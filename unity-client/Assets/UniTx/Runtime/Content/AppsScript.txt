@@ -1,0 +1,160 @@
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Export JSON")
+    .addItem("Download All Sheets as ZIP", "downloadSheetsAsZip")
+    .addToUi();
+}
+
+function downloadSheetsAsZip() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheets = ss.getSheets();
+  const blobs = [];
+
+  sheets.forEach(sheet => {
+    const sheetName = sheet.getName();
+    const data = sheet.getDataRange().getValues();
+    if (data.length < 2) return; // skip empty sheets
+
+    const headers = data[0];
+    const jsonArray = [];
+    let currentObj = null;
+
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      const isEmptyRow = row.every(v => v === "" || v === null);
+      if (isEmptyRow) continue;
+
+      const firstId = row[headers.indexOf('_id')];
+
+      // New main object starts here
+      if (firstId) {
+        if (currentObj) jsonArray.push(cleanObject(currentObj));
+        currentObj = {};
+      }
+
+      if (!currentObj) continue;
+
+      // Build _stats object if applicable
+      let statEntry = {};
+      let hasStatsData = false;
+
+      headers.forEach((header, colIndex) => {
+        const val = row[colIndex];
+        if (val === "" || val == null) return;
+
+        // Case A: array of objects, e.g. "_stats[].fieldName"
+        if (header.indexOf('[].') !== -1) {
+          // normalize like "_stats[].field" -> group under currentObj._stats (array of objects)
+          const parts = header.split('[].');
+          const arrKey = parts[0];          // e.g. "_stats"
+          const fieldKey = parts[1];        // e.g. "_castRange"
+          statEntry[fieldKey] = val;
+          hasStatsData = true;
+        }
+        // Case B: simple array column, e.g. "tags[]" or "_stats[]"
+        else if (header.endsWith('[]')) {
+          const arrayKey = header.slice(0, -2); // remove trailing []
+          // If this is the firstId row, create array with value; continuation rows will push
+          const existing = getNestedValue(currentObj, arrayKey) || [];
+          existing.push(val);
+          setNestedValue(currentObj, arrayKey, existing);
+        }
+        // Case C: normal field (only set on row where _id exists)
+        else {
+          if (firstId) {
+            setNestedValue(currentObj, header, val);
+          }
+        }
+      });
+
+      // push assembled object for _stats[].fields
+      if (hasStatsData) {
+        // arrKey was set above inside branch; compute safe arrName from header pattern:
+        // find the header that had '[].' in it for this row (we can compute using headers)
+        // but easier: derive arr name from any header in headers that matches and has value in row:
+        let arrKeyName = null;
+        for (let h = 0; h < headers.length; h++) {
+          if (headers[h].indexOf('[].') !== -1 && row[h] !== "" && row[h] != null) {
+            arrKeyName = headers[h].split('[].')[0];
+            break;
+          }
+        }
+        if (!arrKeyName) arrKeyName = "_stats"; // fallback, though shouldn't happen
+
+        if (!currentObj[arrKeyName]) currentObj[arrKeyName] = [];
+        currentObj[arrKeyName].push(statEntry);
+      }
+    }
+
+    if (currentObj) jsonArray.push(cleanObject(currentObj));
+
+    // Convert to JSON
+    const jsonString = JSON.stringify(jsonArray, null, 2);
+    blobs.push(Utilities.newBlob(jsonString, "application/json", sheetName + ".json"));
+  });
+
+  // Create ZIP
+  const zip = Utilities.zip(blobs).setName(ss.getName() + "_sheets.zip");
+
+  // Auto-download
+  const url = "data:application/zip;base64," + Utilities.base64Encode(zip.getBytes());
+  const html = HtmlService.createHtmlOutput(
+    `<a id="download" href="${url}" download="${zip.getName()}">
+       Click here if download does not start automatically
+     </a>
+     <script>document.getElementById("download").click();</script>`
+  ).setWidth(300).setHeight(100);
+
+  SpreadsheetApp.getUi().showModalDialog(html, "Download ZIP");
+}
+
+
+// ===============================
+// 🧩 Utility Functions
+// ===============================
+
+// Set nested property (handles deep paths like "_stats.attack.damage.min")
+function setNestedValue(obj, path, value) {
+  const parts = path.split(".");
+  let target = obj;
+
+  for (let i = 0; i < parts.length - 1; i++) {
+    const part = parts[i];
+    if (!Object.prototype.hasOwnProperty.call(target, part) || typeof target[part] !== "object") {
+      target[part] = {};
+    }
+    target = target[part];
+  }
+  target[parts[parts.length - 1]] = value;
+}
+
+// Safely get nested property
+function getNestedValue(obj, path) {
+  const parts = path.split(".");
+  let target = obj;
+  for (const part of parts) {
+    if (target == null || typeof target !== "object") return undefined;
+    target = target[part];
+  }
+  return target;
+}
+
+// Recursively remove empty keys/arrays
+function cleanObject(obj) {
+  const cleaned = {};
+  for (const key in obj) {
+    const val = obj[key];
+    if (val === "" || val == null) continue;
+
+    if (Array.isArray(val)) {
+      const arr = val.filter(v => v !== "" && v != null);
+      if (arr.length > 0) cleaned[key] = arr;
+    } else if (typeof val === "object") {
+      const nested = cleanObject(val);
+      if (Object.keys(nested).length > 0) cleaned[key] = nested;
+    } else {
+      cleaned[key] = val;
+    }
+  }
+  return cleaned;
+}
