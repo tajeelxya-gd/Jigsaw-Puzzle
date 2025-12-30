@@ -1,8 +1,12 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Bootstrap;
+using UniTx.Runtime.Clock;
 using UniTx.Runtime.Content;
+using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
+using UniTx.Runtime.Serialisation;
+using UniTx.Runtime.UnityEventListener;
 
 namespace Client.Runtime
 {
@@ -17,7 +21,13 @@ namespace Client.Runtime
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
+            _binder.BindAsSingleton<UnityEventListener>();
+            _binder.BindAsSingleton<LocalClock>(); // replace with server clock for prod
             _binder.BindAsSingleton<ContentService>();
+            _binder.BindAsSingleton<SerialisationService>();
+            _binder.BindAsSingleton<EntityService>();
+
+            _binder.BindAsSingleton<PuzzleService>();
             return UniTask.CompletedTask;
         }
     }
