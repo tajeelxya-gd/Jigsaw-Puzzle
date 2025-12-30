@@ -13,11 +13,15 @@ namespace Client.Runtime
 
         private Rigidbody _rb;
         private PuzzlePiece _piece;
+        private Collider _collider;
+        private SnapToSlot _snap;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _piece = GetComponent<PuzzlePiece>();
+            _collider = GetComponent<Collider>();
+            _snap = GetComponent<SnapToSlot>();
         }
 
         protected override bool CanStartDrag(PointerEventData eventData)
@@ -25,8 +29,10 @@ namespace Client.Runtime
             if (_piece != null && _piece.IsPlaced)
                 return false;
 
-            // Must actually hit THIS object (or its children)
             if (eventData.pointerCurrentRaycast.gameObject == null)
+                return false;
+
+            if (eventData.pointerCurrentRaycast.gameObject.layer != LayerMask.NameToLayer("JigsawPiece"))
                 return false;
 
             if (!eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
@@ -37,8 +43,6 @@ namespace Client.Runtime
 
         protected override void OnDragStarted(PointerEventData eventData)
         {
-            UniStatics.LogInfo("Piece drag started", this);
-
             _cachedCam = eventData.pressEventCamera ?? Camera.main;
             _fixedY = transform.position.y;
 
@@ -63,10 +67,11 @@ namespace Client.Runtime
 
         protected override void OnDragEnded(PointerEventData eventData)
         {
-            UniStatics.LogInfo("Piece drag ended", this);
-
             _rb.isKinematic = false;
             _cachedCam = null;
+
+            // Snap to nearest slot if available
+            _snap?.SnapToNearestSlot();
         }
 
         private Vector3 GetMouseWorldPosition(Vector2 screenPosition)

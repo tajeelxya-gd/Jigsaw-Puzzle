@@ -95,7 +95,7 @@ namespace Client.Runtime
             // Ensure final snap is exact
             transform.SetPositionAndRotation(endPos, endRot);
 
-            _piece.MarkPlaced();
+            // _piece.MarkPlaced();
 
             UniStatics.LogInfo("Piece snapped into place", this);
         }
