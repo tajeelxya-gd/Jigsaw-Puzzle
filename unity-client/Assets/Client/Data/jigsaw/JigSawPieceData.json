@@ -1,0 +1,210 @@
+[
+  {
+    "_id": "piece_01_4x3_board",
+    "_placementOnBoard": 0,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_02_4x3_board",
+        "_placement": "right"
+      },
+      {
+        "_id": "piece_05_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_02_4x3_board",
+    "_placementOnBoard": 1,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_01_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_03_4x3_board",
+        "_placement": "right"
+      },
+      {
+        "_id": "piece_06_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_03_4x3_board",
+    "_placementOnBoard": 2,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_02_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_04_4x3_board",
+        "_placement": "right"
+      },
+      {
+        "_id": "piece_07_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_04_4x3_board",
+    "_placementOnBoard": 3,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_03_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_08_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_05_4x3_board",
+    "_placementOnBoard": 4,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_01_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_06_4x3_board",
+        "_placement": "right"
+      },
+      {
+        "_id": "piece_09_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_06_4x3_board",
+    "_placementOnBoard": 5,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_02_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_05_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_07_4x3_board",
+        "_placement": "right"
+      },
+      {
+        "_id": "piece_10_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_07_4x3_board",
+    "_placementOnBoard": 6,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_03_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_06_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_08_4x3_board",
+        "_placement": "right"
+      },
+      {
+        "_id": "piece_11_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_08_4x3_board",
+    "_placementOnBoard": 7,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_04_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_07_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_12_4x3_board",
+        "_placement": "bottom"
+      }
+    ]
+  },
+  {
+    "_id": "piece_09_4x3_board",
+    "_placementOnBoard": 8,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_05_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_10_4x3_board",
+        "_placement": "right"
+      }
+    ]
+  },
+  {
+    "_id": "piece_10_4x3_board",
+    "_placementOnBoard": 9,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_06_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_09_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_11_4x3_board",
+        "_placement": "right"
+      }
+    ]
+  },
+  {
+    "_id": "piece_11_4x3_board",
+    "_placementOnBoard": 10,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_07_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_10_4x3_board",
+        "_placement": "left"
+      },
+      {
+        "_id": "piece_12_4x3_board",
+        "_placement": "right"
+      }
+    ]
+  },
+  {
+    "_id": "piece_12_4x3_board",
+    "_placementOnBoard": 11,
+    "_neighbourPieces": [
+      {
+        "_id": "piece_08_4x3_board",
+        "_placement": "top"
+      },
+      {
+        "_id": "piece_11_4x3_board",
+        "_placement": "left"
+      }
+    ]
+  }
+]
