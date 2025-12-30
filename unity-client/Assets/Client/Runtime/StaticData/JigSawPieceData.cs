@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client.Runtime
 {
     [Serializable]
-    public class JigSawPieceData : IData
+    public sealed class JigSawPieceData : IData
     {
         [SerializeField] private string _id;
         [SerializeField] private int _placementOnBoard;

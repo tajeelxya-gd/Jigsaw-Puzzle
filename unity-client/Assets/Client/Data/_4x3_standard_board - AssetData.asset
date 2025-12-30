@@ -14,6 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
   _id: _4x3_standard_board_asset_data
   _assets:
+  - _key: full_image_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: Full_Image_plane
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - _key: piece_01_4x3_standard_board
     _reference:
       m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0

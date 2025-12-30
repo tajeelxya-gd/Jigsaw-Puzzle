@@ -5,7 +5,7 @@ namespace Client.Runtime
 {
 
     [Serializable]
-    public class NeighbourPiece
+    public sealed class NeighbourPiece
     {
         [SerializeField] private string _id;
         [SerializeField] private string _placement;
