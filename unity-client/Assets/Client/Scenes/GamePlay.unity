@@ -2512,7 +2512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.ContentLoadingStep
   _tags:
-  - jigsaw
+  - mg_content
 --- !u!1001 &1350060599
 PrefabInstance:
   m_ObjectHideFlags: 0

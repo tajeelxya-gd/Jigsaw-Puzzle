@@ -4,6 +4,6 @@ namespace Client.Runtime
 {
     public interface IPuzzleService
     {
-    
+        
     }
 }

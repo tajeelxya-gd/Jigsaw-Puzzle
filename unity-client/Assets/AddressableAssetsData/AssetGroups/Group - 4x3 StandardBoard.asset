@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Group - 4x3 StandardBoard
   m_GUID: 64f4f73583dc41d4d963ccd45aa3ad01
   m_SerializeEntries:
-  - m_GUID: 1473f954a1abe08409b24897313d48f8
-    m_Address: _4x3_standard_board - AssetData
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ca617b021bb6b3f40ba0a880bf88f2d0
     m_Address: Jigsaw Puzzle 4x3
     m_ReadOnly: 0

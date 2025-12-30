@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 6767d09e3dc6e8d4c953e237b7e22c16
   m_currentHash:
     serializedVersion: 2
-    Hash: 4c08bcd4bdde9c242b25a380e70d4ecb
+    Hash: eb4e639e3b43d303eb194ea0f7e0a01f
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - WidgetsAssetData
-    - jigsaw
+    - mg_content
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: f042e0edd927b2743add64c527115eaa, type: 2}
