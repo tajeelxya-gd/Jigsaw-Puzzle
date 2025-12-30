@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UnityEngine;
 
@@ -9,17 +10,32 @@ namespace Client.Runtime
         [Header("Snap Settings")]
         [SerializeField] private float snapPositionThreshold = 0.15f;
         [SerializeField] private float snapRotationThreshold = 5f;
+        [SerializeField] float snapDuration = 0.2f; // duration in seconds
 
         private PuzzlePiece _piece;
         private Rigidbody _rb;
+        private DragController _drag;
 
         private void Awake()
         {
             _piece = GetComponent<PuzzlePiece>();
             TryGetComponent(out _rb);
+            TryGetComponent(out _drag);
         }
 
-        private void LateUpdate()
+        private void OnEnable()
+        {
+            if (_drag != null)
+                _drag.OnEndDragEvent += HandleDragEnded;
+        }
+
+        private void OnDisable()
+        {
+            if (_drag != null)
+                _drag.OnEndDragEvent -= HandleDragEnded;
+        }
+
+        private void HandleDragEnded(ISceneEntity entity)
         {
             if (_piece.IsPlaced)
                 return;
@@ -33,7 +49,7 @@ namespace Client.Runtime
         private bool IsSnapCandidate()
         {
             var posDistance = Vector3.Distance(
-                transform.position,
+                _piece.SnapPosition,
                 _piece.TargetPosition
             );
 
@@ -41,28 +57,45 @@ namespace Client.Runtime
                 return false;
 
             var rotDistance = Quaternion.Angle(
-                transform.rotation,
+                _piece.SnapRotation,
                 _piece.TargetRotation
             );
 
             return rotDistance <= snapRotationThreshold;
         }
 
-        private void Snap()
+
+        private async void Snap()
         {
-            transform.SetPositionAndRotation(
-                _piece.TargetPosition,
-                _piece.TargetRotation
-            );
-
-            _piece.MarkPlaced();
-
             if (_rb != null)
             {
+                _rb.isKinematic = true;
                 _rb.linearVelocity = Vector3.zero;
                 _rb.angularVelocity = Vector3.zero;
-                _rb.isKinematic = true;
             }
+
+            Vector3 startPos = transform.position;
+            Quaternion startRot = transform.rotation;
+            Vector3 endPos = _piece.TargetPosition;
+            Quaternion endRot = _piece.TargetRotation;
+
+            float elapsed = 0f;
+
+            while (elapsed < snapDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / snapDuration);
+
+                transform.position = Vector3.Lerp(startPos, endPos, t);
+                transform.rotation = Quaternion.Slerp(startRot, endRot, t);
+
+                await UniTask.Yield();
+            }
+
+            // Ensure final snap is exact
+            transform.SetPositionAndRotation(endPos, endRot);
+
+            _piece.MarkPlaced();
 
             UniStatics.LogInfo("Piece snapped into place", this);
         }
