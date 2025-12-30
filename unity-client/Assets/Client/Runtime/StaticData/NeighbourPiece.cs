@@ -8,10 +8,9 @@ namespace Client.Runtime
     public class NeighbourPiece
     {
         [SerializeField] private string _id;
-        [SerializeField] private PlacementDirection _placement;
+        [SerializeField] private string _placement;
 
-        // Public Getters
         public string Id => _id;
-        public PlacementDirection Placement => _placement;
+        public PlacementDirection Placement => Enum.TryParse<PlacementDirection>(_placement, out var result) ? result : default;
     }
 }

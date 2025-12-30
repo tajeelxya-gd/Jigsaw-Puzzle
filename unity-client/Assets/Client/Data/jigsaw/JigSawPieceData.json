@@ -5,11 +5,11 @@
     "_neighbourPieces": [
       {
         "_id": "piece_02_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       },
       {
         "_id": "piece_05_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -19,15 +19,15 @@
     "_neighbourPieces": [
       {
         "_id": "piece_01_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_03_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       },
       {
         "_id": "piece_06_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -37,15 +37,15 @@
     "_neighbourPieces": [
       {
         "_id": "piece_02_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_04_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       },
       {
         "_id": "piece_07_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -55,11 +55,11 @@
     "_neighbourPieces": [
       {
         "_id": "piece_03_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_08_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -69,15 +69,15 @@
     "_neighbourPieces": [
       {
         "_id": "piece_01_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_06_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       },
       {
         "_id": "piece_09_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -87,19 +87,19 @@
     "_neighbourPieces": [
       {
         "_id": "piece_02_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_05_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_07_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       },
       {
         "_id": "piece_10_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -109,19 +109,19 @@
     "_neighbourPieces": [
       {
         "_id": "piece_03_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_06_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_08_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       },
       {
         "_id": "piece_11_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -131,15 +131,15 @@
     "_neighbourPieces": [
       {
         "_id": "piece_04_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_07_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_12_4x3_board",
-        "_placement": "bottom"
+        "_placement": "Bottom"
       }
     ]
   },
@@ -149,11 +149,11 @@
     "_neighbourPieces": [
       {
         "_id": "piece_05_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_10_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       }
     ]
   },
@@ -163,15 +163,15 @@
     "_neighbourPieces": [
       {
         "_id": "piece_06_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_09_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_11_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       }
     ]
   },
@@ -181,15 +181,15 @@
     "_neighbourPieces": [
       {
         "_id": "piece_07_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_10_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       },
       {
         "_id": "piece_12_4x3_board",
-        "_placement": "right"
+        "_placement": "Right"
       }
     ]
   },
@@ -199,11 +199,11 @@
     "_neighbourPieces": [
       {
         "_id": "piece_08_4x3_board",
-        "_placement": "top"
+        "_placement": "Top"
       },
       {
         "_id": "piece_11_4x3_board",
-        "_placement": "left"
+        "_placement": "Left"
       }
     ]
   }
