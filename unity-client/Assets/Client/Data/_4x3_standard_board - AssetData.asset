@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040bc25f95706694ea25a65099934e29, type: 3}
+  m_Name: _4x3_standard_board - AssetData
+  m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
+  _id: _4x3_standard_board_asset_data
+  _assets:
+  - _key: piece_01_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface24
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_02_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface25
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_03_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface23
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_04_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface16
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_05_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface20
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_06_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface19
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_07_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface13
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_08_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface11
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_09_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface15
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_10_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface3
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_11_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface5
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: piece_12_4x3_standard_board
+    _reference:
+      m_AssetGUID: ca617b021bb6b3f40ba0a880bf88f2d0
+      m_SubObjectName: polySurface8
+      m_SubObjectType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
