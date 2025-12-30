@@ -1,21 +1,21 @@
 [
   {
-    "_id": "_4x3_board",
+    "_id": "_4x3_standard_board",
     "_xConstraint": 4,
     "_yConstraint": 3,
     "_piecesIds": [
-      "piece_01_4x3_board",
-      "piece_02_4x3_board",
-      "piece_03_4x3_board",
-      "piece_04_4x3_board",
-      "piece_05_4x3_board",
-      "piece_06_4x3_board",
-      "piece_07_4x3_board",
-      "piece_08_4x3_board",
-      "piece_09_4x3_board",
-      "piece_10_4x3_board",
-      "piece_11_4x3_board",
-      "piece_12_4x3_board"
+      "piece_01_4x3_standard_board",
+      "piece_02_4x3_standard_board",
+      "piece_03_4x3_standard_board",
+      "piece_04_4x3_standard_board",
+      "piece_05_4x3_standard_board",
+      "piece_06_4x3_standard_board",
+      "piece_07_4x3_standard_board",
+      "piece_08_4x3_standard_board",
+      "piece_09_4x3_standard_board",
+      "piece_10_4x3_standard_board",
+      "piece_11_4x3_standard_board",
+      "piece_12_4x3_standard_board"
     ]
   }
 ]
