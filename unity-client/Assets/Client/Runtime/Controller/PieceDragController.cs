@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace Client.Runtime
 {
     [RequireComponent(typeof(Rigidbody))]
-    public sealed class PieceDragController : DragController
+    public sealed class PieceDragController : MonoBehaviour
     {
         private Vector3 _offset;
         private float _fixedY;
@@ -24,7 +24,7 @@ namespace Client.Runtime
             _snap = GetComponent<SnapToSlot>();
         }
 
-        protected override bool CanStartDrag(PointerEventData eventData)
+        protected bool CanStartDrag(PointerEventData eventData)
         {
             if (_piece != null && _piece.IsPlaced)
                 return false;
@@ -41,7 +41,7 @@ namespace Client.Runtime
             return true;
         }
 
-        protected override void OnDragStarted(PointerEventData eventData)
+        protected void OnDragStarted(PointerEventData eventData)
         {
             _cachedCam = eventData.pressEventCamera ?? Camera.main;
             _fixedY = transform.position.y;
@@ -54,7 +54,7 @@ namespace Client.Runtime
             _offset = transform.position - mouseWorldPos;
         }
 
-        protected override void OnDragging(PointerEventData eventData)
+        protected void OnDragging(PointerEventData eventData)
         {
             var mouseWorldPos = GetMouseWorldPosition(eventData.position);
 
@@ -65,7 +65,7 @@ namespace Client.Runtime
             );
         }
 
-        protected override void OnDragEnded(PointerEventData eventData)
+        protected void OnDragEnded(PointerEventData eventData)
         {
             _rb.isKinematic = false;
             _cachedCam = null;

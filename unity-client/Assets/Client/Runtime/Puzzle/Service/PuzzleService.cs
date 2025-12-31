@@ -33,6 +33,10 @@ namespace Client.Runtime
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
+            foreach (var piece in _board.Pieces)
+            {
+                // wrap meshes
+            }
         }
 
         public void UnLoadPuzzle()

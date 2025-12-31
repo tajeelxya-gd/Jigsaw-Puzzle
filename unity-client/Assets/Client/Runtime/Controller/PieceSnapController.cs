@@ -14,25 +14,21 @@ namespace Client.Runtime
 
         private PuzzlePiece _piece;
         private Rigidbody _rb;
-        private DragController _drag;
 
         private void Awake()
         {
             _piece = GetComponent<PuzzlePiece>();
             TryGetComponent(out _rb);
-            TryGetComponent(out _drag);
         }
 
         private void OnEnable()
         {
-            if (_drag != null)
-                _drag.OnEndDragEvent += HandleDragEnded;
+           
         }
 
         private void OnDisable()
         {
-            if (_drag != null)
-                _drag.OnEndDragEvent -= HandleDragEnded;
+           
         }
 
         private void HandleDragEnded(ISceneEntity entity)
