@@ -1,5 +1,3 @@
-using System.Linq;
-using UniTx.Runtime;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -23,7 +21,6 @@ namespace Client.Runtime
 
         private void OnMouseDown()
         {
-            UniStatics.LogInfo("OnMouseDown", this);
             _isDragging = true;
 
             // Calculate offset from cursor
@@ -36,18 +33,15 @@ namespace Client.Runtime
 
         private void OnMouseUp()
         {
-            UniStatics.LogInfo("OnMouseUp", this);
             _isDragging = false;
 
             // Try snapping to neighbors after releasing
             TrySnapToNeighbors();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!_isDragging) return;
-
-            UniStatics.LogInfo("Dragging", this);
 
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
