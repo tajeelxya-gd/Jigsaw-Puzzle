@@ -12,9 +12,11 @@ namespace Client.Runtime
 {
     public sealed class JigSawBoard : EntityBase<JigSawBoardData, JigSawBoardSavedData>
     {
-        private readonly IList<Transform> _pieces = new List<Transform>();
         private AssetData _assetData;
         private Texture2D _texture;
+
+        public IList<Transform> Pieces { get; private set; } = new List<Transform>();
+        public Transform FullImg { get; private set; }
 
         public JigSawBoard(string id) : base(id)
         {
@@ -32,10 +34,13 @@ namespace Client.Runtime
             {
                 var asset = _assetData.GetAsset(id);
                 var piece = await UniResources.CreateInstanceAsync<Transform>(asset.RuntimeKey, parent, null, cToken);
-                _pieces.Add(piece);
+                Pieces.Add(piece);
             }
 
-            if (_pieces.First().TryGetComponent<Renderer>(out var renderer))
+            var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
+            FullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
+
+            if (Pieces.First().TryGetComponent<Renderer>(out var renderer))
             {
                 _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
                 renderer.material.SetTexture("_BaseMap", _texture);
@@ -44,17 +49,13 @@ namespace Client.Runtime
 
         public void UnLoadPuzzle()
         {
-            foreach (var piece in _pieces)
+            foreach (var piece in Pieces)
             {
                 UniResources.DisposeInstance(piece.gameObject);
             }
-
-            _pieces.Clear();
-
-            if (_texture != null)
-            {
-                UniResources.DisposeAsset(_texture);
-            }
+            Pieces.Clear();
+            UniResources.DisposeAsset(_texture);
+            UniResources.DisposeInstance(FullImg.gameObject);
         }
 
         protected override void OnInject(IResolver resolver)
