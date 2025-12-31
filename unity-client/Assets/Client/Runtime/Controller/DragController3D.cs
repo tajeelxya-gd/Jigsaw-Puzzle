@@ -1,4 +1,5 @@
 using System.Linq;
+using UniTx.Runtime;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -22,6 +23,7 @@ namespace Client.Runtime
 
         private void OnMouseDown()
         {
+            UniStatics.LogInfo("OnMouseDown", this);
             _isDragging = true;
 
             // Calculate offset from cursor
@@ -34,6 +36,7 @@ namespace Client.Runtime
 
         private void OnMouseUp()
         {
+            UniStatics.LogInfo("OnMouseUp", this);
             _isDragging = false;
 
             // Try snapping to neighbors after releasing
@@ -43,6 +46,8 @@ namespace Client.Runtime
         private void Update()
         {
             if (!_isDragging) return;
+
+            UniStatics.LogInfo("Dragging", this);
 
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
@@ -110,8 +115,13 @@ namespace Client.Runtime
 
         private JigSawPiece FindPieceById(string id)
         {
-            // you can cache all pieces in a dictionary for performance
-            return FindObjectsOfType<JigSawPiece>().FirstOrDefault(p => p.Data.Id == id);
+            var pieces = FindObjectsByType<JigSawPiece>(FindObjectsSortMode.None);
+            foreach (var piece in pieces)
+            {
+                if (piece.Data != null && piece.Data.Id == id)
+                    return piece;
+            }
+            return null;
         }
     }
 }
