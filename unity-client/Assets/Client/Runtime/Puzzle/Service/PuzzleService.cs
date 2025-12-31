@@ -1,17 +1,20 @@
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime;
 using UniTx.Runtime.Content;
 using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
+using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PuzzleService : IPuzzleService, IInjectable
+    public sealed class PuzzleService : IPuzzleService, IInjectable, IInitialisable
     {
         private IContentService _contentService;
         private IEntityService _entityService;
         private JigSawBoard _board;
+        private Transform _puzzleRoot;
 
         public void Inject(IResolver resolver)
         {
@@ -19,11 +22,16 @@ namespace Client.Runtime
             _entityService = resolver.Resolve<IEntityService>();
         }
 
+        public void Initialise()
+        {
+            _puzzleRoot = GameObject.FindGameObjectWithTag("PuzzleRoot").transform;
+        }
+
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
-            await _board.LoadPuzzleAsync(levelData.ImageKey, null, cToken);
+            await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
         }
 
