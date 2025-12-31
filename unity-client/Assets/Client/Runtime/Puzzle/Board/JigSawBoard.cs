@@ -14,7 +14,7 @@ namespace Client.Runtime
         private AssetData _assetData;
         private Texture2D _texture;
 
-        public IList<Transform> Pieces { get; private set; } = new List<Transform>();
+        public IList<JigSawBoardCell> Cells { get; private set; } = new List<JigSawBoardCell>();
         public Transform FullImg { get; private set; }
 
         public JigSawBoard(string id) : base(id)
@@ -36,7 +36,7 @@ namespace Client.Runtime
                 var asset = _assetData.GetAsset(id);
                 var piece = await UniResources.CreateInstanceAsync<Transform>(asset.RuntimeKey, parent, null, cToken);
                 SetLoadedTexture(piece);
-                Pieces.Add(piece);
+                Cells.Add(new JigSawBoardCell(id, piece));
             }
 
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
@@ -46,11 +46,11 @@ namespace Client.Runtime
 
         public void UnLoadPuzzle()
         {
-            foreach (var piece in Pieces)
+            foreach (var cell in Cells)
             {
-                UniResources.DisposeInstance(piece.gameObject);
+                UniResources.DisposeInstance(cell.PieceTransform.gameObject);
             }
-            Pieces.Clear();
+            Cells.Clear();
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeInstance(FullImg.gameObject);
         }

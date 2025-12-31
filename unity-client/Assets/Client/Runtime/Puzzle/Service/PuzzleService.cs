@@ -33,11 +33,12 @@ namespace Client.Runtime
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
-            foreach (var piece in _board.Pieces)
+            foreach (var cell in _board.Cells)
             {
-                // wrap meshes
-                // shuffle and move from original position (scatter)
+                WrapAndSetupPiece(cell);
             }
+
+            ShufflePieces();
         }
 
         public void UnLoadPuzzle()
@@ -52,6 +53,51 @@ namespace Client.Runtime
 
             // TODO: load idx from saves later
             return data.First();
+        }
+
+        private void WrapAndSetupPiece(JigSawBoardCell cell)
+        {
+            var meshTransform = cell.PieceTransform;
+
+            // Create a parent wrapper
+            GameObject pieceRoot = new GameObject(meshTransform.name + "_Piece");
+            pieceRoot.transform.SetParent(_puzzleRoot);
+            pieceRoot.transform.position = meshTransform.position;
+            pieceRoot.transform.rotation = meshTransform.rotation;
+
+            // Reparent the mesh under wrapper
+            meshTransform.SetParent(pieceRoot.transform);
+            meshTransform.localPosition = Vector3.zero;
+            meshTransform.localRotation = Quaternion.identity;
+
+            // Add required components to wrapper
+            var jigSawPiece = pieceRoot.AddComponent<JigSawPiece>();
+            var dragController = pieceRoot.AddComponent<DragController3D>();
+
+            // Collider that matches mesh bounds
+            var renderer = meshTransform.GetComponent<Renderer>();
+            BoxCollider collider = pieceRoot.AddComponent<BoxCollider>();
+            if (renderer != null)
+                collider.size = renderer.bounds.size;
+
+            // Assign piece data
+            var pieceData = _contentService.GetData<JigSawPieceData>(cell.PieceId);
+            jigSawPiece.SetData(pieceData);
+        }
+
+        private void ShufflePieces()
+        {
+            foreach (var cell in _board.Cells)
+            {
+                var randomPos = _puzzleRoot.position + new Vector3(
+                    Random.Range(-0.05f, 0.05f),
+                    0,
+                    Random.Range(-0.15f, -0.03f)
+                );
+
+                var parentTransform = cell.PieceTransform.parent;
+                parentTransform.position = randomPos;
+            }
         }
     }
 }
