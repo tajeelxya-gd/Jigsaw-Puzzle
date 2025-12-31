@@ -1,70 +1,117 @@
+using System.Linq;
+using UnityEngine;
+
 namespace Client.Runtime
 {
-    using UnityEngine;
-
-    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider))]
     public sealed class DragController3D : MonoBehaviour
     {
-        private Camera _cam;
-        private Rigidbody _rb;
+        [SerializeField] private float snapThreshold = 0.2f; // distance to snap
+        [SerializeField] private float dragSmoothness = 10f;
 
-        private Plane _dragPlane;
-        private Vector3 _offset;
+        private Camera _cam;
+        private JigSawPiece _piece;
         private bool _isDragging;
+        private Vector3 _offset;
 
         private void Awake()
         {
             _cam = Camera.main;
-            _rb = GetComponent<Rigidbody>();
-
-            _rb.useGravity = false;
-            _rb.interpolation = RigidbodyInterpolation.Interpolate;
-
-            // Horizontal plane at piece height (Y-locked)
-            _dragPlane = new Plane(Vector3.up, transform.position);
+            _piece = GetComponent<JigSawPiece>();
         }
 
         private void OnMouseDown()
         {
             _isDragging = true;
-            _rb.isKinematic = true;
 
-            if (TryGetPlaneHit(out var hit))
-                _offset = transform.position - hit;
+            // Calculate offset from cursor
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit))
+            {
+                _offset = _piece.transform.position - hit.point;
+            }
         }
 
         private void OnMouseUp()
         {
             _isDragging = false;
-            _rb.isKinematic = false;
+
+            // Try snapping to neighbors after releasing
+            TrySnapToNeighbors();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (!_isDragging) return;
 
-            if (TryGetPlaneHit(out var hit))
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit))
             {
-                Vector3 target = hit + _offset;
-                _rb.MovePosition(Vector3.Lerp(
-                    _rb.position,
-                    target,
-                    Time.fixedDeltaTime * 15f
-                ));
+                Vector3 target = hit.point + _offset;
+
+                if (_piece.Group != null && _piece.Group is JigSawGroup group)
+                {
+                    Vector3 delta = target - _piece.transform.position;
+                    group.Move(delta); // move entire group
+                }
+                else
+                {
+                    _piece.Move(target - _piece.transform.position);
+                }
             }
         }
 
-        private bool TryGetPlaneHit(out Vector3 hitPoint)
+        private void TrySnapToNeighbors()
         {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-            if (_dragPlane.Raycast(ray, out float enter))
+            foreach (var neighborInfo in _piece.Data.NeighbourPieces)
             {
-                hitPoint = ray.GetPoint(enter);
-                return true;
+                var neighborObj = FindPieceById(neighborInfo.Id);
+                if (neighborObj == null) continue;
+
+                float distance = Vector3.Distance(_piece.transform.position, neighborObj.transform.position);
+                if (distance <= snapThreshold)
+                {
+                    // Snap to correct position
+                    Vector3 snapPos = neighborObj.transform.position + GetOffsetForDirection(neighborInfo.Placement);
+                    Vector3 delta = snapPos - _piece.transform.position;
+                    _piece.Move(delta);
+
+                    // Merge groups
+                    _piece.AttachTo(neighborObj.Group ?? CreateGroup(neighborObj, _piece));
+                }
+            }
+        }
+
+        private JigSawGroup CreateGroup(JigSawPiece a, JigSawPiece b)
+        {
+            GameObject groupGO = new GameObject("JigsawGroup");
+            JigSawGroup group = groupGO.AddComponent<JigSawGroup>();
+            group.AddMember(a);
+            group.AddMember(b);
+            return group;
+        }
+
+        private Vector3 GetOffsetForDirection(PlacementDirection dir)
+        {
+            // assumes pieces are aligned along world axes
+            Vector3 offset = Vector3.zero;
+            var size = _piece.GetComponent<Renderer>().bounds.size;
+
+            switch (dir)
+            {
+                case PlacementDirection.Top: offset = new Vector3(0, 0, size.z); break;
+                case PlacementDirection.Bottom: offset = new Vector3(0, 0, -size.z); break;
+                case PlacementDirection.Left: offset = new Vector3(-size.x, 0, 0); break;
+                case PlacementDirection.Right: offset = new Vector3(size.x, 0, 0); break;
             }
 
-            hitPoint = default;
-            return false;
+            return offset;
+        }
+
+        private JigSawPiece FindPieceById(string id)
+        {
+            // you can cache all pieces in a dictionary for performance
+            return FindObjectsOfType<JigSawPiece>().FirstOrDefault(p => p.Data.Id == id);
         }
     }
 }

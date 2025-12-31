@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(PuzzlePiece))]
     public sealed class PieceSnapController : MonoBehaviour
     {
         [Header("Snap Settings")]
@@ -12,12 +11,10 @@ namespace Client.Runtime
         [SerializeField] private float snapRotationThreshold = 5f;
         [SerializeField] float snapDuration = 0.2f; // duration in seconds
 
-        private PuzzlePiece _piece;
         private Rigidbody _rb;
 
         private void Awake()
         {
-            _piece = GetComponent<PuzzlePiece>();
             TryGetComponent(out _rb);
         }
 
@@ -33,9 +30,6 @@ namespace Client.Runtime
 
         private void HandleDragEnded(ISceneEntity entity)
         {
-            if (_piece.IsPlaced)
-                return;
-
             if (!IsSnapCandidate())
                 return;
 
@@ -44,20 +38,7 @@ namespace Client.Runtime
 
         private bool IsSnapCandidate()
         {
-            var posDistance = Vector3.Distance(
-                _piece.SnapPosition,
-                _piece.TargetPosition
-            );
-
-            if (posDistance > snapPositionThreshold)
-                return false;
-
-            var rotDistance = Quaternion.Angle(
-                _piece.SnapRotation,
-                _piece.TargetRotation
-            );
-
-            return rotDistance <= snapRotationThreshold;
+            return 0 <= snapRotationThreshold;
         }
 
 
@@ -72,8 +53,6 @@ namespace Client.Runtime
 
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
-            Vector3 endPos = _piece.TargetPosition;
-            Quaternion endRot = _piece.TargetRotation;
 
             float elapsed = 0f;
 
@@ -82,14 +61,11 @@ namespace Client.Runtime
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / snapDuration);
 
-                transform.position = Vector3.Lerp(startPos, endPos, t);
-                transform.rotation = Quaternion.Slerp(startRot, endRot, t);
 
                 await UniTask.Yield();
             }
 
             // Ensure final snap is exact
-            transform.SetPositionAndRotation(endPos, endRot);
 
             // _piece.MarkPlaced();
 

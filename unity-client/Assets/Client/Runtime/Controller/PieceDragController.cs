@@ -12,23 +12,18 @@ namespace Client.Runtime
         private Camera _cachedCam;
 
         private Rigidbody _rb;
-        private PuzzlePiece _piece;
         private Collider _collider;
         private SnapToSlot _snap;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-            _piece = GetComponent<PuzzlePiece>();
             _collider = GetComponent<Collider>();
             _snap = GetComponent<SnapToSlot>();
         }
 
         protected bool CanStartDrag(PointerEventData eventData)
         {
-            if (_piece != null && _piece.IsPlaced)
-                return false;
-
             if (eventData.pointerCurrentRaycast.gameObject == null)
                 return false;
 

@@ -36,6 +36,7 @@ namespace Client.Runtime
             foreach (var piece in _board.Pieces)
             {
                 // wrap meshes
+                // shuffle and move from original position (scatter)
             }
         }
 
