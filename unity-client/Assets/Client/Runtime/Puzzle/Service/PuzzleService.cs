@@ -35,6 +35,12 @@ namespace Client.Runtime
             _board.SetActiveFullImage(false);
         }
 
+        public void UnLoadPuzzle()
+        {
+            _board.UnLoadPuzzle();
+            _board = null;
+        }
+
         private JigSawLevelData GetCurrentLevelData()
         {
             var data = _contentService.GetAllData<JigSawLevelData>();

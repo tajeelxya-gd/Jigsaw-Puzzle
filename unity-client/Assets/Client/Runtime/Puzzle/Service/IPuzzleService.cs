@@ -7,5 +7,7 @@ namespace Client.Runtime
     public interface IPuzzleService
     {
         UniTask LoadPuzzleAsync(CancellationToken cToken = default);
+
+        void UnLoadPuzzle();
     }
 }
