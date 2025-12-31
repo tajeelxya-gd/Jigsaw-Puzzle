@@ -39,7 +39,7 @@ namespace Client.Runtime
                 cell.WrapAndSetup(_puzzleRoot, data);
             }
 
-            ShufflePieces();
+            // ShufflePieces();
         }
 
         public void UnLoadPuzzle()
@@ -66,7 +66,7 @@ namespace Client.Runtime
                     Random.Range(-0.15f, -0.03f)
                 );
 
-                var parentTransform = cell.PieceTransform.parent;
+                var parentTransform = cell.MeshTransform.parent;
                 parentTransform.position = randomPos;
             }
         }

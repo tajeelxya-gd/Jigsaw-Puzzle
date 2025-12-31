@@ -12,12 +12,6 @@ namespace Client.Runtime
 
         public JigSawPieceData Data { get; private set; }
 
-        private void Awake()
-        {
-            _dragController = GetComponent<DragController>();
-            _dragController.OnDragged += Move;
-        }
-
         public void SetGroup(IGroup group) => _groupRef = group;
 
         public void SetData(JigSawPieceData data) => Data = data;
@@ -47,6 +41,17 @@ namespace Client.Runtime
                 var renderer = GetComponent<Renderer>();
                 if (renderer != null) renderer.material.color = color;
             }
+        }
+
+        private void Awake()
+        {
+            _dragController = GetComponent<DragController>();
+            _dragController.OnDragged += Move;
+        }
+
+        private void OnDestroy()
+        {
+            _dragController.OnDragged -= Move;
         }
 
         private void Move(Vector3 delta)

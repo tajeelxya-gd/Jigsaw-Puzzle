@@ -48,7 +48,7 @@ namespace Client.Runtime
         {
             foreach (var cell in Cells)
             {
-                UniResources.DisposeInstance(cell.PieceTransform.gameObject);
+                UniResources.DisposeInstance(cell.MeshTransform.gameObject);
             }
             Cells.Clear();
             UniResources.DisposeAsset(_texture);

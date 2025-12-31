@@ -1,75 +1,87 @@
-using Cysharp.Threading.Tasks;
-using UniTx.Runtime;
 using UnityEngine;
 
 namespace Client.Runtime
 {
+    [RequireComponent(typeof(JigSawPiece))]
+    [RequireComponent(typeof(DragController))]
     public sealed class PieceSnapController : MonoBehaviour
     {
-        [Header("Snap Settings")]
-        [SerializeField] private float snapPositionThreshold = 0.15f;
-        [SerializeField] private float snapRotationThreshold = 5f;
-        [SerializeField] float snapDuration = 0.2f; // duration in seconds
+        [SerializeField] private float snapThreshold = 0.15f;
 
-        private Rigidbody _rb;
+        private JigSawPiece _piece;
+        private DragController _drag;
 
         private void Awake()
         {
-            TryGetComponent(out _rb);
+            _piece = GetComponent<JigSawPiece>();
+            _drag = GetComponent<DragController>();
+
+            _drag.OnDragEnded += TrySnap;
         }
 
-        private void OnEnable()
+        private void OnDestroy()
         {
-           
+            _drag.OnDragEnded -= TrySnap;
         }
 
-        private void OnDisable()
+        private void TrySnap()
         {
-           
-        }
+            if (_piece.Data == null) return;
 
-        private void HandleDragEnded(ISceneEntity entity)
-        {
-            if (!IsSnapCandidate())
-                return;
-
-            Snap();
-        }
-
-        private bool IsSnapCandidate()
-        {
-            return 0 <= snapRotationThreshold;
-        }
-
-
-        private async void Snap()
-        {
-            if (_rb != null)
+            foreach (var neighbour in _piece.Data.NeighbourPieces)
             {
-                _rb.isKinematic = true;
-                _rb.linearVelocity = Vector3.zero;
-                _rb.angularVelocity = Vector3.zero;
+                var other = JigSawPieceRegistry.Get(neighbour.Id);
+                if (other == null) continue;
+
+                TrySnapTo(other, neighbour.Placement);
             }
+        }
 
-            Vector3 startPos = transform.position;
-            Quaternion startRot = transform.rotation;
+        private void TrySnapTo(JigSawPiece other, PlacementDirection placement)
+        {
+            Vector3 expectedPos = GetExpectedPosition(other, placement);
+            float distance = Vector3.Distance(_piece.transform.position, expectedPos);
 
-            float elapsed = 0f;
+            if (distance > snapThreshold) return;
 
-            while (elapsed < snapDuration)
+            Vector3 delta = expectedPos - _piece.transform.position;
+            ApplySnap(delta, other);
+        }
+
+        private void ApplySnap(Vector3 delta, JigSawPiece other)
+        {
+            if (_piece.Group is JigSawGroup group)
+                group.Move(delta);
+            else
+                _piece.transform.position += delta;
+
+            _piece.AttachTo(other.Group ?? CreateGroup(_piece, other));
+        }
+
+        private Vector3 GetExpectedPosition(JigSawPiece other, PlacementDirection placement)
+        {
+            var bounds = other.GetComponent<Renderer>().bounds;
+            Vector3 size = bounds.size;
+
+            return placement switch
             {
-                elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / snapDuration);
+                PlacementDirection.Top => other.transform.position + new Vector3(0, 0, size.z),
+                PlacementDirection.Bottom => other.transform.position + new Vector3(0, 0, -size.z),
+                PlacementDirection.Left => other.transform.position + new Vector3(-size.x, 0, 0),
+                PlacementDirection.Right => other.transform.position + new Vector3(size.x, 0, 0),
+                _ => other.transform.position
+            };
+        }
 
+        private JigSawGroup CreateGroup(JigSawPiece a, JigSawPiece b)
+        {
+            var go = new GameObject("JigSawGroup");
+            var group = go.AddComponent<JigSawGroup>();
 
-                await UniTask.Yield();
-            }
+            group.AddMember(a);
+            group.AddMember(b);
 
-            // Ensure final snap is exact
-
-            // _piece.MarkPlaced();
-
-            UniStatics.LogInfo("Piece snapped into place", this);
+            return group;
         }
     }
 }

@@ -5,42 +5,41 @@ namespace Client.Runtime
     public sealed class JigSawBoardCell
     {
         private string _pieceId;
-        private Transform _pieceTransform;
+        private Transform _meshTransform;
 
         public string PieceId => _pieceId;
-        public Transform PieceTransform => _pieceTransform;
+        public Transform MeshTransform => _meshTransform;
 
         public JigSawBoardCell(string pieceId, Transform pieceTransform)
         {
             _pieceId = pieceId;
-            _pieceTransform = pieceTransform;
+            _meshTransform = pieceTransform;
         }
 
         public void WrapAndSetup(Transform parent, JigSawPieceData data)
         {
             // Create a parent wrapper
-            GameObject pieceRoot = new GameObject(PieceTransform.name + "_Piece");
+            GameObject pieceRoot = new GameObject(MeshTransform.name + "_Piece");
             pieceRoot.transform.SetParent(parent);
-            pieceRoot.transform.position = PieceTransform.position;
-            pieceRoot.transform.rotation = PieceTransform.rotation;
+            pieceRoot.transform.position = MeshTransform.position;
+            pieceRoot.transform.rotation = MeshTransform.rotation;
 
             // Reparent the mesh under wrapper
-            PieceTransform.SetParent(pieceRoot.transform);
-            PieceTransform.localPosition = Vector3.zero;
-            PieceTransform.localRotation = Quaternion.identity;
+            MeshTransform.SetParent(pieceRoot.transform);
+            MeshTransform.localPosition = Vector3.zero;
+            MeshTransform.localRotation = Quaternion.identity;
 
-            // Add required components to wrapper
-
-            // Collider that matches mesh bounds
-            var renderer = PieceTransform.GetComponent<Renderer>();
+            var renderer = MeshTransform.GetComponent<Renderer>();
             BoxCollider collider = pieceRoot.AddComponent<BoxCollider>();
             pieceRoot.AddComponent<DragController>();
             var jigSawPiece = pieceRoot.AddComponent<JigSawPiece>();
+            pieceRoot.AddComponent<PieceSnapController>();
 
             if (renderer != null)
                 collider.size = renderer.bounds.size;
 
             jigSawPiece.SetData(data);
+            JigSawPieceRegistry.Register(jigSawPiece);
         }
     }
 }
