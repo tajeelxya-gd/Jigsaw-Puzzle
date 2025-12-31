@@ -35,7 +35,7 @@ namespace Client.Runtime
             _board.SetActiveFullImage(false);
             foreach (var cell in _board.Cells)
             {
-                WrapAndSetupPiece(cell);
+                cell.WrapAndSetup(_puzzleRoot, _contentService.GetData<JigSawPieceData>(cell.PieceId));
             }
 
             ShufflePieces();
@@ -53,37 +53,6 @@ namespace Client.Runtime
 
             // TODO: load idx from saves later
             return data.First();
-        }
-
-        private void WrapAndSetupPiece(JigSawBoardCell cell)
-        {
-            var meshTransform = cell.PieceTransform;
-
-            // Create a parent wrapper
-            GameObject pieceRoot = new GameObject(meshTransform.name + "_Piece");
-            pieceRoot.transform.SetParent(_puzzleRoot);
-            pieceRoot.transform.position = meshTransform.position;
-            pieceRoot.transform.rotation = meshTransform.rotation;
-
-            // Reparent the mesh under wrapper
-            meshTransform.SetParent(pieceRoot.transform);
-            meshTransform.localPosition = Vector3.zero;
-            meshTransform.localRotation = Quaternion.identity;
-
-            // Add required components to wrapper
-            var jigSawPiece = pieceRoot.AddComponent<JigSawPiece>();
-
-            // Collider that matches mesh bounds
-            var renderer = meshTransform.GetComponent<Renderer>();
-            BoxCollider collider = pieceRoot.AddComponent<BoxCollider>();
-            if (renderer != null)
-                collider.size = renderer.bounds.size;
-
-            var dragController = pieceRoot.AddComponent<DragController3D>();
-
-            // Assign piece data
-            var pieceData = _contentService.GetData<JigSawPieceData>(cell.PieceId);
-            jigSawPiece.SetData(pieceData);
         }
 
         private void ShufflePieces()
