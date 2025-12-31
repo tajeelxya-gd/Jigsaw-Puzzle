@@ -30,15 +30,16 @@ namespace Client.Runtime
             PieceTransform.localRotation = Quaternion.identity;
 
             // Add required components to wrapper
-            var jigSawPiece = pieceRoot.AddComponent<JigSawPiece>();
 
             // Collider that matches mesh bounds
             var renderer = PieceTransform.GetComponent<Renderer>();
             BoxCollider collider = pieceRoot.AddComponent<BoxCollider>();
+            pieceRoot.AddComponent<DragController>();
+            var jigSawPiece = pieceRoot.AddComponent<JigSawPiece>();
+
             if (renderer != null)
                 collider.size = renderer.bounds.size;
 
-            var dragController = pieceRoot.AddComponent<DragController3D>();
             jigSawPiece.SetData(data);
         }
     }

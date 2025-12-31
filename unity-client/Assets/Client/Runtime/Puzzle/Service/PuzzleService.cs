@@ -35,7 +35,8 @@ namespace Client.Runtime
             _board.SetActiveFullImage(false);
             foreach (var cell in _board.Cells)
             {
-                cell.WrapAndSetup(_puzzleRoot, _contentService.GetData<JigSawPieceData>(cell.PieceId));
+                var data = _contentService.GetData<JigSawPieceData>(cell.PieceId);
+                cell.WrapAndSetup(_puzzleRoot, data);
             }
 
             ShufflePieces();

@@ -2,13 +2,21 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
+    [RequireComponent(typeof(DragController))]
     public sealed class JigSawPiece : MonoBehaviour, IGroupable
     {
         private IGroup _groupRef;
+        private DragController _dragController;
 
         public IGroup Group => _groupRef;
 
         public JigSawPieceData Data { get; private set; }
+
+        private void Awake()
+        {
+            _dragController = GetComponent<DragController>();
+            _dragController.OnDragged += Move;
+        }
 
         public void SetGroup(IGroup group) => _groupRef = group;
 
@@ -26,22 +34,6 @@ namespace Client.Runtime
             }
         }
 
-        // Example actions for single piece
-        public void Move(Vector3 delta)
-        {
-            if (_groupRef != null)
-            {
-                // delegate to group
-                if (_groupRef is JigSawGroup group)
-                    group.Move(delta);
-            }
-            else
-            {
-                // single piece move
-                transform.position += delta;
-            }
-        }
-
         public void Highlight(Color color)
         {
             if (_groupRef != null)
@@ -54,6 +46,21 @@ namespace Client.Runtime
                 // single piece highlight
                 var renderer = GetComponent<Renderer>();
                 if (renderer != null) renderer.material.color = color;
+            }
+        }
+
+        private void Move(Vector3 delta)
+        {
+            if (_groupRef != null)
+            {
+                // delegate to group
+                if (_groupRef is JigSawGroup group)
+                    group.Move(delta);
+            }
+            else
+            {
+                // single piece move
+                transform.position += delta;
             }
         }
     }
