@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Database;
@@ -30,21 +29,19 @@ namespace Client.Runtime
                 _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
             }
 
+            _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
+
             foreach (var id in Data.PiecesIds)
             {
                 var asset = _assetData.GetAsset(id);
                 var piece = await UniResources.CreateInstanceAsync<Transform>(asset.RuntimeKey, parent, null, cToken);
+                SetLoadedTexture(piece);
                 Pieces.Add(piece);
             }
 
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
             FullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
-
-            if (Pieces.First().TryGetComponent<Renderer>(out var renderer))
-            {
-                _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
-                renderer.material.SetTexture("_BaseMap", _texture);
-            }
+            SetLoadedTexture(FullImg);
         }
 
         public void UnLoadPuzzle()
@@ -73,6 +70,14 @@ namespace Client.Runtime
         protected override void OnReset()
         {
             // Empty yet
+        }
+
+        private void SetLoadedTexture(Transform obj)
+        {
+            if (obj.TryGetComponent<Renderer>(out var renderer))
+            {
+                renderer.material.SetTexture("_BaseMap", _texture);
+            }
         }
     }
 }
