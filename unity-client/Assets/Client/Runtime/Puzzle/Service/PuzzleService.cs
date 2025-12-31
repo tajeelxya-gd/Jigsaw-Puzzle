@@ -72,13 +72,14 @@ namespace Client.Runtime
 
             // Add required components to wrapper
             var jigSawPiece = pieceRoot.AddComponent<JigSawPiece>();
-            var dragController = pieceRoot.AddComponent<DragController3D>();
 
             // Collider that matches mesh bounds
             var renderer = meshTransform.GetComponent<Renderer>();
             BoxCollider collider = pieceRoot.AddComponent<BoxCollider>();
             if (renderer != null)
                 collider.size = renderer.bounds.size;
+
+            var dragController = pieceRoot.AddComponent<DragController3D>();
 
             // Assign piece data
             var pieceData = _contentService.GetData<JigSawPieceData>(cell.PieceId);
