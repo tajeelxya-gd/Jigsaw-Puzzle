@@ -9,10 +9,10 @@ namespace Client.Runtime
     {
         [SerializeField] private string _id;
         [SerializeField] private string _boardId;
-        [SerializeField] private string _imageId;
+        [SerializeField] private string _imageKey;
 
         public string Id => _id;
         public string BoardId => _boardId;
-        public string ImageId => _imageId;
+        public string ImageKey => _imageKey;
     }
 }

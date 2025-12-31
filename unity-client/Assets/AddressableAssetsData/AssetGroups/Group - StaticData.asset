@@ -15,8 +15,8 @@ MonoBehaviour:
   m_GroupName: Group - StaticData
   m_GUID: 80ec821ee97495e40875344863904b8b
   m_SerializeEntries:
-  - m_GUID: 1473f954a1abe08409b24897313d48f8
-    m_Address: _4x3_standard_board - AssetData
+  - m_GUID: 94b4fa87af314d743a3aee87e9606e5e
+    m_Address: mg_content
     m_ReadOnly: 0
     m_SerializedLabels:
     - mg_content
