@@ -58,6 +58,8 @@ namespace Client.Runtime
             UniResources.DisposeInstance(FullImg.gameObject);
         }
 
+        public void SetActiveFullImage(bool active) => FullImg.gameObject.SetActive(active);
+
         protected override void OnInject(IResolver resolver)
         {
             // Empty yet

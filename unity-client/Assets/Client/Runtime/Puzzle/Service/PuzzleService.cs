@@ -11,6 +11,7 @@ namespace Client.Runtime
     {
         private IContentService _contentService;
         private IEntityService _entityService;
+        private JigSawBoard _board;
 
         public void Inject(IResolver resolver)
         {
@@ -18,12 +19,12 @@ namespace Client.Runtime
             _entityService = resolver.Resolve<IEntityService>();
         }
 
-        public UniTask LoadPuzzleAsync(CancellationToken cToken = default)
+        public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
-            var board = _entityService.Get<JigSawBoard>(levelData.BoardId);
-
-            return board.LoadPuzzleAsync(levelData.ImageKey, null, cToken);
+            _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
+            await _board.LoadPuzzleAsync(levelData.ImageKey, null, cToken);
+            _board.SetActiveFullImage(false);
         }
 
         private JigSawLevelData GetCurrentLevelData()
