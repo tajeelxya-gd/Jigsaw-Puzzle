@@ -43,7 +43,7 @@ namespace Client.Runtime
             {
                 var mesh = grid.GetChild(0);
                 SetLoadedTexture(mesh);
-                var piece = await SpawnPuzzlePieceAsync(mesh, parent, cToken);
+                var piece = await SpawnPuzzlePieceAsync(i, mesh, parent, cToken);
                 await SpawnCellAsync(i, piece, cToken);
             }
 
@@ -94,13 +94,14 @@ namespace Client.Runtime
             return UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
         }
 
-        private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(Transform mesh, Transform parent, CancellationToken cToken = default)
+        private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(int idx, Transform mesh, Transform parent, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
             piece.transform.SetPositionAndRotation(mesh.position, mesh.rotation);
             mesh.SetParent(piece.transform);
             piece.SetColliderSize(mesh.GetComponent<Renderer>());
             piece.SetCells(_cells);
+            piece.SetIdx(idx);
             _pieces.Add(piece);
 
             return piece;

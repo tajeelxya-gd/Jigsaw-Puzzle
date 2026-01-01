@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +11,17 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _collider;
 
         private IGroup _groupRef;
+        private int _idx;
 
         public IGroup Group => _groupRef;
 
-        public JigSawPieceData Data { get; private set; }
-
         public void SetGroup(IGroup group) => _groupRef = group;
-
-        public void SetData(JigSawPieceData data) => Data = data;
 
         public void SetColliderSize(Renderer renderer) => _collider.size = renderer.bounds.size;
 
         public void SetCells(IList<JigsawBoardCell> cells) => _snapController.SetCells(cells);
+
+        public void SetIdx(int idx) => _idx = idx;
 
         public void AttachTo(IGroup other)
         {
@@ -54,12 +54,21 @@ namespace Client.Runtime
         {
             _dragController.OnDragged += Move;
             _dragController.OnDragEnded += _snapController.SnapToClosestCell;
+            _snapController.OnSnapped += HandleSnapped;
         }
 
         private void OnDestroy()
         {
             _dragController.OnDragged -= Move;
             _dragController.OnDragEnded -= _snapController.SnapToClosestCell;
+            _snapController.OnSnapped -= HandleSnapped;
+
+        }
+
+        private void HandleSnapped(int idx)
+        {
+            var isPlaced = idx == _idx;
+            _dragController.enabled = !isPlaced;
         }
 
         private void Move(Vector3 delta)

@@ -1,6 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
+using UniTx.Runtime.Extensions;
 
 namespace Client.Runtime
 {
@@ -8,8 +11,9 @@ namespace Client.Runtime
     {
         [SerializeField] private float _snapDuration = 0.5f;
 
+        public event Action<int> OnSnapped;
+
         private IList<JigsawBoardCell> _cells;
-        private Coroutine _snapRoutine;
 
         public void SetCells(IList<JigsawBoardCell> cells) => _cells = cells;
 
@@ -17,53 +21,56 @@ namespace Client.Runtime
         {
             if (_cells == null || _cells.Count == 0) return;
 
-            Transform bestTarget = null;
+            JigsawBoardCell bestTarget = null;
             float closestDistanceSqr = float.MaxValue;
             Vector3 currentPos = transform.position;
 
             foreach (var cell in _cells)
             {
                 if (cell == null) continue;
-                var cellTransform = cell.transform;
-                float distSqr = (cellTransform.position - currentPos).sqrMagnitude;
+
+                float distSqr = (cell.transform.position - currentPos).sqrMagnitude;
                 if (distSqr < closestDistanceSqr)
                 {
                     closestDistanceSqr = distSqr;
-                    bestTarget = cellTransform;
+                    bestTarget = cell;
                 }
             }
 
-            if (bestTarget != null)
-            {
-                if (_snapRoutine != null) StopCoroutine(_snapRoutine);
-                _snapRoutine = StartCoroutine(SnapLerp(bestTarget));
-            }
+            if (bestTarget == null) return;
+
+            SnapAsync(bestTarget, this.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private IEnumerator SnapLerp(Transform target)
+        private async UniTask SnapAsync(JigsawBoardCell cell, CancellationToken cToken = default)
         {
-            Vector3 startPos = transform.position;
-            Quaternion startRot = transform.rotation;
-            float elapsed = 0;
+            var startPos = transform.position;
+            var startRot = transform.rotation;
+            var cellTransform = cell.transform;
+
+            float elapsed = 0f;
 
             while (elapsed < _snapDuration)
             {
+                cToken.ThrowIfCancellationRequested();
+
                 elapsed += Time.deltaTime;
                 float normalizedTime = elapsed / _snapDuration;
 
-                // Use SmoothStep for a polished "ease-in-out" feel
-                float t = Mathf.SmoothStep(0, 1, normalizedTime);
+                // Ease-in-out
+                float t = Mathf.SmoothStep(0f, 1f, normalizedTime);
 
-                transform.position = Vector3.Lerp(startPos, target.position, t);
-                transform.rotation = Quaternion.Slerp(startRot, target.rotation, t);
+                transform.position = Vector3.Lerp(startPos, cellTransform.position, t);
+                transform.rotation = Quaternion.Slerp(startRot, cellTransform.rotation, t);
 
-                yield return null;
+                await UniTask.Yield(PlayerLoopTiming.Update, cToken);
             }
 
             // Finalize placement
-            transform.position = target.position;
-            transform.rotation = target.rotation;
-            _snapRoutine = null;
+            transform.position = cellTransform.position;
+            transform.rotation = cellTransform.rotation;
+
+            OnSnapped.Broadcast(cell.Idx);
         }
     }
 }
