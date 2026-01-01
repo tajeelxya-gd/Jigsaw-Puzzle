@@ -12,7 +12,6 @@ namespace Client.Runtime
 {
     public sealed class JigSawBoard : EntityBase<JigSawBoardData, JigSawBoardSavedData>
     {
-        private readonly List<GameObject> _meshes = new();
         private readonly List<JigSawPiece> _pieces = new();
         private readonly List<Transform> _placements = new();
 
@@ -37,11 +36,13 @@ namespace Client.Runtime
             }
 
             _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
+            var grid = await SpawnGridAsync(parent, cToken);
+            var len = grid.childCount;
 
-            for (int i = 0; i < Data.PiecesIds.Length; i++)
+            for (int i = 0; i < len; i++)
             {
-                var id = Data.PiecesIds[i];
-                var mesh = await SpawnMeshAsync(id, parent, cToken);
+                var mesh = grid.GetChild(0);
+                SetLoadedTexture(mesh);
                 var piece = await SpawnPuzzlePieceAsync(mesh, parent, cToken);
                 SetPlacement(i, piece);
             }
@@ -49,16 +50,11 @@ namespace Client.Runtime
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
             FullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
             SetLoadedTexture(FullImg);
+            UniResources.DisposeInstance(grid.gameObject);
         }
 
         public void UnLoadPuzzle()
         {
-            foreach (var mesh in _meshes)
-            {
-                UniResources.DisposeInstance(mesh);
-            }
-            _meshes.Clear();
-
             foreach (var piece in _pieces)
             {
                 UniResources.DisposeInstance(piece.gameObject);
@@ -92,13 +88,10 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        private async UniTask<Transform> SpawnMeshAsync(string id, Transform parent, CancellationToken cToken = default)
+        private UniTask<Transform> SpawnGridAsync(Transform parent, CancellationToken cToken = default)
         {
-            var meshAsset = _assetData.GetAsset(id);
-            var mesh = await UniResources.CreateInstanceAsync<Transform>(meshAsset.RuntimeKey, parent, null, cToken);
-            SetLoadedTexture(mesh);
-            _meshes.Add(mesh.gameObject);
-            return mesh;
+            var gridAsset = _assetData.GetAsset(Data.GridId);
+            return UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
         }
 
         private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(Transform mesh, Transform parent, CancellationToken cToken = default)
@@ -127,7 +120,18 @@ namespace Client.Runtime
         {
             if (obj.TryGetComponent<Renderer>(out var renderer))
             {
-                renderer.material.SetTexture("_BaseMap", _texture);
+                var sharedMaterials = renderer.materials;
+
+                for (int i = 0; i < sharedMaterials.Length; i++)
+                {
+                    var sharedMaterial = sharedMaterials[i];
+                    if (sharedMaterial != null)
+                    {
+                        sharedMaterial.SetTexture("_BaseMap", _texture);
+                    }
+                }
+
+                renderer.materials = sharedMaterials;
             }
         }
     }

@@ -10,16 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Group - 4x3 StandardBoard
+  m_Name: Group - 6X4 StandardBoard
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Group - 4x3 StandardBoard
+  m_GroupName: Group - 6X4 StandardBoard
   m_GUID: 64f4f73583dc41d4d963ccd45aa3ad01
   m_SerializeEntries:
   - m_GUID: 1473f954a1abe08409b24897313d48f8
-    m_Address: _4x3_standard_board_asset_data
+    m_Address: _6x4_standard_board_asset_data
     m_ReadOnly: 0
     m_SerializedLabels:
     - AssetData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b2b25c4a75275f4484c06c274bfc023
+    m_Address: default
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7157240041c20a04580869e9b5da1ba9
+    m_Address: Jigsaw Final 6x4 Grid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93f0aac618e808e41b6cb04a0811b74b
+    m_Address: Jigsaw Final 6x4 single plane
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3503d75f7bc6a74e8ac05b93dec7cc4
+    m_Address: 6X4 image 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d5f53fda6cfc8e640bfdb4e717e7e8ee, type: 2}
