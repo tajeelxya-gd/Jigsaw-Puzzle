@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb90628729938604c809344efbfc382d
+    m_Address: JigsawBoardCell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d5f53fda6cfc8e640bfdb4e717e7e8ee, type: 2}
   m_SchemaSet:

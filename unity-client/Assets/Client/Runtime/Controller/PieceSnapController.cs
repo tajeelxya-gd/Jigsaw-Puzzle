@@ -8,29 +8,28 @@ namespace Client.Runtime
     {
         [SerializeField] private float _snapDuration = 0.5f;
 
-        private IList<Transform> _placements;
+        private IList<JigsawBoardCell> _cells;
         private Coroutine _snapRoutine;
 
-        public void SetPlacements(IList<Transform> placements) => _placements = placements;
+        public void SetCells(IList<JigsawBoardCell> cells) => _cells = cells;
 
-        public void SnapToClosestPlacement()
+        public void SnapToClosestCell()
         {
-            if (_placements == null || _placements.Count == 0) return;
+            if (_cells == null || _cells.Count == 0) return;
 
             Transform bestTarget = null;
             float closestDistanceSqr = float.MaxValue;
             Vector3 currentPos = transform.position;
 
-            // Find the closest placement regardless of distance
-            foreach (var placement in _placements)
+            foreach (var cell in _cells)
             {
-                if (placement == null) continue;
-
-                float distSqr = (placement.position - currentPos).sqrMagnitude;
+                if (cell == null) continue;
+                var cellTransform = cell.transform;
+                float distSqr = (cellTransform.position - currentPos).sqrMagnitude;
                 if (distSqr < closestDistanceSqr)
                 {
                     closestDistanceSqr = distSqr;
-                    bestTarget = placement;
+                    bestTarget = cellTransform;
                 }
             }
 

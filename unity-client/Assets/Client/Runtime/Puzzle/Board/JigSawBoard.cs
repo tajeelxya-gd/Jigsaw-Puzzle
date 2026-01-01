@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -13,14 +12,15 @@ namespace Client.Runtime
     public sealed class JigSawBoard : EntityBase<JigSawBoardData, JigSawBoardSavedData>
     {
         private readonly List<JigSawPiece> _pieces = new();
-        private readonly List<Transform> _placements = new();
+        private readonly List<JigsawBoardCell> _cells = new();
 
         private AssetData _assetData;
         private Texture2D _texture;
 
         public Transform FullImg { get; private set; }
 
-        public IReadOnlyList<Transform> Placements => _placements;
+        public IReadOnlyList<JigsawBoardCell> Cells => _cells;
+
         public IReadOnlyList<JigSawPiece> Pieces => _pieces;
 
         public JigSawBoard(string id) : base(id)
@@ -44,7 +44,7 @@ namespace Client.Runtime
                 var mesh = grid.GetChild(0);
                 SetLoadedTexture(mesh);
                 var piece = await SpawnPuzzlePieceAsync(mesh, parent, cToken);
-                SetPlacement(i, piece);
+                await SpawnCellAsync(i, piece, cToken);
             }
 
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
@@ -61,11 +61,11 @@ namespace Client.Runtime
             }
             _pieces.Clear();
 
-            foreach (var placement in _placements)
+            foreach (var cell in _cells)
             {
-                GameObject.Destroy(placement.gameObject);
+                UniResources.DisposeInstance(cell.gameObject);
             }
-            _placements.Clear();
+            _cells.Clear();
 
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeInstance(FullImg.gameObject);
@@ -100,20 +100,19 @@ namespace Client.Runtime
             piece.transform.SetPositionAndRotation(mesh.position, mesh.rotation);
             mesh.SetParent(piece.transform);
             piece.SetColliderSize(mesh.GetComponent<Renderer>());
-            piece.SetPlacements(_placements);
+            piece.SetCells(_cells);
             _pieces.Add(piece);
 
             return piece;
         }
 
-        private void SetPlacement(int idx, JigSawPiece piece)
+        private async UniTask SpawnCellAsync(int idx, JigSawPiece piece, CancellationToken cToken = default)
         {
-            var go = new GameObject($"Placement - {idx}");
-            var placement = go.transform;
             var pieceTransform = piece.transform;
-            placement.SetParent(pieceTransform.parent);
-            placement.SetPositionAndRotation(pieceTransform.position, pieceTransform.rotation);
-            _placements.Add(go.transform);
+            var cell = await UniResources.CreateInstanceAsync<JigsawBoardCell>("JigsawBoardCell", pieceTransform.parent, null, cToken);
+            cell.SetIdx(idx);
+            cell.transform.SetPositionAndRotation(pieceTransform.position, pieceTransform.rotation);
+            _cells.Add(cell);
         }
 
         private void SetLoadedTexture(Transform obj)

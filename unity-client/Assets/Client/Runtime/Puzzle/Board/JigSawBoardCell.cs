@@ -2,18 +2,12 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigSawBoardCell
+    public sealed class JigsawBoardCell : MonoBehaviour
     {
-        private string _pieceId;
-        private Transform _meshTransform;
+        private int _idx;
 
-        public string PieceId => _pieceId;
-        public Transform MeshTransform => _meshTransform;
+        public int Idx => _idx;
 
-        public JigSawBoardCell(string pieceId, Transform pieceTransform)
-        {
-            _pieceId = pieceId;
-            _meshTransform = pieceTransform;
-        }
+        public void SetIdx(int idx) => _idx = idx;
     }
 }

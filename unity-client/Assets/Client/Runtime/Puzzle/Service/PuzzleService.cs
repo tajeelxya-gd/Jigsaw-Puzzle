@@ -34,7 +34,7 @@ namespace Client.Runtime
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
 
-            // ShufflePieces();
+            ShufflePieces();
         }
 
         public void UnLoadPuzzle()
@@ -58,7 +58,7 @@ namespace Client.Runtime
                 var randomPos = _puzzleRoot.position + new Vector3(
                     Random.Range(-0.05f, 0.05f),
                     0,
-                    Random.Range(-0.15f, -0.1f)
+                    Random.Range(-0.2f, -0.16f)
                 );
 
                 var pieceTransform = piece.transform;
