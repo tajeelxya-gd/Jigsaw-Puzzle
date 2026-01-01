@@ -11,7 +11,6 @@ namespace Client.Runtime
         {
             ContentRegistry.Register<JigSawLevelData>("JigSawLevelData");
             ContentRegistry.Register<JigSawBoardData>("JigSawBoardData");
-            ContentRegistry.Register<JigSawPieceData>("JigSawPieceData");
             return UniTask.CompletedTask;
         }
     }

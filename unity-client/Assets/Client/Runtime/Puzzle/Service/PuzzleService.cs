@@ -13,6 +13,7 @@ namespace Client.Runtime
     {
         private IContentService _contentService;
         private IEntityService _entityService;
+        private IWinConditionChecker _winConditionChecker;
         private JigSawBoard _board;
         private Transform _puzzleRoot;
 
@@ -20,6 +21,7 @@ namespace Client.Runtime
         {
             _contentService = resolver.Resolve<IContentService>();
             _entityService = resolver.Resolve<IEntityService>();
+            _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
         }
 
         public void Initialise()
@@ -33,7 +35,7 @@ namespace Client.Runtime
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
-
+            _winConditionChecker.SetBoard(_board);
             ShufflePieces();
         }
 
@@ -41,6 +43,7 @@ namespace Client.Runtime
         {
             _board.UnLoadPuzzle();
             _board = null;
+            _winConditionChecker.SetBoard(null);
         }
 
         private JigSawLevelData GetCurrentLevelData()

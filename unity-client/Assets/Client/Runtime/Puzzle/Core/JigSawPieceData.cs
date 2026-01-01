@@ -1,18 +1,23 @@
-using System;
-using UniTx.Runtime.Content;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    [Serializable]
-    public sealed class JigSawPieceData : IData
+    public sealed class JigSawPieceData
     {
-        [SerializeField] private string _id;
-        [SerializeField] private int _placementOnBoard;
-        [SerializeField] private NeighbourPiece[] _neighbourPieces;
+        private int _originalIdx;
+        private Vector3 _colliderSize;
+        private IList<JigsawBoardCell> _cells;
 
-        public string Id => _id;
-        public int PlacementOnBoard => _placementOnBoard;
-        public NeighbourPiece[] NeighbourPieces => _neighbourPieces;
+        public int OriginalIdx => _originalIdx;
+        public Vector3 ColliderSize => _colliderSize;
+        public IList<JigsawBoardCell> Cells => _cells;
+
+        public JigSawPieceData(int originalIdx, Vector3 colliderSize, IList<JigsawBoardCell> cells)
+        {
+            _originalIdx = originalIdx;
+            _colliderSize = colliderSize;
+            _cells = cells;
+        }
     }
 }

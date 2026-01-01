@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using UniTx.Runtime.Events;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -10,36 +9,37 @@ namespace Client.Runtime
         [SerializeField] private PieceSnapController _snapController;
         [SerializeField] private BoxCollider _collider;
 
-        private IGroup _groupRef;
-        private int _idx;
+        private JigSawPieceData _data;
 
-        public IGroup Group => _groupRef;
+        public IGroup Group { get; private set; }
 
-        public void SetGroup(IGroup group) => _groupRef = group;
+        public bool IsPlaced { get; private set; }
 
-        public void SetColliderSize(Renderer renderer) => _collider.size = renderer.bounds.size;
+        public void SetGroup(IGroup group) => Group = group;
 
-        public void SetCells(IList<JigsawBoardCell> cells) => _snapController.SetCells(cells);
-
-        public void SetIdx(int idx) => _idx = idx;
+        public void Init(JigSawPieceData data)
+        {
+            _data = data;
+            _collider.size = _data.ColliderSize;
+        }
 
         public void AttachTo(IGroup other)
         {
-            if (_groupRef == null && other != null)
+            if (Group == null && other != null)
             {
                 other.AddMember(this);
             }
-            else if (_groupRef != null && other != null && _groupRef != other)
+            else if (Group != null && other != null && Group != other)
             {
-                _groupRef.Merge(other);
+                Group.Merge(other);
             }
         }
 
         public void Highlight(Color color)
         {
-            if (_groupRef != null)
+            if (Group != null)
             {
-                if (_groupRef is JigSawGroup group)
+                if (Group is JigSawGroup group)
                     group.Highlight(color);
             }
             else
@@ -53,30 +53,37 @@ namespace Client.Runtime
         private void Awake()
         {
             _dragController.OnDragged += Move;
-            _dragController.OnDragEnded += _snapController.SnapToClosestCell;
+            _dragController.OnDragEnded += HandleDraggedEnded;
             _snapController.OnSnapped += HandleSnapped;
         }
 
         private void OnDestroy()
         {
             _dragController.OnDragged -= Move;
-            _dragController.OnDragEnded -= _snapController.SnapToClosestCell;
+            _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
-
         }
+
+        private void HandleDraggedEnded() => _snapController.SnapToClosestCell(_data.Cells);
 
         private void HandleSnapped(int idx)
         {
-            var isPlaced = idx == _idx;
-            _dragController.enabled = !isPlaced;
+            IsPlaced = idx == _data.OriginalIdx;
+            if (IsPlaced)
+            {
+                _dragController.enabled = false;
+                _collider.enabled = false;
+                _snapController.enabled = false;
+                UniEvents.Raise(new PiecePlacedEvent());
+            }
         }
 
         private void Move(Vector3 delta)
         {
-            if (_groupRef != null)
+            if (Group != null)
             {
                 // delegate to group
-                if (_groupRef is JigSawGroup group)
+                if (Group is JigSawGroup group)
                     group.Move(delta);
             }
             else

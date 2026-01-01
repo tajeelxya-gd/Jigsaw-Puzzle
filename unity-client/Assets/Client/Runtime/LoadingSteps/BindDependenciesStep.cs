@@ -28,6 +28,8 @@ namespace Client.Runtime
             _binder.BindAsSingleton<EntityService>();
 
             _binder.BindAsSingleton<PuzzleService>();
+            _binder.BindAsSingleton<JigsawWinConditionChecker>();
+
             return UniTask.CompletedTask;
         }
     }

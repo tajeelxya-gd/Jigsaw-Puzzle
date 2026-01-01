@@ -13,19 +13,15 @@ namespace Client.Runtime
 
         public event Action<int> OnSnapped;
 
-        private IList<JigsawBoardCell> _cells;
-
-        public void SetCells(IList<JigsawBoardCell> cells) => _cells = cells;
-
-        public void SnapToClosestCell()
+        public void SnapToClosestCell(IList<JigsawBoardCell> cells)
         {
-            if (_cells == null || _cells.Count == 0) return;
+            if (cells == null || cells.Count == 0) return;
 
             JigsawBoardCell bestTarget = null;
             float closestDistanceSqr = float.MaxValue;
             Vector3 currentPos = transform.position;
 
-            foreach (var cell in _cells)
+            foreach (var cell in cells)
             {
                 if (cell == null) continue;
 
