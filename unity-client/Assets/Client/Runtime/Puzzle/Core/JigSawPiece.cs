@@ -10,7 +10,7 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private JigsawPieceVFX _vfx;
 
-        private JigSawPieceData _data;
+        public JigSawPieceData Data { get; private set; }
 
         public IGroup Group { get; private set; }
 
@@ -20,8 +20,8 @@ namespace Client.Runtime
 
         public void Init(JigSawPieceData data)
         {
-            _data = data;
-            _collider.size = _data.ColliderSize;
+            Data = data;
+            _collider.size = Data.ColliderSize;
         }
 
         public void AttachTo(IGroup other)
@@ -35,6 +35,8 @@ namespace Client.Runtime
                 Group.Merge(other);
             }
         }
+
+        public void PlayVfx() => _vfx.Play();
 
         private void Awake()
         {
@@ -50,18 +52,18 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDraggedEnded() => _snapController.SnapToClosestCell(_data.Cells);
+        private void HandleDraggedEnded() => _snapController.SnapToClosestCell(Data.Cells);
 
-        private void HandleSnapped(int idx)
+        private void HandleSnapped(JigsawBoardCell cell)
         {
-            IsPlaced = idx == _data.OriginalIdx;
+            IsPlaced = cell.Idx == Data.OriginalIdx;
             if (IsPlaced)
             {
                 _dragController.enabled = false;
                 _collider.enabled = false;
                 _snapController.enabled = false;
-                OnPlaced();
-                UniEvents.Raise(new PiecePlacedEvent());
+                cell.SetPiece(this);
+                UniEvents.Raise(new PiecePlacedEvent(this));
             }
         }
 
@@ -78,12 +80,6 @@ namespace Client.Runtime
                 // single piece move
                 transform.position += delta;
             }
-        }
-
-        private void OnPlaced()
-        {
-            // perform actions here when piece is placed
-            _vfx.Play();
         }
     }
 }

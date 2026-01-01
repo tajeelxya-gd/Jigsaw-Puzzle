@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Database;
@@ -72,6 +73,37 @@ namespace Client.Runtime
         }
 
         public void SetActiveFullImage(bool active) => FullImg.gameObject.SetActive(active);
+
+        public IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
+        {
+            if (idx < 0 || idx >= Cells.Count)
+                return Enumerable.Empty<JigsawBoardCell>();
+
+            var neighbours = new List<JigsawBoardCell>(4);
+            var cols = Data.YConstraint;
+            var rows = Data.XConstraint;
+
+            int row = idx / cols;
+            int col = idx % cols;
+
+            // Top
+            if (row > 0)
+                neighbours.Add(Cells[idx - cols]);
+
+            // Bottom
+            if (row < rows - 1)
+                neighbours.Add(Cells[idx + cols]);
+
+            // Left
+            if (col > 0)
+                neighbours.Add(Cells[idx - 1]);
+
+            // Right
+            if (col < cols - 1)
+                neighbours.Add(Cells[idx + 1]);
+
+            return neighbours;
+        }
 
         protected override void OnInject(IResolver resolver)
         {

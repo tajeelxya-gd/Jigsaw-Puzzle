@@ -29,6 +29,7 @@ namespace Client.Runtime
 
             _binder.BindAsSingleton<PuzzleService>();
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
+            _binder.BindAsSingleton<PieceVFXController>();
 
             return UniTask.CompletedTask;
         }

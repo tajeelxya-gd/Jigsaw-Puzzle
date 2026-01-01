@@ -23,8 +23,8 @@ namespace Client.Runtime
 
         public void Play()
         {
-            // _particleSystem.Play();
-            // FlashAsync(this.GetCancellationTokenOnDestroy()).Forget();
+            _particleSystem.Play();
+            FlashAsync(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private async UniTask FlashAsync(CancellationToken token)

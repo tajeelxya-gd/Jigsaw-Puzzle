@@ -11,7 +11,7 @@ namespace Client.Runtime
     {
         [SerializeField] private float _snapDuration = 0.5f;
 
-        public event Action<int> OnSnapped;
+        public event Action<JigsawBoardCell> OnSnapped;
 
         public void SnapToClosestCell(IList<JigsawBoardCell> cells)
         {
@@ -66,7 +66,7 @@ namespace Client.Runtime
             transform.position = cellTransform.position;
             transform.rotation = cellTransform.rotation;
 
-            OnSnapped.Broadcast(cell.Idx);
+            OnSnapped.Broadcast(cell);
         }
     }
 }

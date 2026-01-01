@@ -9,5 +9,7 @@ namespace Client.Runtime
         UniTask LoadPuzzleAsync(CancellationToken cToken = default);
 
         void UnLoadPuzzle();
+
+        JigSawBoard GetCurrentBoard();
     }
 }

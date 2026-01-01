@@ -46,6 +46,8 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(null);
         }
 
+        public JigSawBoard GetCurrentBoard() => _board;
+
         private JigSawLevelData GetCurrentLevelData()
         {
             var data = _contentService.GetAllData<JigSawLevelData>();
