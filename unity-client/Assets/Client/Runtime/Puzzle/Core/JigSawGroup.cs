@@ -51,14 +51,5 @@ namespace Client.Runtime
                     mb.transform.position += delta;
             }
         }
-
-        public void Highlight(Color color)
-        {
-            foreach (var member in Members)
-            {
-                if (member is JigSawPiece piece)
-                    piece.Highlight(color);
-            }
-        }
     }
 }

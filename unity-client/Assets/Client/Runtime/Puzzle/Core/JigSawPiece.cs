@@ -1,4 +1,3 @@
-using System;
 using UniTx.Runtime.Events;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ namespace Client.Runtime
         [SerializeField] private DragController _dragController;
         [SerializeField] private PieceSnapController _snapController;
         [SerializeField] private BoxCollider _collider;
+        [SerializeField] private JigsawPieceVFX _vfx;
 
         private JigSawPieceData _data;
 
@@ -33,21 +33,6 @@ namespace Client.Runtime
             else if (Group != null && other != null && Group != other)
             {
                 Group.Merge(other);
-            }
-        }
-
-        public void Highlight(Color color)
-        {
-            if (Group != null)
-            {
-                if (Group is JigSawGroup group)
-                    group.Highlight(color);
-            }
-            else
-            {
-                // single piece highlight
-                var renderer = GetComponent<Renderer>();
-                if (renderer != null) renderer.material.color = color;
             }
         }
 
@@ -98,6 +83,7 @@ namespace Client.Runtime
         private void OnPlaced()
         {
             // perform actions here when piece is placed
+            _vfx.Play();
         }
     }
 }
