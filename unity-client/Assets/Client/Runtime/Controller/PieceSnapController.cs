@@ -1,87 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(JigSawPiece))]
-    [RequireComponent(typeof(DragController))]
     public sealed class PieceSnapController : MonoBehaviour
     {
-        [SerializeField] private float snapThreshold = 0.15f;
+        [SerializeField] private float _snapDuration = 0.5f;
 
-        private JigSawPiece _piece;
-        private DragController _drag;
+        private IList<Transform> _placements;
+        private Coroutine _snapRoutine;
 
-        private void Awake()
+        public void SetPlacements(IList<Transform> placements) => _placements = placements;
+
+        public void SnapToClosestPlacement()
         {
-            _piece = GetComponent<JigSawPiece>();
-            _drag = GetComponent<DragController>();
+            if (_placements == null || _placements.Count == 0) return;
 
-            _drag.OnDragEnded += TrySnap;
-        }
+            Transform bestTarget = null;
+            float closestDistanceSqr = float.MaxValue;
+            Vector3 currentPos = transform.position;
 
-        private void OnDestroy()
-        {
-            _drag.OnDragEnded -= TrySnap;
-        }
-
-        private void TrySnap()
-        {
-            if (_piece.Data == null) return;
-
-            foreach (var neighbour in _piece.Data.NeighbourPieces)
+            // Find the closest placement regardless of distance
+            foreach (var placement in _placements)
             {
-                var other = JigSawPieceRegistry.Get(neighbour.Id);
-                if (other == null) continue;
+                if (placement == null) continue;
 
-                TrySnapTo(other, neighbour.Placement);
+                float distSqr = (placement.position - currentPos).sqrMagnitude;
+                if (distSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distSqr;
+                    bestTarget = placement;
+                }
+            }
+
+            if (bestTarget != null)
+            {
+                if (_snapRoutine != null) StopCoroutine(_snapRoutine);
+                _snapRoutine = StartCoroutine(SnapLerp(bestTarget));
             }
         }
 
-        private void TrySnapTo(JigSawPiece other, PlacementDirection placement)
+        private IEnumerator SnapLerp(Transform target)
         {
-            Vector3 expectedPos = GetExpectedPosition(other, placement);
-            float distance = Vector3.Distance(_piece.transform.position, expectedPos);
+            Vector3 startPos = transform.position;
+            Quaternion startRot = transform.rotation;
+            float elapsed = 0;
 
-            if (distance > snapThreshold) return;
-
-            Vector3 delta = expectedPos - _piece.transform.position;
-            ApplySnap(delta, other);
-        }
-
-        private void ApplySnap(Vector3 delta, JigSawPiece other)
-        {
-            if (_piece.Group is JigSawGroup group)
-                group.Move(delta);
-            else
-                _piece.transform.position += delta;
-
-            _piece.AttachTo(other.Group ?? CreateGroup(_piece, other));
-        }
-
-        private Vector3 GetExpectedPosition(JigSawPiece other, PlacementDirection placement)
-        {
-            var bounds = other.GetComponent<Renderer>().bounds;
-            Vector3 size = bounds.size;
-
-            return placement switch
+            while (elapsed < _snapDuration)
             {
-                PlacementDirection.Top => other.transform.position + new Vector3(0, 0, size.z),
-                PlacementDirection.Bottom => other.transform.position + new Vector3(0, 0, -size.z),
-                PlacementDirection.Left => other.transform.position + new Vector3(-size.x, 0, 0),
-                PlacementDirection.Right => other.transform.position + new Vector3(size.x, 0, 0),
-                _ => other.transform.position
-            };
-        }
+                elapsed += Time.deltaTime;
+                float normalizedTime = elapsed / _snapDuration;
 
-        private JigSawGroup CreateGroup(JigSawPiece a, JigSawPiece b)
-        {
-            var go = new GameObject("JigSawGroup");
-            var group = go.AddComponent<JigSawGroup>();
+                // Use SmoothStep for a polished "ease-in-out" feel
+                float t = Mathf.SmoothStep(0, 1, normalizedTime);
 
-            group.AddMember(a);
-            group.AddMember(b);
+                transform.position = Vector3.Lerp(startPos, target.position, t);
+                transform.rotation = Quaternion.Slerp(startRot, target.rotation, t);
 
-            return group;
+                yield return null;
+            }
+
+            // Finalize placement
+            transform.position = target.position;
+            transform.rotation = target.rotation;
+            _snapRoutine = null;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -13,11 +14,15 @@ namespace Client.Runtime
     {
         private readonly List<GameObject> _meshes = new();
         private readonly List<JigSawPiece> _pieces = new();
+        private readonly List<Transform> _placements = new();
 
         private AssetData _assetData;
         private Texture2D _texture;
 
         public Transform FullImg { get; private set; }
+
+        public IReadOnlyList<Transform> Placements => _placements;
+        public IReadOnlyList<JigSawPiece> Pieces => _pieces;
 
         public JigSawBoard(string id) : base(id)
         {
@@ -33,19 +38,12 @@ namespace Client.Runtime
 
             _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
 
-            foreach (var id in Data.PiecesIds)
+            for (int i = 0; i < Data.PiecesIds.Length; i++)
             {
-                var meshAsset = _assetData.GetAsset(id);
-                var mesh = await UniResources.CreateInstanceAsync<Transform>(meshAsset.RuntimeKey, parent, null, cToken);
-                SetLoadedTexture(mesh);
-                _meshes.Add(mesh.gameObject);
-
-                var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
-                var meshTransform = mesh.transform;
-                piece.transform.SetPositionAndRotation(meshTransform.position, meshTransform.rotation);
-                mesh.SetParent(piece.transform);
-                piece.SetColliderSize(mesh.GetComponent<Renderer>());
-                _pieces.Add(piece);
+                var id = Data.PiecesIds[i];
+                var mesh = await SpawnMeshAsync(id, parent, cToken);
+                var piece = await SpawnPuzzlePieceAsync(mesh, parent, cToken);
+                SetPlacement(i, piece);
             }
 
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
@@ -61,11 +59,17 @@ namespace Client.Runtime
             }
             _meshes.Clear();
 
-             foreach (var piece in _pieces)
+            foreach (var piece in _pieces)
             {
                 UniResources.DisposeInstance(piece.gameObject);
             }
             _pieces.Clear();
+
+            foreach (var placement in _placements)
+            {
+                GameObject.Destroy(placement.gameObject);
+            }
+            _placements.Clear();
 
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeInstance(FullImg.gameObject);
@@ -86,6 +90,37 @@ namespace Client.Runtime
         protected override void OnReset()
         {
             // Empty yet
+        }
+
+        private async UniTask<Transform> SpawnMeshAsync(string id, Transform parent, CancellationToken cToken = default)
+        {
+            var meshAsset = _assetData.GetAsset(id);
+            var mesh = await UniResources.CreateInstanceAsync<Transform>(meshAsset.RuntimeKey, parent, null, cToken);
+            SetLoadedTexture(mesh);
+            _meshes.Add(mesh.gameObject);
+            return mesh;
+        }
+
+        private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(Transform mesh, Transform parent, CancellationToken cToken = default)
+        {
+            var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
+            piece.transform.SetPositionAndRotation(mesh.position, mesh.rotation);
+            mesh.SetParent(piece.transform);
+            piece.SetColliderSize(mesh.GetComponent<Renderer>());
+            piece.SetPlacements(_placements);
+            _pieces.Add(piece);
+
+            return piece;
+        }
+
+        private void SetPlacement(int idx, JigSawPiece piece)
+        {
+            var go = new GameObject($"Placement - {idx}");
+            var placement = go.transform;
+            var pieceTransform = piece.transform;
+            placement.SetParent(pieceTransform.parent);
+            placement.SetPositionAndRotation(pieceTransform.position, pieceTransform.rotation);
+            _placements.Add(go.transform);
         }
 
         private void SetLoadedTexture(Transform obj)

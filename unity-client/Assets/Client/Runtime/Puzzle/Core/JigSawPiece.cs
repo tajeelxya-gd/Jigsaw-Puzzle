@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -5,6 +6,7 @@ namespace Client.Runtime
     public sealed class JigSawPiece : MonoBehaviour, IGroupable
     {
         [SerializeField] private DragController _dragController;
+        [SerializeField] private PieceSnapController _snapController;
         [SerializeField] private BoxCollider _collider;
 
         private IGroup _groupRef;
@@ -18,6 +20,8 @@ namespace Client.Runtime
         public void SetData(JigSawPieceData data) => Data = data;
 
         public void SetColliderSize(Renderer renderer) => _collider.size = renderer.bounds.size;
+
+        public void SetPlacements(IList<Transform> placements) => _snapController.SetPlacements(placements);
 
         public void AttachTo(IGroup other)
         {
@@ -49,11 +53,13 @@ namespace Client.Runtime
         private void Awake()
         {
             _dragController.OnDragged += Move;
+            _dragController.OnDragEnded += _snapController.SnapToClosestPlacement;
         }
 
         private void OnDestroy()
         {
             _dragController.OnDragged -= Move;
+            _dragController.OnDragEnded -= _snapController.SnapToClosestPlacement;
         }
 
         private void Move(Vector3 delta)
