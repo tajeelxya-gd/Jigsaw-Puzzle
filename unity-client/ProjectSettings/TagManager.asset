@@ -43,6 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PlacedPieces
+    uniqueID: 2585434503
+    locked: 0
+  - name: UnplacedPieces
+    uniqueID: 1236682803
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

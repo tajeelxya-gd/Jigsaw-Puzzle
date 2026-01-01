@@ -131,8 +131,7 @@ namespace Client.Runtime
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
             piece.transform.SetPositionAndRotation(mesh.position, mesh.rotation);
             mesh.SetParent(piece.transform);
-            var colliderSize = mesh.GetComponent<Renderer>().bounds.size;
-            piece.Init(new JigSawPieceData(idx, colliderSize, _cells));
+            piece.Init(new JigSawPieceData(idx, mesh.GetComponent<Renderer>(), _cells));
             _pieces.Add(piece);
 
             return piece;

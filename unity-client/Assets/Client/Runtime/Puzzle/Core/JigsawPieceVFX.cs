@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
+    [RequireComponent(typeof(JigSawPiece))]
     public sealed class JigsawPieceVFX : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _particleSystem;
@@ -13,10 +14,12 @@ namespace Client.Runtime
 
         private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
         private MaterialPropertyBlock _mpb;
+        private JigSawPiece _jigsawPiece;
 
         private void Awake()
         {
             _mpb = new MaterialPropertyBlock();
+            _jigsawPiece = GetComponent<JigSawPiece>();
         }
 
         [ContextMenu("Play")]
@@ -28,7 +31,7 @@ namespace Client.Runtime
 
         private async UniTask FlashAsync(CancellationToken token)
         {
-            var renderer = transform.GetChild(1).GetComponent<Renderer>();
+            var renderer = _jigsawPiece.Data.Renderer;
             renderer.GetPropertyBlock(_mpb);
 
             Color startEmission = Color.black;

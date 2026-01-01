@@ -21,7 +21,10 @@ namespace Client.Runtime
         public void Init(JigSawPieceData data)
         {
             Data = data;
-            _collider.size = Data.ColliderSize;
+            var renderer = Data.Renderer;
+            _collider.size = renderer.bounds.size;
+            renderer.sortingLayerName = "UnplacedPieces";
+            renderer.sortingOrder = 0;
         }
 
         public void AttachTo(IGroup other)
@@ -63,6 +66,9 @@ namespace Client.Runtime
                 _collider.enabled = false;
                 _snapController.enabled = false;
                 cell.SetPiece(this);
+                var renderer = Data.Renderer;
+                renderer.sortingLayerName = "PlacedPieces";
+                renderer.sortingOrder = 10;
                 UniEvents.Raise(new PiecePlacedEvent(this));
             }
         }
