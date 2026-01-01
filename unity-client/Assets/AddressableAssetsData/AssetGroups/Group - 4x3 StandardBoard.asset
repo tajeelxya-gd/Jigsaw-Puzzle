@@ -21,21 +21,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AssetData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3a0d7676e2f880743ac94d7b215a9e76
-    m_Address: default
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8d0a4fd3a32cae3439cd64d2179f4db6
-    m_Address: Jigsaw1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ca617b021bb6b3f40ba0a880bf88f2d0
-    m_Address: Jigsaw Puzzle 4x3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d5f53fda6cfc8e640bfdb4e717e7e8ee, type: 2}
   m_SchemaSet:
