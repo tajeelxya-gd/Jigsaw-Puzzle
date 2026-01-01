@@ -11,10 +11,12 @@ namespace Client.Runtime
 {
     public sealed class JigSawBoard : EntityBase<JigSawBoardData, JigSawBoardSavedData>
     {
+        private readonly List<GameObject> _meshes = new();
+        private readonly List<JigSawPiece> _pieces = new();
+
         private AssetData _assetData;
         private Texture2D _texture;
 
-        public IList<JigSawBoardCell> Cells { get; private set; } = new List<JigSawBoardCell>();
         public Transform FullImg { get; private set; }
 
         public JigSawBoard(string id) : base(id)
@@ -33,10 +35,17 @@ namespace Client.Runtime
 
             foreach (var id in Data.PiecesIds)
             {
-                var asset = _assetData.GetAsset(id);
-                var piece = await UniResources.CreateInstanceAsync<Transform>(asset.RuntimeKey, parent, null, cToken);
-                SetLoadedTexture(piece);
-                Cells.Add(new JigSawBoardCell(id, piece));
+                var meshAsset = _assetData.GetAsset(id);
+                var mesh = await UniResources.CreateInstanceAsync<Transform>(meshAsset.RuntimeKey, parent, null, cToken);
+                SetLoadedTexture(mesh);
+                _meshes.Add(mesh.gameObject);
+
+                var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
+                var meshTransform = mesh.transform;
+                piece.transform.SetPositionAndRotation(meshTransform.position, meshTransform.rotation);
+                mesh.SetParent(piece.transform);
+                piece.SetColliderSize(mesh.GetComponent<Renderer>());
+                _pieces.Add(piece);
             }
 
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
@@ -46,11 +55,18 @@ namespace Client.Runtime
 
         public void UnLoadPuzzle()
         {
-            foreach (var cell in Cells)
+            foreach (var mesh in _meshes)
             {
-                UniResources.DisposeInstance(cell.MeshTransform.gameObject);
+                UniResources.DisposeInstance(mesh);
             }
-            Cells.Clear();
+            _meshes.Clear();
+
+             foreach (var piece in _pieces)
+            {
+                UniResources.DisposeInstance(piece.gameObject);
+            }
+            _pieces.Clear();
+
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeInstance(FullImg.gameObject);
         }

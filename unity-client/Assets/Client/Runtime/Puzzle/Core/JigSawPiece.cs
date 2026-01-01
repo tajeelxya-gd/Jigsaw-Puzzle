@@ -2,11 +2,12 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(DragController))]
     public sealed class JigSawPiece : MonoBehaviour, IGroupable
     {
+        [SerializeField] private DragController _dragController;
+        [SerializeField] private BoxCollider _collider;
+
         private IGroup _groupRef;
-        private DragController _dragController;
 
         public IGroup Group => _groupRef;
 
@@ -15,6 +16,8 @@ namespace Client.Runtime
         public void SetGroup(IGroup group) => _groupRef = group;
 
         public void SetData(JigSawPieceData data) => Data = data;
+
+        public void SetColliderSize(Renderer renderer) => _collider.size = renderer.bounds.size;
 
         public void AttachTo(IGroup other)
         {
@@ -45,7 +48,6 @@ namespace Client.Runtime
 
         private void Awake()
         {
-            _dragController = GetComponent<DragController>();
             _dragController.OnDragged += Move;
         }
 

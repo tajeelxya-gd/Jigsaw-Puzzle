@@ -33,11 +33,11 @@ namespace Client.Runtime
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
-            foreach (var cell in _board.Cells)
-            {
-                var data = _contentService.GetData<JigSawPieceData>(cell.PieceId);
-                cell.WrapAndSetup(_puzzleRoot, data);
-            }
+            // foreach (var cell in _board.Cells)
+            // {
+            //     var data = _contentService.GetData<JigSawPieceData>(cell.PieceId);
+            //     cell.WrapAndSetup(_puzzleRoot, data);
+            // }
 
             // ShufflePieces();
         }
@@ -56,19 +56,19 @@ namespace Client.Runtime
             return data.First();
         }
 
-        private void ShufflePieces()
-        {
-            foreach (var cell in _board.Cells)
-            {
-                var randomPos = _puzzleRoot.position + new Vector3(
-                    Random.Range(-0.05f, 0.05f),
-                    0,
-                    Random.Range(-0.15f, -0.03f)
-                );
+        // private void ShufflePieces()
+        // {
+        //     foreach (var cell in _board.Cells)
+        //     {
+        //         var randomPos = _puzzleRoot.position + new Vector3(
+        //             Random.Range(-0.05f, 0.05f),
+        //             0,
+        //             Random.Range(-0.15f, -0.03f)
+        //         );
 
-                var parentTransform = cell.MeshTransform.parent;
-                parentTransform.position = randomPos;
-            }
-        }
+        //         var parentTransform = cell.MeshTransform.parent;
+        //         parentTransform.position = randomPos;
+        //     }
+        // }
     }
 }
