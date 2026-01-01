@@ -58,7 +58,7 @@ namespace Client.Runtime
                 var randomPos = _puzzleRoot.position + new Vector3(
                     Random.Range(-0.05f, 0.05f),
                     0,
-                    Random.Range(-0.15f, -0.03f)
+                    Random.Range(-0.15f, -0.1f)
                 );
 
                 var pieceTransform = piece.transform;
