@@ -1,3 +1,4 @@
+using System;
 using UniTx.Runtime.Events;
 using UnityEngine;
 
@@ -74,6 +75,7 @@ namespace Client.Runtime
                 _dragController.enabled = false;
                 _collider.enabled = false;
                 _snapController.enabled = false;
+                OnPlaced();
                 UniEvents.Raise(new PiecePlacedEvent());
             }
         }
@@ -91,6 +93,11 @@ namespace Client.Runtime
                 // single piece move
                 transform.position += delta;
             }
+        }
+
+        private void OnPlaced()
+        {
+            // perform actions here when piece is placed
         }
     }
 }
