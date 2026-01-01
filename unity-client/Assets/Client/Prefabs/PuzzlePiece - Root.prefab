@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawPieceVFX
   _particleSystem: {fileID: 9123130255006762197}
-  highlightColor: {r: 0.9811321, g: 0.9029542, b: 0, a: 1}
+  highlightColor: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
   intensity: 2
   duration: 1
 --- !u!1001 &9123130254991487525

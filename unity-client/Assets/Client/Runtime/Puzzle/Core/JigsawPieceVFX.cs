@@ -13,14 +13,13 @@ namespace Client.Runtime
 
         private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
         private MaterialPropertyBlock _mpb;
-        private Renderer _renderer;
 
         private void Awake()
         {
-            _renderer = GetComponentInChildren<Renderer>();
             _mpb = new MaterialPropertyBlock();
         }
 
+        [ContextMenu("Play")]
         public void Play()
         {
             _particleSystem.Play();
@@ -29,11 +28,12 @@ namespace Client.Runtime
 
         private async UniTask FlashAsync(CancellationToken token)
         {
-            _renderer.GetPropertyBlock(_mpb);
+            var renderer = transform.GetChild(1).GetComponent<Renderer>();
+            renderer.GetPropertyBlock(_mpb);
 
             Color startEmission = Color.black;
             _mpb.SetColor(EmissionColorId, startEmission);
-            _renderer.SetPropertyBlock(_mpb);
+            renderer.SetPropertyBlock(_mpb);
 
             float elapsed = 0f;
 
@@ -43,14 +43,14 @@ namespace Client.Runtime
                 float t = Mathf.Sin((elapsed / duration) * Mathf.PI); // smooth pulse
 
                 _mpb.SetColor(EmissionColorId, highlightColor * intensity * t);
-                _renderer.SetPropertyBlock(_mpb);
+                renderer.SetPropertyBlock(_mpb);
 
                 await UniTask.Yield(PlayerLoopTiming.Update, token);
             }
 
             // Clear emission
             _mpb.SetColor(EmissionColorId, Color.black);
-            _renderer.SetPropertyBlock(_mpb);
+            renderer.SetPropertyBlock(_mpb);
         }
     }
 }
