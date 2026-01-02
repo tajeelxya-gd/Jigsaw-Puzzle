@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
 using UniTx.Runtime.Extensions;
+using System.Collections;
 
 namespace Client.Runtime
 {
@@ -13,9 +14,9 @@ namespace Client.Runtime
 
         public event Action<JigsawBoardCell> OnSnapped;
 
-        public void SnapToClosestCell(IList<JigsawBoardCell> cells)
+        public void SnapToClosestCell(IEnumerable<JigsawBoardCell> cells)
         {
-            if (cells == null || cells.Count == 0) return;
+            if (cells == null) return;
 
             JigsawBoardCell bestTarget = null;
             float closestDistanceSqr = float.MaxValue;

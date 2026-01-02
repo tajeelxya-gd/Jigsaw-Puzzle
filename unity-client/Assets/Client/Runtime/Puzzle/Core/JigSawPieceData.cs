@@ -7,13 +7,13 @@ namespace Client.Runtime
     {
         private int _originalIdx;
         private Renderer _renderer;
-        private IList<JigsawBoardCell> _cells;
+        private IEnumerable<JigsawBoardCell> _cells;
 
         public int OriginalIdx => _originalIdx;
         public Renderer Renderer => _renderer;
-        public IList<JigsawBoardCell> Cells => _cells;
+        public IEnumerable<JigsawBoardCell> Cells => _cells;
 
-        public JigSawPieceData(int originalIdx, Renderer renderer, IList<JigsawBoardCell> cells)
+        public JigSawPieceData(int originalIdx, Renderer renderer, IEnumerable<JigsawBoardCell> cells)
         {
             _originalIdx = originalIdx;
             _renderer = renderer;
