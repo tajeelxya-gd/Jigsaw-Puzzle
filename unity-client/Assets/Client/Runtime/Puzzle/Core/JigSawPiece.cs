@@ -1,3 +1,4 @@
+using System;
 using UniTx.Runtime.Events;
 using UnityEngine;
 
@@ -23,8 +24,6 @@ namespace Client.Runtime
             Data = data;
             var renderer = Data.Renderer;
             _collider.size = renderer.bounds.size;
-            renderer.sortingLayerName = "UnplacedPieces";
-            renderer.sortingOrder = 0;
         }
 
         public void AttachTo(IGroup other)
@@ -43,6 +42,7 @@ namespace Client.Runtime
 
         private void Awake()
         {
+            _dragController.OnDragStarted += HandleDragStarted;
             _dragController.OnDragged += Move;
             _dragController.OnDragEnded += HandleDraggedEnded;
             _snapController.OnSnapped += HandleSnapped;
@@ -50,10 +50,13 @@ namespace Client.Runtime
 
         private void OnDestroy()
         {
+            _dragController.OnDragStarted -= HandleDragStarted;
             _dragController.OnDragged -= Move;
             _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
         }
+
+        private void HandleDragStarted() => SetPosY(0.01f);
 
         private void HandleDraggedEnded() => _snapController.SnapToClosestCell(Data.Cells);
 
@@ -66,9 +69,7 @@ namespace Client.Runtime
                 _collider.enabled = false;
                 _snapController.enabled = false;
                 cell.SetPiece(this);
-                var renderer = Data.Renderer;
-                renderer.sortingLayerName = "PlacedPieces";
-                renderer.sortingOrder = 10;
+                SetPosY(0f);
                 UniEvents.Raise(new PiecePlacedEvent(this));
             }
         }
@@ -87,5 +88,7 @@ namespace Client.Runtime
                 transform.position += delta;
             }
         }
+
+        private void SetPosY(float y) => transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }

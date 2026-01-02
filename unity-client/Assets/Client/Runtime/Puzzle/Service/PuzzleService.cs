@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Content;
 using UniTx.Runtime.Entity;
+using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Client.Runtime
         public void Initialise()
         {
             _puzzleRoot = GameObject.FindGameObjectWithTag("PuzzleRoot").transform;
+            _winConditionChecker.OnWin += () => _board.SetActiveFullImage(true);
         }
 
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
