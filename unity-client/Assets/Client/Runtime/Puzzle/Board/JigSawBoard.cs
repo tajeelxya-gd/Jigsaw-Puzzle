@@ -67,7 +67,7 @@ namespace Client.Runtime
         {
             var join = piece.GetComponentInChildren<JoinController>();
             var neighbours = GetNeighbours(idx).ToArray();
-            join.Init(piece.BoxCollider, neighbours);
+            join.Init(piece.BoxCollider, neighbours, piece);
         }
 
         public void UnLoadPuzzle()
@@ -151,7 +151,7 @@ namespace Client.Runtime
             _pieces.Add(piece);
             if (pieceType == PieceType.Join)
             {
-                await UniResources.CreateInstanceAsync<JoinController>("Join - Controller", parent, null, cToken);
+                await UniResources.CreateInstanceAsync<JoinController>("Join - Controller", pieceTransform, null, cToken);
             }
             return piece;
         }
