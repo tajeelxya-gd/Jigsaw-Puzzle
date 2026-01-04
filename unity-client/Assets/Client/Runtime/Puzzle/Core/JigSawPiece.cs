@@ -66,11 +66,11 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDragStarted() => SetPosY(-0.01f, null);
+        private void HandleDragStarted() => SetPosY(0.01f, this);
 
         private void HandleDraggedEnded() => _snapController.SnapToClosestCell(Data.Cells);
 
-        private void HandleOnDragged(Vector3 delta) => Move(delta, null);
+        private void HandleOnDragged(Vector3 delta) => Move(delta, this);
 
         private void HandleSnapped(JigsawBoardCell cell)
         {

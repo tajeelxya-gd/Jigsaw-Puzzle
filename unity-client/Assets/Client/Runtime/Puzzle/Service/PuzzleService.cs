@@ -38,7 +38,7 @@ namespace Client.Runtime
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
             _winConditionChecker.SetBoard(_board);
-            // ShufflePieces();
+            ShufflePieces();
         }
 
         public void UnLoadPuzzle()
