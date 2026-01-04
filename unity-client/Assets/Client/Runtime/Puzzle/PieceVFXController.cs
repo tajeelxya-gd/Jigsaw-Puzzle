@@ -33,6 +33,7 @@ namespace Client.Runtime
             piece.PlayVfx();
             foreach (var neighbour in neighbours)
             {
+                if (neighbour == null) continue;
                 var neighbourPiece = neighbour.Piece;
                 if (neighbourPiece != null && neighbourPiece.IsPlaced)
                 {

@@ -48,10 +48,26 @@ namespace Client.Runtime
                 await SpawnCellAsync(i, piece, cToken);
             }
 
+            for (int i = 0; i < _pieces.Count; i++)
+            {
+                var piece = _pieces[i];
+                if (piece.Data.PieceType == PieceType.Join)
+                {
+                    SetJoin(i, piece);
+                }
+            }
+
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
             FullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
             SetLoadedTexture(FullImg);
             UniResources.DisposeInstance(grid.gameObject);
+        }
+
+        private void SetJoin(int idx, JigSawPiece piece)
+        {
+            var join = piece.GetComponentInChildren<JoinController>();
+            var neighbours = GetNeighbours(idx).ToArray();
+            join.Init(piece.BoxCollider, neighbours);
         }
 
         public void UnLoadPuzzle()
@@ -76,31 +92,29 @@ namespace Client.Runtime
 
         public IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
         {
-            if (idx < 0 || idx >= Cells.Count)
-                return Enumerable.Empty<JigsawBoardCell>();
-
-            var neighbours = new List<JigsawBoardCell>(4);
             var cols = Data.YConstraint;
             var rows = Data.XConstraint;
+
+            // Fixed size: [0]=Top, [1]=Bottom, [2]=Left, [3]=Right
+            var neighbours = new JigsawBoardCell[4];
+
+            if (idx < 0 || idx >= Cells.Count)
+                return neighbours; // All null
 
             int row = idx / cols;
             int col = idx % cols;
 
             // Top
-            if (row > 0)
-                neighbours.Add(Cells[idx - cols]);
+            neighbours[0] = (row > 0) ? Cells[idx - cols] : null;
 
             // Bottom
-            if (row < rows - 1)
-                neighbours.Add(Cells[idx + cols]);
+            neighbours[1] = (row < rows - 1) ? Cells[idx + cols] : null;
 
             // Left
-            if (col > 0)
-                neighbours.Add(Cells[idx - 1]);
+            neighbours[2] = (col > 0) ? Cells[idx - 1] : null;
 
             // Right
-            if (col < cols - 1)
-                neighbours.Add(Cells[idx + 1]);
+            neighbours[3] = (col < cols - 1) ? Cells[idx + 1] : null;
 
             return neighbours;
         }
@@ -129,12 +143,16 @@ namespace Client.Runtime
         private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(int idx, Transform mesh, Transform parent, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
-            piece.transform.SetPositionAndRotation(mesh.position, mesh.rotation);
-            mesh.SetParent(piece.transform);
-            var neighboursIndices = GetNeighbours(idx).Select(itm => itm.Idx);
-            piece.Init(new JigSawPieceData(idx, mesh.GetComponent<Renderer>(), _cells, neighboursIndices));
+            var pieceTransform = piece.transform;
+            pieceTransform.SetPositionAndRotation(mesh.position, mesh.rotation);
+            mesh.SetParent(pieceTransform);
+            var pieceType = GetPieceType(idx, Data.YConstraint);
+            piece.Init(new JigSawPieceData(idx, mesh.GetComponent<Renderer>(), _cells, pieceType));
             _pieces.Add(piece);
-
+            if (pieceType == PieceType.Join)
+            {
+                await UniResources.CreateInstanceAsync<JoinController>("Join - Controller", parent, null, cToken);
+            }
             return piece;
         }
 
@@ -164,6 +182,16 @@ namespace Client.Runtime
 
                 renderer.materials = sharedMaterials;
             }
+        }
+
+        private PieceType GetPieceType(int index, int numCols)
+        {
+            int row = index / numCols;
+            int col = index % numCols;
+
+            // If the sum of row and column indices is even, it's Basic.
+            // Otherwise, it's Join.
+            return (row + col) % 2 == 0 ? PieceType.Basic : PieceType.Join;
         }
     }
 }

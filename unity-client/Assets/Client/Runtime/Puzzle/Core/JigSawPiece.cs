@@ -19,6 +19,8 @@ namespace Client.Runtime
 
         public void SetGroup(IGroup group) => Group = group;
 
+        public BoxCollider BoxCollider => _collider;
+
         public void Init(JigSawPieceData data)
         {
             Data = data;
