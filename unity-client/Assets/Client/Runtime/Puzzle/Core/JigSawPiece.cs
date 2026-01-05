@@ -84,12 +84,32 @@ namespace Client.Runtime
 
         private void HandleDragStarted() => SetPosY(0.01f, this);
 
-        private void HandleDraggedEnded()
+        private void HandleOnDragged(Vector3 delta)
         {
-            _snapController.SnapToClosestCell(Data.Cells);
+            Move(delta, this);
+
+            // Notify tray for dynamic shifting
+            if (_puzzleTray != null)
+            {
+                if (_puzzleTray.IsOverTray(transform.position))
+                    _puzzleTray.SetHoverPiece(this);
+                else
+                    _puzzleTray.SetHoverPiece(null);
+            }
         }
 
-        private void HandleOnDragged(Vector3 delta) => Move(delta, this);
+        private void HandleDraggedEnded()
+        {
+            // Try to drop back into tray
+            if (_puzzleTray != null && _puzzleTray.IsOverTray(transform.position))
+            {
+                _puzzleTray.SubmitPiece(this);
+                return; // Early exit: don't attempt board snap
+            }
+
+            // Standard snap to board logic
+            _snapController.SnapToClosestCell(Data.Cells);
+        }
 
         private void HandleSnapped(JigsawBoardCell cell)
         {

@@ -22,6 +22,8 @@ namespace Client.Runtime
 
         private readonly List<JigSawPiece> _activePieces = new();
         private JigSawPiece _hitPiece;
+        private JigSawPiece _hoverPiece; // Piece currently being held over the tray
+
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
         private Vector3 _lastMousePos;
@@ -39,10 +41,31 @@ namespace Client.Runtime
             {
                 int randomIndex = Random.Range(i, _activePieces.Count);
                 (_activePieces[i], _activePieces[randomIndex]) = (_activePieces[randomIndex], _activePieces[i]);
+
+                // Initialize parent and state
+                _activePieces[i].transform.SetParent(transform);
                 _activePieces[i].gameObject.SetActive(true);
             }
 
             _scrollX = 0;
+        }
+
+        public bool IsOverTray(Vector3 worldPosition)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            return Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider;
+        }
+
+        public void SetHoverPiece(JigSawPiece piece) => _hoverPiece = piece;
+
+        public void SubmitPiece(JigSawPiece piece)
+        {
+            if (!_activePieces.Contains(piece))
+            {
+                _activePieces.Add(piece);
+                piece.transform.SetParent(transform);
+            }
+            _hoverPiece = null;
         }
 
         private void Update()
@@ -76,22 +99,15 @@ namespace Client.Runtime
             if (_isDragging)
             {
                 Vector3 currentMousePos = Input.mousePosition;
-
                 if (!_scrollLocked)
                 {
                     float diffX = Mathf.Abs(currentMousePos.x - _startMousePos.x);
                     float diffY = Mathf.Abs(currentMousePos.y - _startMousePos.y);
 
-                    if (diffX > _dragThreshold && diffX > diffY)
-                    {
-                        _scrollLocked = true;
-                    }
+                    if (diffX > _dragThreshold && diffX > diffY) _scrollLocked = true;
                     else if (diffY > _dragThreshold && diffY > diffX)
                     {
-                        if (_hitPiece != null)
-                        {
-                            PickUpPiece(_hitPiece);
-                        }
+                        if (_hitPiece != null) PickUpPiece(_hitPiece);
                         _isDragging = false;
                     }
                 }
@@ -100,55 +116,24 @@ namespace Client.Runtime
                 {
                     float deltaX = (currentMousePos.x - _lastMousePos.x) / Screen.width;
                     _scrollX += deltaX * _scrollSpeed;
-
-                    int cols = Mathf.CeilToInt((float)_activePieces.Count / _rowCount);
-                    float totalWidth = (cols - 1) * _spacing.x;
-                    float trayWidth = _trayCollider.size.x;
-                    float maxScroll = Mathf.Max(0, totalWidth - trayWidth + (_padding.x * 2));
-
-                    _scrollX = Mathf.Clamp(_scrollX, -maxScroll, 0);
+                    ClampScroll();
                 }
-
                 _lastMousePos = currentMousePos;
             }
         }
 
-        private JigSawPiece GetPieceAtPosition(Vector3 worldPoint)
+        private void ClampScroll()
         {
-            if (_activePieces.Count == 0) return null;
-
-            Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
-            float localStartX = _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX;
-            float localStartZ = _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y;
-
-            int col = Mathf.RoundToInt((localPoint.x - localStartX) / _spacing.x);
-            int row = Mathf.RoundToInt((localStartZ - localPoint.z) / _spacing.y);
-
-            int cols = Mathf.CeilToInt((float)_activePieces.Count / _rowCount);
-            int index = (row * cols) + col;
-
-            if (index >= 0 && index < _activePieces.Count)
-            {
-                if (_activePieces[index].gameObject.activeSelf)
-                    return _activePieces[index];
-            }
-            return null;
-        }
-
-        private void PickUpPiece(JigSawPiece piece)
-        {
-            // IMPORTANT: Remove from list first so UpdatePiecePositions stops controlling it
-            _activePieces.Remove(piece);
-
-            piece.transform.SetParent(null);
-            piece.transform.localScale = Vector3.one; // Reset scale instantly
-
-            piece.StartManualDrag();
+            int displayCount = _activePieces.Count + (_hoverPiece != null ? 1 : 0);
+            int cols = Mathf.CeilToInt((float)displayCount / _rowCount);
+            float totalWidth = (cols - 1) * _spacing.x;
+            float maxScroll = Mathf.Max(0, totalWidth - _trayCollider.size.x + (_padding.x * 2));
+            _scrollX = Mathf.Clamp(_scrollX, -maxScroll, 0);
         }
 
         private void UpdatePiecePositions()
         {
-            if (_activePieces.Count == 0 || _trayCollider == null) return;
+            if (_activePieces.Count == 0 && _hoverPiece == null) return;
 
             Vector3 localTopLeft = new Vector3(
                 _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX,
@@ -156,7 +141,9 @@ namespace Client.Runtime
                 _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y
             );
 
-            int cols = Mathf.CeilToInt((float)_activePieces.Count / _rowCount);
+            // Shifting Logic: If hovering, we act as if there's one more piece
+            int displayCount = _activePieces.Count + (_hoverPiece != null ? 1 : 0);
+            int cols = Mathf.CeilToInt((float)displayCount / _rowCount);
 
             for (int i = 0; i < _activePieces.Count; i++)
             {
@@ -164,29 +151,45 @@ namespace Client.Runtime
                 int col = i % cols;
 
                 Transform pt = _activePieces[i].transform;
-                if (pt.parent != transform) pt.SetParent(transform);
-
                 Vector3 targetPos = new Vector3(
                     localTopLeft.x + (col * _spacing.x),
                     localTopLeft.y,
                     localTopLeft.z - (row * _spacing.y)
                 );
 
-                // Apply Lerp to position
                 pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
-
-                // Apply Lerp to scale while in tray
-                Vector3 targetScale = Vector3.one * _scaleReduction;
-                pt.localScale = Vector3.Lerp(pt.localScale, targetScale, Time.deltaTime * _lerpSpeed);
-
+                pt.localScale = Vector3.Lerp(pt.localScale, Vector3.one * _scaleReduction, Time.deltaTime * _lerpSpeed);
                 pt.localRotation = Quaternion.identity;
 
                 float localX = pt.localPosition.x;
                 float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
                 float rightEdge = _trayCollider.center.x + (_trayCollider.size.x / 2f) + _visibilityBuffer;
-
                 _activePieces[i].gameObject.SetActive(localX >= leftEdge && localX <= rightEdge);
             }
+        }
+
+        private void PickUpPiece(JigSawPiece piece)
+        {
+            _activePieces.Remove(piece);
+            piece.transform.SetParent(null);
+            piece.transform.localScale = Vector3.one;
+            piece.StartManualDrag();
+        }
+
+        private JigSawPiece GetPieceAtPosition(Vector3 worldPoint)
+        {
+            if (_activePieces.Count == 0) return null;
+            Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
+            float localStartX = _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX;
+            float localStartZ = _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y;
+
+            int col = Mathf.RoundToInt((localPoint.x - localStartX) / _spacing.x);
+            int row = Mathf.RoundToInt((localStartZ - localPoint.z) / _spacing.y);
+            int cols = Mathf.CeilToInt((float)_activePieces.Count / _rowCount);
+            int index = (row * cols) + col;
+
+            if (index >= 0 && index < _activePieces.Count) return _activePieces[index];
+            return null;
         }
     }
 }
