@@ -16,7 +16,7 @@ namespace Client.Runtime
         [Range(0.1f, 0.5f)]
         [SerializeField] private float _tabScaleRatio = 0.25f; // Tab is 25% of the side length
 
-        public void Init(BoxCollider main, JigsawBoardCell[] neighbours, JigSawPiece piece)
+        public void Init(BoxCollider main, JigsawBoardCell[] neighbours)
         {
             Vector3 mSize = main.size;
             Vector3 mCenter = main.center;
@@ -50,10 +50,10 @@ namespace Client.Runtime
             _left.BoxCollider.center = new Vector3(mCenter.x - (mSize.x / 2f), mCenter.y, mCenter.z);
             _right.BoxCollider.center = new Vector3(mCenter.x + (mSize.x / 2f), mCenter.y, mCenter.z);
 
-            _top.Init(neighbours[0], piece);
-            _bottom.Init(neighbours[1], piece);
-            _left.Init(neighbours[2], piece);
-            _right.Init(neighbours[3], piece);
+            _top.Init(neighbours[0]);
+            _bottom.Init(neighbours[1]);
+            _left.Init(neighbours[2]);
+            _right.Init(neighbours[3]);
         }
     }
 }

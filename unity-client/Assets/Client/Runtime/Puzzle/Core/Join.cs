@@ -7,19 +7,14 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private Transform _mergeTransform;
 
-        private bool _isReady;
         private int _neighbourIdx;
-        private JigSawPiece _piece;
 
         public BoxCollider BoxCollider => _collider;
 
-        public void Init(JigsawBoardCell cell, JigSawPiece piece)
+        public void Init(JigsawBoardCell cell)
         {
-            _piece = piece;
-
             if (cell == null)
             {
-                _isReady = false;
                 _neighbourIdx = -1;
                 return;
             }
@@ -27,21 +22,26 @@ namespace Client.Runtime
             _neighbourIdx = cell.Idx;
             var cellTransform = cell.transform;
             _mergeTransform.SetPositionAndRotation(cellTransform.position, cellTransform.rotation);
-            _isReady = true;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (!_isReady || _piece == null) return;
-
-            if (collision.gameObject.TryGetComponent<JigSawPiece>(out var piece))
+            if (other.TryGetComponent<JigSawPiece>(out var piece))
             {
                 if (piece.Data.OriginalIdx == _neighbourIdx)
                 {
-                    piece.transform.SetPositionAndRotation(_mergeTransform.position, _mergeTransform.rotation);
-                    piece.Group.Add(_piece);
-                    _piece.Group.Add(piece);
-                    _isReady = false;
+                    JoinRegistry.Register(piece, _mergeTransform);
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<JigSawPiece>(out var piece))
+            {
+                if (piece.Data.OriginalIdx == _neighbourIdx)
+                {
+                    JoinRegistry.UnRegister(piece);
                 }
             }
         }

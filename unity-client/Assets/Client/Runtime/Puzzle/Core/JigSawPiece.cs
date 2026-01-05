@@ -20,6 +20,8 @@ namespace Client.Runtime
 
         public BoxCollider BoxCollider => _collider;
 
+        public PieceSnapController SnapController => _snapController;
+
         public void Init(JigSawPieceData data)
         {
             Data = data;
@@ -68,7 +70,23 @@ namespace Client.Runtime
 
         private void HandleDragStarted() => SetPosY(0.01f, this);
 
-        private void HandleDraggedEnded() => _snapController.SnapToClosestCell(Data.Cells);
+        private void HandleDraggedEnded()
+        {
+            // if (JoinRegistry.Has())
+            // {
+            //     var kvps = JoinRegistry.Get();
+            //     foreach (var kvp in kvps)
+            //     {
+            //         var piece = kvp.piece;
+            //         var target = kvp.transform;
+            //         piece.SnapController.SnapToTransform(target);
+            //         Group.Add(piece);
+            //     }
+            //     JoinRegistry.Clear();
+            //     return;
+            // }
+            _snapController.SnapToClosestCell(Data.Cells);
+        }
 
         private void HandleOnDragged(Vector3 delta) => Move(delta, this);
 

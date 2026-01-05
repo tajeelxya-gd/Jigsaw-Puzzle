@@ -67,7 +67,7 @@ namespace Client.Runtime
         {
             var join = piece.GetComponentInChildren<JoinController>();
             var neighbours = GetNeighbours(idx).ToArray();
-            join.Init(piece.BoxCollider, neighbours, piece);
+            join.Init(piece.BoxCollider, neighbours);
         }
 
         public void UnLoadPuzzle()
