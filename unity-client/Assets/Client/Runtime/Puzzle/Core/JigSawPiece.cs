@@ -87,14 +87,11 @@ namespace Client.Runtime
         private void HandleOnDragged(Vector3 delta)
         {
             Move(delta, this);
-
-            // Notify tray for dynamic shifting
             if (_puzzleTray != null)
             {
-                if (_puzzleTray.IsOverTray(transform.position))
-                    _puzzleTray.SetHoverPiece(this);
-                else
-                    _puzzleTray.SetHoverPiece(null);
+                // We set the hover piece regardless; 
+                // the tray logic now handles whether it's actually over the collider.
+                _puzzleTray.SetHoverPiece(this);
             }
         }
 

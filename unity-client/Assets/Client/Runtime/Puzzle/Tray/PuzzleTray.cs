@@ -13,7 +13,7 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _trayCollider;
 
         [Header("Smoothness Settings")]
-        [SerializeField] private float _lerpSpeed = 5f;
+        [SerializeField] private float _lerpSpeed = 10f;
 
         [Header("Scroll Settings")]
         [SerializeField] private float _scrollSpeed = 0.1f;
@@ -22,7 +22,7 @@ namespace Client.Runtime
 
         private readonly List<JigSawPiece> _activePieces = new();
         private JigSawPiece _hitPiece;
-        private JigSawPiece _hoverPiece; // Piece currently being held over the tray
+        private JigSawPiece _hoverPiece;
 
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
@@ -35,16 +35,18 @@ namespace Client.Runtime
             if (pieces == null || pieces.Count == 0) return;
 
             _activePieces.Clear();
-            _activePieces.AddRange(pieces);
+            foreach (var p in pieces)
+            {
+                _activePieces.Add(p);
+                p.transform.SetParent(transform);
+                p.gameObject.SetActive(true);
+            }
 
+            // Randomize list
             for (int i = 0; i < _activePieces.Count; i++)
             {
                 int randomIndex = Random.Range(i, _activePieces.Count);
                 (_activePieces[i], _activePieces[randomIndex]) = (_activePieces[randomIndex], _activePieces[i]);
-
-                // Initialize parent and state
-                _activePieces[i].transform.SetParent(transform);
-                _activePieces[i].gameObject.SetActive(true);
             }
 
             _scrollX = 0;
@@ -62,7 +64,8 @@ namespace Client.Runtime
         {
             if (!_activePieces.Contains(piece))
             {
-                _activePieces.Add(piece);
+                int targetIndex = GetInsertionIndex();
+                _activePieces.Insert(targetIndex, piece);
                 piece.transform.SetParent(transform);
             }
             _hoverPiece = null;
@@ -72,6 +75,95 @@ namespace Client.Runtime
         {
             HandleScrollInput();
             UpdatePiecePositions();
+            HandleHoverPieceVisuals();
+        }
+
+        private void HandleHoverPieceVisuals()
+        {
+            if (_hoverPiece == null) return;
+
+            // Scale down if over tray, scale up to 1.0 if outside
+            bool isOver = IsOverTray(_hoverPiece.transform.position);
+            float targetScaleValue = isOver ? _scaleReduction : 1.0f;
+            Vector3 targetScale = Vector3.one * targetScaleValue;
+
+            _hoverPiece.transform.localScale = Vector3.Lerp(
+                _hoverPiece.transform.localScale,
+                targetScale,
+                Time.deltaTime * _lerpSpeed
+            );
+        }
+
+        private void UpdatePiecePositions()
+        {
+            if (_activePieces.Count == 0 && _hoverPiece == null) return;
+
+            Vector3 localTopLeft = GetLocalTopLeft();
+            int insertionIndex = (_hoverPiece != null && IsOverTray(_hoverPiece.transform.position))
+                ? GetInsertionIndex()
+                : -1;
+
+            int displayCount = _activePieces.Count + (insertionIndex != -1 ? 1 : 0);
+            int cols = Mathf.CeilToInt((float)displayCount / _rowCount);
+
+            for (int i = 0; i < _activePieces.Count; i++)
+            {
+                // Create a visual gap by shifting pieces after the insertion index
+                int effectiveIndex = i;
+                if (insertionIndex != -1 && i >= insertionIndex)
+                {
+                    effectiveIndex = i + 1;
+                }
+
+                int row = effectiveIndex / cols;
+                int col = effectiveIndex % cols;
+
+                Transform pt = _activePieces[i].transform;
+                Vector3 targetPos = new Vector3(
+                    localTopLeft.x + (col * _spacing.x),
+                    localTopLeft.y,
+                    localTopLeft.z - (row * _spacing.y)
+                );
+
+                // Smoothly move and scale pieces already in the tray
+                pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
+                pt.localScale = Vector3.Lerp(pt.localScale, Vector3.one * _scaleReduction, Time.deltaTime * _lerpSpeed);
+                pt.localRotation = Quaternion.Lerp(pt.localRotation, Quaternion.identity, Time.deltaTime * _lerpSpeed);
+
+                // Visibility clipping
+                float localX = pt.localPosition.x;
+                float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
+                float rightEdge = _trayCollider.center.x + (_trayCollider.size.x / 2f) + _visibilityBuffer;
+                _activePieces[i].gameObject.SetActive(localX >= leftEdge && localX <= rightEdge);
+            }
+        }
+
+        private int GetInsertionIndex()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3 localPoint = transform.InverseTransformPoint(hit.point);
+                Vector3 localTopLeft = GetLocalTopLeft();
+
+                float relativeX = localPoint.x - localTopLeft.x;
+                // Determine column based on mouse X
+                int col = Mathf.Max(0, Mathf.RoundToInt(relativeX / _spacing.x));
+
+                // Map column to list index (assuming 2 rows, index jumps by rowCount)
+                int targetIdx = Mathf.Clamp(col * _rowCount, 0, _activePieces.Count);
+                return targetIdx;
+            }
+            return _activePieces.Count;
+        }
+
+        private Vector3 GetLocalTopLeft()
+        {
+            return new Vector3(
+                _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX,
+                _trayCollider.center.y,
+                _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y
+            );
         }
 
         private void HandleScrollInput()
@@ -99,12 +191,16 @@ namespace Client.Runtime
             if (_isDragging)
             {
                 Vector3 currentMousePos = Input.mousePosition;
+
                 if (!_scrollLocked)
                 {
                     float diffX = Mathf.Abs(currentMousePos.x - _startMousePos.x);
                     float diffY = Mathf.Abs(currentMousePos.y - _startMousePos.y);
 
-                    if (diffX > _dragThreshold && diffX > diffY) _scrollLocked = true;
+                    if (diffX > _dragThreshold && diffX > diffY)
+                    {
+                        _scrollLocked = true;
+                    }
                     else if (diffY > _dragThreshold && diffY > diffX)
                     {
                         if (_hitPiece != null) PickUpPiece(_hitPiece);
@@ -118,6 +214,7 @@ namespace Client.Runtime
                     _scrollX += deltaX * _scrollSpeed;
                     ClampScroll();
                 }
+
                 _lastMousePos = currentMousePos;
             }
         }
@@ -131,48 +228,11 @@ namespace Client.Runtime
             _scrollX = Mathf.Clamp(_scrollX, -maxScroll, 0);
         }
 
-        private void UpdatePiecePositions()
-        {
-            if (_activePieces.Count == 0 && _hoverPiece == null) return;
-
-            Vector3 localTopLeft = new Vector3(
-                _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX,
-                _trayCollider.center.y,
-                _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y
-            );
-
-            // Shifting Logic: If hovering, we act as if there's one more piece
-            int displayCount = _activePieces.Count + (_hoverPiece != null ? 1 : 0);
-            int cols = Mathf.CeilToInt((float)displayCount / _rowCount);
-
-            for (int i = 0; i < _activePieces.Count; i++)
-            {
-                int row = i / cols;
-                int col = i % cols;
-
-                Transform pt = _activePieces[i].transform;
-                Vector3 targetPos = new Vector3(
-                    localTopLeft.x + (col * _spacing.x),
-                    localTopLeft.y,
-                    localTopLeft.z - (row * _spacing.y)
-                );
-
-                pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
-                pt.localScale = Vector3.Lerp(pt.localScale, Vector3.one * _scaleReduction, Time.deltaTime * _lerpSpeed);
-                pt.localRotation = Quaternion.identity;
-
-                float localX = pt.localPosition.x;
-                float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
-                float rightEdge = _trayCollider.center.x + (_trayCollider.size.x / 2f) + _visibilityBuffer;
-                _activePieces[i].gameObject.SetActive(localX >= leftEdge && localX <= rightEdge);
-            }
-        }
-
         private void PickUpPiece(JigSawPiece piece)
         {
             _activePieces.Remove(piece);
             piece.transform.SetParent(null);
-            piece.transform.localScale = Vector3.one;
+            // We don't reset scale here anymore so HandleHoverPieceVisuals can lerp it up
             piece.StartManualDrag();
         }
 
@@ -180,11 +240,11 @@ namespace Client.Runtime
         {
             if (_activePieces.Count == 0) return null;
             Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
-            float localStartX = _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX;
-            float localStartZ = _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y;
+            Vector3 localTopLeft = GetLocalTopLeft();
 
-            int col = Mathf.RoundToInt((localPoint.x - localStartX) / _spacing.x);
-            int row = Mathf.RoundToInt((localStartZ - localPoint.z) / _spacing.y);
+            int col = Mathf.RoundToInt((localPoint.x - localTopLeft.x) / _spacing.x);
+            int row = Mathf.RoundToInt((localTopLeft.z - localPoint.z) / _spacing.y);
+
             int cols = Mathf.CeilToInt((float)_activePieces.Count / _rowCount);
             int index = (row * cols) + col;
 
