@@ -7,11 +7,14 @@ using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.Serialisation;
 using UniTx.Runtime.UnityEventListener;
+using UnityEngine;
 
 namespace Client.Runtime
 {
     public sealed class BindDependenciesStep : LoadingStepBase, IInjectable
     {
+        [SerializeField] private PuzzleTray _puzzleTray;
+
         private IBinder _binder;
 
         public void Inject(IResolver resolver)
@@ -30,6 +33,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton<PuzzleService>();
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
             _binder.BindAsSingleton<PieceVFXController>();
+            _binder.BindAsSingleton(_puzzleTray);
 
             return UniTask.CompletedTask;
         }
