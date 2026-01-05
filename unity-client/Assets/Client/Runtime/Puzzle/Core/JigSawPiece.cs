@@ -74,6 +74,32 @@ namespace Client.Runtime
             _snapController.OnSnapped += HandleSnapped;
         }
 
+        private void Update()
+        {
+            // If this piece is currently being hovered over the tray, 
+            // let the tray handle the scale (or do nothing here).
+            // Otherwise, if it's not at full scale, return it to 1.0.
+
+            if (IsBeingHoveredOverTray()) return;
+
+            if (transform.localScale != Vector3.one)
+            {
+                transform.localScale = Vector3.Lerp(
+                    transform.localScale,
+                    Vector3.one,
+                    Time.deltaTime * 10f
+                );
+            }
+        }
+
+        private bool IsBeingHoveredOverTray()
+        {
+            // If the piece is already inside the tray (parented), the tray handles it.
+            if (transform.parent != null) return true;
+
+            // If we are dragging it and it's over the tray, return true
+            return _puzzleTray != null && _puzzleTray.IsOverTray(transform.position);
+        }
         private void OnDestroy()
         {
             _dragController.OnDragStarted -= HandleDragStarted;
@@ -97,15 +123,20 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
-            // Try to drop back into tray
+            // Important: Release the tray's hold on this piece first
+            if (_puzzleTray != null)
+            {
+                _puzzleTray.SetHoverPiece(null);
+            }
+
             if (_puzzleTray != null && _puzzleTray.IsOverTray(transform.position))
             {
                 _puzzleTray.SubmitPiece(this);
-                return; // Early exit: don't attempt board snap
             }
-
-            // Standard snap to board logic
-            _snapController.SnapToClosestCell(Data.Cells);
+            else
+            {
+                _snapController.SnapToClosestCell(Data.Cells);
+            }
         }
 
         private void HandleSnapped(JigsawBoardCell cell)
