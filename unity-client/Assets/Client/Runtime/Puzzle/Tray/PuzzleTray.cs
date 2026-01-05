@@ -13,11 +13,12 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _trayCollider;
 
         [Header("Scroll Settings")]
-        [SerializeField] private float _scrollSpeed = 0.1f; // Adjusted for screen percentage
+        [SerializeField] private float _scrollSpeed = 0.1f;
         [SerializeField] private float _visibilityBuffer = 0.01f;
-        [SerializeField] private float _dragThreshold = 10f; // Pixels move before locking drag
+        [SerializeField] private float _dragThreshold = 10f;
 
         private readonly List<JigSawPiece> _activePieces = new();
+        private JigSawPiece _hitPiece;
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
         private Vector3 _lastMousePos;
@@ -53,13 +54,15 @@ namespace Client.Runtime
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit) &&
-                   (hit.collider == _trayCollider || hit.transform.IsChildOf(transform)))
+                if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider)
                 {
                     _isDragging = true;
                     _scrollLocked = false;
                     _startMousePos = Input.mousePosition;
                     _lastMousePos = Input.mousePosition;
+
+                    // COORDINATE FIX: Find which piece is under the mouse click
+                    _hitPiece = GetPieceAtPosition(hit.point);
                 }
             }
 
@@ -67,31 +70,32 @@ namespace Client.Runtime
             {
                 _isDragging = false;
                 _scrollLocked = false;
+                _hitPiece = null;
             }
 
             if (_isDragging)
             {
                 Vector3 currentMousePos = Input.mousePosition;
 
-                // 1. Check if we should lock into scrolling mode
                 if (!_scrollLocked)
                 {
                     float diffX = Mathf.Abs(currentMousePos.x - _startMousePos.x);
                     float diffY = Mathf.Abs(currentMousePos.y - _startMousePos.y);
 
-                    // Only lock if horizontal movement is significantly greater than vertical
                     if (diffX > _dragThreshold && diffX > diffY)
                     {
                         _scrollLocked = true;
                     }
-                    // If vertical is dominant, we might want to cancel the scroll drag
-                    else if (diffY > _dragThreshold)
+                    else if (diffY > _dragThreshold && diffY > diffX)
                     {
+                        if (_hitPiece != null)
+                        {
+                            PickUpPiece(_hitPiece);
+                        }
                         _isDragging = false;
                     }
                 }
 
-                // 2. Perform scrolling if locked
                 if (_scrollLocked)
                 {
                     float deltaX = (currentMousePos.x - _lastMousePos.x) / Screen.width;
@@ -107,6 +111,44 @@ namespace Client.Runtime
 
                 _lastMousePos = currentMousePos;
             }
+        }
+
+        // Logic to find the piece based on world-to-local coordinates
+        private JigSawPiece GetPieceAtPosition(Vector3 worldPoint)
+        {
+            if (_activePieces.Count == 0) return null;
+
+            // Convert world hit point to tray's local space
+            Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
+
+            // Calculate where the grid starts locally (same math as UpdatePiecePositions)
+            float localStartX = _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX;
+            float localStartZ = _trayCollider.center.y + (_trayCollider.size.z / 2f) - _padding.y;
+
+            // Reverse the grid math to find the index
+            int col = Mathf.RoundToInt((localPoint.x - localStartX) / _spacing.x);
+            int row = Mathf.RoundToInt((localStartZ - localPoint.z) / _spacing.y);
+
+            int cols = Mathf.CeilToInt((float)_activePieces.Count / _rowCount);
+            int index = (row * cols) + col;
+
+            if (index >= 0 && index < _activePieces.Count)
+            {
+                // Only return if it's currently active (visible in tray)
+                if (_activePieces[index].gameObject.activeSelf)
+                    return _activePieces[index];
+            }
+
+            return null;
+        }
+        private void PickUpPiece(JigSawPiece piece)
+        {
+            _activePieces.Remove(piece);
+            piece.transform.SetParent(null);
+            piece.transform.localScale = Vector3.one;
+
+            // This triggers the chain: Tray -> Piece -> DragController
+            piece.StartManualDrag();
         }
 
         private void UpdatePiecePositions()

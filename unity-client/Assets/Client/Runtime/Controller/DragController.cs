@@ -29,15 +29,16 @@ namespace Client.Runtime
 
         private void HandleInput()
         {
+            // Standard click-to-drag logic
             if (Input.GetMouseButtonDown(0))
             {
                 if (TryBeginDrag())
                 {
-                    _isDragging = true;
-                    OnDragStarted.Broadcast();
+                    BeginDragSequence();
                 }
             }
 
+            // End drag when mouse is released
             if (Input.GetMouseButtonUp(0) && _isDragging)
             {
                 _isDragging = false;
@@ -51,15 +52,37 @@ namespace Client.Runtime
             if (!Physics.Raycast(ray, out var hit)) return false;
             if (hit.transform != transform) return false;
 
-            // Lock plane at drag start (2D board plane)
+            InitializeDragMath(ray);
+            return true;
+        }
+
+        /// <summary>
+        /// Called by JigSawPiece when pulled from the Tray.
+        /// Bypasses the initial click detection.
+        /// </summary>
+        public void ForceStartDrag()
+        {
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            InitializeDragMath(ray);
+            BeginDragSequence();
+        }
+
+        private void InitializeDragMath(Ray ray)
+        {
+            // Lock plane at drag start (XZ board plane)
             _dragPlane = new Plane(Vector3.up, transform.position);
 
-            if (!_dragPlane.Raycast(ray, out float enter)) return false;
+            if (_dragPlane.Raycast(ray, out float enter))
+            {
+                Vector3 planeHit = ray.GetPoint(enter);
+                _offset = transform.position - planeHit;
+            }
+        }
 
-            Vector3 planeHit = ray.GetPoint(enter);
-            _offset = transform.position - planeHit;
-
-            return true;
+        private void BeginDragSequence()
+        {
+            _isDragging = true;
+            OnDragStarted.Broadcast();
         }
 
         private void HandleDrag()
@@ -78,7 +101,10 @@ namespace Client.Runtime
             // 2D-style constraint (XZ board)
             delta.y = 0f;
 
-            OnDragged.Broadcast(delta);
+            if (delta.sqrMagnitude > Mathf.Epsilon)
+            {
+                OnDragged.Broadcast(delta);
+            }
         }
     }
 }

@@ -15,11 +15,8 @@ namespace Client.Runtime
         public readonly HashSet<JigSawPiece> Group = new();
 
         public JigSawPieceData Data { get; private set; }
-
         public bool IsPlaced { get; private set; }
-
         public BoxCollider BoxCollider => _collider;
-
         public PieceSnapController SnapController => _snapController;
 
         public void Init(JigSawPieceData data)
@@ -32,13 +29,22 @@ namespace Client.Runtime
 
         public void PlayVfx() => _vfx.Play();
 
+        /// <summary>
+        /// Specifically used when picking the piece from the tray.
+        /// Activates the drag controller mid-mouse-press.
+        /// </summary>
+        public void StartManualDrag()
+        {
+            _dragController.ForceStartDrag();
+        }
+
         public void Move(Vector3 delta, JigSawPiece toExclude)
         {
             MoveInternal(delta);
             foreach (var piece in Group)
             {
                 if (piece == toExclude) continue;
-                Move(delta, this);
+                piece.Move(delta, this);
             }
         }
 
@@ -48,7 +54,7 @@ namespace Client.Runtime
             foreach (var piece in Group)
             {
                 if (piece == toExclude) continue;
-                SetPosY(y, this);
+                piece.SetPosY(y, this);
             }
         }
 
@@ -72,19 +78,6 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
-            // if (JoinRegistry.Has())
-            // {
-            //     var kvps = JoinRegistry.Get();
-            //     foreach (var kvp in kvps)
-            //     {
-            //         var piece = kvp.piece;
-            //         var target = kvp.transform;
-            //         piece.SnapController.SnapToTransform(target);
-            //         Group.Add(piece);
-            //     }
-            //     JoinRegistry.Clear();
-            //     return;
-            // }
             _snapController.SnapToClosestCell(Data.Cells);
         }
 
