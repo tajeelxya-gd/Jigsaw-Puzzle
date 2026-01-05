@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using UniTx.Runtime.Events;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigSawPiece : MonoBehaviour
+    public sealed class JigSawPiece : MonoBehaviour, IInjectable
     {
         [SerializeField] private DragController _dragController;
         [SerializeField] private PieceSnapController _snapController;
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private JigsawPieceVFX _vfx;
+
+        private IPuzzleTray _puzzleTray;
 
         public readonly HashSet<JigSawPiece> Group = new();
 
@@ -18,6 +21,11 @@ namespace Client.Runtime
         public bool IsPlaced { get; private set; }
         public BoxCollider BoxCollider => _collider;
         public PieceSnapController SnapController => _snapController;
+
+        public void Inject(IResolver resolver)
+        {
+            _puzzleTray = resolver.Resolve<IPuzzleTray>();
+        }
 
         public void Init(JigSawPieceData data)
         {

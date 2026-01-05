@@ -17,6 +17,7 @@ namespace Client.Runtime
 
         private AssetData _assetData;
         private Texture2D _texture;
+        private IResolver _resolver;
 
         public Transform FullImg { get; private set; }
 
@@ -119,10 +120,7 @@ namespace Client.Runtime
             return neighbours;
         }
 
-        protected override void OnInject(IResolver resolver)
-        {
-            // Empty yet
-        }
+        protected override void OnInject(IResolver resolver) => _resolver = resolver;
 
         protected override void OnInit()
         {
@@ -143,6 +141,7 @@ namespace Client.Runtime
         private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(int idx, Transform mesh, Transform parent, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
+            piece.Inject(_resolver);
             var pieceTransform = piece.transform;
             pieceTransform.SetPositionAndRotation(mesh.position, mesh.rotation);
             mesh.SetParent(pieceTransform);
