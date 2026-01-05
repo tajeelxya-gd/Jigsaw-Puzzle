@@ -12,6 +12,9 @@ namespace Client.Runtime
         [SerializeField] private Vector2 _padding = new Vector2(0.02f, 0.02f);
         [SerializeField] private BoxCollider _trayCollider;
 
+        [Header("Smoothness Settings")]
+        [SerializeField] private float _lerpSpeed = 5f;
+
         [Header("Scroll Settings")]
         [SerializeField] private float _scrollSpeed = 0.1f;
         [SerializeField] private float _visibilityBuffer = 0.01f;
@@ -40,7 +43,6 @@ namespace Client.Runtime
             }
 
             _scrollX = 0;
-            UpdatePiecePositions();
         }
 
         private void Update()
@@ -60,8 +62,6 @@ namespace Client.Runtime
                     _scrollLocked = false;
                     _startMousePos = Input.mousePosition;
                     _lastMousePos = Input.mousePosition;
-
-                    // COORDINATE FIX: Find which piece is under the mouse click
                     _hitPiece = GetPieceAtPosition(hit.point);
                 }
             }
@@ -113,19 +113,14 @@ namespace Client.Runtime
             }
         }
 
-        // Logic to find the piece based on world-to-local coordinates
         private JigSawPiece GetPieceAtPosition(Vector3 worldPoint)
         {
             if (_activePieces.Count == 0) return null;
 
-            // Convert world hit point to tray's local space
             Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
-
-            // Calculate where the grid starts locally (same math as UpdatePiecePositions)
             float localStartX = _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX;
-            float localStartZ = _trayCollider.center.y + (_trayCollider.size.z / 2f) - _padding.y;
+            float localStartZ = _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y;
 
-            // Reverse the grid math to find the index
             int col = Mathf.RoundToInt((localPoint.x - localStartX) / _spacing.x);
             int row = Mathf.RoundToInt((localStartZ - localPoint.z) / _spacing.y);
 
@@ -134,20 +129,20 @@ namespace Client.Runtime
 
             if (index >= 0 && index < _activePieces.Count)
             {
-                // Only return if it's currently active (visible in tray)
                 if (_activePieces[index].gameObject.activeSelf)
                     return _activePieces[index];
             }
-
             return null;
         }
+
         private void PickUpPiece(JigSawPiece piece)
         {
+            // IMPORTANT: Remove from list first so UpdatePiecePositions stops controlling it
             _activePieces.Remove(piece);
-            piece.transform.SetParent(null);
-            piece.transform.localScale = Vector3.one;
 
-            // This triggers the chain: Tray -> Piece -> DragController
+            piece.transform.SetParent(null);
+            piece.transform.localScale = Vector3.one; // Reset scale instantly
+
             piece.StartManualDrag();
         }
 
@@ -171,14 +166,20 @@ namespace Client.Runtime
                 Transform pt = _activePieces[i].transform;
                 if (pt.parent != transform) pt.SetParent(transform);
 
-                pt.localPosition = new Vector3(
+                Vector3 targetPos = new Vector3(
                     localTopLeft.x + (col * _spacing.x),
                     localTopLeft.y,
                     localTopLeft.z - (row * _spacing.y)
                 );
 
+                // Apply Lerp to position
+                pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
+
+                // Apply Lerp to scale while in tray
+                Vector3 targetScale = Vector3.one * _scaleReduction;
+                pt.localScale = Vector3.Lerp(pt.localScale, targetScale, Time.deltaTime * _lerpSpeed);
+
                 pt.localRotation = Quaternion.identity;
-                pt.localScale = Vector3.one * _scaleReduction;
 
                 float localX = pt.localPosition.x;
                 float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;

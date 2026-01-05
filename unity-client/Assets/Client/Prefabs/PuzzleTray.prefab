@@ -51,8 +51,10 @@ MonoBehaviour:
   _scaleReduction: 0.5
   _padding: {x: 0.02, y: 0.01}
   _trayCollider: {fileID: 8619639753298581620}
+  _lerpSpeed: 5
   _scrollSpeed: 0.1
   _visibilityBuffer: 0.01
+  _dragThreshold: 10
 --- !u!65 &8619639753298581620
 BoxCollider:
   m_ObjectHideFlags: 0
