@@ -26,6 +26,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - WidgetsAssetData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb814e5b140baa949a0c6a6a77343331
+    m_Address: LoadingWidget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d5f53fda6cfc8e640bfdb4e717e7e8ee, type: 2}
   m_SchemaSet:

@@ -21,3 +21,10 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: LoadingWidget
+    _reference:
+      m_AssetGUID: bb814e5b140baa949a0c6a6a77343331
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
