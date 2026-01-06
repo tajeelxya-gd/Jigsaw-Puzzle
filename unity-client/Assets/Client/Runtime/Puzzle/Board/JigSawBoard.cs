@@ -32,13 +32,10 @@ namespace Client.Runtime
 
         public async UniTask LoadPuzzleAsync(string imageKey, Transform parent, CancellationToken cToken = default)
         {
-            if (_assetData == null)
-            {
-                _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
-            }
-
+            _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
             _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
-            var grid = await SpawnGridAsync(parent, cToken);
+            var gridAsset = _assetData.GetAsset(Data.GridId);
+            var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
             var len = grid.childCount;
 
             for (int i = 0; i < len; i++)
@@ -65,13 +62,6 @@ namespace Client.Runtime
             UniResources.DisposeInstance(grid.gameObject);
         }
 
-        private void SetJoin(int idx, JigSawPiece piece)
-        {
-            var join = piece.GetJoinController();
-            var neighbours = GetNeighbours(idx).ToArray();
-            join.Init(piece.BoxCollider, neighbours);
-        }
-
         public void UnLoadPuzzle()
         {
             foreach (var piece in _pieces)
@@ -88,6 +78,7 @@ namespace Client.Runtime
 
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeInstance(_fullImg.gameObject);
+            UniResources.DisposeAsset(_assetData);
         }
 
         public void SetActiveFullImage(bool active) => _boardCompletion.SetActiveFullImage(active);
@@ -133,10 +124,11 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        private UniTask<Transform> SpawnGridAsync(Transform parent, CancellationToken cToken = default)
+        private void SetJoin(int idx, JigSawPiece piece)
         {
-            var gridAsset = _assetData.GetAsset(Data.GridId);
-            return UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
+            var join = piece.GetJoinController();
+            var neighbours = GetNeighbours(idx).ToArray();
+            join.Init(piece.BoxCollider, neighbours);
         }
 
         private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(int idx, Transform mesh, Transform parent, CancellationToken cToken = default)
