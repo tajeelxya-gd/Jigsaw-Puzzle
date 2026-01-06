@@ -66,7 +66,7 @@ namespace Client.Runtime
 
         private void SetJoin(int idx, JigSawPiece piece)
         {
-            var join = piece.GetComponentInChildren<JoinController>();
+            var join = piece.GetJoinController();
             var neighbours = GetNeighbours(idx).ToArray();
             join.Init(piece.BoxCollider, neighbours);
         }

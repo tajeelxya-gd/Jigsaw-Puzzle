@@ -14,6 +14,7 @@ namespace Client.Runtime
         [SerializeField] private JigsawPieceVFX _vfx;
 
         private IPuzzleTray _puzzleTray;
+        private JoinController _joinController;
 
         public readonly HashSet<JigSawPiece> Group = new();
         public JigSawPieceData Data { get; private set; }
@@ -29,6 +30,12 @@ namespace Client.Runtime
             var renderer = Data.Renderer;
             _collider.size = renderer.bounds.size;
             Group.Add(this);
+        }
+
+        public JoinController GetJoinController()
+        {
+            if (Data.PieceType != PieceType.Join) return null;
+            return _joinController ??= GetComponentInChildren<JoinController>(true);
         }
 
         public void PlayVfx() => _vfx.Play();
@@ -59,6 +66,12 @@ namespace Client.Runtime
             }
         }
 
+        public void SetActiveJoinController(bool active)
+        {
+            var joinController = GetJoinController();
+            if (joinController != null) joinController.gameObject.SetActive(active);
+        }
+
         private void Awake()
         {
             _dragController.OnDragStarted += HandleDragStarted;
@@ -70,9 +83,6 @@ namespace Client.Runtime
         private void Update()
         {
             if (_puzzleTray == null) return;
-            // If this piece is currently being hovered over the tray, 
-            // let the tray handle the scale (or do nothing here).
-            // Otherwise, if it's not at full scale, return it to 1.0.
 
             if (IsBeingHoveredOverTray()) return;
 
@@ -131,13 +141,19 @@ namespace Client.Runtime
             IsPlaced = cell.Idx == Data.OriginalIdx;
             if (IsPlaced)
             {
-                _dragController.enabled = false;
-                _collider.enabled = false;
-                _snapController.enabled = false;
                 cell.SetPiece(this);
-                SetPosYInternal(0f);
+                LockPiece();
                 UniEvents.Raise(new PiecePlacedEvent(this));
             }
+        }
+
+        private void LockPiece()
+        {
+            _dragController.enabled = false;
+            _collider.enabled = false;
+            _snapController.enabled = false;
+            SetPosYInternal(0f);
+            SetActiveJoinController(false);
         }
 
         private void MoveInternal(Vector3 delta) => transform.position += delta;
