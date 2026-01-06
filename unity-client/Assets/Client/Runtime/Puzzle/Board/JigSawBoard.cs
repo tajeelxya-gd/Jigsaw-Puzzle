@@ -14,12 +14,12 @@ namespace Client.Runtime
     {
         private readonly List<JigSawPiece> _pieces = new();
         private readonly List<JigsawBoardCell> _cells = new();
+        private readonly JigsawBoardCompletion _boardCompletion = new();
 
         private AssetData _assetData;
         private Texture2D _texture;
         private IResolver _resolver;
-
-        public Transform FullImg { get; private set; }
+        private Transform _fullImg;
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
 
@@ -59,8 +59,9 @@ namespace Client.Runtime
             }
 
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
-            FullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
-            SetLoadedTexture(FullImg);
+            _fullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
+            SetLoadedTexture(_fullImg);
+            _boardCompletion.SetMeshRenderer(_fullImg.GetComponent<MeshRenderer>());
             UniResources.DisposeInstance(grid.gameObject);
         }
 
@@ -86,10 +87,10 @@ namespace Client.Runtime
             _cells.Clear();
 
             UniResources.DisposeAsset(_texture);
-            UniResources.DisposeInstance(FullImg.gameObject);
+            UniResources.DisposeInstance(_fullImg.gameObject);
         }
 
-        public void SetActiveFullImage(bool active) => FullImg.gameObject.SetActive(active);
+        public void SetActiveFullImage(bool active) => _boardCompletion.SetActiveFullImage(active);
 
         public IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
         {
