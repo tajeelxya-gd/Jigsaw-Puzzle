@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Group - Widgets
   m_GUID: 9fae00bd9d3aa6847ae77eb5a9a341ba
   m_SerializeEntries:
+  - m_GUID: 3ace08f8952d15543ae79ec1e5767fc7
+    m_Address: LevelCompletedWidget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4671ad8ec49ddb4697a87df9a9854d5
     m_Address: Widgets - AssetData
     m_ReadOnly: 0

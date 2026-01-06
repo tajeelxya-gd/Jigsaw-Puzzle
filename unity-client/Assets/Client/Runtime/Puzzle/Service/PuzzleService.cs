@@ -6,6 +6,7 @@ using UniTx.Runtime;
 using UniTx.Runtime.Content;
 using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
+using UniTx.Runtime.Widgets;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -31,7 +32,7 @@ namespace Client.Runtime
         public void Initialise()
         {
             _puzzleRoot = GameObject.FindGameObjectWithTag("PuzzleRoot").transform;
-            _winConditionChecker.OnWin += () => _board.SetActiveFullImage(true);
+            _winConditionChecker.OnWin += HandleOnWin;
         }
 
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
@@ -60,6 +61,15 @@ namespace Client.Runtime
 
             // TODO: load idx from saves later
             return data[idx];
+        }
+
+        private void HandleOnWin() => UniTask.Void(HandleOnWinAsync, default);
+
+        private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
+        {
+            _board.SetActiveFullImage(true);
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            await UniWidgets.PushAsync<LevelCompletedWidget>();
         }
     }
 }

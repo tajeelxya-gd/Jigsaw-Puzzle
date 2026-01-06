@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: Widgets - AssetData
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
   _id: default-widgets-asset-data
-  _assets: []
+  _assets:
+  - _key: LevelCompletedWidget
+    _reference:
+      m_AssetGUID: 3ace08f8952d15543ae79ec1e5767fc7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
