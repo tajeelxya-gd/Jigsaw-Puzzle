@@ -7,7 +7,7 @@ namespace Client.Runtime
     public sealed class JigsawBoardCompletion
     {
         private MeshRenderer _fullImageCube;
-        private float _duration = 0.5f;
+        private float _duration = 1f; // Slightly slower for a smoother "dissolve" look
         private AnimationCurve _easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         private CancellationTokenSource _cts;
@@ -21,12 +21,15 @@ namespace Client.Runtime
 
             if (_fullImageCube != null)
             {
-                // 1. Instantiate the material for transparency control
+                // Accessing .material creates a runtime instance of the embedded FBX material
                 _material = _fullImageCube.material;
 
-                // 2. Set Y rotation to 180 degrees // TODO: remove this after correct fpx reimport
+                // Fix rotation if FBX import is flipped
                 Vector3 currentRotation = _fullImageCube.transform.localEulerAngles;
                 _fullImageCube.transform.localEulerAngles = new Vector3(currentRotation.x, 180f, currentRotation.z);
+
+                // Ensure it starts invisible
+                ApplyInstantState(false);
             }
         }
 
@@ -42,73 +45,46 @@ namespace Client.Runtime
             }
 
             _cts = CancellationTokenSource.CreateLinkedTokenSource(parentToken);
-            AnimateCube(true, _cts.Token).Forget();
+            AnimateAlpha(_cts.Token).Forget();
         }
 
         private void ApplyInstantState(bool active)
         {
-            if (_fullImageCube == null) return;
-
-            _fullImageCube.transform.localScale = active ? Vector3.one : Vector3.zero;
-
-            if (_material != null)
-            {
-                Color color = _material.HasProperty(_baseColorProp)
-                    ? _material.GetColor(_baseColorProp)
-                    : _material.GetColor(_colorProp);
-
-                color.a = active ? 1f : 0f;
-
-                if (_material.HasProperty(_baseColorProp))
-                    _material.SetColor(_baseColorProp, color);
-                else
-                    _material.SetColor(_colorProp, color);
-            }
+            if (_fullImageCube == null || _material == null) return;
 
             _fullImageCube.gameObject.SetActive(active);
+            SetAlpha(active ? 1f : 0f);
         }
 
-        private async UniTaskVoid AnimateCube(bool active, CancellationToken token)
+        private async UniTaskVoid AnimateAlpha(CancellationToken token)
         {
             if (_fullImageCube == null || _material == null) return;
 
             float elapsed = 0f;
-            Vector3 startScale = _fullImageCube.transform.localScale;
-            Vector3 targetScale = Vector3.one;
-
-            float startAlpha = 0f;
-            float targetAlpha = 1f;
-
             _fullImageCube.gameObject.SetActive(true);
 
             while (elapsed < _duration)
             {
-                if (token.IsCancellationRequested || _fullImageCube == null) return;
+                if (token.IsCancellationRequested) return;
 
                 elapsed += Time.deltaTime;
                 float normalizedTime = Mathf.Clamp01(elapsed / _duration);
                 float t = _easeCurve.Evaluate(normalizedTime);
 
-                _fullImageCube.transform.localScale = Vector3.Lerp(startScale, targetScale, t);
-
-                Color color = _material.HasProperty(_baseColorProp)
-                    ? _material.GetColor(_baseColorProp)
-                    : _material.GetColor(_colorProp);
-
-                color.a = Mathf.Lerp(startAlpha, targetAlpha, t);
-
-                if (_material.HasProperty(_baseColorProp))
-                    _material.SetColor(_baseColorProp, color);
-                else
-                    _material.SetColor(_colorProp, color);
+                SetAlpha(t);
 
                 await UniTask.Yield(PlayerLoopTiming.Update, token);
             }
 
-            if (_fullImageCube != null)
-            {
-                _fullImageCube.transform.localScale = targetScale;
-            }
+            SetAlpha(1f);
+        }
+
+        private void SetAlpha(float alpha)
+        {
+            int propId = _material.HasProperty(_baseColorProp) ? _baseColorProp : _colorProp;
+            Color color = _material.GetColor(propId);
+            color.a = alpha;
+            _material.SetColor(propId, color);
         }
 
         public void Dispose()

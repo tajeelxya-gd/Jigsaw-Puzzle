@@ -56,7 +56,7 @@ namespace Client.Runtime
         private JigSawLevelData GetCurrentLevelData()
         {
             var data = _contentService.GetAllData<JigSawLevelData>().ToArray();
-            var idx = Math.Clamp(0, data.Length - 1, ++_idx);
+            var idx = Math.Clamp(++_idx, 0, data.Length - 1);
 
             // TODO: load idx from saves later
             return data[idx];
