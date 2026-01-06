@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JigSawBoard _board;
         private Transform _puzzleRoot;
+        private int _idx = -1;
 
         public void Inject(IResolver resolver)
         {
@@ -53,10 +55,11 @@ namespace Client.Runtime
 
         private JigSawLevelData GetCurrentLevelData()
         {
-            var data = _contentService.GetAllData<JigSawLevelData>();
+            var data = _contentService.GetAllData<JigSawLevelData>().ToArray();
+            var idx = Math.Clamp(0, data.Length - 1, ++_idx);
 
             // TODO: load idx from saves later
-            return data.First();
+            return data[idx];
         }
     }
 }
