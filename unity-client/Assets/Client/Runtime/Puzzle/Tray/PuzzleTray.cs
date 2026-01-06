@@ -13,10 +13,10 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _trayCollider;
 
         [Header("Smoothness Settings")]
-        [SerializeField] private float _lerpSpeed = 10f;
+        [SerializeField] private float _lerpSpeed = 15f;
 
         [Header("Scroll Settings")]
-        [SerializeField] private float _scrollSpeed = 0.1f;
+        [SerializeField] private float _scrollSpeed = 0.15f;
         [SerializeField] private float _visibilityBuffer = 0.01f;
         [SerializeField] private float _dragThreshold = 10f;
 
@@ -52,6 +52,9 @@ namespace Client.Runtime
 
         public bool IsOverTray(Vector3 worldPosition)
         {
+            // If the piece is part of a group, we treat the tray as "invisible" to it
+            if (_hoverPiece != null && _hoverPiece.Group.Count > 1) return false;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             return Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider;
         }
@@ -60,6 +63,9 @@ namespace Client.Runtime
 
         public void SubmitPiece(JigSawPiece piece)
         {
+            // ONLY allow single pieces to be returned to the tray
+            if (piece.Group.Count > 1) return;
+
             if (!_activePieces.Contains(piece))
             {
                 piece.SetActiveJoinController(false);
@@ -81,7 +87,9 @@ namespace Client.Runtime
         {
             if (_hoverPiece == null) return;
 
-            // The Tray only forces a scale IF the piece is within the tray bounds
+            // Re-check: If this is a group, don't apply tray scaling logic
+            if (_hoverPiece.Group.Count > 1) return;
+
             bool isOver = IsOverTray(_hoverPiece.transform.position);
 
             if (isOver)
@@ -101,8 +109,8 @@ namespace Client.Runtime
 
             Vector3 localTopLeft = GetLocalTopLeft();
 
-            // Shifting only happens if we are currently dragging a piece over the tray
-            int insertionIndex = (_hoverPiece != null && IsOverTray(_hoverPiece.transform.position))
+            // Shifting only happens if we are currently dragging a SINGLE piece over the tray
+            int insertionIndex = (_hoverPiece != null && _hoverPiece.Group.Count == 1 && IsOverTray(_hoverPiece.transform.position))
                 ? GetInsertionIndex()
                 : -1;
 
@@ -214,7 +222,7 @@ namespace Client.Runtime
 
         private void ClampScroll()
         {
-            int totalCount = _activePieces.Count + (_hoverPiece != null ? 1 : 0);
+            int totalCount = _activePieces.Count + (_hoverPiece != null && _hoverPiece.Group.Count == 1 ? 1 : 0);
             int cols = Mathf.CeilToInt((float)totalCount / _rowCount);
             float totalWidth = (cols - 1) * _spacing.x;
             float maxScroll = Mathf.Max(0, totalWidth - _trayCollider.size.x + (_padding.x * 2));

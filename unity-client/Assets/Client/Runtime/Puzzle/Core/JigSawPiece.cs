@@ -141,12 +141,15 @@ namespace Client.Runtime
         {
             _puzzleTray.SetHoverPiece(null);
 
-            if (_puzzleTray.IsOverTray(transform.position))
+            // 1. Only single pieces can enter the tray
+            // If it's a cluster, we skip tray logic entirely and snap to grid
+            if (Group.Count == 1 && _puzzleTray.IsOverTray(transform.position))
             {
                 _puzzleTray.SubmitPiece(this);
                 return;
             }
 
+            // 2. Check for merging with other pieces in the world
             if (JoinRegistry.HasCorrectContacts())
             {
                 var kvps = JoinRegistry.Get().ToArray();
@@ -156,13 +159,14 @@ namespace Client.Runtime
                     var join = kvp.join;
                     var piece = kvp.piece;
 
-                    // join.gameObject.SetActive(false);
                     piece.SnapController.SnapToTransform(join.MergeTransform);
                     piece.JoinGroup(this);
                 }
                 return;
             }
 
+            // 3. Default behavior: Snap cluster or single piece to the closest board cell
+            // This handles the "cluster dropped on tray" case by snapping it to the board instead
             _snapController.SnapToClosestCell(Data.Cells);
         }
 

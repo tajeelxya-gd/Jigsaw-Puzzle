@@ -1213,6 +1213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d8a7696227b1143b51068f898fac41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.AppConfigurationStep
+  _runInBackground: 0
+  _sleepTimeout: 120
+  _multiTouchEnabled: 0
+  _targetFrameRate: 60
+  _culture: en-US
 --- !u!4 &1467069947
 Transform:
   m_ObjectHideFlags: 0
