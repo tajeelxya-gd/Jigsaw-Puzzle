@@ -1,25 +1,24 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using System;
 
 namespace Client.Runtime
 {
+    [RequireComponent(typeof(JigSawPiece))]
     public sealed class PieceSnapController : MonoBehaviour
     {
-        [SerializeField] private float _snapDuration = 0.5f;
+        [SerializeField] private float _snapDuration = 0.25f; // Slightly faster feel for groups
 
+        private JigSawPiece _piece;
         public event Action<JigsawBoardCell> OnSnapped;
 
-        /// <summary>
-        /// Snaps the piece to a specific transform without a cell reference.
-        /// </summary>
+        private void Awake() => _piece = GetComponent<JigSawPiece>();
+
         public void SnapToTransform(Transform target)
         {
             if (target == null) return;
-
-            // Start the async snap process for a generic transform
             SnapAsync(target, this.GetCancellationTokenOnDestroy()).Forget();
         }
 
@@ -44,56 +43,73 @@ namespace Client.Runtime
             }
 
             if (bestTarget == null) return;
-
             SnapAsync(bestTarget, this.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        /// <summary>
-        /// Handles snapping to a JigsawBoardCell and triggers the OnSnapped event.
-        /// </summary>
         private async UniTask SnapAsync(JigsawBoardCell cell, CancellationToken cToken = default)
         {
             await SnapAsync(cell.transform, cToken);
-
-            // Trigger event safely
             OnSnapped?.Invoke(cell);
         }
 
-        /// <summary>
-        /// Core snapping logic for any transform target.
-        /// </summary>
         private async UniTask SnapAsync(Transform targetTransform, CancellationToken cToken = default)
         {
-            var startPos = transform.position;
-            var startRot = transform.rotation;
+            // 1. Capture the initial state of the entire group
+            var group = _piece.Group;
+            int count = group.Count;
+
+            Vector3[] startPositions = new Vector3[count];
+            Vector3[] relativeOffsets = new Vector3[count];
+            Quaternion[] startRotations = new Quaternion[count];
+            JigSawPiece[] pieces = new JigSawPiece[count];
+
+            int i = 0;
+            foreach (var p in group)
+            {
+                pieces[i] = p;
+                startPositions[i] = p.transform.position;
+                startRotations[i] = p.transform.rotation;
+
+                // Offset of this piece relative to the piece that started the snap
+                relativeOffsets[i] = p.transform.position - transform.position;
+                i++;
+            }
 
             float elapsed = 0f;
 
             while (elapsed < _snapDuration)
             {
-                // Ensure we handle cancellation (e.g., object destroyed during move)
                 cToken.ThrowIfCancellationRequested();
-
-                // Safety check in case the target is destroyed during the animation
                 if (targetTransform == null) return;
 
                 elapsed += Time.deltaTime;
                 float normalizedTime = Mathf.Clamp01(elapsed / _snapDuration);
-
-                // Ease-in-out curve
                 float t = Mathf.SmoothStep(0f, 1f, normalizedTime);
 
-                transform.position = Vector3.Lerp(startPos, targetTransform.position, t);
-                transform.rotation = Quaternion.Slerp(startRot, targetTransform.rotation, t);
+                // 2. Move every piece in the group relative to the lead target
+                for (int j = 0; j < pieces.Length; j++)
+                {
+                    if (pieces[j] == null) continue;
+
+                    Vector3 targetPosWithOffset = targetTransform.position + relativeOffsets[j];
+                    pieces[j].transform.position = Vector3.Lerp(startPositions[j], targetPosWithOffset, t);
+
+                    // Usually, for jigsaw clusters, the whole group shares the same rotation alignment
+                    pieces[j].transform.rotation = Quaternion.Slerp(startRotations[j], targetTransform.rotation, t);
+                }
 
                 await UniTask.Yield(PlayerLoopTiming.Update, cToken);
             }
 
-            // Finalize placement
+            // 3. Finalize placement for all pieces
             if (targetTransform != null)
             {
-                transform.position = targetTransform.position;
-                transform.rotation = targetTransform.rotation;
+                for (int j = 0; j < pieces.Length; j++)
+                {
+                    if (pieces[j] == null) continue;
+                    pieces[j].transform.position = targetTransform.position + relativeOffsets[j];
+                    pieces[j].transform.rotation = targetTransform.rotation;
+                }
             }
         }
     }

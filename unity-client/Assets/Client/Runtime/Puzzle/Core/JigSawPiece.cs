@@ -168,11 +168,34 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
+            // Check if the piece we just dropped is in its correct slot
             IsPlaced = cell.Idx == Data.OriginalIdx;
+
             if (IsPlaced)
             {
-                cell.SetPiece(this);
-                LockPiece();
+                // 1. Create a temporary list/array from the group 
+                // We do this because LockPiece might change group state or disabling components
+                var groupToLock = Group.ToArray();
+
+                foreach (var piece in groupToLock)
+                {
+                    // 2. Mark each piece as placed
+                    piece.IsPlaced = true;
+
+                    // 3. Find the cell this specific group-piece belongs to.
+                    // Since they are snapped perfectly, we can find the cell by its OriginalIdx
+                    var targetCell = Data.Cells.FirstOrDefault(c => c.Idx == piece.Data.OriginalIdx);
+
+                    if (targetCell != null)
+                    {
+                        targetCell.SetPiece(piece);
+                    }
+
+                    // 4. Disable physics/input for this piece
+                    piece.LockPiece();
+                }
+
+                // 5. Raise the event once for the whole cluster
                 UniEvents.Raise(new PiecePlacedEvent(this));
             }
         }
