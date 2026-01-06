@@ -1,13 +1,15 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Client.Runtime
 {
-    public sealed class JigsawBoardCompletion
+    public sealed class JigsawBoardCompletion : IDisposable
     {
         private MeshRenderer _fullImageCube;
-        private float _duration = 1f; // Slightly slower for a smoother "dissolve" look
+        private float _duration = 1f;
         private AnimationCurve _easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         private CancellationTokenSource _cts;
@@ -21,7 +23,8 @@ namespace Client.Runtime
 
             if (_fullImageCube != null)
             {
-                // Accessing .material creates a runtime instance of the embedded FBX material
+                // Accessing .material creates a runtime instance. 
+                // We must store it to destroy it later.
                 _material = _fullImageCube.material;
 
                 // Fix rotation if FBX import is flipped
@@ -35,8 +38,8 @@ namespace Client.Runtime
 
         public void SetActiveFullImage(bool active, CancellationToken parentToken = default)
         {
-            _cts?.Cancel();
-            _cts?.Dispose();
+            // 1. Clean up existing animation/token
+            CancelExisting();
 
             if (!active)
             {
@@ -44,8 +47,20 @@ namespace Client.Runtime
                 return;
             }
 
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(parentToken);
-            AnimateAlpha(_cts.Token).Forget();
+            // 2. Safety check for parent token
+            if (parentToken.IsCancellationRequested) return;
+
+            try
+            {
+                // 3. Create linked source and start animation
+                _cts = CancellationTokenSource.CreateLinkedTokenSource(parentToken);
+                AnimateAlpha(_cts.Token).Forget();
+            }
+            catch (ObjectDisposedException)
+            {
+                // Handle edge case where parentToken disposes exactly as we link
+                ApplyInstantState(true);
+            }
         }
 
         private void ApplyInstantState(bool active)
@@ -63,34 +78,68 @@ namespace Client.Runtime
             float elapsed = 0f;
             _fullImageCube.gameObject.SetActive(true);
 
-            while (elapsed < _duration)
+            try
             {
-                if (token.IsCancellationRequested) return;
+                while (elapsed < _duration)
+                {
+                    // Check token before doing work
+                    token.ThrowIfCancellationRequested();
 
-                elapsed += Time.deltaTime;
-                float normalizedTime = Mathf.Clamp01(elapsed / _duration);
-                float t = _easeCurve.Evaluate(normalizedTime);
+                    elapsed += Time.deltaTime;
+                    float normalizedTime = Mathf.Clamp01(elapsed / _duration);
+                    float t = _easeCurve.Evaluate(normalizedTime);
 
-                SetAlpha(t);
+                    SetAlpha(t);
 
-                await UniTask.Yield(PlayerLoopTiming.Update, token);
+                    await UniTask.Yield(PlayerLoopTiming.Update, token);
+                }
+
+                SetAlpha(1f);
             }
-
-            SetAlpha(1f);
+            catch (OperationCanceledException)
+            {
+                // Animation was cancelled, which is expected behavior
+            }
         }
 
         private void SetAlpha(float alpha)
         {
+            if (_material == null) return;
+
             int propId = _material.HasProperty(_baseColorProp) ? _baseColorProp : _colorProp;
             Color color = _material.GetColor(propId);
             color.a = alpha;
             _material.SetColor(propId, color);
         }
 
+        private void CancelExisting()
+        {
+            if (_cts != null)
+            {
+                // We check if it's already disposed internally or just cancel
+                try
+                {
+                    _cts.Cancel();
+                    _cts.Dispose();
+                }
+                catch (ObjectDisposedException) { /* Already gone */ }
+                finally
+                {
+                    _cts = null;
+                }
+            }
+        }
+
         public void Dispose()
         {
-            _cts?.Cancel();
-            _cts?.Dispose();
+            CancelExisting();
+
+            // Prevent memory leak from material instance
+            if (_material != null)
+            {
+                Object.Destroy(_material);
+                _material = null;
+            }
         }
     }
 }
