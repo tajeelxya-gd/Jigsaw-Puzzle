@@ -53,6 +53,7 @@ MonoBehaviour:
   _left: {fileID: 6197975287133564481}
   _right: {fileID: 6349487655154725005}
   _tabScaleRatio: 0.22
+  _verticalExpansion: 0.01
 --- !u!1001 &2728270292373190277
 PrefabInstance:
   m_ObjectHideFlags: 0

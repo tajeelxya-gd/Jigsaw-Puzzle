@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -16,7 +17,8 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JoinController _joinController;
 
-        public readonly HashSet<JigSawPiece> Group = new();
+        // Note: Removed 'readonly' so we can swap references during merging
+        public HashSet<JigSawPiece> Group { get; set; } = new();
         public JigSawPieceData Data { get; private set; }
         public bool IsPlaced { get; private set; }
         public BoxCollider BoxCollider => _collider;
@@ -29,6 +31,9 @@ namespace Client.Runtime
             Data = data;
             var renderer = Data.Renderer;
             _collider.size = renderer.bounds.size;
+
+            // Ensure the group contains at least this piece
+            Group.Clear();
             Group.Add(this);
         }
 
@@ -40,29 +45,28 @@ namespace Client.Runtime
 
         public void PlayVfx() => _vfx.Play();
 
-        /// <summary>
-        /// Specifically used when picking the piece from the tray.
-        /// Activates the drag controller mid-mouse-press.
-        /// </summary>
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
-        public void Move(Vector3 delta, JigSawPiece toExclude)
+        /// <summary>
+        /// Moves the entire group by iterating through the shared HashSet.
+        /// Calling MoveInternal prevents the StackOverflow recursion.
+        /// </summary>
+        public void Move(Vector3 delta)
         {
-            MoveInternal(delta);
             foreach (var piece in Group)
             {
-                if (piece == toExclude) continue;
-                piece.Move(delta, this);
+                piece.MoveInternal(delta);
             }
         }
 
-        public void SetPosY(float y, JigSawPiece toExclude)
+        /// <summary>
+        /// Sets the Y position for the entire group.
+        /// </summary>
+        public void SetPosY(float y)
         {
-            SetPosYInternal(y);
             foreach (var piece in Group)
             {
-                if (piece == toExclude) continue;
-                piece.SetPosY(y, this);
+                piece.SetPosYInternal(y);
             }
         }
 
@@ -70,6 +74,22 @@ namespace Client.Runtime
         {
             var joinController = GetJoinController();
             if (joinController != null) joinController.gameObject.SetActive(active);
+        }
+
+        public void JoinGroup(JigSawPiece other)
+        {
+            // Already in the same group instance
+            if (this.Group == other.Group) return;
+
+            // Merge the smaller group into the larger group for performance
+            HashSet<JigSawPiece> groupToKeep = this.Group.Count >= other.Group.Count ? this.Group : other.Group;
+            HashSet<JigSawPiece> groupToDiscard = (groupToKeep == this.Group) ? other.Group : this.Group;
+
+            foreach (JigSawPiece p in groupToDiscard)
+            {
+                groupToKeep.Add(p);
+                p.Group = groupToKeep;
+            }
         }
 
         private void Awake()
@@ -83,7 +103,6 @@ namespace Client.Runtime
         private void Update()
         {
             if (_puzzleTray == null) return;
-
             if (IsBeingHoveredOverTray()) return;
 
             if (transform.localScale != Vector3.one)
@@ -98,10 +117,7 @@ namespace Client.Runtime
 
         private bool IsBeingHoveredOverTray()
         {
-            // If the piece is already inside the tray (parented), the tray handles it.
             if (transform.parent != null) return true;
-
-            // If we are dragging it and it's over the tray, return true
             return _puzzleTray.IsOverTray(transform.position);
         }
 
@@ -113,27 +129,41 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDragStarted() => SetPosY(0.01f, this);
+        private void HandleDragStarted() => SetPosY(0.01f);
 
         private void HandleOnDragged(Vector3 delta)
         {
-            Move(delta, this);
+            Move(delta);
             _puzzleTray.SetHoverPiece(this);
         }
 
         private void HandleDraggedEnded()
         {
-            // Important: Release the tray's hold on this piece first
             _puzzleTray.SetHoverPiece(null);
 
             if (_puzzleTray.IsOverTray(transform.position))
             {
                 _puzzleTray.SubmitPiece(this);
+                return;
             }
-            else
+
+            if (JoinRegistry.HasCorrectContacts())
             {
-                _snapController.SnapToClosestCell(Data.Cells);
+                var kvps = JoinRegistry.Get().ToArray();
+                JoinRegistry.Clear();
+                foreach (var kvp in kvps)
+                {
+                    var join = kvp.join;
+                    var piece = kvp.piece;
+
+                    join.gameObject.SetActive(false);
+                    piece.SnapController.SnapToTransform(join.MergeTransform);
+                    piece.JoinGroup(this);
+                }
+                return;
             }
+
+            _snapController.SnapToClosestCell(Data.Cells);
         }
 
         private void HandleSnapped(JigsawBoardCell cell)
@@ -157,7 +187,6 @@ namespace Client.Runtime
         }
 
         private void MoveInternal(Vector3 delta) => transform.position += delta;
-
         private void SetPosYInternal(float y) => transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }

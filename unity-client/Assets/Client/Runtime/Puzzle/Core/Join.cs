@@ -11,6 +11,8 @@ namespace Client.Runtime
 
         public BoxCollider BoxCollider => _collider;
 
+        public Transform MergeTransform => _mergeTransform;
+
         public void Init(JigsawBoardCell cell)
         {
             if (cell == null)
@@ -30,7 +32,7 @@ namespace Client.Runtime
             {
                 if (piece.Data.OriginalIdx == _neighbourIdx)
                 {
-                    JoinRegistry.Register(piece, _mergeTransform);
+                    JoinRegistry.Register(piece, this);
                 }
             }
         }
