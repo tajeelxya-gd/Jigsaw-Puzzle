@@ -188,8 +188,7 @@ namespace Client.Runtime
             int row = index / numCols;
             int col = index % numCols;
 
-            // If the sum of row and column indices is even, it's Basic.
-            // Otherwise, it's Join.
+            // If the sum of row and column indices is even, it's Basic. Otherwise, it's Join.
             return (row + col) % 2 == 0 ? PieceType.Basic : PieceType.Join;
         }
     }

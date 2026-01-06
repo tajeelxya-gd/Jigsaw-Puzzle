@@ -16,16 +16,12 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
 
         public readonly HashSet<JigSawPiece> Group = new();
-
         public JigSawPieceData Data { get; private set; }
         public bool IsPlaced { get; private set; }
         public BoxCollider BoxCollider => _collider;
         public PieceSnapController SnapController => _snapController;
 
-        public void Inject(IResolver resolver)
-        {
-            _puzzleTray = resolver.Resolve<IPuzzleTray>();
-        }
+        public void Inject(IResolver resolver) => _puzzleTray = resolver.Resolve<IPuzzleTray>();
 
         public void Init(JigSawPieceData data)
         {
@@ -41,10 +37,7 @@ namespace Client.Runtime
         /// Specifically used when picking the piece from the tray.
         /// Activates the drag controller mid-mouse-press.
         /// </summary>
-        public void StartManualDrag()
-        {
-            _dragController.ForceStartDrag();
-        }
+        public void StartManualDrag() => _dragController.ForceStartDrag();
 
         public void Move(Vector3 delta, JigSawPiece toExclude)
         {
@@ -76,6 +69,7 @@ namespace Client.Runtime
 
         private void Update()
         {
+            if (_puzzleTray == null) return;
             // If this piece is currently being hovered over the tray, 
             // let the tray handle the scale (or do nothing here).
             // Otherwise, if it's not at full scale, return it to 1.0.
@@ -98,8 +92,9 @@ namespace Client.Runtime
             if (transform.parent != null) return true;
 
             // If we are dragging it and it's over the tray, return true
-            return _puzzleTray != null && _puzzleTray.IsOverTray(transform.position);
+            return _puzzleTray.IsOverTray(transform.position);
         }
+
         private void OnDestroy()
         {
             _dragController.OnDragStarted -= HandleDragStarted;
@@ -113,23 +108,15 @@ namespace Client.Runtime
         private void HandleOnDragged(Vector3 delta)
         {
             Move(delta, this);
-            if (_puzzleTray != null)
-            {
-                // We set the hover piece regardless; 
-                // the tray logic now handles whether it's actually over the collider.
-                _puzzleTray.SetHoverPiece(this);
-            }
+            _puzzleTray.SetHoverPiece(this);
         }
 
         private void HandleDraggedEnded()
         {
             // Important: Release the tray's hold on this piece first
-            if (_puzzleTray != null)
-            {
-                _puzzleTray.SetHoverPiece(null);
-            }
+            _puzzleTray.SetHoverPiece(null);
 
-            if (_puzzleTray != null && _puzzleTray.IsOverTray(transform.position))
+            if (_puzzleTray.IsOverTray(transform.position))
             {
                 _puzzleTray.SubmitPiece(this);
             }

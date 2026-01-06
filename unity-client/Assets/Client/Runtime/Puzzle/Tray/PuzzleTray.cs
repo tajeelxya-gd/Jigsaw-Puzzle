@@ -23,7 +23,6 @@ namespace Client.Runtime
         private readonly List<JigSawPiece> _activePieces = new();
         private JigSawPiece _hitPiece;
         private JigSawPiece _hoverPiece;
-
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
         private Vector3 _lastMousePos;
@@ -33,6 +32,7 @@ namespace Client.Runtime
         public void ShufflePieces(IReadOnlyList<JigSawPiece> pieces)
         {
             if (pieces == null || pieces.Count == 0) return;
+
             _activePieces.Clear();
             foreach (var p in pieces)
             {
@@ -40,11 +40,13 @@ namespace Client.Runtime
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
             }
+
             for (int i = 0; i < _activePieces.Count; i++)
             {
                 int randomIndex = Random.Range(i, _activePieces.Count);
                 (_activePieces[i], _activePieces[randomIndex]) = (_activePieces[randomIndex], _activePieces[i]);
             }
+
             _scrollX = 0;
         }
 
@@ -64,7 +66,6 @@ namespace Client.Runtime
                 _activePieces.Insert(Mathf.Clamp(targetIndex, 0, _activePieces.Count), piece);
                 piece.transform.SetParent(transform);
             }
-            // This nullifies the reference so HandleHoverPieceVisuals() stops running
             _hoverPiece = null;
         }
 
@@ -91,8 +92,6 @@ namespace Client.Runtime
                     Time.deltaTime * _lerpSpeed
                 );
             }
-            // Note: We REMOVED the 'else scale to 1.0' here. 
-            // The Piece's own Update now handles the return to 1.0.
         }
 
         private void UpdatePiecePositions()
@@ -105,9 +104,6 @@ namespace Client.Runtime
             int insertionIndex = (_hoverPiece != null && IsOverTray(_hoverPiece.transform.position))
                 ? GetInsertionIndex()
                 : -1;
-
-            int totalCount = _activePieces.Count + (insertionIndex != -1 ? 1 : 0);
-            int cols = Mathf.CeilToInt((float)totalCount / _rowCount);
 
             for (int i = 0; i < _activePieces.Count; i++)
             {
