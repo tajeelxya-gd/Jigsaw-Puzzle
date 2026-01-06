@@ -5,6 +5,7 @@
     "_yConstraint": 4,
     "_assetDataId": "_6x4_standard_board_asset_data",
     "_fullImageId": "full_image_6x4_standard_board",
-    "_gridId": "grid_6x4_standard_board"
+    "_gridId": "grid_6x4_standard_board",
+    "_trayScaleReduction": 0.5
   }
 ]

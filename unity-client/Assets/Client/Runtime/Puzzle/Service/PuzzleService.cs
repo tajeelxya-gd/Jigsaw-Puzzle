@@ -39,7 +39,7 @@ namespace Client.Runtime
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
             _board.SetActiveFullImage(false);
             _winConditionChecker.SetBoard(_board);
-            _puzzleTray.ShufflePieces(_board.Pieces);
+            _puzzleTray.ShufflePieces(_board);
         }
 
         public void UnLoadPuzzle()

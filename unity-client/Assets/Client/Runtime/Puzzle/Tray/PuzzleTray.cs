@@ -8,7 +8,6 @@ namespace Client.Runtime
         [Header("Grid Settings")]
         [SerializeField] private int _rowCount = 2;
         [SerializeField] private Vector2 _spacing = new Vector2(0.06f, 0.05f);
-        [SerializeField] private float _scaleReduction = 0.5f;
         [SerializeField] private Vector2 _padding = new Vector2(0.02f, 0.02f);
         [SerializeField] private BoxCollider _trayCollider;
 
@@ -28,9 +27,12 @@ namespace Client.Runtime
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
+        private float _scaleReduction;
 
-        public void ShufflePieces(IReadOnlyList<JigSawPiece> pieces)
+        public void ShufflePieces(JigSawBoard board)
         {
+            _scaleReduction = board.Data.TrayScaleReduction;
+            var pieces = board.Pieces;
             if (pieces == null || pieces.Count == 0) return;
 
             _activePieces.Clear();
