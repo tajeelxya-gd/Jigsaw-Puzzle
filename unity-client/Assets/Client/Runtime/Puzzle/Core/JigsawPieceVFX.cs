@@ -32,6 +32,7 @@ namespace Client.Runtime
         private async UniTask FlashAsync(CancellationToken token)
         {
             var renderer = _jigsawPiece.Data.Renderer;
+            renderer.material.EnableKeyword("_EMISSION");
             renderer.GetPropertyBlock(_mpb);
 
             Color startEmission = Color.black;

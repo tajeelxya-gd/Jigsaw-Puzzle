@@ -140,7 +140,6 @@ namespace Client.Runtime
             mesh.SetParent(pieceTransform);
             var pieceType = GetPieceType(idx, Data.YConstraint);
             var renderer = mesh.GetComponent<Renderer>();
-            renderer.material.EnableKeyword("_EMISSION");
             piece.Init(new JigSawPieceData(idx, renderer, _cells, pieceType));
             _pieces.Add(piece);
             if (pieceType == PieceType.Join)
