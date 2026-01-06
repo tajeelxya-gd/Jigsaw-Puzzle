@@ -777,7 +777,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1796932628}
   m_Father: {fileID: 1579571277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1469,6 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdda1f1f284f3c4381c6a764f3018ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.LoadingWidgetStep
+  _loadingWidget: {fileID: 1796932629}
   _activateLoading: 1
 --- !u!4 &1695979985
 Transform:
@@ -1485,6 +1487,117 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1926188898}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1796932627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 365996293}
+    m_Modifications:
+    - target: {fileID: 4380428640312459254, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_Name
+      value: LoadingWidget
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380428640312459254, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 406.4436
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+--- !u!224 &1796932628 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6841883903222429367, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+  m_PrefabInstance: {fileID: 1796932627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1796932629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4380428640312459254, guid: bb814e5b140baa949a0c6a6a77343331, type: 3}
+  m_PrefabInstance: {fileID: 1796932627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1813031127
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,6 +1627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdda1f1f284f3c4381c6a764f3018ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.LoadingWidgetStep
+  _loadingWidget: {fileID: 1796932629}
   _activateLoading: 0
 --- !u!4 &1813031129
 Transform:
@@ -1560,9 +1674,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1695979985}
   - {fileID: 1467069947}
   - {fileID: 893568232}
-  - {fileID: 1695979985}
   - {fileID: 193517018}
   - {fileID: 1181361556}
   - {fileID: 2038323280}
@@ -1584,9 +1698,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Bootstrap.AppLoader
   _loadingSteps:
+  - {fileID: 1695979984}
   - {fileID: 1467069946}
   - {fileID: 893568231}
-  - {fileID: 1695979984}
   - {fileID: 193517017}
   - {fileID: 1181361557}
   - {fileID: 2038323279}
