@@ -2,11 +2,16 @@
   {
     "_id": "level_1",
     "_boardId": "_4x3_standard_board",
-    "_imageKey": "island"
+    "_imageKey": "img_island"
   },
   {
     "_id": "level_2",
     "_boardId": "_6x4_standard_board",
-    "_imageKey": "default"
+    "_imageKey": "img_island"
+  },
+  {
+    "_id": "level_3",
+    "_boardId": "_7x5_standard_board",
+    "_imageKey": "img_island"
   }
 ]

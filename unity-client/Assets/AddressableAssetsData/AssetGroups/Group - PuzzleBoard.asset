@@ -31,6 +31,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 808c68e45cf51ed49aed8ae0ed131604
+    m_Address: _7x5_standard_board_asset_data
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93f0aac618e808e41b6cb04a0811b74b
     m_Address: Jigsaw Final 6x4 single plane
     m_ReadOnly: 0
