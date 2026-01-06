@@ -147,7 +147,9 @@ namespace Client.Runtime
             pieceTransform.SetPositionAndRotation(mesh.position, mesh.rotation);
             mesh.SetParent(pieceTransform);
             var pieceType = GetPieceType(idx, Data.YConstraint);
-            piece.Init(new JigSawPieceData(idx, mesh.GetComponent<Renderer>(), _cells, pieceType));
+            var renderer = mesh.GetComponent<Renderer>();
+            renderer.material.EnableKeyword("_EMISSION");
+            piece.Init(new JigSawPieceData(idx, renderer, _cells, pieceType));
             _pieces.Add(piece);
             if (pieceType == PieceType.Join)
             {
