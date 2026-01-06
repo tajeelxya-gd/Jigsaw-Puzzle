@@ -10,19 +10,26 @@ namespace Client.Runtime
 {
     public sealed class AppConfigurationStep : LoadingStepBase
     {
+        [SerializeField] private bool _runInBackground = false;
+        [SerializeField] private int _sleepTimeout = 2 * 60;
+        [SerializeField] private bool _multiTouchEnabled = false;
+        [SerializeField] private int _targetFrameRate = 60;
+        [SerializeField] private string _culture = "en-US";
+
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
             SetAppSettings();
-            SetCulture("en-US");
+            SetCulture(_culture);
 
             return UniTask.CompletedTask;
         }
 
-        private static void SetAppSettings()
+        private void SetAppSettings()
         {
-            Application.runInBackground = false;
-            Screen.sleepTimeout = 2 * 60;
-            Input.multiTouchEnabled = false;
+            Application.runInBackground = _runInBackground;
+            Screen.sleepTimeout = _sleepTimeout;
+            Input.multiTouchEnabled = _multiTouchEnabled;
+            Application.targetFrameRate = _targetFrameRate;
         }
 
         private void SetCulture(string cultureName)
