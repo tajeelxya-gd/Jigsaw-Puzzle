@@ -12,11 +12,11 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _trayCollider;
 
         [Header("Smoothness Settings")]
-        [SerializeField] private float _lerpSpeed = 15f;
+        [SerializeField] private float _lerpSpeed = 20f;
 
         [Header("Scroll Settings")]
         [SerializeField] private float _scrollSpeed = 0.15f;
-        [SerializeField] private float _visibilityBuffer = 0.01f;
+        [SerializeField] private float _visibilityBuffer = 0f;
         [SerializeField] private float _dragThreshold = 10f;
 
         private readonly List<JigSawPiece> _activePieces = new();
