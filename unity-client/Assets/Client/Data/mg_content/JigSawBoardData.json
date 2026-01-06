@@ -1,5 +1,14 @@
 [
   {
+    "_id": "_4x3_standard_board",
+    "_xConstraint": 4,
+    "_yConstraint": 3,
+    "_assetDataId": "_4x3_standard_board_asset_data",
+    "_fullImageId": "full_image_4x3_standard_board",
+    "_gridId": "grid_4x3_standard_board",
+    "_trayScaleReduction": 0.33
+  },
+  {
     "_id": "_6x4_standard_board",
     "_xConstraint": 6,
     "_yConstraint": 4,

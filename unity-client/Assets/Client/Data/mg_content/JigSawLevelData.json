@@ -1,7 +1,12 @@
 [
   {
     "_id": "level_1",
+    "_boardId": "_4x3_standard_board",
+    "_imageKey": "default"
+  },
+  {
+    "_id": "level_2",
     "_boardId": "_6x4_standard_board",
-    "_imageKey": "6X4 image 1"
+    "_imageKey": "default"
   }
 ]

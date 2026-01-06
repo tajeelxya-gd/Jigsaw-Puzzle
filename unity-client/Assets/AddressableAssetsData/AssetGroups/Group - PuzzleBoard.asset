@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Group - 6X4 StandardBoard
+  m_Name: Group - PuzzleBoard
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Group - 6X4 StandardBoard
+  m_GroupName: Group - PuzzleBoard
   m_GUID: 64f4f73583dc41d4d963ccd45aa3ad01
   m_SerializeEntries:
   - m_GUID: 1473f954a1abe08409b24897313d48f8
@@ -21,8 +21,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - AssetData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1b2b25c4a75275f4484c06c274bfc023
-    m_Address: default
+  - m_GUID: 23379414edfc08b4d96da78306d7e757
+    m_Address: Jigsaw Final 4x3 Grid
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -36,10 +36,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b3503d75f7bc6a74e8ac05b93dec7cc4
-    m_Address: 6X4 image 1
+  - m_GUID: 9637bb8555a2da94e8493b6fd81ff247
+    m_Address: _4x3_standard_board_asset_data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - AssetData
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d5f53fda6cfc8e640bfdb4e717e7e8ee, type: 2}
