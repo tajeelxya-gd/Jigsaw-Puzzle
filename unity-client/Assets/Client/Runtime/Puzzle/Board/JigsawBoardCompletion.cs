@@ -7,7 +7,7 @@ namespace Client.Runtime
     public sealed class JigsawBoardCompletion
     {
         private MeshRenderer _fullImageCube;
-        private float _duration = 0.75f;
+        private float _duration = 0.5f;
         private AnimationCurve _easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         private CancellationTokenSource _cts;
