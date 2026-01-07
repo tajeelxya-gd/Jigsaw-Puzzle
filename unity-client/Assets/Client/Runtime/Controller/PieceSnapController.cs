@@ -12,15 +12,12 @@ namespace Client.Runtime
         [SerializeField] private float _snapDuration = 0.25f; // Slightly faster feel for groups
 
         private JigSawPiece _piece;
-        private bool _snapStarted = false;
         public event Action<JigsawBoardCell> OnSnapped;
 
         private void Awake() => _piece = GetComponent<JigSawPiece>();
 
         public void SnapToTransform(Transform target)
         {
-            if (_snapStarted) return;
-            _snapStarted = true;
             if (target == null) return;
             SnapAsync(target, this.GetCancellationTokenOnDestroy()).Forget();
         }
