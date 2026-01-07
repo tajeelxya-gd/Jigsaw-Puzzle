@@ -129,12 +129,17 @@ namespace Client.Runtime
         {
             _puzzleTray.SetHoverPiece(null);
 
-            if (Group.Count == 1 && _puzzleTray.IsOverTray(transform.position))
+            // 1. Physical Tray Check
+            bool physicallyOverTray = _puzzleTray.IsOverTray(transform.position);
+
+            // 2. Only submit if it's a single piece
+            if (physicallyOverTray && Group.Count == 1)
             {
                 _puzzleTray.SubmitPiece(this);
                 return;
             }
 
+            // 3. Merge Logic
             if (JoinRegistry.HasCorrectContacts())
             {
                 var kvps = JoinRegistry.Get().ToArray();
@@ -151,6 +156,9 @@ namespace Client.Runtime
                 return;
             }
 
+            // 4. THE FIX: If it's a group OR not over tray, 
+            // we MUST force it to find a home on the board.
+            // Ensure SnapToClosestCell handles the Y-axis reset.
             _snapController.SnapToClosestCell(Data.Cells);
         }
 

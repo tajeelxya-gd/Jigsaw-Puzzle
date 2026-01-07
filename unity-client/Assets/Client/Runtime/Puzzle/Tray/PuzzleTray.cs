@@ -54,9 +54,8 @@ namespace Client.Runtime
 
         public bool IsOverTray(Vector3 worldPosition)
         {
-            // If the piece is part of a group, we treat the tray as "invisible" to it
-            if (_hoverPiece != null && _hoverPiece.Group.Count > 1) return false;
-
+            // Remove the group check from here. 
+            // This method should only report if the mouse/position is physically over the collider.
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             return Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider;
         }
@@ -111,14 +110,18 @@ namespace Client.Runtime
 
             Vector3 localTopLeft = GetLocalTopLeft();
 
-            // Shifting only happens if we are currently dragging a SINGLE piece over the tray
-            int insertionIndex = (_hoverPiece != null && _hoverPiece.Group.Count == 1 && IsOverTray(_hoverPiece.transform.position))
-                ? GetInsertionIndex()
-                : -1;
+            // SHIFT FIX: Explicitly check if we have a hover piece AND it is a single piece
+            bool shouldShowInsertionSpace = _hoverPiece != null &&
+                                            _hoverPiece.Group.Count == 1 &&
+                                            IsOverTray(_hoverPiece.transform.position);
+
+            int insertionIndex = shouldShowInsertionSpace ? GetInsertionIndex() : -1;
 
             for (int i = 0; i < _activePieces.Count; i++)
             {
                 int effectiveIndex = i;
+
+                // Only shift pieces if we are dragging a valid single piece
                 if (insertionIndex != -1 && i >= insertionIndex)
                 {
                     effectiveIndex = i + 1;
@@ -224,7 +227,10 @@ namespace Client.Runtime
 
         private void ClampScroll()
         {
-            int totalCount = _activePieces.Count + (_hoverPiece != null && _hoverPiece.Group.Count == 1 ? 1 : 0);
+            // Fix: Only count the hover piece in scroll bounds if it's a single piece
+            bool countsAsExtra = _hoverPiece != null && _hoverPiece.Group.Count == 1;
+            int totalCount = _activePieces.Count + (countsAsExtra ? 1 : 0);
+
             int cols = Mathf.CeilToInt((float)totalCount / _rowCount);
             float totalWidth = (cols - 1) * _spacing.x;
             float maxScroll = Mathf.Max(0, totalWidth - _trayCollider.size.x + (_padding.x * 2));
