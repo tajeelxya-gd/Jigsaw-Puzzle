@@ -78,6 +78,11 @@ namespace Client.Runtime
                 groupToKeep.Add(p);
                 p.Group = groupToKeep;
             }
+
+            foreach (var p in groupToKeep)
+            {
+                p.PlayVfx();
+            }
         }
 
         private void Awake()
@@ -156,9 +161,6 @@ namespace Client.Runtime
                 return;
             }
 
-            // 4. THE FIX: If it's a group OR not over tray, 
-            // we MUST force it to find a home on the board.
-            // Ensure SnapToClosestCell handles the Y-axis reset.
             _snapController.SnapToClosestCell(Data.Cells);
         }
 
