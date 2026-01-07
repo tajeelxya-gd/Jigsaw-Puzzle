@@ -12,9 +12,14 @@ namespace Client.Runtime
 
         public static void UnRegister(JigSawPiece piece) => _registry.Remove(piece);
 
-        public static void Clear() => _registry.Clear();
+        public static List<(JigSawPiece piece, Join join)> Flush()
+        {
+            if (_registry.Count == 0) return new List<(JigSawPiece, Join)>();
 
-        public static IEnumerable<(JigSawPiece piece, Join join)> Get() => _registry.Select(kvp => (kvp.Key, kvp.Value));
+            var data = _registry.Select(kvp => (kvp.Key, kvp.Value)).ToList();
+            _registry.Clear();
+            return data;
+        }
 
         public static bool HasCorrectContacts() => _registry.Count > 0;
     }

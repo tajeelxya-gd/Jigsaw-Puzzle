@@ -142,8 +142,8 @@ namespace Client.Runtime
             // 3. Merge Logic
             if (JoinRegistry.HasCorrectContacts())
             {
-                var kvps = JoinRegistry.Get().ToArray();
-                JoinRegistry.Clear();
+                var kvps = JoinRegistry.Flush();
+
                 foreach (var kvp in kvps)
                 {
                     var join = kvp.join;
