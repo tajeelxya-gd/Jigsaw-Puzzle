@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
@@ -27,18 +28,31 @@ namespace Client.Runtime
         {
             var board = _puzzleService.GetCurrentBoard();
             var piece = ev.jigSawPiece;
-            var idx = piece.Data.OriginalIdx;
-            var neighbours = board.GetNeighbours(idx);
 
-            piece.PlayVfx();
-            foreach (var neighbour in neighbours)
+            // 1. Initialize the set with the current group
+            HashSet<JigSawPiece> allToNotify = new(piece.Group);
+
+            // 2. Iterate through every piece in the group to find their immediate neighbors
+            foreach (var groupMember in piece.Group)
             {
-                if (neighbour == null) continue;
-                var neighbourPiece = neighbour.Piece;
-                if (neighbourPiece != null && neighbourPiece.IsPlaced)
+                var neighbors = board.GetNeighbours(groupMember.Data.OriginalIdx);
+
+                foreach (var neighborCell in neighbors)
                 {
-                    neighbourPiece.PlayVfx();
+                    var neighborPiece = neighborCell?.Piece;
+
+                    // Only add if the neighbor exists, is placed, and isn't already in our set
+                    if (neighborPiece != null && neighborPiece.IsPlaced)
+                    {
+                        allToNotify.Add(neighborPiece);
+                    }
                 }
+            }
+
+            // 3. Trigger VFX for the group and their immediate neighbors
+            foreach (var p in allToNotify)
+            {
+                p.PlayVfx();
             }
         }
     }

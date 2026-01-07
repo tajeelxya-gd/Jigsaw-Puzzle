@@ -144,6 +144,7 @@ namespace Client.Runtime
                     var join = kvp.join;
                     var piece = kvp.piece;
 
+                    join.gameObject.SetActive(false);
                     piece.SnapController.SnapToTransform(join.MergeTransform);
                     piece.JoinGroup(join.Owner);
                 }
