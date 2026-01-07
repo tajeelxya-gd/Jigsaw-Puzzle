@@ -67,6 +67,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
             _board.SetActiveFullImage(true);
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
             await UniWidgets.PushAsync<LevelCompletedWidget>();
