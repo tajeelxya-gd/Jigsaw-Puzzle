@@ -30,7 +30,7 @@ namespace Client.Runtime
             var piece = ev.jigSawPiece;
 
             // 1. Start with the current piece's group
-            HashSet<JigSawPiece> allToNotify = new(piece.Group);
+            JigsawGroup allToNotify = new(piece.Group);
 
             // 2. Prepare BFS to find all connected placed pieces
             Queue<JigSawPiece> searchQueue = new();

@@ -16,7 +16,7 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JoinController _joinController;
 
-        public HashSet<JigSawPiece> Group { get; set; } = new();
+        public JigsawGroup Group { get; set; } = new();
         public JigSawPieceData Data { get; private set; }
         public bool IsPlaced { get; private set; }
         public BoxCollider BoxCollider => _collider;
@@ -148,7 +148,7 @@ namespace Client.Runtime
             if (JoinRegistry.HasCorrectContacts())
             {
                 var kvps = JoinRegistry.Flush();
-                HashSet<HashSet<JigSawPiece>> processedGroups = new();
+                HashSet<JigsawGroup> processedGroups = new();
 
                 foreach (var kvp in kvps)
                 {
@@ -157,6 +157,7 @@ namespace Client.Runtime
 
                     if (processedGroups.Contains(piece.Group)) continue;
                     processedGroups.Add(piece.Group);
+                    processedGroups.Add(join.Owner.Group);
 
                     join.gameObject.SetActive(false);
                     piece.SnapController.SnapToTransform(join.MergeTransform);
