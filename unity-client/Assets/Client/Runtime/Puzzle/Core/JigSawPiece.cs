@@ -148,15 +148,15 @@ namespace Client.Runtime
             if (JoinRegistry.HasCorrectContacts())
             {
                 var kvps = JoinRegistry.Flush();
-                HashSet<JigSawPiece> processed = new();
+                HashSet<HashSet<JigSawPiece>> processedGroups = new();
 
                 foreach (var kvp in kvps)
                 {
                     var join = kvp.join;
                     var piece = kvp.piece;
 
-                    if (processed.Contains(join.Owner)) continue;
-                    processed.Add(join.Owner);
+                    if (processedGroups.Contains(piece.Group)) continue;
+                    processedGroups.Add(piece.Group);
 
                     join.gameObject.SetActive(false);
                     piece.SnapController.SnapToTransform(join.MergeTransform);
