@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniTx.Runtime.Events;
@@ -17,7 +16,6 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JoinController _joinController;
 
-        // Note: Removed 'readonly' so we can swap references during merging
         public HashSet<JigSawPiece> Group { get; set; } = new();
         public JigSawPieceData Data { get; private set; }
         public bool IsPlaced { get; private set; }
@@ -32,7 +30,6 @@ namespace Client.Runtime
             var renderer = Data.Renderer;
             _collider.size = renderer.bounds.size;
 
-            // Ensure the group contains at least this piece
             Group.Clear();
             Group.Add(this);
         }
@@ -47,10 +44,6 @@ namespace Client.Runtime
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
-        /// <summary>
-        /// Moves the entire group by iterating through the shared HashSet.
-        /// Calling MoveInternal prevents the StackOverflow recursion.
-        /// </summary>
         public void Move(Vector3 delta)
         {
             foreach (var piece in Group)
@@ -59,9 +52,6 @@ namespace Client.Runtime
             }
         }
 
-        /// <summary>
-        /// Sets the Y position for the entire group.
-        /// </summary>
         public void SetPosY(float y)
         {
             foreach (var piece in Group)
@@ -78,14 +68,12 @@ namespace Client.Runtime
 
         public void JoinGroup(JigSawPiece other)
         {
-            // Already in the same group instance
-            if (this.Group == other.Group) return;
+            if (Group == other.Group) return;
 
-            // Merge the smaller group into the larger group for performance
-            HashSet<JigSawPiece> groupToKeep = this.Group.Count >= other.Group.Count ? this.Group : other.Group;
-            HashSet<JigSawPiece> groupToDiscard = (groupToKeep == this.Group) ? other.Group : this.Group;
+            var groupToKeep = Group.Count >= other.Group.Count ? Group : other.Group;
+            var groupToDiscard = (groupToKeep == Group) ? other.Group : Group;
 
-            foreach (JigSawPiece p in groupToDiscard)
+            foreach (var p in groupToDiscard)
             {
                 groupToKeep.Add(p);
                 p.Group = groupToKeep;
@@ -115,18 +103,18 @@ namespace Client.Runtime
             }
         }
 
-        private bool IsBeingHoveredOverTray()
-        {
-            if (transform.parent != null) return true;
-            return _puzzleTray.IsOverTray(transform.position);
-        }
-
         private void OnDestroy()
         {
             _dragController.OnDragStarted -= HandleDragStarted;
             _dragController.OnDragged -= HandleOnDragged;
             _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
+        }
+
+        private bool IsBeingHoveredOverTray()
+        {
+            if (transform.parent != null) return true;
+            return _puzzleTray.IsOverTray(transform.position);
         }
 
         private void HandleDragStarted() => SetPosY(0.01f);
@@ -141,15 +129,12 @@ namespace Client.Runtime
         {
             _puzzleTray.SetHoverPiece(null);
 
-            // 1. Only single pieces can enter the tray
-            // If it's a cluster, we skip tray logic entirely and snap to grid
             if (Group.Count == 1 && _puzzleTray.IsOverTray(transform.position))
             {
                 _puzzleTray.SubmitPiece(this);
                 return;
             }
 
-            // 2. Check for merging with other pieces in the world
             if (JoinRegistry.HasCorrectContacts())
             {
                 var kvps = JoinRegistry.Get().ToArray();
@@ -165,41 +150,25 @@ namespace Client.Runtime
                 return;
             }
 
-            // 3. Default behavior: Snap cluster or single piece to the closest board cell
-            // This handles the "cluster dropped on tray" case by snapping it to the board instead
             _snapController.SnapToClosestCell(Data.Cells);
         }
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            // Check if the piece we just dropped is in its correct slot
             IsPlaced = cell.Idx == Data.OriginalIdx;
 
             if (IsPlaced)
             {
-                // 1. Create a temporary list/array from the group 
-                // We do this because LockPiece might change group state or disabling components
                 var groupToLock = Group.ToArray();
 
                 foreach (var piece in groupToLock)
                 {
-                    // 2. Mark each piece as placed
                     piece.IsPlaced = true;
-
-                    // 3. Find the cell this specific group-piece belongs to.
-                    // Since they are snapped perfectly, we can find the cell by its OriginalIdx
-                    var targetCell = Data.Cells.FirstOrDefault(c => c.Idx == piece.Data.OriginalIdx);
-
-                    if (targetCell != null)
-                    {
-                        targetCell.SetPiece(piece);
-                    }
-
-                    // 4. Disable physics/input for this piece
+                    var targetCell = Data.Cells.First(c => c.Idx == piece.Data.OriginalIdx);
+                    targetCell.SetPiece(piece);
                     piece.LockPiece();
                 }
 
-                // 5. Raise the event once for the whole cluster
                 UniEvents.Raise(new PiecePlacedEvent(this));
             }
         }
