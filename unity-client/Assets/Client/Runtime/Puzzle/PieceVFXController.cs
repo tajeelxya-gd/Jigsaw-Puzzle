@@ -29,27 +29,38 @@ namespace Client.Runtime
             var board = _puzzleService.GetCurrentBoard();
             var piece = ev.jigSawPiece;
 
-            // 1. Initialize the set with the current group
+            // 1. Start with the current piece's group
             HashSet<JigSawPiece> allToNotify = new(piece.Group);
 
-            // 2. Iterate through every piece in the group to find their immediate neighbors
-            foreach (var groupMember in piece.Group)
+            // 2. Prepare BFS to find all connected placed pieces
+            Queue<JigSawPiece> searchQueue = new();
+
+            // Add all current group members to the queue to check their neighbors too
+            foreach (var p in piece.Group)
             {
-                var neighbors = board.GetNeighbours(groupMember.Data.OriginalIdx);
+                searchQueue.Enqueue(p);
+            }
+
+            // 3. Crawl through neighbors of neighbors
+            while (searchQueue.Count > 0)
+            {
+                var current = searchQueue.Dequeue();
+                var neighbors = board.GetNeighbours(current.Data.OriginalIdx);
 
                 foreach (var neighborCell in neighbors)
                 {
                     var neighborPiece = neighborCell?.Piece;
 
-                    // Only add if the neighbor exists, is placed, and isn't already in our set
-                    if (neighborPiece != null && neighborPiece.IsPlaced)
+                    // If the neighbor is placed and we haven't processed it yet
+                    if (neighborPiece != null && neighborPiece.IsPlaced && !allToNotify.Contains(neighborPiece))
                     {
                         allToNotify.Add(neighborPiece);
+                        searchQueue.Enqueue(neighborPiece); // Add to queue to check ITS neighbors
                     }
                 }
             }
 
-            // 3. Trigger VFX for the group and their immediate neighbors
+            // 4. Play VFX
             foreach (var p in allToNotify)
             {
                 p.PlayVfx();
