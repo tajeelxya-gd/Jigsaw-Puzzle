@@ -77,6 +77,12 @@ namespace Client.Runtime
         private void Update()
         {
             HandleScrollInput();
+
+            if (!_isDragging)
+            {
+                ClampScroll();
+            }
+
             UpdatePiecePositions();
             HandleHoverPieceVisuals();
         }
@@ -224,9 +230,17 @@ namespace Client.Runtime
             bool countsAsExtra = _hoverPiece != null && _hoverPiece.Group.Count == 1;
             int totalCount = _activePieces.Count + (countsAsExtra ? 1 : 0);
 
+            if (totalCount == 0)
+            {
+                _scrollX = 0;
+                return;
+            }
+
             int cols = Mathf.CeilToInt((float)totalCount / _rowCount);
-            float totalWidth = (cols - 1) * _spacing.x;
-            float maxScroll = Mathf.Max(0, totalWidth - _trayCollider.size.x + (_padding.x * 2));
+
+            float totalContentWidth = (cols - 1) * _spacing.x;
+            float visibleWidth = _trayCollider.size.x - (_padding.x * 2);
+            float maxScroll = Mathf.Max(0, totalContentWidth - visibleWidth);
             _scrollX = Mathf.Clamp(_scrollX, -maxScroll, 0);
         }
 
