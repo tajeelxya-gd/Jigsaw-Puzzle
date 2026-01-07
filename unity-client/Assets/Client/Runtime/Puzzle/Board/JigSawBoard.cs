@@ -128,7 +128,7 @@ namespace Client.Runtime
         {
             var join = piece.GetJoinController();
             var neighbours = GetNeighbours(idx).ToArray();
-            join.Init(piece.BoxCollider, neighbours);
+            join.Init(piece.BoxCollider, neighbours, piece);
         }
 
         private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(int idx, Transform mesh, Transform parent, CancellationToken cToken = default)

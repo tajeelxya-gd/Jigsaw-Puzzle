@@ -18,7 +18,7 @@ namespace Client.Runtime
         [Tooltip("Extra height added to the top and bottom of the joiner collider")]
         [SerializeField] private float _verticalExpansion = 0.1f;
 
-        public void Init(BoxCollider main, JigsawBoardCell[] neighbours)
+        public void Init(BoxCollider main, JigsawBoardCell[] neighbours, JigSawPiece owner)
         {
             Vector3 mSize = main.size;
             Vector3 mCenter = main.center;
@@ -51,10 +51,10 @@ namespace Client.Runtime
             _left.BoxCollider.center = new Vector3(mCenter.x - (mSize.x / 2f), mCenter.y, mCenter.z);
             _right.BoxCollider.center = new Vector3(mCenter.x + (mSize.x / 2f), mCenter.y, mCenter.z);
 
-            _top.Init(neighbours[0]);
-            _bottom.Init(neighbours[1]);
-            _left.Init(neighbours[2]);
-            _right.Init(neighbours[3]);
+            _top.Init(neighbours[0], owner);
+            _bottom.Init(neighbours[1], owner);
+            _left.Init(neighbours[2], owner);
+            _right.Init(neighbours[3], owner);
         }
     }
 }

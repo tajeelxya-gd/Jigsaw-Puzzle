@@ -8,13 +8,16 @@ namespace Client.Runtime
         [SerializeField] private Transform _mergeTransform;
 
         private int _neighbourIdx;
+        public JigSawPiece Owner { get; private set; }
 
         public BoxCollider BoxCollider => _collider;
 
         public Transform MergeTransform => _mergeTransform;
 
-        public void Init(JigsawBoardCell cell)
+        public void Init(JigsawBoardCell cell, JigSawPiece owner)
         {
+            Owner = owner;
+
             if (cell == null)
             {
                 _neighbourIdx = -1;

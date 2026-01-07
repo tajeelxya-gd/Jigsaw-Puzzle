@@ -145,7 +145,7 @@ namespace Client.Runtime
                     var piece = kvp.piece;
 
                     piece.SnapController.SnapToTransform(join.MergeTransform);
-                    piece.JoinGroup(this);
+                    piece.JoinGroup(join.Owner);
                 }
                 return;
             }
