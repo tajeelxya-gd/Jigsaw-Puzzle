@@ -54,8 +54,6 @@ namespace Client.Runtime
 
         public bool IsOverTray(Vector3 worldPosition)
         {
-            // Remove the group check from here. 
-            // This method should only report if the mouse/position is physically over the collider.
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             return Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider;
         }
@@ -64,7 +62,6 @@ namespace Client.Runtime
 
         public void SubmitPiece(JigSawPiece piece)
         {
-            // ONLY allow single pieces to be returned to the tray
             if (piece.Group.Count > 1) return;
 
             if (!_activePieces.Contains(piece))
@@ -88,7 +85,6 @@ namespace Client.Runtime
         {
             if (_hoverPiece == null) return;
 
-            // Re-check: If this is a group, don't apply tray scaling logic
             if (_hoverPiece.Group.Count > 1) return;
 
             bool isOver = IsOverTray(_hoverPiece.transform.position);
@@ -110,10 +106,9 @@ namespace Client.Runtime
 
             Vector3 localTopLeft = GetLocalTopLeft();
 
-            // SHIFT FIX: Explicitly check if we have a hover piece AND it is a single piece
             bool shouldShowInsertionSpace = _hoverPiece != null &&
-                                            _hoverPiece.Group.Count == 1 &&
-                                            IsOverTray(_hoverPiece.transform.position);
+                _hoverPiece.Group.Count == 1 &&
+                IsOverTray(_hoverPiece.transform.position);
 
             int insertionIndex = shouldShowInsertionSpace ? GetInsertionIndex() : -1;
 
@@ -121,7 +116,6 @@ namespace Client.Runtime
             {
                 int effectiveIndex = i;
 
-                // Only shift pieces if we are dragging a valid single piece
                 if (insertionIndex != -1 && i >= insertionIndex)
                 {
                     effectiveIndex = i + 1;
@@ -227,7 +221,6 @@ namespace Client.Runtime
 
         private void ClampScroll()
         {
-            // Fix: Only count the hover piece in scroll bounds if it's a single piece
             bool countsAsExtra = _hoverPiece != null && _hoverPiece.Group.Count == 1;
             int totalCount = _activePieces.Count + (countsAsExtra ? 1 : 0);
 
