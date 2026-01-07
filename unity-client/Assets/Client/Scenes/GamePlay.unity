@@ -1705,9 +1705,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1695979985}
   - {fileID: 1467069947}
   - {fileID: 1576265594}
-  - {fileID: 1695979985}
   - {fileID: 893568232}
   - {fileID: 193517018}
   - {fileID: 1181361556}
@@ -1730,9 +1730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Bootstrap.AppLoader
   _loadingSteps:
+  - {fileID: 1695979984}
   - {fileID: 1467069946}
   - {fileID: 1576265593}
-  - {fileID: 1695979984}
   - {fileID: 893568231}
   - {fileID: 193517017}
   - {fileID: 1181361557}
