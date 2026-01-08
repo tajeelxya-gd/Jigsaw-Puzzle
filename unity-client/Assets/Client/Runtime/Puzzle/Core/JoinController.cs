@@ -15,41 +15,36 @@ namespace Client.Runtime
         [Range(0.1f, 0.5f)]
         [SerializeField] private float _tabScaleRatio = 0.2f;
 
-        [Tooltip("Extra height added to the top and bottom of the joiner collider")]
-        [SerializeField] private float _verticalExpansion = 0.001f;
+        [Tooltip("The actual height/thickness of the joiner tabs")]
+        [SerializeField] private float _tabThickness = 0.01f;
 
         public void Init(BoxCollider main, JigsawBoardCell[] neighbours, JigSawPiece owner)
         {
             Vector3 mSize = main.size;
             Vector3 mCenter = main.center;
 
-            // Apply expansion: size.y + (expansion * 2) if you want 'expansion' to be the amount added to EACH side
-            float expandedThickness = mSize.y + (_verticalExpansion * 2f);
+            float surfaceY = mCenter.y + (mSize.y / 2f);
+            float joinerCenterY = surfaceY + (_tabThickness / 2f);
 
-            // TOP & BOTTOM (Horizontal edges)
             float tbWidth = mSize.x * _tabScaleRatio;
             float tbDepth = tbWidth;
+            var tbSize = new Vector3(tbWidth, _tabThickness, tbDepth);
 
-            // Using expandedThickness for the Y value
-            Vector3 tbSize = new Vector3(tbWidth, expandedThickness, tbDepth);
             _top.BoxCollider.size = tbSize;
             _bottom.BoxCollider.size = tbSize;
 
-            // Positions (Y remains mCenter.y so it expands equally up and down)
-            _top.BoxCollider.center = new Vector3(mCenter.x, mCenter.y, mCenter.z + (mSize.z / 2f));
-            _bottom.BoxCollider.center = new Vector3(mCenter.x, mCenter.y, mCenter.z - (mSize.z / 2f));
+            _top.BoxCollider.center = new Vector3(mCenter.x, joinerCenterY, mCenter.z + (mSize.z / 2f));
+            _bottom.BoxCollider.center = new Vector3(mCenter.x, joinerCenterY, mCenter.z - (mSize.z / 2f));
 
-            // LEFT & RIGHT (Vertical edges)
-            float lrHeight = mSize.z * _tabScaleRatio;
-            float lrDepth = lrHeight;
+            var lrHeight = mSize.z * _tabScaleRatio;
+            var lrDepth = lrHeight;
+            var lrSize = new Vector3(lrDepth, _tabThickness, lrHeight);
 
-            // Using expandedThickness for the Y value
-            Vector3 lrSize = new Vector3(lrDepth, expandedThickness, lrHeight);
             _left.BoxCollider.size = lrSize;
             _right.BoxCollider.size = lrSize;
 
-            _left.BoxCollider.center = new Vector3(mCenter.x - (mSize.x / 2f), mCenter.y, mCenter.z);
-            _right.BoxCollider.center = new Vector3(mCenter.x + (mSize.x / 2f), mCenter.y, mCenter.z);
+            _left.BoxCollider.center = new Vector3(mCenter.x - (mSize.x / 2f), joinerCenterY, mCenter.z);
+            _right.BoxCollider.center = new Vector3(mCenter.x + (mSize.x / 2f), joinerCenterY, mCenter.z);
 
             _top.Init(neighbours[0], owner);
             _bottom.Init(neighbours[1], owner);
