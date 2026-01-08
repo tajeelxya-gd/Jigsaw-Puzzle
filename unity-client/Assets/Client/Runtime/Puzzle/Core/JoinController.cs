@@ -13,10 +13,10 @@ namespace Client.Runtime
 
         [Header("Settings")]
         [Range(0.1f, 0.5f)]
-        [SerializeField] private float _tabScaleRatio = 0.25f;
+        [SerializeField] private float _tabScaleRatio = 0.2f;
 
         [Tooltip("Extra height added to the top and bottom of the joiner collider")]
-        [SerializeField] private float _verticalExpansion = 0.1f;
+        [SerializeField] private float _verticalExpansion = 0.001f;
 
         public void Init(BoxCollider main, JigsawBoardCell[] neighbours, JigSawPiece owner)
         {
