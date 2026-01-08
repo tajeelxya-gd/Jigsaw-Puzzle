@@ -8,6 +8,7 @@ namespace Client.Runtime
         [SerializeField] private Transform _mergeTransform;
 
         private int _neighbourIdx;
+
         public JigSawPiece Owner { get; private set; }
 
         public BoxCollider BoxCollider => _collider;

@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4859071235291310297}
   - component: {fileID: 3413027680415423041}
-  m_Layer: 0
+  - component: {fileID: 5633606701473021482}
+  m_Layer: 9
   m_Name: Join - Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4859071235291310297
 Transform:
   m_ObjectHideFlags: 0
@@ -48,12 +49,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d36025a43e5784fb3bab3c7bd33b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JoinController
+  _collider: {fileID: 5633606701473021482}
   _top: {fileID: 1527563089748763168}
   _bottom: {fileID: 6019702616108892057}
   _left: {fileID: 6197975287133564481}
   _right: {fileID: 6349487655154725005}
   _tabScaleRatio: 0.2
   _tabThickness: 0.02
+  _scaleFactor: 1.4
+--- !u!65 &5633606701473021482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567200134162070632}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2728270292373190277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,6 +89,10 @@ PrefabInstance:
     - target: {fileID: 3812674760707776236, guid: 304a611009368f4409659153a08295e9, type: 3}
       propertyPath: m_Name
       value: Join - Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812674760707776236, guid: 304a611009368f4409659153a08295e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5327178857467374637, guid: 304a611009368f4409659153a08295e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -139,6 +167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Join - Bot
       objectReference: {fileID: 0}
+    - target: {fileID: 3812674760707776236, guid: 304a611009368f4409659153a08295e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5327178857467374637, guid: 304a611009368f4409659153a08295e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -212,6 +244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Join - Left
       objectReference: {fileID: 0}
+    - target: {fileID: 3812674760707776236, guid: 304a611009368f4409659153a08295e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5327178857467374637, guid: 304a611009368f4409659153a08295e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -284,6 +320,10 @@ PrefabInstance:
     - target: {fileID: 3812674760707776236, guid: 304a611009368f4409659153a08295e9, type: 3}
       propertyPath: m_Name
       value: Join - Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812674760707776236, guid: 304a611009368f4409659153a08295e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5327178857467374637, guid: 304a611009368f4409659153a08295e9, type: 3}
       propertyPath: m_LocalPosition.x

@@ -6,6 +6,7 @@ namespace Client.Runtime
     {
         public enum ConnectionType { Simple, Join }
 
+        [SerializeField] private BoxCollider _collider;
         [SerializeField] private Join _top;
         [SerializeField] private Join _bottom;
         [SerializeField] private Join _left;
@@ -13,15 +14,19 @@ namespace Client.Runtime
 
         [Header("Settings")]
         [Range(0.1f, 0.5f)]
-        [SerializeField] private float _tabScaleRatio = 0.2f;
+        [SerializeField] private float _tabScaleRatio;
 
         [Tooltip("The actual height/thickness of the joiner tabs")]
-        [SerializeField] private float _tabThickness = 0.02f;
+        [SerializeField] private float _tabThickness;
+        [SerializeField] private float _scaleFactor;
 
         public void Init(BoxCollider main, JigsawBoardCell[] neighbours, JigSawPiece owner)
         {
             var mSize = main.size;
             var mCenter = main.center;
+            _collider.size = new Vector3(mSize.x * _scaleFactor, mSize.y, mSize.z * _scaleFactor);
+            _collider.center = mCenter;
+
             var surfaceY = mCenter.y + (mSize.y / 2f);
             var joinerCenterY = surfaceY;
 
@@ -53,6 +58,31 @@ namespace Client.Runtime
             _bottom.Init(neighbours[1], owner);
             _left.Init(neighbours[2], owner);
             _right.Init(neighbours[3], owner);
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent<PuzzleTray>(out var _))
+            {
+                SetActiveJoins(false);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<PuzzleTray>(out var _))
+            {
+                SetActiveJoins(true);
+            }
+        }
+
+        private void SetActiveJoins(bool active)
+        {
+            _top.gameObject.SetActive(active);
+            _bottom.gameObject.SetActive(active);
+            _left.gameObject.SetActive(active);
+            _right.gameObject.SetActive(active);
         }
     }
 }

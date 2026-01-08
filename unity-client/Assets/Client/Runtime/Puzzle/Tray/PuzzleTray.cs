@@ -66,7 +66,6 @@ namespace Client.Runtime
 
             if (!_activePieces.Contains(piece))
             {
-                piece.SetActiveJoinController(false);
                 int targetIndex = GetInsertionIndex();
                 _activePieces.Insert(Mathf.Clamp(targetIndex, 0, _activePieces.Count), piece);
                 piece.transform.SetParent(transform);
@@ -249,7 +248,6 @@ namespace Client.Runtime
             _activePieces.Remove(piece);
             piece.transform.SetParent(null);
             piece.StartManualDrag();
-            piece.SetActiveJoinController(true);
         }
 
         private JigSawPiece GetPieceAtPosition(Vector3 worldPoint)

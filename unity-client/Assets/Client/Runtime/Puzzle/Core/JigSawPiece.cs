@@ -55,12 +55,6 @@ namespace Client.Runtime
             }
         }
 
-        public void SetActiveJoinController(bool active)
-        {
-            var joinController = GetJoinController();
-            if (joinController != null) joinController.gameObject.SetActive(active);
-        }
-
         public void JoinGroup(JigSawPiece other)
         {
             if (Group == other.Group) return;
@@ -115,6 +109,12 @@ namespace Client.Runtime
         {
             if (Data.PieceType != PieceType.Join) return null;
             return _joinController ??= GetComponentInChildren<JoinController>(true);
+        }
+
+        private void SetActiveJoinController(bool active)
+        {
+            var joinController = GetJoinController();
+            if (joinController != null) joinController.gameObject.SetActive(active);
         }
 
         private bool IsBeingHoveredOverTray()
