@@ -46,7 +46,8 @@ namespace Client.Runtime
             while (searchQueue.Count > 0)
             {
                 var current = searchQueue.Dequeue();
-                var neighbors = board.GetNeighbours(current.Data.OriginalIdx);
+                var idx = current.Data.OriginalCell.Idx;
+                var neighbors = board.GetNeighbours(idx);
 
                 foreach (var neighborCell in neighbors)
                 {

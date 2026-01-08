@@ -135,6 +135,7 @@ namespace Client.Runtime
             float cellLocalHeight = size.z / r;
             float startX = (-size.x / 2f) + (cellLocalWidth / 2f);
             float startZ = (size.z / 2f) - (cellLocalHeight / 2f);
+            var cellSize = new Vector3(cellLocalWidth * parent.lossyScale.x, 0.001f, cellLocalHeight * parent.lossyScale.z);
 
             for (var i = 0; i < len; i++)
             {
@@ -150,7 +151,7 @@ namespace Client.Runtime
                 var worldPos = parent.TransformPoint(localPos);
                 var cell = await UniResources.CreateInstanceAsync<JigsawBoardCell>("JigsawBoardCell", parent, null, cToken);
 
-                cell.SetIdx(i);
+                cell.SetData(i, cellSize);
                 cell.name = $"Cell_{i}";
                 cell.transform.SetPositionAndRotation(worldPos, parent.rotation);
                 _cells.Add(cell);
@@ -172,7 +173,7 @@ namespace Client.Runtime
             var renderer = mesh.GetComponent<Renderer>();
             renderer.material.EnableKeyword("_EMISSION");
             piece.Inject(_resolver);
-            piece.Init(new JigSawPieceData(cell.Idx, renderer, _cells, GetPieceType(cell.Idx, Data.YConstraint)));
+            piece.Init(new JigSawPieceData(cell, renderer, _cells, GetPieceType(cell.Idx, Data.YConstraint)));
             _pieces.Add(piece);
         }
 

@@ -33,7 +33,7 @@ namespace Client.Runtime
         {
             if (other.TryGetComponent<JigSawPiece>(out var piece))
             {
-                if (piece.Data.OriginalIdx == _neighbourIdx)
+                if (piece.Data.OriginalCell.Idx == _neighbourIdx)
                 {
                     JoinRegistry.Register(piece, this);
                 }
@@ -44,7 +44,7 @@ namespace Client.Runtime
         {
             if (other.TryGetComponent<JigSawPiece>(out var piece))
             {
-                if (piece.Data.OriginalIdx == _neighbourIdx)
+                if (piece.Data.OriginalCell.Idx == _neighbourIdx)
                 {
                     JoinRegistry.UnRegister(piece);
                 }

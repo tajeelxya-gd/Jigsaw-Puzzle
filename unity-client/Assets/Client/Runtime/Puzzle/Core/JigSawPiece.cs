@@ -27,8 +27,7 @@ namespace Client.Runtime
         public void Init(JigSawPieceData data)
         {
             Data = data;
-            var renderer = Data.Renderer;
-            _collider.size = renderer.bounds.size;
+            _collider.size = Data.OriginalCell.Size;
 
             Group = new JigsawGroup($"group_{GetInstanceID()}")
             {
@@ -177,7 +176,7 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            IsPlaced = cell.Idx == Data.OriginalIdx;
+            IsPlaced = cell.Idx == Data.OriginalCell.Idx;
 
             if (IsPlaced)
             {
@@ -186,7 +185,7 @@ namespace Client.Runtime
                 foreach (var piece in groupToLock)
                 {
                     piece.IsPlaced = true;
-                    var targetCell = Data.Cells.First(c => c.Idx == piece.Data.OriginalIdx);
+                    var targetCell = Data.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
                     targetCell.SetPiece(piece);
                     piece.LockPiece();
                 }

@@ -4,16 +4,16 @@ namespace Client.Runtime
 {
     public sealed class JigsawBoardCell : MonoBehaviour
     {
-        private int _idx;
-        
-        private JigSawPiece _piece;
+        public int Idx { get; private set; }
+        public Vector3 Size { get; private set; }
+        public JigSawPiece Piece { get; private set; }
 
-        public int Idx => _idx;
+        public void SetData(int idx, Vector3 size)
+        {
+            Idx = idx;
+            Size = size;
+        }
 
-        public JigSawPiece Piece => _piece;
-
-        public void SetIdx(int idx) => _idx = idx;
-
-        public void SetPiece(JigSawPiece piece) => _piece = piece;
+        public void SetPiece(JigSawPiece piece) => Piece = piece;
     }
 }
