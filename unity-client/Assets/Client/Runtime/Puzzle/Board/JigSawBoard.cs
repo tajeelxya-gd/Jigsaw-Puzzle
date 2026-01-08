@@ -125,9 +125,7 @@ namespace Client.Runtime
 
         private async UniTask SpawnGridAsync(Transform parent, CancellationToken cToken = default)
         {
-            var mesh = parent.GetComponentInChildren<MeshFilter>().sharedMesh;
-            var size = mesh.bounds.size;
-
+            var size = new Vector3(0.1857f, 0f, 0.2387f);
             var r = Data.XConstraint;
             var c = Data.YConstraint;
             var len = r * c;

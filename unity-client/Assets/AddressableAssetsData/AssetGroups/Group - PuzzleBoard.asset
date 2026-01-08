@@ -21,11 +21,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AssetData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 23379414edfc08b4d96da78306d7e757
-    m_Address: Jigsaw Final 4x3 Grid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7157240041c20a04580869e9b5da1ba9
     m_Address: Jigsaw Final 6x4 Grid
     m_ReadOnly: 0
