@@ -18,7 +18,7 @@ namespace Client.Runtime
         private IWinConditionChecker _winConditionChecker;
         private IPuzzleTray _puzzleTray;
         private JigSawBoard _board;
-        private Transform _puzzleRoot;
+        private Transform _puzzleBoard;
         private int _idx = -1;
 
         public void Inject(IResolver resolver)
@@ -31,7 +31,7 @@ namespace Client.Runtime
 
         public void Initialise()
         {
-            _puzzleRoot = GameObject.FindGameObjectWithTag("PuzzleRoot").transform;
+            _puzzleBoard = GameObject.FindGameObjectWithTag("PuzzleBoard").transform;
             _winConditionChecker.OnWin += HandleOnWin;
         }
 
@@ -39,7 +39,7 @@ namespace Client.Runtime
         {
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
-            await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleRoot, cToken);
+            await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
             _board.SetActiveFullImage(false);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board);

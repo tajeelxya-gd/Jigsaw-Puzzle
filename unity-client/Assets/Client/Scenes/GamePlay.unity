@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 188538188}
   m_Layer: 0
   m_Name: Puzzle - Root
-  m_TagString: PuzzleRoot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -489,11 +489,11 @@ Transform:
   m_GameObject: {fileID: 188538187}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1694860898}
+  - {fileID: 1631925631}
   - {fileID: 1588303118419370976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1325,6 +1325,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1631925630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1631925631}
+  m_Layer: 0
+  m_Name: PuzzleBoard
+  m_TagString: PuzzleBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1631925631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631925630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1694860898}
+  m_Father: {fileID: 188538188}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650109707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,7 +1405,7 @@ GameObject:
   - component: {fileID: 1694860900}
   - component: {fileID: 1694860899}
   m_Layer: 0
-  m_Name: board
+  m_Name: BoardMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1387,12 +1419,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694860897}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.01, z: 0.00097}
-  m_LocalScale: {x: 0.18875839, y: 0.0047999998, z: 0.24427554}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
+  m_LocalScale: {x: 0.1857, y: 0.005, z: 0.2387}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 188538188}
+  m_Father: {fileID: 1631925631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1694860899
 BoxCollider:
@@ -1802,7 +1834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.19
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalRotation.w
