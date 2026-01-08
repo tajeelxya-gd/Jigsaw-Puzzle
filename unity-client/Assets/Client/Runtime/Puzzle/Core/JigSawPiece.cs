@@ -16,7 +16,7 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JoinController _joinController;
 
-        public JigsawGroup Group { get; set; } = new();
+        public JigsawGroup Group { get; set; }
         public JigSawPieceData Data { get; private set; }
         public bool IsPlaced { get; private set; }
         public BoxCollider BoxCollider => _collider;
@@ -30,8 +30,10 @@ namespace Client.Runtime
             var renderer = Data.Renderer;
             _collider.size = renderer.bounds.size;
 
-            Group.Clear();
-            Group.Add(this);
+            Group = new JigsawGroup($"group_{GetInstanceID()}")
+            {
+                this
+            };
         }
 
         public JoinController GetJoinController()
@@ -148,16 +150,21 @@ namespace Client.Runtime
             if (JoinRegistry.HasCorrectContacts())
             {
                 var kvps = JoinRegistry.Flush();
-                HashSet<JigsawGroup> processedGroups = new();
+                HashSet<(string, string)> processedGroups = new();
 
                 foreach (var kvp in kvps)
                 {
                     var join = kvp.join;
                     var piece = kvp.piece;
+                    var id1 = piece.Group.Id;
+                    var id2 = join.Owner.Group.Id;
 
-                    if (processedGroups.Contains(piece.Group)) continue;
-                    processedGroups.Add(piece.Group);
-                    processedGroups.Add(join.Owner.Group);
+                    if (id1 == id2) continue;
+                    var pair1 = (id1, id2);
+                    var pair2 = (id2, id1);
+                    if (processedGroups.Contains(pair1) || processedGroups.Contains(pair2)) continue;
+                    processedGroups.Add(pair1);
+                    processedGroups.Add(pair2);
 
                     join.gameObject.SetActive(false);
                     piece.SnapController.SnapToTransform(join.MergeTransform);

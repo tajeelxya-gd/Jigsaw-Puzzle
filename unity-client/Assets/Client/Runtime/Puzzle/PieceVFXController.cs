@@ -30,13 +30,14 @@ namespace Client.Runtime
             var piece = ev.jigSawPiece;
 
             // 1. Start with the current piece's group
-            JigsawGroup allToNotify = new(piece.Group);
+            var pieceGroup = piece.Group;
+            JigsawGroup allToNotify = new("group_tmp", pieceGroup);
 
             // 2. Prepare BFS to find all connected placed pieces
             Queue<JigSawPiece> searchQueue = new();
 
             // Add all current group members to the queue to check their neighbors too
-            foreach (var p in piece.Group)
+            foreach (var p in pieceGroup)
             {
                 searchQueue.Enqueue(p);
             }
