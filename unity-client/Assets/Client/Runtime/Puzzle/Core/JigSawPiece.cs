@@ -160,11 +160,10 @@ namespace Client.Runtime
                     var id2 = join.Owner.Group.Id;
 
                     if (id1 == id2) continue;
-                    var pair1 = (id1, id2);
-                    var pair2 = (id2, id1);
-                    if (processedGroups.Contains(pair1) || processedGroups.Contains(pair2)) continue;
-                    processedGroups.Add(pair1);
-                    processedGroups.Add(pair2);
+
+                    var pair = string.CompareOrdinal(id1, id2) < 0 ? (id1, id2) : (id2, id1);
+
+                    if (!processedGroups.Add(pair)) continue;
 
                     join.gameObject.SetActive(false);
                     piece.SnapController.SnapToTransform(join.MergeTransform);
