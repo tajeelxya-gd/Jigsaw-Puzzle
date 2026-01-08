@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime.Events;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -9,8 +10,12 @@ namespace Client.Runtime
     public sealed class JigsawBoardCompletion : IDisposable
     {
         private MeshRenderer _fullImageCube;
-        private float _duration = 1f;
+        private float _duration = 0.5f; // Slightly longer for a smoother "rise"
         private AnimationCurve _easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+        [Header("Water Effect Settings")]
+        [SerializeField] private float _riseDistance = 0f; // How far "underwater" it starts
+        private Vector3 _targetLocalPos;
 
         private CancellationTokenSource _cts;
         private Material _material;
@@ -23,22 +28,23 @@ namespace Client.Runtime
 
             if (_fullImageCube != null)
             {
-                // Accessing .material creates a runtime instance. 
-                // We must store it to destroy it later.
                 _material = _fullImageCube.material;
+
+                // Store the final "resting" position
+                _targetLocalPos = _fullImageCube.transform.localPosition;
 
                 // Fix rotation if FBX import is flipped
                 Vector3 currentRotation = _fullImageCube.transform.localEulerAngles;
                 _fullImageCube.transform.localEulerAngles = new Vector3(currentRotation.x, 180f, currentRotation.z);
 
-                // Ensure it starts invisible
                 ApplyInstantState(false);
             }
+
+            TestMethod();
         }
 
         public void SetActiveFullImage(bool active, CancellationToken parentToken = default)
         {
-            // 1. Clean up existing animation/token
             CancelExisting();
 
             if (!active)
@@ -47,18 +53,15 @@ namespace Client.Runtime
                 return;
             }
 
-            // 2. Safety check for parent token
             if (parentToken.IsCancellationRequested) return;
 
             try
             {
-                // 3. Create linked source and start animation
                 _cts = CancellationTokenSource.CreateLinkedTokenSource(parentToken);
-                AnimateAlpha(_cts.Token).Forget();
+                AnimateRiseFromWater(_cts.Token).Forget();
             }
             catch (ObjectDisposedException)
             {
-                // Handle edge case where parentToken disposes exactly as we link
                 ApplyInstantState(true);
             }
         }
@@ -68,44 +71,48 @@ namespace Client.Runtime
             if (_fullImageCube == null || _material == null) return;
 
             _fullImageCube.gameObject.SetActive(active);
+            _fullImageCube.transform.localPosition = active ? _targetLocalPos : _targetLocalPos - Vector3.up * _riseDistance;
             SetAlpha(active ? 1f : 0f);
         }
 
-        private async UniTaskVoid AnimateAlpha(CancellationToken token)
+        private async UniTaskVoid AnimateRiseFromWater(CancellationToken token)
         {
             if (_fullImageCube == null || _material == null) return;
 
             float elapsed = 0f;
             _fullImageCube.gameObject.SetActive(true);
 
+            // Starting position (Below the "water" surface)
+            Vector3 startPos = _targetLocalPos - Vector3.up * _riseDistance;
+
             try
             {
                 while (elapsed < _duration)
                 {
-                    // Check token before doing work
                     token.ThrowIfCancellationRequested();
 
                     elapsed += Time.deltaTime;
                     float normalizedTime = Mathf.Clamp01(elapsed / _duration);
                     float t = _easeCurve.Evaluate(normalizedTime);
 
+                    // 1. Animate Position (Rising Up)
+                    _fullImageCube.transform.localPosition = Vector3.Lerp(startPos, _targetLocalPos, t);
+
+                    // 2. Animate Alpha (Fading In)
                     SetAlpha(t);
 
                     await UniTask.Yield(PlayerLoopTiming.Update, token);
                 }
 
+                _fullImageCube.transform.localPosition = _targetLocalPos;
                 SetAlpha(1f);
             }
-            catch (OperationCanceledException)
-            {
-                // Animation was cancelled, which is expected behavior
-            }
+            catch (OperationCanceledException) { }
         }
 
         private void SetAlpha(float alpha)
         {
             if (_material == null) return;
-
             int propId = _material.HasProperty(_baseColorProp) ? _baseColorProp : _colorProp;
             Color color = _material.GetColor(propId);
             color.a = alpha;
@@ -116,30 +123,36 @@ namespace Client.Runtime
         {
             if (_cts != null)
             {
-                // We check if it's already disposed internally or just cancel
                 try
                 {
                     _cts.Cancel();
                     _cts.Dispose();
                 }
-                catch (ObjectDisposedException) { /* Already gone */ }
-                finally
-                {
-                    _cts = null;
-                }
+                catch (ObjectDisposedException) { }
+                finally { _cts = null; }
             }
         }
 
         public void Dispose()
         {
             CancelExisting();
-
-            // Prevent memory leak from material instance
             if (_material != null)
             {
                 Object.Destroy(_material);
                 _material = null;
             }
         }
+
+        private void TestMethod()
+        {
+            UniEvents.Subscribe<DemoTestEvent>(HandleTestEvent);
+            return;
+
+            void HandleTestEvent(DemoTestEvent @event)
+            {
+                SetActiveFullImage(true);
+            }
+        }
+
     }
 }
