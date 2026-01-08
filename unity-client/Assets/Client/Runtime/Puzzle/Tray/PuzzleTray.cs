@@ -89,7 +89,6 @@ namespace Client.Runtime
         private void HandleHoverPieceVisuals()
         {
             if (_hoverPiece == null) return;
-
             if (_hoverPiece.Group.Count > 1) return;
 
             bool isOver = IsOverTray(_hoverPiece.transform.position);
@@ -109,7 +108,8 @@ namespace Client.Runtime
         {
             if (_activePieces.Count == 0 && _hoverPiece == null) return;
 
-            Vector3 localTopLeft = GetLocalTopLeft();
+            // Updated to Middle-Left Anchor
+            Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
             bool shouldShowInsertionSpace = _hoverPiece != null &&
                 _hoverPiece.Group.Count == 1 &&
@@ -130,10 +130,12 @@ namespace Client.Runtime
                 int col = effectiveIndex / _rowCount;
 
                 Transform pt = _activePieces[i].transform;
+
+                // Position relative to vertical center
                 Vector3 targetPos = new Vector3(
-                    localTopLeft.x + (col * _spacing.x),
-                    localTopLeft.y,
-                    localTopLeft.z - (row * _spacing.y)
+                    localAnchor.x + (col * _spacing.x),
+                    localAnchor.y,
+                    localAnchor.z - (row * _spacing.y)
                 );
 
                 pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
@@ -153,25 +155,31 @@ namespace Client.Runtime
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Vector3 localPoint = transform.InverseTransformPoint(hit.point);
-                Vector3 localTopLeft = GetLocalTopLeft();
+                Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
-                float relativeX = localPoint.x - (localTopLeft.x - _spacing.x * 0.5f);
-                float relativeZ = localTopLeft.z - localPoint.z;
+                float relativeX = localPoint.x - (localAnchor.x - _spacing.x * 0.5f);
+                // Difference from Z anchor (Top of the centered group)
+                float relativeZ = localAnchor.z - localPoint.z;
 
                 int col = Mathf.Max(0, Mathf.FloorToInt(relativeX / _spacing.x));
-                int row = Mathf.Clamp(Mathf.FloorToInt(relativeZ / _spacing.y), 0, _rowCount - 1);
+                int row = Mathf.Clamp(Mathf.FloorToInt(relativeZ / _spacing.y + 0.5f), 0, _rowCount - 1);
 
                 return (col * _rowCount) + row;
             }
             return _activePieces.Count;
         }
 
-        private Vector3 GetLocalTopLeft()
+        // --- NEW ALIGNMENT LOGIC ---
+        private Vector3 GetLocalMiddleLeftAnchor()
         {
+            // Calculate how much height the actual rows occupy
+            float gridHeight = (_rowCount - 1) * _spacing.y;
+
             return new Vector3(
                 _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX,
                 _trayCollider.center.y,
-                _trayCollider.center.z + (_trayCollider.size.z / 2f) - _padding.y
+                // Start Z at Center + Half of Grid Height to keep it vertically centered
+                _trayCollider.center.z + (gridHeight / 2f)
             );
         }
 
@@ -254,10 +262,10 @@ namespace Client.Runtime
         {
             if (_activePieces.Count == 0) return null;
             Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
-            Vector3 localTopLeft = GetLocalTopLeft();
+            Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
-            int col = Mathf.RoundToInt((localPoint.x - localTopLeft.x) / _spacing.x);
-            int row = Mathf.Clamp(Mathf.RoundToInt((localTopLeft.z - localPoint.z) / _spacing.y), 0, _rowCount - 1);
+            int col = Mathf.RoundToInt((localPoint.x - localAnchor.x) / _spacing.x);
+            int row = Mathf.Clamp(Mathf.RoundToInt((localAnchor.z - localPoint.z) / _spacing.y), 0, _rowCount - 1);
 
             int index = (col * _rowCount) + row;
             if (index >= 0 && index < _activePieces.Count) return _activePieces[index];
