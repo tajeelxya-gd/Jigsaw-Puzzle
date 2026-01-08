@@ -28,3 +28,10 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: grid_4x3_standard_board_flat
+    _reference:
+      m_AssetGUID: 8c2dd953bd77ac746904209acc7048af
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

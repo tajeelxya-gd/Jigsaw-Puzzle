@@ -40,7 +40,6 @@ namespace Client.Runtime
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
-            _board.SetActiveFullImage(false);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board);
         }
@@ -67,9 +66,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
-            _board.SetActiveFullImage(true);
-            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
         }
     }

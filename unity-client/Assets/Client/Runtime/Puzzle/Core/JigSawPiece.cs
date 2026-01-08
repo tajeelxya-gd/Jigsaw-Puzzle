@@ -28,6 +28,8 @@ namespace Client.Runtime
         {
             Data = data;
             _collider.size = Data.OriginalCell.Size;
+            Data.Renderer.gameObject.SetActive(true);
+            Data.FlatRenderer.gameObject.SetActive(false);
 
             Group = new JigsawGroup($"group_{GetInstanceID()}")
             {
@@ -201,6 +203,8 @@ namespace Client.Runtime
             _snapController.enabled = false;
             SetPosYInternal(0f);
             SetActiveJoinController(false);
+            Data.Renderer.gameObject.SetActive(false);
+            Data.FlatRenderer.gameObject.SetActive(true);
         }
 
         private void MoveInternal(Vector3 delta) => transform.position += delta;

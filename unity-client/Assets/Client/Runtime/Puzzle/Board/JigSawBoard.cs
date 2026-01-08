@@ -14,7 +14,6 @@ namespace Client.Runtime
     {
         private readonly List<JigSawPiece> _pieces = new();
         private readonly List<JigsawBoardCell> _cells = new();
-        private readonly JigsawBoardCompletion _boardCompletion = new();
 
         private AssetData _assetData;
         private Texture2D _texture;
@@ -37,12 +36,18 @@ namespace Client.Runtime
             _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
+            var flatGridAsset = _assetData.GetAsset(Data.FlatGridId);
+            var flatGrid = await UniResources.CreateInstanceAsync<Transform>(flatGridAsset.RuntimeKey, parent, null, cToken);
 
             foreach (var cell in _cells)
             {
                 var mesh = grid.GetChild(0);
+                var flatMesh = flatGrid.GetChild(0);
+
                 SetLoadedTexture(mesh);
-                await WrapMeshInPuzzlePieceAsync(cell, mesh, cToken);
+                SetLoadedTexture(flatMesh);
+
+                await WrapMeshInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
             }
 
             for (int i = 0; i < _pieces.Count; i++)
@@ -57,7 +62,6 @@ namespace Client.Runtime
             var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
             _fullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
             SetLoadedTexture(_fullImg);
-            _boardCompletion.SetMeshRenderer(_fullImg.GetComponent<MeshRenderer>());
             UniResources.DisposeInstance(grid.gameObject);
         }
 
@@ -79,8 +83,6 @@ namespace Client.Runtime
             UniResources.DisposeInstance(_fullImg.gameObject);
             UniResources.DisposeAsset(_assetData);
         }
-
-        public void SetActiveFullImage(bool active) => _boardCompletion.SetActiveFullImage(active);
 
         public IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
         {
@@ -163,15 +165,18 @@ namespace Client.Runtime
             join.Init(piece.BoxCollider, neighbours, piece);
         }
 
-        private async UniTask WrapMeshInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, CancellationToken cToken = default)
+        private async UniTask WrapMeshInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, Transform flatMesh, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
             piece.name = $"Piece_{cell.Idx}";
             mesh.SetParent(piece.transform);
+            flatMesh.SetParent(piece.transform);
             var renderer = mesh.GetComponent<Renderer>();
             renderer.material.EnableKeyword("_EMISSION");
+            var flatRenderer = flatMesh.GetComponent<Renderer>();
+            flatRenderer.material.EnableKeyword("_EMISSION");
             piece.Inject(_resolver);
-            piece.Init(new JigSawPieceData(cell, renderer, _cells, GetPieceType(cell.Idx, Data.YConstraint)));
+            piece.Init(new JigSawPieceData(cell, renderer,flatRenderer, _cells, GetPieceType(cell.Idx, Data.YConstraint)));
             _pieces.Add(piece);
         }
 
