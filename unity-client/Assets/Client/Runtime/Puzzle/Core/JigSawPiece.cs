@@ -36,12 +36,6 @@ namespace Client.Runtime
             };
         }
 
-        public JoinController GetJoinController()
-        {
-            if (Data.PieceType != PieceType.Join) return null;
-            return _joinController ??= GetComponentInChildren<JoinController>(true);
-        }
-
         public void PlayVfx() => _vfx.Play();
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
@@ -116,6 +110,12 @@ namespace Client.Runtime
             _dragController.OnDragged -= HandleOnDragged;
             _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
+        }
+
+        private JoinController GetJoinController()
+        {
+            if (Data.PieceType != PieceType.Join) return null;
+            return _joinController ??= GetComponentInChildren<JoinController>(true);
         }
 
         private bool IsBeingHoveredOverTray()

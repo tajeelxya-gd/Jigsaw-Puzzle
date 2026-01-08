@@ -32,18 +32,17 @@ namespace Client.Runtime
 
         public async UniTask LoadPuzzleAsync(string imageKey, Transform parent, CancellationToken cToken = default)
         {
+            await SpawnGridAsync(parent, cToken);
             _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
             _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
-            var len = grid.childCount;
 
-            for (int i = 0; i < len; i++)
+            foreach (var cell in _cells)
             {
                 var mesh = grid.GetChild(0);
                 SetLoadedTexture(mesh);
-                var piece = await SpawnPuzzlePieceAsync(i, mesh, parent, cToken);
-                await SpawnCellAsync(i, piece, cToken);
+                await WrapMeshInPuzzlePieceAsync(cell, mesh, cToken);
             }
 
             for (int i = 0; i < _pieces.Count; i++)
@@ -51,7 +50,7 @@ namespace Client.Runtime
                 var piece = _pieces[i];
                 if (piece.Data.PieceType == PieceType.Join)
                 {
-                    SetJoin(i, piece);
+                    await SetJoinAsync(i, piece, cToken);
                 }
             }
 
@@ -124,39 +123,57 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        private void SetJoin(int idx, JigSawPiece piece)
+        private async UniTask SpawnGridAsync(Transform parent, CancellationToken cToken = default)
         {
-            var join = piece.GetJoinController();
+            var mesh = parent.GetComponentInChildren<MeshFilter>().sharedMesh;
+            var size = mesh.bounds.size;
+
+            var r = Data.XConstraint;
+            var c = Data.YConstraint;
+            var len = r * c;
+            float cellLocalWidth = size.x / c;
+            float cellLocalHeight = size.z / r;
+            float startX = (-size.x / 2f) + (cellLocalWidth / 2f);
+            float startZ = (size.z / 2f) - (cellLocalHeight / 2f);
+
+            for (var i = 0; i < len; i++)
+            {
+                int currentRow = i / c;
+                int currentCol = i % c;
+
+                var localPos = new Vector3(
+                    startX + (currentCol * cellLocalWidth),
+                    0.001f,
+                    startZ - (currentRow * cellLocalHeight)
+                );
+
+                var worldPos = parent.TransformPoint(localPos);
+                var cell = await UniResources.CreateInstanceAsync<JigsawBoardCell>("JigsawBoardCell", parent, null, cToken);
+
+                cell.SetIdx(i);
+                cell.name = $"Cell_{i}";
+                cell.transform.SetPositionAndRotation(worldPos, parent.rotation);
+                _cells.Add(cell);
+            }
+        }
+
+        private async UniTask SetJoinAsync(int idx, JigSawPiece piece, CancellationToken cToken = default)
+        {
+            var join = await UniResources.CreateInstanceAsync<JoinController>("Join - Controller", piece.transform, null, cToken);
             var neighbours = GetNeighbours(idx).ToArray();
             join.Init(piece.BoxCollider, neighbours, piece);
         }
 
-        private async UniTask<JigSawPiece> SpawnPuzzlePieceAsync(int idx, Transform mesh, Transform parent, CancellationToken cToken = default)
+        private async UniTask WrapMeshInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, CancellationToken cToken = default)
         {
-            var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", parent, null, cToken);
-            piece.Inject(_resolver);
-            var pieceTransform = piece.transform;
-            pieceTransform.SetPositionAndRotation(mesh.position, mesh.rotation);
-            mesh.SetParent(pieceTransform);
-            var pieceType = GetPieceType(idx, Data.YConstraint);
+            var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
+            piece.name = $"Piece_{cell.Idx}";
+            mesh.SetParent(piece.transform);
             var renderer = mesh.GetComponent<Renderer>();
             renderer.material.EnableKeyword("_EMISSION");
-            piece.Init(new JigSawPieceData(idx, renderer, _cells, pieceType));
+            piece.Inject(_resolver);
+            piece.Init(new JigSawPieceData(cell.Idx, renderer, _cells, GetPieceType(cell.Idx, Data.YConstraint)));
             _pieces.Add(piece);
-            if (pieceType == PieceType.Join)
-            {
-                await UniResources.CreateInstanceAsync<JoinController>("Join - Controller", pieceTransform, null, cToken);
-            }
-            return piece;
-        }
-
-        private async UniTask SpawnCellAsync(int idx, JigSawPiece piece, CancellationToken cToken = default)
-        {
-            var pieceTransform = piece.transform;
-            var cell = await UniResources.CreateInstanceAsync<JigsawBoardCell>("JigsawBoardCell", pieceTransform.parent, null, cToken);
-            cell.SetIdx(idx);
-            cell.transform.SetPositionAndRotation(pieceTransform.position, pieceTransform.rotation);
-            _cells.Add(cell);
         }
 
         private void SetLoadedTexture(Transform obj)
