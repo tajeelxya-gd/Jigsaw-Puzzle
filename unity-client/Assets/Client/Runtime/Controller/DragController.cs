@@ -94,15 +94,13 @@ namespace Client.Runtime
 
             Vector3 planeHit = ray.GetPoint(enter);
             Vector3 target = planeHit + _offset;
-
             Vector3 delta = target - transform.position;
-
-            // 2D-style constraint (XZ board)
             delta.y = 0f;
 
             if (delta.sqrMagnitude > Mathf.Epsilon)
             {
                 OnDragged.Broadcast(delta);
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             }
         }
     }

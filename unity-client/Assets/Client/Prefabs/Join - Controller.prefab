@@ -55,7 +55,7 @@ MonoBehaviour:
   _left: {fileID: 6197975287133564481}
   _right: {fileID: 6349487655154725005}
   _tabScaleRatio: 0.2
-  _tabThickness: 0.02
+  _tabThickness: 0.1
   _scaleFactor: 1.4
 --- !u!65 &5633606701473021482
 BoxCollider:
