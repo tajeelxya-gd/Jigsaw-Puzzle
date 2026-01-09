@@ -14,13 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
   _id: _6x4_standard_board_asset_data
   _assets:
-  - _key: full_image_6x4_standard_board
-    _reference:
-      m_AssetGUID: 93f0aac618e808e41b6cb04a0811b74b
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_SubObjectGUID: 
-      m_EditorAssetChanged: 1
   - _key: grid_6x4_standard_board
     _reference:
       m_AssetGUID: 7157240041c20a04580869e9b5da1ba9
