@@ -34,27 +34,33 @@ namespace Client.Runtime
         public async UniTask FlashAsync(CancellationToken token)
         {
             var renderer = _isFlat ? _data.FlatMesh : _data.Mesh;
-            renderer.GetPropertyBlock(_mpb);
+            int materialCount = renderer.sharedMaterials.Length;
 
             Color startEmission = Color.black;
-            _mpb.SetColor(EmissionColorId, startEmission);
-            renderer.SetPropertyBlock(_mpb);
-
             float elapsed = 0f;
 
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.Sin((elapsed / duration) * Mathf.PI);
+                Color currentColor = highlightColor * intensity * t;
 
-                _mpb.SetColor(EmissionColorId, highlightColor * intensity * t);
-                renderer.SetPropertyBlock(_mpb);
+                renderer.GetPropertyBlock(_mpb);
+                _mpb.SetColor(EmissionColorId, currentColor);
+
+                for (int i = 0; i < materialCount; i++)
+                {
+                    renderer.SetPropertyBlock(_mpb, i);
+                }
 
                 await UniTask.Yield(PlayerLoopTiming.Update, token);
             }
 
             _mpb.SetColor(EmissionColorId, Color.black);
-            renderer.SetPropertyBlock(_mpb);
+            for (int i = 0; i < materialCount; i++)
+            {
+                renderer.SetPropertyBlock(_mpb, i);
+            }
         }
 
         private void SetTexture(Renderer renderer, Texture2D texture)
