@@ -19,7 +19,7 @@ namespace Client.Runtime
 
         public JigsawGroup Group { get; set; }
         public JigSawPieceData Data { get; private set; }
-        public bool IsPlaced { get; private set; }
+        public bool IsLocked { get; private set; }
         public BoxCollider BoxCollider => _collider;
         public PieceSnapController SnapController => _snapController;
 
@@ -178,17 +178,17 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            IsPlaced = cell.Idx == Data.OriginalCell.Idx;
+            IsLocked = cell.Idx == Data.OriginalCell.Idx;
 
-            if (IsPlaced)
+            if (IsLocked)
             {
                 var groupToLock = Group.ToArray();
 
                 foreach (var piece in groupToLock)
                 {
-                    piece.IsPlaced = true;
+                    piece.IsLocked = true;
                     var targetCell = Data.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
-                    targetCell.SetPiece(piece);
+                    targetCell.LockPiece(piece);
                     piece.LockPiece();
                 }
 

@@ -54,7 +54,7 @@ namespace Client.Runtime
                     var neighborPiece = neighborCell?.Piece;
 
                     // If the neighbor is placed and we haven't processed it yet
-                    if (neighborPiece != null && neighborPiece.IsPlaced && !allToNotify.Contains(neighborPiece))
+                    if (neighborPiece != null && neighborPiece.IsLocked && !allToNotify.Contains(neighborPiece))
                     {
                         allToNotify.Add(neighborPiece);
                         searchQueue.Enqueue(neighborPiece); // Add to queue to check ITS neighbors

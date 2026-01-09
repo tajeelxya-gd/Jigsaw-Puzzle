@@ -18,7 +18,7 @@ namespace Client.Runtime
 
         public bool CheckWin()
         {
-            var placed = _board.Pieces.Count(itm => itm.IsPlaced);
+            var placed = _board.Pieces.Count(itm => itm.IsLocked);
             return placed == _board.Pieces.Count;
         }
 

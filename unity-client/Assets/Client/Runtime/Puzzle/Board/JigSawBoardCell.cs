@@ -8,12 +8,14 @@ namespace Client.Runtime
         public Vector3 Size { get; private set; }
         public JigSawPiece Piece { get; private set; }
 
+        private int _stackCounter;
+
         public void SetData(int idx, Vector3 size)
         {
             Idx = idx;
             Size = size;
         }
 
-        public void SetPiece(JigSawPiece piece) => Piece = piece;
+        public void LockPiece(JigSawPiece piece) => Piece = piece;
     }
 }
