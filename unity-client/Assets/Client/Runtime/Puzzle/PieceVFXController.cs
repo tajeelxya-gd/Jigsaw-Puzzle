@@ -1,19 +1,11 @@
 using System.Collections.Generic;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
-using UniTx.Runtime.IoC;
 
 namespace Client.Runtime
 {
-    public sealed class PieceVFXController : IInjectable, IInitialisable, IResettable
+    public sealed class PieceVFXController : IInitialisable, IResettable
     {
-        private IPuzzleService _puzzleService;
-
-        public void Inject(IResolver resolver)
-        {
-            _puzzleService = resolver.Resolve<IPuzzleService>();
-        }
-
         public void Initialise()
         {
             UniEvents.Subscribe<PiecePlacedEvent>(HandlePiecePlaced);
@@ -26,11 +18,8 @@ namespace Client.Runtime
 
         private void HandlePiecePlaced(PiecePlacedEvent ev)
         {
-            var board = _puzzleService.GetCurrentBoard();
-            var piece = ev.jigSawPiece;
-
             // 1. Start with the current piece's group
-            var pieceGroup = piece.Group;
+            var pieceGroup = ev.jigSawPiece.Group;
             JigsawGroup allToNotify = new("group_tmp", pieceGroup);
 
             // 2. Prepare BFS to find all connected placed pieces
@@ -47,17 +36,17 @@ namespace Client.Runtime
             {
                 var current = searchQueue.Dequeue();
                 var idx = current.Data.OriginalCell.Idx;
-                var neighbors = board.GetNeighbours(idx);
+                var neighbors = JigsawBoardCalculator.GetNeighbours(idx);
 
-                foreach (var neighborCell in neighbors)
+                foreach (var cell in neighbors)
                 {
-                    var neighborPiece = neighborCell?.Piece;
+                    var piece = cell?.Piece;
 
                     // If the neighbor is placed and we haven't processed it yet
-                    if (neighborPiece != null && neighborPiece.IsLocked && !allToNotify.Contains(neighborPiece))
+                    if (piece != null && piece.IsLocked && !allToNotify.Contains(piece))
                     {
-                        allToNotify.Add(neighborPiece);
-                        searchQueue.Enqueue(neighborPiece); // Add to queue to check ITS neighbors
+                        allToNotify.Add(piece);
+                        searchQueue.Enqueue(piece); // Add to queue to check ITS neighbors
                     }
                 }
             }

@@ -14,8 +14,8 @@ namespace Client.Runtime
         [SerializeField] private JigsawPieceVFX _vfx;
         [SerializeField] private JigsawPieceRenderer _renderer;
 
+        private IPuzzleService _puzzleService;
         private IPuzzleTray _puzzleTray;
-        private JoinController _joinController;
 
         public JigsawGroup Group { get; set; }
         public JigSawPieceData Data { get; private set; }
@@ -23,7 +23,11 @@ namespace Client.Runtime
         public BoxCollider BoxCollider => _collider;
         public PieceSnapController SnapController => _snapController;
 
-        public void Inject(IResolver resolver) => _puzzleTray = resolver.Resolve<IPuzzleTray>();
+        public void Inject(IResolver resolver)
+        {
+            _puzzleService = resolver.Resolve<IPuzzleService>();
+            _puzzleTray = resolver.Resolve<IPuzzleTray>();
+        }
 
         public void Init(JigSawPieceData data, JigsawPieceRendererData rendererData)
         {
@@ -88,15 +92,6 @@ namespace Client.Runtime
         {
             if (_puzzleTray == null) return;
             if (IsBeingHoveredOverTray()) return;
-
-            if (transform.localScale != Vector3.one)
-            {
-                transform.localScale = Vector3.Lerp(
-                    transform.localScale,
-                    Vector3.one,
-                    Time.deltaTime * 10f
-                );
-            }
         }
 
         private void OnDestroy()
@@ -105,18 +100,6 @@ namespace Client.Runtime
             _dragController.OnDragged -= HandleOnDragged;
             _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
-        }
-
-        private JoinController GetJoinController()
-        {
-            if (Data.PieceType != PieceType.Join) return null;
-            return _joinController ??= GetComponentInChildren<JoinController>(true);
-        }
-
-        private void SetActiveJoinController(bool active)
-        {
-            var joinController = GetJoinController();
-            if (joinController != null) joinController.gameObject.SetActive(active);
         }
 
         private bool IsBeingHoveredOverTray()
@@ -148,30 +131,30 @@ namespace Client.Runtime
             }
 
             // 3. Merge Logic
-            if (JoinRegistry.HasCorrectContacts())
-            {
-                var kvps = JoinRegistry.Flush();
-                HashSet<(string, string)> processedGroups = new();
+            // if (JoinRegistry.HasCorrectContacts())
+            // {
+            //     var kvps = JoinRegistry.Flush();
+            //     HashSet<(string, string)> processedGroups = new();
 
-                foreach (var kvp in kvps)
-                {
-                    var join = kvp.join;
-                    var piece = kvp.piece;
-                    var id1 = piece.Group.Id;
-                    var id2 = join.Owner.Group.Id;
+            //     foreach (var kvp in kvps)
+            //     {
+            //         var join = kvp.join;
+            //         var piece = kvp.piece;
+            //         var id1 = piece.Group.Id;
+            //         var id2 = join.Owner.Group.Id;
 
-                    if (id1 == id2) continue;
+            //         if (id1 == id2) continue;
 
-                    var pair = string.CompareOrdinal(id1, id2) < 0 ? (id1, id2) : (id2, id1);
+            //         var pair = string.CompareOrdinal(id1, id2) < 0 ? (id1, id2) : (id2, id1);
 
-                    if (!processedGroups.Add(pair)) continue;
+            //         if (!processedGroups.Add(pair)) continue;
 
-                    join.gameObject.SetActive(false);
-                    piece.SnapController.SnapToTransform(join.MergeTransform);
-                    piece.JoinGroup(join.Owner);
-                }
-                return;
-            }
+            //         join.gameObject.SetActive(false);
+            //         piece.SnapController.SnapToTransform(join.MergeTransform);
+            //         piece.JoinGroup(join.Owner);
+            //     }
+            //     return;
+            // }
 
             _snapController.SnapToClosestCell(Data.Cells);
         }
@@ -202,7 +185,6 @@ namespace Client.Runtime
             _collider.enabled = false;
             _snapController.enabled = false;
             SetPosYInternal(0f);
-            SetActiveJoinController(false);
             _renderer.SetActive(isFlat: true);
         }
 

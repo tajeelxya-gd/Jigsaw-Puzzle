@@ -27,11 +27,9 @@ namespace Client.Runtime
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
-        private float _scaleReduction;
 
         public void ShufflePieces(JigSawBoard board)
         {
-            _scaleReduction = board.Data.TrayScaleReduction;
             var pieces = board.Pieces;
             if (pieces == null || pieces.Count == 0) return;
 
@@ -83,25 +81,6 @@ namespace Client.Runtime
             }
 
             UpdatePiecePositions();
-            HandleHoverPieceVisuals();
-        }
-
-        private void HandleHoverPieceVisuals()
-        {
-            if (_hoverPiece == null) return;
-            if (_hoverPiece.Group.Count > 1) return;
-
-            bool isOver = IsOverTray(_hoverPiece.transform.position);
-
-            if (isOver)
-            {
-                Vector3 targetScale = Vector3.one * _scaleReduction;
-                _hoverPiece.transform.localScale = Vector3.Lerp(
-                    _hoverPiece.transform.localScale,
-                    targetScale,
-                    Time.deltaTime * _lerpSpeed
-                );
-            }
         }
 
         private void UpdatePiecePositions()
@@ -139,7 +118,6 @@ namespace Client.Runtime
                 );
 
                 pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
-                pt.localScale = Vector3.Lerp(pt.localScale, Vector3.one * _scaleReduction, Time.deltaTime * _lerpSpeed);
                 pt.localRotation = Quaternion.Lerp(pt.localRotation, Quaternion.identity, Time.deltaTime * _lerpSpeed);
 
                 float localX = pt.localPosition.x;

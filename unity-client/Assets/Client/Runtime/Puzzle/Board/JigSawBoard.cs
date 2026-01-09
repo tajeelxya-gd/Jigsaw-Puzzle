@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Database;
@@ -46,16 +45,8 @@ namespace Client.Runtime
                 await WrapMeshesInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
             }
 
-            for (int i = 0; i < _pieces.Count; i++)
-            {
-                var piece = _pieces[i];
-                if (piece.Data.PieceType == PieceType.Join)
-                {
-                    await SetJoinAsync(i, piece, cToken);
-                }
-            }
-
             UniResources.DisposeInstance(grid.gameObject);
+            UniResources.DisposeInstance(flatGrid.gameObject);
         }
 
         public void UnLoadPuzzle()
@@ -74,35 +65,6 @@ namespace Client.Runtime
 
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeAsset(_assetData);
-        }
-
-        public IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
-        {
-            var cols = Data.YConstraint;
-            var rows = Data.XConstraint;
-
-            // Fixed size: [0]=Top, [1]=Bottom, [2]=Left, [3]=Right
-            var neighbours = new JigsawBoardCell[4];
-
-            if (idx < 0 || idx >= Cells.Count)
-                return neighbours; // All null
-
-            int row = idx / cols;
-            int col = idx % cols;
-
-            // Top
-            neighbours[0] = (row > 0) ? Cells[idx - cols] : null;
-
-            // Bottom
-            neighbours[1] = (row < rows - 1) ? Cells[idx + cols] : null;
-
-            // Left
-            neighbours[2] = (col > 0) ? Cells[idx - 1] : null;
-
-            // Right
-            neighbours[3] = (col < cols - 1) ? Cells[idx + 1] : null;
-
-            return neighbours;
         }
 
         protected override void OnInject(IResolver resolver) => _resolver = resolver;
@@ -150,13 +112,6 @@ namespace Client.Runtime
             }
         }
 
-        private async UniTask SetJoinAsync(int idx, JigSawPiece piece, CancellationToken cToken = default)
-        {
-            var join = await UniResources.CreateInstanceAsync<JoinController>("Join - Controller", piece.transform, null, cToken);
-            var neighbours = GetNeighbours(idx).ToArray();
-            join.Init(piece.BoxCollider, neighbours, piece);
-        }
-
         private async UniTask WrapMeshesInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, Transform flatMesh, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
@@ -164,19 +119,10 @@ namespace Client.Runtime
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
             var rendererData = new JigsawPieceRendererData(mesh.GetComponent<Renderer>(), flatMesh.GetComponent<Renderer>(), _texture);
-            var pieceData = new JigSawPieceData(cell, _cells, GetPieceType(cell.Idx, Data.YConstraint));
+            var pieceData = new JigSawPieceData(cell, _cells);
             piece.Inject(_resolver);
             piece.Init(pieceData, rendererData);
             _pieces.Add(piece);
-        }
-
-        private PieceType GetPieceType(int index, int numCols)
-        {
-            int row = index / numCols;
-            int col = index % numCols;
-
-            // If the sum of row and column indices is even, it's Basic. Otherwise, it's Join.
-            return (row + col) % 2 == 0 ? PieceType.Basic : PieceType.Join;
         }
     }
 }
