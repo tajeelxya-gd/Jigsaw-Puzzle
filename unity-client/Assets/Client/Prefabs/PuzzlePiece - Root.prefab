@@ -274,6 +274,10 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
+      propertyPath: ClampVelocityModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.gravitySource
       value: 0
       objectReference: {fileID: 0}
@@ -291,11 +295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.9
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: RotationModule.curve.minMaxState
@@ -303,11 +307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.9
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 1.2
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -315,15 +319,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.80651474
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.8614223
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.8679245
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.minColor.b
@@ -343,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.minMaxState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startSpeed.minMaxState
@@ -367,15 +371,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key0.b
-      value: 0.9123354
+      value: 0.990566
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key0.g
-      value: 0.9622642
+      value: 0.990566
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key0.r
-      value: 0.9533519
+      value: 0.990566
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key1.b
@@ -411,7 +415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 19855088, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}
       propertyPath: RotationModule.curve.maxCurve.m_Curve.Array.data[0].time
