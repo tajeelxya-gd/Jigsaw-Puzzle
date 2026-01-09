@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 946193399347285323}
   - component: {fileID: 4325325926952226782}
   - component: {fileID: 3110966378498270128}
+  - component: {fileID: 2974595056074598061}
   m_Layer: 6
   m_Name: PuzzlePiece - Root
   m_TagString: Untagged
@@ -102,6 +103,7 @@ MonoBehaviour:
   _snapController: {fileID: 4325325926952226782}
   _collider: {fileID: 3977144257232086906}
   _vfx: {fileID: 3110966378498270128}
+  _renderer: {fileID: 2974595056074598061}
 --- !u!114 &946193399347285323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,9 +142,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawPieceVFX
   _particleSystem: {fileID: 9123130255006762197}
-  highlightColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+--- !u!114 &2974595056074598061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348590068401610536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b18cecee067aa47a1730feff850706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawPieceRenderer
+  highlightColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
   intensity: 1
-  duration: 0.7
+  duration: 1
 --- !u!1001 &9123130254991487525
 PrefabInstance:
   m_ObjectHideFlags: 0

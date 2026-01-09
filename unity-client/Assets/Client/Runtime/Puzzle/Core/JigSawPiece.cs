@@ -12,6 +12,7 @@ namespace Client.Runtime
         [SerializeField] private PieceSnapController _snapController;
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private JigsawPieceVFX _vfx;
+        [SerializeField] private JigsawPieceRenderer _renderer;
 
         private IPuzzleTray _puzzleTray;
         private JoinController _joinController;
@@ -24,12 +25,11 @@ namespace Client.Runtime
 
         public void Inject(IResolver resolver) => _puzzleTray = resolver.Resolve<IPuzzleTray>();
 
-        public void Init(JigSawPieceData data)
+        public void Init(JigSawPieceData data, JigsawPieceRendererData rendererData)
         {
             Data = data;
             _collider.size = Data.OriginalCell.Size;
-            Data.Renderer.gameObject.SetActive(true);
-            Data.FlatRenderer.gameObject.SetActive(false);
+            _renderer.Init(rendererData);
 
             Group = new JigsawGroup($"group_{GetInstanceID()}")
             {
@@ -203,8 +203,7 @@ namespace Client.Runtime
             _snapController.enabled = false;
             SetPosYInternal(0f);
             SetActiveJoinController(false);
-            Data.Renderer.gameObject.SetActive(false);
-            Data.FlatRenderer.gameObject.SetActive(true);
+            _renderer.SetActive(isFlat: true);
         }
 
         private void MoveInternal(Vector3 delta) => transform.position += delta;

@@ -18,7 +18,6 @@ namespace Client.Runtime
         private AssetData _assetData;
         private Texture2D _texture;
         private IResolver _resolver;
-        private Transform _fullImg;
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
 
@@ -31,7 +30,7 @@ namespace Client.Runtime
 
         public async UniTask LoadPuzzleAsync(string imageKey, Transform parent, CancellationToken cToken = default)
         {
-            await SpawnGridAsync(parent, cToken);
+            await SpawnCellsAsync(parent, cToken);
             _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
             _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
@@ -44,10 +43,7 @@ namespace Client.Runtime
                 var mesh = grid.GetChild(0);
                 var flatMesh = flatGrid.GetChild(0);
 
-                SetLoadedTexture(mesh);
-                SetLoadedTexture(flatMesh);
-
-                await WrapMeshInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
+                await WrapMeshesInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
             }
 
             for (int i = 0; i < _pieces.Count; i++)
@@ -59,9 +55,6 @@ namespace Client.Runtime
                 }
             }
 
-            var fullImgAsset = _assetData.GetAsset(Data.FullImageId);
-            _fullImg = await UniResources.CreateInstanceAsync<Transform>(fullImgAsset.RuntimeKey, parent, null, cToken);
-            SetLoadedTexture(_fullImg);
             UniResources.DisposeInstance(grid.gameObject);
         }
 
@@ -80,7 +73,6 @@ namespace Client.Runtime
             _cells.Clear();
 
             UniResources.DisposeAsset(_texture);
-            UniResources.DisposeInstance(_fullImg.gameObject);
             UniResources.DisposeAsset(_assetData);
         }
 
@@ -125,7 +117,7 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        private async UniTask SpawnGridAsync(Transform parent, CancellationToken cToken = default)
+        private async UniTask SpawnCellsAsync(Transform parent, CancellationToken cToken = default)
         {
             var size = new Vector3(0.1857f, 0f, 0.2387f);
             var r = Data.XConstraint;
@@ -165,38 +157,17 @@ namespace Client.Runtime
             join.Init(piece.BoxCollider, neighbours, piece);
         }
 
-        private async UniTask WrapMeshInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, Transform flatMesh, CancellationToken cToken = default)
+        private async UniTask WrapMeshesInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, Transform flatMesh, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
             piece.name = $"Piece_{cell.Idx}";
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
-            var renderer = mesh.GetComponent<Renderer>();
-            renderer.material.EnableKeyword("_EMISSION");
-            var flatRenderer = flatMesh.GetComponent<Renderer>();
-            flatRenderer.material.EnableKeyword("_EMISSION");
+            var rendererData = new JigsawPieceRendererData(mesh.GetComponent<Renderer>(), flatMesh.GetComponent<Renderer>(), _texture);
+            var pieceData = new JigSawPieceData(cell, _cells, GetPieceType(cell.Idx, Data.YConstraint));
             piece.Inject(_resolver);
-            piece.Init(new JigSawPieceData(cell, renderer,flatRenderer, _cells, GetPieceType(cell.Idx, Data.YConstraint)));
+            piece.Init(pieceData, rendererData);
             _pieces.Add(piece);
-        }
-
-        private void SetLoadedTexture(Transform obj)
-        {
-            if (obj.TryGetComponent<Renderer>(out var renderer))
-            {
-                var sharedMaterials = renderer.materials;
-
-                for (int i = 0; i < sharedMaterials.Length; i++)
-                {
-                    var sharedMaterial = sharedMaterials[i];
-                    if (sharedMaterial != null)
-                    {
-                        sharedMaterial.SetTexture("_BaseMap", _texture);
-                    }
-                }
-
-                renderer.materials = sharedMaterials;
-            }
         }
 
         private PieceType GetPieceType(int index, int numCols)
