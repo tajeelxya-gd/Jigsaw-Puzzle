@@ -56,10 +56,10 @@ namespace Client.Runtime
         private JigSawLevelData GetCurrentLevelData()
         {
             var data = _contentService.GetAllData<JigSawLevelData>().ToArray();
-            var idx = Math.Clamp(++_idx, 0, data.Length - 1);
+            if (++_idx >= data.Length) _idx = 0;
 
             // TODO: load idx from saves later
-            return data[idx];
+            return data[_idx];
         }
 
         private void HandleOnWin() => UniTask.Void(HandleOnWinAsync, default);
