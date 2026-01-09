@@ -12,19 +12,19 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private JigsawPieceVFX _vfx;
         [SerializeField] private JigsawPieceRenderer _renderer;
+        [SerializeField] private ScaleController _scaleController;
 
-        private IPuzzleService _puzzleService;
         private IPuzzleTray _puzzleTray;
+        private float _scaleDown;
 
         public JigsawGroup Group { get; set; }
         public JigsawPieceData Data { get; private set; }
         public bool IsLocked { get; private set; }
-        public BoxCollider BoxCollider => _collider;
-        public PieceSnapController SnapController => _snapController;
 
         public void Inject(IResolver resolver)
         {
-            _puzzleService = resolver.Resolve<IPuzzleService>();
+            var puzzleService = resolver.Resolve<IPuzzleService>();
+            _scaleDown = puzzleService.GetCurrentBoard().Data.TrayScaleReduction;
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
         }
 
@@ -79,6 +79,10 @@ namespace Client.Runtime
             }
         }
 
+        public void ScaleUp() => _scaleController.ScaleTo(1f);
+
+        public void ScaleDown() => _scaleController.ScaleTo(_scaleDown);
+
         private void Awake()
         {
             _dragController.OnDragStarted += HandleDragStarted;
@@ -87,24 +91,12 @@ namespace Client.Runtime
             _snapController.OnSnapped += HandleSnapped;
         }
 
-        private void Update()
-        {
-            if (_puzzleTray == null) return;
-            if (IsBeingHoveredOverTray()) return;
-        }
-
         private void OnDestroy()
         {
             _dragController.OnDragStarted -= HandleDragStarted;
             _dragController.OnDragged -= HandleOnDragged;
             _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
-        }
-
-        private bool IsBeingHoveredOverTray()
-        {
-            if (transform.parent != null) return true;
-            return _puzzleTray.IsOverTray(transform.position);
         }
 
         private void HandleDragStarted() => SetPosY(0.01f);

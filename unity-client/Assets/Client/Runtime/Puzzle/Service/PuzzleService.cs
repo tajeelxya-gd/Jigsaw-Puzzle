@@ -42,7 +42,7 @@ namespace Client.Runtime
             JigsawBoardCalculator.SetBoard(_board);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
-            _puzzleTray.ShufflePieces(_board);
+            _puzzleTray.ShufflePieces(_board.Pieces);
         }
 
         public void UnLoadPuzzle()

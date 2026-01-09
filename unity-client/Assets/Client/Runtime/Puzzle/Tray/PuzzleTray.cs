@@ -28,14 +28,14 @@ namespace Client.Runtime
         private bool _isDragging;
         private bool _scrollLocked;
 
-        public void ShufflePieces(JigsawBoard board)
+        public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
         {
-            var pieces = board.Pieces;
-            if (pieces == null || pieces.Count == 0) return;
+            if (pieces == null) return;
 
             _activePieces.Clear();
             foreach (var p in pieces)
             {
+                p.ScaleDown();
                 _activePieces.Add(p);
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
@@ -161,7 +161,6 @@ namespace Client.Runtime
             );
         }
 
-        #region Input Logic
         private void HandleScrollInput()
         {
             if (Input.GetMouseButtonDown(0))
@@ -249,6 +248,21 @@ namespace Client.Runtime
             if (index >= 0 && index < _activePieces.Count) return _activePieces[index];
             return null;
         }
-        #endregion
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent<JigsawPiece>(out var piece))
+            {
+                piece.ScaleDown();
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<JigsawPiece>(out var piece))
+            {
+                piece.ScaleUp();
+            }
+        }
     }
 }
