@@ -6,7 +6,7 @@ namespace Client.Runtime
 {
     public sealed class JigsawPieceRenderer : MonoBehaviour
     {
-        [SerializeField] private Color highlightColor = Color.yellow;
+        [SerializeField] private Color highlightColor;
         [SerializeField] private float intensity;
         [SerializeField] private float duration;
 

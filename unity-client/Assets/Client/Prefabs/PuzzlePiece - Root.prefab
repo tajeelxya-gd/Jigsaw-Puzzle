@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b18cecee067aa47a1730feff850706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawPieceRenderer
-  highlightColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+  highlightColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   intensity: 1
   duration: 1
 --- !u!1001 &9123130254991487525
