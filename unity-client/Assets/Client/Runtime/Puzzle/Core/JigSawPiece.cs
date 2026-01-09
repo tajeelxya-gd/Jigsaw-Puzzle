@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigSawPiece : MonoBehaviour, IInjectable
+    public sealed class JigsawPiece : MonoBehaviour, IInjectable
     {
         [SerializeField] private DragController _dragController;
         [SerializeField] private PieceSnapController _snapController;
@@ -18,7 +17,7 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
 
         public JigsawGroup Group { get; set; }
-        public JigSawPieceData Data { get; private set; }
+        public JigsawPieceData Data { get; private set; }
         public bool IsLocked { get; private set; }
         public BoxCollider BoxCollider => _collider;
         public PieceSnapController SnapController => _snapController;
@@ -29,7 +28,7 @@ namespace Client.Runtime
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
         }
 
-        public void Init(JigSawPieceData data, JigsawPieceRendererData rendererData)
+        public void Init(JigsawPieceData data, JigsawPieceRendererData rendererData)
         {
             Data = data;
             _collider.size = Data.OriginalCell.Size;
@@ -61,7 +60,7 @@ namespace Client.Runtime
             }
         }
 
-        public void JoinGroup(JigSawPiece other)
+        public void JoinGroup(JigsawPiece other)
         {
             if (Group == other.Group) return;
 

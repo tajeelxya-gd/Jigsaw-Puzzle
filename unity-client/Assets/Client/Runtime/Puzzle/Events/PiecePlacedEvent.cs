@@ -5,9 +5,9 @@ namespace Client.Runtime
     public readonly struct PiecePlacedEvent : IEvent
     {
         // Empty yet
-        public readonly JigSawPiece jigSawPiece;
+        public readonly JigsawPiece jigSawPiece;
 
-        public PiecePlacedEvent(JigSawPiece jigSawPiece)
+        public PiecePlacedEvent(JigsawPiece jigSawPiece)
         {
             this.jigSawPiece = jigSawPiece;
         }

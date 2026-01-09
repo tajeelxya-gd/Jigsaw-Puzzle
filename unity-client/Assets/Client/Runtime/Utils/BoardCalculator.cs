@@ -4,9 +4,9 @@ namespace Client.Runtime
 {
     public static class JigsawBoardCalculator
     {
-        private static JigSawBoard _board;
+        private static JigsawBoard _board;
 
-        public static void SetBoard(JigSawBoard board) => _board = board;
+        public static void SetBoard(JigsawBoard board) => _board = board;
 
         public static IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
         {

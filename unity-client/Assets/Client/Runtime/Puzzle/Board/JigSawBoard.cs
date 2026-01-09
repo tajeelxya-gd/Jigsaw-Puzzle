@@ -9,9 +9,9 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigSawBoard : EntityBase<JigSawBoardData, JigSawBoardSavedData>
+    public sealed class JigsawBoard : EntityBase<JigsawBoardData, JigsawBoardSavedData>
     {
-        private readonly List<JigSawPiece> _pieces = new();
+        private readonly List<JigsawPiece> _pieces = new();
         private readonly List<JigsawBoardCell> _cells = new();
 
         private AssetData _assetData;
@@ -20,9 +20,9 @@ namespace Client.Runtime
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
 
-        public IReadOnlyList<JigSawPiece> Pieces => _pieces;
+        public IReadOnlyList<JigsawPiece> Pieces => _pieces;
 
-        public JigSawBoard(string id) : base(id)
+        public JigsawBoard(string id) : base(id)
         {
             // Empty yet
         }
@@ -114,12 +114,12 @@ namespace Client.Runtime
 
         private async UniTask WrapMeshesInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, Transform flatMesh, CancellationToken cToken = default)
         {
-            var piece = await UniResources.CreateInstanceAsync<JigSawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
+            var piece = await UniResources.CreateInstanceAsync<JigsawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
             piece.name = $"Piece_{cell.Idx}";
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
             var rendererData = new JigsawPieceRendererData(mesh.GetComponent<Renderer>(), flatMesh.GetComponent<Renderer>(), _texture);
-            var pieceData = new JigSawPieceData(cell, _cells);
+            var pieceData = new JigsawPieceData(cell, _cells);
             piece.Inject(_resolver);
             piece.Init(pieceData, rendererData);
             _pieces.Add(piece);

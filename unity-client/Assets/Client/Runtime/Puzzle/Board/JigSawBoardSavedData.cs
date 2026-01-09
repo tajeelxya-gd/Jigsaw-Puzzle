@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client.Runtime
 {
     [Serializable]
-    public sealed class JigSawBoardSavedData : ISavedData
+    public sealed class JigsawBoardSavedData : ISavedData
     {
         [SerializeField] private string _id;
         [SerializeField] private long _modifiedTimestamp;

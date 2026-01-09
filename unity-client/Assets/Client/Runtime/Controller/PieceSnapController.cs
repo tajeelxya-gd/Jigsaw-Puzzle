@@ -6,15 +6,15 @@ using System.Threading;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(JigSawPiece))]
+    [RequireComponent(typeof(JigsawPiece))]
     public sealed class PieceSnapController : MonoBehaviour
     {
         [SerializeField] private float _snapDuration = 0.25f; // Slightly faster feel for groups
 
-        private JigSawPiece _piece;
+        private JigsawPiece _piece;
         public event Action<JigsawBoardCell> OnSnapped;
 
-        private void Awake() => _piece = GetComponent<JigSawPiece>();
+        private void Awake() => _piece = GetComponent<JigsawPiece>();
 
         public void SnapToTransform(Transform target)
         {
@@ -61,7 +61,7 @@ namespace Client.Runtime
             Vector3[] startPositions = new Vector3[count];
             Vector3[] relativeOffsets = new Vector3[count];
             Quaternion[] startRotations = new Quaternion[count];
-            JigSawPiece[] pieces = new JigSawPiece[count];
+            JigsawPiece[] pieces = new JigsawPiece[count];
 
             int i = 0;
             foreach (var p in group)

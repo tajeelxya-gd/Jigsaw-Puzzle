@@ -6,7 +6,7 @@ namespace Client.Runtime
     {
         public int Idx { get; private set; }
         public Vector3 Size { get; private set; }
-        public JigSawPiece Piece { get; private set; }
+        public JigsawPiece Piece { get; private set; }
 
         private int _stackCounter;
 
@@ -16,6 +16,6 @@ namespace Client.Runtime
             Size = size;
         }
 
-        public void LockPiece(JigSawPiece piece) => Piece = piece;
+        public void LockPiece(JigsawPiece piece) => Piece = piece;
     }
 }

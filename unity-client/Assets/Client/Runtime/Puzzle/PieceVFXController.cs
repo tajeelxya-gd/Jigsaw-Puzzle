@@ -23,7 +23,7 @@ namespace Client.Runtime
             JigsawGroup allToNotify = new("group_tmp", pieceGroup);
 
             // 2. Prepare BFS to find all connected placed pieces
-            Queue<JigSawPiece> searchQueue = new();
+            Queue<JigsawPiece> searchQueue = new();
 
             // Add all current group members to the queue to check their neighbors too
             foreach (var p in pieceGroup)

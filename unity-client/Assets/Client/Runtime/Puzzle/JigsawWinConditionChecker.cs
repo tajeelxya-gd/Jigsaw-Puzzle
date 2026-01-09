@@ -12,7 +12,7 @@ namespace Client.Runtime
         public event Action OnLose;
         public event Action OnAdvance;
 
-        private JigSawBoard _board;
+        private JigsawBoard _board;
 
         public bool CheckLose() => false;
 
@@ -22,7 +22,7 @@ namespace Client.Runtime
             return placed == _board.Pieces.Count;
         }
 
-        public void SetBoard(JigSawBoard board) => _board = board;
+        public void SetBoard(JigsawBoard board) => _board = board;
 
         public void Initialise()
         {

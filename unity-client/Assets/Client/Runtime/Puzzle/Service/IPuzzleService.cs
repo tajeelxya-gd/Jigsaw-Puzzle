@@ -10,6 +10,6 @@ namespace Client.Runtime
 
         void UnLoadPuzzle();
 
-        JigSawBoard GetCurrentBoard();
+        JigsawBoard GetCurrentBoard();
     }
 }

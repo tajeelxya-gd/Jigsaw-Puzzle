@@ -19,16 +19,16 @@ namespace Client.Runtime
         [SerializeField] private float _visibilityBuffer = 0f;
         [SerializeField] private float _dragThreshold = 10f;
 
-        private readonly List<JigSawPiece> _activePieces = new();
-        private JigSawPiece _hitPiece;
-        private JigSawPiece _hoverPiece;
+        private readonly List<JigsawPiece> _activePieces = new();
+        private JigsawPiece _hitPiece;
+        private JigsawPiece _hoverPiece;
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
 
-        public void ShufflePieces(JigSawBoard board)
+        public void ShufflePieces(JigsawBoard board)
         {
             var pieces = board.Pieces;
             if (pieces == null || pieces.Count == 0) return;
@@ -56,9 +56,9 @@ namespace Client.Runtime
             return Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider;
         }
 
-        public void SetHoverPiece(JigSawPiece piece) => _hoverPiece = piece;
+        public void SetHoverPiece(JigsawPiece piece) => _hoverPiece = piece;
 
-        public void SubmitPiece(JigSawPiece piece)
+        public void SubmitPiece(JigsawPiece piece)
         {
             if (piece.Group.Count > 1) return;
 
@@ -229,14 +229,14 @@ namespace Client.Runtime
             _scrollX = Mathf.Clamp(_scrollX, -maxScroll, 0);
         }
 
-        private void PickUpPiece(JigSawPiece piece)
+        private void PickUpPiece(JigsawPiece piece)
         {
             _activePieces.Remove(piece);
             piece.transform.SetParent(null);
             piece.StartManualDrag();
         }
 
-        private JigSawPiece GetPieceAtPosition(Vector3 worldPoint)
+        private JigsawPiece GetPieceAtPosition(Vector3 worldPoint)
         {
             if (_activePieces.Count == 0) return null;
             Vector3 localPoint = transform.InverseTransformPoint(worldPoint);

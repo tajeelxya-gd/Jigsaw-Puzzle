@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(JigSawPiece), typeof(JigsawPieceRenderer))]
+    [RequireComponent(typeof(JigsawPiece), typeof(JigsawPieceRenderer))]
     public sealed class JigsawPieceVFX : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
-        private JigSawPiece _jigsawPiece;
+        private JigsawPiece _jigsawPiece;
         private JigsawPieceRenderer _renderer;
 
         private void Awake()
         {
-            _jigsawPiece = GetComponent<JigSawPiece>();
+            _jigsawPiece = GetComponent<JigsawPiece>();
             _renderer = GetComponent<JigsawPieceRenderer>();
         }
 
