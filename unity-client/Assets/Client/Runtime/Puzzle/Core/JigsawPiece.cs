@@ -45,7 +45,12 @@ namespace Client.Runtime
         {
             var boardData = _board.Data;
             var data = JigsawBoardCalculator.GetNeighbours(Data.OriginalCell.Idx, boardData.YConstraint, boardData.XConstraint);
-            return default;
+            var neighbours = new List<JigsawPiece>();
+            if (data.Top != -1) neighbours.Add(_board.Pieces[data.Top]);
+            if (data.Bottom != -1) neighbours.Add(_board.Pieces[data.Bottom]);
+            if (data.Left != -1) neighbours.Add(_board.Pieces[data.Left]);
+            if (data.Right != -1) neighbours.Add(_board.Pieces[data.Right]);
+            return neighbours;
         }
 
         public void PlayVfx() => _vfx.Play();

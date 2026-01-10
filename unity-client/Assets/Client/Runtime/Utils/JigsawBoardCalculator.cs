@@ -10,7 +10,7 @@ namespace Client.Runtime
             int col = idx % cols;
 
             var top = (row > 0) ? idx - cols : -1;
-            var bot = (row < rows - 1) ? idx + col : -1;
+            var bot = (row < rows - 1) ? idx + cols : -1;
             var left = (col > 0) ? idx - 1 : -1;
             var right = (col < cols - 1) ? idx + 1 : -1;
 
