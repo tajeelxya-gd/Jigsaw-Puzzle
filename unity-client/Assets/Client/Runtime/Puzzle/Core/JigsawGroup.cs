@@ -4,10 +4,14 @@ namespace Client.Runtime
 {
     public sealed class JigsawGroup : HashSet<JigsawPiece>
     {
-        public readonly string Id;
+        public JigsawGroup() : base()
+        {
+            // Empty
+        }
 
-        public JigsawGroup(string id) : base() => Id = id;
-
-        public JigsawGroup(string id, IEnumerable<JigsawPiece> pieces) : base(pieces) => Id = id;
+        public JigsawGroup(IEnumerable<JigsawPiece> pieces) : base(pieces)
+        {
+            // Empty
+        }
     }
 }

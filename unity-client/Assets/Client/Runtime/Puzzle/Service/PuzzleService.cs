@@ -39,7 +39,6 @@ namespace Client.Runtime
         {
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
-            JigsawBoardCalculator.SetBoard(_board);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);

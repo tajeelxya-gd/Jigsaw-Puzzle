@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
@@ -15,7 +16,7 @@ namespace Client.Runtime
         [SerializeField] private ScaleController _scaleController;
 
         private IPuzzleTray _puzzleTray;
-        private float _scaleDown;
+        private JigsawBoard _board;
 
         public JigsawGroup Group { get; set; }
         public JigsawPieceData Data { get; private set; }
@@ -24,7 +25,7 @@ namespace Client.Runtime
         public void Inject(IResolver resolver)
         {
             var puzzleService = resolver.Resolve<IPuzzleService>();
-            _scaleDown = puzzleService.GetCurrentBoard().Data.TrayScaleReduction;
+            _board = puzzleService.GetCurrentBoard();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
         }
 
@@ -34,10 +35,17 @@ namespace Client.Runtime
             _collider.size = Data.OriginalCell.Size;
             _renderer.Init(rendererData);
 
-            Group = new JigsawGroup($"group_{GetInstanceID()}")
+            Group = new JigsawGroup()
             {
                 this
             };
+        }
+
+        public IEnumerable<JigsawPiece> GetNeighbours()
+        {
+            var boardData = _board.Data;
+            var data = JigsawBoardCalculator.GetNeighbours(Data.OriginalCell.Idx, boardData.YConstraint, boardData.XConstraint);
+            return default;
         }
 
         public void PlayVfx() => _vfx.Play();
@@ -81,7 +89,7 @@ namespace Client.Runtime
 
         public void ScaleUp() => _scaleController.ScaleTo(1f);
 
-        public void ScaleDown() => _scaleController.ScaleTo(_scaleDown);
+        public void ScaleDown() => _scaleController.ScaleTo(_board.Data.TrayScaleReduction);
 
         private void Awake()
         {
@@ -147,7 +155,7 @@ namespace Client.Runtime
             //     return;
             // }
 
-            _snapController.SnapToClosestCell(Data.Cells);
+            _snapController.SnapToClosestCell(_board.Cells);
         }
 
         private void HandleSnapped(JigsawBoardCell cell)
@@ -161,7 +169,7 @@ namespace Client.Runtime
                 foreach (var piece in groupToLock)
                 {
                     piece.IsLocked = true;
-                    var targetCell = Data.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
+                    var targetCell = _board.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
                     targetCell.LockPiece(piece);
                     piece.LockPiece();
                 }

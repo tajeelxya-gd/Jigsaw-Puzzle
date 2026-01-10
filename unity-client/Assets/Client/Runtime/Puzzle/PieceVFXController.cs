@@ -20,7 +20,7 @@ namespace Client.Runtime
         {
             // 1. Start with the current piece's group
             var pieceGroup = ev.jigSawPiece.Group;
-            JigsawGroup allToNotify = new("group_tmp", pieceGroup);
+            JigsawGroup allToNotify = new(pieceGroup);
 
             // 2. Prepare BFS to find all connected placed pieces
             Queue<JigsawPiece> searchQueue = new();
@@ -35,15 +35,12 @@ namespace Client.Runtime
             while (searchQueue.Count > 0)
             {
                 var current = searchQueue.Dequeue();
-                var idx = current.Data.OriginalCell.Idx;
-                var neighbors = JigsawBoardCalculator.GetNeighbours(idx);
+                var neighbors = current.GetNeighbours();
 
-                foreach (var cell in neighbors)
+                foreach (var piece in neighbors)
                 {
-                    var piece = cell?.Piece;
-
                     // If the neighbor is placed and we haven't processed it yet
-                    if (piece != null && piece.IsLocked && !allToNotify.Contains(piece))
+                    if (piece.IsLocked && !allToNotify.Contains(piece))
                     {
                         allToNotify.Add(piece);
                         searchQueue.Enqueue(piece); // Add to queue to check ITS neighbors
