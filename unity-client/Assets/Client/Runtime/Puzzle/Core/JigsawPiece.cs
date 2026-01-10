@@ -17,9 +17,9 @@ namespace Client.Runtime
 
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
+        private JigsawBoardCell _correctCell; // original cell
 
         public JigsawGroup Group { get; set; }
-        public JigsawPieceData Data { get; private set; }
         public bool IsLocked { get; private set; }
 
         public void Inject(IResolver resolver)
@@ -29,10 +29,10 @@ namespace Client.Runtime
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
         }
 
-        public void Init(JigsawPieceData data, JigsawPieceRendererData rendererData)
+        public void Init(JigsawBoardCell cell, JigsawPieceRendererData rendererData)
         {
-            Data = data;
-            _collider.size = Data.OriginalCell.Size;
+            _correctCell = cell;
+            _collider.size = _correctCell.Size;
             _renderer.Init(rendererData);
 
             Group = new JigsawGroup()
@@ -44,7 +44,7 @@ namespace Client.Runtime
         public IEnumerable<JigsawPiece> GetNeighbours()
         {
             var boardData = _board.Data;
-            var data = JigsawBoardCalculator.GetNeighbours(Data.OriginalCell.Idx, boardData.YConstraint, boardData.XConstraint);
+            var data = JigsawBoardCalculator.GetNeighbours(_correctCell.Idx, boardData.YConstraint, boardData.XConstraint);
             var neighbours = new List<JigsawPiece>();
             if (data.Top != -1) neighbours.Add(_board.Pieces[data.Top]);
             if (data.Bottom != -1) neighbours.Add(_board.Pieces[data.Bottom]);
@@ -139,7 +139,7 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            IsLocked = cell.Idx == Data.OriginalCell.Idx;
+            IsLocked = cell.Idx == _correctCell.Idx;
 
             if (IsLocked)
             {
@@ -148,7 +148,7 @@ namespace Client.Runtime
                 foreach (var piece in groupToLock)
                 {
                     piece.IsLocked = true;
-                    var targetCell = _board.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
+                    var targetCell = _board.Cells.First(c => c.Idx == piece._correctCell.Idx);
                     piece.LockPiece();
                 }
 

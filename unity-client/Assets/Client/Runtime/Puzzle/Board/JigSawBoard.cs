@@ -119,9 +119,8 @@ namespace Client.Runtime
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
             var rendererData = new JigsawPieceRendererData(mesh.GetComponent<Renderer>(), flatMesh.GetComponent<Renderer>(), _texture);
-            var pieceData = new JigsawPieceData(cell);
             piece.Inject(_resolver);
-            piece.Init(pieceData, rendererData);
+            piece.Init(cell, rendererData);
             _pieces.Add(piece);
         }
     }
