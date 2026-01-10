@@ -17,6 +17,12 @@ namespace Client.Runtime
             Size = size;
         }
 
-        public void Lock() => IsLocked = true;
+        public void Push(JigsawPiece piece)
+        {}
+
+        public JigsawPiece Pop()
+        {
+            return default;
+        }
     }
 }
