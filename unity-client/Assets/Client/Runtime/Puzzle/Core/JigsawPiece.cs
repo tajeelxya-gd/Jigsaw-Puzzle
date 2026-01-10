@@ -134,7 +134,29 @@ namespace Client.Runtime
                 return;
             }
 
-            // 3. Merge Logic
+            _snapController.SnapToClosestCell(_board.Cells);
+        }
+
+        private void HandleSnapped(JigsawBoardCell cell)
+        {
+            IsLocked = cell.Idx == Data.OriginalCell.Idx;
+
+            if (IsLocked)
+            {
+                var groupToLock = Group.ToArray();
+
+                foreach (var piece in groupToLock)
+                {
+                    piece.IsLocked = true;
+                    var targetCell = _board.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
+                    piece.LockPiece();
+                }
+
+                UniEvents.Raise(new PiecePlacedEvent(this));
+
+                return;
+            }
+
             // if (JoinRegistry.HasCorrectContacts())
             // {
             //     var kvps = JoinRegistry.Flush();
@@ -157,30 +179,8 @@ namespace Client.Runtime
             //         piece.SnapController.SnapToTransform(join.MergeTransform);
             //         piece.JoinGroup(join.Owner);
             //     }
-            //     return;
             // }
 
-            _snapController.SnapToClosestCell(_board.Cells);
-        }
-
-        private void HandleSnapped(JigsawBoardCell cell)
-        {
-            IsLocked = cell.Idx == Data.OriginalCell.Idx;
-
-            if (IsLocked)
-            {
-                var groupToLock = Group.ToArray();
-
-                foreach (var piece in groupToLock)
-                {
-                    piece.IsLocked = true;
-                    var targetCell = _board.Cells.First(c => c.Idx == piece.Data.OriginalCell.Idx);
-                    targetCell.LockPiece(piece);
-                    piece.LockPiece();
-                }
-
-                UniEvents.Raise(new PiecePlacedEvent(this));
-            }
         }
 
         private void LockPiece()
