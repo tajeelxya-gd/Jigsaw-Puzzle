@@ -18,8 +18,8 @@ namespace Client.Runtime
 
         public bool CheckWin()
         {
-            var placed = _board.Pieces.Count(itm => itm.IsLocked);
-            return placed == _board.Pieces.Count;
+            var placed = _board.Cells.Count(itm => itm.IsLocked);
+            return placed == _board.Cells.Count;
         }
 
         public void SetBoard(JigsawBoard board) => _board = board;

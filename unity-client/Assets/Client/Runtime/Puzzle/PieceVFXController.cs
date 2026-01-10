@@ -37,10 +37,12 @@ namespace Client.Runtime
                 var current = searchQueue.Dequeue();
                 var neighbors = current.GetNeighbours();
 
-                foreach (var piece in neighbors)
+                foreach (var cell in neighbors)
                 {
+                    var piece = cell.GetCorrectPiece();
+
                     // If the neighbor is placed and we haven't processed it yet
-                    if (piece.IsLocked && !allToNotify.Contains(piece))
+                    if (cell.IsLocked && !allToNotify.Contains(piece))
                     {
                         allToNotify.Add(piece);
                         searchQueue.Enqueue(piece); // Add to queue to check ITS neighbors

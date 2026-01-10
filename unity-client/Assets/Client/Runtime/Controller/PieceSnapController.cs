@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using UniTx.Runtime.Extensions;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(JigsawPiece))]
     public sealed class PieceSnapController : MonoBehaviour
     {
-        [SerializeField] private float _snapDuration = 0.25f; // Slightly faster feel for groups
+        [SerializeField] private float _snapDuration = 0.25f;
 
-        private JigsawPiece _piece;
         public event Action<JigsawBoardCell> OnSnapped;
 
-        private void Awake() => _piece = GetComponent<JigsawPiece>();
-
-        public void SnapToTransform(Transform target)
-        {
-            if (target == null) return;
-            SnapAsync(target, this.GetCancellationTokenOnDestroy()).Forget();
-        }
-
-        public void SnapToClosestCell(IEnumerable<JigsawBoardCell> cells)
+        public void SnapToClosestCell(JigsawGroup group, IEnumerable<JigsawBoardCell> cells)
         {
             if (cells == null) return;
 
@@ -43,19 +34,18 @@ namespace Client.Runtime
             }
 
             if (bestTarget == null) return;
-            SnapAsync(bestTarget, this.GetCancellationTokenOnDestroy()).Forget();
+            SnapAsync(group, bestTarget, this.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private async UniTask SnapAsync(JigsawBoardCell cell, CancellationToken cToken = default)
+        private async UniTask SnapAsync(JigsawGroup group, JigsawBoardCell cell, CancellationToken cToken = default)
         {
-            await SnapAsync(cell.transform, cToken);
-            OnSnapped?.Invoke(cell);
+            await SnapAsync(group, cell.transform, cToken);
+            OnSnapped.Broadcast(cell);
         }
 
-        private async UniTask SnapAsync(Transform targetTransform, CancellationToken cToken = default)
+        private async UniTask SnapAsync(JigsawGroup group, Transform targetTransform, CancellationToken cToken = default)
         {
             // 1. Capture the initial state of the entire group
-            var group = _piece.Group;
             int count = group.Count;
 
             Vector3[] startPositions = new Vector3[count];

@@ -17,10 +17,10 @@ namespace Client.Runtime
 
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
-        private JigsawBoardCell _correctCell; // original cell
+        public JigsawBoardCell CorrectCell { get; private set; } // original cell
+        private JigsawBoardCell _currentCell;
 
         public JigsawGroup Group { get; set; }
-        public bool IsLocked { get; private set; }
 
         public void Inject(IResolver resolver)
         {
@@ -31,8 +31,9 @@ namespace Client.Runtime
 
         public void Init(JigsawBoardCell cell, JigsawPieceRendererData rendererData)
         {
-            _correctCell = cell;
-            _collider.size = _correctCell.Size;
+            _currentCell = null;
+            CorrectCell = cell;
+            _collider.size = CorrectCell.Size;
             _renderer.Init(rendererData);
 
             Group = new JigsawGroup()
@@ -41,17 +42,8 @@ namespace Client.Runtime
             };
         }
 
-        public IEnumerable<JigsawPiece> GetNeighbours()
-        {
-            var boardData = _board.Data;
-            var data = JigsawBoardCalculator.GetNeighbours(_correctCell.Idx, boardData.YConstraint, boardData.XConstraint);
-            var neighbours = new List<JigsawPiece>();
-            if (data.Top != -1) neighbours.Add(_board.Pieces[data.Top]);
-            if (data.Bottom != -1) neighbours.Add(_board.Pieces[data.Bottom]);
-            if (data.Left != -1) neighbours.Add(_board.Pieces[data.Left]);
-            if (data.Right != -1) neighbours.Add(_board.Pieces[data.Right]);
-            return neighbours;
-        }
+        public IEnumerable<JigsawBoardCell> GetNeighbours()
+            => _currentCell == null ? Enumerable.Empty<JigsawBoardCell>() : _currentCell.GetNeighbours();
 
         public void PlayVfx() => _vfx.Play();
 
@@ -112,7 +104,14 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDragStarted() => SetPosY(0.01f);
+        private void HandleDragStarted()
+        {
+            foreach (var piece in Group)
+            {
+                _currentCell?.Pop();
+            }
+            SetPosY(0.01f);
+        }
 
         private void HandleOnDragged(Vector3 delta)
         {
@@ -134,21 +133,19 @@ namespace Client.Runtime
                 return;
             }
 
-            _snapController.SnapToClosestCell(_board.Cells);
+            _snapController.SnapToClosestCell(Group, _board.Cells);
         }
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            IsLocked = cell.Idx == _correctCell.Idx;
+            _currentCell = cell;
 
-            if (IsLocked)
+            if (cell.Push(this))
             {
-                var groupToLock = Group.ToArray();
-
-                foreach (var piece in groupToLock)
+                foreach (var piece in Group)
                 {
-                    piece.IsLocked = true;
-                    var targetCell = _board.Cells.First(c => c.Idx == piece._correctCell.Idx);
+                    piece.CorrectCell.Push(piece);
+                    piece._currentCell = piece.CorrectCell;
                     piece.LockPiece();
                 }
 
@@ -157,30 +154,20 @@ namespace Client.Runtime
                 return;
             }
 
-            // if (JoinRegistry.HasCorrectContacts())
-            // {
-            //     var kvps = JoinRegistry.Flush();
-            //     HashSet<(string, string)> processedGroups = new();
+            var neighbours = GetNeighbours();
+            var correctNeighbours = CorrectCell.GetNeighbours();
+            foreach (var neighbour in neighbours)
+            {
+                foreach (var correctNeighbour in correctNeighbours)
+                {
+                    var piece = neighbour.GetPieceOrDefaultWithIdx(correctNeighbour.Idx);
 
-            //     foreach (var kvp in kvps)
-            //     {
-            //         var join = kvp.join;
-            //         var piece = kvp.piece;
-            //         var id1 = piece.Group.Id;
-            //         var id2 = join.Owner.Group.Id;
+                    if (piece == null) continue;
 
-            //         if (id1 == id2) continue;
+                    JoinGroup(piece);
+                }
 
-            //         var pair = string.CompareOrdinal(id1, id2) < 0 ? (id1, id2) : (id2, id1);
-
-            //         if (!processedGroups.Add(pair)) continue;
-
-            //         join.gameObject.SetActive(false);
-            //         piece.SnapController.SnapToTransform(join.MergeTransform);
-            //         piece.JoinGroup(join.Owner);
-            //     }
-            // }
-
+            }
         }
 
         private void LockPiece()
