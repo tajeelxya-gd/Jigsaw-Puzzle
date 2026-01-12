@@ -16,6 +16,7 @@ namespace Client.Runtime
         private IContentService _contentService;
         private IEntityService _entityService;
         private IWinConditionChecker _winConditionChecker;
+        private IPieceVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
         private Transform _puzzleBoard;
@@ -27,6 +28,7 @@ namespace Client.Runtime
             _entityService = resolver.Resolve<IEntityService>();
             _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
+            _vfxController = resolver.Resolve<IPieceVFXController>();
         }
 
         public void Initialise()
@@ -68,6 +70,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
+            await _vfxController.AnimateBoardCompletionAsync(_board.Pieces, cToken);
             await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
         }

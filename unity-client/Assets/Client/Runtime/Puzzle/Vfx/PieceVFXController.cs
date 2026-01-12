@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
+using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PieceVFXController : IInitialisable, IResettable
+    public sealed class PieceVFXController : IPieceVFXController, IInitialisable, IResettable
     {
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
@@ -22,13 +26,14 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
-        private void HandlePiecePlaced(GroupPlacedEvent ev)
+        private void HandlePiecePlaced(GroupPlacedEvent ev) => HighlightGroupAndNeighbours(ev.Group);
+
+        public void HighlightGroupAndNeighbours(JigsawGroup group)
         {
             // 1. Run BFS to find all connected locked pieces
-            var pieceGroup = ev.Group;
             Queue<JigsawPiece> searchQueue = new();
 
-            foreach (var p in pieceGroup)
+            foreach (var p in group)
             {
                 searchQueue.Enqueue(p);
                 _vfxQueue.Add(p);
@@ -57,13 +62,53 @@ namespace Client.Runtime
             TriggerBatchVfx();
         }
 
+        public async UniTask AnimateBoardCompletionAsync(IEnumerable<JigsawPiece> pieces, CancellationToken cToken = default)
+        {
+            var tasks = new List<UniTask>();
+
+            float liftAmount = 0.01f;      // Height of the pop
+            float duration = 0.5f;        // Total time for one piece to go up and down
+            int delayBetweenPieces = 50; // Delay in ms between each piece starting
+
+            foreach (var piece in pieces)
+            {
+                if (cToken.IsCancellationRequested) break;
+
+                tasks.Add(ManualBounceAsync(piece, liftAmount, duration, cToken));
+
+                await UniTask.Delay(delayBetweenPieces, cancellationToken: cToken);
+            }
+
+            await UniTask.WhenAll(tasks);
+        }
+
+        private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, CancellationToken cToken)
+        {
+            Vector3 startPos = piece.transform.localPosition;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                if (cToken.IsCancellationRequested) return;
+
+                elapsed += Time.deltaTime;
+                float normalizedTime = elapsed / duration;
+
+                float yOffset = Mathf.Sin(normalizedTime * Mathf.PI) * amount;
+
+                piece.transform.localPosition = startPos + new Vector3(0, yOffset, 0);
+
+                await UniTask.Yield(PlayerLoopTiming.Update, cToken);
+            }
+
+            piece.transform.localPosition = startPos;
+        }
+
         private async void TriggerBatchVfx()
         {
             if (_isBatching) return;
             _isBatching = true;
 
-            // Wait until the end of the frame/next tick so all simultaneous 
-            // events have finished adding their pieces to _vfxQueue
             await Task.Yield();
 
             foreach (var p in _vfxQueue)
