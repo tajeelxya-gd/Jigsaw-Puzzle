@@ -7,11 +7,41 @@
   {
     "_id": "mg_level_2_cell_action_reward_1",
     "_cellIdx": 0,
-    "_rewardId": "mg_reward_ empty_2"
+    "_rewardId": "mg_reward_ empty"
   },
   {
     "_id": "mg_level_2_cell_action_reward_2",
     "_cellIdx": 11,
-    "_rewardId": "mg_reward_ empty_3"
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_3_cell_action_reward_1",
+    "_cellIdx": 18,
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_3_cell_action_reward_2",
+    "_cellIdx": 19,
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_4_cell_action_reward_1",
+    "_cellIdx": 2,
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_4_cell_action_reward_2",
+    "_cellIdx": 10,
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_4_cell_action_reward_3",
+    "_cellIdx": 18,
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_4_cell_action_reward_4",
+    "_cellIdx": 21,
+    "_rewardId": "mg_reward_ empty"
   }
 ]
