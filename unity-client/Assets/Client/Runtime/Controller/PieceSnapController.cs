@@ -39,11 +39,13 @@ namespace Client.Runtime
 
         private async UniTask SnapAsync(JigsawGroup group, JigsawBoardCell cell, CancellationToken cToken = default)
         {
-            await SnapAsync(group, cell.transform, cToken);
+            var cellTransform = cell.transform;
+            var snapPos = new Vector3(cellTransform.position.x, cell.GetNextHeight(), cellTransform.position.z);
+            await SnapAsync(group, snapPos, cellTransform.rotation, cToken);
             OnSnapped.Broadcast(cell);
         }
 
-        private async UniTask SnapAsync(JigsawGroup group, Transform targetTransform, CancellationToken cToken = default)
+        private async UniTask SnapAsync(JigsawGroup group, Vector3 snapPos, Quaternion snapRot, CancellationToken cToken = default)
         {
             // 1. Capture the initial state of the entire group
             int count = group.Count;
@@ -70,7 +72,6 @@ namespace Client.Runtime
             while (elapsed < _snapDuration)
             {
                 cToken.ThrowIfCancellationRequested();
-                if (targetTransform == null) return;
 
                 elapsed += Time.deltaTime;
                 float normalizedTime = Mathf.Clamp01(elapsed / _snapDuration);
@@ -81,25 +82,22 @@ namespace Client.Runtime
                 {
                     if (pieces[j] == null) continue;
 
-                    Vector3 targetPosWithOffset = targetTransform.position + relativeOffsets[j];
+                    Vector3 targetPosWithOffset = snapPos + relativeOffsets[j];
                     pieces[j].transform.position = Vector3.Lerp(startPositions[j], targetPosWithOffset, t);
 
                     // Usually, for jigsaw clusters, the whole group shares the same rotation alignment
-                    pieces[j].transform.rotation = Quaternion.Slerp(startRotations[j], targetTransform.rotation, t);
+                    pieces[j].transform.rotation = Quaternion.Slerp(startRotations[j], snapRot, t);
                 }
 
                 await UniTask.Yield(PlayerLoopTiming.Update, cToken);
             }
 
             // 3. Finalize placement for all pieces
-            if (targetTransform != null)
+            for (int j = 0; j < pieces.Length; j++)
             {
-                for (int j = 0; j < pieces.Length; j++)
-                {
-                    if (pieces[j] == null) continue;
-                    pieces[j].transform.position = targetTransform.position + relativeOffsets[j];
-                    pieces[j].transform.rotation = targetTransform.rotation;
-                }
+                if (pieces[j] == null) continue;
+                pieces[j].transform.position = snapPos + relativeOffsets[j];
+                pieces[j].transform.rotation = snapRot;
             }
         }
     }

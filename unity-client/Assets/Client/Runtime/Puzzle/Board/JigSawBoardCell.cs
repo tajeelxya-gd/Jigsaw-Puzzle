@@ -25,8 +25,9 @@ namespace Client.Runtime
 
         public bool Push(JigsawPiece piece)
         {
+            var newY = GetNextHeight();
             _stack.Push(piece);
-            SetHeight(piece);
+            SetHeight(piece, newY);
 
             if (piece.CorrectIdx == Idx)
             {
@@ -49,11 +50,12 @@ namespace Client.Runtime
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
 
-        private void SetHeight(JigsawPiece piece)
+        public float GetNextHeight() => _stack.Count * 0.0001f;
+
+        private void SetHeight(JigsawPiece piece, float height)
         {
-            var newY = (_stack.Count - 1) * 0.0001f;
             var pTransform = piece.transform;
-            pTransform.position = new Vector3(pTransform.position.x, newY, pTransform.position.z);
+            pTransform.position = new Vector3(pTransform.position.x, height, pTransform.position.z);
         }
     }
 }
