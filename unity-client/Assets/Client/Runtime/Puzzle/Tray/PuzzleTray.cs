@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -38,7 +35,7 @@ namespace Client.Runtime
             _activePieces.Clear();
             foreach (var p in pieces)
             {
-                p.ScaleDown();
+                p.OnEnterTray();
                 _activePieces.Add(p);
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
@@ -249,8 +246,7 @@ namespace Client.Runtime
         {
             if (other.TryGetComponent<JigsawPiece>(out var piece))
             {
-                piece.IsOverTray = true;
-                piece.ScaleDown();
+                piece.OnEnterTray();
             }
         }
 
@@ -258,8 +254,7 @@ namespace Client.Runtime
         {
             if (other.TryGetComponent<JigsawPiece>(out var piece))
             {
-                piece.IsOverTray = false;
-                piece.ScaleUp();
+                piece.OnExitTray();
             }
         }
     }

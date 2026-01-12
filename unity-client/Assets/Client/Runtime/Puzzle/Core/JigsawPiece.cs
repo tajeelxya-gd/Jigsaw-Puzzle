@@ -20,7 +20,7 @@ namespace Client.Runtime
         public int CorrectIdx { get; private set; }
         public int CurrentIdx { get; set; }
         public JigsawGroup Group { get; set; }
-        public bool IsOverTray { get; set; }
+        public bool IsOverTray { get; private set; }
 
         public void Inject(IResolver resolver)
         {
@@ -45,14 +45,18 @@ namespace Client.Runtime
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
-        public void ScaleUp()
+        public void OnExitTray()
         {
-            if (Group.Count == 1) _scaleController.ScaleTo(1f);
+            IsOverTray = false;
+            if (Group.Count > 1) return;
+            _scaleController.ScaleTo(1f);
         }
 
-        public void ScaleDown()
+        public void OnEnterTray()
         {
-            if (Group.Count == 1) _scaleController.ScaleTo(_puzzleService.GetCurrentBoard().Data.TrayScaleReduction);
+            IsOverTray = true;
+            if (Group.Count > 1) return;
+            _scaleController.ScaleTo(_puzzleService.GetCurrentBoard().Data.TrayScaleReduction);
         }
 
         public void LockPiece()
@@ -103,10 +107,8 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            // 1. Update the CurrentIdx for all pieces in the group based on where this piece landed
             Group.SetCurrentCells(cell.Idx, this);
 
-            // 2. Check if the placement resulted in the anchor being "Locked"
             if (cell.Idx == CorrectIdx && cell.Contains(this))
             {
                 Group.Lock();
@@ -114,8 +116,6 @@ namespace Client.Runtime
                 return;
             }
 
-            // 3. Neighbor Merge Check
-            // We create a copy of the group to iterate because Join() modifies the collection
             var piecesToCheck = new List<JigsawPiece>(Group);
 
             foreach (var piece in piecesToCheck)
@@ -136,21 +136,15 @@ namespace Client.Runtime
 
             var neighborCell = JigsawBoardCalculator.Board.Cells[neighborIdx];
 
-            // Scan every piece currently inside the neighbor cell
             foreach (var otherPiece in neighborCell.AllPieces)
             {
                 if (otherPiece == null) continue;
 
-                // Verify if this piece is the mathematically correct neighbor
                 bool isCorrectNeighbor = IsMathematicallyAdjacent(piece, otherPiece);
 
-                // Merge if it's the right neighbor and belongs to a different group
                 if (isCorrectNeighbor && piece.Group != otherPiece.Group)
                 {
                     piece.Group.Join(otherPiece.Group);
-
-                    // Once a merge is found in this cell, the whole stack 
-                    // belongs to the same group now, so we can stop scanning this cell.
                     break;
                 }
             }
