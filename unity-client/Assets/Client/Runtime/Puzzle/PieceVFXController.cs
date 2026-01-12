@@ -1,18 +1,14 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
-using UniTx.Runtime.IoC;
 
 namespace Client.Runtime
 {
-    public sealed class PieceVFXController : IInjectable, IInitialisable, IResettable
+    public sealed class PieceVFXController : IInitialisable, IResettable
     {
-        private IPuzzleService _puzzleService;
-
-        public void Inject(IResolver resolver)
-        {
-            _puzzleService = resolver.Resolve<IPuzzleService>();
-        }
+        private readonly HashSet<JigsawPiece> _vfxQueue = new();
+        private bool _isBatching;
 
         public void Initialise()
         {
@@ -22,24 +18,22 @@ namespace Client.Runtime
         public void Reset()
         {
             UniEvents.Unsubscribe<GroupPlacedEvent>(HandlePiecePlaced);
+            _vfxQueue.Clear();
+            _isBatching = false;
         }
 
         private void HandlePiecePlaced(GroupPlacedEvent ev)
         {
-            // 1. Start with the current piece's group
+            // 1. Run BFS to find all connected locked pieces
             var pieceGroup = ev.Group;
-            JigsawGroup allToNotify = new(pieceGroup);
-
-            // 2. Prepare BFS to find all connected placed pieces
             Queue<JigsawPiece> searchQueue = new();
 
-            // Add all current group members to the queue to check their neighbors too
             foreach (var p in pieceGroup)
             {
                 searchQueue.Enqueue(p);
+                _vfxQueue.Add(p);
             }
 
-            // 3. Crawl through neighbors of neighbors
             while (searchQueue.Count > 0)
             {
                 var current = searchQueue.Dequeue();
@@ -47,24 +41,38 @@ namespace Client.Runtime
 
                 foreach (var cell in neighbors)
                 {
-                    // If the neighbor is placed and we haven't processed it yet
                     if (cell.IsLocked)
                     {
                         var piece = cell.GetCorrectPiece();
-                        if (!allToNotify.Contains(piece))
+                        // Only add to search if not already in our global VFX batch
+                        if (_vfxQueue.Add(piece))
                         {
-                            allToNotify.Add(piece);
-                            searchQueue.Enqueue(piece); // Add to queue to check ITS neighbors
+                            searchQueue.Enqueue(piece);
                         }
                     }
                 }
             }
 
-            // 4. Play VFX
-            foreach (var p in allToNotify)
+            // 2. Trigger the batch play once at the end of the frame
+            TriggerBatchVfx();
+        }
+
+        private async void TriggerBatchVfx()
+        {
+            if (_isBatching) return;
+            _isBatching = true;
+
+            // Wait until the end of the frame/next tick so all simultaneous 
+            // events have finished adding their pieces to _vfxQueue
+            await Task.Yield();
+
+            foreach (var p in _vfxQueue)
             {
-                p.PlayVfx();
+                if (p != null) p.PlayVfx();
             }
+
+            _vfxQueue.Clear();
+            _isBatching = false;
         }
     }
 }

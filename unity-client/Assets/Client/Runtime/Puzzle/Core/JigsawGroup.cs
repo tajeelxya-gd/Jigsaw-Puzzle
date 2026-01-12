@@ -108,15 +108,33 @@ namespace Client.Runtime
                 {
                     var cell = JigsawBoardCalculator.Board.Cells[piece.CurrentIdx];
 
-                    // Only pop if this piece is the one currently on top of the stack
-                    if (cell.OccupyingPiece == piece)
+                    // If the piece is in this cell, remove it regardless of stack position
+                    if (cell.Contains(piece))
                     {
-                        cell.TryPop();
+                        RemovePieceFromStack(cell, piece);
                     }
 
-                    // Reset the index as the piece is now detached from the grid
                     piece.CurrentIdx = -1;
                 }
+            }
+        }
+
+        private void RemovePieceFromStack(JigsawBoardCell cell, JigsawPiece pieceToRemove)
+        {
+            // Use a temporary list to filter out the piece
+            // (Stacks don't allow removing from the middle, so we rebuild)
+            var tempStorage = new List<JigsawPiece>();
+
+            while (cell.HasAnyPiece)
+            {
+                var p = cell.TryPop();
+                if (p != pieceToRemove) tempStorage.Add(p);
+            }
+
+            // Push back in reverse order to maintain original hierarchy
+            for (int i = tempStorage.Count - 1; i >= 0; i--)
+            {
+                cell.Push(tempStorage[i]);
             }
         }
     }

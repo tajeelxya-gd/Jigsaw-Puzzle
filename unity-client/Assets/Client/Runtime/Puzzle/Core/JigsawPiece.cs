@@ -107,8 +107,8 @@ namespace Client.Runtime
             // 1. Update the CurrentIdx for all pieces in the group based on where this piece landed
             Group.SetCurrentCells(cell.Idx, this);
 
-            // 2. If the piece is in its correct home, lock it and exit
-            if (cell.Push(this))
+            // 2. Check if the placement resulted in the anchor being "Locked"
+            if (cell.Idx == CorrectIdx && cell.Contains(this))
             {
                 Group.Lock();
                 UniEvents.Raise(new GroupPlacedEvent(Group));
@@ -135,21 +135,24 @@ namespace Client.Runtime
         {
             if (neighborIdx == -1) return;
 
-            // Get the cell at the neighbor index
             var neighborCell = JigsawBoardCalculator.Board.Cells[neighborIdx];
 
-            // Check if there is a piece already sitting in that cell
-            if (neighborCell.OccupyingPiece != null)
+            // Scan every piece currently inside the neighbor cell
+            foreach (var otherPiece in neighborCell.AllPieces)
             {
-                var otherPiece = neighborCell.OccupyingPiece;
+                if (otherPiece == null) continue;
 
-                // If the pieces are mathematically supposed to be neighbors
-                // (Checking if their CorrectIdx distance matches their CurrentIdx distance)
+                // Verify if this piece is the mathematically correct neighbor
                 bool isCorrectNeighbor = IsMathematicallyAdjacent(piece, otherPiece);
 
+                // Merge if it's the right neighbor and belongs to a different group
                 if (isCorrectNeighbor && piece.Group != otherPiece.Group)
                 {
                     piece.Group.Join(otherPiece.Group);
+
+                    // Once a merge is found in this cell, the whole stack 
+                    // belongs to the same group now, so we can stop scanning this cell.
+                    break;
                 }
             }
         }

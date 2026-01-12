@@ -11,8 +11,10 @@ namespace Client.Runtime
         public int Idx { get; private set; }
         public Vector3 Size { get; private set; }
         public bool IsLocked { get; private set; }
+        public IEnumerable<JigsawPiece> AllPieces => _stack;
+        public bool HasAnyPiece => _stack.Count > 0;
 
-        public JigsawPiece OccupyingPiece => _stack.Count > 0 ? _stack.Peek() : null;
+        public bool Contains(JigsawPiece piece) => _stack.Contains(piece);
 
         public void SetData(int idx, Vector3 size, JigsawBoard board)
         {
@@ -23,19 +25,35 @@ namespace Client.Runtime
 
         public bool Push(JigsawPiece piece)
         {
+            _stack.Push(piece);
+            SetHeight(piece);
+
             if (piece.CorrectIdx == Idx)
             {
-                _stack.Push(piece);
                 IsLocked = true;
                 return true;
             }
 
-            _stack.Push(piece);
             return false;
         }
 
-        public JigsawPiece TryPop() => _stack.TryPop(out var result) ? result : null;
+        public JigsawPiece TryPop()
+        {
+            if (_stack.TryPop(out var result))
+            {
+                if (result.CorrectIdx == Idx) IsLocked = false;
+                return result;
+            }
+            return null;
+        }
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
+
+        private void SetHeight(JigsawPiece piece)
+        {
+            var newY = (_stack.Count - 1) * 0.0001f;
+            var pTransform = piece.transform;
+            pTransform.position = new Vector3(pTransform.position.x, newY, pTransform.position.z);
+        }
     }
 }
