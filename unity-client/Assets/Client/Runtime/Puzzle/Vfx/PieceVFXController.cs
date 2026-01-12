@@ -67,10 +67,10 @@ namespace Client.Runtime
         {
             var allTasks = new List<UniTask>();
 
-            float liftAmount = 0.015f;
+            float liftAmount = 0.017f;
             float duration = 0.5f;
-            int delayBetweenGroups = 100;
-            int delayBetweenPiecesInGroup = 20;
+            float delayBetweenGroups = 0.1f;
+            float delayBetweenPiecesInGroup = 0.05f;
 
             // Use Select to keep track of the original index for math
             var indexedPieces = pieces.Select((piece, index) => new { piece, index });
@@ -89,10 +89,10 @@ namespace Client.Runtime
                     allTasks.Add(ManualBounceAsync(item.piece, liftAmount, duration, cToken));
 
                     if (delayBetweenPiecesInGroup > 0)
-                        await UniTask.Delay(delayBetweenPiecesInGroup, cancellationToken: cToken);
+                        await UniTask.Delay(TimeSpan.FromSeconds(delayBetweenPiecesInGroup), cancellationToken: cToken);
                 }
 
-                await UniTask.Delay(delayBetweenGroups, cancellationToken: cToken);
+                await UniTask.Delay(TimeSpan.FromSeconds(delayBetweenGroups), cancellationToken: cToken);
             }
 
             await UniTask.WhenAll(allTasks);
