@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -27,9 +26,8 @@ namespace Client.Runtime
         /// <returns></returns>
         public bool Push(JigsawPiece piece)
         {
-            if (piece.CorrectCell.Idx == Idx)
+            if (piece.CorrectIdx == Idx)
             {
-                if (!IsLocked) _stack.Push(piece);
                 IsLocked = true;
                 return true;
             }
@@ -39,20 +37,6 @@ namespace Client.Runtime
         }
 
         public JigsawPiece Pop() => _stack.Pop();
-
-        public JigsawPiece GetPieceOrDefaultWithIdx(int idx) => _stack.FirstOrDefault(itm => itm.CorrectCell.Idx == idx);
-
-        public IEnumerable<JigsawBoardCell> GetNeighbours()
-        {
-            var boardData = _board.Data;
-            var data = JigsawBoardCalculator.GetNeighbours(Idx, boardData.YConstraint, boardData.XConstraint);
-            var neighbours = new List<JigsawBoardCell>();
-            if (data.Top != -1) neighbours.Add(_board.Cells[data.Top]);
-            if (data.Bottom != -1) neighbours.Add(_board.Cells[data.Bottom]);
-            if (data.Left != -1) neighbours.Add(_board.Cells[data.Left]);
-            if (data.Right != -1) neighbours.Add(_board.Cells[data.Right]);
-            return neighbours;
-        }
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
     }

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -16,24 +14,23 @@ namespace Client.Runtime
         [SerializeField] private ScaleController _scaleController;
 
         private IPuzzleTray _puzzleTray;
-        private JigsawBoard _board;
-        public JigsawBoardCell CorrectCell { get; private set; } // original cell
-        private JigsawBoardCell _currentCell;
+        private IPuzzleService _puzzleService;
 
+        public int CorrectIdx { get; private set; }
+        public int CurrentIdx { get; private set; }
         public JigsawGroup Group { get; set; }
 
         public void Inject(IResolver resolver)
         {
-            var puzzleService = resolver.Resolve<IPuzzleService>();
-            _board = puzzleService.GetCurrentBoard();
+            _puzzleService = resolver.Resolve<IPuzzleService>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
         }
 
         public void Init(JigsawBoardCell cell, JigsawPieceRendererData rendererData)
         {
-            _currentCell = null;
-            CorrectCell = cell;
-            _collider.size = CorrectCell.Size;
+            CorrectIdx = cell.Idx;
+            CurrentIdx = -1;
+            _collider.size = cell.Size;
             _renderer.Init(rendererData);
 
             Group = new JigsawGroup()
@@ -42,16 +39,21 @@ namespace Client.Runtime
             };
         }
 
-        public IEnumerable<JigsawBoardCell> GetNeighbours()
-            => _currentCell == null ? Enumerable.Empty<JigsawBoardCell>() : _currentCell.GetNeighbours();
-
         public void PlayVfx() => _vfx.Play();
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
         public void ScaleUp() => _scaleController.ScaleTo(1f);
 
-        public void ScaleDown() => _scaleController.ScaleTo(_board.Data.TrayScaleReduction);
+        public void ScaleDown() => _scaleController.ScaleTo(_puzzleService.GetCurrentBoard().Data.TrayScaleReduction);
+
+        public void LockPiece()
+        {
+            _dragController.enabled = false;
+            _collider.enabled = false;
+            _snapController.enabled = false;
+            _renderer.SetActive(isFlat: true);
+        }
 
         private void Awake()
         {
@@ -69,14 +71,7 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDragStarted()
-        {
-            foreach (var piece in Group)
-            {
-                piece._currentCell?.Pop();
-            }
-            Group.SetPosY(0.01f);
-        }
+        private void HandleDragStarted() => Group.SetPosY(0.01f);
 
         private void HandleOnDragged(Vector3 delta)
         {
@@ -98,49 +93,19 @@ namespace Client.Runtime
                 return;
             }
 
-            _snapController.SnapToClosestCell(Group, _board.Cells);
+            _snapController.SnapToClosestCell(Group, _puzzleService.GetCurrentBoard().Cells);
         }
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
-            _currentCell = cell;
-
             if (cell.Push(this))
             {
-                foreach (var piece in Group)
-                {
-                    piece.CorrectCell.Push(piece);
-                    piece._currentCell = piece.CorrectCell;
-                    piece.LockPiece();
-                }
+                Group.Lock();
 
-                UniEvents.Raise(new PiecePlacedEvent(this));
+                UniEvents.Raise(new GroupPlacedEvent(Group));
 
                 return;
             }
-
-            var neighbours = GetNeighbours();
-            var correctNeighbours = CorrectCell.GetNeighbours();
-            foreach (var neighbour in neighbours)
-            {
-                foreach (var correctNeighbour in correctNeighbours)
-                {
-                    var piece = neighbour.GetPieceOrDefaultWithIdx(correctNeighbour.Idx);
-
-                    if (piece == null) continue;
-
-                    Group.Join(piece.Group);
-                }
-
-            }
-        }
-
-        private void LockPiece()
-        {
-            _dragController.enabled = false;
-            _collider.enabled = false;
-            _snapController.enabled = false;
-            _renderer.SetActive(isFlat: true);
         }
     }
 }

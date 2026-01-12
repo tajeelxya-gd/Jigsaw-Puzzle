@@ -26,15 +26,15 @@ namespace Client.Runtime
 
         public void Initialise()
         {
-            UniEvents.Subscribe<PiecePlacedEvent>(OnPiecePlaced);
+            UniEvents.Subscribe<GroupPlacedEvent>(OnPiecePlaced);
         }
 
         public void Reset()
         {
-            UniEvents.Unsubscribe<PiecePlacedEvent>(OnPiecePlaced);
+            UniEvents.Unsubscribe<GroupPlacedEvent>(OnPiecePlaced);
         }
 
-        private void OnPiecePlaced(PiecePlacedEvent @event)
+        private void OnPiecePlaced(GroupPlacedEvent @event)
         {
             if (CheckWin())
             {

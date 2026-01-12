@@ -19,7 +19,7 @@ namespace Client.Runtime
         {
             if (this == other) return;
 
-            var groupToKeep = this.Count >= other.Count ? this : other;
+            var groupToKeep = Count >= other.Count ? this : other;
             var groupToDiscard = (groupToKeep == this) ? other : this;
 
             foreach (var piece in groupToDiscard)
@@ -49,6 +49,15 @@ namespace Client.Runtime
                 var pieceTransform = piece.transform;
                 pieceTransform.position = new Vector3(pieceTransform.position.x, y, pieceTransform.position.z);
             }
+        }
+
+        public void Lock()
+        {
+            foreach (var piece in this)
+            {
+                piece.LockPiece();
+            }
+            SetPosY(0f);
         }
     }
 }
