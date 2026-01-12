@@ -57,7 +57,7 @@ namespace Client.Runtime
             {
                 piece.LockPiece();
             }
-            SetPosY(0f);
+            SetPosY(-0.0001f);
         }
 
         public void SetCurrentCells(int anchorIdx, JigsawPiece anchorPiece)
