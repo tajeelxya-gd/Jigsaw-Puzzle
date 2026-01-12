@@ -1,12 +1,19 @@
 [
   {
-    "_id": "level_1",
-    "_boardId": "_4x3_standard_board",
-    "_imageKey": "img_island"
+    "_id": "mg_level_1",
+    "_boardId": "mg_4x3_standard_board",
+    "_imageKey": "img_island",
+    "_cellActionIds": [
+      "mg_level_1_cell_action_reward_1"
+    ]
   },
   {
-    "_id": "level_2",
-    "_boardId": "_4x3_standard_board",
-    "_imageKey": "img_lion"
+    "_id": "mg_level_2",
+    "_boardId": "mg_4x3_standard_board",
+    "_imageKey": "img_lion",
+    "_cellActionIds": [
+      "mg_level_2_cell_action_reward_1",
+      "mg_level_2_cell_action_reward_2"
+    ]
   }
 ]

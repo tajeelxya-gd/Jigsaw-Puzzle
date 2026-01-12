@@ -41,7 +41,7 @@ namespace Client.Runtime
         {
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
-            await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
+            await _board.LoadPuzzleAsync(levelData, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
@@ -70,7 +70,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), cancellationToken: cToken);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(_board.Pieces, _board.Data.YConstraint, AnimationOrder.RowByRow, cToken);
             await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();

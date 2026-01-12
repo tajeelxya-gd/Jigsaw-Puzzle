@@ -7,6 +7,7 @@ namespace Client.Runtime
     {
         private readonly Stack<JigsawPiece> _stack = new();
         private JigsawBoard _board;
+        private ICellActionData _actionData;
 
         public int Idx { get; private set; }
         public Vector3 Size { get; private set; }
@@ -16,11 +17,12 @@ namespace Client.Runtime
 
         public bool Contains(JigsawPiece piece) => _stack.Contains(piece);
 
-        public void SetData(int idx, Vector3 size, JigsawBoard board)
+        public void SetData(int idx, Vector3 size, JigsawBoard board, ICellActionData actionData)
         {
             Idx = idx;
             Size = size;
             _board = board;
+            _actionData = actionData;
         }
 
         public bool Push(JigsawPiece piece)
@@ -32,6 +34,8 @@ namespace Client.Runtime
             if (piece.CorrectIdx == Idx)
             {
                 IsLocked = true;
+                CellActionProcessor.Process(_actionData);
+                _actionData = null;
                 return true;
             }
 

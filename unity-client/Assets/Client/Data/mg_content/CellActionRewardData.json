@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "mg_level_1_cell_action_reward_1",
+    "_cellIdx": 4,
+    "_rewardId": "mg_reward_ empty"
+  },
+  {
+    "_id": "mg_level_2_cell_action_reward_1",
+    "_cellIdx": 0,
+    "_rewardId": "mg_reward_ empty_2"
+  },
+  {
+    "_id": "mg_level_2_cell_action_reward_2",
+    "_cellIdx": 11,
+    "_rewardId": "mg_reward_ empty_3"
+  }
+]

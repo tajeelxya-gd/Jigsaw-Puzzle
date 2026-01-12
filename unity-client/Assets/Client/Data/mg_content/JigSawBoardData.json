@@ -1,30 +1,29 @@
 [
   {
-    "_id": "_4x3_standard_board",
+    "_id": "mg_4x3_standard_board",
     "_xConstraint": 4,
     "_yConstraint": 3,
-    "_assetDataId": "_4x3_standard_board_asset_data",
-    "_fullImageId": "full_image_4x3_standard_board",
-    "_gridId": "grid_4x3_standard_board",
-    "_flatGridId": "grid_4x3_standard_board_flat",
+    "_assetDataId": "mg_4x3_standard_board_asset_data",
+    "_gridId": "mg_4x3_standard_board_grid",
+    "_flatGridId": "mg_4x3_standard_board_flat_grid",
     "_trayScale": 0.33
   },
   {
-    "_id": "_6x4_standard_board",
+    "_id": "mg_6x4_standard_board",
     "_xConstraint": 6,
     "_yConstraint": 4,
-    "_assetDataId": "_6x4_standard_board_asset_data",
-    "_fullImageId": "full_image_6x4_standard_board",
-    "_gridId": "grid_6x4_standard_board",
+    "_assetDataId": "mg_6x4_standard_board_asset_data",
+    "_gridId": "mg_6x4_standard_board_grid",
+    "_flatGridId": "mg_6x4_standard_board_flat_grid",
     "_trayScale": 0.5
   },
   {
-    "_id": "_7x5_standard_board",
+    "_id": "mg_7x5_standard_board",
     "_xConstraint": 7,
     "_yConstraint": 5,
-    "_assetDataId": "_7x5_standard_board_asset_data",
-    "_fullImageId": "full_image_7x5_standard_board",
-    "_gridId": "grid_7x5_standard_board",
+    "_assetDataId": "mg_7x5_standard_board_asset_data",
+    "_gridId": "mg_7x5_standard_board_grid",
+    "_flatGridId": "mg_7x5_standard_board_flat_grid",
     "_trayScale": 0.53
   }
 ]

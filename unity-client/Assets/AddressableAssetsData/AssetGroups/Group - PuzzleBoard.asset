@@ -15,19 +15,8 @@ MonoBehaviour:
   m_GroupName: Group - PuzzleBoard
   m_GUID: 64f4f73583dc41d4d963ccd45aa3ad01
   m_SerializeEntries:
-  - m_GUID: 1473f954a1abe08409b24897313d48f8
-    m_Address: _6x4_standard_board_asset_data
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AssetData
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7157240041c20a04580869e9b5da1ba9
     m_Address: Jigsaw Final 6x4 Grid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 808c68e45cf51ed49aed8ae0ed131604
-    m_Address: _7x5_standard_board_asset_data
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

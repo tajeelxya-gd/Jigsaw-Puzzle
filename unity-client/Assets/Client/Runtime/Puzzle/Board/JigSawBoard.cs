@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using PlasticGui.WorkspaceWindow.Items;
 using UniTx.Runtime.Database;
 using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
@@ -17,6 +19,7 @@ namespace Client.Runtime
         private AssetData _assetData;
         private Texture2D _texture;
         private IResolver _resolver;
+        private JigSawLevelData _levelData;
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
 
@@ -27,11 +30,12 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        public async UniTask LoadPuzzleAsync(string imageKey, Transform parent, CancellationToken cToken = default)
+        public async UniTask LoadPuzzleAsync(JigSawLevelData levelData, Transform parent, CancellationToken cToken = default)
         {
+            _levelData = levelData;
             await SpawnCellsAsync(parent, cToken);
             _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
-            _texture = await UniResources.LoadAssetAsync<Texture2D>(imageKey, cToken: cToken);
+            _texture = await UniResources.LoadAssetAsync<Texture2D>(levelData.ImageKey, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
             var flatGridAsset = _assetData.GetAsset(Data.FlatGridId);
@@ -65,6 +69,7 @@ namespace Client.Runtime
 
             UniResources.DisposeAsset(_texture);
             UniResources.DisposeAsset(_assetData);
+            _levelData = null;
         }
 
         protected override void OnInject(IResolver resolver) => _resolver = resolver;
@@ -90,6 +95,7 @@ namespace Client.Runtime
             float startX = (-size.x / 2f) + (cellLocalWidth / 2f);
             float startZ = (size.z / 2f) - (cellLocalHeight / 2f);
             var cellSize = new Vector3(cellLocalWidth * parent.lossyScale.x, 0.001f, cellLocalHeight * parent.lossyScale.z);
+            var actionData = _contentservice.GetData<ICellActionData>(_levelData.CellActionIds).ToArray();
 
             for (var i = 0; i < len; i++)
             {
@@ -104,8 +110,8 @@ namespace Client.Runtime
 
                 var worldPos = parent.TransformPoint(localPos);
                 var cell = await UniResources.CreateInstanceAsync<JigsawBoardCell>("JigsawBoardCell", parent, null, cToken);
-
-                cell.SetData(i, cellSize, this);
+                var action = actionData.FirstOrDefault(itm => itm.CellIdx == i);
+                cell.SetData(i, cellSize, this, action);
                 cell.name = $"Cell_{i}";
                 cell.transform.SetPositionAndRotation(worldPos, parent.rotation);
                 _cells.Add(cell);

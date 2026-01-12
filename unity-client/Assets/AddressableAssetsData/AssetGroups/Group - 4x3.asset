@@ -21,7 +21,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9637bb8555a2da94e8493b6fd81ff247
-    m_Address: _4x3_standard_board_asset_data
+    m_Address: mg_4x3_standard_board_asset_data
     m_ReadOnly: 0
     m_SerializedLabels:
     - AssetData

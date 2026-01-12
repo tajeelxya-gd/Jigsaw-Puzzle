@@ -10,13 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 040bc25f95706694ea25a65099934e29, type: 3}
-  m_Name: _6x4_standard_board_asset_data
+  m_Name: mg_4x3_standard_board_asset_data
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
-  _id: _6x4_standard_board_asset_data
+  _id: mg_4x3_standard_board
   _assets:
-  - _key: grid_6x4_standard_board
+  - _key: mg_4x3_standard_board_grid
     _reference:
-      m_AssetGUID: 7157240041c20a04580869e9b5da1ba9
+      m_AssetGUID: e0ce14bc814a26a49b59bbafc044f316
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: mg_4x3_standard_board_flat_grid
+    _reference:
+      m_AssetGUID: 8c2dd953bd77ac746904209acc7048af
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
