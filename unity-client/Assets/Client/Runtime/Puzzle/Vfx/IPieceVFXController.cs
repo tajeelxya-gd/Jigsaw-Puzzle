@@ -8,6 +8,6 @@ namespace Client.Runtime
     {
         void HighlightGroupAndNeighbours(JigsawGroup group);
 
-        UniTask AnimateBoardCompletionAsync(IEnumerable<JigsawPiece> pieces, CancellationToken cToken = default);
+        UniTask AnimateBoardCompletionAsync(IEnumerable<JigsawPiece> pieces, int cols, AnimationOrder order, CancellationToken cToken = default);
     }
 }

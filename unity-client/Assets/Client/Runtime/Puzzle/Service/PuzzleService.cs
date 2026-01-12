@@ -70,8 +70,8 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
-            await _vfxController.AnimateBoardCompletionAsync(_board.Pieces, cToken);
-            await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: cToken);
+            await _vfxController.AnimateBoardCompletionAsync(_board.Pieces, _board.Data.YConstraint, AnimationOrder.RowByRow, cToken);
+            await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
         }
     }

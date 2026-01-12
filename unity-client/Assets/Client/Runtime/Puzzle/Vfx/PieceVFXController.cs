@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
@@ -62,24 +63,39 @@ namespace Client.Runtime
             TriggerBatchVfx();
         }
 
-        public async UniTask AnimateBoardCompletionAsync(IEnumerable<JigsawPiece> pieces, CancellationToken cToken = default)
+        public async UniTask AnimateBoardCompletionAsync(IEnumerable<JigsawPiece> pieces, int cols, AnimationOrder order, CancellationToken cToken = default)
         {
-            var tasks = new List<UniTask>();
+            var allTasks = new List<UniTask>();
 
-            float liftAmount = 0.01f;      // Height of the pop
-            float duration = 0.5f;        // Total time for one piece to go up and down
-            int delayBetweenPieces = 50; // Delay in ms between each piece starting
+            float liftAmount = 0.015f;
+            float duration = 0.5f;
+            int delayBetweenGroups = 100;
+            int delayBetweenPiecesInGroup = 20;
 
-            foreach (var piece in pieces)
+            // Use Select to keep track of the original index for math
+            var indexedPieces = pieces.Select((piece, index) => new { piece, index });
+
+            // Group by calculating Row or Col from the index
+            var groups = order == AnimationOrder.RowByRow
+                ? indexedPieces.GroupBy(x => x.index / cols).OrderBy(g => g.Key)
+                : indexedPieces.GroupBy(x => x.index % cols).OrderBy(g => g.Key);
+
+            foreach (var group in groups)
             {
                 if (cToken.IsCancellationRequested) break;
 
-                tasks.Add(ManualBounceAsync(piece, liftAmount, duration, cToken));
+                foreach (var item in group)
+                {
+                    allTasks.Add(ManualBounceAsync(item.piece, liftAmount, duration, cToken));
 
-                await UniTask.Delay(delayBetweenPieces, cancellationToken: cToken);
+                    if (delayBetweenPiecesInGroup > 0)
+                        await UniTask.Delay(delayBetweenPiecesInGroup, cancellationToken: cToken);
+                }
+
+                await UniTask.Delay(delayBetweenGroups, cancellationToken: cToken);
             }
 
-            await UniTask.WhenAll(tasks);
+            await UniTask.WhenAll(allTasks);
         }
 
         private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, CancellationToken cToken)
@@ -93,11 +109,9 @@ namespace Client.Runtime
 
                 elapsed += Time.deltaTime;
                 float normalizedTime = elapsed / duration;
-
                 float yOffset = Mathf.Sin(normalizedTime * Mathf.PI) * amount;
 
                 piece.transform.localPosition = startPos + new Vector3(0, yOffset, 0);
-
                 await UniTask.Yield(PlayerLoopTiming.Update, cToken);
             }
 
