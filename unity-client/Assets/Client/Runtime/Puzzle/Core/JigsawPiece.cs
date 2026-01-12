@@ -20,6 +20,7 @@ namespace Client.Runtime
         public int CorrectIdx { get; private set; }
         public int CurrentIdx { get; set; }
         public JigsawGroup Group { get; set; }
+        public bool IsOverTray { get; set; }
 
         public void Inject(IResolver resolver)
         {
@@ -91,9 +92,7 @@ namespace Client.Runtime
         {
             _puzzleTray.SetHoverPiece(null);
 
-            var physicallyOverTray = _puzzleTray.IsOverTray(transform.position);
-
-            if (physicallyOverTray && Group.Count == 1)
+            if (IsOverTray && Group.Count == 1)
             {
                 _puzzleTray.SubmitPiece(this);
                 return;

@@ -30,7 +30,6 @@ namespace Client.Runtime
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
-        private bool _onCooldown;
 
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
         {
@@ -52,12 +51,6 @@ namespace Client.Runtime
             }
 
             _scrollX = 0;
-        }
-
-        public bool IsOverTray(Vector3 worldPosition)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            return Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider;
         }
 
         public void SetHoverPiece(JigsawPiece piece) => _hoverPiece = piece;
@@ -95,8 +88,7 @@ namespace Client.Runtime
             Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
             bool shouldShowInsertionSpace = _hoverPiece != null &&
-                _hoverPiece.Group.Count == 1 &&
-                IsOverTray(_hoverPiece.transform.position);
+                _hoverPiece.Group.Count == 1 && _hoverPiece.IsOverTray;
 
             int insertionIndex = shouldShowInsertionSpace ? GetInsertionIndex() : -1;
 
@@ -255,33 +247,20 @@ namespace Client.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_onCooldown) return;
-
-            UniTask.Void(StartCooldownAsync, this.GetCancellationTokenOnDestroy());
-
             if (other.TryGetComponent<JigsawPiece>(out var piece))
             {
+                piece.IsOverTray = true;
                 piece.ScaleDown();
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (_onCooldown) return;
-
-            UniTask.Void(StartCooldownAsync, this.GetCancellationTokenOnDestroy());
-
             if (other.TryGetComponent<JigsawPiece>(out var piece))
             {
+                piece.IsOverTray = false;
                 piece.ScaleUp();
             }
-        }
-
-        private async UniTaskVoid StartCooldownAsync(CancellationToken cToken = default)
-        {
-            _onCooldown = true;
-            await UniTask.DelayFrame(2, cancellationToken: cToken);
-            _onCooldown = false;
         }
     }
 }
