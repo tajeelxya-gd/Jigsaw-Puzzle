@@ -14,6 +14,7 @@ namespace Client.Runtime
     public sealed class BindDependenciesStep : LoadingStepBase, IInjectable
     {
         [SerializeField] private PuzzleTray _puzzleTray;
+        [SerializeField] private CameraEffects _cameraEffects;
 
         private IBinder _binder;
 
@@ -34,6 +35,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
             _binder.BindAsSingleton<PieceVFXController>();
             _binder.BindAsSingleton(_puzzleTray);
+            _binder.BindAsSingleton(_cameraEffects);
 
             return UniTask.CompletedTask;
         }

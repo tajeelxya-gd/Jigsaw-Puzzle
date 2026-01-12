@@ -56,7 +56,8 @@ namespace Client.Runtime
         {
             IsOverTray = true;
             if (Group.Count > 1) return;
-            _scaleController.ScaleTo(_puzzleService.GetCurrentBoard().Data.TrayScaleReduction);
+            var scale = _puzzleService.GetCurrentBoard().Data.TrayScaleReduction;
+            _scaleController.ScaleTo(scale);
         }
 
         public void LockPiece()
@@ -117,7 +118,6 @@ namespace Client.Runtime
             }
 
             var piecesToCheck = new List<JigsawPiece>(Group);
-
             foreach (var piece in piecesToCheck)
             {
                 if (piece.CurrentIdx == -1) continue;

@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PieceVFXController : IPieceVFXController, IInitialisable, IResettable
+    public sealed class PieceVFXController : IPieceVFXController, IInitialisable, IResettable, IInjectable
     {
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
+        private ICameraEffects _cameraEffects;
+
+        public void Inject(IResolver resolver) => _cameraEffects = resolver.Resolve<ICameraEffects>();
 
         public void Initialise()
         {
@@ -27,7 +31,11 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
-        private void HandlePiecePlaced(GroupPlacedEvent ev) => HighlightGroupAndNeighbours(ev.Group);
+        private void HandlePiecePlaced(GroupPlacedEvent ev)
+        {
+            _cameraEffects.PlayGroupingEffect();
+            HighlightGroupAndNeighbours(ev.Group);
+        }
 
         public void HighlightGroupAndNeighbours(JigsawGroup group)
         {
