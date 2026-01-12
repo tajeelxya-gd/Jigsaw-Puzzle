@@ -56,7 +56,7 @@ namespace Client.Runtime
         {
             IsOverTray = true;
             if (Group.Count > 1) return;
-            var scale = _puzzleService.GetCurrentBoard().Data.TrayScaleReduction;
+            var scale = _puzzleService.GetCurrentBoard().Data.TrayScale;
             _scaleController.ScaleTo(scale);
         }
 
