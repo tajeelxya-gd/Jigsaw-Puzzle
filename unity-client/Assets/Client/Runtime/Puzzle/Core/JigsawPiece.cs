@@ -49,41 +49,6 @@ namespace Client.Runtime
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
-        public void Move(Vector3 delta)
-        {
-            foreach (var piece in Group)
-            {
-                piece.MoveInternal(delta);
-            }
-        }
-
-        public void SetPosY(float y)
-        {
-            foreach (var piece in Group)
-            {
-                piece.SetPosYInternal(y);
-            }
-        }
-
-        public void JoinGroup(JigsawPiece other)
-        {
-            if (Group == other.Group) return;
-
-            var groupToKeep = Group.Count >= other.Group.Count ? Group : other.Group;
-            var groupToDiscard = (groupToKeep == Group) ? other.Group : Group;
-
-            foreach (var p in groupToDiscard)
-            {
-                groupToKeep.Add(p);
-                p.Group = groupToKeep;
-            }
-
-            foreach (var p in groupToKeep)
-            {
-                p.PlayVfx();
-            }
-        }
-
         public void ScaleUp() => _scaleController.ScaleTo(1f);
 
         public void ScaleDown() => _scaleController.ScaleTo(_board.Data.TrayScaleReduction);
@@ -108,14 +73,14 @@ namespace Client.Runtime
         {
             foreach (var piece in Group)
             {
-                _currentCell?.Pop();
+                piece._currentCell?.Pop();
             }
-            SetPosY(0.01f);
+            Group.SetPosY(0.01f);
         }
 
         private void HandleOnDragged(Vector3 delta)
         {
-            Move(delta);
+            Group.Move(delta);
             _puzzleTray.SetHoverPiece(this);
         }
 
@@ -164,7 +129,7 @@ namespace Client.Runtime
 
                     if (piece == null) continue;
 
-                    JoinGroup(piece);
+                    Group.Join(piece.Group);
                 }
 
             }
@@ -175,11 +140,7 @@ namespace Client.Runtime
             _dragController.enabled = false;
             _collider.enabled = false;
             _snapController.enabled = false;
-            SetPosYInternal(0f);
             _renderer.SetActive(isFlat: true);
         }
-
-        private void MoveInternal(Vector3 delta) => transform.position += delta;
-        private void SetPosYInternal(float y) => transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }
