@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PieceVFXController : IPieceVFXController, IInitialisable, IResettable, IInjectable
+    public sealed class VFXController : IVFXController, IInitialisable, IResettable, IInjectable
     {
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;

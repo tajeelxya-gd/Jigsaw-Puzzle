@@ -16,7 +16,7 @@ namespace Client.Runtime
         private IContentService _contentService;
         private IEntityService _entityService;
         private IWinConditionChecker _winConditionChecker;
-        private IPieceVFXController _vfxController;
+        private IVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
         private Transform _puzzleBoard;
@@ -28,7 +28,7 @@ namespace Client.Runtime
             _entityService = resolver.Resolve<IEntityService>();
             _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
-            _vfxController = resolver.Resolve<IPieceVFXController>();
+            _vfxController = resolver.Resolve<IVFXController>();
         }
 
         public void Initialise()

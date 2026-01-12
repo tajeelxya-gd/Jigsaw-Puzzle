@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Client.Runtime
 {
-    public interface IPieceVFXController
+    public interface IVFXController
     {
         void HighlightGroupAndNeighbours(JigsawGroup group);
 

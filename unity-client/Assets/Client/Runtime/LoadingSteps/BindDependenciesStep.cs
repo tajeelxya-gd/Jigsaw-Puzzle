@@ -33,7 +33,7 @@ namespace Client.Runtime
 
             _binder.BindAsSingleton<PuzzleService>();
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
-            _binder.BindAsSingleton<PieceVFXController>();
+            _binder.BindAsSingleton<VFXController>();
             _binder.BindAsSingleton(_puzzleTray);
             _binder.BindAsSingleton(_cameraEffects);
 
