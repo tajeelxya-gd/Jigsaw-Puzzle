@@ -7,7 +7,7 @@
     "_fullImageId": "full_image_4x3_standard_board",
     "_gridId": "grid_4x3_standard_board",
     "_flatGridId": "grid_4x3_standard_board_flat",
-    "_trayScaleReduction": 0.33
+    "_trayScale": 0.33
   },
   {
     "_id": "_6x4_standard_board",
@@ -16,7 +16,7 @@
     "_assetDataId": "_6x4_standard_board_asset_data",
     "_fullImageId": "full_image_6x4_standard_board",
     "_gridId": "grid_6x4_standard_board",
-    "_trayScaleReduction": 0.5
+    "_trayScale": 0.5
   },
   {
     "_id": "_7x5_standard_board",
@@ -25,6 +25,6 @@
     "_assetDataId": "_7x5_standard_board_asset_data",
     "_fullImageId": "full_image_7x5_standard_board",
     "_gridId": "grid_7x5_standard_board",
-    "_trayScaleReduction": 0.53
+    "_trayScale": 0.53
   }
 ]
