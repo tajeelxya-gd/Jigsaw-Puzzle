@@ -17,7 +17,7 @@ namespace Client.Runtime
         private IEntityService _entityService;
         private IWinConditionChecker _winConditionChecker;
         private IPuzzleTray _puzzleTray;
-        private JigSawBoard _board;
+        private JigsawBoard _board;
         private Transform _puzzleBoard;
         private int _idx = -1;
 
@@ -38,10 +38,11 @@ namespace Client.Runtime
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
-            _board = _entityService.Get<JigSawBoard>(levelData.BoardId);
+            _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
-            _puzzleTray.ShufflePieces(_board);
+            _puzzleTray.ShufflePieces(_board.Pieces);
+            JigsawBoardCalculator.SetBoard(_board);
         }
 
         public void UnLoadPuzzle()
@@ -49,9 +50,10 @@ namespace Client.Runtime
             _board.UnLoadPuzzle();
             _board = null;
             _winConditionChecker.SetBoard(null);
+            JigsawBoardCalculator.SetBoard(null);
         }
 
-        public JigSawBoard GetCurrentBoard() => _board;
+        public JigsawBoard GetCurrentBoard() => _board;
 
         private JigSawLevelData GetCurrentLevelData()
         {

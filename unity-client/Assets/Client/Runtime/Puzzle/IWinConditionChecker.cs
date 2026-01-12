@@ -10,6 +10,6 @@ namespace Client.Runtime
 
         bool CheckWin();
         bool CheckLose();
-        void SetBoard(JigSawBoard board);
+        void SetBoard(JigsawBoard board);
     }
 }

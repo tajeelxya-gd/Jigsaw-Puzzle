@@ -1,72 +1,78 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
-using UniTx.Runtime.IoC;
 
 namespace Client.Runtime
 {
-    public sealed class PieceVFXController : IInjectable, IInitialisable, IResettable
+    public sealed class PieceVFXController : IInitialisable, IResettable
     {
-        private IPuzzleService _puzzleService;
-
-        public void Inject(IResolver resolver)
-        {
-            _puzzleService = resolver.Resolve<IPuzzleService>();
-        }
+        private readonly HashSet<JigsawPiece> _vfxQueue = new();
+        private bool _isBatching;
 
         public void Initialise()
         {
-            UniEvents.Subscribe<PiecePlacedEvent>(HandlePiecePlaced);
+            UniEvents.Subscribe<GroupPlacedEvent>(HandlePiecePlaced);
         }
 
         public void Reset()
         {
-            UniEvents.Unsubscribe<PiecePlacedEvent>(HandlePiecePlaced);
+            UniEvents.Unsubscribe<GroupPlacedEvent>(HandlePiecePlaced);
+            _vfxQueue.Clear();
+            _isBatching = false;
         }
 
-        private void HandlePiecePlaced(PiecePlacedEvent ev)
+        private void HandlePiecePlaced(GroupPlacedEvent ev)
         {
-            var board = _puzzleService.GetCurrentBoard();
-            var piece = ev.jigSawPiece;
+            // 1. Run BFS to find all connected locked pieces
+            var pieceGroup = ev.Group;
+            Queue<JigsawPiece> searchQueue = new();
 
-            // 1. Start with the current piece's group
-            var pieceGroup = piece.Group;
-            JigsawGroup allToNotify = new("group_tmp", pieceGroup);
-
-            // 2. Prepare BFS to find all connected placed pieces
-            Queue<JigSawPiece> searchQueue = new();
-
-            // Add all current group members to the queue to check their neighbors too
             foreach (var p in pieceGroup)
             {
                 searchQueue.Enqueue(p);
+                _vfxQueue.Add(p);
             }
 
-            // 3. Crawl through neighbors of neighbors
             while (searchQueue.Count > 0)
             {
                 var current = searchQueue.Dequeue();
-                var idx = current.Data.OriginalCell.Idx;
-                var neighbors = board.GetNeighbours(idx);
+                var neighbors = JigsawBoardCalculator.GetNeighboursCells(current.CorrectIdx);
 
-                foreach (var neighborCell in neighbors)
+                foreach (var cell in neighbors)
                 {
-                    var neighborPiece = neighborCell?.Piece;
-
-                    // If the neighbor is placed and we haven't processed it yet
-                    if (neighborPiece != null && neighborPiece.IsLocked && !allToNotify.Contains(neighborPiece))
+                    if (cell.IsLocked)
                     {
-                        allToNotify.Add(neighborPiece);
-                        searchQueue.Enqueue(neighborPiece); // Add to queue to check ITS neighbors
+                        var piece = cell.GetCorrectPiece();
+                        // Only add to search if not already in our global VFX batch
+                        if (_vfxQueue.Add(piece))
+                        {
+                            searchQueue.Enqueue(piece);
+                        }
                     }
                 }
             }
 
-            // 4. Play VFX
-            foreach (var p in allToNotify)
+            // 2. Trigger the batch play once at the end of the frame
+            TriggerBatchVfx();
+        }
+
+        private async void TriggerBatchVfx()
+        {
+            if (_isBatching) return;
+            _isBatching = true;
+
+            // Wait until the end of the frame/next tick so all simultaneous 
+            // events have finished adding their pieces to _vfxQueue
+            await Task.Yield();
+
+            foreach (var p in _vfxQueue)
             {
-                p.PlayVfx();
+                if (p != null) p.PlayVfx();
             }
+
+            _vfxQueue.Clear();
+            _isBatching = false;
         }
     }
 }

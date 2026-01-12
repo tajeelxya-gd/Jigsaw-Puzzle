@@ -12,29 +12,29 @@ namespace Client.Runtime
         public event Action OnLose;
         public event Action OnAdvance;
 
-        private JigSawBoard _board;
+        private JigsawBoard _board;
 
         public bool CheckLose() => false;
 
         public bool CheckWin()
         {
-            var placed = _board.Pieces.Count(itm => itm.IsLocked);
-            return placed == _board.Pieces.Count;
+            var placed = _board.Cells.Count(itm => itm.IsLocked);
+            return placed == _board.Cells.Count;
         }
 
-        public void SetBoard(JigSawBoard board) => _board = board;
+        public void SetBoard(JigsawBoard board) => _board = board;
 
         public void Initialise()
         {
-            UniEvents.Subscribe<PiecePlacedEvent>(OnPiecePlaced);
+            UniEvents.Subscribe<GroupPlacedEvent>(OnPiecePlaced);
         }
 
         public void Reset()
         {
-            UniEvents.Unsubscribe<PiecePlacedEvent>(OnPiecePlaced);
+            UniEvents.Unsubscribe<GroupPlacedEvent>(OnPiecePlaced);
         }
 
-        private void OnPiecePlaced(PiecePlacedEvent @event)
+        private void OnPiecePlaced(GroupPlacedEvent @event)
         {
             if (CheckWin())
             {

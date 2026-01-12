@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client.Runtime
 {
     [Serializable]
-    public sealed class JigSawBoardData : IEntityData
+    public sealed class JigsawBoardData : IEntityData
     {
         [SerializeField] private string _id;
         [SerializeField] private string _name;
@@ -25,6 +25,6 @@ namespace Client.Runtime
         public string FlatGridId => _flatGridId;
         public float TrayScaleReduction => _trayScaleReduction;
 
-        public IEntity CreateEntity() => new JigSawBoard(Id);
+        public IEntity CreateEntity() => new JigsawBoard(Id);
     }
 }

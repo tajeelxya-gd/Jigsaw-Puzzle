@@ -5,9 +5,9 @@ namespace Client.Runtime
 {
     public interface IPuzzleTray
     {
-        void ShufflePieces(JigSawBoard board);
+        void ShufflePieces(IEnumerable<JigsawPiece> pieces);
         bool IsOverTray(Vector3 worldPosition);
-        void SetHoverPiece(JigSawPiece piece);
-        void SubmitPiece(JigSawPiece piece);
+        void SetHoverPiece(JigsawPiece piece);
+        void SubmitPiece(JigsawPiece piece);
     }
 }
