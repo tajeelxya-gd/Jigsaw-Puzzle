@@ -12,6 +12,8 @@ namespace Client.Runtime
         public Vector3 Size { get; private set; }
         public bool IsLocked { get; private set; }
 
+        public JigsawPiece OccupyingPiece => _stack.Count > 0 ? _stack.Peek() : null;
+
         public void SetData(int idx, Vector3 size, JigsawBoard board)
         {
             Idx = idx;
@@ -19,15 +21,11 @@ namespace Client.Runtime
             _board = board;
         }
 
-        /// <summary>
-        /// Returns true when correct piece is pushed to the cell.
-        /// </summary>
-        /// <param name="piece"></param>
-        /// <returns></returns>
         public bool Push(JigsawPiece piece)
         {
             if (piece.CorrectIdx == Idx)
             {
+                _stack.Push(piece);
                 IsLocked = true;
                 return true;
             }
@@ -36,7 +34,7 @@ namespace Client.Runtime
             return false;
         }
 
-        public JigsawPiece Pop() => _stack.Pop();
+        public JigsawPiece TryPop() => _stack.TryPop(out var result) ? result : null;
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Client.Runtime
         private IPuzzleService _puzzleService;
 
         public int CorrectIdx { get; private set; }
-        public int CurrentIdx { get; private set; }
+        public int CurrentIdx { get; set; }
         public JigsawGroup Group { get; set; }
 
         public void Inject(IResolver resolver)
@@ -43,9 +44,15 @@ namespace Client.Runtime
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
-        public void ScaleUp() => _scaleController.ScaleTo(1f);
+        public void ScaleUp()
+        {
+            if (Group.Count == 1) _scaleController.ScaleTo(1f);
+        }
 
-        public void ScaleDown() => _scaleController.ScaleTo(_puzzleService.GetCurrentBoard().Data.TrayScaleReduction);
+        public void ScaleDown()
+        {
+            if (Group.Count == 1) _scaleController.ScaleTo(_puzzleService.GetCurrentBoard().Data.TrayScaleReduction);
+        }
 
         public void LockPiece()
         {
@@ -71,22 +78,21 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDragStarted() => Group.SetPosY(0.01f);
-
-        private void HandleOnDragged(Vector3 delta)
+        private void HandleDragStarted()
         {
-            Group.Move(delta);
             _puzzleTray.SetHoverPiece(this);
+            Group.SetPosY(0.01f);
+            Group.RemoveFromCurrentCells();
         }
+
+        private void HandleOnDragged(Vector3 delta) => Group.Move(delta);
 
         private void HandleDraggedEnded()
         {
             _puzzleTray.SetHoverPiece(null);
 
-            // 1. Physical Tray Check
-            bool physicallyOverTray = _puzzleTray.IsOverTray(transform.position);
+            var physicallyOverTray = _puzzleTray.IsOverTray(transform.position);
 
-            // 2. Only submit if it's a single piece
             if (physicallyOverTray && Group.Count == 1)
             {
                 _puzzleTray.SubmitPiece(this);
@@ -98,14 +104,75 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell)
         {
+            // 1. Update the CurrentIdx for all pieces in the group based on where this piece landed
+            Group.SetCurrentCells(cell.Idx, this);
+
+            // 2. If the piece is in its correct home, lock it and exit
             if (cell.Push(this))
             {
                 Group.Lock();
-
                 UniEvents.Raise(new GroupPlacedEvent(Group));
-
                 return;
             }
+
+            // 3. Neighbor Merge Check
+            // We create a copy of the group to iterate because Join() modifies the collection
+            var piecesToCheck = new List<JigsawPiece>(Group);
+
+            foreach (var piece in piecesToCheck)
+            {
+                if (piece.CurrentIdx == -1) continue;
+
+                var neighbors = JigsawBoardCalculator.GetNeighboursIndices(piece.CurrentIdx);
+                CheckAndMerge(piece, neighbors.Top);
+                CheckAndMerge(piece, neighbors.Bottom);
+                CheckAndMerge(piece, neighbors.Left);
+                CheckAndMerge(piece, neighbors.Right);
+            }
+        }
+
+        private void CheckAndMerge(JigsawPiece piece, int neighborIdx)
+        {
+            if (neighborIdx == -1) return;
+
+            // Get the cell at the neighbor index
+            var neighborCell = JigsawBoardCalculator.Board.Cells[neighborIdx];
+
+            // Check if there is a piece already sitting in that cell
+            if (neighborCell.OccupyingPiece != null)
+            {
+                var otherPiece = neighborCell.OccupyingPiece;
+
+                // If the pieces are mathematically supposed to be neighbors
+                // (Checking if their CorrectIdx distance matches their CurrentIdx distance)
+                bool isCorrectNeighbor = IsMathematicallyAdjacent(piece, otherPiece);
+
+                if (isCorrectNeighbor && piece.Group != otherPiece.Group)
+                {
+                    piece.Group.Join(otherPiece.Group);
+                }
+            }
+        }
+
+        private bool IsMathematicallyAdjacent(JigsawPiece a, JigsawPiece b)
+        {
+            var boardData = JigsawBoardCalculator.Board.Data;
+            int cols = boardData.YConstraint;
+
+            // Get 2D grid distance in the "solved" state
+            int rA = a.CorrectIdx / cols;
+            int cA = a.CorrectIdx % cols;
+            int rB = b.CorrectIdx / cols;
+            int cB = b.CorrectIdx % cols;
+
+            // Get 2D grid distance in the "current" state
+            int curRA = a.CurrentIdx / cols;
+            int curCA = a.CurrentIdx % cols;
+            int curRB = b.CurrentIdx / cols;
+            int curCB = b.CurrentIdx % cols;
+
+            // They are a match if their relative distance is the same in both states
+            return (rA - rB == curRA - curRB) && (cA - cB == curCA - curCB);
         }
     }
 }

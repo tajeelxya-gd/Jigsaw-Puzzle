@@ -42,6 +42,7 @@ namespace Client.Runtime
             await _board.LoadPuzzleAsync(levelData.ImageKey, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
+            JigsawBoardCalculator.SetBoard(_board);
         }
 
         public void UnLoadPuzzle()
@@ -49,6 +50,7 @@ namespace Client.Runtime
             _board.UnLoadPuzzle();
             _board = null;
             _winConditionChecker.SetBoard(null);
+            JigsawBoardCalculator.SetBoard(null);
         }
 
         public JigsawBoard GetCurrentBoard() => _board;

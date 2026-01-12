@@ -43,7 +43,7 @@ namespace Client.Runtime
             while (searchQueue.Count > 0)
             {
                 var current = searchQueue.Dequeue();
-                var neighbors = GetNeighbours(current.CorrectIdx);
+                var neighbors = JigsawBoardCalculator.GetNeighboursCells(current.CorrectIdx);
 
                 foreach (var cell in neighbors)
                 {
@@ -65,19 +65,6 @@ namespace Client.Runtime
             {
                 p.PlayVfx();
             }
-        }
-
-        private IEnumerable<JigsawBoardCell> GetNeighbours(int idx)
-        {
-            var board = _puzzleService.GetCurrentBoard();
-            var boardData = board.Data;
-            var data = JigsawBoardCalculator.GetNeighbours(idx, boardData.YConstraint, boardData.XConstraint);
-            var neighbours = new List<JigsawBoardCell>();
-            if (data.Top != -1) neighbours.Add(board.Cells[data.Top]);
-            if (data.Bottom != -1) neighbours.Add(board.Cells[data.Bottom]);
-            if (data.Left != -1) neighbours.Add(board.Cells[data.Left]);
-            if (data.Right != -1) neighbours.Add(board.Cells[data.Right]);
-            return neighbours;
         }
     }
 }
