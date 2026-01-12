@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -27,6 +30,7 @@ namespace Client.Runtime
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
+        private bool _onCooldown;
 
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
         {
@@ -43,7 +47,7 @@ namespace Client.Runtime
 
             for (int i = 0; i < _activePieces.Count; i++)
             {
-                int randomIndex = Random.Range(i, _activePieces.Count);
+                int randomIndex = UnityEngine.Random.Range(i, _activePieces.Count);
                 (_activePieces[i], _activePieces[randomIndex]) = (_activePieces[randomIndex], _activePieces[i]);
             }
 
@@ -251,6 +255,10 @@ namespace Client.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
+            if (_onCooldown) return;
+
+            UniTask.Void(StartCooldownAsync, this.GetCancellationTokenOnDestroy());
+
             if (other.TryGetComponent<JigsawPiece>(out var piece))
             {
                 piece.ScaleDown();
@@ -259,10 +267,21 @@ namespace Client.Runtime
 
         private void OnTriggerExit(Collider other)
         {
+            if (_onCooldown) return;
+
+            UniTask.Void(StartCooldownAsync, this.GetCancellationTokenOnDestroy());
+
             if (other.TryGetComponent<JigsawPiece>(out var piece))
             {
                 piece.ScaleUp();
             }
+        }
+
+        private async UniTaskVoid StartCooldownAsync(CancellationToken cToken = default)
+        {
+            _onCooldown = true;
+            await UniTask.DelayFrame(2, cancellationToken: cToken);
+            _onCooldown = false;
         }
     }
 }
