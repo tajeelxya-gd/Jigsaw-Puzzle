@@ -10,7 +10,7 @@ namespace Client.Runtime
         [SerializeField] private ParticleSystem _particleSystem;
 
         private JigsawPieceRenderer _renderer;
-        private bool _isPlaying;
+        private CancellationTokenSource _cts;
 
         private void Awake()
         {
@@ -20,16 +20,33 @@ namespace Client.Runtime
         [ContextMenu("Play")]
         public void Play()
         {
-            if (_isPlaying) return;
-            UniTask.Void(PlayAsync, this.GetCancellationTokenOnDestroy());
+            _cts?.Cancel();
+            _cts?.Dispose();
+
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(this.GetCancellationTokenOnDestroy());
+
+            UniTask.Void(PlayAsync, _cts.Token);
         }
 
         private async UniTaskVoid PlayAsync(CancellationToken cToken = default)
         {
-            _isPlaying = true;
-            _particleSystem.Play();
-            await _renderer.FlashAsync(cToken);
-            _isPlaying = false;
+            try
+            {
+                _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                _particleSystem.Play();
+
+                await _renderer.FlashAsync(cToken);
+            }
+            catch (System.OperationCanceledException)
+            {
+                // Silently catch the cancellation when a new Play() is called
+            }
+        }
+
+        private void OnDestroy()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
     }
 }
