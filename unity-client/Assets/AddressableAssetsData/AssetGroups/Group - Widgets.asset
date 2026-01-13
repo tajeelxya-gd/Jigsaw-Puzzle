@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3ee4f1c9b8bc0b4eac363d6b9cef082
+    m_Address: RestartLevelWidget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4671ad8ec49ddb4697a87df9a9854d5
     m_Address: Widgets - AssetData
     m_ReadOnly: 0

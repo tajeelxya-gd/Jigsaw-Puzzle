@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
+using UniTx.Runtime.Widgets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,11 +53,13 @@ namespace Client.Runtime
 
         private void HandleOnWin() => _helper.ShowFullImage(false);
 
-        private void HandleLevelStart(LevelStartEvent @event) => SetToggles(true);
-
-        private void HandleReset()
+        private void HandleLevelStart(LevelStartEvent @event)
         {
+            SetToggles(true);
+            _helper.ShowFullImage(false);
         }
+
+        private void HandleReset() => UniWidgets.PushAsync<RestartLevelWidget>();
 
         private void HandleCornerPieces(bool toggle)
         {

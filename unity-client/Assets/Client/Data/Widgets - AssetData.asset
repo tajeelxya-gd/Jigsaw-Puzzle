@@ -28,3 +28,10 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: RestartLevelWidget
+    _reference:
+      m_AssetGUID: a3ee4f1c9b8bc0b4eac363d6b9cef082
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

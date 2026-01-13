@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime;
 
 namespace Client.Runtime
 {
-    public interface IPuzzleTray
+    public interface IPuzzleTray : IResettable
     {
         void ShufflePieces(IEnumerable<JigsawPiece> pieces);
         void SetHoverPiece(JigsawPiece piece);

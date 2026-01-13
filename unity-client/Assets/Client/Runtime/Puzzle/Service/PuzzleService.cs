@@ -55,6 +55,14 @@ namespace Client.Runtime
             _board = null;
             _winConditionChecker.SetBoard(null);
             JigsawBoardCalculator.SetBoard(null);
+            _puzzleTray.Reset();
+        }
+
+        public UniTask RestartPuzzleAsync(CancellationToken cToken = default)
+        {
+            UnLoadPuzzle();
+            _idx--;
+            return LoadPuzzleAsync(cToken);
         }
 
         public JigsawBoard GetCurrentBoard() => _board;

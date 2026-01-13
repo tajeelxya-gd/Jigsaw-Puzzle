@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PuzzleTray : MonoBehaviour, IPuzzleTray
+    public sealed class PuzzleTray : MonoBehaviour, IPuzzleTray, IResettable, IInjectable
     {
         [Header("Grid Settings")]
         [SerializeField] private int _rowCount = 2;
@@ -22,7 +24,7 @@ namespace Client.Runtime
         [SerializeField] private float _dragThreshold = 10f;
 
         private readonly List<JigsawPiece> _activePieces = new();
-        private IEnumerable<JigsawPiece> _allPieces;
+        private IPuzzleService _puzzleService;
         private JigsawPiece _hitPiece;
         private JigsawPiece _hoverPiece;
         private float _scrollX = 0f;
@@ -31,10 +33,21 @@ namespace Client.Runtime
         private bool _isDragging;
         private bool _scrollLocked;
 
+        public void Inject(IResolver resolver) => _puzzleService = resolver.Resolve<IPuzzleService>();
+
+        public void Reset()
+        {
+            _activePieces.Clear();
+            _scrollX = 0;
+            _hitPiece = null;
+            _hoverPiece = null;
+            _startMousePos = _lastMousePos = Vector3.zero;
+            _isDragging = _scrollLocked = false;
+        }
+
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
         {
             if (pieces == null) return;
-            _allPieces = pieces;
 
             _activePieces.Clear();
             foreach (var p in pieces)
@@ -87,7 +100,9 @@ namespace Client.Runtime
 
         public void PickPieces()
         {
-            foreach (var piece in _allPieces)
+            var pieces = _puzzleService.GetCurrentBoard().Pieces;
+
+            foreach (var piece in pieces)
             {
                 if (piece.IsLocked || piece.IsOverTray) continue;
                 var group = piece.Group;
@@ -173,7 +188,6 @@ namespace Client.Runtime
             return _activePieces.Count;
         }
 
-        // --- NEW ALIGNMENT LOGIC ---
         private Vector3 GetLocalMiddleLeftAnchor()
         {
             // Calculate how much height the actual rows occupy
