@@ -1,4 +1,4 @@
-using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -48,14 +48,19 @@ namespace Client.Runtime
         {
         }
 
-        private void HandleDropPieces(bool value)
+        private void HandleDropPieces(bool value) => HandleDropPiecesAsync(value, this.GetCancellationTokenOnDestroy()).Forget();
+
+        private async UniTaskVoid HandleDropPiecesAsync(bool value, CancellationToken cToken = default)
         {
             if (value)
             {
-                _puzzleTray.DropPieces();
+                _puzzleTray.PickPieces();
                 return;
             }
-            _puzzleTray.PickPieces();
+
+            _dropPieces.interactable = false;
+            await _puzzleTray.DropPiecesAsync(cToken);
+            _dropPieces.interactable = true;
         }
 
         private void HandleEye(bool value)

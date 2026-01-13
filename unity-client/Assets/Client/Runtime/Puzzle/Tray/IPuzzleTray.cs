@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 
 namespace Client.Runtime
 {
@@ -7,7 +9,7 @@ namespace Client.Runtime
         void ShufflePieces(IEnumerable<JigsawPiece> pieces);
         void SetHoverPiece(JigsawPiece piece);
         void SubmitPiece(JigsawPiece piece);
-        void DropPieces();
+        UniTask DropPiecesAsync(CancellationToken cToken = default);
         void PickPieces();
     }
 }

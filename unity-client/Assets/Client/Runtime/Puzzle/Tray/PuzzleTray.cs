@@ -69,8 +69,9 @@ namespace Client.Runtime
             _hoverPiece = null;
         }
 
-        public void DropPieces()
+        public UniTask DropPiecesAsync(CancellationToken cToken = default)
         {
+            var tasks = new List<UniTask>();
             while (_activePieces.Count > 0)
             {
                 var piece = _activePieces[0];
@@ -78,9 +79,10 @@ namespace Client.Runtime
                 piece.transform.SetParent(null);
                 piece.gameObject.SetActive(true);
                 piece.OnExitTray();
-                piece.SnapToRandomCellAsync().Forget();
+                tasks.Add(piece.SnapToRandomCellAsync(cToken));
             }
             _scrollX = 0;
+            return UniTask.WhenAll(tasks);
         }
 
         public void PickPieces()
