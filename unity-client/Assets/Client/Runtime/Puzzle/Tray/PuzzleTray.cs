@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -20,6 +22,7 @@ namespace Client.Runtime
         [SerializeField] private float _dragThreshold = 10f;
 
         private readonly List<JigsawPiece> _activePieces = new();
+        private IEnumerable<JigsawPiece> _allPieces;
         private JigsawPiece _hitPiece;
         private JigsawPiece _hoverPiece;
         private float _scrollX = 0f;
@@ -31,6 +34,7 @@ namespace Client.Runtime
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
         {
             if (pieces == null) return;
+            _allPieces = pieces;
 
             _activePieces.Clear();
             foreach (var p in pieces)
@@ -63,6 +67,33 @@ namespace Client.Runtime
                 piece.transform.SetParent(transform);
             }
             _hoverPiece = null;
+        }
+
+        public void DropPieces()
+        {
+            while (_activePieces.Count > 0)
+            {
+                var piece = _activePieces[0];
+                _activePieces.Remove(piece);
+                piece.transform.SetParent(null);
+                piece.gameObject.SetActive(true);
+                piece.OnExitTray();
+                piece.SnapToRandomCellAsync().Forget();
+            }
+            _scrollX = 0;
+        }
+
+        public void PickPieces()
+        {
+            foreach (var piece in _allPieces)
+            {
+                if (piece.IsLocked || piece.IsOverTray) continue;
+                var group = piece.Group;
+                if (group.Count > 1) continue;
+                group.RemoveFromCurrentCells();
+                piece.OnEnterTray();
+                SubmitPiece(piece);
+            }
         }
 
         private void Update()

@@ -34,10 +34,10 @@ namespace Client.Runtime
             }
 
             if (bestTarget == null) return;
-            SnapAsync(group, bestTarget, this.GetCancellationTokenOnDestroy()).Forget();
+            SnapToCellAsync(group, bestTarget, this.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private async UniTask SnapAsync(JigsawGroup group, JigsawBoardCell cell, CancellationToken cToken = default)
+        public async UniTask SnapToCellAsync(JigsawGroup group, JigsawBoardCell cell, CancellationToken cToken = default)
         {
             var cellTransform = cell.transform;
             var snapPos = new Vector3(cellTransform.position.x, cell.GetNextHeight(), cellTransform.position.z);

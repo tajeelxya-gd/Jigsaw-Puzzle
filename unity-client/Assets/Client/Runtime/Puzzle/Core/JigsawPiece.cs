@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -21,6 +23,7 @@ namespace Client.Runtime
         public int CurrentIdx { get; set; }
         public JigsawGroup Group { get; set; }
         public bool IsOverTray { get; private set; }
+        public bool IsLocked { get; private set; }
 
         public void Inject(IResolver resolver)
         {
@@ -66,6 +69,14 @@ namespace Client.Runtime
             _collider.enabled = false;
             _snapController.enabled = false;
             _renderer.SetActive(isFlat: true);
+            IsLocked = true;
+        }
+
+        public UniTask SnapToRandomCellAsync(CancellationToken cToken = default)
+        {
+            var cells = _puzzleService.GetCurrentBoard().Cells;
+            var idx = Random.Range(0, cells.Count);
+            return _snapController.SnapToCellAsync(Group, cells[idx], cToken);
         }
 
         private void Awake()
