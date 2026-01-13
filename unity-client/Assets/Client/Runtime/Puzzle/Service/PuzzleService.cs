@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Content;
 using UniTx.Runtime.Entity;
+using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.Widgets;
 using UnityEngine;
@@ -18,7 +19,6 @@ namespace Client.Runtime
         private IWinConditionChecker _winConditionChecker;
         private IVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
-        private IJigsawHelper _helper;
         private JigsawBoard _board;
         private Transform _puzzleBoard;
         private int _idx = -1;
@@ -30,7 +30,6 @@ namespace Client.Runtime
             _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _vfxController = resolver.Resolve<IVFXController>();
-            _helper = resolver.Resolve<IJigsawHelper>();
         }
 
         public void Initialise()
@@ -47,6 +46,7 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
+            UniEvents.Raise(new LevelStartEvent());
         }
 
         public void UnLoadPuzzle()
@@ -72,7 +72,6 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
-            _helper.ShowFullImage(false);
             await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(_board.Pieces, _board.Data.YConstraint, AnimationOrder.RowByRow, cToken);
             await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: cToken);

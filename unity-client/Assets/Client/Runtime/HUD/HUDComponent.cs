@@ -1,12 +1,14 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime;
+using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Client.Runtime
 {
-    public sealed class HUDComponent : MonoBehaviour, IInjectable
+    public sealed class HUDComponent : MonoBehaviour, IInjectable, IInitialisable, IResettable
     {
         [SerializeField] private Button _reset;
         [SerializeField] private Toggle _cornerPieces;
@@ -15,16 +17,18 @@ namespace Client.Runtime
 
         private IPuzzleTray _puzzleTray;
         private IJigsawHelper _helper;
+        private IWinConditionChecker _checker;
 
         public void Inject(IResolver resolver)
         {
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _helper = resolver.Resolve<IJigsawHelper>();
+            _checker = resolver.Resolve<IWinConditionChecker>();
         }
 
-        private void Awake() => RegisterEvents();
+        public void Initialise() => RegisterEvents();
 
-        private void OnDestroy() => UnRegisterEvents();
+        public void Reset() => UnRegisterEvents();
 
         private void RegisterEvents()
         {
@@ -32,6 +36,8 @@ namespace Client.Runtime
             _cornerPieces.onValueChanged.AddListener(HandleCornerPieces);
             _dropPieces.onValueChanged.AddListener(HandleDropPieces);
             _eye.onValueChanged.AddListener(HandleEye);
+            UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
+            _checker.OnWin += HandleOnWin;
         }
 
         private void UnRegisterEvents()
@@ -40,7 +46,13 @@ namespace Client.Runtime
             _cornerPieces.onValueChanged.RemoveListener(HandleCornerPieces);
             _dropPieces.onValueChanged.RemoveListener(HandleDropPieces);
             _eye.onValueChanged.RemoveListener(HandleEye);
+            UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
+            _checker.OnWin -= HandleOnWin;
         }
+
+        private void HandleOnWin() => _helper.ShowFullImage(false);
+
+        private void HandleLevelStart(LevelStartEvent @event) => SetToggles(true);
 
         private void HandleReset()
         {
@@ -66,5 +78,12 @@ namespace Client.Runtime
         }
 
         private void HandleEye(bool toggle) => _helper.ShowFullImage(!toggle);
+
+        private void SetToggles(bool toggle)
+        {
+            _cornerPieces.SetIsOnWithoutNotify(toggle);
+            _dropPieces.SetIsOnWithoutNotify(toggle);
+            _eye.SetIsOnWithoutNotify(toggle);
+        }
     }
 }

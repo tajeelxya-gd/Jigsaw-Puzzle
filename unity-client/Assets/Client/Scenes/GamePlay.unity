@@ -1245,11 +1245,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8534072342025232293, guid: 8fc5d56b6f1508f42920dd8161c4b664, type: 3}
   m_PrefabInstance: {fileID: 865170475}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &865170477 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6822096193222400588, guid: 8fc5d56b6f1508f42920dd8161c4b664, type: 3}
+--- !u!114 &865170478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1850959402090203614, guid: 8fc5d56b6f1508f42920dd8161c4b664, type: 3}
   m_PrefabInstance: {fileID: 865170475}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7909d093274e84c83272e9117ed6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.HUDComponent
 --- !u!1 &893568230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,6 +1466,7 @@ MonoBehaviour:
   _puzzleTray: {fileID: 1588303118419370977}
   _cameraEffects: {fileID: 1170203801}
   _jigsawHelper: {fileID: 1804178050}
+  _hudComponent: {fileID: 865170478}
 --- !u!1 &1234614348 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 132536, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
@@ -1511,52 +1518,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.ContentLoadingStep
   _tags:
   - mg_content
---- !u!1 &1418502872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1418502874}
-  - component: {fileID: 1418502873}
-  m_Layer: 0
-  m_Name: SceneInject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1418502873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418502872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abc1880dcb6df894fa7ad5ed8c5f37b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.SceneInjectStep
-  _objects:
-  - {fileID: 865170477}
---- !u!4 &1418502874
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418502872}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1926188898}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1451793331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2213,7 +2174,6 @@ Transform:
   - {fileID: 193517018}
   - {fileID: 1181361556}
   - {fileID: 2038323280}
-  - {fileID: 1418502874}
   - {fileID: 1344897707}
   - {fileID: 551642901}
   - {fileID: 1813031129}
@@ -2239,7 +2199,6 @@ MonoBehaviour:
   - {fileID: 193517017}
   - {fileID: 1181361557}
   - {fileID: 2038323279}
-  - {fileID: 1418502873}
   - {fileID: 1344897708}
   - {fileID: 551642900}
   - {fileID: 1813031128}
