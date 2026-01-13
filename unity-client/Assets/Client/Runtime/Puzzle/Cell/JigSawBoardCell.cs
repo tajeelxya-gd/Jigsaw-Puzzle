@@ -5,6 +5,8 @@ namespace Client.Runtime
 {
     public sealed class JigsawBoardCell : MonoBehaviour
     {
+        private const float HeightFactor = 0.00015f;
+
         private readonly Stack<JigsawPiece> _stack = new();
         private JigsawBoard _board;
         private ICellActionData _actionData;
@@ -33,6 +35,7 @@ namespace Client.Runtime
 
             if (piece.CorrectIdx == Idx)
             {
+                SetHeight(piece, -0.001f);
                 IsLocked = true;
                 CellActionProcessor.Process(_actionData);
                 _actionData = null;
@@ -54,7 +57,7 @@ namespace Client.Runtime
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
 
-        public float GetNextHeight() => _stack.Count * 0.00015f;
+        public float GetNextHeight() => _stack.Count * HeightFactor;
 
         private void SetHeight(JigsawPiece piece, float height)
         {
