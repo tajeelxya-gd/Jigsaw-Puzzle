@@ -19,6 +19,7 @@ namespace Client.Runtime
         private Texture2D _texture;
         private IResolver _resolver;
         private JigSawLevelData _levelData;
+        private IJigsawHelper _helper;
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
 
@@ -48,6 +49,8 @@ namespace Client.Runtime
                 await WrapMeshesInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
             }
 
+            _helper.SetTexture(_texture);
+
             UniResources.DisposeInstance(grid.gameObject);
             UniResources.DisposeInstance(flatGrid.gameObject);
         }
@@ -71,7 +74,11 @@ namespace Client.Runtime
             _levelData = null;
         }
 
-        protected override void OnInject(IResolver resolver) => _resolver = resolver;
+        protected override void OnInject(IResolver resolver)
+        {
+            _resolver = resolver;
+            _helper = resolver.Resolve<IJigsawHelper>();
+        }
 
         protected override void OnInit()
         {

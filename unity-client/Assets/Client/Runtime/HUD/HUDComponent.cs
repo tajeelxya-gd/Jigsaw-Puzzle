@@ -14,10 +14,12 @@ namespace Client.Runtime
         [SerializeField] private Toggle _eye;
 
         private IPuzzleTray _puzzleTray;
+        private IJigsawHelper _helper;
 
         public void Inject(IResolver resolver)
         {
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
+            _helper = resolver.Resolve<IJigsawHelper>();
         }
 
         private void Awake() => RegisterEvents();
@@ -44,15 +46,15 @@ namespace Client.Runtime
         {
         }
 
-        private void HandleCornerPieces(bool value)
+        private void HandleCornerPieces(bool toggle)
         {
         }
 
-        private void HandleDropPieces(bool value) => HandleDropPiecesAsync(value, this.GetCancellationTokenOnDestroy()).Forget();
+        private void HandleDropPieces(bool toggle) => HandleDropPiecesAsync(toggle, this.GetCancellationTokenOnDestroy()).Forget();
 
-        private async UniTaskVoid HandleDropPiecesAsync(bool value, CancellationToken cToken = default)
+        private async UniTaskVoid HandleDropPiecesAsync(bool toggle, CancellationToken cToken = default)
         {
-            if (value)
+            if (toggle)
             {
                 _puzzleTray.PickPieces();
                 return;
@@ -63,8 +65,6 @@ namespace Client.Runtime
             _dropPieces.interactable = true;
         }
 
-        private void HandleEye(bool value)
-        {
-        }
+        private void HandleEye(bool toggle) => _helper.ShowFullImage(!toggle);
     }
 }
