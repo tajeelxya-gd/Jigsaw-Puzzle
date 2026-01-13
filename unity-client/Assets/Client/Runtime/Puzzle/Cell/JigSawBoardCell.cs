@@ -54,7 +54,7 @@ namespace Client.Runtime
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
 
-        public float GetNextHeight() => _stack.Count * 0.0001f;
+        public float GetNextHeight() => _stack.Count * 0.00015f;
 
         private void SetHeight(JigsawPiece piece, float height)
         {
