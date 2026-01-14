@@ -16,6 +16,7 @@ namespace Client.Runtime
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
+            InputHandler.Init();
             return _puzzleService.LoadPuzzleAsync(cToken);
         }
 

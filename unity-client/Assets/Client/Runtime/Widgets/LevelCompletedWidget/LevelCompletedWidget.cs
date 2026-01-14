@@ -33,8 +33,10 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleNextLevelAsync(CancellationToken cToken = default)
         {
+            await UniWidgets.PushAsync<LoadingWidget>(cToken);
             _puzzleService.UnLoadPuzzle();
             await _puzzleService.LoadPuzzleAsync(cToken);
+            await UniWidgets.PopWidgetsStackAsync(cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
         }
     }

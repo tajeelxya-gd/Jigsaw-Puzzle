@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Group - Widgets
   m_GUID: 9fae00bd9d3aa6847ae77eb5a9a341ba
   m_SerializeEntries:
-  - m_GUID: 3ace08f8952d15543ae79ec1e5767fc7
-    m_Address: LevelCompletedWidget
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3ee4f1c9b8bc0b4eac363d6b9cef082
     m_Address: RestartLevelWidget
     m_ReadOnly: 0
@@ -33,6 +28,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb814e5b140baa949a0c6a6a77343331
     m_Address: LoadingWidget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbf3d7c6c5ed1dc4e8905e72ae8ecd6a
+    m_Address: LevelCompletedWidget
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

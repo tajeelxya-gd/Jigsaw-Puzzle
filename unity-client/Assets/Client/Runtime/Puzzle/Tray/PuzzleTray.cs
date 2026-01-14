@@ -213,7 +213,7 @@ namespace Client.Runtime
 
         private void HandleScrollInput()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (InputHandler._3DActive && Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider)
@@ -226,7 +226,7 @@ namespace Client.Runtime
                 }
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (InputHandler._3DActive && Input.GetMouseButtonUp(0))
             {
                 _isDragging = false;
                 _scrollLocked = false;

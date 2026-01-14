@@ -30,7 +30,7 @@ namespace Client.Runtime
         private void HandleInput()
         {
             // Standard click-to-drag logic
-            if (Input.GetMouseButtonDown(0))
+            if (InputHandler._3DActive && Input.GetMouseButtonDown(0))
             {
                 if (TryBeginDrag())
                 {
@@ -39,7 +39,7 @@ namespace Client.Runtime
             }
 
             // End drag when mouse is released
-            if (Input.GetMouseButtonUp(0) && _isDragging)
+            if (InputHandler._3DActive && Input.GetMouseButtonUp(0) && _isDragging)
             {
                 _isDragging = false;
                 OnDragEnded.Broadcast();
