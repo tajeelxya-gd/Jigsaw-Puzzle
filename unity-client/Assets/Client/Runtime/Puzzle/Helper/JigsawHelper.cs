@@ -8,6 +8,7 @@ namespace Client.Runtime
 
         public void SetTexture(Texture2D texture)
         {
+            _renderer.material.EnableKeyword("_EMISSION");
             var sharedMaterials = _renderer.materials;
 
             for (int i = 0; i < sharedMaterials.Length; i++)
