@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ef6715478c116f24b9e45f8304e5a0a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -107,7 +107,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0
-    - _DetailAlbedoMapScale: 1
+    - _DetailAlbedoMapScale: 1.56
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
@@ -136,9 +136,9 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
-    - _Color: {r: 0.5566037, g: 0.5566037, b: 0.5566037, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 0.03389659, b: 0.09411765, a: 1}
+    - _Color: {r: 0, g: 0.03389659, b: 0.094117604, a: 1}
+    - _EmissionColor: {r: 0.009166957, g: 0.01420456, b: 0.01886791, a: 1}
     - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -128,6 +128,7 @@ namespace Client.Runtime
         {
             var piece = await UniResources.CreateInstanceAsync<JigsawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
             piece.name = $"Piece_{cell.Idx}";
+            mesh.gameObject.layer = flatMesh.gameObject.layer = piece.gameObject.layer;
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
             var rendererData = new JigsawPieceRendererData(mesh.GetComponent<Renderer>(), flatMesh.GetComponent<Renderer>(), _texture);
