@@ -75,6 +75,7 @@ namespace Client.Runtime
                 {
                     sharedMaterial.SetTexture("_BaseMap", texture);
                     sharedMaterial.SetTexture("_DetailAlbedoMap", texture);
+                    sharedMaterial.EnableKeyword("_DETAIL_MULX2");
                 }
             }
 

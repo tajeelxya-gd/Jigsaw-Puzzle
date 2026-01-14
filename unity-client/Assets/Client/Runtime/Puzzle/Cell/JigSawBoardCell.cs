@@ -35,7 +35,6 @@ namespace Client.Runtime
 
             if (piece.CorrectIdx == Idx)
             {
-                SetHeight(piece, -0.001f);
                 IsLocked = true;
                 CellActionProcessor.Process(_actionData);
                 _actionData = null;
