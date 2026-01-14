@@ -12,5 +12,7 @@ namespace Client.Runtime
         void SubmitPiece(JigsawPiece piece);
         UniTask DropPiecesAsync(CancellationToken cToken = default);
         void PickPieces();
+        bool CanDropPieces();
+        bool CanPickPieces();
     }
 }

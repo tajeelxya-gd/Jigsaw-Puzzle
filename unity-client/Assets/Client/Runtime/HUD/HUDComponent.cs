@@ -56,6 +56,7 @@ namespace Client.Runtime
         private void HandleLevelStart(LevelStartEvent @event)
         {
             SetToggles(true);
+            SetDropButton(true);
             _helper.ShowFullImage(false);
         }
 
@@ -72,12 +73,14 @@ namespace Client.Runtime
             if (toggle)
             {
                 _puzzleTray.PickPieces();
-                return;
+            }
+            else
+            {
+                _dropPieces.interactable = false;
+                await _puzzleTray.DropPiecesAsync(cToken);
             }
 
-            _dropPieces.interactable = false;
-            await _puzzleTray.DropPiecesAsync(cToken);
-            _dropPieces.interactable = true;
+            SetDropButton(toggle);
         }
 
         private void HandleEye(bool toggle) => _helper.ShowFullImage(!toggle);
@@ -87,6 +90,12 @@ namespace Client.Runtime
             _cornerPieces.SetIsOnWithoutNotify(toggle);
             _dropPieces.SetIsOnWithoutNotify(toggle);
             _eye.SetIsOnWithoutNotify(toggle);
+        }
+
+        private void SetDropButton(bool toggle)
+        {
+            _dropPieces.transform.localEulerAngles = new Vector3(0f, 0f, toggle ? 90f : -90f);
+            _dropPieces.interactable = toggle ? _puzzleTray.CanDropPieces() : _puzzleTray.CanPickPieces();
         }
     }
 }

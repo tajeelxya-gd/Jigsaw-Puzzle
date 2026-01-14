@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
@@ -111,6 +112,15 @@ namespace Client.Runtime
                 piece.OnEnterTray();
                 SubmitPiece(piece);
             }
+        }
+
+        public bool CanDropPieces() => _activePieces.Count > 0;
+
+        public bool CanPickPieces()
+        {
+            var pieces = _puzzleService.GetCurrentBoard().Pieces;
+
+            return pieces.Any(itm => !itm.IsLocked && !itm.IsOverTray && itm.Group.Count == 1);
         }
 
         private void Update()
