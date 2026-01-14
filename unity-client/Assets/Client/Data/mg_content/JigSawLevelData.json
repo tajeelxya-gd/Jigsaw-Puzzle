@@ -35,5 +35,15 @@
       "mg_level_4_cell_action_reward_3",
       "mg_level_4_cell_action_reward_4"
     ]
+  },
+  {
+    "_id": "mg_level_5",
+    "_boardId": "mg_7x5_standard_board",
+    "_imageKey": "img_island"
+  },
+  {
+    "_id": "mg_level_6",
+    "_boardId": "mg_7x5_standard_board",
+    "_imageKey": "img_lion"
   }
 ]
