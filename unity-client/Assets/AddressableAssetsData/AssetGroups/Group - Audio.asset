@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Group - Audio
   m_GUID: df658dff530c3d24f86cb033e6038c0f
   m_SerializeEntries:
+  - m_GUID: 252f7b60efb045e459a1018a899a7cc2
+    m_Address: PieceGroupFormed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 978c1bee9b791f64a8718bcccc53aba4
     m_Address: PieceLockedOnCell
     m_ReadOnly: 0

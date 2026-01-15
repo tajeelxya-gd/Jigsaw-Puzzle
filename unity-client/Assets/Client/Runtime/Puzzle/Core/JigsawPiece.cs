@@ -17,9 +17,11 @@ namespace Client.Runtime
         [SerializeField] private JigsawPieceRenderer _renderer;
         [SerializeField] private ScaleController _scaleController;
         [SerializeField] private ScriptableObject _piecePlaced;
+        [SerializeField] private ScriptableObject _groupFormed;
 
         private IPuzzleTray _puzzleTray;
         private IPuzzleService _puzzleService;
+        private bool _recentGroup;
 
         public int CorrectIdx { get; private set; }
         public int CurrentIdx { get; set; }
@@ -130,6 +132,7 @@ namespace Client.Runtime
                 return;
             }
 
+            _recentGroup = false;
             var piecesToCheck = new List<JigsawPiece>(Group);
             foreach (var piece in piecesToCheck)
             {
@@ -141,8 +144,9 @@ namespace Client.Runtime
                 CheckAndMerge(piece, neighbors.Left);
                 CheckAndMerge(piece, neighbors.Right);
             }
-
-            UniAudio.Play2D((IAudioConfig)_piecePlaced);
+            
+            var audio = _recentGroup ? _groupFormed : _piecePlaced;
+            UniAudio.Play2D((IAudioConfig)audio);
         }
 
         private void CheckAndMerge(JigsawPiece piece, int neighborIdx)
@@ -160,6 +164,7 @@ namespace Client.Runtime
                 if (isCorrectNeighbor && piece.Group != otherPiece.Group)
                 {
                     piece.Group.Join(otherPiece.Group);
+                    _recentGroup = true;
                     break;
                 }
             }

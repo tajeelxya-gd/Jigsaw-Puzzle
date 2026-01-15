@@ -79,6 +79,7 @@ MonoBehaviour:
   _renderer: {fileID: 2974595056074598061}
   _scaleController: {fileID: 1605043729510110250}
   _piecePlaced: {fileID: 11400000, guid: 9795e9f4c3a2d2b4fa8d8b0423312289, type: 2}
+  _groupFormed: {fileID: 11400000, guid: 252f7b60efb045e459a1018a899a7cc2, type: 2}
 --- !u!114 &946193399347285323
 MonoBehaviour:
   m_ObjectHideFlags: 0
