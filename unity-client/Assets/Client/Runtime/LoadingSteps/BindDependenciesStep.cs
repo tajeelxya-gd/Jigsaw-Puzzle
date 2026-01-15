@@ -17,6 +17,7 @@ namespace Client.Runtime
         [SerializeField] private CameraEffects _cameraEffects;
         [SerializeField] private JigsawHelper _jigsawHelper;
         [SerializeField] private HUDComponent _hudComponent;
+        [SerializeField] private VFXController _vfxController;
 
         private IBinder _binder;
 
@@ -35,7 +36,7 @@ namespace Client.Runtime
 
             _binder.BindAsSingleton<PuzzleService>();
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
-            _binder.BindAsSingleton<VFXController>();
+            _binder.BindAsSingleton(_vfxController);
             _binder.BindAsSingleton(_puzzleTray);
             _binder.BindAsSingleton(_cameraEffects);
             _binder.BindAsSingleton(_jigsawHelper);

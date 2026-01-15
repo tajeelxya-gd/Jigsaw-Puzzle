@@ -12,14 +12,23 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class VFXController : IVFXController, IInitialisable, IResettable, IInjectable
+    public sealed class VFXController : MonoBehaviour, IVFXController, IInitialisable, IResettable, IInjectable
     {
+        [SerializeField] private float _liftAmount = 0.017f;
+        [SerializeField] private float _duration = 0.5f;
+        [SerializeField] private float _delayBetweenPiecesInGroup = 0.05f;
+        [SerializeField] private float _delayBetweenGroup = 0.05f;
+        [SerializeField] private ScriptableObject _pieceLocked;
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
         private ICameraEffects _cameraEffects;
-        private IAudioConfig _pieceLocked;
+        private IPuzzleService _puzzleService;
 
-        public void Inject(IResolver resolver) => _cameraEffects = resolver.Resolve<ICameraEffects>();
+        public void Inject(IResolver resolver)
+        {
+            _cameraEffects = resolver.Resolve<ICameraEffects>();
+            _puzzleService = resolver.Resolve<IPuzzleService>();
+        }
 
         public void Initialise()
         {
@@ -33,12 +42,10 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
-        public void SetPiecePlacedAudioConfig(IAudioConfig config) => _pieceLocked = config;
-
         private void HandlePiecePlaced(GroupPlacedEvent ev)
         {
             _cameraEffects.PlayGroupingEffect();
-            UniAudio.Play2D(_pieceLocked);
+            UniAudio.Play2D((IAudioConfig)_pieceLocked);
             HighlightGroupAndNeighbours(ev.Group);
         }
 
@@ -76,43 +83,47 @@ namespace Client.Runtime
             TriggerBatchVfx();
         }
 
-        public async UniTask AnimateBoardCompletionAsync(IEnumerable<JigsawPiece> pieces, int cols, AnimationOrder order, CancellationToken cToken = default)
+        public async UniTask AnimateBoardCompletionAsync(CancellationToken cToken = default)
         {
-            var allTasks = new List<UniTask>();
+            await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
 
-            float liftAmount = 0.017f;
-            float duration = 0.5f;
-            float delayBetweenGroups = 0.1f;
-            float delayBetweenPiecesInGroup = 0.05f;
+            var allTasks = new List<UniTask>();
+            var order = AnimationOrder.RowByRow;
+            var board = _puzzleService.GetCurrentBoard();
+            var cols = board.Data.YConstraint;
 
             // Use Select to keep track of the original index for math
-            var indexedPieces = pieces.Select((piece, index) => new { piece, index });
+            var indexedPieces = board.Pieces.Select((piece, index) => new { piece, index });
 
             // Group by calculating Row or Col from the index
             var groups = order == AnimationOrder.RowByRow
                 ? indexedPieces.GroupBy(x => x.index / cols).OrderBy(g => g.Key)
                 : indexedPieces.GroupBy(x => x.index % cols).OrderBy(g => g.Key);
-
+            var delay = 0f;
+            var groupDelay = 0f;
             foreach (var group in groups)
             {
                 if (cToken.IsCancellationRequested) break;
 
+                delay = groupDelay;
+
                 foreach (var item in group)
                 {
-                    allTasks.Add(ManualBounceAsync(item.piece, liftAmount, duration, cToken));
-
-                    if (delayBetweenPiecesInGroup > 0)
-                        await UniTask.Delay(TimeSpan.FromSeconds(delayBetweenPiecesInGroup), cancellationToken: cToken);
+                    allTasks.Add(ManualBounceAsync(item.piece, _liftAmount, _duration, delay, cToken));
+                    delay += _delayBetweenPiecesInGroup;
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(delayBetweenGroups), cancellationToken: cToken);
+                groupDelay += _delayBetweenGroup;
             }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
 
             await UniTask.WhenAll(allTasks);
         }
 
-        private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, CancellationToken cToken)
+        private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, float delay, CancellationToken cToken)
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
             Vector3 startPos = piece.transform.localPosition;
             float elapsed = 0f;
 
@@ -146,5 +157,13 @@ namespace Client.Runtime
             _vfxQueue.Clear();
             _isBatching = false;
         }
+
+#if UNITY_EDITOR
+        [ContextMenu("PlayAnim")]
+        private void PlayAnim()
+        {
+            AnimateBoardCompletionAsync(this.GetCancellationTokenOnDestroy()).Forget();
+        }
+#endif
     }
 }
