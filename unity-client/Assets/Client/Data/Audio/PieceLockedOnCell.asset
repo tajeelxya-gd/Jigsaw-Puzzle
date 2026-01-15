@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Audio.UniAudioConfig
   _data:
     _clip: {fileID: 8300000, guid: c17136ca2de8047469a82a1e58164c25, type: 3}
-    _volume: 1
+    _volume: 0.85
     _pitch: 1
     _loop: 0
     _minDistance: 1
