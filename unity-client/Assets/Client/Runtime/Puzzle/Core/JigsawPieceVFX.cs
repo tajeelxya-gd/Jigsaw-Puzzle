@@ -7,7 +7,6 @@ namespace Client.Runtime
     [RequireComponent(typeof(JigsawPieceRenderer))]
     public sealed class JigsawPieceVFX : MonoBehaviour
     {
-
         private JigsawPieceRenderer _renderer;
         private CancellationTokenSource _cts;
 

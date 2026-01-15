@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Codice.Client.BaseCommands;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Audio;
@@ -14,10 +15,11 @@ namespace Client.Runtime
 {
     public sealed class VFXController : MonoBehaviour, IVFXController, IInitialisable, IResettable, IInjectable
     {
-        [SerializeField] private float _liftAmount = 0.017f;
-        [SerializeField] private float _duration = 0.5f;
-        [SerializeField] private float _delayBetweenPiecesInGroup = 0.05f;
-        [SerializeField] private float _delayBetweenGroup = 0.05f;
+        [SerializeField] private float _liftAmount;
+        [SerializeField] private float _duration;
+        [SerializeField] private float _delayBetweenPiecesInGroup;
+        [SerializeField] private float _delayBetweenGroup;
+        [SerializeField] private float _vfxDelayInPieces;
         [SerializeField] private ScriptableObject _pieceLocked;
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
@@ -79,8 +81,7 @@ namespace Client.Runtime
                 }
             }
 
-            // 2. Trigger the batch play once at the end of the frame
-            TriggerBatchVfx();
+            UniTask.Void(TriggerBatchVfxAsync, this.GetCancellationTokenOnDestroy());
         }
 
         public async UniTask AnimateBoardCompletionAsync(CancellationToken cToken = default)
@@ -141,16 +142,23 @@ namespace Client.Runtime
             piece.transform.localPosition = startPos;
         }
 
-        private async void TriggerBatchVfx()
+        private async UniTaskVoid TriggerBatchVfxAsync(CancellationToken cToken = default)
         {
             if (_isBatching) return;
             _isBatching = true;
 
             await Task.Yield();
 
+            var delay = 0f;
+
             foreach (var p in _vfxQueue)
             {
-                if (p != null) p.PlayVfx();
+                if (p != null)
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
+                    p.PlayVfx();
+                    delay += _vfxDelayInPieces;
+                }
             }
 
             _vfxQueue.Clear();
