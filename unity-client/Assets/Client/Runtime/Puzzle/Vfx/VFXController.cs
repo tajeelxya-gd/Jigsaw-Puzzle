@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
+using UniTx.Runtime.Audio;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Client.Runtime
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
         private ICameraEffects _cameraEffects;
+        private IAudioConfig _pieceLocked;
 
         public void Inject(IResolver resolver) => _cameraEffects = resolver.Resolve<ICameraEffects>();
 
@@ -31,9 +33,12 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
+        public void SetPiecePlacedAudioConfig(IAudioConfig config) => _pieceLocked = config;
+
         private void HandlePiecePlaced(GroupPlacedEvent ev)
         {
             _cameraEffects.PlayGroupingEffect();
+            UniAudio.Play2D(_pieceLocked);
             HighlightGroupAndNeighbours(ev.Group);
         }
 
