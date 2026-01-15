@@ -2332,6 +2332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50eba1dfe55b38d4f800cfeba2f88726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.InitDependenciesStep
+  _audioAssetDataId: AudioAssetData
 --- !u!4 &2038323280
 Transform:
   m_ObjectHideFlags: 0

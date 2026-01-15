@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime.Audio;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Client.Runtime
         [SerializeField] private JigsawPieceVFX _vfx;
         [SerializeField] private JigsawPieceRenderer _renderer;
         [SerializeField] private ScaleController _scaleController;
+        [SerializeField] private ScriptableObject _piecePlacedAudio;
 
         private IPuzzleTray _puzzleTray;
         private IPuzzleService _puzzleService;
@@ -139,6 +141,8 @@ namespace Client.Runtime
                 CheckAndMerge(piece, neighbors.Left);
                 CheckAndMerge(piece, neighbors.Right);
             }
+
+            UniAudio.Play2D(_piecePlacedAudio as IAudioConfig);
         }
 
         private void CheckAndMerge(JigsawPiece piece, int neighborIdx)

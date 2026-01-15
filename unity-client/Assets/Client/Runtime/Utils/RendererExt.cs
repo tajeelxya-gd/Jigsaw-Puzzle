@@ -4,10 +4,10 @@ namespace Client.Runtime
 {
     public static class RendererExt
     {
-        public static void SetTexture(this Renderer renderer, Texture2D texture)
+        public static void SetTexture(this Renderer source, Texture2D texture)
         {
-            renderer.material.EnableKeyword("_EMISSION");
-            var sharedMaterials = renderer.materials;
+            source.material.EnableKeyword("_EMISSION");
+            var sharedMaterials = source.materials;
 
             for (int i = 0; i < sharedMaterials.Length; i++)
             {
@@ -21,7 +21,7 @@ namespace Client.Runtime
                 }
             }
 
-            renderer.materials = sharedMaterials;
+            source.materials = sharedMaterials;
         }
     }
 }
