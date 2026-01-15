@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.CameraEffects
   camTransform: {fileID: 0}
   _punchIntensity: 0.004
-  _punchDuration: 0.7
+  _punchDuration: 0.35
