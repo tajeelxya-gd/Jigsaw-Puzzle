@@ -7,7 +7,6 @@ namespace Client.Runtime
     [RequireComponent(typeof(JigsawPieceRenderer))]
     public sealed class JigsawPieceVFX : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem _particleSystem;
 
         private JigsawPieceRenderer _renderer;
         private CancellationTokenSource _cts;
@@ -32,9 +31,6 @@ namespace Client.Runtime
         {
             try
             {
-                _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                _particleSystem.Play();
-
                 await _renderer.FlashAsync(cToken);
             }
             catch (System.OperationCanceledException)

@@ -5,11 +5,14 @@ namespace Client.Runtime
 {
     public sealed class JigsawBoardCell : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem _particleSystem;
+
         private const float HeightFactor = 0.00015f;
 
         private readonly Stack<JigsawPiece> _stack = new();
         private JigsawBoard _board;
         private ICellActionData _actionData;
+        private bool _once = true;
 
         public int Idx { get; private set; }
         public Vector3 Size { get; private set; }
@@ -36,8 +39,12 @@ namespace Client.Runtime
             if (piece.CorrectIdx == Idx)
             {
                 IsLocked = true;
-                CellActionProcessor.Process(_actionData);
-                _actionData = null;
+                if (_once)
+                {
+                    _particleSystem.Play();
+                    CellActionProcessor.Process(_actionData);
+                    _once = false;
+                }
                 return true;
             }
 
