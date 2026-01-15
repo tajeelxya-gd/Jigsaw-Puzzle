@@ -602,6 +602,7 @@ MonoBehaviour:
   _cornerPieces: {fileID: 1106484988375146716}
   _dropPieces: {fileID: 4045081265679811003}
   _eye: {fileID: 8021854784921462426}
+  _click: {fileID: 11400000, guid: a255b3c39852da74396354338650ac38, type: 2}
 --- !u!1 &7342396512376337611
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
+using UniTx.Runtime.Audio;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.Widgets;
@@ -15,6 +16,7 @@ namespace Client.Runtime
         [SerializeField] private Toggle _cornerPieces;
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Toggle _eye;
+        [SerializeField] private ScriptableObject _click;
 
         private IPuzzleTray _puzzleTray;
         private IJigsawHelper _helper;
@@ -60,13 +62,22 @@ namespace Client.Runtime
             _helper.ShowFullImage(false);
         }
 
-        private void HandleReset() => UniWidgets.PushAsync<RestartLevelWidget>();
+        private void HandleReset()
+        {
+            PlayAudio();
+            UniWidgets.PushAsync<RestartLevelWidget>();
+        }
 
         private void HandleCornerPieces(bool toggle)
         {
+            PlayAudio();
         }
 
-        private void HandleDropPieces(bool toggle) => HandleDropPiecesAsync(toggle, this.GetCancellationTokenOnDestroy()).Forget();
+        private void HandleDropPieces(bool toggle)
+        {
+            PlayAudio();
+            HandleDropPiecesAsync(toggle, this.GetCancellationTokenOnDestroy()).Forget();
+        }
 
         private async UniTaskVoid HandleDropPiecesAsync(bool toggle, CancellationToken cToken = default)
         {
@@ -83,7 +94,11 @@ namespace Client.Runtime
             SetDropButton(toggle);
         }
 
-        private void HandleEye(bool toggle) => _helper.ShowFullImage(!toggle);
+        private void HandleEye(bool toggle)
+        {
+            PlayAudio();
+            _helper.ShowFullImage(!toggle);
+        }
 
         private void SetToggles(bool toggle)
         {
@@ -97,5 +112,7 @@ namespace Client.Runtime
             _dropPieces.transform.localEulerAngles = new Vector3(0f, 0f, toggle ? 90f : -90f);
             _dropPieces.interactable = toggle ? _puzzleTray.CanDropPieces() : _puzzleTray.CanPickPieces();
         }
+
+        private void PlayAudio() => UniAudio.Play2D((IAudioConfig)_click);
     }
 }
