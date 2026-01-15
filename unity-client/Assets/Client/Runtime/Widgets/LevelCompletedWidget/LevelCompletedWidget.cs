@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime.Audio;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.Widgets;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Client.Runtime
     public sealed class LevelCompletedWidget : MonoBehaviour, IWidget, IInjectable
     {
         [SerializeField] private Button _nextLevelBtn;
+        [SerializeField] private ScriptableObject _levelCompleted;
 
         private IPuzzleService _puzzleService;
 
@@ -22,6 +24,7 @@ namespace Client.Runtime
         public void Initialise()
         {
             _nextLevelBtn.onClick.AddListener(HandleNextLevel);
+            UniAudio.Play2D((IAudioConfig)_levelCompleted);
         }
 
         public void Reset()
