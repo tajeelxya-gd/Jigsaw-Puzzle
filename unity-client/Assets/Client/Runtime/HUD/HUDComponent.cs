@@ -15,18 +15,16 @@ namespace Client.Runtime
         [SerializeField] private Button _reset;
         [SerializeField] private Toggle _cornerPieces;
         [SerializeField] private Toggle _dropPieces;
-        [SerializeField] private Toggle _eye;
+        [SerializeField] private Button _eye;
         [SerializeField] private ScriptableObject _click;
 
         private IPuzzleTray _puzzleTray;
         private IJigsawHelper _helper;
-        private IWinConditionChecker _checker;
 
         public void Inject(IResolver resolver)
         {
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _helper = resolver.Resolve<IJigsawHelper>();
-            _checker = resolver.Resolve<IWinConditionChecker>();
         }
 
         public void Initialise() => RegisterEvents();
@@ -38,9 +36,8 @@ namespace Client.Runtime
             _reset.onClick.AddListener(HandleReset);
             _cornerPieces.onValueChanged.AddListener(HandleCornerPieces);
             _dropPieces.onValueChanged.AddListener(HandleDropPieces);
-            _eye.onValueChanged.AddListener(HandleEye);
+            _eye.onClick.AddListener(HandleEye);
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
-            _checker.OnWin += HandleOnWin;
         }
 
         private void UnRegisterEvents()
@@ -48,18 +45,14 @@ namespace Client.Runtime
             _reset.onClick.RemoveListener(HandleReset);
             _cornerPieces.onValueChanged.RemoveListener(HandleCornerPieces);
             _dropPieces.onValueChanged.RemoveListener(HandleDropPieces);
-            _eye.onValueChanged.RemoveListener(HandleEye);
+            _eye.onClick.RemoveListener(HandleEye);
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
-            _checker.OnWin -= HandleOnWin;
         }
-
-        private void HandleOnWin() => _helper.ShowFullImage(false);
 
         private void HandleLevelStart(LevelStartEvent @event)
         {
             SetToggles(true);
             SetDropButton(true);
-            _helper.ShowFullImage(false);
         }
 
         private void HandleReset()
@@ -94,17 +87,16 @@ namespace Client.Runtime
             SetDropButton(toggle);
         }
 
-        private void HandleEye(bool toggle)
+        private void HandleEye()
         {
             PlayAudio();
-            _helper.ShowFullImage(!toggle);
+            _helper.ToggleImage();
         }
 
         private void SetToggles(bool toggle)
         {
             _cornerPieces.SetIsOnWithoutNotify(toggle);
             _dropPieces.SetIsOnWithoutNotify(toggle);
-            _eye.SetIsOnWithoutNotify(toggle);
         }
 
         private void SetDropButton(bool toggle)
