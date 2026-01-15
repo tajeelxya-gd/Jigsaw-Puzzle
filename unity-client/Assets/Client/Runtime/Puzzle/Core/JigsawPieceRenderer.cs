@@ -19,8 +19,8 @@ namespace Client.Runtime
         {
             _data = data;
             _mpb = new MaterialPropertyBlock();
-            SetTexture(_data.Mesh, _data.Texture);
-            SetTexture(_data.FlatMesh, _data.Texture);
+            _data.Mesh.SetTexture(_data.Texture);
+            _data.FlatMesh.SetTexture(_data.Texture);
             SetActive(isFlat: false);
         }
 
@@ -36,7 +36,6 @@ namespace Client.Runtime
             var renderer = _isFlat ? _data.FlatMesh : _data.Mesh;
             int materialCount = renderer.sharedMaterials.Length;
 
-            Color startEmission = Color.black;
             float elapsed = 0f;
 
             while (elapsed < duration)
@@ -61,26 +60,6 @@ namespace Client.Runtime
             {
                 renderer.SetPropertyBlock(_mpb, i);
             }
-        }
-
-        private void SetTexture(Renderer renderer, Texture2D texture)
-        {
-            renderer.material.EnableKeyword("_EMISSION");
-            var sharedMaterials = renderer.materials;
-
-            for (int i = 0; i < sharedMaterials.Length; i++)
-            {
-                var sharedMaterial = sharedMaterials[i];
-                if (sharedMaterial != null)
-                {
-                    sharedMaterial.SetTexture("_BaseMap", texture);
-                    sharedMaterial.SetTexture("_DetailAlbedoMap", texture);
-                    sharedMaterial.SetFloat("_DetailAlbedoMapScale", 0.75f);
-                    sharedMaterial.EnableKeyword("_DETAIL_MULX2");
-                }
-            }
-
-            renderer.materials = sharedMaterials;
         }
     }
 }

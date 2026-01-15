@@ -49,7 +49,7 @@ namespace Client.Runtime
                 await WrapMeshesInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
             }
 
-            _helper.SetTexture(_texture);
+            _helper.SetFullImage(_texture);
 
             UniResources.DisposeInstance(grid.gameObject);
             UniResources.DisposeInstance(flatGrid.gameObject);
