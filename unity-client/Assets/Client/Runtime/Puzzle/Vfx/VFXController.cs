@@ -20,7 +20,9 @@ namespace Client.Runtime
         [SerializeField] private float _delayBetweenPiecesInGroup;
         [SerializeField] private float _delayBetweenGroup;
         [SerializeField] private float _vfxDelayInPieces;
+        [SerializeField] private int _maxHighlightPieces = -1;
         [SerializeField] private ScriptableObject _pieceLocked;
+
         private readonly HashSet<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
         private ICameraEffects _cameraEffects;
@@ -64,6 +66,8 @@ namespace Client.Runtime
 
             while (searchQueue.Count > 0)
             {
+                if (_maxHighlightPieces != -1 && _vfxQueue.Count >= _maxHighlightPieces) break;
+
                 var current = searchQueue.Dequeue();
                 var neighbors = JigsawBoardCalculator.GetNeighboursCells(current.CorrectIdx);
 
