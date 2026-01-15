@@ -78,7 +78,7 @@ MonoBehaviour:
   _vfx: {fileID: 3110966378498270128}
   _renderer: {fileID: 2974595056074598061}
   _scaleController: {fileID: 1605043729510110250}
-  _piecePlacedAudio: {fileID: 11400000, guid: 9795e9f4c3a2d2b4fa8d8b0423312289, type: 2}
+  _piecePlaced: {fileID: 11400000, guid: 9795e9f4c3a2d2b4fa8d8b0423312289, type: 2}
 --- !u!114 &946193399347285323
 MonoBehaviour:
   m_ObjectHideFlags: 0
