@@ -1,6 +1,7 @@
 [
   {
     "_id": "mg_level_1",
+    "_name": "1 - 4 x 3",
     "_boardId": "mg_4x3_standard_board",
     "_imageKey": "img_island",
     "_cellActionIds": [
@@ -9,6 +10,7 @@
   },
   {
     "_id": "mg_level_2",
+    "_name": "2 - 4 x 3",
     "_boardId": "mg_4x3_standard_board",
     "_imageKey": "img_lion",
     "_cellActionIds": [
@@ -18,6 +20,7 @@
   },
   {
     "_id": "mg_level_3",
+    "_name": "3 - 6 x 4",
     "_boardId": "mg_6x4_standard_board",
     "_imageKey": "img_island",
     "_cellActionIds": [
@@ -27,6 +30,7 @@
   },
   {
     "_id": "mg_level_4",
+    "_name": "4 - 6 x 4",
     "_boardId": "mg_6x4_standard_board",
     "_imageKey": "img_lion",
     "_cellActionIds": [
@@ -38,11 +42,13 @@
   },
   {
     "_id": "mg_level_5",
+    "_name": "5 - 7 x 5",
     "_boardId": "mg_7x5_standard_board",
     "_imageKey": "img_island"
   },
   {
     "_id": "mg_level_6",
+    "_name": "6 - 7 x 5",
     "_boardId": "mg_7x5_standard_board",
     "_imageKey": "img_lion"
   }
