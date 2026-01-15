@@ -116,9 +116,8 @@ namespace Client.Runtime
                 groupDelay += _delayBetweenGroup;
             }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
-
             await UniTask.WhenAll(allTasks);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
         }
 
         private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, float delay, CancellationToken cToken)
