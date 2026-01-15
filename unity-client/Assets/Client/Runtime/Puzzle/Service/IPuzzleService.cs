@@ -12,5 +12,7 @@ namespace Client.Runtime
         void UnLoadPuzzle();
 
         JigsawBoard GetCurrentBoard();
+
+        JigSawLevelData GetCurrentLevelData();
     }
 }

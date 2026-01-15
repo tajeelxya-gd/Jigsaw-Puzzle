@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniTx.Runtime;
 using UniTx.Runtime.Audio;
 using UniTx.Runtime.Events;
@@ -16,15 +17,18 @@ namespace Client.Runtime
         [SerializeField] private Toggle _cornerPieces;
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Button _eye;
+        [SerializeField] private TMP_Text _levelName;
         [SerializeField] private ScriptableObject _click;
 
         private IPuzzleTray _puzzleTray;
         private IJigsawHelper _helper;
+        private IPuzzleService _puzzleService;
 
         public void Inject(IResolver resolver)
         {
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _helper = resolver.Resolve<IJigsawHelper>();
+            _puzzleService = resolver.Resolve<IPuzzleService>();
         }
 
         public void Initialise() => RegisterEvents();
@@ -51,6 +55,7 @@ namespace Client.Runtime
 
         private void HandleLevelStart(LevelStartEvent @event)
         {
+            _levelName.SetText(_puzzleService.GetCurrentLevelData().Name);
             SetToggles(true);
             SetDropButton(true);
         }

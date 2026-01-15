@@ -8,11 +8,13 @@ namespace Client.Runtime
     public sealed class JigSawLevelData : IData
     {
         [SerializeField] private string _id;
+        [SerializeField] private string _name;
         [SerializeField] private string _boardId;
         [SerializeField] private string _imageKey;
         [SerializeField] private string[] _cellActionIds;
 
         public string Id => _id;
+        public string Name => _name;
         public string BoardId => _boardId;
         public string ImageKey => _imageKey;
         public string[] CellActionIds => _cellActionIds;

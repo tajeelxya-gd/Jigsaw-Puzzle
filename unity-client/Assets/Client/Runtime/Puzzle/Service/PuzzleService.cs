@@ -21,6 +21,7 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
         private Transform _puzzleBoard;
+        private JigSawLevelData _levelData;
         private int _idx = -1;
 
         public void Inject(IResolver resolver)
@@ -40,9 +41,9 @@ namespace Client.Runtime
 
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
-            var levelData = GetCurrentLevelData();
-            _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
-            await _board.LoadPuzzleAsync(levelData, _puzzleBoard, cToken);
+            if (_levelData == null) IncrementLevel();
+            _board = _entityService.Get<JigsawBoard>(_levelData.BoardId);
+            await _board.LoadPuzzleAsync(_levelData, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
@@ -61,19 +62,18 @@ namespace Client.Runtime
         public UniTask RestartPuzzleAsync(CancellationToken cToken = default)
         {
             UnLoadPuzzle();
-            _idx--;
             return LoadPuzzleAsync(cToken);
         }
 
         public JigsawBoard GetCurrentBoard() => _board;
+        public JigSawLevelData GetCurrentLevelData() => _levelData;
 
-        private JigSawLevelData GetCurrentLevelData()
+        private void IncrementLevel()
         {
             var data = _contentService.GetAllData<JigSawLevelData>().ToArray();
             if (++_idx >= data.Length) _idx = 0;
 
-            // TODO: load idx from saves later
-            return data[_idx];
+            _levelData = data[_idx];
         }
 
         private void HandleOnWin() => UniTask.Void(HandleOnWinAsync, default);
@@ -83,6 +83,7 @@ namespace Client.Runtime
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
+            IncrementLevel();
         }
     }
 }
