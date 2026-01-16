@@ -19,8 +19,6 @@ namespace Client.Runtime
         {
             _data = data;
             _mpb = new MaterialPropertyBlock();
-            _data.Mesh.SetTexture(_data.Texture);
-            _data.FlatMesh.SetTexture(_data.Texture);
             SetActive(isFlat: false);
         }
 

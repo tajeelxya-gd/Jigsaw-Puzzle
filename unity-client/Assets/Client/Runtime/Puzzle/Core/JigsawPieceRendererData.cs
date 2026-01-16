@@ -6,13 +6,11 @@ namespace Client.Runtime
     {
         public readonly Renderer Mesh;
         public readonly Renderer FlatMesh;
-        public readonly Texture2D Texture;
 
-        public JigsawPieceRendererData(Renderer mesh, Renderer flatMesh, Texture2D texture)
+        public JigsawPieceRendererData(Renderer mesh, Renderer flatMesh)
         {
             Mesh = mesh;
             FlatMesh = flatMesh;
-            Texture = texture;
         }
     }
 }

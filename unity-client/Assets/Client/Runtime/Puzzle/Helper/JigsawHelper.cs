@@ -7,7 +7,8 @@ namespace Client.Runtime
 {
     public sealed class JigsawHelper : MonoBehaviour, IJigsawHelper, IInjectable, IInitialisable, IResettable
     {
-        [SerializeField] private Renderer _renderer;
+        [SerializeField] private Renderer _fullImage;
+        [SerializeField] private Material[] _materials;
 
         private Camera _cam;
 
@@ -27,9 +28,22 @@ namespace Client.Runtime
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
         }
 
-        public void SetFullImage(Texture2D texture) => _renderer.SetTexture(texture);
+        public void SetTexture(Texture2D texture)
+        {
+            foreach (var mat in _materials)
+            {
+                mat.SetTexture("_BaseMap", texture);
+                mat.SetTexture("_DetailAlbedoMap", texture);
+            }
+
+            _fullImage.sharedMaterials = new[] { GetBaseMaterial() };
+        }
 
         public void ToggleImage() => gameObject.SetActive(!gameObject.activeSelf);
+
+        public Material GetBaseMaterial() => _materials[0];
+
+        public Material GetOutlineMaterial() => _materials[1];
 
         private void Awake() => _cam = Camera.main;
 

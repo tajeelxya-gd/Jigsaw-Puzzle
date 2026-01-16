@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime;
 using UniTx.Runtime.Database;
 using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
@@ -40,6 +41,7 @@ namespace Client.Runtime
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
             var flatGridAsset = _assetData.GetAsset(Data.FlatGridId);
             var flatGrid = await UniResources.CreateInstanceAsync<Transform>(flatGridAsset.RuntimeKey, parent, null, cToken);
+            _helper.SetTexture(_texture);
 
             foreach (var cell in _cells)
             {
@@ -48,8 +50,6 @@ namespace Client.Runtime
 
                 await WrapMeshesInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
             }
-
-            _helper.SetFullImage(_texture);
 
             UniResources.DisposeInstance(grid.gameObject);
             UniResources.DisposeInstance(flatGrid.gameObject);
@@ -131,7 +131,11 @@ namespace Client.Runtime
             mesh.gameObject.layer = piece.gameObject.layer;
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
-            var rendererData = new JigsawPieceRendererData(mesh.GetComponent<Renderer>(), flatMesh.GetComponent<Renderer>(), _texture);
+            var meshRenderer = mesh.GetComponent<Renderer>();
+            var flatMeshRenderer = flatMesh.GetComponent<Renderer>();
+            meshRenderer.sharedMaterials = new[] { _helper.GetOutlineMaterial(), _helper.GetBaseMaterial() };
+            flatMeshRenderer.sharedMaterials = new[] { _helper.GetBaseMaterial() };
+            var rendererData = new JigsawPieceRendererData(meshRenderer, flatMeshRenderer);
             piece.Inject(_resolver);
             piece.Init(cell, rendererData);
             _pieces.Add(piece);

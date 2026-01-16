@@ -4,7 +4,12 @@ namespace Client.Runtime
 {
     public interface IJigsawHelper
     {
-        void SetFullImage(Texture2D texture);
+        void SetTexture(Texture2D texture);
+        
         void ToggleImage();
+
+        Material GetBaseMaterial();
+
+        Material GetOutlineMaterial();
     }
 }
