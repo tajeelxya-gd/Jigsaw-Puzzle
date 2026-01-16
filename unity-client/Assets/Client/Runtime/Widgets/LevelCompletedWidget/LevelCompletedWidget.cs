@@ -1,6 +1,5 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using log4net.Core;
 using TMPro;
 using UniTx.Runtime.Audio;
 using UniTx.Runtime.IoC;
