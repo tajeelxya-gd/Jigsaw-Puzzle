@@ -95,7 +95,7 @@ namespace Client.Runtime
         private void HandleEye()
         {
             PlayAudio();
-            _helper.ToggleImage();
+            _helper.ToggleFullImage();
         }
 
         private void SetToggles(bool toggle)

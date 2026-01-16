@@ -750,7 +750,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2527,10 +2527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7d7f57f797b3b4daf5f20424e75447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawHelper
+  _assetDataKey: MaterialAssetData
   _fullImage: {fileID: 1451793333}
-  _materials:
-  - {fileID: 2100000, guid: 4a4f8ecb33ae1734cb0116396bef1be8, type: 2}
-  - {fileID: 2100000, guid: 5db2b04bcbe9c174a854f4204e978447, type: 2}
 --- !u!1 &2038323278
 GameObject:
   m_ObjectHideFlags: 0

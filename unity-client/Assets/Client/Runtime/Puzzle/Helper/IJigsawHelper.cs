@@ -1,15 +1,19 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Client.Runtime
 {
     public interface IJigsawHelper
     {
-        void SetTexture(Texture2D texture);
-        
-        void ToggleImage();
+        Material BaseMaterial { get; }
 
-        Material GetBaseMaterial();
+        Material OutlineMaterial { get; }
 
-        Material GetOutlineMaterial();
+        void ToggleFullImage();
+
+        UniTask LoadMaterialsAsync(string key, CancellationToken cToken = default);
+
+        void UnLoadMaterials();
     }
 }

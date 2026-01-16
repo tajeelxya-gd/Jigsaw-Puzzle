@@ -17,7 +17,6 @@ namespace Client.Runtime
         private readonly List<JigsawBoardCell> _cells = new();
 
         private AssetData _assetData;
-        private Texture2D _texture;
         private IResolver _resolver;
         private JigSawLevelData _levelData;
         private IJigsawHelper _helper;
@@ -36,12 +35,11 @@ namespace Client.Runtime
             _levelData = levelData;
             await SpawnCellsAsync(parent, cToken);
             _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
-            _texture = await UniResources.LoadAssetAsync<Texture2D>(levelData.ImageKey, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
             var flatGridAsset = _assetData.GetAsset(Data.FlatGridId);
             var flatGrid = await UniResources.CreateInstanceAsync<Transform>(flatGridAsset.RuntimeKey, parent, null, cToken);
-            _helper.SetTexture(_texture);
+            await _helper.LoadMaterialsAsync(levelData.ImageKey, cToken);
 
             foreach (var cell in _cells)
             {
@@ -68,8 +66,7 @@ namespace Client.Runtime
                 UniResources.DisposeInstance(cell.gameObject);
             }
             _cells.Clear();
-
-            UniResources.DisposeAsset(_texture);
+            _helper.UnLoadMaterials();
             UniResources.DisposeAsset(_assetData);
             _levelData = null;
         }
@@ -133,8 +130,8 @@ namespace Client.Runtime
             flatMesh.SetParent(piece.transform);
             var meshRenderer = mesh.GetComponent<Renderer>();
             var flatMeshRenderer = flatMesh.GetComponent<Renderer>();
-            meshRenderer.sharedMaterials = new[] { _helper.GetOutlineMaterial(), _helper.GetBaseMaterial() };
-            flatMeshRenderer.sharedMaterials = new[] { _helper.GetBaseMaterial() };
+            meshRenderer.sharedMaterials = new[] { _helper.OutlineMaterial, _helper.BaseMaterial };
+            flatMeshRenderer.sharedMaterials = new[] { _helper.BaseMaterial };
             var rendererData = new JigsawPieceRendererData(meshRenderer, flatMeshRenderer);
             piece.Inject(_resolver);
             piece.Init(cell, rendererData);

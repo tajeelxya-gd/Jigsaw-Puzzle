@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040bc25f95706694ea25a65099934e29, type: 3}
+  m_Name: Materials - AssetData
+  m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
+  _id: materials-asset-data
+  _assets:
+  - _key: island
+    _reference:
+      m_AssetGUID: 4a4f8ecb33ae1734cb0116396bef1be8
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: island_dark
+    _reference:
+      m_AssetGUID: 5db2b04bcbe9c174a854f4204e978447
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: lion
+    _reference:
+      m_AssetGUID: 8e3f3b7fd16aca449ae2d75527cf5db7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: lion_dark
+    _reference:
+      m_AssetGUID: 62e3443fdb807aa4a985c5064f8fd117
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

@@ -1,51 +1,62 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
+using UniTx.Runtime.Database;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
+using UniTx.Runtime.ResourceManagement;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigsawHelper : MonoBehaviour, IJigsawHelper, IInjectable, IInitialisable, IResettable
+    public sealed class JigsawHelper : MonoBehaviour, IJigsawHelper, IInjectable, IInitialisableAsync, IResettable
     {
+        [SerializeField] private string _assetDataKey;
         [SerializeField] private Renderer _fullImage;
-        [SerializeField] private Material[] _materials;
-
-        private Camera _cam;
 
         private IWinConditionChecker _checker;
+        private AssetData _assetData;
+        private Camera _cam;
+
+        public Material BaseMaterial { get; private set; }
+
+        public Material OutlineMaterial { get; private set; }
 
         public void Inject(IResolver resolver) => _checker = resolver.Resolve<IWinConditionChecker>();
 
-        public void Initialise()
+        public async UniTask InitialiseAsync(CancellationToken cToken = default)
         {
+            _assetData = await UniResources.LoadAssetAsync<AssetData>(_assetDataKey, cToken: cToken);
             _checker.OnWin += HandleOnWin;
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
+            _cam = Camera.main;
         }
 
         public void Reset()
         {
             _checker.OnWin -= HandleOnWin;
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
+            UniResources.DisposeAsset(_assetData);
         }
 
-        public void SetTexture(Texture2D texture)
+        public async UniTask LoadMaterialsAsync(string key, CancellationToken cToken = default)
         {
-            foreach (var mat in _materials)
-            {
-                mat.SetTexture("_BaseMap", texture);
-                mat.SetTexture("_DetailAlbedoMap", texture);
-            }
+            var matAsset = _assetData.GetAsset(key);
+            BaseMaterial = await UniResources.LoadAssetAsync<Material>(matAsset.RuntimeKey, cToken: cToken);
 
-            _fullImage.sharedMaterials = new[] { GetBaseMaterial() };
+            var outlineAsset = _assetData.GetAsset($"{key}_dark");
+            OutlineMaterial = await UniResources.LoadAssetAsync<Material>(outlineAsset.RuntimeKey, cToken: cToken);
+
+            _fullImage.sharedMaterials = new[] { BaseMaterial };
         }
 
-        public void ToggleImage() => gameObject.SetActive(!gameObject.activeSelf);
+        public void UnLoadMaterials()
+        {
+            UniResources.DisposeAsset(BaseMaterial);
+            UniResources.DisposeAsset(OutlineMaterial);
+        }
 
-        public Material GetBaseMaterial() => _materials[0];
-
-        public Material GetOutlineMaterial() => _materials[1];
-
-        private void Awake() => _cam = Camera.main;
+        public void ToggleFullImage() => gameObject.SetActive(!gameObject.activeSelf);
 
         private void Update()
         {
