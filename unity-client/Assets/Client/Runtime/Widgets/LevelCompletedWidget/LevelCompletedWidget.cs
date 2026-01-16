@@ -1,5 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using log4net.Core;
+using TMPro;
 using UniTx.Runtime.Audio;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.Widgets;
@@ -11,6 +13,7 @@ namespace Client.Runtime
     public sealed class LevelCompletedWidget : MonoBehaviour, IWidget, IInjectable
     {
         [SerializeField] private Button _nextLevelBtn;
+        [SerializeField] private TMP_Text _nextLevelText;
         [SerializeField] private ScriptableObject _levelCompleted;
 
         private IPuzzleService _puzzleService;
@@ -24,6 +27,7 @@ namespace Client.Runtime
         public void Initialise()
         {
             _nextLevelBtn.onClick.AddListener(HandleNextLevel);
+            SetLevelText();
             UniAudio.Play2D((IAudioConfig)_levelCompleted);
         }
 
@@ -41,6 +45,12 @@ namespace Client.Runtime
             await _puzzleService.LoadPuzzleAsync(cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
+        }
+
+        private void SetLevelText()
+        {
+            var levelName = _puzzleService.GetNextLevelData().Name;
+            _nextLevelText.SetText($"Next Level: {levelName}");
         }
     }
 }

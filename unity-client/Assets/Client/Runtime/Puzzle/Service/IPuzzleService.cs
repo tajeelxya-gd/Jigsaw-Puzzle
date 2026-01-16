@@ -14,5 +14,8 @@ namespace Client.Runtime
         JigsawBoard GetCurrentBoard();
 
         JigSawLevelData GetCurrentLevelData();
+        JigSawLevelData GetNextLevelData();
+
+        void LoadCurrentLevelData();
     }
 }

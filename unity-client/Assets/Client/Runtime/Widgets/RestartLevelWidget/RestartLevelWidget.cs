@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.Widgets;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Client.Runtime
     {
         [SerializeField] private Button _restartBtn;
         [SerializeField] private Button _closeBtn;
+        [SerializeField] private TMP_Text _levelText;
 
         private IPuzzleService _puzzleService;
 
@@ -25,6 +27,7 @@ namespace Client.Runtime
         {
             _restartBtn.onClick.AddListener(HandleRestartLevel);
             _closeBtn.onClick.AddListener(HandleClose);
+            SetLevelText();
         }
 
         public void Reset()
@@ -44,5 +47,11 @@ namespace Client.Runtime
         }
 
         private void HandleClose() => UniWidgets.PopWidgetsStackAsync(this.GetCancellationTokenOnDestroy()).Forget();
+
+        private void SetLevelText()
+        {
+            var levelName = _puzzleService.GetCurrentLevelData().Name;
+            _levelText.SetText(levelName);
+        }
     }
 }

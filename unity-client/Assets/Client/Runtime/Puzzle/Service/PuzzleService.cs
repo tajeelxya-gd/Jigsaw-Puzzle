@@ -21,8 +21,8 @@ namespace Client.Runtime
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
         private Transform _puzzleBoard;
-        private JigSawLevelData _levelData;
-        private int _idx = -1;
+        private int _idx;
+        private JigSawLevelData[] _levelsData;
 
         public void Inject(IResolver resolver)
         {
@@ -41,9 +41,9 @@ namespace Client.Runtime
 
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
-            if (_levelData == null) IncrementLevel();
-            _board = _entityService.Get<JigsawBoard>(_levelData.BoardId);
-            await _board.LoadPuzzleAsync(_levelData, _puzzleBoard, cToken);
+            var levelData = GetCurrentLevelData();
+            _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
+            await _board.LoadPuzzleAsync(levelData, _puzzleBoard, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
@@ -66,14 +66,24 @@ namespace Client.Runtime
         }
 
         public JigsawBoard GetCurrentBoard() => _board;
-        public JigSawLevelData GetCurrentLevelData() => _levelData;
+        public JigSawLevelData GetCurrentLevelData() => _levelsData[_idx];
+
+        public void LoadCurrentLevelData()
+        {
+            _levelsData = _contentService.GetAllData<JigSawLevelData>().ToArray();
+            // TODO: load from saves
+            _idx = 0;
+        }
+
+        public JigSawLevelData GetNextLevelData()
+        {
+            var idx = (_idx + 1) >= _levelsData.Length ? 0 : _idx + 1;
+            return _levelsData[idx];
+        }
 
         private void IncrementLevel()
         {
-            var data = _contentService.GetAllData<JigSawLevelData>().ToArray();
-            if (++_idx >= data.Length) _idx = 0;
-
-            _levelData = data[_idx];
+            if (++_idx >= _levelsData.Length) _idx = 0;
         }
 
         private void HandleOnWin() => UniTask.Void(HandleOnWinAsync, default);
