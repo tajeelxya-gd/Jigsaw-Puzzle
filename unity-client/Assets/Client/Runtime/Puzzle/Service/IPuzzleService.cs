@@ -6,6 +6,7 @@ namespace Client.Runtime
 {
     public interface IPuzzleService
     {
+        Transform PuzzleBoard { get; }
         Transform PuzzleBounds { get; }
 
         UniTask RestartPuzzleAsync(CancellationToken cToken = default);

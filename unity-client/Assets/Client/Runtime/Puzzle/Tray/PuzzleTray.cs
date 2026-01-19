@@ -15,6 +15,7 @@ namespace Client.Runtime
         [SerializeField] private Vector2 _spacing = new Vector2(0.06f, 0.05f);
         [SerializeField] private Vector2 _padding = new Vector2(0.02f, 0.02f);
         [SerializeField] private BoxCollider _trayCollider;
+        [SerializeField] private Transform _meshTransform;
 
         [Header("Smoothness Settings")]
         [SerializeField] private float _lerpSpeed = 20f;
@@ -34,6 +35,10 @@ namespace Client.Runtime
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
+
+        public BoxCollider TrayCollider => _trayCollider;
+
+        public Transform MeshTransform => _meshTransform;
 
         public void Inject(IResolver resolver) => _puzzleService = resolver.Resolve<IPuzzleService>();
 

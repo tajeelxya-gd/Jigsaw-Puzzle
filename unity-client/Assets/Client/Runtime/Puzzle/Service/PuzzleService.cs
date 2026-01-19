@@ -27,6 +27,8 @@ namespace Client.Runtime
 
         public Transform PuzzleBounds => _puzzleBounds;
 
+        public Transform PuzzleBoard => _puzzleBoard;
+
         public void Inject(IResolver resolver)
         {
             _contentService = resolver.Resolve<IContentService>();

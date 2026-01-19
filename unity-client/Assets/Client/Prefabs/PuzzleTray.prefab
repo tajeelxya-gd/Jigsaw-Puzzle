@@ -51,6 +51,7 @@ MonoBehaviour:
   _spacing: {x: 0.04, y: 0.03}
   _padding: {x: 0.02, y: 0.02}
   _trayCollider: {fileID: 8619639753298581620}
+  _meshTransform: {fileID: 4931361379226056397}
   _lerpSpeed: 20
   _scrollSpeed: 0.15
   _visibilityBuffer: 0
@@ -129,13 +130,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5521023354659315876}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.10452846, y: 0, z: 0, w: 0.9945219}
   m_LocalPosition: {x: 0, y: -0.01, z: -0.001}
-  m_LocalScale: {x: 0.41, y: 0.0047999998, z: 0.08}
+  m_LocalScale: {x: 1, y: 0.0047999998, z: 0.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 208879049908472635}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 12, y: 0, z: 0}
 --- !u!33 &4293186905976467176
 MeshFilter:
   m_ObjectHideFlags: 0
