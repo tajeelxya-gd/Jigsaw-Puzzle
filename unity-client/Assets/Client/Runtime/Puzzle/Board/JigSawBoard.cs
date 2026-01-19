@@ -30,10 +30,10 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        public async UniTask LoadPuzzleAsync(JigSawLevelData levelData, Transform parent, CancellationToken cToken = default)
+        public async UniTask LoadPuzzleAsync(JigSawLevelData levelData, Transform parent, Transform bounds, CancellationToken cToken = default)
         {
             _levelData = levelData;
-            await SpawnCellsAsync(parent, cToken);
+            await SpawnCellsAsync(parent, bounds, cToken);
             _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
@@ -87,9 +87,10 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        private async UniTask SpawnCellsAsync(Transform parent, CancellationToken cToken = default)
+        private async UniTask SpawnCellsAsync(Transform parent, Transform bounds, CancellationToken cToken = default)
         {
-            var size = new Vector3(0.1857f, 0f, 0.2387f);
+            var boundsSize = bounds.lossyScale;
+            var size = new Vector3(boundsSize.x, 0f, boundsSize.z);
             var r = Data.XConstraint;
             var c = Data.YConstraint;
             var len = r * c;

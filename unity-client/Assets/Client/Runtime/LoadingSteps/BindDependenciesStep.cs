@@ -13,6 +13,7 @@ namespace Client.Runtime
 {
     public sealed class BindDependenciesStep : LoadingStepBase, IInjectable
     {
+        [SerializeField] private PuzzleService _puzzleService;
         [SerializeField] private PuzzleTray _puzzleTray;
         [SerializeField] private CameraEffects _cameraEffects;
         [SerializeField] private JigsawHelper _jigsawHelper;
@@ -34,8 +35,8 @@ namespace Client.Runtime
             _binder.BindAsSingleton<SerialisationService>();
             _binder.BindAsSingleton<EntityService>();
 
-            _binder.BindAsSingleton<PuzzleService>();
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
+            _binder.BindAsSingleton(_puzzleService);
             _binder.BindAsSingleton(_vfxController);
             _binder.BindAsSingleton(_puzzleTray);
             _binder.BindAsSingleton(_cameraEffects);

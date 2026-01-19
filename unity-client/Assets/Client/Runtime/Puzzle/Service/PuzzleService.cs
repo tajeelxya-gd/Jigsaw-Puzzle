@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -12,15 +11,17 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PuzzleService : IPuzzleService, IInjectable, IInitialisable
+    public sealed class PuzzleService : MonoBehaviour, IPuzzleService, IInjectable, IInitialisable, IResettable
     {
+        [SerializeField] private Transform _puzzleBoard;
+        [SerializeField] private Transform _puzzleBounds;
+
         private IContentService _contentService;
         private IEntityService _entityService;
         private IWinConditionChecker _winConditionChecker;
         private IVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
         private JigsawBoard _board;
-        private Transform _puzzleBoard;
         private int _idx;
         private JigSawLevelData[] _levelsData;
 
@@ -33,17 +34,15 @@ namespace Client.Runtime
             _vfxController = resolver.Resolve<IVFXController>();
         }
 
-        public void Initialise()
-        {
-            _puzzleBoard = GameObject.FindGameObjectWithTag("PuzzleBoard").transform;
-            _winConditionChecker.OnWin += HandleOnWin;
-        }
+        public void Initialise() => _winConditionChecker.OnWin += HandleOnWin;
+
+        public void Reset() => _winConditionChecker.OnWin -= HandleOnWin;
 
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
-            await _board.LoadPuzzleAsync(levelData, _puzzleBoard, cToken);
+            await _board.LoadPuzzleAsync(levelData, _puzzleBoard, _puzzleBounds, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
