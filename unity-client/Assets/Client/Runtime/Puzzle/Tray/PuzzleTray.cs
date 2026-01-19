@@ -241,14 +241,24 @@ namespace Client.Runtime
                 Vector3 currentMousePos = Input.mousePosition;
                 if (!_scrollLocked)
                 {
-                    float diffX = Mathf.Abs(currentMousePos.x - _startMousePos.x);
-                    float diffY = Mathf.Abs(currentMousePos.y - _startMousePos.y);
+                    Vector2 delta = currentMousePos - _startMousePos;
+                    float totalDist = delta.magnitude;
 
-                    if (diffX > _dragThreshold && diffX > diffY) _scrollLocked = true;
-                    else if (diffY > _dragThreshold && diffY > diffX)
+                    if (totalDist > _dragThreshold)
                     {
-                        if (_hitPiece != null) PickUpPiece(_hitPiece);
-                        _isDragging = false;
+                        float angle = Mathf.Abs(Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);
+
+                        bool isHorizontal = angle < 25f || angle > 155f;
+
+                        if (isHorizontal)
+                        {
+                            _scrollLocked = true;
+                        }
+                        else
+                        {
+                            if (_hitPiece != null) PickUpPiece(_hitPiece);
+                            _isDragging = false;
+                        }
                     }
                 }
 
