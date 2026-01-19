@@ -9,8 +9,9 @@ namespace Client.Runtime
     {
         [SerializeField] private float _refHeight;
         [SerializeField] private float _refWidth;
-        [SerializeField] private int _refFOV;
-        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private Vector3 _refPosition;
+        [SerializeField] private Vector3 _refEulerAngles;
+        [SerializeField] private Transform _mainCamera;
         [SerializeField] private Transform _puzzleBounds;
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
@@ -19,18 +20,35 @@ namespace Client.Runtime
             return UniTask.CompletedTask;
         }
 
+        [ContextMenu("SetCameraPosition")]
         private void SetCameraPosition()
         {
+            _mainCamera.eulerAngles = _refEulerAngles;
             var refAspect = _refWidth / _refHeight;
             var currentAspect = (float)Screen.width / Screen.height;
-            var horizontalFOV = 2f * Mathf.Atan(Mathf.Tan(_refFOV * Mathf.Deg2Rad * 0.5f) * refAspect) * Mathf.Rad2Deg;
-            var targetVerticalFOV = 2f * Mathf.Atan(Mathf.Tan(horizontalFOV * Mathf.Deg2Rad * 0.5f) / currentAspect) * Mathf.Rad2Deg;
 
-            _mainCamera.fieldOfView = targetVerticalFOV;
-            var cams = GetComponentsInChildren<Camera>();
-            foreach (var cam in cams)
+            // 2. Determine if we need to adjust for "Pillarboxing" (Screen is narrower than reference)
+            if (currentAspect < refAspect)
             {
-                cam.fieldOfView = targetVerticalFOV;
+                // Calculate how much we need to "push back" the camera
+                // The ratio of aspects tells us the multiplier for the required distance
+                var scaleFactor = refAspect / currentAspect;
+
+                // Calculate the distance from reference position to the puzzle center
+                var directionToCamera = (_refPosition - _puzzleBounds.position).normalized;
+                var refDistance = Vector3.Distance(_refPosition, _puzzleBounds.position);
+
+                // New distance maintains the same horizontal margins
+                var newDistance = refDistance * scaleFactor;
+
+                // Set new position along the same look-at vector
+                _mainCamera.position = _puzzleBounds.position + (directionToCamera * newDistance);
+            }
+            else
+            {
+                // 3. Screen is wider or equal: Use reference position
+                // (Vertical margins are naturally preserved by the camera's vertical FOV)
+                _mainCamera.position = _refPosition;
             }
         }
     }

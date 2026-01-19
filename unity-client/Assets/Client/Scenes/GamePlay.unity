@@ -703,8 +703,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.SceneConfigurationStep
   _refHeight: 2992
   _refWidth: 1344
-  _refFOV: 25
-  _mainCamera: {fileID: 1996743873}
+  _refPosition: {x: 0, y: 1.11, z: -0.23}
+  _refEulerAngles: {x: 77, y: 0, z: 0}
+  _mainCamera: {fileID: 1996743874}
   _puzzleBounds: {fileID: 1922763260}
 --- !u!4 &372355784
 Transform:
@@ -2326,6 +2327,7 @@ MonoBehaviour:
   - {fileID: 1181361557}
   - {fileID: 2038323279}
   - {fileID: 1344897708}
+  - {fileID: 372355783}
   - {fileID: 551642900}
   - {fileID: 1813031128}
 --- !u!1 &1996743869
