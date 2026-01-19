@@ -25,6 +25,7 @@ namespace Client.Runtime
         [SerializeField] private float _dragThreshold = 10f;
 
         private readonly List<JigsawPiece> _activePieces = new();
+        private Camera _cam;
         private IPuzzleService _puzzleService;
         private JigsawPiece _hitPiece;
         private JigsawPiece _hoverPiece;
@@ -123,6 +124,8 @@ namespace Client.Runtime
             return pieces.Any(itm => !itm.IsLocked && !itm.IsOverTray && itm.Group.Count == 1);
         }
 
+        private void Awake() => _cam = Camera.main;
+
         private void Update()
         {
             HandleScrollInput();
@@ -180,7 +183,7 @@ namespace Client.Runtime
 
         private int GetInsertionIndex()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Vector3 localPoint = transform.InverseTransformPoint(hit.point);
@@ -215,7 +218,7 @@ namespace Client.Runtime
         {
             if (InputHandler._3DActive && Input.GetMouseButtonDown(0))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider)
                 {
                     _isDragging = true;
