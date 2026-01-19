@@ -1,55 +1,46 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Bootstrap;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class SceneConfigurationStep : LoadingStepBase
+    public sealed class SceneConfigurationStep : LoadingStepBase, IInjectable
     {
-        [SerializeField] private float _refHeight;
-        [SerializeField] private float _refWidth;
-        [SerializeField] private Vector3 _refPosition;
-        [SerializeField] private Vector3 _refEulerAngles;
-        [SerializeField] private Transform _mainCamera;
-        [SerializeField] private Transform _puzzleBounds;
+        [Header("Reference Settings")]
+        [SerializeField] private float _refHeight = 2992;
+        [SerializeField] private float _refWidth = 1344;
+        [SerializeField] private Vector3 _refPosition = new(0f, 1.11f, -0.23f);
+        [SerializeField] private Vector3 _refEulerAngles = new(77f, 0f, 0f);
+
+        private IPuzzleService _puzzleService;
+
+        public void Inject(IResolver resolver) => _puzzleService = resolver.Resolve<IPuzzleService>();
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
             SetCameraPosition();
+            SetPuzzleTrayPosition();
             return UniTask.CompletedTask;
         }
 
-        [ContextMenu("SetCameraPosition")]
         private void SetCameraPosition()
         {
-            _mainCamera.eulerAngles = _refEulerAngles;
+            var mainCamera = Camera.main.transform;
+            var bounds = _puzzleService.PuzzleBounds;
+            mainCamera.eulerAngles = _refEulerAngles;
+
             var refAspect = _refWidth / _refHeight;
             var currentAspect = (float)Screen.width / Screen.height;
+            var refOffset = _refPosition - bounds.position;
+            var hFactor = refAspect / currentAspect;
 
-            // 2. Determine if we need to adjust for "Pillarboxing" (Screen is narrower than reference)
-            if (currentAspect < refAspect)
-            {
-                // Calculate how much we need to "push back" the camera
-                // The ratio of aspects tells us the multiplier for the required distance
-                var scaleFactor = refAspect / currentAspect;
+            mainCamera.position = bounds.position + (refOffset * hFactor);
+        }
 
-                // Calculate the distance from reference position to the puzzle center
-                var directionToCamera = (_refPosition - _puzzleBounds.position).normalized;
-                var refDistance = Vector3.Distance(_refPosition, _puzzleBounds.position);
-
-                // New distance maintains the same horizontal margins
-                var newDistance = refDistance * scaleFactor;
-
-                // Set new position along the same look-at vector
-                _mainCamera.position = _puzzleBounds.position + (directionToCamera * newDistance);
-            }
-            else
-            {
-                // 3. Screen is wider or equal: Use reference position
-                // (Vertical margins are naturally preserved by the camera's vertical FOV)
-                _mainCamera.position = _refPosition;
-            }
+        private void SetPuzzleTrayPosition()
+        {
         }
     }
 }

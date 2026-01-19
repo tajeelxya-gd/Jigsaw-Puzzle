@@ -25,6 +25,8 @@ namespace Client.Runtime
         private int _idx;
         private JigSawLevelData[] _levelsData;
 
+        public Transform PuzzleBounds => _puzzleBounds;
+
         public void Inject(IResolver resolver)
         {
             _contentService = resolver.Resolve<IContentService>();

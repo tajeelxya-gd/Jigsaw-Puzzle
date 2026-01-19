@@ -1,10 +1,13 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Client.Runtime
 {
     public interface IPuzzleService
     {
+        Transform PuzzleBounds { get; }
+
         UniTask RestartPuzzleAsync(CancellationToken cToken = default);
 
         UniTask LoadPuzzleAsync(CancellationToken cToken = default);
