@@ -92,6 +92,7 @@ namespace Client.Runtime
             _helper.UnLoadMaterials();
             UniResources.DisposeAsset(_assetData);
             _levelData = null;
+            _sortingY = 0;
         }
 
         protected override void OnInject(IResolver resolver)
