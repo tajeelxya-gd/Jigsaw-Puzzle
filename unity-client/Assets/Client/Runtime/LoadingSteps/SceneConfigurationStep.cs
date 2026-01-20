@@ -25,6 +25,12 @@ namespace Client.Runtime
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
+            ConfigureScene();
+            return UniTask.CompletedTask;
+        }
+
+        private void ConfigureScene()
+        {
             var boardRoot = _puzzleService.PuzzleRoot;
             var frameMesh = _puzzleService.FrameMesh;
 
@@ -34,9 +40,11 @@ namespace Client.Runtime
             }
 
             FitBoardToSection(frameMesh, _boardSection);
-            FitTrayToSection(_puzzleTray.MeshTransform, _puzzleTray.TrayCollider, _puzzleTraySection);
 
-            return UniTask.CompletedTask;
+            if (_puzzleTray != null)
+            {
+                FitTrayToSection(_puzzleTray.MeshTransform, _puzzleTray.TrayCollider, _puzzleTraySection);
+            }
         }
 
         private void FitBoardToSection(Transform frameTransform, RectTransform section)
