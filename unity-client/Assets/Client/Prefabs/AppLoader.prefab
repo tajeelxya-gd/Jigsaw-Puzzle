@@ -573,3 +573,4 @@ MonoBehaviour:
   _boardSection: {fileID: 0}
   _puzzleTraySection: {fileID: 0}
   _fitPadding: 0.95
+  _trayMeshZScale: 0.01

@@ -2262,7 +2262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 425
+  m_MinHeight: 375
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -2328,11 +2328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9945219
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.10452837
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2344,7 +2344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2397,19 +2397,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1568065
+      value: 1.0985878
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02592484
+      value: -0.28883263
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.7826082
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: 0.6225146
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2421,7 +2421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: 77
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2500,10 +2500,6 @@ PrefabInstance:
       propertyPath: _loadingWidget
       value: 
       objectReference: {fileID: 1796932629}
-    - target: {fileID: 7959790900971533332, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
-      propertyPath: _fitPadding
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7959790900971533332, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
       propertyPath: _boardSection
       value: 
