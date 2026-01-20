@@ -9,6 +9,7 @@ namespace Client.Runtime
     public interface IPuzzleTray : IResettable
     {
         BoxCollider TrayCollider { get; }
+
         Transform MeshTransform { get; }
 
         void ShufflePieces(IEnumerable<JigsawPiece> pieces);
