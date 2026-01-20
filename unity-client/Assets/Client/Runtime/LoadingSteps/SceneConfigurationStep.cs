@@ -194,37 +194,45 @@ namespace Client.Runtime
 
                 // 5. Detect base dimensions of the mesh for scaling
                 float baseWidth = 1f;
+                float baseHeight = 1f;
                 float baseDepth = 1f;
                 var filter = meshTransform.GetComponent<MeshFilter>();
                 if (filter != null && filter.sharedMesh != null)
                 {
                     baseWidth = filter.sharedMesh.bounds.size.x;
+                    baseHeight = filter.sharedMesh.bounds.size.y;
                     baseDepth = filter.sharedMesh.bounds.size.z;
                 }
 
                 if (Mathf.Abs(baseWidth) < 0.001f) baseWidth = 1f;
+                if (Mathf.Abs(baseHeight) < 0.001f) baseHeight = 1f;
                 if (Mathf.Abs(baseDepth) < 0.001f) baseDepth = 1f;
 
                 // 6. Apply Scale to Mesh
-                Vector3 targetLocalScale = new Vector3(worldWidth / baseWidth, meshTransform.localScale.y, worldDepth / baseDepth);
+                // Middle Aligned: Already handled by worldCenter and meshTransform.localPosition = Vector3.zero
+                // User requested mesh z axis to be 0.01f (interpreted as local scale to match Inspector expectation)
+                float targetLocalScaleZ = 0.01f;
+                Vector3 targetLocalScale = new Vector3(worldWidth / baseWidth, meshTransform.localScale.y, targetLocalScaleZ);
 
                 // Compensate for parent scale if nested
                 if (meshTransform.parent != null)
                 {
                     Vector3 parentScale = meshTransform.parent.lossyScale;
-                    // Divide world dimension by parent scale to get target local scale
                     targetLocalScale.x = worldWidth / (baseWidth * parentScale.x);
-                    targetLocalScale.z = worldDepth / (baseDepth * parentScale.z);
+                    // We set localScale.z to 0.01f as requested, which means world depth will be 0.01 * baseDepth * parentScale.z
                 }
                 meshTransform.localScale = targetLocalScale;
 
-                // 7. Scale and align the Box Collider
-                // Size is world-space dimensions divided by lossyScale of the collider object
+                // 7. Update tray collider to match position and size of mesh
+                // Calculate the actual world depth resulting from the 0.01f local scale
+                float meshWorldDepth = targetLocalScale.z * baseDepth * (meshTransform.parent != null ? meshTransform.parent.lossyScale.z : 1f);
+                float meshWorldHeight = meshTransform.localScale.y * baseHeight * (meshTransform.parent != null ? meshTransform.parent.lossyScale.y : 1f);
+
                 Vector3 colliderLossyScale = trayCollider.transform.lossyScale;
                 trayCollider.size = new Vector3(
                     worldWidth / Mathf.Max(colliderLossyScale.x, 0.001f),
-                    trayCollider.size.y,
-                    worldDepth / Mathf.Max(colliderLossyScale.z, 0.001f)
+                    meshWorldHeight / Mathf.Max(colliderLossyScale.y, 0.001f),
+                    meshWorldDepth / Mathf.Max(colliderLossyScale.z, 0.001f)
                 );
                 trayCollider.center = Vector3.zero;
             }
