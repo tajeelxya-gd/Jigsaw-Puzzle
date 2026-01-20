@@ -769,13 +769,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6645133, y: 0, z: 0, w: 0.7472765}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 83.29, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,19 +2397,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1551402
+      value: 1.1568065
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.074996926
+      value: -0.02592484
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.67559016
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7372774
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2421,7 +2421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 95
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
