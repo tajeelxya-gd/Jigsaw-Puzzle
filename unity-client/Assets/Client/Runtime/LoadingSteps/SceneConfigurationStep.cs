@@ -13,6 +13,7 @@ namespace Client.Runtime
         [SerializeField] private RectTransform _boardSection;
         [SerializeField] private RectTransform _puzzleTraySection;
         [SerializeField] private float _fitPadding = 0.95f;
+        [SerializeField] private float _trayMeshZScale = 0.01f;
 
         private IPuzzleService _puzzleService;
         private IPuzzleTray _puzzleTray;
@@ -211,8 +212,8 @@ namespace Client.Runtime
                 // 6. Apply Scale to Mesh
                 // Middle Aligned: Already handled by worldCenter and meshTransform.localPosition = Vector3.zero
                 // User requested mesh z axis to be 0.01f (interpreted as local scale to match Inspector expectation)
-                float targetLocalScaleZ = 0.01f;
-                Vector3 targetLocalScale = new Vector3(worldWidth / baseWidth, meshTransform.localScale.y, targetLocalScaleZ);
+                // User requested mesh z axis to be adjustable (interpreted as local scale)
+                Vector3 targetLocalScale = new Vector3(worldWidth / baseWidth, meshTransform.localScale.y, _trayMeshZScale);
 
                 // Compensate for parent scale if nested
                 if (meshTransform.parent != null)

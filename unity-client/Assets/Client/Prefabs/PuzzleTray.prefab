@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.PuzzleTray
   _rowCount: 2
-  _spacing: {x: 0.04, y: 0.03}
+  _spacing: {x: 0.047, y: 0.047}
   _padding: {x: 0.02, y: 0.02}
   _trayCollider: {fileID: 8619639753298581620}
   _meshTransform: {fileID: 5581737927461339339}
