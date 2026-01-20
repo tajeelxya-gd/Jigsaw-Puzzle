@@ -28,6 +28,10 @@ namespace Client.Runtime
                 piece.Group = groupToKeep;
             }
 
+            // Update height for the entire new group based on new size
+            float newHeight = JigsawBoardCalculator.Board.GetSortingY(groupToKeep.Count);
+            groupToKeep.SetPosY(newHeight);
+
             foreach (var piece in groupToKeep)
             {
                 piece.PlayVfx();
@@ -74,7 +78,7 @@ namespace Client.Runtime
             int anchorBaseCol = anchorPiece.CorrectIdx % cols;
 
             // Generate a single height for the entire group if not provided
-            float targetHeight = groupHeight ?? board.GetNextSortingY();
+            float targetHeight = groupHeight ?? board.GetSortingY(Count);
 
             foreach (var piece in this)
             {
@@ -94,7 +98,7 @@ namespace Client.Runtime
                     piece.CurrentIdx = targetIdx;
 
                     // Push the piece into the cell's stack so neighbors can find it
-                    board.Cells[targetIdx].Push(piece, targetHeight);
+                    board.Cells[targetIdx].Push(piece, Count, targetHeight);
                 }
                 else
                 {
@@ -137,7 +141,8 @@ namespace Client.Runtime
             // Push back in reverse order to maintain original hierarchy
             for (int i = tempStorage.Count - 1; i >= 0; i--)
             {
-                cell.Push(tempStorage[i]);
+                var p = tempStorage[i];
+                cell.Push(p, p.Group.Count, p.transform.position.y);
             }
         }
     }

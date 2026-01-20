@@ -40,7 +40,7 @@ namespace Client.Runtime
         public async UniTask SnapToCellAsync(JigsawGroup group, JigsawBoardCell cell, CancellationToken cToken = default)
         {
             var cellTransform = cell.transform;
-            float targetHeight = cell.GetNextHeight();
+            float targetHeight = cell.GetNextHeight(group.Count);
             var snapPos = new Vector3(cellTransform.position.x, targetHeight, cellTransform.position.z);
             await SnapAsync(group, snapPos, cellTransform.rotation, cToken);
             OnSnapped?.Invoke(cell, targetHeight);

@@ -34,11 +34,23 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        public float GetNextSortingY()
+        public float GetSortingY(int groupSize)
         {
+            // Base layer
+            const float baseHeight = 0.0001f;
+            const float bandRange = 0.004f; // Total range for sorting
+
+            // Smaller groups (Count=1) get higher Y values
+            // Larger groups (Count=10+) get lower Y values
+            // formula: 1/size mapping to range
+            float sizeWeight = 1f / groupSize;
+            float heightFromSize = sizeWeight * bandRange;
+
+            // Cyclical drop order offset to resolve Z-fighting for same-sized groups
             _sortingY += SortingYStep;
-            if (_sortingY > MaxSortingY) _sortingY = SortingYStep;
-            return _sortingY;
+            if (_sortingY > 0.0005f) _sortingY = 0f;
+
+            return baseHeight + heightFromSize + _sortingY;
         }
 
         public async UniTask LoadPuzzleAsync(JigSawLevelData levelData, Transform parent, Transform bounds, CancellationToken cToken = default)

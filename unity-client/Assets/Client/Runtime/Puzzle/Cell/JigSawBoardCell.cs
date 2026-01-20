@@ -29,9 +29,9 @@ namespace Client.Runtime
             _actionData = actionData;
         }
 
-        public bool Push(JigsawPiece piece, float? height = null)
+        public bool Push(JigsawPiece piece, int groupSize, float? height = null)
         {
-            var newY = height ?? GetNextHeight();
+            var newY = height ?? GetNextHeight(groupSize);
             _stack.Push(piece);
             SetHeight(piece, newY);
 
@@ -62,7 +62,7 @@ namespace Client.Runtime
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
 
-        public float GetNextHeight() => _board.GetNextSortingY();
+        public float GetNextHeight(int groupSize) => _board.GetSortingY(groupSize);
 
         private void SetHeight(JigsawPiece piece, float height)
         {
