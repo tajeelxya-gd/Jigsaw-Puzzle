@@ -15,6 +15,7 @@ namespace Client.Runtime
     {
         [SerializeField] private Transform _puzzleBoard;
         [SerializeField] private Transform _puzzleBounds;
+        [SerializeField] private Transform _frameMesh;
 
         private IContentService _contentService;
         private IEntityService _entityService;
@@ -25,9 +26,10 @@ namespace Client.Runtime
         private int _idx;
         private JigSawLevelData[] _levelsData;
 
-        public Transform PuzzleBounds => _puzzleBounds;
 
-        public Transform PuzzleBoard => _puzzleBoard;
+        public Transform PuzzleRoot => _puzzleBoard;
+
+        public Transform FrameMesh => _frameMesh;
 
         public void Inject(IResolver resolver)
         {
