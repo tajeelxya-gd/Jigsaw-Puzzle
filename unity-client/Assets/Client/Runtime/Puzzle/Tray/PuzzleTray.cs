@@ -33,6 +33,7 @@ namespace Client.Runtime
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
         private Vector3 _lastMousePos;
+        private readonly Dictionary<JigsawPiece, Quaternion> _trayRotations = new();
         private bool _isDragging;
         private bool _scrollLocked;
 
@@ -45,6 +46,7 @@ namespace Client.Runtime
         public void Reset()
         {
             _activePieces.Clear();
+            _trayRotations.Clear();
             _scrollX = 0;
             _hitPiece = null;
             _hoverPiece = null;
@@ -57,10 +59,12 @@ namespace Client.Runtime
             if (pieces == null) return;
 
             _activePieces.Clear();
+            _trayRotations.Clear();
             foreach (var p in pieces)
             {
                 p.OnEnterTray();
                 _activePieces.Add(p);
+                _trayRotations[p] = GetRandomTrayRotation();
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
             }
@@ -92,6 +96,7 @@ namespace Client.Runtime
             {
                 int targetIndex = GetInsertionIndex();
                 _activePieces.Insert(Mathf.Clamp(targetIndex, 0, _activePieces.Count), piece);
+                _trayRotations[piece] = GetRandomTrayRotation();
                 piece.transform.SetParent(transform);
             }
             _hoverPiece = null;
@@ -104,12 +109,14 @@ namespace Client.Runtime
             {
                 var piece = _activePieces[0];
                 _activePieces.Remove(piece);
+                _trayRotations.Remove(piece);
                 piece.transform.SetParent(null);
                 piece.gameObject.SetActive(true);
                 piece.OnExitTray();
                 tasks.Add(piece.SnapToRandomCellAsync(cToken));
             }
             _scrollX = 0;
+            _trayRotations.Clear();
             return UniTask.WhenAll(tasks);
         }
 
@@ -206,7 +213,9 @@ namespace Client.Runtime
                 );
 
                 pt.localPosition = Vector3.Lerp(pt.localPosition, targetPos, Time.deltaTime * _lerpSpeed);
-                pt.localRotation = Quaternion.Lerp(pt.localRotation, Quaternion.identity, Time.deltaTime * _lerpSpeed);
+
+                Quaternion targetRot = _trayRotations.TryGetValue(_activePieces[i], out var rot) ? rot : Quaternion.identity;
+                pt.localRotation = Quaternion.Lerp(pt.localRotation, targetRot, Time.deltaTime * _lerpSpeed);
 
                 float localX = pt.localPosition.x;
                 float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
@@ -328,7 +337,9 @@ namespace Client.Runtime
         private void PickUpPiece(JigsawPiece piece)
         {
             _activePieces.Remove(piece);
+            _trayRotations.Remove(piece);
             piece.transform.SetParent(null);
+            piece.transform.localRotation = Quaternion.identity;
             piece.StartManualDrag();
         }
 
@@ -344,6 +355,12 @@ namespace Client.Runtime
             int index = (col * _rowCount) + row;
             if (index >= 0 && index < _activePieces.Count) return _activePieces[index];
             return null;
+        }
+
+        private Quaternion GetRandomTrayRotation()
+        {
+            // Subtle random rotation on Y axis as seen in reference image
+            return Quaternion.Euler(0, Random.Range(-15f, 15f), 0);
         }
     }
 }
