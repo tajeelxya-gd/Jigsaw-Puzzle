@@ -1814,6 +1814,97 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1963918741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963918743}
+  - component: {fileID: 1963918742}
+  m_Layer: 0
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1963918742
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963918741}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: ac183a3f25af9014a8ad48c16e697145, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.28, y: 1.28}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &1963918743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963918741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1968588792
 GameObject:
   m_ObjectHideFlags: 0
@@ -2211,7 +2302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.21075524
+      value: -0.20489994
       objectReference: {fileID: 0}
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2240,6 +2331,14 @@ PrefabInstance:
     - target: {fileID: 208879049908472635, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695525050523609625, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1753495
+      objectReference: {fileID: 0}
+    - target: {fileID: 3695525050523609625, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4189858505960107931, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_Name
@@ -2396,6 +2495,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 721809048}
     - target: {fileID: 7959790900971533332, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
+      propertyPath: _trayBgYScale
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959790900971533332, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
       propertyPath: _puzzleTraySection
       value: 
       objectReference: {fileID: 2042884604}
@@ -2496,6 +2599,7 @@ SceneRoots:
   - {fileID: 2804954288133900461}
   - {fileID: 1700548789720078504}
   - {fileID: 410087041}
+  - {fileID: 1963918743}
   - {fileID: 966765925}
   - {fileID: 188538188}
   - {fileID: 1579571277}

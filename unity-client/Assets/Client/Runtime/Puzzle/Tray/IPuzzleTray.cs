@@ -10,7 +10,7 @@ namespace Client.Runtime
     {
         BoxCollider TrayCollider { get; }
 
-        Transform MeshTransform { get; }
+        Transform BgTransform { get; }
 
         void ShufflePieces(IEnumerable<JigsawPiece> pieces);
         void SetHoverPiece(JigsawPiece piece);

@@ -13,7 +13,7 @@ namespace Client.Runtime
         [SerializeField] private RectTransform _boardSection;
         [SerializeField] private RectTransform _puzzleTraySection;
         [SerializeField] private float _fitPadding = 0.95f;
-        [SerializeField] private float _trayMeshZScale = 0.01f;
+        [SerializeField] private float _trayBgYScale = 0.075f;
 
         private IPuzzleService _puzzleService;
         private IPuzzleTray _puzzleTray;
@@ -44,7 +44,7 @@ namespace Client.Runtime
 
             if (_puzzleTray != null)
             {
-                FitTrayToSection(_puzzleTray.MeshTransform, _puzzleTray.TrayCollider, _puzzleTraySection);
+                FitTrayToSection(_puzzleTray.BgTransform, _puzzleTray.TrayCollider, _puzzleTraySection);
             }
         }
 
@@ -193,47 +193,52 @@ namespace Client.Runtime
                 // 4. Reset Mesh Local Position as requested by user
                 meshTransform.localPosition = Vector3.zero;
 
-                // 5. Detect base dimensions of the mesh for scaling
+                // 5. Detect base dimensions (Mesh or Sprite)
                 float baseWidth = 1f;
                 float baseHeight = 1f;
-                float baseDepth = 1f;
-                var filter = meshTransform.GetComponent<MeshFilter>();
-                if (filter != null && filter.sharedMesh != null)
+
+                var spriteRenderer = meshTransform.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null && spriteRenderer.sprite != null)
                 {
-                    baseWidth = filter.sharedMesh.bounds.size.x;
-                    baseHeight = filter.sharedMesh.bounds.size.y;
-                    baseDepth = filter.sharedMesh.bounds.size.z;
+                    baseWidth = spriteRenderer.sprite.bounds.size.x;
+                    baseHeight = spriteRenderer.sprite.bounds.size.y;
+                }
+                else
+                {
+                    var filter = meshTransform.GetComponent<MeshFilter>();
+                    if (filter != null && filter.sharedMesh != null)
+                    {
+                        baseWidth = filter.sharedMesh.bounds.size.x;
+                        baseHeight = filter.sharedMesh.bounds.size.y;
+                    }
                 }
 
                 if (Mathf.Abs(baseWidth) < 0.001f) baseWidth = 1f;
                 if (Mathf.Abs(baseHeight) < 0.001f) baseHeight = 1f;
-                if (Mathf.Abs(baseDepth) < 0.001f) baseDepth = 1f;
 
-                // 6. Apply Scale to Mesh
-                // Middle Aligned: Already handled by worldCenter and meshTransform.localPosition = Vector3.zero
-                // User requested mesh z axis to be 0.01f (interpreted as local scale to match Inspector expectation)
-                // User requested mesh z axis to be adjustable (interpreted as local scale)
-                Vector3 targetLocalScale = new Vector3(worldWidth / baseWidth, meshTransform.localScale.y, _trayMeshZScale);
+                // 6. Apply Scale to Background
+                // User's current logic for background scaling
+                Vector3 targetLocalScale = new Vector3(worldWidth / baseWidth, _trayBgYScale, meshTransform.localScale.z);
 
                 // Compensate for parent scale if nested
                 if (meshTransform.parent != null)
                 {
                     Vector3 parentScale = meshTransform.parent.lossyScale;
                     targetLocalScale.x = worldWidth / (baseWidth * parentScale.x);
-                    // We set localScale.z to 0.01f as requested, which means world depth will be 0.01 * baseDepth * parentScale.z
+                    // y and z depend on specifically how the user oriented the sprite/parent
                 }
                 meshTransform.localScale = targetLocalScale;
 
-                // 7. Update tray collider to match position and size of mesh
-                // Calculate the actual world depth resulting from the 0.01f local scale
-                float meshWorldDepth = targetLocalScale.z * baseDepth * (meshTransform.parent != null ? meshTransform.parent.lossyScale.z : 1f);
-                float meshWorldHeight = meshTransform.localScale.y * baseHeight * (meshTransform.parent != null ? meshTransform.parent.lossyScale.y : 1f);
+                // 7. Update tray collider to match the actual background dimensions
+                // Calculate resulting world dimensions of the background (X=Width, Y=Depth/Height in world)
+                float bgWorldWidth = targetLocalScale.x * baseWidth * (meshTransform.parent != null ? meshTransform.parent.lossyScale.x : 1f);
+                float bgWorldDepth = targetLocalScale.y * baseHeight * (meshTransform.parent != null ? meshTransform.parent.lossyScale.y : 1f);
 
                 Vector3 colliderLossyScale = trayCollider.transform.lossyScale;
                 trayCollider.size = new Vector3(
-                    worldWidth / Mathf.Max(colliderLossyScale.x, 0.001f),
-                    meshWorldHeight / Mathf.Max(colliderLossyScale.y, 0.001f),
-                    meshWorldDepth / Mathf.Max(colliderLossyScale.z, 0.001f)
+                    bgWorldWidth / Mathf.Max(colliderLossyScale.x, 0.001f),
+                    0.05f / Mathf.Max(colliderLossyScale.y, 0.001f), // Small thickness for interaction
+                    bgWorldDepth / Mathf.Max(colliderLossyScale.z, 0.001f)
                 );
                 trayCollider.center = Vector3.zero;
             }
