@@ -7,7 +7,6 @@ namespace Client.Runtime
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
-        private const float HeightFactor = 0.00015f;
 
         private readonly Stack<JigsawPiece> _stack = new();
         private JigsawBoard _board;
@@ -30,9 +29,9 @@ namespace Client.Runtime
             _actionData = actionData;
         }
 
-        public bool Push(JigsawPiece piece)
+        public bool Push(JigsawPiece piece, float? height = null)
         {
-            var newY = GetNextHeight();
+            var newY = height ?? GetNextHeight();
             _stack.Push(piece);
             SetHeight(piece, newY);
 
@@ -63,7 +62,7 @@ namespace Client.Runtime
 
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
 
-        public float GetNextHeight() => _stack.Count * HeightFactor;
+        public float GetNextHeight() => _board.GetNextSortingY();
 
         private void SetHeight(JigsawPiece piece, float height)
         {

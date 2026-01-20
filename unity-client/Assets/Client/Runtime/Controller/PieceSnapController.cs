@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Cysharp.Threading.Tasks;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Extensions;
+using UnityEngine;
 
 namespace Client.Runtime
 {
@@ -11,7 +11,7 @@ namespace Client.Runtime
     {
         [SerializeField] private float _snapDuration = 0.25f;
 
-        public event Action<JigsawBoardCell> OnSnapped;
+        public event Action<JigsawBoardCell, float> OnSnapped;
 
         public void SnapToClosestCell(JigsawGroup group, IEnumerable<JigsawBoardCell> cells)
         {
@@ -40,9 +40,10 @@ namespace Client.Runtime
         public async UniTask SnapToCellAsync(JigsawGroup group, JigsawBoardCell cell, CancellationToken cToken = default)
         {
             var cellTransform = cell.transform;
-            var snapPos = new Vector3(cellTransform.position.x, cell.GetNextHeight(), cellTransform.position.z);
+            float targetHeight = cell.GetNextHeight();
+            var snapPos = new Vector3(cellTransform.position.x, targetHeight, cellTransform.position.z);
             await SnapAsync(group, snapPos, cellTransform.rotation, cToken);
-            OnSnapped.Broadcast(cell);
+            OnSnapped?.Invoke(cell, targetHeight);
         }
 
         private async UniTask SnapAsync(JigsawGroup group, Vector3 snapPos, Quaternion snapRot, CancellationToken cToken = default)

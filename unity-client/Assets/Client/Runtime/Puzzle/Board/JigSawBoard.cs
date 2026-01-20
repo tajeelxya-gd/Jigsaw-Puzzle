@@ -25,9 +25,20 @@ namespace Client.Runtime
 
         public IReadOnlyList<JigsawPiece> Pieces => _pieces;
 
+        private float _sortingY = 0f;
+        private const float SortingYStep = 0.00001f;
+        private const float MaxSortingY = 0.005f;
+
         public JigsawBoard(string id) : base(id)
         {
             // Empty yet
+        }
+
+        public float GetNextSortingY()
+        {
+            _sortingY += SortingYStep;
+            if (_sortingY > MaxSortingY) _sortingY = SortingYStep;
+            return _sortingY;
         }
 
         public async UniTask LoadPuzzleAsync(JigSawLevelData levelData, Transform parent, Transform bounds, CancellationToken cToken = default)

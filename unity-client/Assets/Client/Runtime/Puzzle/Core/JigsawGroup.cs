@@ -60,7 +60,7 @@ namespace Client.Runtime
             SetPosY(0);
         }
 
-        public void SetCurrentCells(int anchorIdx, JigsawPiece anchorPiece)
+        public void SetCurrentCells(int anchorIdx, JigsawPiece anchorPiece, float? groupHeight = null)
         {
             var board = JigsawBoardCalculator.Board;
             var boardData = board.Data;
@@ -72,6 +72,9 @@ namespace Client.Runtime
 
             int anchorBaseRow = anchorPiece.CorrectIdx / cols;
             int anchorBaseCol = anchorPiece.CorrectIdx % cols;
+
+            // Generate a single height for the entire group if not provided
+            float targetHeight = groupHeight ?? board.GetNextSortingY();
 
             foreach (var piece in this)
             {
@@ -91,7 +94,7 @@ namespace Client.Runtime
                     piece.CurrentIdx = targetIdx;
 
                     // Push the piece into the cell's stack so neighbors can find it
-                    board.Cells[targetIdx].Push(piece);
+                    board.Cells[targetIdx].Push(piece, targetHeight);
                 }
                 else
                 {

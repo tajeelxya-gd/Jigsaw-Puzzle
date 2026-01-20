@@ -121,9 +121,9 @@ namespace Client.Runtime
             _snapController.SnapToClosestCell(Group, _puzzleService.GetCurrentBoard().Cells);
         }
 
-        private void HandleSnapped(JigsawBoardCell cell)
+        private void HandleSnapped(JigsawBoardCell cell, float height)
         {
-            Group.SetCurrentCells(cell.Idx, this);
+            Group.SetCurrentCells(cell.Idx, this, height);
 
             if (cell.Idx == CorrectIdx && cell.Contains(this))
             {
@@ -144,7 +144,7 @@ namespace Client.Runtime
                 CheckAndMerge(piece, neighbors.Left);
                 CheckAndMerge(piece, neighbors.Right);
             }
-            
+
             var audio = _recentGroup ? _groupFormed : _piecePlaced;
             UniAudio.Play2D((IAudioConfig)audio);
         }
