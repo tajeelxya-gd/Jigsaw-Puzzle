@@ -58,9 +58,6 @@ namespace Client.Runtime
 
         public void ForceStartDrag()
         {
-            // Ensure we are at full scale when dragging starts
-            transform.localScale = Vector3.one;
-
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             InitializeDragMath(ray);
             BeginDragSequence();

@@ -74,7 +74,15 @@ namespace Client.Runtime
             _scrollX = 0;
         }
 
-        public void SetHoverPiece(JigsawPiece piece) => _hoverPiece = piece;
+        public void SetHoverPiece(JigsawPiece piece)
+        {
+            _hoverPiece = piece;
+            if (_hoverPiece != null)
+            {
+                // Force an immediate check so the scale updates the frame it's picked up
+                HandleHoverPieceTrayState();
+            }
+        }
 
         public void SubmitPiece(JigsawPiece piece)
         {
@@ -134,6 +142,7 @@ namespace Client.Runtime
         private void Update()
         {
             HandleScrollInput();
+            HandleHoverPieceTrayState();
 
             if (!_isDragging)
             {
@@ -141,6 +150,26 @@ namespace Client.Runtime
             }
 
             UpdatePiecePositions();
+        }
+
+        private void HandleHoverPieceTrayState()
+        {
+            if (_hoverPiece == null) return;
+
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+
+            // We use Raycast specifically on _trayCollider to ignore the piece itself 
+            // blocking the ray, and to avoid physics scaling flicker.
+            bool isOver = _trayCollider.Raycast(ray, out _, 100f);
+
+            if (isOver && !_hoverPiece.IsOverTray)
+            {
+                _hoverPiece.OnEnterTray();
+            }
+            else if (!isOver && _hoverPiece.IsOverTray)
+            {
+                _hoverPiece.OnExitTray();
+            }
         }
 
         private void UpdatePiecePositions()
@@ -315,22 +344,6 @@ namespace Client.Runtime
             int index = (col * _rowCount) + row;
             if (index >= 0 && index < _activePieces.Count) return _activePieces[index];
             return null;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent<JigsawPiece>(out var piece))
-            {
-                piece.OnEnterTray();
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.TryGetComponent<JigsawPiece>(out var piece))
-            {
-                piece.OnExitTray();
-            }
         }
     }
 }
