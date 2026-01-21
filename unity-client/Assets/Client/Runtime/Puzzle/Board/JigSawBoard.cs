@@ -153,6 +153,7 @@ namespace Client.Runtime
             mesh.gameObject.layer = piece.gameObject.layer;
             mesh.SetParent(piece.transform);
             flatMesh.SetParent(piece.transform);
+            flatMesh.gameObject.layer = LayerMask.NameToLayer("JigsawPieceLocked");
             var meshRenderer = mesh.GetComponent<Renderer>();
             var flatMeshRenderer = flatMesh.GetComponent<Renderer>();
             meshRenderer.sharedMaterials = new[] { _helper.OutlineMaterial, _helper.BaseMaterial };

@@ -19,6 +19,7 @@ namespace Client.Runtime
         {
             _data = data;
             _mpb = new MaterialPropertyBlock();
+            AddShadowCaster();
             SetActive(isFlat: false);
         }
 
@@ -57,6 +58,21 @@ namespace Client.Runtime
             for (int i = 0; i < materialCount; i++)
             {
                 renderer.SetPropertyBlock(_mpb, i);
+            }
+        }
+
+        private void AddShadowCaster()
+        {
+            var mesh = _data.Mesh;
+            var meshTransform = mesh.transform;
+            var shadowProxy = GameObject.Instantiate(mesh, meshTransform.parent);
+            shadowProxy.name = mesh.name + "_ShadowProxy";
+            shadowProxy.gameObject.layer = LayerMask.NameToLayer("Default");
+            shadowProxy.transform.SetPositionAndRotation(meshTransform.position, meshTransform.rotation);
+            if (shadowProxy.TryGetComponent<MeshRenderer>(out var renderer))
+            {
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                renderer.receiveShadows = false;
             }
         }
     }

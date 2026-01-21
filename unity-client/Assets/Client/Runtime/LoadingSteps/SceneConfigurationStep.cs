@@ -13,7 +13,7 @@ namespace Client.Runtime
         [SerializeField] private RectTransform _boardSection;
         [SerializeField] private RectTransform _puzzleTraySection;
         [SerializeField] private float _fitPadding = 0.95f;
-        [SerializeField] private float _trayBgYScale = 0.075f;
+        [SerializeField] private float _trayBgYScale = 0.035f;
 
         private IPuzzleService _puzzleService;
         private IPuzzleTray _puzzleTray;

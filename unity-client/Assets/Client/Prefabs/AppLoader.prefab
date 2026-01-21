@@ -339,7 +339,6 @@ MonoBehaviour:
   - {fileID: 9141284652492727019}
   - {fileID: 5465780741353055732}
   - {fileID: 4985582967801707493}
-  - {fileID: 7959790900971533332}
   - {fileID: 715410019087325436}
   - {fileID: 6860733710026532556}
 --- !u!1 &4950897299910891085
@@ -573,4 +572,4 @@ MonoBehaviour:
   _boardSection: {fileID: 0}
   _puzzleTraySection: {fileID: 0}
   _fitPadding: 0.95
-  _trayMeshZScale: 0.01
+  _trayBgYScale: 0.08
