@@ -6,7 +6,11 @@
     "_assetDataId": "mg_4x3_standard_board_asset_data",
     "_gridId": "mg_4x3_standard_board_grid",
     "_flatGridId": "mg_4x3_standard_board_flat_grid",
-    "_trayScale": 0.5
+    "_trayScale": 0.55,
+    "_traySpacing": {
+      "x": 0.052,
+      "y": 0.052
+    }
   },
   {
     "_id": "mg_6x4_standard_board",
@@ -15,7 +19,11 @@
     "_assetDataId": "mg_6x4_standard_board_asset_data",
     "_gridId": "mg_6x4_standard_board_grid",
     "_flatGridId": "mg_6x4_standard_board_flat_grid",
-    "_trayScale": 0.7
+    "_trayScale": 0.7,
+    "_traySpacing": {
+      "x": 0.047,
+      "y": 0.047
+    }
   },
   {
     "_id": "mg_7x5_standard_board",
@@ -24,6 +32,10 @@
     "_assetDataId": "mg_7x5_standard_board_asset_data",
     "_gridId": "mg_7x5_standard_board_grid",
     "_flatGridId": "mg_7x5_standard_board_flat_grid",
-    "_trayScale": 0.78
+    "_trayScale": 0.78,
+    "_traySpacing": {
+      "x": 0.047,
+      "y": 0.047
+    }
   }
 ]

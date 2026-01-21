@@ -13,7 +13,9 @@ namespace Client.Runtime
         private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
         private JigsawPieceRendererData _data;
         private MaterialPropertyBlock _mpb;
+        private Renderer _shadowProxy;
         private bool _isFlat;
+        private float _shadowY;
 
         public void Init(JigsawPieceRendererData data)
         {
@@ -25,9 +27,11 @@ namespace Client.Runtime
 
         public void SetActive(bool isFlat)
         {
+            isFlat = false;
             _isFlat = isFlat;
             _data.Mesh.gameObject.SetActive(!isFlat);
             _data.FlatMesh.gameObject.SetActive(isFlat);
+            _shadowProxy.gameObject.SetActive(!isFlat);
         }
 
         public async UniTask FlashAsync(CancellationToken token)
@@ -61,19 +65,31 @@ namespace Client.Runtime
             }
         }
 
+        public void LiftShadow() => SetShadowY(0.06f);
+
+        public void UnLiftShadow() => SetShadowY(_shadowY);
+
         private void AddShadowCaster()
         {
             var mesh = _data.Mesh;
             var meshTransform = mesh.transform;
-            var shadowProxy = GameObject.Instantiate(mesh, meshTransform.parent);
-            shadowProxy.name = mesh.name + "_ShadowProxy";
-            shadowProxy.gameObject.layer = LayerMask.NameToLayer("Default");
-            shadowProxy.transform.SetPositionAndRotation(meshTransform.position, meshTransform.rotation);
-            if (shadowProxy.TryGetComponent<MeshRenderer>(out var renderer))
+            _shadowProxy = GameObject.Instantiate(mesh, meshTransform.parent);
+            _shadowProxy.name = mesh.name + "_ShadowProxy";
+            _shadowProxy.gameObject.layer = LayerMask.NameToLayer("Default");
+            _shadowProxy.transform.SetPositionAndRotation(meshTransform.position, meshTransform.rotation);
+            if (_shadowProxy.TryGetComponent<MeshRenderer>(out var renderer))
             {
                 renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
                 renderer.receiveShadows = false;
             }
+            _shadowY = _shadowProxy.transform.position.y;
+        }
+
+        private void SetShadowY(float y)
+        {
+            var shadowTransform = _shadowProxy.transform;
+            var position = shadowTransform.position;
+            shadowTransform.position = new Vector3(position.x, y, position.z);
         }
     }
 }

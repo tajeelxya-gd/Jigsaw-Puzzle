@@ -12,7 +12,7 @@ namespace Client.Runtime
     {
         [Header("Grid Settings")]
         [SerializeField] private int _rowCount = 2;
-        [SerializeField] private Vector2 _spacing = new Vector2(0.06f, 0.05f);
+        [SerializeField] private Vector2 _spacing;
         [SerializeField] private Vector2 _padding = new Vector2(0.02f, 0.02f);
         [SerializeField] private BoxCollider _trayCollider;
         [SerializeField] private Transform _bgTransform;
@@ -54,6 +54,7 @@ namespace Client.Runtime
 
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
         {
+            SetSpacing();
             if (pieces == null) return;
 
             _activePieces.Clear();
@@ -152,6 +153,12 @@ namespace Client.Runtime
             UpdatePiecePositions();
         }
 
+        private void SetSpacing()
+        {
+            var boardData = _puzzleService.GetCurrentBoard().Data;
+            _spacing = boardData.TraySpacing;
+        }
+
         private void HandleHoverPieceTrayState()
         {
             if (_hoverPiece == null) return;
@@ -211,7 +218,7 @@ namespace Client.Runtime
                 float localX = pt.localPosition.x;
                 float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
                 float rightEdge = _trayCollider.center.x + (_trayCollider.size.x / 2f) + _visibilityBuffer;
-                _activePieces[i].gameObject.SetActive(localX >= leftEdge && localX <= rightEdge);
+                // _activePieces[i].gameObject.SetActive(localX >= leftEdge && localX <= rightEdge);
             }
         }
 

@@ -15,6 +15,7 @@ namespace Client.Runtime
         [SerializeField] private string _gridId;
         [SerializeField] private string _flatGridId;
         [SerializeField] private float _trayScale;
+        [SerializeField] private Vector2 _traySpacing;
 
         public string Id => _id;
         public string Name => _name;
@@ -24,6 +25,7 @@ namespace Client.Runtime
         public string GridId => _gridId;
         public string FlatGridId => _flatGridId;
         public float TrayScale => _trayScale;
+        public Vector2 TraySpacing => _traySpacing;
 
         public IEntity CreateEntity() => new JigsawBoard(Id);
     }

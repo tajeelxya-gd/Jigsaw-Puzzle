@@ -1,7 +1,7 @@
 [
   {
     "_id": "mg_level_1",
-    "_name": "Level 1",
+    "_name": "1 - 4 x 3",
     "_boardId": "mg_4x3_standard_board",
     "_imageKey": "island",
     "_cellActionIds": [
@@ -10,7 +10,7 @@
   },
   {
     "_id": "mg_level_2",
-    "_name": "Level 2",
+    "_name": "2 - 6 x 4",
     "_boardId": "mg_6x4_standard_board",
     "_imageKey": "island",
     "_cellActionIds": [
@@ -20,7 +20,7 @@
   },
   {
     "_id": "mg_level_3",
-    "_name": "Level 3",
+    "_name": "3 - 7 x 5",
     "_boardId": "mg_7x5_standard_board",
     "_imageKey": "island"
   }

@@ -102,6 +102,7 @@ namespace Client.Runtime
 
         private void HandleDragStarted()
         {
+            // _renderer.LiftShadow();
             _puzzleTray.SetHoverPiece(this);
             Group.SetPosY(0.01f);
             Group.RemoveFromCurrentCells();
@@ -111,6 +112,7 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
+            // _renderer.UnLiftShadow();
             _puzzleTray.SetHoverPiece(null);
 
             if (IsOverTray && Group.Count == 1)
