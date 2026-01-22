@@ -28,6 +28,13 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: island_semi_dark
+    _reference:
+      m_AssetGUID: fac664471062ec74f91a9e51b8b9a7e8
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - _key: lion
     _reference:
       m_AssetGUID: 8e3f3b7fd16aca449ae2d75527cf5db7

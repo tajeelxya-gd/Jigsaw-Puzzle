@@ -34,6 +34,7 @@ namespace Client.Runtime
         {
             _puzzleService = resolver.Resolve<IPuzzleService>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
+            _renderer.Inject(resolver);
         }
 
         public void Init(JigsawBoardCell cell, JigsawPieceRendererData rendererData)

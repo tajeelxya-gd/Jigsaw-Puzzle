@@ -156,8 +156,6 @@ namespace Client.Runtime
             flatMesh.gameObject.layer = LayerMask.NameToLayer("JigsawPieceLocked");
             var meshRenderer = mesh.GetComponent<Renderer>();
             var flatMeshRenderer = flatMesh.GetComponent<Renderer>();
-            meshRenderer.sharedMaterials = new[] { _helper.OutlineMaterial, _helper.BaseMaterial };
-            flatMeshRenderer.sharedMaterials = new[] { _helper.BaseMaterial };
             var rendererData = new JigsawPieceRendererData(meshRenderer, flatMeshRenderer);
             piece.Inject(_resolver);
             piece.Init(cell, rendererData);

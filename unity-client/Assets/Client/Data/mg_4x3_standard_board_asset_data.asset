@@ -16,14 +16,14 @@ MonoBehaviour:
   _assets:
   - _key: mg_4x3_standard_board_grid
     _reference:
-      m_AssetGUID: e0ce14bc814a26a49b59bbafc044f316
+      m_AssetGUID: bf20cdba6e9c1ad46b2092cb17985581
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
   - _key: mg_4x3_standard_board_flat_grid
     _reference:
-      m_AssetGUID: 8c2dd953bd77ac746904209acc7048af
+      m_AssetGUID: 6363127d608d3e145bfeede9882fbed3
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

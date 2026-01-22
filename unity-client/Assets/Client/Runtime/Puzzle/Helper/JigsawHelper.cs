@@ -22,6 +22,8 @@ namespace Client.Runtime
 
         public Material OutlineMaterial { get; private set; }
 
+        public Material SemiOutlineMaterial { get; private set; }
+
         public void Inject(IResolver resolver) => _checker = resolver.Resolve<IWinConditionChecker>();
 
         public async UniTask InitialiseAsync(CancellationToken cToken = default)
@@ -46,6 +48,9 @@ namespace Client.Runtime
 
             var outlineAsset = _assetData.GetAsset($"{key}_dark");
             OutlineMaterial = await UniResources.LoadAssetAsync<Material>(outlineAsset.RuntimeKey, cToken: cToken);
+
+            var semiOutlineAsset = _assetData.GetAsset($"{key}_semi_dark");
+            SemiOutlineMaterial = await UniResources.LoadAssetAsync<Material>(semiOutlineAsset.RuntimeKey, cToken: cToken);
 
             _fullImage.sharedMaterials = new[] { BaseMaterial };
         }

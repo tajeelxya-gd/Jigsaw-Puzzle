@@ -41,6 +41,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - MaterialAssetData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fac664471062ec74f91a9e51b8b9a7e8
+    m_Address: mat_island_semi_dark
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d5f53fda6cfc8e640bfdb4e717e7e8ee, type: 2}
   m_SchemaSet:

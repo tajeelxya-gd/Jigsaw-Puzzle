@@ -9,6 +9,7 @@ namespace Client.Runtime
         Material BaseMaterial { get; }
 
         Material OutlineMaterial { get; }
+        Material SemiOutlineMaterial { get; }
 
         void ToggleFullImage();
 

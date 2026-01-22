@@ -1,21 +1,28 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigsawPieceRenderer : MonoBehaviour
+    public sealed class JigsawPieceRenderer : MonoBehaviour, IInjectable
     {
         [SerializeField] private Color highlightColor;
         [SerializeField] private float intensity;
         [SerializeField] private float duration;
 
         private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
+        private IJigsawHelper _helper;
         private JigsawPieceRendererData _data;
         private MaterialPropertyBlock _mpb;
         private Renderer _shadowProxy;
         private bool _isFlat;
         private float _shadowY;
+
+        public void Inject(IResolver resolver)
+        {
+            _helper = resolver.Resolve<IJigsawHelper>();
+        }
 
         public void Init(JigsawPieceRendererData data)
         {
@@ -27,11 +34,13 @@ namespace Client.Runtime
 
         public void SetActive(bool isFlat)
         {
-            isFlat = false;
-            _isFlat = isFlat;
-            _data.Mesh.gameObject.SetActive(!isFlat);
-            _data.FlatMesh.gameObject.SetActive(isFlat);
-            _shadowProxy.gameObject.SetActive(!isFlat);
+            var tmpFlat = false;
+            _data.Mesh.gameObject.SetActive(!tmpFlat);
+            _data.FlatMesh.gameObject.SetActive(tmpFlat);
+            _shadowProxy.gameObject.SetActive(!tmpFlat);
+            var outlineMaterial = isFlat ? _helper.SemiOutlineMaterial : _helper.OutlineMaterial;
+            _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
+            _data.FlatMesh.sharedMaterials = new[] { _helper.BaseMaterial };
         }
 
         public async UniTask FlashAsync(CancellationToken token)
