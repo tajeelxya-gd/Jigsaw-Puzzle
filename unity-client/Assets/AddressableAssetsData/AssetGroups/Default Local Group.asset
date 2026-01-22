@@ -15,23 +15,23 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 6767d09e3dc6e8d4c953e237b7e22c16
   m_SerializeEntries:
+  - m_GUID: 2cd8c5d97aee5754cb5ef64ffb7a33b8
+    m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid Double Outline.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f6f2ad1639fe3744944d0082b9f35c0
     m_Address: PuzzlePiece - Root
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6363127d608d3e145bfeede9882fbed3
-    m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid Flat.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf20cdba6e9c1ad46b2092cb17985581
-    m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eb90628729938604c809344efbfc382d
     m_Address: JigsawBoardCell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc6e0118133e8ee4ca017196149e38f3
+    m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid Double Outline.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
