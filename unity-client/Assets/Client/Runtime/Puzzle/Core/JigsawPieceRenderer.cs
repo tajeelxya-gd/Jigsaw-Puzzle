@@ -92,6 +92,7 @@ namespace Client.Runtime
                 renderer.receiveShadows = false;
             }
             _shadowY = _shadowProxy.transform.position.y;
+            SetShadowY(0.035f);
         }
 
         private void SetShadowY(float y)
