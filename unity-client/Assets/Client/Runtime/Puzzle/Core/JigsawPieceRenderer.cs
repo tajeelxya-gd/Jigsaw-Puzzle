@@ -33,13 +33,13 @@ namespace Client.Runtime
 
         public void SetActive(bool isFlat)
         {
-            var tmpFlat = false;
-            _data.Mesh.gameObject.SetActive(!tmpFlat);
-            _data.FlatMesh.gameObject.SetActive(tmpFlat);
-            _shadowProxy.gameObject.SetActive(!tmpFlat);
+            _isFlat = isFlat;
+            _data.Mesh.gameObject.SetActive(true);
+            _data.FlatMesh.gameObject.SetActive(false);
+            _shadowProxy.gameObject.SetActive(true);
             var outlineMaterial = isFlat ? _helper.SemiOutlineMaterial : _helper.OutlineMaterial;
             _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
-            _data.FlatMesh.sharedMaterials = new[] { _helper.BaseMaterial };
+            // _data.FlatMesh.sharedMaterials = new[] { _helper.BaseMaterial };
         }
 
         public async UniTask FlashAsync(CancellationToken token)

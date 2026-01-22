@@ -20,8 +20,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f5cdffdf889fc2459b252cbc559a1ae
+    m_Address: Assets/Client/Exports/3D/6x4/Jigsaw Final 6x4 Grid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f6f2ad1639fe3744944d0082b9f35c0
     m_Address: PuzzlePiece - Root
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7139cb7d290c9ff46a6e6ee3357917a6
+    m_Address: Assets/Client/Exports/3D/7x5/Jigsaw Final 7x5 Grid.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
