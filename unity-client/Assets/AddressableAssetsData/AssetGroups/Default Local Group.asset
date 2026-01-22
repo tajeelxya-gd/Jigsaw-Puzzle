@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf20cdba6e9c1ad46b2092cb17985581
+    m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eb90628729938604c809344efbfc382d
     m_Address: JigsawBoardCell
     m_ReadOnly: 0

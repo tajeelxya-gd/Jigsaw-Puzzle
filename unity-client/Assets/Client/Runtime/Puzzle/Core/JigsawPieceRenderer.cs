@@ -17,7 +17,6 @@ namespace Client.Runtime
         private MaterialPropertyBlock _mpb;
         private Renderer _shadowProxy;
         private bool _isFlat;
-        private float _shadowY;
 
         public void Inject(IResolver resolver)
         {
@@ -74,10 +73,6 @@ namespace Client.Runtime
             }
         }
 
-        public void LiftShadow() => SetShadowY(0.06f);
-
-        public void UnLiftShadow() => SetShadowY(_shadowY);
-
         private void AddShadowCaster()
         {
             var mesh = _data.Mesh;
@@ -91,15 +86,6 @@ namespace Client.Runtime
                 renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
                 renderer.receiveShadows = false;
             }
-            _shadowY = _shadowProxy.transform.position.y;
-            SetShadowY(0.035f);
-        }
-
-        private void SetShadowY(float y)
-        {
-            var shadowTransform = _shadowProxy.transform;
-            var position = shadowTransform.position;
-            shadowTransform.position = new Vector3(position.x, y, position.z);
         }
     }
 }

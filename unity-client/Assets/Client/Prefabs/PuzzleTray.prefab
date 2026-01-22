@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2135336398424538154}
   - component: {fileID: 2233281216705619017}
   - component: {fileID: 2994109636296171758}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Small_Tiles_bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.PuzzleTray
   _rowCount: 2
   _spacing: {x: 0.047, y: 0.047}
-  _padding: {x: 0, y: 0}
+  _padding: {x: 0.02, y: 0}
   _trayCollider: {fileID: 8619639753298581620}
   _bgTransform: {fileID: 2135336398424538154}
   _lerpSpeed: 20
