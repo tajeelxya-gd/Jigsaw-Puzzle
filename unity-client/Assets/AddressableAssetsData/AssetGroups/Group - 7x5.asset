@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Group - 7x5
   m_GUID: 135224dc96a27a4418d8e3ccec808917
   m_SerializeEntries:
+  - m_GUID: 7139cb7d290c9ff46a6e6ee3357917a6
+    m_Address: Jigsaw Final 7x5 Grid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ffc0a92931f1c834ba441544a1d08429
     m_Address: mg_7x5_standard_board_asset_data
     m_ReadOnly: 0

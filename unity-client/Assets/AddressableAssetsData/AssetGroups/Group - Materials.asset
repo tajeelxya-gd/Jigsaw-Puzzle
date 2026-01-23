@@ -15,13 +15,28 @@ MonoBehaviour:
   m_GroupName: Group - Materials
   m_GUID: 8dd49a06f3628174489bdef1440d1143
   m_SerializeEntries:
+  - m_GUID: 0a9b2028c8cc8ce4e8644ab5b0c5a0d4
+    m_Address: mat_img_2_dark
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a4f8ecb33ae1734cb0116396bef1be8
     m_Address: mat_island
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c552c4c4d759a54b9bdde043a8ca768
+    m_Address: mat_img_2_semi_dark
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5db2b04bcbe9c174a854f4204e978447
     m_Address: mat_island_dark
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fc3b318c275650489d6ff876a52ce4b
+    m_Address: mat_img_2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
