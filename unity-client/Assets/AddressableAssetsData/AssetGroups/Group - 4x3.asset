@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Group - 4x3
   m_GUID: 04860650e946a2144a4a61982b1051ae
   m_SerializeEntries:
-  - m_GUID: 8c2dd953bd77ac746904209acc7048af
-    m_Address: Jigsaw Final 4x3 Grid Flat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9637bb8555a2da94e8493b6fd81ff247
     m_Address: mg_4x3_standard_board_asset_data
     m_ReadOnly: 0

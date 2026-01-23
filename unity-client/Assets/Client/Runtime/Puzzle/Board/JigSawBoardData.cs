@@ -13,7 +13,6 @@ namespace Client.Runtime
         [SerializeField] private int _yConstraint;
         [SerializeField] private string _assetDataId;
         [SerializeField] private string _gridId;
-        [SerializeField] private string _flatGridId;
         [SerializeField] private float _trayScale;
         [SerializeField] private Vector2 _traySpacing;
 
@@ -23,7 +22,6 @@ namespace Client.Runtime
         public int YConstraint => _yConstraint;
         public string AssetDataId => _assetDataId;
         public string GridId => _gridId;
-        public string FlatGridId => _flatGridId;
         public float TrayScale => _trayScale;
         public Vector2 TraySpacing => _traySpacing;
 

@@ -20,9 +20,9 @@ namespace Client.Runtime
 
         public Material BaseMaterial { get; private set; }
 
-        public Material OutlineMaterial { get; private set; }
+        public Material PieceTrayOutline { get; private set; }
 
-        public Material SemiOutlineMaterial { get; private set; }
+        public Material PieceBoardOutline { get; private set; }
 
         public void Inject(IResolver resolver) => _checker = resolver.Resolve<IWinConditionChecker>();
 
@@ -46,11 +46,11 @@ namespace Client.Runtime
             var matAsset = _assetData.GetAsset(key);
             BaseMaterial = await UniResources.LoadAssetAsync<Material>(matAsset.RuntimeKey, cToken: cToken);
 
-            var outlineAsset = _assetData.GetAsset($"{key}_dark");
-            OutlineMaterial = await UniResources.LoadAssetAsync<Material>(outlineAsset.RuntimeKey, cToken: cToken);
+            var trayOutlineAsset = _assetData.GetAsset($"{key}_tray");
+            PieceTrayOutline = await UniResources.LoadAssetAsync<Material>(trayOutlineAsset.RuntimeKey, cToken: cToken);
 
-            var semiOutlineAsset = _assetData.GetAsset($"{key}_semi_dark");
-            SemiOutlineMaterial = await UniResources.LoadAssetAsync<Material>(semiOutlineAsset.RuntimeKey, cToken: cToken);
+            var boardOutlineAsset = _assetData.GetAsset($"{key}_board");
+            PieceBoardOutline = await UniResources.LoadAssetAsync<Material>(boardOutlineAsset.RuntimeKey, cToken: cToken);
 
             _fullImage.sharedMaterials = new[] { BaseMaterial };
         }
@@ -58,7 +58,7 @@ namespace Client.Runtime
         public void UnLoadMaterials()
         {
             UniResources.DisposeAsset(BaseMaterial);
-            UniResources.DisposeAsset(OutlineMaterial);
+            UniResources.DisposeAsset(PieceTrayOutline);
         }
 
         public void ToggleFullImage() => gameObject.SetActive(!gameObject.activeSelf);

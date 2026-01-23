@@ -30,52 +30,41 @@ namespace Client.Runtime
             _data = data;
             _mpb = new MaterialPropertyBlock();
             AddShadowCaster();
-            SetActive(isFlat: false);
+            SetActive(locked: false);
         }
 
-        public void SetActive(bool isFlat)
+        public void SetActive(bool locked)
         {
             _data.Mesh.gameObject.SetActive(true);
-            _data.FlatMesh.gameObject.SetActive(false);
             _shadowProxy.gameObject.SetActive(true);
 
-            var outlineMaterial = isFlat ? _helper.SemiOutlineMaterial : _helper.OutlineMaterial;
-            _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
-
-            if (isFlat) LiftShadow(0.03f);
+            if (locked)
+            {
+                // lift shadow
+                SetShadowY(0.03f);
+            }
         }
 
         public async UniTask FlashAsync(CancellationToken token)
         {
             var renderer = _data.Mesh;
-            int materialCount = renderer.sharedMaterials.Length;
-
-            // Normalize the 0-255 input to 0-1 for Unity's Color system
-            float maxIntensity = targetReflectionValue / 255f;
-
-            float elapsed = 0f;
+            var materialCount = renderer.sharedMaterials.Length;
+            var maxIntensity = targetReflectionValue / 255f;
+            var elapsed = 0f;
 
             try
             {
                 while (elapsed < duration)
                 {
                     elapsed += Time.deltaTime;
-                    float progress = Mathf.Clamp01(elapsed / duration);
-
-                    // Mathf.Sin(0 to PI) creates a perfect 0 -> 1 -> 0 curve.
-                    // 0% duration = Sin(0) = 0
-                    // 50% duration = Sin(PI/2) = 1
-                    // 100% duration = Sin(PI) = 0
-                    float t = Mathf.Sin(progress * Mathf.PI);
-
-                    // Calculate current intensity
-                    float currentVal = t * maxIntensity;
-                    Color reflectColor = new Color(currentVal, currentVal, currentVal, 1f);
+                    var progress = Mathf.Clamp01(elapsed / duration);
+                    var t = Mathf.Sin(progress * Mathf.PI);
+                    var currentVal = t * maxIntensity;
+                    var reflectColor = new Color(currentVal, currentVal, currentVal, 1f);
 
                     renderer.GetPropertyBlock(_mpb);
                     _mpb.SetColor(ReflectColorId, reflectColor);
 
-                    // Apply to all materials (Outline and Base)
                     for (int i = 0; i < materialCount; i++)
                     {
                         renderer.SetPropertyBlock(_mpb, i);
@@ -86,7 +75,6 @@ namespace Client.Runtime
             }
             finally
             {
-                // Ensure we return to 0 reflection after the duration
                 _mpb.Clear();
                 _mpb.SetColor(ReflectColorId, Color.black);
                 for (int i = 0; i < materialCount; i++)
@@ -94,6 +82,12 @@ namespace Client.Runtime
                     renderer.SetPropertyBlock(_mpb, i);
                 }
             }
+        }
+
+        public void SetOutlineMaterial(bool isOverTray)
+        {
+            var outlineMaterial = isOverTray ? _helper.PieceTrayOutline : _helper.PieceBoardOutline;
+            _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
         }
 
         private void AddShadowCaster()
@@ -111,6 +105,6 @@ namespace Client.Runtime
             }
         }
 
-        private void LiftShadow(float yOffset) => _shadowProxy.transform.position += Vector3.up * yOffset;
+        private void SetShadowY(float yOffset) => _shadowProxy.transform.position += Vector3.up * yOffset;
     }
 }

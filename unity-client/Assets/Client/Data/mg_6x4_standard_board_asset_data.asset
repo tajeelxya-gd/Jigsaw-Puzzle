@@ -21,10 +21,3 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-  - _key: mg_6x4_standard_board_flat_grid
-    _reference:
-      m_AssetGUID: 3f5cdffdf889fc2459b252cbc559a1ae
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_SubObjectGUID: 
-      m_EditorAssetChanged: 0

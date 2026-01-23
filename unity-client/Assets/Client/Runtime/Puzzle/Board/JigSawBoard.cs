@@ -36,18 +36,12 @@ namespace Client.Runtime
 
         public float GetSortingY(int groupSize)
         {
-            // Base layer
             const float baseHeight = 0.0001f;
-            const float bandRange = 0.004f; // Total range for sorting
-
-            // Smaller groups (Count=1) get higher Y values
-            // Larger groups (Count=10+) get lower Y values
-            // formula: 1/size mapping to range
+            const float bandRange = 0.004f;
             float sizeWeight = 1f / groupSize;
             float heightFromSize = sizeWeight * bandRange;
-
-            // Cyclical drop order offset to resolve Z-fighting for same-sized groups
             _sortingY += SortingYStep;
+
             if (_sortingY > 0.0005f) _sortingY = 0f;
 
             return baseHeight + heightFromSize + _sortingY;
@@ -60,20 +54,16 @@ namespace Client.Runtime
             _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
             var gridAsset = _assetData.GetAsset(Data.GridId);
             var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
-            var flatGridAsset = _assetData.GetAsset(Data.FlatGridId);
-            var flatGrid = await UniResources.CreateInstanceAsync<Transform>(flatGridAsset.RuntimeKey, parent, null, cToken);
             await _helper.LoadMaterialsAsync(levelData.ImageKey, cToken);
 
             foreach (var cell in _cells)
             {
                 var mesh = grid.GetChild(0);
-                var flatMesh = flatGrid.GetChild(0);
 
-                await WrapMeshesInPuzzlePieceAsync(cell, mesh, flatMesh, cToken);
+                await WrapMeshesInPuzzlePieceAsync(cell, mesh, cToken);
             }
 
             UniResources.DisposeInstance(grid.gameObject);
-            UniResources.DisposeInstance(flatGrid.gameObject);
         }
 
         public void UnLoadPuzzle()
@@ -146,17 +136,14 @@ namespace Client.Runtime
             }
         }
 
-        private async UniTask WrapMeshesInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, Transform flatMesh, CancellationToken cToken = default)
+        private async UniTask WrapMeshesInPuzzlePieceAsync(JigsawBoardCell cell, Transform mesh, CancellationToken cToken = default)
         {
             var piece = await UniResources.CreateInstanceAsync<JigsawPiece>("PuzzlePiece - Root", cell.transform, null, cToken);
             piece.name = $"Piece_{cell.Idx}";
             mesh.gameObject.layer = piece.gameObject.layer;
             mesh.SetParent(piece.transform);
-            flatMesh.SetParent(piece.transform);
-            flatMesh.gameObject.layer = LayerMask.NameToLayer("JigsawPieceLocked");
             var meshRenderer = mesh.GetComponent<Renderer>();
-            var flatMeshRenderer = flatMesh.GetComponent<Renderer>();
-            var rendererData = new JigsawPieceRendererData(meshRenderer, flatMeshRenderer);
+            var rendererData = new JigsawPieceRendererData(meshRenderer);
             piece.Inject(_resolver);
             piece.Init(cell, rendererData);
             _pieces.Add(piece);

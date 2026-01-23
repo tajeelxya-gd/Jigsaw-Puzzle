@@ -8,8 +8,8 @@ namespace Client.Runtime
     {
         Material BaseMaterial { get; }
 
-        Material OutlineMaterial { get; }
-        Material SemiOutlineMaterial { get; }
+        Material PieceTrayOutline { get; }
+        Material PieceBoardOutline { get; }
 
         void ToggleFullImage();
 

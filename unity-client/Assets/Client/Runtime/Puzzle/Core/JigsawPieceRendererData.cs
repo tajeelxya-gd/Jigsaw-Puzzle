@@ -5,12 +5,10 @@ namespace Client.Runtime
     public class JigsawPieceRendererData
     {
         public readonly Renderer Mesh;
-        public readonly Renderer FlatMesh;
 
-        public JigsawPieceRendererData(Renderer mesh, Renderer flatMesh)
+        public JigsawPieceRendererData(Renderer mesh)
         {
             Mesh = mesh;
-            FlatMesh = flatMesh;
         }
     }
 }
