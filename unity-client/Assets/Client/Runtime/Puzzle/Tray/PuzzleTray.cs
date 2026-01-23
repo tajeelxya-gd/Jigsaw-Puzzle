@@ -60,23 +60,61 @@ namespace Client.Runtime
             SetSpacing();
             if (pieces == null) return;
 
-            _activePieces.Clear();
+            var board = _puzzleService.GetCurrentBoard();
+            if (board == null) return;
+
+            var boardData = board.Data;
+            int puzzleRows = boardData.XConstraint;
+            int puzzleCols = boardData.YConstraint;
+
+            var cornerPieces = new List<JigsawPiece>();
+            var otherPieces = new List<JigsawPiece>();
+
             foreach (var p in pieces)
             {
                 p.OnEnterTray();
-                _activePieces.Add(p);
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
+
+                int r = p.CorrectIdx / puzzleCols;
+                int c = p.CorrectIdx % puzzleCols;
+                bool isCorner = (r == 0 || r == puzzleRows - 1) && (c == 0 || c == puzzleCols - 1);
+
+                if (isCorner) cornerPieces.Add(p);
+                else otherPieces.Add(p);
             }
 
-            for (int i = 0; i < _activePieces.Count; i++)
+            // Sort corners by Column then Row to distribute them naturally across tray rows
+            // Column-major tray layout (index % rowCount = row)
+            // Sorting by Col then Row ensures Row 0 gets Top corners and Row 1 gets Bottom corners in a 2-row tray.
+            cornerPieces.Sort((a, b) =>
             {
-                int randomIndex = UnityEngine.Random.Range(i, _activePieces.Count);
-                (_activePieces[i], _activePieces[randomIndex]) = (_activePieces[randomIndex], _activePieces[i]);
-            }
+                int colA = a.CorrectIdx % puzzleCols;
+                int colB = b.CorrectIdx % puzzleCols;
+                if (colA != colB) return colA.CompareTo(colB);
+
+                int rowA = a.CorrectIdx / puzzleCols;
+                int rowB = b.CorrectIdx / puzzleCols;
+                return rowA.CompareTo(rowB);
+            });
+
+            ShuffleList(otherPieces);
+
+            _activePieces.Clear();
+            _activePieces.AddRange(cornerPieces);
+            _activePieces.AddRange(otherPieces);
 
             _scrollX = 0;
             _scrollVelocity = 0f;
+        }
+
+        private void ShuffleList<T>(List<T> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                int randomIndex = UnityEngine.Random.Range(i, list.Count);
+                (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+            }
         }
 
         public void SetHoverPiece(JigsawPiece piece)
