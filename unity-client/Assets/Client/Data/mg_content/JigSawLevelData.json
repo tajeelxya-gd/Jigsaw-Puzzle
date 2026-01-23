@@ -3,7 +3,7 @@
     "_id": "mg_level_1",
     "_name": "1 - 4 x 3",
     "_boardId": "mg_4x3_standard_board",
-    "_imageKey": "island",
+    "_imageKey": "img_1",
     "_cellActionIds": [
       "mg_level_1_cell_action_reward_1"
     ]
@@ -12,7 +12,7 @@
     "_id": "mg_level_2",
     "_name": "2 - 6 x 4",
     "_boardId": "mg_6x4_standard_board",
-    "_imageKey": "island",
+    "_imageKey": "img_2",
     "_cellActionIds": [
       "mg_level_3_cell_action_reward_1",
       "mg_level_3_cell_action_reward_2"
@@ -22,6 +22,31 @@
     "_id": "mg_level_3",
     "_name": "3 - 7 x 5",
     "_boardId": "mg_7x5_standard_board",
-    "_imageKey": "island"
+    "_imageKey": "img_1"
+  },
+  {
+    "_id": "mg_level_4",
+    "_name": "4 - 4 x 3",
+    "_boardId": "mg_4x3_standard_board",
+    "_imageKey": "img_2",
+    "_cellActionIds": [
+      "mg_level_1_cell_action_reward_1"
+    ]
+  },
+  {
+    "_id": "mg_level_5",
+    "_name": "5 - 6 x 4",
+    "_boardId": "mg_6x4_standard_board",
+    "_imageKey": "img_1",
+    "_cellActionIds": [
+      "mg_level_3_cell_action_reward_1",
+      "mg_level_3_cell_action_reward_2"
+    ]
+  },
+  {
+    "_id": "mg_level_6",
+    "_name": "6 - 7 x 5",
+    "_boardId": "mg_7x5_standard_board",
+    "_imageKey": "img_2"
   }
 ]

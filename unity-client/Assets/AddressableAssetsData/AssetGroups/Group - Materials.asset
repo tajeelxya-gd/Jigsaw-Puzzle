@@ -25,16 +25,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 62e3443fdb807aa4a985c5064f8fd117
-    m_Address: mat_lion_dark
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8e3f3b7fd16aca449ae2d75527cf5db7
-    m_Address: mat_lion
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f45246de6e1790e4c8088e09514dfcaa
     m_Address: Materials - AssetData
     m_ReadOnly: 0

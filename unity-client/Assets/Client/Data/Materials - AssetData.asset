@@ -14,37 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Database.AssetData
   _id: materials-asset-data
   _assets:
-  - _key: island
+  - _key: img_1
     _reference:
       m_AssetGUID: 4a4f8ecb33ae1734cb0116396bef1be8
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-  - _key: island_dark
+  - _key: img_1_dark
     _reference:
       m_AssetGUID: 5db2b04bcbe9c174a854f4204e978447
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-  - _key: island_semi_dark
+  - _key: img_1_semi_dark
     _reference:
       m_AssetGUID: fac664471062ec74f91a9e51b8b9a7e8
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-  - _key: lion
+  - _key: img_2
     _reference:
-      m_AssetGUID: 8e3f3b7fd16aca449ae2d75527cf5db7
+      m_AssetGUID: 9fc3b318c275650489d6ff876a52ce4b
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-  - _key: lion_dark
+  - _key: img_2_dark
     _reference:
-      m_AssetGUID: 62e3443fdb807aa4a985c5064f8fd117
+      m_AssetGUID: 0a9b2028c8cc8ce4e8644ab5b0c5a0d4
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: img_2_semi_dark
+    _reference:
+      m_AssetGUID: 5c552c4c4d759a54b9bdde043a8ca768
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

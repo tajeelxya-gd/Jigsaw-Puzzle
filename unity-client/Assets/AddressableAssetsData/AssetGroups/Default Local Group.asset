@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 6767d09e3dc6e8d4c953e237b7e22c16
   m_SerializeEntries:
+  - m_GUID: 0a9b2028c8cc8ce4e8644ab5b0c5a0d4
+    m_Address: Assets/Client/Exports/2D/Images/2/mat_img_2_dark.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2cd8c5d97aee5754cb5ef64ffb7a33b8
     m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid Double Outline.fbx
     m_ReadOnly: 0
@@ -30,8 +35,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c552c4c4d759a54b9bdde043a8ca768
+    m_Address: Assets/Client/Exports/2D/Images/2/mat_img_2_semi_dark.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7139cb7d290c9ff46a6e6ee3357917a6
     m_Address: Assets/Client/Exports/3D/7x5/Jigsaw Final 7x5 Grid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fc3b318c275650489d6ff876a52ce4b
+    m_Address: Assets/Client/Exports/2D/Images/2/mat_img_2.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
