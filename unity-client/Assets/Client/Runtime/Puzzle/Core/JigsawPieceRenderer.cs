@@ -49,8 +49,7 @@ namespace Client.Runtime
             var renderer = _data.Mesh;
             int materialCount = renderer.sharedMaterials.Length;
 
-            // 1. Capture original values from the shared materials before starting
-            // We look at the first material as the reference for the "original" state
+            // 1. Capture original values from the shared materials
             var baseMat = renderer.sharedMaterial;
             Color originalColor = baseMat.HasProperty(MainColorId) ? baseMat.GetColor(MainColorId) : Color.white;
             Color originalReflect = baseMat.HasProperty(ReflectColorId) ? baseMat.GetColor(ReflectColorId) : new Color(0.5f, 0.5f, 0.5f, 0.5f);
@@ -61,11 +60,18 @@ namespace Client.Runtime
             {
                 while (elapsed < duration)
                 {
+                    // Use Time.deltaTime to progress smoothly
                     elapsed += Time.deltaTime;
-                    float normalizedTime = Mathf.Clamp01(elapsed / duration);
-                    float t = Mathf.Sin(normalizedTime * Mathf.PI);
 
-                    // 2. Lerp from the CAPTURED original to the highlight
+                    // Normalize time (0 to 1)
+                    float normalizedTime = Mathf.Clamp01(elapsed / duration);
+
+                    // SmoothStep creates a "Ease In, Ease Out" feel for the transition
+                    // Then Sin creates the pulse: 0 -> 1 -> 0
+                    float smoothT = Mathf.SmoothStep(0f, 1f, normalizedTime);
+                    float t = Mathf.Sin(smoothT * Mathf.PI);
+
+                    // 2. Lerp using the smooth t value
                     Color lerpedColor = Color.Lerp(originalColor, highlightColor * intensity, t);
                     Color lerpedReflect = Color.Lerp(originalReflect, highlightColor * intensity, t);
 
@@ -78,13 +84,13 @@ namespace Client.Runtime
                         renderer.SetPropertyBlock(_mpb, i);
                     }
 
+                    // Yield until next frame
                     await UniTask.Yield(PlayerLoopTiming.Update, token);
                 }
             }
             finally
             {
-                // 3. Guaranteed Reset: Clear the PropertyBlock overrides 
-                // This makes the renderer revert to the exact values in the sharedMaterials
+                // 3. Guaranteed Clean Reset
                 renderer.GetPropertyBlock(_mpb);
                 _mpb.Clear();
                 for (int i = 0; i < materialCount; i++)

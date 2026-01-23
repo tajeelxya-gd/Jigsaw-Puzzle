@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawPieceRenderer
   highlightColor: {r: 1, g: 1, b: 1, a: 1}
-  intensity: 0.9
-  duration: 0.85
+  intensity: 1
+  duration: 0.9
 --- !u!114 &1605043729510110250
 MonoBehaviour:
   m_ObjectHideFlags: 0
