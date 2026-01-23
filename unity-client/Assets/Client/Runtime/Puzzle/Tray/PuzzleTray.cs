@@ -24,6 +24,7 @@ namespace Client.Runtime
         [SerializeField] private float _scrollSpeed = 0.15f;
         [SerializeField] private float _visibilityBuffer = 0f;
         [SerializeField] private float _dragThreshold = 10f;
+        [SerializeField] private float _decelerationRate = 0.95f;
 
         private readonly List<JigsawPiece> _activePieces = new();
         private Camera _cam;
@@ -35,6 +36,7 @@ namespace Client.Runtime
         private Vector3 _lastMousePos;
         private bool _isDragging;
         private bool _scrollLocked;
+        private float _scrollVelocity = 0f;
 
         public BoxCollider TrayCollider => _trayCollider;
 
@@ -46,6 +48,7 @@ namespace Client.Runtime
         {
             _activePieces.Clear();
             _scrollX = 0;
+            _scrollVelocity = 0f;
             _hitPiece = null;
             _hoverPiece = null;
             _startMousePos = _lastMousePos = Vector3.zero;
@@ -73,6 +76,7 @@ namespace Client.Runtime
             }
 
             _scrollX = 0;
+            _scrollVelocity = 0f;
         }
 
         public void SetHoverPiece(JigsawPiece piece)
@@ -111,6 +115,7 @@ namespace Client.Runtime
                 tasks.Add(piece.SnapToRandomCellAsync(cToken));
             }
             _scrollX = 0;
+            _scrollVelocity = 0f;
             return UniTask.WhenAll(tasks);
         }
 
@@ -147,10 +152,24 @@ namespace Client.Runtime
 
             if (!_isDragging)
             {
+                ApplyInertia();
                 ClampScroll();
             }
 
             UpdatePiecePositions();
+        }
+
+        private void ApplyInertia()
+        {
+            if (Mathf.Abs(_scrollVelocity) > 0.001f)
+            {
+                _scrollX += _scrollVelocity * Time.deltaTime;
+                _scrollVelocity *= Mathf.Pow(_decelerationRate, Time.deltaTime * 60f);
+            }
+            else
+            {
+                _scrollVelocity = 0f;
+            }
         }
 
         private void SetSpacing()
@@ -264,6 +283,7 @@ namespace Client.Runtime
                 {
                     _isDragging = true;
                     _scrollLocked = false;
+                    _scrollVelocity = 0f;
                     _startMousePos = Input.mousePosition;
                     _lastMousePos = Input.mousePosition;
                     _hitPiece = GetPieceAtPosition(hit.point);
@@ -306,7 +326,9 @@ namespace Client.Runtime
                 if (_scrollLocked)
                 {
                     float deltaX = (currentMousePos.x - _lastMousePos.x) / Screen.width;
-                    _scrollX += deltaX * _scrollSpeed;
+                    float scrollDelta = deltaX * _scrollSpeed;
+                    _scrollX += scrollDelta;
+                    _scrollVelocity = scrollDelta / Time.deltaTime;
                     ClampScroll();
                 }
                 _lastMousePos = currentMousePos;
@@ -329,7 +351,13 @@ namespace Client.Runtime
             float totalContentWidth = (cols - 1) * _spacing.x;
             float visibleWidth = _trayCollider.size.x - (_padding.x * 2);
             float maxScroll = Mathf.Max(0, totalContentWidth - visibleWidth);
-            _scrollX = Mathf.Clamp(_scrollX, -maxScroll, 0);
+
+            float clampedX = Mathf.Clamp(_scrollX, -maxScroll, 0);
+            if (!Mathf.Approximately(clampedX, _scrollX))
+            {
+                _scrollX = clampedX;
+                _scrollVelocity = 0f;
+            }
         }
 
         private void PickUpPiece(JigsawPiece piece)
