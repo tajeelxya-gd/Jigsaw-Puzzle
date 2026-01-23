@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using cakeslice;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.IoC;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace Client.Runtime
             _mpb = new MaterialPropertyBlock();
             AddShadowCaster();
             SetActive(locked: false);
+            _data.Mesh.gameObject.AddComponent<Outline>();
         }
 
         public void SetActive(bool locked)
@@ -86,8 +88,9 @@ namespace Client.Runtime
 
         public void SetOutlineMaterial(bool isOverTray)
         {
-            var outlineMaterial = isOverTray ? _helper.PieceTrayOutline : _helper.PieceBoardOutline;
+            var outlineMaterial = _helper.PieceBoardOutline;
             _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
+            _data.Mesh.gameObject.GetComponent<Outline>().enabled = isOverTray;
         }
 
         private void AddShadowCaster()
