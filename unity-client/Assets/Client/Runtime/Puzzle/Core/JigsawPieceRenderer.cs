@@ -8,18 +8,17 @@ namespace Client.Runtime
 {
     public sealed class JigsawPieceRenderer : MonoBehaviour, IInjectable
     {
-        [SerializeField] private Color highlightColor;
-        [SerializeField] private float intensity;
-        [SerializeField] private float duration;
+        [Header("Reflection Settings")]
+        [Range(0f, 255f)]
+        [SerializeField] private float targetReflectionValue = 255f;
+        [SerializeField] private float duration = 1.0f;
 
-        private static readonly int MainColorId = Shader.PropertyToID("_Color");
         private static readonly int ReflectColorId = Shader.PropertyToID("_ReflectColor");
 
         private IJigsawHelper _helper;
         private JigsawPieceRendererData _data;
         private MaterialPropertyBlock _mpb;
         private Renderer _shadowProxy;
-        private bool _isFlat;
 
         public void Inject(IResolver resolver)
         {
@@ -36,17 +35,14 @@ namespace Client.Runtime
 
         public void SetActive(bool isFlat)
         {
-            _isFlat = isFlat;
             _data.Mesh.gameObject.SetActive(true);
             _data.FlatMesh.gameObject.SetActive(false);
             _shadowProxy.gameObject.SetActive(true);
+
             var outlineMaterial = isFlat ? _helper.SemiOutlineMaterial : _helper.OutlineMaterial;
             _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
-            // _data.FlatMesh.sharedMaterials = new[] { _helper.BaseMaterial };
-            if (isFlat)
-            {
-                LiftShadow(0.03f);
-            }
+
+            if (isFlat) LiftShadow(0.03f);
         }
 
         public async UniTask FlashAsync(CancellationToken token)
@@ -54,10 +50,8 @@ namespace Client.Runtime
             var renderer = _data.Mesh;
             int materialCount = renderer.sharedMaterials.Length;
 
-            // 1. Capture original values from the shared materials
-            var baseMat = renderer.sharedMaterial;
-            Color originalColor = baseMat.HasProperty(MainColorId) ? baseMat.GetColor(MainColorId) : Color.white;
-            Color originalReflect = baseMat.HasProperty(ReflectColorId) ? baseMat.GetColor(ReflectColorId) : new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            // Normalize the 0-255 input to 0-1 for Unity's Color system
+            float maxIntensity = targetReflectionValue / 255f;
 
             float elapsed = 0f;
 
@@ -65,39 +59,36 @@ namespace Client.Runtime
             {
                 while (elapsed < duration)
                 {
-                    // Use Time.deltaTime to progress smoothly
                     elapsed += Time.deltaTime;
+                    float progress = Mathf.Clamp01(elapsed / duration);
 
-                    // Normalize time (0 to 1)
-                    float normalizedTime = Mathf.Clamp01(elapsed / duration);
+                    // Mathf.Sin(0 to PI) creates a perfect 0 -> 1 -> 0 curve.
+                    // 0% duration = Sin(0) = 0
+                    // 50% duration = Sin(PI/2) = 1
+                    // 100% duration = Sin(PI) = 0
+                    float t = Mathf.Sin(progress * Mathf.PI);
 
-                    // SmoothStep creates a "Ease In, Ease Out" feel for the transition
-                    // Then Sin creates the pulse: 0 -> 1 -> 0
-                    float smoothT = Mathf.SmoothStep(0f, 1f, normalizedTime);
-                    float t = Mathf.Sin(smoothT * Mathf.PI);
-
-                    // 2. Lerp using the smooth t value
-                    Color lerpedColor = Color.Lerp(originalColor, highlightColor * intensity, t);
-                    Color lerpedReflect = Color.Lerp(originalReflect, highlightColor * intensity, t);
+                    // Calculate current intensity
+                    float currentVal = t * maxIntensity;
+                    Color reflectColor = new Color(currentVal, currentVal, currentVal, 1f);
 
                     renderer.GetPropertyBlock(_mpb);
-                    _mpb.SetColor(MainColorId, lerpedColor);
-                    _mpb.SetColor(ReflectColorId, lerpedReflect);
+                    _mpb.SetColor(ReflectColorId, reflectColor);
 
+                    // Apply to all materials (Outline and Base)
                     for (int i = 0; i < materialCount; i++)
                     {
                         renderer.SetPropertyBlock(_mpb, i);
                     }
 
-                    // Yield until next frame
                     await UniTask.Yield(PlayerLoopTiming.Update, token);
                 }
             }
             finally
             {
-                // 3. Guaranteed Clean Reset
-                renderer.GetPropertyBlock(_mpb);
+                // Ensure we return to 0 reflection after the duration
                 _mpb.Clear();
+                _mpb.SetColor(ReflectColorId, Color.black);
                 for (int i = 0; i < materialCount; i++)
                 {
                     renderer.SetPropertyBlock(_mpb, i);
@@ -108,21 +99,18 @@ namespace Client.Runtime
         private void AddShadowCaster()
         {
             var mesh = _data.Mesh;
-            var meshTransform = mesh.transform;
-            _shadowProxy = GameObject.Instantiate(mesh, meshTransform.parent);
+            _shadowProxy = Instantiate(mesh, mesh.transform.parent);
             _shadowProxy.name = mesh.name + "_ShadowProxy";
             _shadowProxy.gameObject.layer = LayerMask.NameToLayer("Default");
-            _shadowProxy.transform.SetPositionAndRotation(meshTransform.position, meshTransform.rotation);
-            if (_shadowProxy.TryGetComponent<MeshRenderer>(out var renderer))
+            _shadowProxy.transform.SetPositionAndRotation(mesh.transform.position, mesh.transform.rotation);
+
+            if (_shadowProxy.TryGetComponent<MeshRenderer>(out var r))
             {
-                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-                renderer.receiveShadows = false;
+                r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                r.receiveShadows = false;
             }
         }
 
-        private void LiftShadow(float yOffset)
-        {
-            _shadowProxy.transform.position += Vector3.up * yOffset;
-        }
+        private void LiftShadow(float yOffset) => _shadowProxy.transform.position += Vector3.up * yOffset;
     }
 }

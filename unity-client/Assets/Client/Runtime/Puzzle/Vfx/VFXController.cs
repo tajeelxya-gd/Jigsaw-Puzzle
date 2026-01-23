@@ -84,7 +84,7 @@ namespace Client.Runtime
                 }
             }
 
-            UniTask.Void(TriggerBatchVfxAsync, this.GetCancellationTokenOnDestroy());
+            TriggerBatchVfx();
         }
 
         public async UniTask AnimateBoardCompletionAsync(CancellationToken cToken = default)
@@ -145,6 +145,27 @@ namespace Client.Runtime
             piece.transform.localPosition = startPos;
         }
 
+        private void TriggerBatchVfx()
+        {
+            if (_vfxDelayInPieces > 0)
+            {
+                UniTask.Void(TriggerBatchVfxAsync, this.GetCancellationTokenOnDestroy());
+                return;
+            }
+
+
+            if (_isBatching) return;
+            _isBatching = true;
+
+            foreach (var p in _vfxQueue)
+            {
+                p.PlayVfx();
+            }
+
+            _vfxQueue.Clear();
+            _isBatching = false;
+        }
+
         private async UniTaskVoid TriggerBatchVfxAsync(CancellationToken cToken = default)
         {
             if (_isBatching) return;
@@ -156,12 +177,9 @@ namespace Client.Runtime
 
             foreach (var p in _vfxQueue)
             {
-                if (p != null)
-                {
-                    await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
-                    p.PlayVfx();
-                    delay += _vfxDelayInPieces;
-                }
+                await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
+                p.PlayVfx();
+                delay += _vfxDelayInPieces;
             }
 
             _vfxQueue.Clear();
