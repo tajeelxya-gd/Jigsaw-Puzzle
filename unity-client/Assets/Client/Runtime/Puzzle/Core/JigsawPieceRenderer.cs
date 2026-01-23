@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.IoC;
@@ -42,6 +43,10 @@ namespace Client.Runtime
             var outlineMaterial = isFlat ? _helper.SemiOutlineMaterial : _helper.OutlineMaterial;
             _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
             // _data.FlatMesh.sharedMaterials = new[] { _helper.BaseMaterial };
+            if (isFlat)
+            {
+                LiftShadow(0.03f);
+            }
         }
 
         public async UniTask FlashAsync(CancellationToken token)
@@ -113,6 +118,11 @@ namespace Client.Runtime
                 renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
                 renderer.receiveShadows = false;
             }
+        }
+
+        private void LiftShadow(float yOffset)
+        {
+            _shadowProxy.transform.position += Vector3.up * yOffset;
         }
     }
 }
