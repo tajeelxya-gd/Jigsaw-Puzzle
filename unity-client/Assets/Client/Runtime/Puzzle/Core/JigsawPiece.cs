@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Audio;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 namespace Client.Runtime

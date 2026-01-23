@@ -11,7 +11,9 @@ namespace Client.Runtime
         [SerializeField] private float intensity;
         [SerializeField] private float duration;
 
-        private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
+        private static readonly int MainColorId = Shader.PropertyToID("_Color");
+        private static readonly int ReflectColorId = Shader.PropertyToID("_ReflectColor");
+
         private IJigsawHelper _helper;
         private JigsawPieceRendererData _data;
         private MaterialPropertyBlock _mpb;
@@ -44,32 +46,51 @@ namespace Client.Runtime
 
         public async UniTask FlashAsync(CancellationToken token)
         {
-            var renderer = _isFlat ? _data.FlatMesh : _data.Mesh;
+            var renderer = _data.Mesh;
             int materialCount = renderer.sharedMaterials.Length;
+
+            // 1. Capture original values from the shared materials before starting
+            // We look at the first material as the reference for the "original" state
+            var baseMat = renderer.sharedMaterial;
+            Color originalColor = baseMat.HasProperty(MainColorId) ? baseMat.GetColor(MainColorId) : Color.white;
+            Color originalReflect = baseMat.HasProperty(ReflectColorId) ? baseMat.GetColor(ReflectColorId) : new Color(0.5f, 0.5f, 0.5f, 0.5f);
 
             float elapsed = 0f;
 
-            while (elapsed < duration)
+            try
             {
-                elapsed += Time.deltaTime;
-                float t = Mathf.Sin((elapsed / duration) * Mathf.PI);
-                Color currentColor = highlightColor * intensity * t;
+                while (elapsed < duration)
+                {
+                    elapsed += Time.deltaTime;
+                    float normalizedTime = Mathf.Clamp01(elapsed / duration);
+                    float t = Mathf.Sin(normalizedTime * Mathf.PI);
 
+                    // 2. Lerp from the CAPTURED original to the highlight
+                    Color lerpedColor = Color.Lerp(originalColor, highlightColor * intensity, t);
+                    Color lerpedReflect = Color.Lerp(originalReflect, highlightColor * intensity, t);
+
+                    renderer.GetPropertyBlock(_mpb);
+                    _mpb.SetColor(MainColorId, lerpedColor);
+                    _mpb.SetColor(ReflectColorId, lerpedReflect);
+
+                    for (int i = 0; i < materialCount; i++)
+                    {
+                        renderer.SetPropertyBlock(_mpb, i);
+                    }
+
+                    await UniTask.Yield(PlayerLoopTiming.Update, token);
+                }
+            }
+            finally
+            {
+                // 3. Guaranteed Reset: Clear the PropertyBlock overrides 
+                // This makes the renderer revert to the exact values in the sharedMaterials
                 renderer.GetPropertyBlock(_mpb);
-                _mpb.SetColor(EmissionColorId, currentColor);
-
+                _mpb.Clear();
                 for (int i = 0; i < materialCount; i++)
                 {
                     renderer.SetPropertyBlock(_mpb, i);
                 }
-
-                await UniTask.Yield(PlayerLoopTiming.Update, token);
-            }
-
-            _mpb.SetColor(EmissionColorId, Color.black);
-            for (int i = 0; i < materialCount; i++)
-            {
-                renderer.SetPropertyBlock(_mpb, i);
             }
         }
 
