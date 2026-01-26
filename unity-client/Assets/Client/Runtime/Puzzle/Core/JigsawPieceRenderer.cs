@@ -44,7 +44,7 @@ namespace Client.Runtime
             if (locked)
             {
                 // lift shadow
-                SetShadowY(0.03f);
+                SetShadowY(0.035f);
             }
         }
 
@@ -118,6 +118,6 @@ namespace Client.Runtime
             }
         }
 
-        private void SetShadowY(float yOffset) => _shadowProxy.transform.position += Vector3.up * yOffset;
+        private void SetShadowY(float yOffset) => _shadowProxy.transform.localPosition += Vector3.up * yOffset;
     }
 }
