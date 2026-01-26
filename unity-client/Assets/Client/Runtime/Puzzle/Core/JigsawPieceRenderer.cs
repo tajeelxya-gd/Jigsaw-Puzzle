@@ -44,7 +44,7 @@ namespace Client.Runtime
             if (locked)
             {
                 // lift shadow
-                SetShadowY(0.035f);
+                SetShadowY(0.02f);
             }
         }
 
@@ -93,6 +93,7 @@ namespace Client.Runtime
             mesh.localScale = new Vector3(mesh.localScale.x, 1f, mesh.localScale.z);
             mesh.GetComponent<Outline>().enabled = true;
             transform.rotation = Quaternion.Euler(_data.TrayEulers);
+            SetShadowY(0);
         }
 
         public void OnTrayExit()
@@ -101,6 +102,7 @@ namespace Client.Runtime
             mesh.localScale = new Vector3(mesh.localScale.x, 0.2f, mesh.localScale.z);
             mesh.GetComponent<Outline>().enabled = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
+            SetShadowY(-0.03f);
         }
 
         private void AddShadowCaster()
@@ -118,6 +120,6 @@ namespace Client.Runtime
             }
         }
 
-        private void SetShadowY(float yOffset) => _shadowProxy.transform.localPosition += Vector3.up * yOffset;
+        private void SetShadowY(float yOffset) => _shadowProxy.transform.localPosition = Vector3.up * yOffset;
     }
 }
