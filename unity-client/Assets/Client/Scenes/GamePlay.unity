@@ -1255,12 +1255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff106ffb73c0ef49bccef44c8e8f19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.CameraEffects
---- !u!1 &1234614348 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 132536, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
-  m_PrefabInstance: {fileID: 64622998}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1451793331
+--- !u!1001 &1228147743
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1268,76 +1263,69 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2037789598}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
+    - target: {fileID: 919132149155446097, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
       propertyPath: m_Name
-      value: Jigsaw Final 6x4 single plane
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: Full Image Plane
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
---- !u!4 &1451793332 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
+--- !u!4 &1228147744 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-  m_PrefabInstance: {fileID: 1451793331}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
+  m_PrefabInstance: {fileID: 1228147743}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1451793333 stripped
+--- !u!23 &1228147745 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d9be86bf01ab0fc46a1aebc7d66277b7, type: 3}
-  m_PrefabInstance: {fileID: 1451793331}
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 8042bf0e725bfc34f8c58a674cf62294, type: 3}
+  m_PrefabInstance: {fileID: 1228147743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1234614348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 132536, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+  m_PrefabInstance: {fileID: 64622998}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579571273
 GameObject:
@@ -1784,11 +1772,11 @@ Transform:
   m_GameObject: {fileID: 2037789597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.004, z: -0.0011}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1451793332}
+  - {fileID: 1228147744}
   m_Father: {fileID: 1631925631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2037789599
@@ -1825,7 +1813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.JigsawHelper
   _assetDataKey: MaterialAssetData
-  _fullImage: {fileID: 1451793333}
+  _fullImage: {fileID: 1228147745}
 --- !u!1001 &1588303118419370975
 PrefabInstance:
   m_ObjectHideFlags: 0
