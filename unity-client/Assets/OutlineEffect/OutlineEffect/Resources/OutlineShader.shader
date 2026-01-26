@@ -2,26 +2,7 @@
 
 /*
 //  Copyright (c) 2015 José Guerreiro. All rights reserved.
-//
 //  MIT license, see http://www.opensource.org/licenses/mit-license.php
-//  
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//  
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//  
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
 */
 
 Shader "Hidden/OutlineEffect" 
@@ -29,11 +10,24 @@ Shader "Hidden/OutlineEffect"
     Properties 
     {
         _MainTex ("Base (RGB)", 2D) = "white" {}
-        _Softness ("Outline Softness", Range(1, 20)) = 10
+        _OutlineSource ("Outline Source", 2D) = "black" {}
+        _LineColor1 ("Line Color 1", Color) = (1,1,1,1)
+        _LineColor2 ("Line Color 2", Color) = (1,1,1,1)
+        _LineColor3 ("Line Color 3", Color) = (1,1,1,1)
+        _LineThicknessX ("Line Thickness X", Float) = 1
+        _LineThicknessY ("Line Thickness Y", Float) = 1
+        _LineIntensity ("Line Intensity", Float) = 1
+        _Softness ("Outline Softness", Range(0.01, 1.0)) = 0.5
+        _FillAmount ("Fill Amount", Float) = 0
+        _FillColor ("Fill Color", Color) = (1,1,1,1)
+        _UseFillColor ("Use Fill Color", Int) = 0
+        _Dark ("Darken Background", Int) = 0
+        _FlipY ("Flip Y", Int) = 0
+        _CornerOutlines ("Corner Outlines", Int) = 0
     }
     SubShader 
     {
-        // --- Pass 0: Handles color collisions (unchanged logic, optimized) ---
+        // --- Pass 0: Color Collision Detection ---
         Pass
         {
             ZTest Always ZWrite Off Cull Off
@@ -42,12 +36,9 @@ Shader "Hidden/OutlineEffect"
             #pragma fragment frag
             #include "UnityCG.cginc"
 
-            sampler2D _MainTex;
             sampler2D _OutlineSource;
-            float4 _MainTex_ST;
             float _LineThicknessX;
             float _LineThicknessY;
-            float4 _MainTex_TexelSize;
 
             struct v2f {
                 float4 position : SV_POSITION;
@@ -81,7 +72,7 @@ Shader "Hidden/OutlineEffect"
             ENDCG
         }
 
-       // --- Pass 1: The Smooth Anti-Aliased Outline ---
+        // --- Pass 1: The Smooth Anti-Aliased Outline ---
         Pass
         {
             ZTest Always ZWrite Off Cull Off
@@ -100,11 +91,8 @@ Shader "Hidden/OutlineEffect"
             float _LineIntensity;
             half4 _LineColor1, _LineColor2, _LineColor3;
             int _FlipY, _Dark, _UseFillColor, _CornerOutlines;
-            float _FillAmount;
+            float _FillAmount, _Softness;
             fixed4 _FillColor;
-            
-            // ENSURE THIS IS DECLARED HERE
-            float _Softness; 
 
             struct v2f {
                 float4 position : SV_POSITION;
@@ -121,62 +109,60 @@ Shader "Hidden/OutlineEffect"
             half4 frag (v2f input) : COLOR {
                 float2 uv = input.uv;
                 
-                // Fix for Unity's coordinate system
+                // Unity UV handling
                 if (_FlipY == 1) uv.y = 1 - uv.y;
                 #if UNITY_UV_STARTS_AT_TOP
-                    if (_MainTex_TexelSize.y < 0) uv.y = 1 - uv.y;
+                if (_MainTex_TexelSize.y < 0) uv.y = 1 - uv.y;
                 #endif
 
-                half4 originalPixel = tex2D(_MainTex, UnityStereoScreenSpaceUVAdjust(input.uv, _MainTex_ST));
-                half4 center = tex2D(_OutlineSource, UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST));
+                half4 screen = tex2D(_MainTex, UnityStereoScreenSpaceUVAdjust(input.uv, _MainTex_ST));
+                half4 mask = tex2D(_OutlineSource, UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST));
 
-                // 1. Sample Neighbors
-                float2 offsetX = float2(_LineThicknessX, 0);
-                float2 offsetY = float2(0, _LineThicknessY);
+                // 1. Edge Sampling
+                float2 offX = float2(_LineThicknessX, 0);
+                float2 offY = float2(0, _LineThicknessY);
                 
-                half4 s1 = tex2D(_OutlineSource, uv + offsetX);
-                half4 s2 = tex2D(_OutlineSource, uv - offsetX);
-                half4 s3 = tex2D(_OutlineSource, uv + offsetY);
-                half4 s4 = tex2D(_OutlineSource, uv - offsetY);
+                half4 s1 = tex2D(_OutlineSource, uv + offX);
+                half4 s2 = tex2D(_OutlineSource, uv - offX);
+                half4 s3 = tex2D(_OutlineSource, uv + offY);
+                half4 s4 = tex2D(_OutlineSource, uv - offY);
 
                 half4 maxS = max(max(s1, s2), max(s3, s4));
 
                 if (_CornerOutlines) {
-                    maxS = max(maxS, tex2D(_OutlineSource, uv + offsetX + offsetY));
-                    maxS = max(maxS, tex2D(_OutlineSource, uv - offsetX - offsetY));
-                    maxS = max(maxS, tex2D(_OutlineSource, uv + offsetX - offsetY));
-                    maxS = max(maxS, tex2D(_OutlineSource, uv - offsetX + offsetY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv + offX + offY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv - offX - offY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv + offX - offY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv - offX + offY));
                 }
 
-                // 2. SMOOTHNESS CALCULATION
-                // We use the difference between the neighbor max and center to find the edge
-                // Higher _Softness makes the edge thinner/sharper.
-                float edge = saturate((maxS.a - center.a) * _Softness);
+                // 2. Anti-Aliasing via Smoothstep
+                // This creates a smooth curve between the background and the edge.
+                float edge = smoothstep(0, _Softness, maxS.a - mask.a);
                 
-                // 3. COLOR SELECTION
-                half4 outColor = _LineColor1;
-                if (maxS.g > maxS.r && maxS.g > maxS.b) outColor = _LineColor2;
-                else if (maxS.b > maxS.r && maxS.b > maxS.g) outColor = _LineColor3;
+                // 3. Color Logic
+                half4 outCol = _LineColor1;
+                if (maxS.g > maxS.r && maxS.g > maxS.b) outCol = _LineColor2;
+                else if (maxS.b > maxS.r && maxS.b > maxS.g) outCol = _LineColor3;
 
-                half4 outlineCol = outColor * _LineIntensity;
+                half4 outline = outCol * _LineIntensity;
 
-                // 4. DARKENING / ADDITIVE
+                // 4. Darkening Logic
                 if (_Dark) {
-                    originalPixel.rgb *= lerp(1.0, (1.0 - outColor.a), edge);
+                    screen.rgb *= lerp(1.0, (1.0 - outCol.a), edge);
                 }
 
-                // 5. FINAL BLEND
-                // This blends the original screen with the outline color using our smooth 'edge'
-                half4 final = lerp(originalPixel, outlineCol, edge);
-
-                // Apply Fill if needed
+                // 5. Final Composition
+                // Lerp creates the semi-transparent anti-aliased edge
+                half4 combined = lerp(screen, outline, edge);
+                
+                // Inner Fill
                 if (_FillAmount < 1.0) {
-                    half4 fill = _UseFillColor ? _FillColor : (outlineCol * _FillAmount);
-                    // Only fill where the center object actually exists
-                    final = lerp(final, final + fill, (center.a) * (1.0 - _FillAmount));
+                    half4 fill = _UseFillColor ? _FillColor : (outline * _FillAmount);
+                    combined = lerp(combined, combined + fill, mask.a * (1.0 - _FillAmount));
                 }
 
-                return final;
+                return combined;
             }
             ENDCG
         }

@@ -17,11 +17,9 @@ namespace cakeslice
         [Range(0, 10)]
         public float lineIntensity = .5f;
         
-        // --- ADDED: Softness Property ---
-        [Range(1.0f, 20.0f)]
-        [Tooltip("Higher values make the outline sharper, lower values make it softer/blurry.")]
-        public float lineSoftness = 10.0f; 
-        // --------------------------------
+        [Range(0.01f, 1.0f)] // Changed range for better smoothstep control
+        [Tooltip("Lower values make the outline softer/blurry. Higher values make it sharper.")]
+        public float lineSoftness = 0.5f; 
 
         [Range(0, 1)]
         public float fillAmount = 0.2f;
@@ -130,15 +128,28 @@ namespace cakeslice
                 }
             }
 
-            if (renderTexture != null) renderTexture.Release();
-            if (extraRenderTexture != null) extraRenderTexture.Release();
-            
-            renderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
-            extraRenderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
+            CreateRenderTextures();
             UpdateOutlineCameraFromSource();
 
             commandBuffer = new CommandBuffer();
             outlineCamera.AddCommandBuffer(CameraEvent.BeforeImageEffects, commandBuffer);
+        }
+
+        // Helper to ensure textures are created with AA and Filtering
+        private void CreateRenderTextures()
+        {
+            if (renderTexture != null) renderTexture.Release();
+            if (extraRenderTexture != null) extraRenderTexture.Release();
+
+            int aaSamples = QualitySettings.antiAliasing > 0 ? QualitySettings.antiAliasing : 1;
+
+            renderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
+            renderTexture.antiAliasing = aaSamples;
+            renderTexture.filterMode = FilterMode.Bilinear; // Critical for smoothness
+            
+            extraRenderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
+            extraRenderTexture.antiAliasing = aaSamples;
+            extraRenderTexture.filterMode = FilterMode.Bilinear;
         }
 
         bool RenderTheNextFrame;
@@ -160,16 +171,13 @@ namespace cakeslice
 
             if (renderTexture == null || renderTexture.width != sourceCamera.pixelWidth || renderTexture.height != sourceCamera.pixelHeight)
             {
-                if (renderTexture != null) renderTexture.Release();
-                if (extraRenderTexture != null) extraRenderTexture.Release();
-                renderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
-                extraRenderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
+                CreateRenderTextures();
                 outlineCamera.targetTexture = renderTexture;
             }
 
             UpdateMaterialsPublicProperties();
             UpdateOutlineCameraFromSource();
-            outlineCamera.targetTexture = renderTexture;
+            
             commandBuffer.SetRenderTarget(renderTexture);
             commandBuffer.Clear();
 
@@ -321,9 +329,8 @@ namespace cakeslice
                 outlineShaderMaterial.SetColor("_LineColor2", lineColor1 * lineColor1);
                 outlineShaderMaterial.SetColor("_LineColor3", lineColor2 * lineColor2);
                 
-                // --- ADDED: Pass softness to shader ---
+                // Pass softness to shader
                 outlineShaderMaterial.SetFloat("_Softness", lineSoftness);
-                // --------------------------------------
 
                 outlineShaderMaterial.SetInt("_FlipY", flipY ? 1 : 0);
                 outlineShaderMaterial.SetInt("_Dark", !additiveRendering ? 1 : 0);
