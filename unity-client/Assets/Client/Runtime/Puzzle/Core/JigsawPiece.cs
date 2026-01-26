@@ -56,7 +56,7 @@ namespace Client.Runtime
         public void OnExitTray()
         {
             IsOverTray = false;
-            _renderer.SetOutlineMaterial(IsOverTray);
+            _renderer.OnTrayExit();
             if (Group.Count > 1) return;
             _scaleController.ScaleTo(1f);
         }
@@ -64,7 +64,7 @@ namespace Client.Runtime
         public void OnEnterTray()
         {
             IsOverTray = true;
-            _renderer.SetOutlineMaterial(IsOverTray);
+            _renderer.OnTrayEnter();
             if (Group.Count > 1) return;
             var scale = _puzzleService.GetCurrentBoard().Data.TrayScale;
             _scaleController.ScaleTo(scale);

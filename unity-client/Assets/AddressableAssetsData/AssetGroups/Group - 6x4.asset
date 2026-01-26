@@ -20,11 +20,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3f5cdffdf889fc2459b252cbc559a1ae
-    m_Address: Jigsaw Final 6x4 Grid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 945c07e346d82ad488d23a9a6dc11c95
     m_Address: mg_6x4_standard_board_asset_data
     m_ReadOnly: 0

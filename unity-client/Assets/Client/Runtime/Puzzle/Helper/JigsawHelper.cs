@@ -18,11 +18,8 @@ namespace Client.Runtime
         private AssetData _assetData;
         private Camera _cam;
 
-        public Material BaseMaterial { get; private set; }
-
-        public Material PieceTrayOutline { get; private set; }
-
-        public Material PieceBoardOutline { get; private set; }
+        public Material PieceMaterial { get; private set; }
+        public Material PieceBaseMaterial { get; private set; }
 
         public void Inject(IResolver resolver) => _checker = resolver.Resolve<IWinConditionChecker>();
 
@@ -44,21 +41,18 @@ namespace Client.Runtime
         public async UniTask LoadMaterialsAsync(string key, CancellationToken cToken = default)
         {
             var matAsset = _assetData.GetAsset(key);
-            BaseMaterial = await UniResources.LoadAssetAsync<Material>(matAsset.RuntimeKey, cToken: cToken);
+            PieceMaterial = await UniResources.LoadAssetAsync<Material>(matAsset.RuntimeKey, cToken: cToken);
 
-            var trayOutlineAsset = _assetData.GetAsset($"{key}_tray");
-            PieceTrayOutline = await UniResources.LoadAssetAsync<Material>(trayOutlineAsset.RuntimeKey, cToken: cToken);
+            var baseMatAsset = _assetData.GetAsset($"{key}_base");
+            PieceBaseMaterial = await UniResources.LoadAssetAsync<Material>(baseMatAsset.RuntimeKey, cToken: cToken);
 
-            var boardOutlineAsset = _assetData.GetAsset($"{key}_board");
-            PieceBoardOutline = await UniResources.LoadAssetAsync<Material>(boardOutlineAsset.RuntimeKey, cToken: cToken);
-
-            _fullImage.sharedMaterials = new[] { BaseMaterial };
+            _fullImage.sharedMaterials = new[] { PieceMaterial };
         }
 
         public void UnLoadMaterials()
         {
-            UniResources.DisposeAsset(BaseMaterial);
-            UniResources.DisposeAsset(PieceTrayOutline);
+            UniResources.DisposeAsset(PieceMaterial);
+            UniResources.DisposeAsset(PieceBaseMaterial);
         }
 
         public void ToggleFullImage() => gameObject.SetActive(!gameObject.activeSelf);

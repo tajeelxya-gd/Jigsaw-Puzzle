@@ -33,6 +33,7 @@ namespace Client.Runtime
             AddShadowCaster();
             SetActive(locked: false);
             _data.Mesh.gameObject.AddComponent<Outline>();
+            _data.Mesh.sharedMaterials = new[] { _helper.PieceBaseMaterial, _helper.PieceMaterial };
         }
 
         public void SetActive(bool locked)
@@ -86,20 +87,27 @@ namespace Client.Runtime
             }
         }
 
-        public void SetOutlineMaterial(bool isOverTray)
+        public void OnTrayEnter()
         {
-            var outlineMaterial = _helper.PieceBoardOutline;
-            _data.Mesh.sharedMaterials = new[] { outlineMaterial, _helper.BaseMaterial };
-            _data.Mesh.gameObject.GetComponent<Outline>().enabled = isOverTray;
+            var mesh = _data.Mesh.transform;
+            mesh.localScale = new Vector3(mesh.localScale.x, 1f, mesh.localScale.z);
+            mesh.GetComponent<Outline>().enabled = true;
+        }
+
+        public void OnTrayExit()
+        {
+            var mesh = _data.Mesh.transform;
+            mesh.localScale = new Vector3(mesh.localScale.x, 0.2f, mesh.localScale.z);
+            mesh.GetComponent<Outline>().enabled = false;
         }
 
         private void AddShadowCaster()
         {
             var mesh = _data.Mesh;
-            _shadowProxy = Instantiate(mesh, mesh.transform.parent);
+            _shadowProxy = Instantiate(mesh, mesh.transform);
             _shadowProxy.name = mesh.name + "_ShadowProxy";
             _shadowProxy.gameObject.layer = LayerMask.NameToLayer("Default");
-            _shadowProxy.transform.SetPositionAndRotation(mesh.transform.position, mesh.transform.rotation);
+            _shadowProxy.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
             if (_shadowProxy.TryGetComponent<MeshRenderer>(out var r))
             {

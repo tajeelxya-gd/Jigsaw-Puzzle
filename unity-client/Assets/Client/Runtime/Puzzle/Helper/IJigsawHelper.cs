@@ -6,10 +6,9 @@ namespace Client.Runtime
 {
     public interface IJigsawHelper
     {
-        Material BaseMaterial { get; }
+        Material PieceMaterial { get; }
 
-        Material PieceTrayOutline { get; }
-        Material PieceBoardOutline { get; }
+        Material PieceBaseMaterial { get; }
 
         void ToggleFullImage();
 
