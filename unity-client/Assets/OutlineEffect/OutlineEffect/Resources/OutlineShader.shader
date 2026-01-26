@@ -26,240 +26,160 @@
 
 Shader "Hidden/OutlineEffect" 
 {
-	Properties 
-	{
-		_MainTex ("Base (RGB)", 2D) = "white" {}
-		
-	}
-	SubShader 
-	{
-		Pass
-		{
-			Tags{ "RenderType" = "Opaque" }
-			LOD 200
-			ZTest Always
-			ZWrite Off
-			Cull Off
+    Properties 
+    {
+        _MainTex ("Base (RGB)", 2D) = "white" {}
+        _Softness ("Outline Softness", Range(1, 20)) = 10
+    }
+    SubShader 
+    {
+        // --- Pass 0: Handles color collisions (unchanged logic, optimized) ---
+        Pass
+        {
+            ZTest Always ZWrite Off Cull Off
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
 
-			CGPROGRAM
+            sampler2D _MainTex;
+            sampler2D _OutlineSource;
+            float4 _MainTex_ST;
+            float _LineThicknessX;
+            float _LineThicknessY;
+            float4 _MainTex_TexelSize;
 
-			#pragma vertex vert
-			#pragma fragment frag
-			#pragma target 3.0
-			#include "UnityCG.cginc"
+            struct v2f {
+                float4 position : SV_POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
-			sampler2D _MainTex;
-			float4 _MainTex_ST;
-			sampler2D _OutlineSource;
+            v2f vert(appdata_img v) {
+                v2f o;
+                o.position = UnityObjectToClipPos(v.vertex);
+                o.uv = v.texcoord;
+                return o;
+            }
 
-			struct v2f
-			{
-				float4 position : SV_POSITION;
-				float2 uv : TEXCOORD0;
-			};
+            half4 frag(v2f input) : COLOR {
+                float2 uv = input.uv;
+                half4 s1 = tex2D(_OutlineSource, uv + float2(_LineThicknessX, 0));
+                half4 s2 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX, 0));
+                half4 s3 = tex2D(_OutlineSource, uv + float2(0, _LineThicknessY));
+                half4 s4 = tex2D(_OutlineSource, uv + float2(0, -_LineThicknessY));
 
-			v2f vert(appdata_img v)
-			{
-				v2f o;
-				o.position = UnityObjectToClipPos(v.vertex);
-				o.uv = v.texcoord;
+                const float h = .95f;
+                bool red = s1.r > h || s2.r > h || s3.r > h || s4.r > h;
+                bool green = s1.g > h || s2.g > h || s3.g > h || s4.g > h;
+                bool blue = s1.b > h || s2.b > h || s3.b > h || s4.b > h;
+                 
+                if ((red && blue) || (green && blue) || (red && green))
+                    return float4(0,0,0,0);
+                
+                return tex2D(_OutlineSource, uv);
+            }
+            ENDCG
+        }
 
-				return o;
-			}
+       // --- Pass 1: The Smooth Anti-Aliased Outline ---
+        Pass
+        {
+            ZTest Always ZWrite Off Cull Off
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
 
-			float _LineThicknessX;
-			float _LineThicknessY;
-			int _FlipY;
-			uniform float4 _MainTex_TexelSize;
+            sampler2D _MainTex;
+            sampler2D _OutlineSource;
+            float4 _MainTex_ST;
+            float4 _MainTex_TexelSize;
+            
+            float _LineThicknessX;
+            float _LineThicknessY;
+            float _LineIntensity;
+            half4 _LineColor1, _LineColor2, _LineColor3;
+            int _FlipY, _Dark, _UseFillColor, _CornerOutlines;
+            float _FillAmount;
+            fixed4 _FillColor;
+            
+            // ENSURE THIS IS DECLARED HERE
+            float _Softness; 
 
-			half4 frag(v2f input) : COLOR
-			{
-				float2 uv = input.uv;
-				if (_FlipY == 1)
-					uv.y = uv.y;
-				#if UNITY_UV_STARTS_AT_TOP
-				if (_MainTex_TexelSize.y < 0)
-					uv.y = 1 - uv.y;
-				#endif
+            struct v2f {
+                float4 position : SV_POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
-				//half4 originalPixel = tex2D(_MainTex,input.uv, UnityStereoScreenSpaceUVAdjust(input.uv, _MainTex_ST));
-				half4 outlineSource = tex2D(_OutlineSource, UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST));
+            v2f vert(appdata_img v) {
+                v2f o;
+                o.position = UnityObjectToClipPos(v.vertex);
+                o.uv = v.texcoord;
+                return o;
+            }
 
-				const float h = .95f;
+            half4 frag (v2f input) : COLOR {
+                float2 uv = input.uv;
+                
+                // Fix for Unity's coordinate system
+                if (_FlipY == 1) uv.y = 1 - uv.y;
+                #if UNITY_UV_STARTS_AT_TOP
+                    if (_MainTex_TexelSize.y < 0) uv.y = 1 - uv.y;
+                #endif
 
-				half4 sample1 = tex2D(_OutlineSource, uv + float2(_LineThicknessX,0.0));
-				half4 sample2 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX,0.0));
-				half4 sample3 = tex2D(_OutlineSource, uv + float2(.0,_LineThicknessY));
-				half4 sample4 = tex2D(_OutlineSource, uv + float2(.0,-_LineThicknessY));
+                half4 originalPixel = tex2D(_MainTex, UnityStereoScreenSpaceUVAdjust(input.uv, _MainTex_ST));
+                half4 center = tex2D(_OutlineSource, UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST));
 
-				bool red = sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h;
-				bool green = sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h;
-				bool blue = sample1.b > h || sample2.b > h || sample3.b > h || sample4.b > h;
-				 
-				if ((red && blue) || (green && blue) || (red && green))
-					return float4(0,0,0,0);
-				else
-					return outlineSource;
-			}
+                // 1. Sample Neighbors
+                float2 offsetX = float2(_LineThicknessX, 0);
+                float2 offsetY = float2(0, _LineThicknessY);
+                
+                half4 s1 = tex2D(_OutlineSource, uv + offsetX);
+                half4 s2 = tex2D(_OutlineSource, uv - offsetX);
+                half4 s3 = tex2D(_OutlineSource, uv + offsetY);
+                half4 s4 = tex2D(_OutlineSource, uv - offsetY);
 
-			ENDCG
-		}
+                half4 maxS = max(max(s1, s2), max(s3, s4));
 
-		Pass
-		{
-			Tags { "RenderType"="Opaque" }
-			LOD 200
-			ZTest Always
-			ZWrite Off
-			Cull Off
-			
-			CGPROGRAM
+                if (_CornerOutlines) {
+                    maxS = max(maxS, tex2D(_OutlineSource, uv + offsetX + offsetY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv - offsetX - offsetY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv + offsetX - offsetY));
+                    maxS = max(maxS, tex2D(_OutlineSource, uv - offsetX + offsetY));
+                }
 
-			#pragma vertex vert
-			#pragma fragment frag
-			#pragma target 3.0
-			#include "UnityCG.cginc"
+                // 2. SMOOTHNESS CALCULATION
+                // We use the difference between the neighbor max and center to find the edge
+                // Higher _Softness makes the edge thinner/sharper.
+                float edge = saturate((maxS.a - center.a) * _Softness);
+                
+                // 3. COLOR SELECTION
+                half4 outColor = _LineColor1;
+                if (maxS.g > maxS.r && maxS.g > maxS.b) outColor = _LineColor2;
+                else if (maxS.b > maxS.r && maxS.b > maxS.g) outColor = _LineColor3;
 
-			sampler2D _MainTex;
-			float4 _MainTex_ST;
-			sampler2D _OutlineSource;
+                half4 outlineCol = outColor * _LineIntensity;
 
-			struct v2f {
-			   float4 position : SV_POSITION;
-			   float2 uv : TEXCOORD0;
-			};
-			
-			v2f vert(appdata_img v)
-			{
-			   	v2f o;
-				o.position = UnityObjectToClipPos(v.vertex);
-				o.uv = v.texcoord;
-				
-			   	return o;
-			}
+                // 4. DARKENING / ADDITIVE
+                if (_Dark) {
+                    originalPixel.rgb *= lerp(1.0, (1.0 - outColor.a), edge);
+                }
 
-			int _UseFillColor;
-			fixed4 _FillColor;
-			float _LineThicknessX;
-			float _LineThicknessY;
-			float _LineIntensity;
-			half4 _LineColor1;
-			half4 _LineColor2;
-			half4 _LineColor3;
-			int _FlipY;
-			int _Dark;
-			float _FillAmount;
-			int _CornerOutlines;
-			uniform float4 _MainTex_TexelSize;
+                // 5. FINAL BLEND
+                // This blends the original screen with the outline color using our smooth 'edge'
+                half4 final = lerp(originalPixel, outlineCol, edge);
 
-			half4 frag (v2f input) : COLOR
-			{	
-				float2 uv = input.uv;
-				if (_FlipY == 1)
-					uv.y = 1 - uv.y;
-				#if UNITY_UV_STARTS_AT_TOP
-					if (_MainTex_TexelSize.y < 0)
-						uv.y = 1 - uv.y;
-				#endif
+                // Apply Fill if needed
+                if (_FillAmount < 1.0) {
+                    half4 fill = _UseFillColor ? _FillColor : (outlineCol * _FillAmount);
+                    // Only fill where the center object actually exists
+                    final = lerp(final, final + fill, (center.a) * (1.0 - _FillAmount));
+                }
 
-				half4 originalPixel = tex2D(_MainTex, UnityStereoScreenSpaceUVAdjust(input.uv, _MainTex_ST));
-				half4 outlineSource = tex2D(_OutlineSource, UnityStereoScreenSpaceUVAdjust(uv, _MainTex_ST));
-								
-				const float h = .95f;
-				half4 outline = 0;
-				bool hasOutline = false;
-
-				half4 sample1 = tex2D(_OutlineSource, uv + float2(_LineThicknessX,0.0));
-				half4 sample2 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX,0.0));
-				half4 sample3 = tex2D(_OutlineSource, uv + float2(.0,_LineThicknessY));
-				half4 sample4 = tex2D(_OutlineSource, uv + float2(.0,-_LineThicknessY));
-				
-				bool outside = outlineSource.a < h;
-				bool outsideDark = outside && _Dark;
-
-				if (_CornerOutlines)
-				{
-					// TODO: Conditional compile
-					half4 sample5 = tex2D(_OutlineSource, uv + float2(_LineThicknessX, _LineThicknessY));
-					half4 sample6 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX, -_LineThicknessY));
-					half4 sample7 = tex2D(_OutlineSource, uv + float2(_LineThicknessX, -_LineThicknessY));
-					half4 sample8 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX, _LineThicknessY));
-
-					if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h ||
-						sample5.r > h || sample6.r > h || sample7.r > h || sample8.r > h)
-					{
-						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor1.a;
-						hasOutline = true;
-					}
-					else if (sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h ||
-						sample5.g > h || sample6.g > h || sample7.g > h || sample8.g > h)
-					{
-						outline = _LineColor2 * _LineIntensity * _LineColor2.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor2.a;
-						hasOutline = true;
-					}
-					else if (sample1.b > h || sample2.b > h || sample3.b > h || sample4.b > h ||
-						sample5.b > h || sample6.b > h || sample7.b > h || sample8.b > h)
-					{
-						outline = _LineColor3 * _LineIntensity * _LineColor3.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor3.a;
-						hasOutline = true;
-					}
-
-					if (!outside)
-					{
-						if(_UseFillColor)
-							outline = _FillColor * _FillAmount;
-						else
-							outline *= _FillAmount;
-					}
-				}
-				else
-				{
-					if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h)
-					{
-						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor1.a;
-						hasOutline = true;
-					}
-					else if (sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h)
-					{
-						outline = _LineColor2 * _LineIntensity * _LineColor2.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor2.a;
-						hasOutline = true;
-					}
-					else if (sample1.b > h || sample2.b > h || sample3.b > h || sample4.b > h)
-					{
-						outline = _LineColor3 * _LineIntensity * _LineColor3.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor3.a;
-						hasOutline = true;
-					}
-					if (!outside)
-					{
-						if(_UseFillColor)
-							outline = _FillColor * _FillAmount;
-						else
-							outline *= _FillAmount;
-					}
-				}					
-					
-				//return outlineSource;		
-				if (hasOutline)
-					return lerp(originalPixel + outline, outline, _FillAmount);
-				else
-					return originalPixel;
-			}
-			
-			ENDCG
-		}
-	} 
-
-	FallBack "Diffuse"
+                return final;
+            }
+            ENDCG
+        }
+    }
+    FallBack "Diffuse"
 }
