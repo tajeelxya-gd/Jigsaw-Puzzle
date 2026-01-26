@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public interface IPuzzleTray : IResettable
+    public interface IPuzzleTray : IResettable, ISceneEntity
     {
         BoxCollider TrayCollider { get; }
 

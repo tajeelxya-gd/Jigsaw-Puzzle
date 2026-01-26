@@ -97,7 +97,6 @@ namespace Client.Runtime
             if (delta.sqrMagnitude > Mathf.Epsilon)
             {
                 OnDragged.Broadcast(delta);
-                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             }
         }
     }

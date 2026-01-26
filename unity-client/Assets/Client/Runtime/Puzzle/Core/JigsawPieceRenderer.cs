@@ -92,6 +92,7 @@ namespace Client.Runtime
             var mesh = _data.Mesh.transform;
             mesh.localScale = new Vector3(mesh.localScale.x, 1f, mesh.localScale.z);
             mesh.GetComponent<Outline>().enabled = true;
+            transform.rotation = Quaternion.Euler(_data.TrayEulers);
         }
 
         public void OnTrayExit()
@@ -99,6 +100,7 @@ namespace Client.Runtime
             var mesh = _data.Mesh.transform;
             mesh.localScale = new Vector3(mesh.localScale.x, 0.2f, mesh.localScale.z);
             mesh.GetComponent<Outline>().enabled = false;
+            transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
         private void AddShadowCaster()

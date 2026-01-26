@@ -42,6 +42,10 @@ namespace Client.Runtime
 
         public Transform BgTransform => _bgTransform;
 
+        public GameObject GameObject => gameObject;
+
+        public Transform Transform => transform;
+
         public void Inject(IResolver resolver) => _puzzleService = resolver.Resolve<IPuzzleService>();
 
         public void Reset()

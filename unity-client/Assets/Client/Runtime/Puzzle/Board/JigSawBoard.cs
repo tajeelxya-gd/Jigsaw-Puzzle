@@ -20,6 +20,7 @@ namespace Client.Runtime
         private IResolver _resolver;
         private JigSawLevelData _levelData;
         private IJigsawHelper _helper;
+        private IPuzzleTray _tray;
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
 
@@ -89,6 +90,7 @@ namespace Client.Runtime
         {
             _resolver = resolver;
             _helper = resolver.Resolve<IJigsawHelper>();
+            _tray = resolver.Resolve<IPuzzleTray>();
         }
 
         protected override void OnInit()
@@ -143,7 +145,7 @@ namespace Client.Runtime
             mesh.gameObject.layer = piece.gameObject.layer;
             mesh.SetParent(piece.transform);
             var meshRenderer = mesh.GetComponent<Renderer>();
-            var rendererData = new JigsawPieceRendererData(meshRenderer);
+            var rendererData = new JigsawPieceRendererData(meshRenderer, _tray.Transform.rotation.eulerAngles);
             piece.Inject(_resolver);
             piece.Init(cell, rendererData);
             _pieces.Add(piece);
