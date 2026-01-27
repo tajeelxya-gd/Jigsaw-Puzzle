@@ -88,9 +88,6 @@ namespace Client.Runtime
                 else otherPieces.Add(p);
             }
 
-            // Sort corners by Column then Row to distribute them naturally across tray rows
-            // Column-major tray layout (index % rowCount = row)
-            // Sorting by Col then Row ensures Row 0 gets Top corners and Row 1 gets Bottom corners in a 2-row tray.
             cornerPieces.Sort((a, b) =>
             {
                 int colA = a.CorrectIdx % puzzleCols;
@@ -126,7 +123,6 @@ namespace Client.Runtime
             _hoverPiece = piece;
             if (_hoverPiece != null)
             {
-                // Force an immediate check so the scale updates the frame it's picked up
                 HandleHoverPieceTrayState();
             }
         }
@@ -226,8 +222,6 @@ namespace Client.Runtime
 
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-            // We use Raycast specifically on _trayCollider to ignore the piece itself 
-            // blocking the ray, and to avoid physics scaling flicker.
             bool isOver = _trayCollider.Raycast(ray, out _, 100f);
 
             if (isOver && !_hoverPiece.IsOverTray)
@@ -244,7 +238,6 @@ namespace Client.Runtime
         {
             if (_activePieces.Count == 0 && _hoverPiece == null) return;
 
-            // Updated to Middle-Left Anchor
             Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
             bool shouldShowInsertionSpace = _hoverPiece != null &&
@@ -266,7 +259,6 @@ namespace Client.Runtime
 
                 Transform pt = _activePieces[i].transform;
 
-                // Position relative to vertical center
                 Vector3 targetPos = new Vector3(
                     localAnchor.x + (col * _spacing.x),
                     localAnchor.y,
@@ -279,7 +271,6 @@ namespace Client.Runtime
                 float localX = pt.localPosition.x;
                 float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
                 float rightEdge = _trayCollider.center.x + (_trayCollider.size.x / 2f) + _visibilityBuffer;
-                // _activePieces[i].gameObject.SetActive(localX >= leftEdge && localX <= rightEdge);
             }
         }
 
@@ -292,7 +283,6 @@ namespace Client.Runtime
                 Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
                 float relativeX = localPoint.x - (localAnchor.x - _spacing.x * 0.5f);
-                // Difference from Z anchor (Top of the centered group)
                 float relativeZ = localAnchor.z - localPoint.z;
 
                 int col = Mathf.Max(0, Mathf.FloorToInt(relativeX / _spacing.x));
@@ -305,13 +295,11 @@ namespace Client.Runtime
 
         private Vector3 GetLocalMiddleLeftAnchor()
         {
-            // Calculate how much height the actual rows occupy
             float gridHeight = (_rowCount - 1) * _spacing.y;
 
             return new Vector3(
                 _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX,
                 _trayCollider.center.y,
-                // Start Z at Center + Half of Grid Height to keep it vertically centered
                 _trayCollider.center.z + (gridHeight / 2f)
             );
         }
