@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "mg_4x3_standard",
+    "_xConstraint": 4,
+    "_yConstraint": 3,
+    "_trayScale": 0.55,
+    "_traySpacing": {
+      "x": 0.052,
+      "y": 0.052
+    }
+  },
+  {
+    "_id": "mg_6x4_standard",
+    "_xConstraint": 6,
+    "_yConstraint": 4,
+    "_trayScale": 0.7,
+    "_traySpacing": {
+      "x": 0.05,
+      "y": 0.05
+    }
+  },
+  {
+    "_id": "mg_7x5_standard",
+    "_xConstraint": 7,
+    "_yConstraint": 5,
+    "_trayScale": 0.78,
+    "_traySpacing": {
+      "x": 0.047,
+      "y": 0.047
+    }
+  }
+]

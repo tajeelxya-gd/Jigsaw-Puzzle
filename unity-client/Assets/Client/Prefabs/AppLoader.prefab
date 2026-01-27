@@ -522,7 +522,7 @@ MonoBehaviour:
   _puzzleService: {fileID: 0}
   _puzzleTray: {fileID: 0}
   _cameraEffects: {fileID: 0}
-  _jigsawHelper: {fileID: 0}
+  _jigsawResourceLoader: {fileID: 0}
   _hudComponent: {fileID: 0}
   _vfxController: {fileID: 0}
 --- !u!1 &7964194896348924751

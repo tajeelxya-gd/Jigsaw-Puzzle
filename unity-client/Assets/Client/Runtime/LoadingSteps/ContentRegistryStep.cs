@@ -9,8 +9,8 @@ namespace Client.Runtime
     {
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
-            ContentRegistry.Register<JigSawLevelData>("JigSawLevelData");
-            ContentRegistry.Register<JigsawBoardData>("JigSawBoardData");
+            ContentRegistry.Register<JigsawLevelData>("JigsawLevelData");
+            ContentRegistry.Register<JigsawGridData>("JigsawGridData");
             ContentRegistry.Register<CellActionRewardData>("CellActionRewardData");
             return UniTask.CompletedTask;
         }

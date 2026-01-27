@@ -16,7 +16,7 @@ namespace Client.Runtime
         [SerializeField] private PuzzleService _puzzleService;
         [SerializeField] private PuzzleTray _puzzleTray;
         [SerializeField] private CameraEffects _cameraEffects;
-        [SerializeField] private JigsawHelper _jigsawHelper;
+        [SerializeField] private JigsawResourceLoader _jigsawResourceLoader;
         [SerializeField] private HUDComponent _hudComponent;
         [SerializeField] private VFXController _vfxController;
 
@@ -40,7 +40,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton(_vfxController);
             _binder.BindAsSingleton(_puzzleTray);
             _binder.BindAsSingleton(_cameraEffects);
-            _binder.BindAsSingleton(_jigsawHelper);
+            _binder.BindAsSingleton(_jigsawResourceLoader);
             _binder.BindAsSingleton(_hudComponent);
 
             return UniTask.CompletedTask;

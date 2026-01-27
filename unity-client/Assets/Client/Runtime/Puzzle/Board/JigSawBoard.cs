@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UniTx.Runtime;
-using UniTx.Runtime.Database;
 using UniTx.Runtime.Entity;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.ResourceManagement;
@@ -11,15 +9,13 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigsawBoard : EntityBase<JigsawBoardData, JigsawBoardSavedData>
+    public sealed class JigsawBoard : EntityBase<JigsawGridData, JigsawBoardSavedData>
     {
         private readonly List<JigsawPiece> _pieces = new();
         private readonly List<JigsawBoardCell> _cells = new();
 
-        private AssetData _assetData;
         private IResolver _resolver;
-        private JigSawLevelData _levelData;
-        private IJigsawHelper _helper;
+        private IJigsawResourceLoader _helper;
         private IPuzzleTray _tray;
 
         public IReadOnlyList<JigsawBoardCell> Cells => _cells;
@@ -48,14 +44,10 @@ namespace Client.Runtime
             return baseHeight + heightFromSize + _sortingY;
         }
 
-        public async UniTask LoadPuzzleAsync(JigSawLevelData levelData, Transform parent, Transform bounds, CancellationToken cToken = default)
+        public async UniTask LoadPuzzleAsync(Transform parent, Transform bounds, string[] cellActionIds, CancellationToken cToken = default)
         {
-            _levelData = levelData;
-            await SpawnCellsAsync(parent, bounds, cToken);
-            _assetData = await UniResources.LoadAssetAsync<AssetData>(Data.AssetDataId, cToken: cToken);
-            var gridAsset = _assetData.GetAsset(Data.GridId);
-            var grid = await UniResources.CreateInstanceAsync<Transform>(gridAsset.RuntimeKey, parent, null, cToken);
-            await _helper.LoadMaterialsAsync(levelData.ImageKey, cToken);
+            await SpawnCellsAsync(parent, bounds, cellActionIds, cToken);
+            var grid = _helper.Grid;
 
             foreach (var cell in _cells)
             {
@@ -63,8 +55,6 @@ namespace Client.Runtime
 
                 await WrapMeshesInPuzzlePieceAsync(cell, mesh, cToken);
             }
-
-            UniResources.DisposeInstance(grid.gameObject);
         }
 
         public void UnLoadPuzzle()
@@ -80,17 +70,14 @@ namespace Client.Runtime
                 UniResources.DisposeInstance(cell.gameObject);
             }
             _cells.Clear();
-            _helper.UnLoadMaterials();
-            UniResources.DisposeAsset(_assetData);
-            _levelData = null;
             _sortingY = 0;
         }
 
         protected override void OnInject(IResolver resolver)
         {
             _resolver = resolver;
-            _helper = resolver.Resolve<IJigsawHelper>();
             _tray = resolver.Resolve<IPuzzleTray>();
+            _helper = resolver.Resolve<IJigsawResourceLoader>();
         }
 
         protected override void OnInit()
@@ -103,7 +90,7 @@ namespace Client.Runtime
             // Empty yet
         }
 
-        private async UniTask SpawnCellsAsync(Transform parent, Transform bounds, CancellationToken cToken = default)
+        private async UniTask SpawnCellsAsync(Transform parent, Transform bounds, string[] cellActionIds, CancellationToken cToken = default)
         {
             var boundsSize = bounds.lossyScale;
             var size = new Vector3(boundsSize.x, 0f, boundsSize.z);
@@ -115,7 +102,7 @@ namespace Client.Runtime
             float startX = (-size.x / 2f) + (cellLocalWidth / 2f);
             float startZ = (size.z / 2f) - (cellLocalHeight / 2f);
             var cellSize = new Vector3(cellLocalWidth * parent.lossyScale.x, 0.001f, cellLocalHeight * parent.lossyScale.z);
-            var actionData = _contentservice.GetData<ICellActionData>(_levelData.CellActionIds).ToArray();
+            var actionData = _contentservice.GetData<ICellActionData>(cellActionIds).ToArray();
 
             for (var i = 0; i < len; i++)
             {

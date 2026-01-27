@@ -16,14 +16,14 @@ namespace Client.Runtime
 
         private static readonly int ReflectColorId = Shader.PropertyToID("_ReflectColor");
 
-        private IJigsawHelper _helper;
+        private IJigsawResourceLoader _helper;
         private JigsawPieceRendererData _data;
         private MaterialPropertyBlock _mpb;
         private Renderer _shadowProxy;
 
         public void Inject(IResolver resolver)
         {
-            _helper = resolver.Resolve<IJigsawHelper>();
+            _helper = resolver.Resolve<IJigsawResourceLoader>();
         }
 
         public void Init(JigsawPieceRendererData data)
@@ -33,7 +33,6 @@ namespace Client.Runtime
             AddShadowCaster();
             SetActive(locked: false);
             _data.Mesh.gameObject.AddComponent<Outline>();
-            _data.Mesh.sharedMaterials = new[] { _helper.PieceBaseMaterial, _helper.PieceMaterial };
         }
 
         public void SetActive(bool locked)
@@ -89,8 +88,11 @@ namespace Client.Runtime
 
         public void OnTrayEnter()
         {
-            var mesh = _data.Mesh.transform;
-            mesh.localScale = new Vector3(mesh.localScale.x, 1f, mesh.localScale.z);
+            var mesh = _data.Mesh;
+            var meshTransform = mesh.transform;
+            mesh.sharedMaterials = new[] { _helper.OutlineTray, _helper.Base };
+
+            meshTransform.localScale = new Vector3(meshTransform.localScale.x, 1f, meshTransform.localScale.z);
             mesh.GetComponent<Outline>().enabled = true;
             transform.rotation = Quaternion.Euler(_data.TrayEulers);
             SetShadowY(0);
@@ -98,8 +100,11 @@ namespace Client.Runtime
 
         public void OnTrayExit()
         {
-            var mesh = _data.Mesh.transform;
-            mesh.localScale = new Vector3(mesh.localScale.x, 0.2f, mesh.localScale.z);
+            var mesh = _data.Mesh;
+            var meshTransform = mesh.transform;
+            mesh.sharedMaterials = new[] { _helper.OutlineBoard, _helper.Base };
+
+            meshTransform.localScale = new Vector3(meshTransform.localScale.x, 0.2f, meshTransform.localScale.z);
             mesh.GetComponent<Outline>().enabled = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
             SetShadowY(-0.03f);

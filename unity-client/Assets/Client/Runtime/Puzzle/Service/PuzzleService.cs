@@ -23,9 +23,10 @@ namespace Client.Runtime
         private IWinConditionChecker _winConditionChecker;
         private IVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
+        private IJigsawResourceLoader _helper;
         private JigsawBoard _board;
         private int _idx;
-        private JigSawLevelData[] _levelsData;
+        private JigsawLevelData[] _levelsData;
 
 
         public Transform PuzzleRoot => _puzzleBoard;
@@ -39,6 +40,7 @@ namespace Client.Runtime
             _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _vfxController = resolver.Resolve<IVFXController>();
+            _helper = resolver.Resolve<IJigsawResourceLoader>();
         }
 
         public void Initialise() => _winConditionChecker.OnWin += HandleOnWin;
@@ -48,8 +50,10 @@ namespace Client.Runtime
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
-            _board = _entityService.Get<JigsawBoard>(levelData.BoardId);
-            await _board.LoadPuzzleAsync(levelData, _puzzleBoard, _puzzleBounds, cToken);
+            _board = _entityService.Get<JigsawBoard>(levelData.GridId);
+            await _helper.CreateGridAsync(levelData.GridId, _puzzleBoard, cToken);
+            await _helper.LoadImageAsync(levelData.ImageKey);
+            await _board.LoadPuzzleAsync(_puzzleBoard, _puzzleBounds, levelData.CellActionIds, cToken);
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
@@ -59,6 +63,8 @@ namespace Client.Runtime
         public void UnLoadPuzzle()
         {
             _board.UnLoadPuzzle();
+            _helper.UnLoadImage();
+            _helper.DestroyGrid();
             _board = null;
             _winConditionChecker.SetBoard(null);
             JigsawBoardCalculator.SetBoard(null);
@@ -72,16 +78,16 @@ namespace Client.Runtime
         }
 
         public JigsawBoard GetCurrentBoard() => _board;
-        public JigSawLevelData GetCurrentLevelData() => _levelsData[_idx];
+        public JigsawLevelData GetCurrentLevelData() => _levelsData[_idx];
 
         public void LoadCurrentLevelData()
         {
-            _levelsData = _contentService.GetAllData<JigSawLevelData>().ToArray();
+            _levelsData = _contentService.GetAllData<JigsawLevelData>().ToArray();
             // TODO: load from saves
             _idx = 0;
         }
 
-        public JigSawLevelData GetNextLevelData()
+        public JigsawLevelData GetNextLevelData()
         {
             var idx = (_idx + 1) >= _levelsData.Length ? 0 : _idx + 1;
             return _levelsData[idx];
