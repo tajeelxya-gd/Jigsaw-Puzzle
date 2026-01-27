@@ -14,8 +14,6 @@ namespace Client.Runtime
 
         Transform Grid { get; }
 
-        void ToggleFullImage();
-
         UniTask LoadImageAsync(string key, CancellationToken cToken = default);
 
         void UnLoadImage();

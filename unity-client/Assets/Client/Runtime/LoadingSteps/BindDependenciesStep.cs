@@ -19,6 +19,7 @@ namespace Client.Runtime
         [SerializeField] private JigsawResourceLoader _jigsawResourceLoader;
         [SerializeField] private HUDComponent _hudComponent;
         [SerializeField] private VFXController _vfxController;
+        [SerializeField] private FullImageHandler _fullImageHandler;
 
         private IBinder _binder;
 
@@ -42,6 +43,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton(_cameraEffects);
             _binder.BindAsSingleton(_jigsawResourceLoader);
             _binder.BindAsSingleton(_hudComponent);
+            _binder.BindAsSingleton(_fullImageHandler);
 
             return UniTask.CompletedTask;
         }

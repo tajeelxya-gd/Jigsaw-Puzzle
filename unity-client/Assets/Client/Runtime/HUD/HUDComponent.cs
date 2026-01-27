@@ -21,13 +21,13 @@ namespace Client.Runtime
         [SerializeField] private ScriptableObject _click;
 
         private IPuzzleTray _puzzleTray;
-        private IJigsawResourceLoader _helper;
+        private IFullImageHandler _helper;
         private IPuzzleService _puzzleService;
 
         public void Inject(IResolver resolver)
         {
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
-            _helper = resolver.Resolve<IJigsawResourceLoader>();
+            _helper = resolver.Resolve<IFullImageHandler>();
             _puzzleService = resolver.Resolve<IPuzzleService>();
         }
 
