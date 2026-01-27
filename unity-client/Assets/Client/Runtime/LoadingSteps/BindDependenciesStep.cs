@@ -20,6 +20,7 @@ namespace Client.Runtime
         [SerializeField] private HUDComponent _hudComponent;
         [SerializeField] private VFXController _vfxController;
         [SerializeField] private FullImageHandler _fullImageHandler;
+        [SerializeField] private SavedDataHandler _savedDataHandler;
 
         private IBinder _binder;
 
@@ -36,6 +37,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton<SerialisationService>();
             _binder.BindAsSingleton<EntityService>();
 
+            _binder.BindAsSingleton(_savedDataHandler);
             _binder.BindAsSingleton<JigsawWinConditionChecker>();
             _binder.BindAsSingleton(_puzzleService);
             _binder.BindAsSingleton(_vfxController);

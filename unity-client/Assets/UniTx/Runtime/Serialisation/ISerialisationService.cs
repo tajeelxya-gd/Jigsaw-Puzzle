@@ -29,5 +29,7 @@ namespace UniTx.Runtime.Serialisation
         /// </returns>
         T Load<T>(string id)
             where T : ISavedData, new();
+
+        void SaveImmediate();
     }
 }

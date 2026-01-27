@@ -24,10 +24,9 @@ namespace Client.Runtime
         private IVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
         private IJigsawResourceLoader _helper;
+        private IUserSavedData _savedData;
         private JigsawBoard _board;
-        private int _idx;
         private JigsawLevelData[] _levelsData;
-
 
         public Transform PuzzleRoot => _puzzleBoard;
 
@@ -41,6 +40,7 @@ namespace Client.Runtime
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _vfxController = resolver.Resolve<IVFXController>();
             _helper = resolver.Resolve<IJigsawResourceLoader>();
+            _savedData = resolver.Resolve<IUserSavedData>();
         }
 
         public void Initialise() => _winConditionChecker.OnWin += HandleOnWin;
@@ -57,6 +57,7 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
+            await SetLevelStateAsync(cToken);
             UniEvents.Raise(new LevelStartEvent());
         }
 
@@ -69,6 +70,7 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(null);
             JigsawBoardCalculator.SetBoard(null);
             _puzzleTray.Reset();
+            UniEvents.Raise(new LevelResetEvent());
         }
 
         public UniTask RestartPuzzleAsync(CancellationToken cToken = default)
@@ -78,34 +80,43 @@ namespace Client.Runtime
         }
 
         public JigsawBoard GetCurrentBoard() => _board;
-        public JigsawLevelData GetCurrentLevelData() => _levelsData[_idx];
 
-        public void LoadCurrentLevelData()
+        public JigsawLevelData GetCurrentLevelData()
         {
-            _levelsData = _contentService.GetAllData<JigsawLevelData>().ToArray();
-            // TODO: load from saves
-            _idx = 0;
+            _levelsData ??= _contentService.GetAllData<JigsawLevelData>().ToArray();
+            return _levelsData[GetCurrentIdx()];
         }
 
         public JigsawLevelData GetNextLevelData()
         {
-            var idx = (_idx + 1) >= _levelsData.Length ? 0 : _idx + 1;
-            return _levelsData[idx];
-        }
-
-        private void IncrementLevel()
-        {
-            if (++_idx >= _levelsData.Length) _idx = 0;
+            var currentIdx = GetCurrentIdx();
+            var nextIdx = (currentIdx + 1) >= _levelsData.Length ? _levelsData.Length - 1 : currentIdx;
+            return _levelsData[nextIdx];
         }
 
         private void HandleOnWin() => UniTask.Void(HandleOnWinAsync, default);
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: cToken);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
-            IncrementLevel();
+        }
+
+        private int GetCurrentIdx() => Math.Clamp(_savedData.CurrentLevel, 0, _levelsData.Length - 1);
+
+        private async UniTask SetLevelStateAsync(CancellationToken cToken = default)
+        {
+            var state = _savedData.CurrentLevelState;
+            if (state == null || state.Pieces == null) return;
+
+            foreach (var pieceState in state.Pieces)
+            {
+                if (pieceState.CorrectIdx == -1 || pieceState.CurrentIdx == -1) continue;
+
+                var piece = _board.Pieces[pieceState.CorrectIdx];
+                await _puzzleTray.DropPieceAsync(piece, pieceState.CurrentIdx, cToken);
+            }
         }
     }
 }

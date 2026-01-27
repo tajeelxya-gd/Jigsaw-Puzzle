@@ -1,6 +1,6 @@
-using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace UniTx.Runtime.Serialisation
@@ -48,6 +48,8 @@ namespace UniTx.Runtime.Serialisation
 
             return _serialiser.Deserialise<T>(id);
         }
+
+        public void SaveImmediate() => _serialiser.SerialiseDirty();
 
         private async UniTaskVoid SaveLoopAsync(CancellationToken cToken = default)
         {

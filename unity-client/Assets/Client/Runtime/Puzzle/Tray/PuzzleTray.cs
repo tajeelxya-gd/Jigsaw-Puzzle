@@ -136,15 +136,20 @@ namespace Client.Runtime
             while (_activePieces.Count > 0)
             {
                 var piece = _activePieces[0];
-                _activePieces.Remove(piece);
-                piece.transform.SetParent(null);
-                piece.gameObject.SetActive(true);
-                piece.OnExitTray();
-                tasks.Add(piece.SnapToRandomCellAsync(cToken));
+                tasks.Add(DropPieceAsync(piece, -1, cToken));
             }
             _scrollX = 0;
             _scrollVelocity = 0f;
             return UniTask.WhenAll(tasks);
+        }
+
+        public UniTask DropPieceAsync(JigsawPiece piece, int cellIdx, CancellationToken cToken = default)
+        {
+            _activePieces.Remove(piece);
+            piece.transform.SetParent(null);
+            piece.gameObject.SetActive(true);
+            piece.OnExitTray();
+            return cellIdx == -1 ? piece.SnapToRandomCellAsync(cToken) : piece.SnapToCellAsync(cellIdx, cToken);
         }
 
         public void PickPieces()

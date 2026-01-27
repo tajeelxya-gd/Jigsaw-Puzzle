@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Bootstrap;
@@ -17,9 +18,7 @@ namespace Client.Runtime
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
             InputHandler.Init();
-            _puzzleService.LoadCurrentLevelData();
             return _puzzleService.LoadPuzzleAsync(cToken);
         }
-
     }
 }

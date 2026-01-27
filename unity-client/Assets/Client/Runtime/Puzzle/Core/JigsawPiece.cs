@@ -79,11 +79,17 @@ namespace Client.Runtime
             IsLocked = true;
         }
 
+        public UniTask SnapToCellAsync(int idx, CancellationToken cToken = default)
+        {
+            var cells = _puzzleService.GetCurrentBoard().Cells;
+            return _snapController.SnapToCellAsync(Group, cells[idx], cToken);
+        }
+
         public UniTask SnapToRandomCellAsync(CancellationToken cToken = default)
         {
             var cells = _puzzleService.GetCurrentBoard().Cells;
             var idx = Random.Range(0, cells.Count);
-            return _snapController.SnapToCellAsync(Group, cells[idx], cToken);
+            return SnapToCellAsync(idx, cToken);
         }
 
         private void Awake()

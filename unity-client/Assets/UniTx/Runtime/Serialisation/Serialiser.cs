@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using UniTx.Runtime.Clock;
 using UnityEditor;
 using UnityEngine;
-using UniTx.Runtime.Clock;
 
 namespace UniTx.Runtime.Serialisation
 {

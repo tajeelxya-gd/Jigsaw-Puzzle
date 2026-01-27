@@ -7,6 +7,7 @@ namespace Client.Runtime
     public interface IPuzzleService
     {
         Transform PuzzleRoot { get; }
+
         Transform FrameMesh { get; }
 
         UniTask RestartPuzzleAsync(CancellationToken cToken = default);
@@ -20,7 +21,5 @@ namespace Client.Runtime
         JigsawLevelData GetCurrentLevelData();
 
         JigsawLevelData GetNextLevelData();
-
-        void LoadCurrentLevelData();
     }
 }
