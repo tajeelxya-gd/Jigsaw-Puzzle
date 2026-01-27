@@ -1,0 +1,37 @@
+{
+    "friendlyName": "Google Pixel 9 Pro XL",
+    "version": 1,
+    "screens": [
+        {
+            "width": 1344,
+            "height": 2992,
+            "dpi": 486,
+            "orientations": [
+                {
+                    "orientation": 1,
+                    "friendlyName": "Portrait",
+                    "safeArea": {
+                        "x": 0,
+                        "y": 118,
+                        "width": 1344,
+                        "height": 2810
+                    }
+                },
+                {
+                    "orientation": 3,
+                    "friendlyName": "Landscape Left",
+                    "safeArea": {
+                        "x": 118,
+                        "y": 0,
+                        "width": 2874,
+                        "height": 1344
+                    }
+                }
+            ]
+        }
+    ],
+    "systemInfo": {
+        "deviceModel": "Google Pixel 9 Pro XL",
+        "operatingSystem": "Android"
+    }
+}
