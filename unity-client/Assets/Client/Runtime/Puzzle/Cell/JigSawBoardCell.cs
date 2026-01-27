@@ -40,7 +40,7 @@ namespace Client.Runtime
                 IsLocked = true;
                 if (_once)
                 {
-                    _particleSystem.Play();
+                    PlayVfx();
                     CellActionProcessor.Process(_actionData);
                     _once = false;
                 }
@@ -63,6 +63,9 @@ namespace Client.Runtime
         public JigsawPiece GetCorrectPiece() => _board.Pieces[Idx];
 
         public float GetNextHeight(int groupSize) => _board.GetSortingY(groupSize);
+
+        [ContextMenu("PlayVfx")]
+        private void PlayVfx() => _particleSystem.Play();
 
         private void SetHeight(JigsawPiece piece, float height)
         {

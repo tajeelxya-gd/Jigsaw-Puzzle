@@ -58,6 +58,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: StarExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 4944323335919179839, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335919201107, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335919224505, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4944323335919500719, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -97,6 +109,26 @@ PrefabInstance:
     - target: {fileID: 4944323335919500719, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335934668079, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: ShapeModule.type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335934668079, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335934668079, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335934668079, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944323335934668079, guid: 77e8fccb7339a7e49b24b49b5941f287, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.9019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
