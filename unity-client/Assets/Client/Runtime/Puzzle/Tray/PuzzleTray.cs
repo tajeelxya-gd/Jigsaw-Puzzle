@@ -71,7 +71,7 @@ namespace Client.Runtime
             int puzzleRows = boardData.XConstraint;
             int puzzleCols = boardData.YConstraint;
 
-            var cornerPieces = new List<JigsawPiece>();
+            var edgePieces = new List<JigsawPiece>();
             var otherPieces = new List<JigsawPiece>();
 
             foreach (var p in pieces)
@@ -82,27 +82,17 @@ namespace Client.Runtime
 
                 int r = p.CorrectIdx / puzzleCols;
                 int c = p.CorrectIdx % puzzleCols;
-                bool isCorner = (r == 0 || r == puzzleRows - 1) && (c == 0 || c == puzzleCols - 1);
+                bool isEdge = r == 0 || r == puzzleRows - 1 || c == 0 || c == puzzleCols - 1;
 
-                if (isCorner) cornerPieces.Add(p);
+                if (isEdge) edgePieces.Add(p);
                 else otherPieces.Add(p);
             }
 
-            cornerPieces.Sort((a, b) =>
-            {
-                int colA = a.CorrectIdx % puzzleCols;
-                int colB = b.CorrectIdx % puzzleCols;
-                if (colA != colB) return colA.CompareTo(colB);
-
-                int rowA = a.CorrectIdx / puzzleCols;
-                int rowB = b.CorrectIdx / puzzleCols;
-                return rowA.CompareTo(rowB);
-            });
-
+            ShuffleList(edgePieces);
             ShuffleList(otherPieces);
 
             _activePieces.Clear();
-            _activePieces.AddRange(cornerPieces);
+            _activePieces.AddRange(edgePieces);
             _activePieces.AddRange(otherPieces);
 
             _scrollX = 0;
