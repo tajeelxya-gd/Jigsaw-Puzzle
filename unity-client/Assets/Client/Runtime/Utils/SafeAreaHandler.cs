@@ -1,3 +1,4 @@
+using UniTx.Runtime;
 using UnityEngine;
 
 namespace PuzzleTemplate.Runtime
@@ -28,7 +29,11 @@ namespace PuzzleTemplate.Runtime
         {
             if (_rectTransform == null) return;
 
-            Rect safeArea = Screen.safeArea;
+            var safeArea = Screen.safeArea;
+
+            UniStatics.LogInfo($"X: {safeArea.x}", this, Color.blanchedAlmond);
+            UniStatics.LogInfo($"Y: {safeArea.y}", this, Color.blanchedAlmond);
+
             _lastSafeArea = safeArea;
             _lastScreenSize = new Vector2(Screen.width, Screen.height);
 
