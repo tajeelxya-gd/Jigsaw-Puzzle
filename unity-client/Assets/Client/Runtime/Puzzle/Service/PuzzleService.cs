@@ -109,7 +109,7 @@ namespace Client.Runtime
         private async UniTask SetLevelStateAsync(CancellationToken cToken = default)
         {
             var state = _savedData.CurrentLevelState;
-            if (state == null || state.Pieces == null) return;
+            if (state == null || state.Pieces == null || !state.LevelId.Equals(GetCurrentLevelData().Id)) return;
 
             var tasks = new List<UniTask>();
             foreach (var pieceState in state.Pieces)

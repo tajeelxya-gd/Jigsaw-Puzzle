@@ -17,6 +17,7 @@ namespace Client.Runtime
         private IWinConditionChecker _checker;
         private IClock _clock;
         private UserSavedData _savedData;
+        private string _levelId;
 
         public void Inject(IResolver resolver)
         {
@@ -32,12 +33,14 @@ namespace Client.Runtime
         public void Initialise()
         {
             _checker.OnWin += HandleOnWin;
+            UniEvents.Subscribe<LevelStartEvent>(HandleOnLevelStart);
             UniEvents.Subscribe<LevelResetEvent>(HandleOnLevelReset);
         }
 
         public void Reset()
         {
             _checker.OnWin -= HandleOnWin;
+            UniEvents.Unsubscribe<LevelStartEvent>(HandleOnLevelStart);
             UniEvents.Unsubscribe<LevelResetEvent>(HandleOnLevelReset);
         }
 
@@ -55,8 +58,15 @@ namespace Client.Runtime
 
         private void HandleOnLevelReset(LevelResetEvent @event)
         {
+            _levelId = null;
             _savedData.CurrentLevelState = null;
             Save();
+        }
+
+         private void HandleOnLevelStart(LevelStartEvent @event)
+        {
+            var levelData = _puzzleService.GetCurrentLevelData();
+            _levelId = levelData.Id;
         }
 
         private void Save()
@@ -73,12 +83,14 @@ namespace Client.Runtime
 
             var pieces = board.Pieces;
             var pieceStates = new JigsawPieceState[pieces.Count];
+
             for (var i = 0; i < pieces.Count; i++)
             {
                 var piece = pieces[i];
                 pieceStates[i] = new JigsawPieceState(piece.CorrectIdx, piece.CurrentIdx);
             }
-            _savedData.CurrentLevelState = new JigsawLevelState(pieceStates);
+
+            _savedData.CurrentLevelState = new JigsawLevelState(_levelId, pieceStates);
             Save();
         }
     }
