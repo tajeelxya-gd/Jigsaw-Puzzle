@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -110,13 +111,16 @@ namespace Client.Runtime
             var state = _savedData.CurrentLevelState;
             if (state == null || state.Pieces == null) return;
 
+            var tasks = new List<UniTask>();
             foreach (var pieceState in state.Pieces)
             {
                 if (pieceState.CorrectIdx == -1 || pieceState.CurrentIdx == -1) continue;
 
                 var piece = _board.Pieces[pieceState.CorrectIdx];
-                await _puzzleTray.DropPieceAsync(piece, pieceState.CurrentIdx, cToken);
+                tasks.Add(_puzzleTray.DropPieceAsync(piece, pieceState.CurrentIdx, cToken));
             }
+
+            await UniTask.WhenAll(tasks);
         }
     }
 }
