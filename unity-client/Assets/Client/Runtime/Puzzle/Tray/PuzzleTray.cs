@@ -67,10 +67,7 @@ namespace Client.Runtime
             var board = _puzzleService.GetCurrentBoard();
             if (board == null) return;
 
-            var difficulty = _puzzleService.GetCurrentLevelData().Difficulty; // 0 - 10
-            // if difficulty is 0 it means 100% of edge pieces are at front
-            // if difficulty is 10 or more it means 0% of edge pieces are at front
-            // and any range in between should adjust accordingly
+            var difficulty = _puzzleService.GetCurrentLevelData().Difficulty; // 0 - 10, 0 -> easiest
             var edgePieces = new List<JigsawPiece>();
             var otherPieces = new List<JigsawPiece>();
 
@@ -91,7 +88,6 @@ namespace Client.Runtime
 
             if (difficulty <= 5)
             {
-                // Lower difficulty: Prioritize edge pieces at the front, sorted by index at difficulty 0.
                 float ratio = 1f - (difficulty / 5f);
                 int count = Mathf.FloorToInt(edgePieces.Count * ratio);
 
@@ -106,7 +102,6 @@ namespace Client.Runtime
             }
             else
             {
-                // Higher difficulty: Prioritize non-edge pieces at the front to hide border pieces.
                 float ratio = (difficulty - 5f) / 5f;
                 int count = Mathf.FloorToInt(otherPieces.Count * ratio);
 
