@@ -19,10 +19,11 @@ namespace Client.Runtime
         [SerializeField] private float _delayBetweenPiecesInGroup;
         [SerializeField] private float _delayBetweenGroup;
         [SerializeField] private float _vfxDelayInPieces;
+        [SerializeField] private float _vfxDelayInClockwise;
         [SerializeField] private int _maxHighlightPieces = -1;
         [SerializeField] private ScriptableObject _pieceLocked;
 
-        private readonly HashSet<JigsawPiece> _vfxQueue = new();
+        private readonly List<JigsawPiece> _vfxQueue = new();
         private bool _isBatching;
         private ICameraEffects _cameraEffects;
         private IPuzzleService _puzzleService;
@@ -49,11 +50,13 @@ namespace Client.Runtime
         {
             // 1. Run BFS to find all connected locked pieces
             Queue<JigsawPiece> searchQueue = new();
+            HashSet<JigsawPiece> processed = new();
 
             foreach (var p in group)
             {
                 searchQueue.Enqueue(p);
-                _vfxQueue.Add(p);
+                processed.Add(p);
+                if (!_vfxQueue.Contains(p)) _vfxQueue.Add(p);
             }
 
             while (searchQueue.Count > 0)
@@ -68,16 +71,16 @@ namespace Client.Runtime
                     if (cell.IsLocked)
                     {
                         var piece = cell.GetCorrectPiece();
-                        // Only add to search if not already in our global VFX batch
-                        if (_vfxQueue.Add(piece))
+                        if (processed.Add(piece))
                         {
                             searchQueue.Enqueue(piece);
+                            if (!_vfxQueue.Contains(piece)) _vfxQueue.Add(piece);
                         }
                     }
                 }
             }
 
-            TriggerBatchVfx();
+            TriggerBatchVfx(_vfxDelayInPieces);
         }
 
         public async UniTask AnimateBoardCompletionAsync(CancellationToken cToken = default)
@@ -89,10 +92,7 @@ namespace Client.Runtime
             var board = _puzzleService.GetCurrentBoard();
             var cols = board.Data.YConstraint;
 
-            // Use Select to keep track of the original index for math
             var indexedPieces = board.Pieces.Select((piece, index) => new { piece, index });
-
-            // Group by calculating Row or Col from the index
             var groups = order == AnimationOrder.RowByRow
                 ? indexedPieces.GroupBy(x => x.index / cols).OrderBy(g => g.Key)
                 : indexedPieces.GroupBy(x => x.index % cols).OrderBy(g => g.Key);
@@ -117,52 +117,79 @@ namespace Client.Runtime
             await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
         }
 
+        public UniTask WaitForHighlightsAsync(CancellationToken cToken = default)
+        {
+            return UniTask.WaitWhile(() => _vfxQueue.Count > 0, cancellationToken: cToken);
+        }
+
         private void HandlePiecePlaced(GroupPlacedEvent ev)
         {
             _cameraEffects.PlayGroupingEffect();
             UniAudio.Play2D((IAudioConfig)_pieceLocked);
-            if(ev.IsEdge && AllEdgesLocked(out var edges))
+            if(JigsawBoardCalculator.IsEdge(ev.Anchor.CorrectIdx) && AllEdgesLocked(out var edges))
             {
-                Highlight(edges);
+                HighlightClockwise(edges, ev.Anchor);
                 return;
             }
             HighlightGroupAndNeighbours(ev.Group);
         }
 
-        private bool AllEdgesLocked(out IEnumerable<JigsawBoardCell> edgeCells)
+        private bool AllEdgesLocked(out IEnumerable<JigsawPiece> edgePieces)
         {
             var board = _puzzleService.GetCurrentBoard();
-            var allCells = board.Cells;
-            var edges = new List<JigsawBoardCell>();
+            var allPieces = board.Pieces;
+            var edges = new List<JigsawPiece>();
             bool allLocked = true;
 
-            for (var i = 0; i < allCells.Count; i++)
+            for (var i = 0; i < allPieces.Count; i++)
             {
-                var cell = allCells[i];
+                var piece = allPieces[i];
 
-                if (JigsawBoardCalculator.IsEdge(cell.Idx)) 
+                if (JigsawBoardCalculator.IsEdge(piece.CorrectIdx)) 
                 {
-                    edges.Add(cell);
+                    edges.Add(piece);
 
-                    if (!cell.IsLocked)
+                    if (!piece.IsLocked)
                     {
                         allLocked = false;
                     }
                 }
             }
 
-            edgeCells = edges;
+            edgePieces = edges;
             return allLocked;
         }
 
-        private void Highlight(IEnumerable<JigsawBoardCell> cells)
+        private void HighlightClockwise(IEnumerable<JigsawPiece> pieces, JigsawPiece anchor)
         {
-           foreach(var cell in cells)
-           {
-                var piece = cell.GetCorrectPiece();
-                piece.PlayVfx();
-                cell.PlayVfx();
-           }
+            var board = _puzzleService.GetCurrentBoard();
+            var data = board.Data;
+            int rows = data.XConstraint;
+            int cols = data.YConstraint;
+
+            var sorted = pieces.OrderBy(p => 
+            {
+                int r = p.CorrectIdx / cols;
+                int col = p.CorrectIdx % cols;
+                if (r == 0) return col; 
+                if (col == cols - 1) return cols + r;
+                if (r == rows - 1) return cols + rows + (cols - 1 - col);
+                return cols + rows + cols + (rows - 1 - r);
+            }).ToList();
+
+            int anchorIndex = sorted.IndexOf(anchor);
+            if (anchorIndex != -1)
+            {
+                var rotated = sorted.Skip(anchorIndex).Concat(sorted.Take(anchorIndex)).ToList();
+                sorted = rotated;
+            }
+
+            foreach(var piece in sorted)
+            {
+                if (!_vfxQueue.Contains(piece)) _vfxQueue.Add(piece);
+            }
+
+            TriggerBatchVfx(_vfxDelayInClockwise);
         }
 
         private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, float delay, CancellationToken cToken)
@@ -186,14 +213,13 @@ namespace Client.Runtime
             piece.transform.localPosition = startPos;
         }
 
-        private void TriggerBatchVfx()
+        private void TriggerBatchVfx(float vfxDelay)
         {
-            if (_vfxDelayInPieces > 0)
+            if (vfxDelay > 0)
             {
-                UniTask.Void(TriggerBatchVfxAsync, this.GetCancellationTokenOnDestroy());
+                TriggerBatchVfxAsync(vfxDelay, this.GetCancellationTokenOnDestroy()).Forget();
                 return;
             }
-
 
             if (_isBatching) return;
             _isBatching = true;
@@ -207,7 +233,7 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
-        private async UniTaskVoid TriggerBatchVfxAsync(CancellationToken cToken = default)
+        private async UniTaskVoid TriggerBatchVfxAsync(float vfxDelay,CancellationToken cToken = default)
         {
             if (_isBatching) return;
             _isBatching = true;
@@ -215,13 +241,13 @@ namespace Client.Runtime
             await Task.Yield();
 
             var delay = 0f;
-
+            var tasks =  new List<UniTask>();
             foreach (var p in _vfxQueue)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
-                p.PlayVfx();
-                delay += _vfxDelayInPieces;
+                tasks.Add(UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken).ContinueWith(() => p.PlayVfx()));
+                delay += vfxDelay;
             }
+            await UniTask.WhenAll(tasks);
 
             _vfxQueue.Clear();
             _isBatching = false;

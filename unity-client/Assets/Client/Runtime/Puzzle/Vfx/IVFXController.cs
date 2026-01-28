@@ -8,5 +8,7 @@ namespace Client.Runtime
         void HighlightGroupAndNeighbours(JigsawGroup group);
 
         UniTask AnimateBoardCompletionAsync(CancellationToken cToken = default);
+
+        UniTask WaitForHighlightsAsync(CancellationToken cToken = default);
     }
 }

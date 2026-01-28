@@ -5,12 +5,12 @@ namespace Client.Runtime
     public readonly struct GroupPlacedEvent : IEvent
     {
         public readonly JigsawGroup Group;
-        public readonly bool IsEdge;
+        public readonly JigsawPiece Anchor;
 
-        public GroupPlacedEvent(JigsawGroup group, bool isEdge)
+        public GroupPlacedEvent(JigsawGroup group, JigsawPiece anchor)
         {
             Group = group;
-            IsEdge = isEdge;
+            Anchor = anchor;
         }
     }
 }

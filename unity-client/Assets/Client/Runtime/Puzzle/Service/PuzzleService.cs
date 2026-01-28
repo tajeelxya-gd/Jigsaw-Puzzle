@@ -101,6 +101,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
+            await _vfxController.WaitForHighlightsAsync(cToken);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
