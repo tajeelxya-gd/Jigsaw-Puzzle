@@ -31,7 +31,12 @@ namespace Client.Runtime
 
         public bool Push(JigsawPiece piece, int groupSize, float? height = null)
         {
-            var newY = height ?? GetNextHeight(groupSize);
+            var newY = 0f;
+            if(!piece.IsLocked)
+            {
+                newY = height ?? GetNextHeight(groupSize);
+            }
+
             _stack.Push(piece);
             SetHeight(piece, newY);
 

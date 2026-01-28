@@ -52,7 +52,9 @@ namespace Client.Runtime
 
         private void HandleLevelStart(LevelStartEvent @event) 
         { 
-            _loader.FullImage.SetParent(transform);
+            var fullImg = _loader.FullImage;
+            fullImg.SetParent(transform);
+            fullImg.gameObject.layer = gameObject.layer;
             Fade(false);
         }
         

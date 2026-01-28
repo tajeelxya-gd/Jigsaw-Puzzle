@@ -52,7 +52,6 @@ namespace Client.Runtime
             foreach (var cell in _cells)
             {
                 var mesh = grid.GetChild(0);
-
                 await WrapMeshesInPuzzlePieceAsync(cell, mesh, cToken);
             }
         }
@@ -131,6 +130,8 @@ namespace Client.Runtime
             piece.name = $"Piece_{cell.Idx}";
             mesh.gameObject.layer = piece.gameObject.layer;
             mesh.SetParent(piece.transform);
+            var pos = mesh.localPosition;
+            mesh.localPosition = new Vector3(pos.x, 0f, pos.z);
             var meshRenderer = mesh.GetComponent<Renderer>();
             var rendererData = new JigsawPieceRendererData(meshRenderer, _tray.Transform.rotation.eulerAngles);
             piece.Inject(_resolver);
