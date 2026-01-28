@@ -57,8 +57,8 @@ namespace Client.Runtime
             await _helper.LoadImageAsync(levelData.ImageKey);
             await _board.LoadPuzzleAsync(_puzzleBoard, _puzzleBounds, levelData.CellActionIds, cToken);
             _winConditionChecker.SetBoard(_board);
-            _puzzleTray.ShufflePieces(_board.Pieces);
             JigsawBoardCalculator.SetBoard(_board);
+            _puzzleTray.ShufflePieces(_board.Pieces);
             await SetLevelStateAsync(cToken);
             UniEvents.Raise(new LevelStartEvent());
         }

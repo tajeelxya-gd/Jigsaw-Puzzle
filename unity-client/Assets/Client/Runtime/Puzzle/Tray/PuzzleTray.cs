@@ -67,10 +67,6 @@ namespace Client.Runtime
             var board = _puzzleService.GetCurrentBoard();
             if (board == null) return;
 
-            var boardData = board.Data;
-            int puzzleRows = boardData.XConstraint;
-            int puzzleCols = boardData.YConstraint;
-
             var edgePieces = new List<JigsawPiece>();
             var otherPieces = new List<JigsawPiece>();
 
@@ -80,11 +76,7 @@ namespace Client.Runtime
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
 
-                int r = p.CorrectIdx / puzzleCols;
-                int c = p.CorrectIdx % puzzleCols;
-                bool isEdge = r == 0 || r == puzzleRows - 1 || c == 0 || c == puzzleCols - 1;
-
-                if (isEdge) edgePieces.Add(p);
+                if (JigsawBoardCalculator.IsEdge(p.CorrectIdx)) edgePieces.Add(p);
                 else otherPieces.Add(p);
             }
 
