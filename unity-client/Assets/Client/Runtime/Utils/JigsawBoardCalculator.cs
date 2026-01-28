@@ -37,5 +37,14 @@ namespace Client.Runtime
             if (indices.Right != -1) neighbours.Add(Board.Cells[indices.Right]);
             return neighbours;
         }
+
+        public static bool IsEdge(int idx)
+        {
+            var data = Board.Data;
+            int r = idx / data.YConstraint;
+            int c = idx % data.YConstraint;
+            bool isEdge = r == 0 || r == data.XConstraint - 1 || c == 0 || c == data.YConstraint - 1;
+            return isEdge;
+        }
     }
 }

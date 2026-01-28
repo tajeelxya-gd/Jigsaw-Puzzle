@@ -139,7 +139,7 @@ namespace Client.Runtime
             if (cell.Idx == CorrectIdx && cell.Contains(this))
             {
                 Group.Lock();
-                UniEvents.Raise(new GroupPlacedEvent(Group));
+                UniEvents.Raise(new GroupPlacedEvent(Group, JigsawBoardCalculator.IsEdge(cell.Idx)));
                 return;
             }
 

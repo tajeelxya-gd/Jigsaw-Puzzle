@@ -70,7 +70,7 @@ namespace Client.Runtime
         public float GetNextHeight(int groupSize) => _board.GetSortingY(groupSize);
 
         [ContextMenu("PlayVfx")]
-        private void PlayVfx() => _particleSystem.Play();
+        public void PlayVfx() => _particleSystem.Play();
 
         private void SetHeight(JigsawPiece piece, float height)
         {

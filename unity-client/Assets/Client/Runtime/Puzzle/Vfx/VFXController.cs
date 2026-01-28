@@ -45,13 +45,6 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
-        private void HandlePiecePlaced(GroupPlacedEvent ev)
-        {
-            _cameraEffects.PlayGroupingEffect();
-            UniAudio.Play2D((IAudioConfig)_pieceLocked);
-            HighlightGroupAndNeighbours(ev.Group);
-        }
-
         public void HighlightGroupAndNeighbours(JigsawGroup group)
         {
             // 1. Run BFS to find all connected locked pieces
@@ -122,6 +115,54 @@ namespace Client.Runtime
 
             await UniTask.WhenAll(allTasks);
             await UniTask.Delay(TimeSpan.FromSeconds(0.35f), cancellationToken: cToken);
+        }
+
+        private void HandlePiecePlaced(GroupPlacedEvent ev)
+        {
+            _cameraEffects.PlayGroupingEffect();
+            UniAudio.Play2D((IAudioConfig)_pieceLocked);
+            if(ev.IsEdge && AllEdgesLocked(out var edges))
+            {
+                Highlight(edges);
+                return;
+            }
+            HighlightGroupAndNeighbours(ev.Group);
+        }
+
+        private bool AllEdgesLocked(out IEnumerable<JigsawBoardCell> edgeCells)
+        {
+            var board = _puzzleService.GetCurrentBoard();
+            var allCells = board.Cells;
+            var edges = new List<JigsawBoardCell>();
+            bool allLocked = true;
+
+            for (var i = 0; i < allCells.Count; i++)
+            {
+                var cell = allCells[i];
+
+                if (JigsawBoardCalculator.IsEdge(cell.Idx)) 
+                {
+                    edges.Add(cell);
+
+                    if (!cell.IsLocked)
+                    {
+                        allLocked = false;
+                    }
+                }
+            }
+
+            edgeCells = edges;
+            return allLocked;
+        }
+
+        private void Highlight(IEnumerable<JigsawBoardCell> cells)
+        {
+           foreach(var cell in cells)
+           {
+                var piece = cell.GetCorrectPiece();
+                piece.PlayVfx();
+                cell.PlayVfx();
+           }
         }
 
         private async UniTask ManualBounceAsync(JigsawPiece piece, float amount, float duration, float delay, CancellationToken cToken)
