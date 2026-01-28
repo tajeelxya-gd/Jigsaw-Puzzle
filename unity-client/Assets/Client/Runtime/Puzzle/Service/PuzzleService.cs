@@ -53,6 +53,7 @@ namespace Client.Runtime
             var levelData = GetCurrentLevelData();
             _board = _entityService.Get<JigsawBoard>(levelData.GridId);
             await _helper.CreateGridAsync(levelData.GridId, _puzzleBoard, cToken);
+            await _helper.CreateFullImageAsync($"{levelData.GridId}_full_image", _puzzleBoard, cToken);
             await _helper.LoadImageAsync(levelData.ImageKey);
             await _board.LoadPuzzleAsync(_puzzleBoard, _puzzleBounds, levelData.CellActionIds, cToken);
             _winConditionChecker.SetBoard(_board);
@@ -67,6 +68,7 @@ namespace Client.Runtime
             _board.UnLoadPuzzle();
             _helper.UnLoadImage();
             _helper.DestroyGrid();
+            _helper.DestroyFullImage();
             _board = null;
             _winConditionChecker.SetBoard(null);
             JigsawBoardCalculator.SetBoard(null);

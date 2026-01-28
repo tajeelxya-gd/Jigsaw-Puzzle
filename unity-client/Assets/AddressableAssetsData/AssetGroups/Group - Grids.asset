@@ -20,6 +20,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2da869cf9cf65584090c7b444ea2f374
+    m_Address: Full Image 7x5 Grid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3046f6f653675ad4280f921df625ea05
+    m_Address: Full Image 6x4 Grid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 308b430c7f78ca94c9f6e19fbcd4fd5a
+    m_Address: Full Image 4x3 Grid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7fb660798ed14c6498b9b754e939a5dd
     m_Address: Jigsaw Final 7x5 Grid
     m_ReadOnly: 0

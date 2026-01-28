@@ -21,6 +21,13 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: mg_4x3_standard_full_image
+    _reference:
+      m_AssetGUID: 308b430c7f78ca94c9f6e19fbcd4fd5a
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - _key: mg_6x4_standard
     _reference:
       m_AssetGUID: 02a4a1542ea0e9043b49fdfa3a2222c5
@@ -28,9 +35,23 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: mg_6x4_standard_full_image
+    _reference:
+      m_AssetGUID: 3046f6f653675ad4280f921df625ea05
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - _key: mg_7x5_standard
     _reference:
       m_AssetGUID: 7fb660798ed14c6498b9b754e939a5dd
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - _key: mg_7x5_standard_full_image
+    _reference:
+      m_AssetGUID: 2da869cf9cf65584090c7b444ea2f374
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

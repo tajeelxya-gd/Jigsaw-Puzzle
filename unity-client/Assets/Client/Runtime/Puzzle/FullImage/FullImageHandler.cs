@@ -10,12 +10,15 @@ namespace Client.Runtime
 {
     public sealed class FullImageHandler : MonoBehaviour, IFullImageHandler, IInitialisable, IResettable, IInjectable
     {
-        [SerializeField] private Renderer _fullImage;
-
+        private IJigsawResourceLoader _loader;
         private IWinConditionChecker _checker;
         private Camera _cam;
 
-        public void Inject(IResolver resolver) => _checker = resolver.Resolve<IWinConditionChecker>();
+        public void Inject(IResolver resolver) 
+        { 
+            _checker = resolver.Resolve<IWinConditionChecker>();
+            _loader = resolver.Resolve<IJigsawResourceLoader>();
+        }
 
         public void Initialise()
         {
@@ -47,7 +50,11 @@ namespace Client.Runtime
             }
         }
 
-        private void HandleLevelStart(LevelStartEvent @event) => Fade(false);
+        private void HandleLevelStart(LevelStartEvent @event) 
+        { 
+            _loader.FullImage.SetParent(transform);
+            Fade(false);
+        }
         
         private void HandleGroupPlaced(GroupPlacedEvent @event) => Fade(false);
 

@@ -14,6 +14,8 @@ namespace Client.Runtime
 
         Transform Grid { get; }
 
+        Transform FullImage { get; }
+
         UniTask LoadImageAsync(string key, CancellationToken cToken = default);
 
         void UnLoadImage();
@@ -21,5 +23,10 @@ namespace Client.Runtime
         UniTask CreateGridAsync(string key, Transform parent, CancellationToken cToken = default);
 
         void DestroyGrid();
+
+        UniTask CreateFullImageAsync(string key, Transform parent, CancellationToken cToken = default);
+
+        void DestroyFullImage();
+
     }
 }

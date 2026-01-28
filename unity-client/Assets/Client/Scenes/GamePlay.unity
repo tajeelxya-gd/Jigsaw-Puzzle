@@ -693,7 +693,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2039
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -934,7 +934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9110daa9bc72da043804e7d59a7bcb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.FullImageHandler
-  _fullImage: {fileID: 0}
 --- !u!1 &966765923
 GameObject:
   m_ObjectHideFlags: 0

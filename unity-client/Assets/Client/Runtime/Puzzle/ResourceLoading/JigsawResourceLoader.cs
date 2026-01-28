@@ -21,11 +21,13 @@ namespace Client.Runtime
         private AssetData _gridAssetData;
         private Texture2D _image;
         private Transform _grid;
+        private Transform _fullImage;
 
         public Material Base => _base;
         public Material OutlineTray => _outlineTray;
         public Material OutlineBoard => _outlineBoard;
         public Transform Grid => _grid;
+        public Transform FullImage => _fullImage;
 
         public async UniTask InitialiseAsync(CancellationToken cToken = default)
         {
@@ -65,6 +67,21 @@ namespace Client.Runtime
         {
             UniResources.DisposeInstance(_grid.gameObject);
             _grid = null;
+        }
+        
+        public async UniTask CreateFullImageAsync(string key, Transform parent, CancellationToken cToken = default)
+        {
+            var fullImageAsset = _gridAssetData.GetAsset(key);
+            _fullImage = await UniResources.CreateInstanceAsync<Transform>(fullImageAsset.RuntimeKey, parent, null, cToken: cToken);
+            _fullImage.localPosition = Vector3.zero;
+            var renderer = _fullImage.GetComponent<Renderer>();
+            renderer.sharedMaterials = new[] { _base };
+        }
+
+        public void DestroyFullImage()
+        {
+            UniResources.DisposeInstance(_fullImage.gameObject);
+            _fullImage = null;
         }
     }
 }
