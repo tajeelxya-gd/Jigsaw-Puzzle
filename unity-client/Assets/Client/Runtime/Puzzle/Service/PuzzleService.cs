@@ -109,7 +109,8 @@ namespace Client.Runtime
         private async UniTask SetLevelStateAsync(CancellationToken cToken = default)
         {
             var state = _savedData.CurrentLevelState;
-            if (state == null || state.Pieces == null || !state.LevelId.Equals(GetCurrentLevelData().Id)) return;
+
+            if (!IsStateValid(state)) return;
 
             var tasks = new List<UniTask>();
             foreach (var pieceState in state.Pieces)
@@ -122,5 +123,8 @@ namespace Client.Runtime
 
             await UniTask.WhenAll(tasks);
         }
+
+        private bool IsStateValid(JigsawLevelState state)
+            => state != null && state.Pieces != null && state.LevelId.Equals(GetCurrentLevelData().Id);
     }
 }
