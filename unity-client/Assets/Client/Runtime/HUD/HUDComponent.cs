@@ -15,7 +15,6 @@ namespace Client.Runtime
     public sealed class HUDComponent : MonoBehaviour, IInjectable, IInitialisable, IResettable
     {
         [SerializeField] private Button _reset;
-        [SerializeField] private Toggle _cornerPieces;
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Button _eye;
         [SerializeField] private TMP_Text _levelName;
@@ -39,7 +38,6 @@ namespace Client.Runtime
         private void RegisterEvents()
         {
             _reset.onClick.AddListener(HandleReset);
-            _cornerPieces.onValueChanged.AddListener(HandleCornerPieces);
             _dropPieces.onValueChanged.AddListener(HandleDropPieces);
             _eye.onClick.AddListener(HandleEye);
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
@@ -48,7 +46,6 @@ namespace Client.Runtime
         private void UnRegisterEvents()
         {
             _reset.onClick.RemoveListener(HandleReset);
-            _cornerPieces.onValueChanged.RemoveListener(HandleCornerPieces);
             _dropPieces.onValueChanged.RemoveListener(HandleDropPieces);
             _eye.onClick.RemoveListener(HandleEye);
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
@@ -65,11 +62,6 @@ namespace Client.Runtime
         {
             PlayAudio();
             UniWidgets.PushAsync<RestartLevelWidget>();
-        }
-
-        private void HandleCornerPieces(bool toggle)
-        {
-            PlayAudio();
         }
 
         private void HandleDropPieces(bool toggle)
@@ -101,7 +93,6 @@ namespace Client.Runtime
 
         private void SetToggles(bool toggle)
         {
-            _cornerPieces.SetIsOnWithoutNotify(toggle);
             _dropPieces.SetIsOnWithoutNotify(toggle);
         }
 
