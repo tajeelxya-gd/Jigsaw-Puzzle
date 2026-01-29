@@ -5,33 +5,78 @@
         {
             "width": 1344,
             "height": 2992,
-            "dpi": 486,
+            "navigationBarHeight": 64,
+            "dpi": 486.0,
             "orientations": [
                 {
                     "orientation": 1,
                     "friendlyName": "Portrait",
                     "safeArea": {
-                        "x": 0,
-                        "y": 118,
-                        "width": 1344,
-                        "height": 2810
-                    }
+                        "serializedVersion": "2",
+                        "x": 0.0,
+                        "y": 118.0,
+                        "width": 1344.0,
+                        "height": 2810.0
+                    },
+                    "cutouts": [
+                        {
+                            "serializedVersion": "2",
+                            "x": 632.0,
+                            "y": 2892.0,
+                            "width": 80.0,
+                            "height": 80.0
+                        }
+                    ]
                 },
                 {
                     "orientation": 3,
                     "friendlyName": "Landscape Left",
                     "safeArea": {
-                        "x": 118,
-                        "y": 0,
-                        "width": 2874,
-                        "height": 1344
-                    }
+                        "serializedVersion": "2",
+                        "x": 118.0,
+                        "y": 0.0,
+                        "width": 2810.0,
+                        "height": 1344.0
+                    },
+                    "cutouts": [
+                        {
+                            "serializedVersion": "2",
+                            "x": 0.0,
+                            "y": 632.0,
+                            "width": 118.0,
+                            "height": 80.0
+                        }
+                    ]
+                },
+                {
+                    "orientation": 4,
+                    "friendlyName": "Landscape Right",
+                    "safeArea": {
+                        "serializedVersion": "2",
+                        "x": 64.0,
+                        "y": 0.0,
+                        "width": 2810.0,
+                        "height": 1344.0
+                    },
+                    "cutouts": [
+                        {
+                            "serializedVersion": "2",
+                            "x": 2874.0,
+                            "y": 632.0,
+                            "width": 118.0,
+                            "height": 80.0
+                        }
+                    ]
                 }
-            ]
+            ],
+            "presentation": {
+                "cornerRadius": 120.0
+            }
         }
     ],
     "systemInfo": {
         "deviceModel": "Google Pixel 9 Pro XL",
+        "deviceType": 1,
         "operatingSystem": "Android"
     }
 }
