@@ -12,6 +12,8 @@ namespace Client.Runtime
 
         Material OutlineBoard { get; }
 
+        Material OutlineGrid { get; }
+
         Material Shadow { get; }
 
         Transform Grid { get; }
@@ -30,5 +32,8 @@ namespace Client.Runtime
 
         void DestroyFullImage();
 
+        UniTask LoadOutlineGridAsync(string key, CancellationToken cToken = default);
+
+        void UnLoadOutlineGrid();
     }
 }

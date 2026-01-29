@@ -77,7 +77,7 @@ namespace Client.Runtime
         {
             var mesh = _data.Mesh;
             var meshTransform = mesh.transform;
-            mesh.sharedMaterials = new[] { _helper.OutlineTray, _helper.Base };
+            mesh.sharedMaterials = new[] { _helper.OutlineTray, _helper.Base, _helper.OutlineGrid };
 
             meshTransform.localScale = new Vector3(meshTransform.localScale.x, 1f, meshTransform.localScale.z);
             mesh.GetComponent<Outline>().enabled = true;
@@ -89,7 +89,7 @@ namespace Client.Runtime
         {
             var mesh = _data.Mesh;
             var meshTransform = mesh.transform;
-            mesh.sharedMaterials = new[] { _helper.OutlineBoard, _helper.Base };
+            mesh.sharedMaterials = new[] { _helper.OutlineBoard, _helper.Base, _helper.OutlineGrid };
 
             meshTransform.localScale = new Vector3(meshTransform.localScale.x, 0.2f, meshTransform.localScale.z);
             mesh.GetComponent<Outline>().enabled = false;
@@ -119,7 +119,7 @@ namespace Client.Runtime
             if (_shadowProxy.TryGetComponent<MeshRenderer>(out var r))
             {
                 r.receiveShadows = false;
-                r.sharedMaterials = new[] { _helper.Shadow, _helper.Shadow };
+                r.sharedMaterials = new[] { _helper.Shadow, _helper.Shadow, _helper.Shadow };
             }
         }
     }

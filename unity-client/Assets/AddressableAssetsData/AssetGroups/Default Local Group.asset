@@ -20,6 +20,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4eb3f2b40f496441ba2ba8afe97824d
+    m_Address: Assets/Client/Exports/3D/4x3/Materials/Layer 0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0ce14bc814a26a49b59bbafc044f316
+    m_Address: Assets/Client/Exports/3D/4x3/Jigsaw Final 4x3 Grid.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eb90628729938604c809344efbfc382d
     m_Address: JigsawBoardCell
     m_ReadOnly: 0

@@ -27,6 +27,7 @@ namespace Client.Runtime
         public Material Base => _base;
         public Material OutlineTray => _outlineTray;
         public Material OutlineBoard => _outlineBoard;
+        public Material OutlineGrid {get; private set;}
         public Material Shadow => _shadow;
         public Transform Grid => _grid;
         public Transform FullImage => _fullImage;
@@ -84,6 +85,17 @@ namespace Client.Runtime
         {
             UniResources.DisposeInstance(_fullImage.gameObject);
             _fullImage = null;
+        }
+
+        public async UniTask LoadOutlineGridAsync(string key, CancellationToken cToken = default)
+        {
+            var outlineGridAsset = _gridAssetData.GetAsset(key);
+            OutlineGrid = await UniResources.LoadAssetAsync<Material>(outlineGridAsset.RuntimeKey, cToken: cToken);
+        }
+
+        public void UnLoadOutlineGrid()
+        {
+            UniResources.DisposeAsset(OutlineGrid);
         }
     }
 }
