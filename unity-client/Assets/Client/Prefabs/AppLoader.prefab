@@ -525,6 +525,8 @@ MonoBehaviour:
   _jigsawResourceLoader: {fileID: 0}
   _hudComponent: {fileID: 0}
   _vfxController: {fileID: 0}
+  _fullImageHandler: {fileID: 0}
+  _savedDataHandler: {fileID: 0}
 --- !u!1 &7964194896348924751
 GameObject:
   m_ObjectHideFlags: 0

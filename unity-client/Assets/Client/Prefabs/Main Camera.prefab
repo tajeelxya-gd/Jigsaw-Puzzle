@@ -96,11 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78da3f00f3328541b4526c0b0b5ec5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: OEBIF::cakeslice.OutlineEffect
-  lineThickness: 0.48
+  lineThickness: 0.45
   lineIntensity: 1
   lineSoftness: 1
   fillAmount: 0
-  lineColor0: {r: 0, g: 0, b: 0, a: 1}
+  lineColor0: {r: 0.5882353, g: 0, b: 0, a: 1}
   lineColor1: {r: 0, g: 1, b: 0, a: 1}
   lineColor2: {r: 0, g: 0, b: 1, a: 1}
   additiveRendering: 0

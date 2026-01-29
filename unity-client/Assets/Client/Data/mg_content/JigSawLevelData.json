@@ -9,14 +9,14 @@
   {
     "_id": "mg_level_2",
     "_name": "Level 2",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_2",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_3",
     "_name": "Level 3",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_3",
     "_difficulty": 0
   },
@@ -30,14 +30,14 @@
   {
     "_id": "mg_level_5",
     "_name": "Level 5",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_5",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_6",
     "_name": "Level 6",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_6",
     "_difficulty": 0
   },
@@ -51,14 +51,14 @@
   {
     "_id": "mg_level_8",
     "_name": "Level 8",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_8",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_9",
     "_name": "Level 9",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_9",
     "_difficulty": 0
   },
@@ -72,14 +72,14 @@
   {
     "_id": "mg_level_11",
     "_name": "Level 11",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_11",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_12",
     "_name": "Level 12",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_12",
     "_difficulty": 0
   },
@@ -93,14 +93,14 @@
   {
     "_id": "mg_level_14",
     "_name": "Level 14",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_14",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_15",
     "_name": "Level 15",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_15",
     "_difficulty": 0
   },
@@ -114,14 +114,14 @@
   {
     "_id": "mg_level_17",
     "_name": "Level 17",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_17",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_18",
     "_name": "Level 18",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_18",
     "_difficulty": 0
   },
@@ -135,14 +135,14 @@
   {
     "_id": "mg_level_20",
     "_name": "Level 20",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_20",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_21",
     "_name": "Level 21",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_21",
     "_difficulty": 0
   },
@@ -156,14 +156,14 @@
   {
     "_id": "mg_level_23",
     "_name": "Level 23",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_23",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_24",
     "_name": "Level 24",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_24",
     "_difficulty": 0
   },
@@ -177,14 +177,14 @@
   {
     "_id": "mg_level_26",
     "_name": "Level 26",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_26",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_27",
     "_name": "Level 27",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_27",
     "_difficulty": 0
   },
@@ -198,14 +198,14 @@
   {
     "_id": "mg_level_29",
     "_name": "Level 29",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_29",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_30",
     "_name": "Level 30",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_30",
     "_difficulty": 0
   },
@@ -219,14 +219,14 @@
   {
     "_id": "mg_level_32",
     "_name": "Level 32",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_32",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_33",
     "_name": "Level 33",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_33",
     "_difficulty": 0
   },
@@ -240,14 +240,14 @@
   {
     "_id": "mg_level_35",
     "_name": "Level 35",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_35",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_36",
     "_name": "Level 36",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_36",
     "_difficulty": 0
   },
@@ -261,14 +261,14 @@
   {
     "_id": "mg_level_38",
     "_name": "Level 38",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_38",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_39",
     "_name": "Level 39",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_39",
     "_difficulty": 0
   },
@@ -282,14 +282,14 @@
   {
     "_id": "mg_level_41",
     "_name": "Level 41",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_41",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_42",
     "_name": "Level 42",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_42",
     "_difficulty": 0
   },
@@ -303,14 +303,14 @@
   {
     "_id": "mg_level_44",
     "_name": "Level 44",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_44",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_45",
     "_name": "Level 45",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_45",
     "_difficulty": 0
   },
@@ -324,14 +324,14 @@
   {
     "_id": "mg_level_47",
     "_name": "Level 47",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_47",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_48",
     "_name": "Level 48",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_48",
     "_difficulty": 0
   },
@@ -345,14 +345,14 @@
   {
     "_id": "mg_level_50",
     "_name": "Level 50",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_50",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_51",
     "_name": "Level 51",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_51",
     "_difficulty": 0
   },
@@ -366,14 +366,14 @@
   {
     "_id": "mg_level_53",
     "_name": "Level 53",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_53",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_54",
     "_name": "Level 54",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_54",
     "_difficulty": 0
   },
@@ -387,14 +387,14 @@
   {
     "_id": "mg_level_56",
     "_name": "Level 56",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_56",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_57",
     "_name": "Level 57",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_57",
     "_difficulty": 0
   },
@@ -408,14 +408,14 @@
   {
     "_id": "mg_level_59",
     "_name": "Level 59",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_59",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_60",
     "_name": "Level 60",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_60",
     "_difficulty": 0
   },
@@ -429,14 +429,14 @@
   {
     "_id": "mg_level_62",
     "_name": "Level 62",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_62",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_63",
     "_name": "Level 63",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_63",
     "_difficulty": 0
   },
@@ -450,14 +450,14 @@
   {
     "_id": "mg_level_65",
     "_name": "Level 65",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_65",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_66",
     "_name": "Level 66",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_66",
     "_difficulty": 0
   },
@@ -471,14 +471,14 @@
   {
     "_id": "mg_level_68",
     "_name": "Level 68",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_68",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_69",
     "_name": "Level 69",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_69",
     "_difficulty": 0
   },
@@ -492,14 +492,14 @@
   {
     "_id": "mg_level_71",
     "_name": "Level 71",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_71",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_72",
     "_name": "Level 72",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_72",
     "_difficulty": 0
   },
@@ -513,14 +513,14 @@
   {
     "_id": "mg_level_74",
     "_name": "Level 74",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_74",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_75",
     "_name": "Level 75",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_75",
     "_difficulty": 0
   },
@@ -534,14 +534,14 @@
   {
     "_id": "mg_level_77",
     "_name": "Level 77",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_77",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_78",
     "_name": "Level 78",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_78",
     "_difficulty": 0
   },
@@ -555,14 +555,14 @@
   {
     "_id": "mg_level_80",
     "_name": "Level 80",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_80",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_81",
     "_name": "Level 81",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_81",
     "_difficulty": 0
   },
@@ -576,14 +576,14 @@
   {
     "_id": "mg_level_83",
     "_name": "Level 83",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_83",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_84",
     "_name": "Level 84",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_84",
     "_difficulty": 0
   },
@@ -597,14 +597,14 @@
   {
     "_id": "mg_level_86",
     "_name": "Level 86",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_86",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_87",
     "_name": "Level 87",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_87",
     "_difficulty": 0
   },
@@ -618,14 +618,14 @@
   {
     "_id": "mg_level_89",
     "_name": "Level 89",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_89",
     "_difficulty": 0
   },
   {
     "_id": "mg_level_90",
     "_name": "Level 90",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_90",
     "_difficulty": 0
   },
@@ -639,14 +639,14 @@
   {
     "_id": "mg_level_92",
     "_name": "Level 92",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_92",
     "_difficulty": 10
   },
   {
     "_id": "mg_level_93",
     "_name": "Level 93",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_93",
     "_difficulty": 10
   },
@@ -660,14 +660,14 @@
   {
     "_id": "mg_level_95",
     "_name": "Level 95",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_95",
     "_difficulty": 10
   },
   {
     "_id": "mg_level_96",
     "_name": "Level 96",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_96",
     "_difficulty": 10
   },
@@ -681,14 +681,14 @@
   {
     "_id": "mg_level_98",
     "_name": "Level 98",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_98",
     "_difficulty": 10
   },
   {
     "_id": "mg_level_99",
     "_name": "Level 99",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_99",
     "_difficulty": 10
   },
