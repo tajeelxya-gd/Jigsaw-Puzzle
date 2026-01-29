@@ -10,9 +10,12 @@ namespace Client.Runtime
 {
     public sealed class FullImageHandler : MonoBehaviour, IFullImageHandler, IInitialisable, IResettable, IInjectable
     {
+        [SerializeField] private float _levelCompletedDuration = 1;
+
         private IJigsawResourceLoader _loader;
         private IWinConditionChecker _checker;
         private Camera _cam;
+        private Renderer _renderer;
 
         public void Inject(IResolver resolver) 
         { 
@@ -36,6 +39,11 @@ namespace Client.Runtime
 
         public void ToggleFullImage() => Fade(!gameObject.activeSelf);
 
+        public UniTask PlayLevelCompletedAnimationAsync(CancellationToken cToken = default)
+        {
+            return UniTask.CompletedTask;
+        }
+
         private void Awake() => _cam = Camera.main;
 
         private void Update()
@@ -55,6 +63,7 @@ namespace Client.Runtime
             var fullImg = _loader.FullImage;
             fullImg.SetParent(transform);
             fullImg.gameObject.layer = gameObject.layer;
+            _renderer = fullImg.GetComponent<Renderer>();
             Fade(false);
         }
         
