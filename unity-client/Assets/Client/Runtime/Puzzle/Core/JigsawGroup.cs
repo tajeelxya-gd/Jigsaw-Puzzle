@@ -126,6 +126,30 @@ namespace Client.Runtime
             }
         }
 
+        public void SetIdleShadow()
+        {
+            foreach (var piece in this)
+            {
+                piece.Renderer.SetIdleShadow();
+            }
+        }
+
+        public void SetHoverShadow()
+        {
+            foreach (var piece in this)
+            {
+                piece.Renderer.SetHoverShadow();
+            }
+        }
+
+        public void SetShadowLayer(int layer)
+        {
+            foreach (var piece in this)
+            {
+                piece.Renderer.SetShadowLayer(layer);
+            }
+        }
+
         private void RemovePieceFromStack(JigsawBoardCell cell, JigsawPiece pieceToRemove)
         {
             // Use a temporary list to filter out the piece

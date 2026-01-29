@@ -16,6 +16,7 @@ namespace Client.Runtime
         [SerializeField] private Material _base;
         [SerializeField] private Material _outlineBoard;
         [SerializeField] private Material _outlineTray;
+        [SerializeField] private Material _shadow;
 
         private AssetData _imageAssetData;
         private AssetData _gridAssetData;
@@ -26,6 +27,7 @@ namespace Client.Runtime
         public Material Base => _base;
         public Material OutlineTray => _outlineTray;
         public Material OutlineBoard => _outlineBoard;
+        public Material Shadow => _shadow;
         public Transform Grid => _grid;
         public Transform FullImage => _fullImage;
 

@@ -38,6 +38,24 @@ namespace Client.Runtime
             return neighbours;
         }
 
+        public static bool IsMathematicallyAdjacent(JigsawPiece a, JigsawPiece b)
+        {
+            var boardData = JigsawBoardCalculator.Board.Data;
+            int cols = boardData.YConstraint;
+
+            int rA = a.CorrectIdx / cols;
+            int cA = a.CorrectIdx % cols;
+            int rB = b.CorrectIdx / cols;
+            int cB = b.CorrectIdx % cols;
+
+            int curRA = a.CurrentIdx / cols;
+            int curCA = a.CurrentIdx % cols;
+            int curRB = b.CurrentIdx / cols;
+            int curCB = b.CurrentIdx % cols;
+
+            return (rA - rB == curRA - curRB) && (cA - cB == curCA - curCB);
+        }
+
         public static bool IsEdge(int idx)
         {
             var data = Board.Data;
@@ -45,6 +63,14 @@ namespace Client.Runtime
             int c = idx % data.YConstraint;
             bool isEdge = r == 0 || r == data.XConstraint - 1 || c == 0 || c == data.YConstraint - 1;
             return isEdge;
+        }
+
+        public static bool IsBottomEdge(int idx)
+        {
+            var data = Board.Data;
+            int r = idx / data.YConstraint;
+            bool isBottomEdge = r == data.XConstraint - 1;
+            return isBottomEdge;
         }
     }
 }

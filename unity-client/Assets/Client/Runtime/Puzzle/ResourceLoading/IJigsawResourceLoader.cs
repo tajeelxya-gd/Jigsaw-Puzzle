@@ -12,6 +12,8 @@ namespace Client.Runtime
 
         Material OutlineBoard { get; }
 
+        Material Shadow { get; }
+
         Transform Grid { get; }
 
         Transform FullImage { get; }

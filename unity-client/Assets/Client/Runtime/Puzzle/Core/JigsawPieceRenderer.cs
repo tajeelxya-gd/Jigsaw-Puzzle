@@ -31,20 +31,7 @@ namespace Client.Runtime
             _data = data;
             _mpb = new MaterialPropertyBlock();
             AddShadowCaster();
-            SetActive(locked: false);
             _data.Mesh.gameObject.AddComponent<Outline>();
-        }
-
-        public void SetActive(bool locked)
-        {
-            _data.Mesh.gameObject.SetActive(true);
-            _shadowProxy.gameObject.SetActive(true);
-
-            if (locked)
-            {
-                // lift shadow
-                SetShadowY(0.02f);
-            }
         }
 
         public async UniTask FlashAsync(CancellationToken token)
@@ -95,7 +82,7 @@ namespace Client.Runtime
             meshTransform.localScale = new Vector3(meshTransform.localScale.x, 1f, meshTransform.localScale.z);
             mesh.GetComponent<Outline>().enabled = true;
             transform.rotation = Quaternion.Euler(_data.TrayEulers);
-            SetShadowY(0);
+            SetHoverShadow();
         }
 
         public void OnTrayExit()
@@ -107,7 +94,18 @@ namespace Client.Runtime
             meshTransform.localScale = new Vector3(meshTransform.localScale.x, 0.2f, meshTransform.localScale.z);
             mesh.GetComponent<Outline>().enabled = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
-            SetShadowY(-0.03f);
+        }
+
+        public void SetIdleShadow() => SetShadowZ(-0.0015f);
+
+        public void SetHoverShadow() => SetShadowZ(-0.0035f);
+
+        public void SetShadowLayer(int layer) => _shadowProxy.gameObject.layer = layer;
+
+        private void SetShadowZ(float zOffset)
+        {
+            var pos = _shadowProxy.transform.localPosition;
+            _shadowProxy.transform.localPosition = new Vector3(pos.x, pos.y, zOffset);
         }
 
         private void AddShadowCaster()
@@ -115,16 +113,14 @@ namespace Client.Runtime
             var mesh = _data.Mesh;
             _shadowProxy = Instantiate(mesh, mesh.transform);
             _shadowProxy.name = mesh.name + "_ShadowProxy";
-            _shadowProxy.gameObject.layer = LayerMask.NameToLayer("Default");
-            _shadowProxy.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            SetShadowLayer(mesh.gameObject.layer);
+            _shadowProxy.transform.SetLocalPositionAndRotation(new Vector3(0f, -0.001f, 0f), Quaternion.identity);
 
             if (_shadowProxy.TryGetComponent<MeshRenderer>(out var r))
             {
-                r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
                 r.receiveShadows = false;
+                r.sharedMaterials = new[] { _helper.Shadow, _helper.Shadow };
             }
         }
-
-        private void SetShadowY(float yOffset) => _shadowProxy.transform.localPosition = Vector3.up * yOffset;
     }
 }

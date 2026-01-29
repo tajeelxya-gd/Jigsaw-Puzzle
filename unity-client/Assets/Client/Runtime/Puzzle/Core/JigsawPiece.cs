@@ -28,6 +28,7 @@ namespace Client.Runtime
         public JigsawGroup Group { get; set; }
         public bool IsOverTray { get; private set; }
         public bool IsLocked { get; private set; }
+        public JigsawPieceRenderer Renderer => _renderer;
 
         public void Inject(IResolver resolver)
         {
@@ -56,16 +57,16 @@ namespace Client.Runtime
         public void OnExitTray()
         {
             IsOverTray = false;
-            _renderer.OnTrayExit();
             if (Group.Count > 1) return;
+            _renderer.OnTrayExit();
             _scaleController.ScaleTo(1f);
         }
 
         public void OnEnterTray()
         {
             IsOverTray = true;
-            _renderer.OnTrayEnter();
             if (Group.Count > 1) return;
+            _renderer.OnTrayEnter();
             var scale = _puzzleService.GetCurrentBoard().Data.TrayScale;
             _scaleController.ScaleTo(scale);
         }
@@ -75,7 +76,6 @@ namespace Client.Runtime
             _dragController.enabled = false;
             _collider.enabled = false;
             _snapController.enabled = false;
-            _renderer.SetActive(locked: true);
             IsLocked = true;
         }
 
@@ -110,9 +110,10 @@ namespace Client.Runtime
 
         private void HandleDragStarted()
         {
-            // _renderer.LiftShadow();
             _puzzleTray.SetHoverPiece(this);
             Group.SetPosY(0.01f);
+            Group.SetHoverShadow();
+            Group.SetShadowLayer(LayerMask.NameToLayer("JigsawPiece"));
             Group.RemoveFromCurrentCells();
         }
 
@@ -120,7 +121,6 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
-            // _renderer.UnLiftShadow();
             _puzzleTray.SetHoverPiece(null);
 
             if (IsOverTray && Group.Count == 1)
@@ -134,7 +134,13 @@ namespace Client.Runtime
 
         private void HandleSnapped(JigsawBoardCell cell, float height)
         {
+            Group.SetIdleShadow();
             Group.SetCurrentCells(cell.Idx, this, height);
+
+            if(JigsawBoardCalculator.IsBottomEdge(cell.Idx))
+            {
+                Group.SetShadowLayer(LayerMask.NameToLayer("JigsawFrame"));
+            }
 
             if (cell.Idx == CorrectIdx && cell.Contains(this))
             {
@@ -170,7 +176,7 @@ namespace Client.Runtime
             {
                 if (otherPiece == null) continue;
 
-                bool isCorrectNeighbor = IsMathematicallyAdjacent(piece, otherPiece);
+                bool isCorrectNeighbor = JigsawBoardCalculator.IsMathematicallyAdjacent(piece, otherPiece);
 
                 if (isCorrectNeighbor && piece.Group != otherPiece.Group)
                 {
@@ -179,27 +185,6 @@ namespace Client.Runtime
                     break;
                 }
             }
-        }
-
-        private bool IsMathematicallyAdjacent(JigsawPiece a, JigsawPiece b)
-        {
-            var boardData = JigsawBoardCalculator.Board.Data;
-            int cols = boardData.YConstraint;
-
-            // Get 2D grid distance in the "solved" state
-            int rA = a.CorrectIdx / cols;
-            int cA = a.CorrectIdx % cols;
-            int rB = b.CorrectIdx / cols;
-            int cB = b.CorrectIdx % cols;
-
-            // Get 2D grid distance in the "current" state
-            int curRA = a.CurrentIdx / cols;
-            int curCA = a.CurrentIdx % cols;
-            int curRB = b.CurrentIdx / cols;
-            int curCB = b.CurrentIdx % cols;
-
-            // They are a match if their relative distance is the same in both states
-            return (rA - rB == curRA - curRB) && (cA - cB == curCA - curCB);
         }
     }
 }
