@@ -121,6 +121,7 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
+            Group.SetIdleShadow();
             _puzzleTray.SetHoverPiece(null);
 
             if (IsOverTray && Group.Count == 1)

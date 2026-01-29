@@ -96,16 +96,37 @@ namespace Client.Runtime
             transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
-        public void SetIdleShadow() => SetShadowZ(-0.0015f);
+        public void SetIdleShadow() => SetShadowZAsync(-0.0015f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
 
-        public void SetHoverShadow() => SetShadowZ(-0.0035f);
+        public void SetHoverShadow() => SetShadowZAsync(-0.0035f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
 
         public void SetShadowLayer(int layer) => _shadowProxy.gameObject.layer = layer;
 
-        private void SetShadowZ(float zOffset)
+        private async UniTaskVoid SetShadowZAsync(float targetZ, float duration, CancellationToken cToken = default)
         {
-            var pos = _shadowProxy.transform.localPosition;
-            _shadowProxy.transform.localPosition = new Vector3(pos.x, pos.y, zOffset);
+            Vector3 startPos = _shadowProxy.transform.localPosition;
+            float startZ = startPos.z;
+            float elapsed = 0f;
+
+            try
+            {
+                while (elapsed < duration)
+                {
+                    if (cToken.IsCancellationRequested) return;
+
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / duration);
+                    float currentZ = Mathf.Lerp(startZ, targetZ, Mathf.SmoothStep(0, 1, t));
+                    _shadowProxy.transform.localPosition = new Vector3(startPos.x, startPos.y, currentZ);
+                    await UniTask.Yield(PlayerLoopTiming.Update, cToken);
+                }
+
+                _shadowProxy.transform.localPosition = new Vector3(startPos.x, startPos.y, targetZ);
+            }
+            catch (System.OperationCanceledException)
+            {
+                // Empty
+            }
         }
 
         private void AddShadowCaster()
