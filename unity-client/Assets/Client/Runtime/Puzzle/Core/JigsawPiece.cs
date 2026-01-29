@@ -121,7 +121,6 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
-            Group.SetIdleShadow();
             _puzzleTray.SetHoverPiece(null);
 
             if (IsOverTray && Group.Count == 1)
@@ -130,6 +129,7 @@ namespace Client.Runtime
                 return;
             }
 
+            Group.SetIdleShadow();
             _snapController.SnapToClosestCell(Group, _puzzleService.GetCurrentBoard().Cells);
         }
 
