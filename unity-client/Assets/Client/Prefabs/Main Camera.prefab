@@ -100,7 +100,7 @@ MonoBehaviour:
   lineIntensity: 1
   lineSoftness: 1
   fillAmount: 0
-  lineColor0: {r: 0.5882353, g: 0, b: 0, a: 1}
+  lineColor0: {r: 0.64705884, g: 0, b: 0, a: 1}
   lineColor1: {r: 0, g: 1, b: 0, a: 1}
   lineColor2: {r: 0, g: 0, b: 1, a: 1}
   additiveRendering: 0
