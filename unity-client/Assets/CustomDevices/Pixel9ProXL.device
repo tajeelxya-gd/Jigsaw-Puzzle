@@ -5,7 +5,7 @@
         {
             "width": 1344,
             "height": 2992,
-            "navigationBarHeight": 64,
+            "navigationBarHeight": 72,
             "dpi": 486.0,
             "orientations": [
                 {
@@ -14,15 +14,15 @@
                     "safeArea": {
                         "serializedVersion": "2",
                         "x": 0.0,
-                        "y": 118.0,
+                        "y": 72.0,
                         "width": 1344.0,
-                        "height": 2810.0
+                        "height": 2752.0
                     },
                     "cutouts": [
                         {
                             "serializedVersion": "2",
                             "x": 632.0,
-                            "y": 2892.0,
+                            "y": 2852.0,
                             "width": 80.0,
                             "height": 80.0
                         }
@@ -33,17 +33,17 @@
                     "friendlyName": "Landscape Left",
                     "safeArea": {
                         "serializedVersion": "2",
-                        "x": 118.0,
+                        "x": 168.0,
                         "y": 0.0,
-                        "width": 2810.0,
+                        "width": 2752.0,
                         "height": 1344.0
                     },
                     "cutouts": [
                         {
                             "serializedVersion": "2",
-                            "x": 0.0,
+                            "x": 60.0,
                             "y": 632.0,
-                            "width": 118.0,
+                            "width": 80.0,
                             "height": 80.0
                         }
                     ]
@@ -53,17 +53,17 @@
                     "friendlyName": "Landscape Right",
                     "safeArea": {
                         "serializedVersion": "2",
-                        "x": 64.0,
+                        "x": 72.0,
                         "y": 0.0,
-                        "width": 2810.0,
+                        "width": 2752.0,
                         "height": 1344.0
                     },
                     "cutouts": [
                         {
                             "serializedVersion": "2",
-                            "x": 2874.0,
+                            "x": 2852.0,
                             "y": 632.0,
-                            "width": 118.0,
+                            "width": 80.0,
                             "height": 80.0
                         }
                     ]
