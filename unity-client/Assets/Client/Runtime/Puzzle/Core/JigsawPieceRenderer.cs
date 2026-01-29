@@ -96,16 +96,17 @@ namespace Client.Runtime
             transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
-        public void SetIdleShadow() => SetShadowZAsync(-0.0015f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
+        public void SetIdleShadow() => SetShadowAsync(-0.00125f, -0.0015f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
 
-        public void SetHoverShadow() => SetShadowZAsync(-0.0035f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
+        public void SetHoverShadow() => SetShadowAsync(-0.00325f, -0.0035f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
 
         public void SetShadowLayer(int layer) => _shadowProxy.gameObject.layer = layer;
 
-        private async UniTaskVoid SetShadowZAsync(float targetZ, float duration, CancellationToken cToken = default)
+        private async UniTaskVoid SetShadowAsync(float targetX, float targetZ, float duration, CancellationToken cToken = default)
         {
             Vector3 startPos = _shadowProxy.transform.localPosition;
             float startZ = startPos.z;
+            float startX = startPos.x;
             float elapsed = 0f;
 
             try
@@ -117,11 +118,12 @@ namespace Client.Runtime
                     elapsed += Time.deltaTime;
                     float t = Mathf.Clamp01(elapsed / duration);
                     float currentZ = Mathf.Lerp(startZ, targetZ, Mathf.SmoothStep(0, 1, t));
-                    _shadowProxy.transform.localPosition = new Vector3(startPos.x, startPos.y, currentZ);
+                    float currentX = Mathf.Lerp(startX, targetX, Mathf.SmoothStep(0, 1, t));
+                    _shadowProxy.transform.localPosition = new Vector3(currentX, startPos.y, currentZ);
                     await UniTask.Yield(PlayerLoopTiming.Update, cToken);
                 }
 
-                _shadowProxy.transform.localPosition = new Vector3(startPos.x, startPos.y, targetZ);
+                _shadowProxy.transform.localPosition = new Vector3(targetX, startPos.y, targetZ);
             }
             catch (System.OperationCanceledException)
             {
