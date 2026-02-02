@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
+using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
 
@@ -153,6 +154,7 @@ namespace Client.Runtime
                 _activePieces.Insert(Mathf.Clamp(targetIndex, 0, _activePieces.Count), piece);
                 piece.transform.SetParent(transform);
             }
+            piece.Deselect();
             _hoverPiece = null;
         }
 
@@ -392,6 +394,7 @@ namespace Client.Runtime
                             {
                                 _activePieces.RemoveAt(index);
                                 _draggingPiece = _hitPiece;
+                                _draggingPiece.Select();
                                 _draggingStartWorldPos = _draggingPiece.transform.position;
                                 _draggingStartHitPoint = _startHitPoint;
                                 _hitOffset = _draggingStartWorldPos - _draggingStartHitPoint;

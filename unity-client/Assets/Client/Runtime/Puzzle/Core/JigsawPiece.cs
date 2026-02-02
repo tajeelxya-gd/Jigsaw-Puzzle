@@ -114,7 +114,7 @@ namespace Client.Runtime
             _snapController.OnSnapped -= HandleSnapped;
         }
 
-        private void HandleDragStarted()
+        public void Select()
         {
             UniEvents.Raise(new PieceSelectedEvent(true));
             _puzzleTray.SetHoverPiece(this);
@@ -124,12 +124,22 @@ namespace Client.Runtime
             Group.RemoveFromCurrentCells();
         }
 
+        public void Deselect()
+        {
+            UniEvents.Raise(new PieceSelectedEvent(false));
+            _puzzleTray.SetHoverPiece(null);
+        }
+
+        private void HandleDragStarted()
+        {
+            Select();
+        }
+
         private void HandleOnDragged(Vector3 delta) => Group.Move(delta);
 
         private void HandleDraggedEnded()
         {
-            UniEvents.Raise(new PieceSelectedEvent(false));
-            _puzzleTray.SetHoverPiece(null);
+            Deselect();
 
             if (IsOverTray && Group.Count == 1)
             {

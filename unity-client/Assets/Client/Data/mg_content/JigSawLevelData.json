@@ -2,7 +2,7 @@
   {
     "_id": "mg_level_1",
     "_name": "Level 1",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_1",
     "_difficulty": 0
   },
