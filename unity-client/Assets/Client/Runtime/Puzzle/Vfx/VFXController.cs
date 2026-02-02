@@ -126,9 +126,10 @@ namespace Client.Runtime
         {
             _cameraEffects.PlayGroupingEffect();
             UniAudio.Play2D((IAudioConfig)_pieceLocked);
-            if(JigsawBoardCalculator.IsEdge(ev.Anchor.CorrectIdx) && AllEdgesLocked(out var edges))
+            if (JigsawBoardCalculator.IsEdge(ev.Anchor.CorrectIdx) && AllEdgesLocked(out var edges))
             {
                 HighlightClockwise(edges, ev.Anchor);
+                UniEvents.Raise(new ShowToastEvent("Congrats!"));
                 return;
             }
             HighlightGroupAndNeighbours(ev.Group);
@@ -145,7 +146,7 @@ namespace Client.Runtime
             {
                 var piece = allPieces[i];
 
-                if (JigsawBoardCalculator.IsEdge(piece.CorrectIdx)) 
+                if (JigsawBoardCalculator.IsEdge(piece.CorrectIdx))
                 {
                     edges.Add(piece);
 
@@ -167,11 +168,11 @@ namespace Client.Runtime
             int rows = data.XConstraint;
             int cols = data.YConstraint;
 
-            var sorted = pieces.OrderBy(p => 
+            var sorted = pieces.OrderBy(p =>
             {
                 int r = p.CorrectIdx / cols;
                 int col = p.CorrectIdx % cols;
-                if (r == 0) return col; 
+                if (r == 0) return col;
                 if (col == cols - 1) return cols + r;
                 if (r == rows - 1) return cols + rows + (cols - 1 - col);
                 return cols + rows + cols + (rows - 1 - r);
@@ -184,7 +185,7 @@ namespace Client.Runtime
                 sorted = rotated;
             }
 
-            foreach(var piece in sorted)
+            foreach (var piece in sorted)
             {
                 if (!_vfxQueue.Contains(piece)) _vfxQueue.Add(piece);
             }
@@ -233,7 +234,7 @@ namespace Client.Runtime
             _isBatching = false;
         }
 
-        private async UniTaskVoid TriggerBatchVfxAsync(float vfxDelay,CancellationToken cToken = default)
+        private async UniTaskVoid TriggerBatchVfxAsync(float vfxDelay, CancellationToken cToken = default)
         {
             if (_isBatching) return;
             _isBatching = true;
@@ -241,7 +242,7 @@ namespace Client.Runtime
             await Task.Yield();
 
             var delay = 0f;
-            var tasks =  new List<UniTask>();
+            var tasks = new List<UniTask>();
             foreach (var p in _vfxQueue)
             {
                 tasks.Add(UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken).ContinueWith(() => p.PlayVfx()));

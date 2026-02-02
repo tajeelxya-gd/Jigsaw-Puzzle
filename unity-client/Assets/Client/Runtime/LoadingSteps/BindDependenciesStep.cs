@@ -21,6 +21,7 @@ namespace Client.Runtime
         [SerializeField] private VFXController _vfxController;
         [SerializeField] private FullImageHandler _fullImageHandler;
         [SerializeField] private SavedDataHandler _savedDataHandler;
+        [SerializeField] private ToastHandler _toastHandler;
 
         private IBinder _binder;
 
@@ -46,6 +47,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton(_jigsawResourceLoader);
             _binder.BindAsSingleton(_hudComponent);
             _binder.BindAsSingleton(_fullImageHandler);
+            _binder.BindAsSingleton(_toastHandler);
 
             return UniTask.CompletedTask;
         }

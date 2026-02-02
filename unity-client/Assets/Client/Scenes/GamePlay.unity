@@ -604,10 +604,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1579571277}
     m_Modifications:
-    - target: {fileID: 35595666045627206, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -381
-      objectReference: {fileID: 0}
     - target: {fileID: 1197033127427129054, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -615,18 +611,6 @@ PrefabInstance:
     - target: {fileID: 2789706527840876211, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
       propertyPath: m_Name
       value: UI - HUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 5273515938102177081, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -153.70001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5273515938102177081, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -359.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998743721730027079, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -375.1003
       objectReference: {fileID: 0}
     - target: {fileID: 8693616777922887509, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
       propertyPath: m_Pivot.x
@@ -729,6 +713,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7909d093274e84c83272e9117ed6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.HUDComponent
+--- !u!114 &198023260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1266376076446786236, guid: 38b2b286f57d2ef4995bc5349dfd718a, type: 3}
+  m_PrefabInstance: {fileID: 198023257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d711748517204f2409d9e430d68b592c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.ToastHandler
 --- !u!1 &206392853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1855,10 @@ PrefabInstance:
       propertyPath: _hudComponent
       value: 
       objectReference: {fileID: 198023259}
+    - target: {fileID: 9141284652492727019, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
+      propertyPath: _toastHandler
+      value: 
+      objectReference: {fileID: 198023260}
     - target: {fileID: 9141284652492727019, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
       propertyPath: _cameraEffects
       value: 
