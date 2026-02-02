@@ -133,7 +133,7 @@ namespace Client.Runtime
             var pos = mesh.localPosition;
             mesh.localPosition = new Vector3(pos.x, 0f, pos.z);
             var meshRenderer = mesh.GetComponent<Renderer>();
-            var rendererData = new JigsawPieceRendererData(meshRenderer, _tray.Transform.rotation.eulerAngles);
+            var rendererData = new JigsawPieceRendererData(meshRenderer, _tray.Transform.rotation.eulerAngles, Data.IdleShadowOffset, Data.HoverShadowOffset);
             piece.Inject(_resolver);
             piece.Init(cell, rendererData);
             _pieces.Add(piece);

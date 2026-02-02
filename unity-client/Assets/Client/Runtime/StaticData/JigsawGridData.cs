@@ -13,6 +13,8 @@ namespace Client.Runtime
         [SerializeField] private int _yConstraint;
         [SerializeField] private float _trayScale;
         [SerializeField] private Vector2 _traySpacing;
+        [SerializeField] private Vector3 _idleShadowOffset;
+        [SerializeField] private Vector3 _hoverShadowOffset;
 
         public string Id => _id;
         public string Name => _name;
@@ -20,6 +22,8 @@ namespace Client.Runtime
         public int YConstraint => _yConstraint;
         public float TrayScale => _trayScale;
         public Vector2 TraySpacing => _traySpacing;
+        public Vector3 IdleShadowOffset => _idleShadowOffset;
+        public Vector3 HoverShadowOffset => _hoverShadowOffset;
 
         public IEntity CreateEntity() => new JigsawBoard(Id);
     }

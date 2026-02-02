@@ -96,14 +96,16 @@ namespace Client.Runtime
             transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
-        public void SetIdleShadow() => SetShadowAsync(-0.00125f, -0.0015f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
+        public void SetIdleShadow() => SetShadowAsync(_data.IdleShadowOffset, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
 
-        public void SetHoverShadow() => SetShadowAsync(-0.00325f, -0.0035f, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
+        public void SetHoverShadow() => SetShadowAsync(_data.HoverShadowOffset, 0.1f, this.GetCancellationTokenOnDestroy()).Forget();
 
         public void SetShadowLayer(int layer) => _shadowProxy.gameObject.layer = layer;
 
-        private async UniTaskVoid SetShadowAsync(float targetX, float targetZ, float duration, CancellationToken cToken = default)
+        private async UniTaskVoid SetShadowAsync(Vector3 offset, float duration, CancellationToken cToken = default)
         {
+            var targetX = offset.x;
+            var targetZ = offset.z;
             Vector3 startPos = _shadowProxy.transform.localPosition;
             float startZ = startPos.z;
             float startX = startPos.x;
