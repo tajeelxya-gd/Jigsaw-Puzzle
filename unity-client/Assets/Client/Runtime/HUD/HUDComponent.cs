@@ -17,6 +17,7 @@ namespace Client.Runtime
         [SerializeField] private Button _reset;
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Button _eye;
+        [SerializeField] private Button _lock;
         [SerializeField] private TMP_Text _levelName;
         [SerializeField] private ScriptableObject _click;
 
@@ -41,6 +42,7 @@ namespace Client.Runtime
             _dropPieces.onValueChanged.AddListener(HandleDropPieces);
             _eye.onClick.AddListener(HandleEye);
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
+            UniEvents.Subscribe<PieceSelectedEvent>(HandlePieceSelected);
         }
 
         private void UnRegisterEvents()
@@ -49,6 +51,15 @@ namespace Client.Runtime
             _dropPieces.onValueChanged.RemoveListener(HandleDropPieces);
             _eye.onClick.RemoveListener(HandleEye);
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
+            UniEvents.Unsubscribe<PieceSelectedEvent>(HandlePieceSelected);
+        }
+
+        private void HandlePieceSelected(PieceSelectedEvent @event)
+        {
+            var targetAlpha = @event.Selected ? 0.2f : 1f;
+            _dropPieces.image.SetAlpha(targetAlpha);
+            _lock.image.SetAlpha(targetAlpha);
+            _eye.image.SetAlpha(targetAlpha);
         }
 
         private void HandleLevelStart(LevelStartEvent @event)
@@ -98,7 +109,7 @@ namespace Client.Runtime
 
         private void SetDropButton(bool toggle)
         {
-            _dropPieces.transform.localEulerAngles = new Vector3(0f, 0f, toggle ? 90f : -90f);
+            _dropPieces.transform.localEulerAngles = new Vector3(0f, 0f, toggle ? 0f : 180f);
             _dropPieces.interactable = toggle ? _puzzleTray.CanDropPieces() : _puzzleTray.CanPickPieces();
         }
 

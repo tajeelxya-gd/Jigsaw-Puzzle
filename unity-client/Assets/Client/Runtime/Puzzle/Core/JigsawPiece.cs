@@ -110,6 +110,7 @@ namespace Client.Runtime
 
         private void HandleDragStarted()
         {
+            UniEvents.Raise(new PieceSelectedEvent(true));
             _puzzleTray.SetHoverPiece(this);
             Group.SetPosY(0.01f);
             Group.SetHoverShadow();
@@ -121,6 +122,7 @@ namespace Client.Runtime
 
         private void HandleDraggedEnded()
         {
+            UniEvents.Raise(new PieceSelectedEvent(false));
             _puzzleTray.SetHoverPiece(null);
 
             if (IsOverTray && Group.Count == 1)
