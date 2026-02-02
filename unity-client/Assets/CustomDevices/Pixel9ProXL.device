@@ -14,9 +14,9 @@
                     "safeArea": {
                         "serializedVersion": "2",
                         "x": 0.0,
-                        "y": 44.0,
+                        "y": 0.0,
                         "width": 1344.0,
-                        "height": 2752.0
+                        "height": 2796.0
                     },
                     "cutouts": [
                         {
@@ -35,7 +35,7 @@
                         "serializedVersion": "2",
                         "x": 196.0,
                         "y": 0.0,
-                        "width": 2752.0,
+                        "width": 2796.0,
                         "height": 1344.0
                     },
                     "cutouts": [
@@ -53,9 +53,9 @@
                     "friendlyName": "Landscape Right",
                     "safeArea": {
                         "serializedVersion": "2",
-                        "x": 44.0,
+                        "x": 0.0,
                         "y": 0.0,
-                        "width": 2752.0,
+                        "width": 2796.0,
                         "height": 1344.0
                     },
                     "cutouts": [
