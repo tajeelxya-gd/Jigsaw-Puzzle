@@ -11,7 +11,8 @@ namespace Client.Runtime
         public event Action<Vector3> OnDragged;
         public event Action OnDragEnded;
 
-        private readonly float _potency = 3.75f;
+        [SerializeField] private float _potency = 3.75f;
+        [SerializeField] private float _lerpSpeed = 20f;
 
         private Camera _cam;
         private bool _isDragging;
@@ -19,6 +20,7 @@ namespace Client.Runtime
         private Plane _dragPlane;
         private Vector3 _startPosition;
         private Vector3 _startHitPoint;
+        private Vector3 _currentSmoothTarget;
 
         private void Awake() => _cam = Camera.main;
 
@@ -55,10 +57,22 @@ namespace Client.Runtime
             return true;
         }
 
+        public void SetStartPoints(Vector3 worldPosition, Vector3 hitPoint)
+        {
+            _startPosition = worldPosition;
+            _startHitPoint = hitPoint;
+            _dragPlane = new Plane(Vector3.up, _startPosition);
+            _offset = _startPosition - _startHitPoint;
+            _currentSmoothTarget = transform.position;
+        }
+
         public void ForceStartDrag()
         {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-            InitializeDragMath(ray);
+            if (_dragPlane.normal == Vector3.zero) // If not already initialized via SetStartPoints
+            {
+                Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+                InitializeDragMath(ray);
+            }
             BeginDragSequence();
         }
 
@@ -77,6 +91,7 @@ namespace Client.Runtime
         private void BeginDragSequence()
         {
             _isDragging = true;
+            _currentSmoothTarget = transform.position;
             OnDragStarted.Broadcast();
         }
 
@@ -94,8 +109,10 @@ namespace Client.Runtime
             float zDelta = rawDelta.z;
             float modifiedZ = zDelta > -0.02f ? zDelta * (1f + (zDelta + 0.02f) * _potency) : zDelta;
 
-            Vector3 target = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
-            Vector3 moveDelta = target - transform.position;
+            Vector3 instantTarget = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
+            _currentSmoothTarget = Vector3.Lerp(_currentSmoothTarget, instantTarget, Time.deltaTime * _lerpSpeed);
+
+            Vector3 moveDelta = _currentSmoothTarget - transform.position;
             moveDelta.y = 0f;
 
             if (moveDelta.sqrMagnitude > Mathf.Epsilon)

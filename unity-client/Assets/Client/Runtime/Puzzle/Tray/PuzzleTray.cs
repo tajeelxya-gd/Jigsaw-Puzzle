@@ -34,8 +34,14 @@ namespace Client.Runtime
         private float _scrollX = 0f;
         private Vector3 _startMousePos;
         private Vector3 _lastMousePos;
+        private Vector3 _startHitPoint;
+        private Vector3 _hitOffset;
         private bool _isDragging;
-        private bool _scrollLocked;
+        private JigsawPiece _draggingPiece;
+        private Vector3 _draggingStartWorldPos;
+        private Vector3 _draggingStartHitPoint;
+        private int _draggingPieceCol;
+        private bool _isScrolling;
         private float _scrollVelocity = 0f;
 
         public BoxCollider TrayCollider => _trayCollider;
@@ -54,9 +60,10 @@ namespace Client.Runtime
             _scrollX = 0;
             _scrollVelocity = 0f;
             _hitPiece = null;
+            _draggingPiece = null;
             _hoverPiece = null;
             _startMousePos = _lastMousePos = Vector3.zero;
-            _isDragging = _scrollLocked = false;
+            _isDragging = _isScrolling = false;
         }
 
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
@@ -254,8 +261,8 @@ namespace Client.Runtime
 
             Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
-            bool shouldShowInsertionSpace = _hoverPiece != null &&
-                _hoverPiece.Group.Count == 1 && _hoverPiece.IsOverTray;
+            bool shouldShowInsertionSpace = (_hoverPiece != null &&
+                _hoverPiece.Group.Count == 1 && _hoverPiece.IsOverTray) || (_draggingPiece != null);
 
             int insertionIndex = shouldShowInsertionSpace ? GetInsertionIndex() : -1;
 
@@ -326,48 +333,43 @@ namespace Client.Runtime
                 if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider == _trayCollider)
                 {
                     _isDragging = true;
-                    _scrollLocked = false;
+                    _isScrolling = false;
                     _scrollVelocity = 0f;
                     _startMousePos = Input.mousePosition;
                     _lastMousePos = Input.mousePosition;
+                    _startHitPoint = hit.point;
                     _hitPiece = GetPieceAtPosition(hit.point);
                 }
             }
 
             if (InputHandler._3DActive && Input.GetMouseButtonUp(0))
             {
+                if (_isDragging && _draggingPiece != null)
+                {
+                    Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+                    if (_trayCollider.Raycast(ray, out _, 100f)) SubmitPiece(_draggingPiece);
+                    else PickUpPiece(_draggingPiece);
+                }
+
                 _isDragging = false;
-                _scrollLocked = false;
+                _isScrolling = false;
                 _hitPiece = null;
+                _draggingPiece = null;
             }
 
             if (_isDragging)
             {
                 Vector3 currentMousePos = Input.mousePosition;
-                if (!_scrollLocked)
+                Vector2 totalDelta = currentMousePos - _startMousePos;
+                float angle = Mathf.Abs(Mathf.Atan2(totalDelta.y, totalDelta.x) * Mathf.Rad2Deg);
+
+                // 1. Horizontal Scroll Activation & Logic
+                if (!_isScrolling && totalDelta.magnitude > _dragThreshold)
                 {
-                    Vector2 delta = currentMousePos - _startMousePos;
-                    float totalDist = delta.magnitude;
-
-                    if (totalDist > _dragThreshold)
-                    {
-                        float angle = Mathf.Abs(Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);
-
-                        bool isHorizontal = angle < 25f || angle > 155f;
-
-                        if (isHorizontal)
-                        {
-                            _scrollLocked = true;
-                        }
-                        else
-                        {
-                            if (_hitPiece != null) PickUpPiece(_hitPiece);
-                            _isDragging = false;
-                        }
-                    }
+                    if (angle < 25f || angle > 155f) _isScrolling = true;
                 }
 
-                if (_scrollLocked)
+                if (_isScrolling)
                 {
                     float deltaX = (currentMousePos.x - _lastMousePos.x) / Screen.width;
                     float scrollDelta = deltaX * _scrollSpeed;
@@ -375,6 +377,51 @@ namespace Client.Runtime
                     _scrollVelocity = scrollDelta / Time.deltaTime;
                     ClampScroll();
                 }
+
+                // 2. Piece Picking & Movement
+                if (_hitPiece != null && _draggingPiece == null)
+                {
+                    float thresholdY = _isScrolling ? _dragThreshold * 2f : _dragThreshold;
+                    if (Mathf.Abs(totalDelta.y) > thresholdY)
+                    {
+                        bool isMainlyVertical = angle >= 25f && angle <= 155f;
+                        if (isMainlyVertical)
+                        {
+                            int index = _activePieces.IndexOf(_hitPiece);
+                            if (index != -1)
+                            {
+                                _activePieces.RemoveAt(index);
+                                _draggingPiece = _hitPiece;
+                                _draggingStartWorldPos = _draggingPiece.transform.position;
+                                _draggingStartHitPoint = _startHitPoint;
+                                _hitOffset = _draggingStartWorldPos - _draggingStartHitPoint;
+                            }
+                        }
+                    }
+                }
+
+                if (_draggingPiece != null)
+                {
+                    Ray ray = _cam.ScreenPointToRay(currentMousePos);
+                    if (_trayCollider.Raycast(ray, out RaycastHit hit, 100f))
+                    {
+                        Vector3 targetWorldPos = hit.point + _hitOffset;
+                        _draggingPiece.transform.position = Vector3.Lerp(_draggingPiece.transform.position, targetWorldPos, Time.deltaTime * _lerpSpeed);
+                        _draggingPiece.transform.localRotation = Quaternion.Lerp(_draggingPiece.transform.localRotation, Quaternion.identity, Time.deltaTime * _lerpSpeed);
+                    }
+                    else
+                    {
+                        var p = _draggingPiece;
+                        _draggingPiece = null;
+                        _hitPiece = null;
+                        _isDragging = false;
+
+                        p.transform.SetParent(null);
+                        p.OnExitTray();
+                        p.StartManualDrag(_draggingStartWorldPos, _draggingStartHitPoint);
+                    }
+                }
+
                 _lastMousePos = currentMousePos;
             }
         }

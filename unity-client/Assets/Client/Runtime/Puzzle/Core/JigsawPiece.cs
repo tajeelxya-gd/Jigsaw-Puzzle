@@ -54,6 +54,12 @@ namespace Client.Runtime
 
         public void StartManualDrag() => _dragController.ForceStartDrag();
 
+        public void StartManualDrag(Vector3 startWorldPos, Vector3 startHitPoint)
+        {
+            _dragController.SetStartPoints(startWorldPos, startHitPoint);
+            _dragController.ForceStartDrag();
+        }
+
         public void OnExitTray()
         {
             IsOverTray = false;
