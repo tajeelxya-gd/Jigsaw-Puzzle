@@ -49,6 +49,13 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: mg_6x4_standard_mat_outline
+    _reference:
+      m_AssetGUID: 3a0fd09c7450c4345812dca39ac70791
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - _key: mg_7x5_standard
     _reference:
       m_AssetGUID: 7fb660798ed14c6498b9b754e939a5dd
