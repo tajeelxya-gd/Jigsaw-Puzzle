@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using TMPro;
@@ -18,8 +19,12 @@ namespace Client.Runtime
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Button _eye;
         [SerializeField] private Button _lock;
+        [SerializeField] private Slider _slider;
         [SerializeField] private TMP_Text _levelName;
         [SerializeField] private ScriptableObject _click;
+        [SerializeField] private float _sliderDuration = 0.5f;
+
+        private CancellationTokenSource _sliderCts;
 
         private IPuzzleTray _puzzleTray;
         private IFullImageHandler _helper;
@@ -34,7 +39,13 @@ namespace Client.Runtime
 
         public void Initialise() => RegisterEvents();
 
-        public void Reset() => UnRegisterEvents();
+        public void Reset()
+        {
+            UnRegisterEvents();
+            _sliderCts?.Cancel();
+            _sliderCts?.Dispose();
+            _sliderCts = null;
+        }
 
         private void RegisterEvents()
         {
@@ -43,6 +54,7 @@ namespace Client.Runtime
             _eye.onClick.AddListener(HandleEye);
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
             UniEvents.Subscribe<PieceSelectedEvent>(HandlePieceSelected);
+            UniEvents.Subscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
 
         private void UnRegisterEvents()
@@ -52,6 +64,7 @@ namespace Client.Runtime
             _eye.onClick.RemoveListener(HandleEye);
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
             UniEvents.Unsubscribe<PieceSelectedEvent>(HandlePieceSelected);
+            UniEvents.Unsubscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
 
         private void HandlePieceSelected(PieceSelectedEvent @event)
@@ -67,7 +80,43 @@ namespace Client.Runtime
             _levelName.SetText(_puzzleService.GetCurrentLevelData().Name);
             SetToggles(true);
             SetDropButton(true);
+            SetCurrentSliderValue(true);
         }
+
+        private void SetCurrentSliderValue(bool instant = false)
+        {
+            var pieces = _puzzleService.GetCurrentBoard().Pieces;
+            var targetValue = pieces.Count(p => p.IsLocked);
+            _slider.maxValue = pieces.Count;
+
+            if (instant)
+            {
+                _slider.value = targetValue;
+                return;
+            }
+
+            _sliderCts?.Cancel();
+            _sliderCts = new CancellationTokenSource();
+            AnimateSliderAsync(targetValue, _sliderCts.Token).Forget();
+        }
+
+        private async UniTaskVoid AnimateSliderAsync(float targetValue, CancellationToken cToken = default)
+        {
+            float startValue = _slider.value;
+            float elapsed = 0;
+
+            while (elapsed < _sliderDuration)
+            {
+                elapsed += Time.deltaTime;
+                float progress = elapsed / _sliderDuration;
+                _slider.value = Mathf.Lerp(startValue, targetValue, progress);
+                await UniTask.Yield(PlayerLoopTiming.Update, cToken);
+            }
+
+            _slider.value = targetValue;
+        }
+
+        private void HandleGroupPlaced(GroupPlacedEvent @event) => SetCurrentSliderValue();
 
         private void HandleReset()
         {
