@@ -11,15 +11,16 @@ namespace Client.Runtime
         public event Action<Vector3> OnDragged;   // delta
         public event Action OnDragEnded;
 
+        private readonly float _potency = 3.5f;
+
         private Camera _cam;
         private bool _isDragging;
         private Vector3 _offset;
         private Plane _dragPlane;
+        private Vector3 _startPosition;
+        private Vector3 _startHitPoint;
 
-        private void Awake()
-        {
-            _cam = Camera.main;
-        }
+        private void Awake() => _cam = Camera.main;
 
         private void Update()
         {
@@ -29,7 +30,6 @@ namespace Client.Runtime
 
         private void HandleInput()
         {
-            // Standard click-to-drag logic
             if (InputHandler._3DActive && Input.GetMouseButtonDown(0))
             {
                 if (TryBeginDrag())
@@ -38,7 +38,6 @@ namespace Client.Runtime
                 }
             }
 
-            // End drag when mouse is released
             if (InputHandler._3DActive && Input.GetMouseButtonUp(0) && _isDragging)
             {
                 _isDragging = false;
@@ -65,13 +64,13 @@ namespace Client.Runtime
 
         private void InitializeDragMath(Ray ray)
         {
-            // Lock plane at drag start (XZ board plane)
             _dragPlane = new Plane(Vector3.up, transform.position);
 
             if (_dragPlane.Raycast(ray, out float enter))
             {
-                Vector3 planeHit = ray.GetPoint(enter);
-                _offset = transform.position - planeHit;
+                _startHitPoint = ray.GetPoint(enter);
+                _startPosition = transform.position;
+                _offset = _startPosition - _startHitPoint;
             }
         }
 
@@ -89,14 +88,19 @@ namespace Client.Runtime
 
             if (!_dragPlane.Raycast(ray, out float enter)) return;
 
-            Vector3 planeHit = ray.GetPoint(enter);
-            Vector3 target = planeHit + _offset;
-            Vector3 delta = target - transform.position;
-            delta.y = 0f;
+            Vector3 currentHit = ray.GetPoint(enter);
+            Vector3 rawDelta = currentHit - _startHitPoint;
 
-            if (delta.sqrMagnitude > Mathf.Epsilon)
+            float zDelta = rawDelta.z;
+            float modifiedZ = zDelta > 0 ? zDelta * (1f + zDelta * _potency) : zDelta;
+
+            Vector3 target = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
+            Vector3 moveDelta = target - transform.position;
+            moveDelta.y = 0f;
+
+            if (moveDelta.sqrMagnitude > Mathf.Epsilon)
             {
-                OnDragged.Broadcast(delta);
+                OnDragged.Broadcast(moveDelta);
             }
         }
     }
