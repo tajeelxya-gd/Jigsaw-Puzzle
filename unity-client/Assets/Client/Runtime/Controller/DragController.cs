@@ -8,10 +8,10 @@ namespace Client.Runtime
     public sealed class DragController : MonoBehaviour
     {
         public event Action OnDragStarted;
-        public event Action<Vector3> OnDragged;   // delta
+        public event Action<Vector3> OnDragged;
         public event Action OnDragEnded;
 
-        private readonly float _potency = 3.5f;
+        private readonly float _potency = 3.75f;
 
         private Camera _cam;
         private bool _isDragging;
@@ -92,7 +92,7 @@ namespace Client.Runtime
             Vector3 rawDelta = currentHit - _startHitPoint;
 
             float zDelta = rawDelta.z;
-            float modifiedZ = zDelta > 0 ? zDelta * (1f + zDelta * _potency) : zDelta;
+            float modifiedZ = zDelta > -0.02f ? zDelta * (1f + (zDelta + 0.02f) * _potency) : zDelta;
 
             Vector3 target = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
             Vector3 moveDelta = target - transform.position;
