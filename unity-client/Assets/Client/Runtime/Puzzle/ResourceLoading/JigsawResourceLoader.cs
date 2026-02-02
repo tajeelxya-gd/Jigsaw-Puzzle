@@ -17,6 +17,7 @@ namespace Client.Runtime
         [SerializeField] private Material _outlineBoard;
         [SerializeField] private Material _outlineTray;
         [SerializeField] private Material _shadow;
+        [SerializeField] private Material _fullImageMaterial;
 
         private AssetData _imageAssetData;
         private AssetData _gridAssetData;
@@ -27,10 +28,11 @@ namespace Client.Runtime
         public Material Base => _base;
         public Material OutlineTray => _outlineTray;
         public Material OutlineBoard => _outlineBoard;
-        public Material OutlineGrid {get; private set;}
+        public Material OutlineGrid { get; private set; }
         public Material Shadow => _shadow;
         public Transform Grid => _grid;
         public Transform FullImage => _fullImage;
+        public Material FullImageMaterial => _fullImageMaterial;
 
         public async UniTask InitialiseAsync(CancellationToken cToken = default)
         {
@@ -52,6 +54,7 @@ namespace Client.Runtime
             _base.SetTexture(property, _image);
             _outlineTray.SetTexture(property, _image);
             _outlineBoard.SetTexture(property, _image);
+            _fullImageMaterial.SetTexture(property, _image);
         }
 
         public void UnLoadImage()
@@ -71,7 +74,7 @@ namespace Client.Runtime
             UniResources.DisposeInstance(_grid.gameObject);
             _grid = null;
         }
-        
+
         public async UniTask CreateFullImageAsync(string key, Transform parent, CancellationToken cToken = default)
         {
             var fullImageAsset = _gridAssetData.GetAsset(key);

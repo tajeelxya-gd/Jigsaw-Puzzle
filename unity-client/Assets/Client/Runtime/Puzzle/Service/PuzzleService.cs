@@ -25,6 +25,7 @@ namespace Client.Runtime
         private IVFXController _vfxController;
         private IPuzzleTray _puzzleTray;
         private IJigsawResourceLoader _helper;
+        private IFullImageHandler _fullImageHandler;
         private IUserSavedData _savedData;
         private JigsawBoard _board;
         private JigsawLevelData[] _levelsData;
@@ -41,6 +42,7 @@ namespace Client.Runtime
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _vfxController = resolver.Resolve<IVFXController>();
             _helper = resolver.Resolve<IJigsawResourceLoader>();
+            _fullImageHandler = resolver.Resolve<IFullImageHandler>();
             _savedData = resolver.Resolve<IUserSavedData>();
         }
 
@@ -106,6 +108,7 @@ namespace Client.Runtime
             await _vfxController.WaitForHighlightsAsync(cToken);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
+            await _fullImageHandler.PlayLevelCompletedAnimationAsync(cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
         }
 

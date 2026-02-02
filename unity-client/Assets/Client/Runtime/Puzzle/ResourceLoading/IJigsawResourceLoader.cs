@@ -16,6 +16,8 @@ namespace Client.Runtime
 
         Material Shadow { get; }
 
+        Material FullImageMaterial { get; }
+
         Transform Grid { get; }
 
         Transform FullImage { get; }
