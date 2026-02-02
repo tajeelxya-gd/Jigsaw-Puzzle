@@ -72,5 +72,13 @@ namespace Client.Runtime
             bool isBottomEdge = r == data.XConstraint - 1;
             return isBottomEdge;
         }
+
+        public static bool IsLeftEdge(int idx)
+        {
+            var data = Board.Data;
+            int c = idx % data.YConstraint;
+            bool isLeftEdge = c == 0;
+            return isLeftEdge;
+        }
     }
 }

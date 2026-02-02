@@ -1,9 +1,9 @@
 
-using Cysharp.Threading.Tasks;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
-using UniTx.Runtime.IoC;
 using UniTx.Runtime.Events;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -17,8 +17,8 @@ namespace Client.Runtime
         private Camera _cam;
         private Renderer _renderer;
 
-        public void Inject(IResolver resolver) 
-        { 
+        public void Inject(IResolver resolver)
+        {
             _checker = resolver.Resolve<IWinConditionChecker>();
             _loader = resolver.Resolve<IJigsawResourceLoader>();
         }
@@ -58,15 +58,15 @@ namespace Client.Runtime
             }
         }
 
-        private void HandleLevelStart(LevelStartEvent @event) 
-        { 
+        private void HandleLevelStart(LevelStartEvent @event)
+        {
             var fullImg = _loader.FullImage;
             fullImg.SetParent(transform);
             fullImg.gameObject.layer = gameObject.layer;
             _renderer = fullImg.GetComponent<Renderer>();
             Fade(false);
         }
-        
+
         private void HandleGroupPlaced(GroupPlacedEvent @event) => Fade(false);
 
         private void HandleOnWin() => Fade(false);

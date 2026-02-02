@@ -138,7 +138,7 @@ namespace Client.Runtime
             Group.SetIdleShadow();
             Group.SetCurrentCells(cell.Idx, this, height);
 
-            if(JigsawBoardCalculator.IsBottomEdge(cell.Idx))
+            if (JigsawBoardCalculator.IsBottomEdge(cell.Idx) || JigsawBoardCalculator.IsLeftEdge(cell.Idx))
             {
                 Group.SetShadowLayer(LayerMask.NameToLayer("JigsawFrame"));
             }
