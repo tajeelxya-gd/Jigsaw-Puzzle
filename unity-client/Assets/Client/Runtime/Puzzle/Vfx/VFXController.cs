@@ -190,35 +190,59 @@ namespace Client.Runtime
 
         private async UniTaskVoid TriggerTwoWayWaveAsync(List<JigsawPiece> sorted, int anchorIndex, float delay, CancellationToken cToken)
         {
+            foreach (var p in sorted)
+            {
+                if (!_vfxQueue.Contains(p)) _vfxQueue.Add(p);
+            }
+
             int count = sorted.Count;
             int steps = (count / 2) + 1;
             var processed = new HashSet<int>();
 
-            for (int i = 0; i < steps; i++)
+            try
             {
-                if (cToken.IsCancellationRequested) break;
-
-                int cwIdx = (anchorIndex + i) % count;
-                int ccwIdx = (anchorIndex - i + count) % count;
-
-                bool addedCw = processed.Add(cwIdx);
-                bool addedCcw = processed.Add(ccwIdx);
-
-                if (addedCw) sorted[cwIdx].PlayVfx();
-                if (addedCcw) sorted[ccwIdx].PlayVfx();
-
-                if (!addedCw && !addedCcw) break;
-
-                // Check if they met (only after the first step to avoid immediate exit)
-                if (i > 0 && (cwIdx == ccwIdx || (cwIdx + 1) % count == ccwIdx || (ccwIdx + 1) % count == cwIdx))
+                for (int i = 0; i < steps; i++)
                 {
-                    break;
+                    if (cToken.IsCancellationRequested) break;
+
+                    int cwIdx = (anchorIndex + i) % count;
+                    int ccwIdx = (anchorIndex - i + count) % count;
+
+                    bool addedCw = processed.Add(cwIdx);
+                    bool addedCcw = processed.Add(ccwIdx);
+
+                    if (addedCw)
+                    {
+                        sorted[cwIdx].PlayVfx();
+                        _vfxQueue.Remove(sorted[cwIdx]);
+                    }
+
+                    if (addedCcw)
+                    {
+                        sorted[ccwIdx].PlayVfx();
+                        _vfxQueue.Remove(sorted[ccwIdx]);
+                    }
+
+                    if (!addedCw && !addedCcw) break;
+
+                    // Check if they met (only after the first step to avoid immediate exit)
+                    if (i > 0 && (cwIdx == ccwIdx || (cwIdx + 1) % count == ccwIdx || (ccwIdx + 1) % count == cwIdx))
+                    {
+                        break;
+                    }
+
+                    // Wait for next step if there are more pieces to highlight
+                    if (i < steps - 1)
+                    {
+                        await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
+                    }
                 }
-
-                // Wait for next step if there are more pieces to highlight
-                if (i < steps - 1)
+            }
+            finally
+            {
+                foreach (var piece in sorted)
                 {
-                    await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
+                    _vfxQueue.Remove(piece);
                 }
             }
 
