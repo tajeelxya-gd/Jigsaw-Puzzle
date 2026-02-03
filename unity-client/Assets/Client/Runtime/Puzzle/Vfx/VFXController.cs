@@ -128,7 +128,7 @@ namespace Client.Runtime
             UniAudio.Play2D((IAudioConfig)_pieceLocked);
             if (JigsawBoardCalculator.IsEdge(ev.Anchor.CorrectIdx) && AllEdgesLocked(out var edges))
             {
-                HighlightClockwise(edges, ev.Anchor);
+                HighlightEdges(edges, ev.Anchor);
                 UniEvents.Raise(new ShowToastEvent("Congrats!"));
                 return;
             }
@@ -161,14 +161,24 @@ namespace Client.Runtime
             return allLocked;
         }
 
-        private void HighlightClockwise(IEnumerable<JigsawPiece> pieces, JigsawPiece anchor)
+        private void HighlightEdges(IEnumerable<JigsawPiece> pieces, JigsawPiece anchor)
+        {
+            var sorted = SortEdges(pieces);
+
+            int anchorIndex = sorted.IndexOf(anchor);
+            if (anchorIndex == -1) return;
+
+            TriggerTwoWayWaveAsync(sorted, anchorIndex, _vfxDelayInClockwise, this.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private List<JigsawPiece> SortEdges(IEnumerable<JigsawPiece> pieces)
         {
             var board = _puzzleService.GetCurrentBoard();
             var data = board.Data;
             int rows = data.XConstraint;
             int cols = data.YConstraint;
 
-            var sorted = pieces.OrderBy(p =>
+            return pieces.OrderBy(p =>
             {
                 int r = p.CorrectIdx / cols;
                 int col = p.CorrectIdx % cols;
@@ -177,6 +187,46 @@ namespace Client.Runtime
                 if (r == rows - 1) return cols + rows + (cols - 1 - col);
                 return cols + rows + cols + (rows - 1 - r);
             }).ToList();
+        }
+
+        private async UniTaskVoid TriggerTwoWayWaveAsync(List<JigsawPiece> sorted, int anchorIndex, float delay, CancellationToken cToken)
+        {
+            int count = sorted.Count;
+            int steps = (count / 2) + 1;
+            var processed = new HashSet<int>();
+
+            for (int i = 0; i < steps; i++)
+            {
+                if (cToken.IsCancellationRequested) break;
+
+                int cwIdx = (anchorIndex + i) % count;
+                int ccwIdx = (anchorIndex - i + count) % count;
+
+                bool addedCw = processed.Add(cwIdx);
+                bool addedCcw = processed.Add(ccwIdx);
+
+                if (addedCw) sorted[cwIdx].PlayVfx();
+                if (addedCcw) sorted[ccwIdx].PlayVfx();
+
+                if (!addedCw && !addedCcw) break;
+
+                // Check if they met (only after the first step to avoid immediate exit)
+                if (i > 0 && (cwIdx == ccwIdx || (cwIdx + 1) % count == ccwIdx || (ccwIdx + 1) % count == cwIdx))
+                {
+                    break;
+                }
+
+                // Wait for next step if there are more pieces to highlight
+                if (i < steps - 1)
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
+                }
+            }
+        }
+
+        private void HighlightClockwise(IEnumerable<JigsawPiece> pieces, JigsawPiece anchor)
+        {
+            var sorted = SortEdges(pieces);
 
             int anchorIndex = sorted.IndexOf(anchor);
             if (anchorIndex != -1)
