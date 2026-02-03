@@ -1,12 +1,62 @@
 [
   {
-    "_id": "cell_4_action_reward",
-    "_cellIdx": 4,
-    "_rewardId": "mg_reward_currency_3-3"
-  },
-  {
     "_id": "cell_0_action_reward",
     "_cellIdx": 0,
-    "_rewardId": "mg_reward_currency_5-10"
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_1_action_reward",
+    "_cellIdx": 1,
+    "_rewardId": "mg_reward_currency_1-3"
+  },
+  {
+    "_id": "cell_2_action_reward",
+    "_cellIdx": 2,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_3_action_reward",
+    "_cellIdx": 3,
+    "_rewardId": "mg_reward_currency_1-3"
+  },
+  {
+    "_id": "cell_4_action_reward",
+    "_cellIdx": 4,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_5_action_reward",
+    "_cellIdx": 5,
+    "_rewardId": "mg_reward_currency_1-3"
+  },
+  {
+    "_id": "cell_6_action_reward",
+    "_cellIdx": 6,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_7_action_reward",
+    "_cellIdx": 7,
+    "_rewardId": "mg_reward_currency_1-3"
+  },
+  {
+    "_id": "cell_8_action_reward",
+    "_cellIdx": 8,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_9_action_reward",
+    "_cellIdx": 9,
+    "_rewardId": "mg_reward_currency_1-3"
+  },
+  {
+    "_id": "cell_10_action_reward",
+    "_cellIdx": 10,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_11_action_reward",
+    "_cellIdx": 11,
+    "_rewardId": "mg_reward_currency_1-3"
   }
 ]

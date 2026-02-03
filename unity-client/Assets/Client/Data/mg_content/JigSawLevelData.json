@@ -6,8 +6,8 @@
     "_imageKey": "level_1",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -17,8 +17,10 @@
     "_imageKey": "level_2",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_10_action_reward",
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -28,8 +30,8 @@
     "_imageKey": "level_3",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -39,8 +41,10 @@
     "_imageKey": "level_4",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_6_action_reward",
+      "cell_8_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -50,8 +54,8 @@
     "_imageKey": "level_5",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -61,8 +65,10 @@
     "_imageKey": "level_6",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_8_action_reward",
+      "cell_6_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -72,8 +78,8 @@
     "_imageKey": "level_7",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -83,8 +89,10 @@
     "_imageKey": "level_8",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_5_action_reward",
+      "cell_7_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -94,8 +102,8 @@
     "_imageKey": "level_9",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -105,7 +113,9 @@
     "_imageKey": "level_10",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_6_action_reward",
       "cell_0_action_reward",
+      "cell_11_action_reward",
       "cell_4_action_reward"
     ]
   },
@@ -116,8 +126,8 @@
     "_imageKey": "level_11",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -127,8 +137,10 @@
     "_imageKey": "level_12",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_10_action_reward",
+      "cell_1_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -138,8 +150,8 @@
     "_imageKey": "level_13",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -149,8 +161,10 @@
     "_imageKey": "level_14",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_10_action_reward",
+      "cell_6_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -160,8 +174,8 @@
     "_imageKey": "level_15",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -172,7 +186,9 @@
     "_difficulty": 0,
     "_cellActionIds": [
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_11_action_reward",
+      "cell_5_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -182,8 +198,8 @@
     "_imageKey": "level_17",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -193,8 +209,10 @@
     "_imageKey": "level_18",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward",
+      "cell_3_action_reward",
+      "cell_10_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -204,8 +222,8 @@
     "_imageKey": "level_19",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_6_action_reward"
     ]
   },
   {
@@ -215,8 +233,10 @@
     "_imageKey": "level_20",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_11_action_reward",
+      "cell_4_action_reward",
+      "cell_2_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -226,8 +246,8 @@
     "_imageKey": "level_21",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -238,7 +258,9 @@
     "_difficulty": 0,
     "_cellActionIds": [
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_4_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -248,8 +270,8 @@
     "_imageKey": "level_23",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_3_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -259,8 +281,10 @@
     "_imageKey": "level_24",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_1_action_reward",
+      "cell_10_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -271,7 +295,7 @@
     "_difficulty": 0,
     "_cellActionIds": [
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward"
     ]
   },
   {
@@ -281,8 +305,10 @@
     "_imageKey": "level_26",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_3_action_reward",
+      "cell_9_action_reward",
+      "cell_1_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -292,8 +318,8 @@
     "_imageKey": "level_27",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -303,7 +329,9 @@
     "_imageKey": "level_28",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
+      "cell_2_action_reward",
+      "cell_10_action_reward",
+      "cell_7_action_reward",
       "cell_4_action_reward"
     ]
   },
@@ -314,8 +342,8 @@
     "_imageKey": "level_29",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -325,8 +353,10 @@
     "_imageKey": "level_30",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_7_action_reward",
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -336,8 +366,8 @@
     "_imageKey": "level_31",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -347,8 +377,10 @@
     "_imageKey": "level_32",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_11_action_reward",
+      "cell_4_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -358,8 +390,8 @@
     "_imageKey": "level_33",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -369,8 +401,10 @@
     "_imageKey": "level_34",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_7_action_reward",
+      "cell_11_action_reward",
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward"
     ]
   },
   {
@@ -380,8 +414,8 @@
     "_imageKey": "level_35",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_10_action_reward"
     ]
   },
   {
@@ -391,8 +425,10 @@
     "_imageKey": "level_36",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_9_action_reward",
+      "cell_6_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -402,8 +438,8 @@
     "_imageKey": "level_37",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -413,8 +449,10 @@
     "_imageKey": "level_38",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_2_action_reward",
+      "cell_10_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -424,8 +462,8 @@
     "_imageKey": "level_39",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -435,8 +473,10 @@
     "_imageKey": "level_40",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_11_action_reward",
+      "cell_4_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -446,8 +486,8 @@
     "_imageKey": "level_41",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_3_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -457,6 +497,8 @@
     "_imageKey": "level_42",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_1_action_reward",
+      "cell_9_action_reward",
       "cell_0_action_reward",
       "cell_4_action_reward"
     ]
@@ -468,8 +510,8 @@
     "_imageKey": "level_43",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_10_action_reward"
     ]
   },
   {
@@ -479,8 +521,10 @@
     "_imageKey": "level_44",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_11_action_reward",
+      "cell_5_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -490,8 +534,8 @@
     "_imageKey": "level_45",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -501,8 +545,10 @@
     "_imageKey": "level_46",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_11_action_reward",
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -512,8 +558,8 @@
     "_imageKey": "level_47",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -523,8 +569,10 @@
     "_imageKey": "level_48",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_4_action_reward",
+      "cell_6_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -534,8 +582,8 @@
     "_imageKey": "level_49",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -545,8 +593,10 @@
     "_imageKey": "level_50",
     "_difficulty": 0,
     "_cellActionIds": [
+      "cell_11_action_reward",
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -556,8 +606,8 @@
     "_imageKey": "level_51",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -567,7 +617,7 @@
     "_imageKey": "level_52",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
+      "cell_10_action_reward",
       "cell_4_action_reward"
     ]
   },
@@ -578,8 +628,8 @@
     "_imageKey": "level_53",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -589,8 +639,8 @@
     "_imageKey": "level_54",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -600,8 +650,8 @@
     "_imageKey": "level_55",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -611,8 +661,8 @@
     "_imageKey": "level_56",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -622,8 +672,8 @@
     "_imageKey": "level_57",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -633,8 +683,8 @@
     "_imageKey": "level_58",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_6_action_reward"
     ]
   },
   {
@@ -644,8 +694,8 @@
     "_imageKey": "level_59",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -655,8 +705,8 @@
     "_imageKey": "level_60",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -666,8 +716,8 @@
     "_imageKey": "level_61",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -677,8 +727,8 @@
     "_imageKey": "level_62",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -688,8 +738,8 @@
     "_imageKey": "level_63",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -699,8 +749,8 @@
     "_imageKey": "level_64",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_5_action_reward"
     ]
   },
   {
@@ -710,8 +760,8 @@
     "_imageKey": "level_65",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -721,8 +771,8 @@
     "_imageKey": "level_66",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -732,8 +782,8 @@
     "_imageKey": "level_67",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -743,7 +793,7 @@
     "_imageKey": "level_68",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
+      "cell_11_action_reward",
       "cell_4_action_reward"
     ]
   },
@@ -754,8 +804,8 @@
     "_imageKey": "level_69",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -765,8 +815,8 @@
     "_imageKey": "level_70",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_10_action_reward"
     ]
   },
   {
@@ -776,8 +826,8 @@
     "_imageKey": "level_71",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -787,8 +837,8 @@
     "_imageKey": "level_72",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -798,8 +848,8 @@
     "_imageKey": "level_73",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_10_action_reward"
     ]
   },
   {
@@ -809,8 +859,8 @@
     "_imageKey": "level_74",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -820,8 +870,8 @@
     "_imageKey": "level_75",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -832,7 +882,7 @@
     "_difficulty": 0,
     "_cellActionIds": [
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_11_action_reward"
     ]
   },
   {
@@ -842,8 +892,8 @@
     "_imageKey": "level_77",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -853,8 +903,8 @@
     "_imageKey": "level_78",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -864,8 +914,8 @@
     "_imageKey": "level_79",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_8_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -875,8 +925,8 @@
     "_imageKey": "level_80",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -886,8 +936,8 @@
     "_imageKey": "level_81",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_6_action_reward"
     ]
   },
   {
@@ -897,7 +947,7 @@
     "_imageKey": "level_82",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
+      "cell_11_action_reward",
       "cell_4_action_reward"
     ]
   },
@@ -908,8 +958,8 @@
     "_imageKey": "level_83",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -919,8 +969,8 @@
     "_imageKey": "level_84",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -931,7 +981,7 @@
     "_difficulty": 0,
     "_cellActionIds": [
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward"
     ]
   },
   {
@@ -941,8 +991,8 @@
     "_imageKey": "level_86",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_4_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -952,8 +1002,8 @@
     "_imageKey": "level_87",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_3_action_reward",
+      "cell_7_action_reward"
     ]
   },
   {
@@ -963,8 +1013,8 @@
     "_imageKey": "level_88",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -974,8 +1024,8 @@
     "_imageKey": "level_89",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -986,7 +1036,7 @@
     "_difficulty": 0,
     "_cellActionIds": [
       "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward"
     ]
   },
   {
@@ -996,8 +1046,8 @@
     "_imageKey": "level_91",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_3_action_reward",
+      "cell_9_action_reward"
     ]
   },
   {
@@ -1007,8 +1057,8 @@
     "_imageKey": "level_92",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_1_action_reward",
+      "cell_8_action_reward"
     ]
   },
   {
@@ -1018,8 +1068,8 @@
     "_imageKey": "level_93",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_11_action_reward"
     ]
   },
   {
@@ -1029,8 +1079,8 @@
     "_imageKey": "level_94",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_2_action_reward",
+      "cell_10_action_reward"
     ]
   },
   {
@@ -1040,7 +1090,7 @@
     "_imageKey": "level_95",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
+      "cell_7_action_reward",
       "cell_4_action_reward"
     ]
   },
@@ -1051,8 +1101,8 @@
     "_imageKey": "level_96",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_10_action_reward",
+      "cell_3_action_reward"
     ]
   },
   {
@@ -1062,8 +1112,8 @@
     "_imageKey": "level_97",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_7_action_reward",
+      "cell_0_action_reward"
     ]
   },
   {
@@ -1073,8 +1123,8 @@
     "_imageKey": "level_98",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_6_action_reward",
+      "cell_2_action_reward"
     ]
   },
   {
@@ -1084,8 +1134,8 @@
     "_imageKey": "level_99",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_5_action_reward",
+      "cell_1_action_reward"
     ]
   },
   {
@@ -1095,8 +1145,10 @@
     "_imageKey": "level_100",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_4_action_reward"
+      "cell_9_action_reward",
+      "cell_11_action_reward",
+      "cell_4_action_reward",
+      "cell_8_action_reward"
     ]
   }
 ]
