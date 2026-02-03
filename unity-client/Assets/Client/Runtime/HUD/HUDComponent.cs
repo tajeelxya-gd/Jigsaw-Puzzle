@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -41,7 +42,6 @@ namespace Client.Runtime
         public void Initialise()
         {
             RegisterEvents();
-            _currencyHudComponent.Initialise();
         }
 
         public void Reset()
@@ -50,7 +50,6 @@ namespace Client.Runtime
             _sliderCts?.Cancel();
             _sliderCts?.Dispose();
             _sliderCts = null;
-            _currencyHudComponent.Reset();
         }
 
         private void RegisterEvents()
@@ -59,6 +58,7 @@ namespace Client.Runtime
             _dropPieces.onValueChanged.AddListener(HandleDropPieces);
             _eye.onClick.AddListener(HandleEye);
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
+            UniEvents.Subscribe<LevelResetEvent>(HandleLevelReset);
             UniEvents.Subscribe<PieceSelectedEvent>(HandlePieceSelected);
             UniEvents.Subscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
@@ -69,6 +69,7 @@ namespace Client.Runtime
             _dropPieces.onValueChanged.RemoveListener(HandleDropPieces);
             _eye.onClick.RemoveListener(HandleEye);
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
+            UniEvents.Unsubscribe<LevelResetEvent>(HandleLevelReset);
             UniEvents.Unsubscribe<PieceSelectedEvent>(HandlePieceSelected);
             UniEvents.Unsubscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
@@ -87,6 +88,12 @@ namespace Client.Runtime
             SetToggles(true);
             SetDropButton(true);
             SetCurrentSliderValue(true);
+            _currencyHudComponent.Initialise();
+        }
+
+        private void HandleLevelReset(LevelResetEvent @event)
+        {
+            _currencyHudComponent.Reset();
         }
 
         private void SetCurrentSliderValue(bool instant = false)
