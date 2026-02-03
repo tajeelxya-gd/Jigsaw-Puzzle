@@ -497,6 +497,7 @@ MonoBehaviour:
   _currencyId: mg_currency_game
   _txtAmount: {fileID: 6158920497157177509}
   _currencyImg: {fileID: 1552473030990257388}
+  _duration: 0.5
 --- !u!1 &6003641929114339411
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -153.7, y: -407.2}
+  m_AnchoredPosition: {x: -153.70001, y: -359.6}
   m_SizeDelta: {x: 210, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2259752241893403248
@@ -942,7 +943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 149.9, y: -428.6}
+  m_AnchoredPosition: {x: 149.9, y: -381}
   m_SizeDelta: {x: 165, y: 165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5752338601846372390
@@ -1141,7 +1142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -360.80005, y: -422.70032}
+  m_AnchoredPosition: {x: -360.80005, y: -375.1003}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2763583414206196950

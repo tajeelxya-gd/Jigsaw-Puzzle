@@ -25,6 +25,7 @@ namespace Client.Runtime
         private IPuzzleService _puzzleService;
         private ICellActionProcessor _cellActionProcessor;
         private bool _recentGroup;
+        private string _imageKey;
 
         public int CorrectIdx { get; private set; }
         public int CurrentIdx { get; set; }
@@ -138,6 +139,7 @@ namespace Client.Runtime
 
         public void InvokeAction()
         {
+            UniEvents.Raise(new CurrencyCollectHudEffectEvent(_imageKey, _cellActionSprite.transform.position));
             _cellActionSprite.gameObject.SetActive(false);
         }
 
@@ -221,9 +223,9 @@ namespace Client.Runtime
         {
             _cellActionSprite.gameObject.SetActive(actionData != null);
             if (actionData == null) return;
-            var imageKey = _cellActionProcessor.GetImageKey(actionData);
-            if (string.IsNullOrEmpty(imageKey)) return;
-            _cellActionSprite.sprite = await UniResources.LoadAssetAsync<Sprite>(imageKey, null, cToken);
+            _imageKey = _cellActionProcessor.GetImageKey(actionData);
+            if (string.IsNullOrEmpty(_imageKey)) return;
+            _cellActionSprite.sprite = await UniResources.LoadAssetAsync<Sprite>(_imageKey, null, cToken);
 
             var size = _collider.size;
             var center = _collider.center;
