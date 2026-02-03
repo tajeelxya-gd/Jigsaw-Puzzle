@@ -7,6 +7,8 @@ namespace Client.Runtime
     {
         event Action<ValueChangedData> OnValueChanged;
 
+        string ImageKey { get; }
+
         double Amount { get; }
 
         void Add(double amount);

@@ -9,6 +9,8 @@ namespace Client.Runtime
     {
         public event Action<ValueChangedData> OnValueChanged;
 
+        public string ImageKey => Data.ImageKey;
+
         public double Amount => SavedData.Amount;
 
         public Currency(string id) : base(id)
