@@ -1,8 +1,10 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UniTx.Runtime;
 using UniTx.Runtime.Entity;
+using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.ResourceManagement;
 using UnityEngine;
@@ -26,15 +28,27 @@ namespace Client.Runtime
         {
             _currency = _entityService.Get<ICurrency>(_currencyId);
             UpdateText(_currency.Amount);
-            _currency.OnValueChanged += HandleValueChanged;
+            RegisterEvents();
             LoadSpriteAsync(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         public void Reset()
         {
-            _currency.OnValueChanged -= HandleValueChanged;
+            UnRegisterEvents();
             _currency = null;
             UpdateText(0);
+        }
+
+        private void RegisterEvents()
+        {
+            UniEvents.Subscribe<CurrencyCollectHudEffectEvent>(HandleCollectEffect);
+            _currency.OnValueChanged += HandleValueChanged;
+        }
+
+        private void UnRegisterEvents()
+        {
+            UniEvents.Unsubscribe<CurrencyCollectHudEffectEvent>(HandleCollectEffect);
+            _currency.OnValueChanged -= HandleValueChanged;
         }
 
         private void HandleValueChanged(ValueChangedData data) => UpdateText(data.NewValue);
@@ -52,6 +66,13 @@ namespace Client.Runtime
         {
             if (_sprite != null) UniResources.DisposeAsset(_sprite);
             _currencyImg.sprite = null;
+        }
+
+        private void HandleCollectEffect(CurrencyCollectHudEffectEvent @event)
+        {
+            if (!@event.ImageKey.Equals(_currency.ImageKey)) return;
+
+            var duplicate = Instantiate(_sprite);
         }
     }
 }
