@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -15,6 +14,7 @@ namespace Client.Runtime
 {
     public sealed class HUDComponent : MonoBehaviour, IInjectable, IInitialisable, IResettable
     {
+        [SerializeField] private CurrencyHUDComponent _currencyHudComponent;
         [SerializeField] private Button _reset;
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Button _eye;
@@ -35,9 +35,14 @@ namespace Client.Runtime
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
             _helper = resolver.Resolve<IFullImageHandler>();
             _puzzleService = resolver.Resolve<IPuzzleService>();
+            _currencyHudComponent.Inject(resolver);
         }
 
-        public void Initialise() => RegisterEvents();
+        public void Initialise()
+        {
+            RegisterEvents();
+            _currencyHudComponent.Initialise();
+        }
 
         public void Reset()
         {
@@ -45,6 +50,7 @@ namespace Client.Runtime
             _sliderCts?.Cancel();
             _sliderCts?.Dispose();
             _sliderCts = null;
+            _currencyHudComponent.Reset();
         }
 
         private void RegisterEvents()
