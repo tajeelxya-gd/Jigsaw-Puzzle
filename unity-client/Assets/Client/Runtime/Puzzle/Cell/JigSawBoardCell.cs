@@ -50,6 +50,7 @@ namespace Client.Runtime
                 {
                     PlayVfx();
                     _cellActionProcessor.Process(ActionData);
+                    piece.InvokeAction();
                     _once = false;
                 }
                 return true;

@@ -136,6 +136,11 @@ namespace Client.Runtime
             _puzzleTray.SetHoverPiece(null);
         }
 
+        public void InvokeAction()
+        {
+            _cellActionSprite.gameObject.SetActive(false);
+        }
+
         private void HandleDragStarted()
         {
             Select();
