@@ -11,7 +11,7 @@ namespace Client.Runtime
         public event Action<Vector3> OnDragged;
         public event Action OnDragEnded;
 
-        [SerializeField] private float _potency = 3f;
+        [SerializeField] private float _potency;
         [SerializeField] private float _lerpSpeed = 20f;
 
         private Camera _cam;

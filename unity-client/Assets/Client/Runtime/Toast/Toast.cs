@@ -14,12 +14,6 @@ namespace Client.Runtime
 
         private CancellationTokenSource _cts;
 
-        private void OnDestroy()
-        {
-            _cts?.Cancel();
-            _cts?.Dispose();
-        }
-
         public void Show(string message)
         {
             _cts?.Cancel();
@@ -27,6 +21,12 @@ namespace Client.Runtime
             _cts = CancellationTokenSource.CreateLinkedTokenSource(this.GetCancellationTokenOnDestroy());
 
             ShowAsync(message, _cts.Token).Forget();
+        }
+
+        private void OnDestroy()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
 
         private async UniTaskVoid ShowAsync(string message, CancellationToken cToken)
@@ -64,5 +64,8 @@ namespace Client.Runtime
             _canvasGroup.alpha = endAlpha;
             _text.transform.localScale = Vector3.one * endScale;
         }
+
+        [ContextMenu("Play")]
+        private void Show() => Show("Congrats!");
     }
 }
