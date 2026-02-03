@@ -49,8 +49,11 @@ namespace Client.Runtime
                 if (_once)
                 {
                     PlayVfx();
-                    _cellActionProcessor.Process(ActionData);
-                    piece.InvokeAction();
+                    if (ActionData != null)
+                    {
+                        _cellActionProcessor.Process(ActionData);
+                        piece.InvokeAction();
+                    }
                     _once = false;
                 }
                 return true;
