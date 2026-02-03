@@ -19,6 +19,22 @@ namespace Client.Runtime
             _entityService = resolver.Resolve<IEntityService>();
         }
 
+        public string GetImageKey(string rewardId)
+        {
+            if (string.IsNullOrEmpty(rewardId)) return null;
+
+            var data = _contentService.GetData<IRewardData>(rewardId);
+
+            switch (data)
+            {
+                case CurrencyRewardData currencyRewardData:
+                    var currency = _entityService.Get<ICurrency>(currencyRewardData.CurrencyId);
+                    return currency.ImageKey;
+                default:
+                    return null;
+            }
+        }
+
         public void Process(string rewardId)
         {
             if (string.IsNullOrEmpty(rewardId)) return;

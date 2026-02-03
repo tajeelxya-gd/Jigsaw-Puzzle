@@ -12,6 +12,19 @@ namespace Client.Runtime
 
         public void Inject(IResolver resolver) => _rewardProcessor = resolver.Resolve<IRewardProcessor>();
 
+        public string GetImageKey(ICellActionData data)
+        {
+            if (data == null) return null;
+
+            switch (data)
+            {
+                case CellActionRewardData rewardData:
+                    return _rewardProcessor.GetImageKey(rewardData.RewardId);
+                default:
+                    return null;
+            }
+        }
+
         public void Process(ICellActionData data)
         {
             if (data == null) return;

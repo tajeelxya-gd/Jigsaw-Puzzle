@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Audio;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
+using UniTx.Runtime.ResourceManagement;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -15,12 +16,14 @@ namespace Client.Runtime
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private JigsawPieceVFX _vfx;
         [SerializeField] private JigsawPieceRenderer _renderer;
+        [SerializeField] private SpriteRenderer _cellActionSprite;
         [SerializeField] private ScaleController _scaleController;
         [SerializeField] private ScriptableObject _piecePlaced;
         [SerializeField] private ScriptableObject _groupFormed;
 
         private IPuzzleTray _puzzleTray;
         private IPuzzleService _puzzleService;
+        private ICellActionProcessor _cellActionProcessor;
         private bool _recentGroup;
 
         public int CorrectIdx { get; private set; }
@@ -34,6 +37,7 @@ namespace Client.Runtime
         {
             _puzzleService = resolver.Resolve<IPuzzleService>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
+            _cellActionProcessor = resolver.Resolve<ICellActionProcessor>();
             _renderer.Inject(resolver);
         }
 
@@ -48,6 +52,7 @@ namespace Client.Runtime
             {
                 this
             };
+            SetCellActionSpriteAsync(cell.ActionData, this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         public void PlayVfx() => _vfx.Play();
@@ -112,6 +117,7 @@ namespace Client.Runtime
             _dragController.OnDragged -= HandleOnDragged;
             _dragController.OnDragEnded -= HandleDraggedEnded;
             _snapController.OnSnapped -= HandleSnapped;
+            ResetCellActionSprite();
         }
 
         public void Select()
@@ -204,6 +210,27 @@ namespace Client.Runtime
                     break;
                 }
             }
+        }
+
+        private async UniTask SetCellActionSpriteAsync(ICellActionData actionData, CancellationToken cToken = default)
+        {
+            _cellActionSprite.gameObject.SetActive(actionData != null);
+            if (actionData == null) return;
+            var imageKey = _cellActionProcessor.GetImageKey(actionData);
+            if (string.IsNullOrEmpty(imageKey)) return;
+            _cellActionSprite.sprite = await UniResources.LoadAssetAsync<Sprite>(imageKey, null, cToken);
+
+            var size = _collider.size;
+            var center = _collider.center;
+            var spriteTransform = _cellActionSprite.transform;
+            var localPosition = spriteTransform.localPosition;
+            spriteTransform.localPosition = new Vector3(center.x + size.x / 2f, localPosition.y, center.z + size.z / 2f);
+        }
+
+        private void ResetCellActionSprite()
+        {
+            if (_cellActionSprite.sprite == null) return;
+            UniResources.DisposeAsset(_cellActionSprite.sprite);
         }
     }
 }
