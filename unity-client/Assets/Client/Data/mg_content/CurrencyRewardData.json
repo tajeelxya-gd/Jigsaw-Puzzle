@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "mg_reward_currency_3-3",
+    "_currencyId": "mg_currency_game",
+    "_amountMin": 3,
+    "_amountMax": 3
+  },
+  {
+    "_id": "mg_reward_currency_5-10",
+    "_currencyId": "mg_currency_game",
+    "_amountMin": 5,
+    "_amountMax": 10
+  }
+]
