@@ -129,7 +129,6 @@ namespace Client.Runtime
             if (JigsawBoardCalculator.IsEdge(ev.Anchor.CorrectIdx) && AllEdgesLocked(out var edges))
             {
                 HighlightEdges(edges, ev.Anchor);
-                UniEvents.Raise(new ShowToastEvent("Congrats!"));
                 return;
             }
             HighlightGroupAndNeighbours(ev.Group);
@@ -222,6 +221,9 @@ namespace Client.Runtime
                     await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: cToken);
                 }
             }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.55f), cancellationToken: cToken);
+            UniEvents.Raise(new ShowToastEvent("Congrats!"));
         }
 
         private void HighlightClockwise(IEnumerable<JigsawPiece> pieces, JigsawPiece anchor)
