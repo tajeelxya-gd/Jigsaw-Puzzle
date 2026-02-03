@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client.Runtime
 {
     [Serializable]
-    public class CurrencyData : IEntityData
+    public class CurrencyData : ICurrencyData
     {
         [SerializeField] private string _id;
         [SerializeField] private string _name;
@@ -13,6 +13,6 @@ namespace Client.Runtime
         public string Id => _id;
         public string Name => _name;
 
-        public IEntity CreateEntity() => throw new System.NotImplementedException();
+        public IEntity CreateEntity() => new Currency(_id);
     }
 }

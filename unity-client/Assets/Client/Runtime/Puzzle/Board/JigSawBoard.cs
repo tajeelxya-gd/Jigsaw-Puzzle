@@ -117,6 +117,7 @@ namespace Client.Runtime
                 var worldPos = parent.TransformPoint(localPos);
                 var cell = await UniResources.CreateInstanceAsync<JigsawBoardCell>("JigsawBoardCell", parent, null, cToken);
                 var action = actionData.FirstOrDefault(itm => itm.CellIdx == i);
+                cell.Inject(_resolver);
                 cell.SetData(i, cellSize, this, action);
                 cell.name = $"Cell_{i}";
                 cell.transform.SetPositionAndRotation(worldPos, parent.rotation);

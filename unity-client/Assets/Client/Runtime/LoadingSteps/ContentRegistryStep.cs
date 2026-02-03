@@ -13,6 +13,7 @@ namespace Client.Runtime
             ContentRegistry.Register<JigsawGridData>("JigsawGridData");
             ContentRegistry.Register<CellActionRewardData>("CellActionRewardData");
             ContentRegistry.Register<CurrencyData>("CurrencyData");
+            ContentRegistry.Register<CurrencyRewardData>("CurrencyRewardData");
             return UniTask.CompletedTask;
         }
     }

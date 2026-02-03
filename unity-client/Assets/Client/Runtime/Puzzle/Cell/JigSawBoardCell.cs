@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class JigsawBoardCell : MonoBehaviour
+    public sealed class JigsawBoardCell : MonoBehaviour, IInjectable
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
@@ -12,12 +13,18 @@ namespace Client.Runtime
         private JigsawBoard _board;
         private ICellActionData _actionData;
         private bool _once = true;
+        private ICellActionProcessor _cellActionProcessor;
 
         public int Idx { get; private set; }
         public Vector3 Size { get; private set; }
         public bool IsLocked { get; private set; }
         public IEnumerable<JigsawPiece> AllPieces => _stack;
         public bool HasAnyPiece => _stack.Count > 0;
+
+        public void Inject(IResolver resolver)
+        {
+            _cellActionProcessor = resolver.Resolve<ICellActionProcessor>();
+        }
 
         public bool Contains(JigsawPiece piece) => _stack.Contains(piece);
 
@@ -32,7 +39,7 @@ namespace Client.Runtime
         public bool Push(JigsawPiece piece, int groupSize, float? height = null)
         {
             var newY = 0f;
-            if(!piece.IsLocked)
+            if (!piece.IsLocked)
             {
                 newY = height ?? GetNextHeight(groupSize);
             }
@@ -46,7 +53,7 @@ namespace Client.Runtime
                 if (_once)
                 {
                     PlayVfx();
-                    CellActionProcessor.Process(_actionData);
+                    _cellActionProcessor.Process(_actionData);
                     _once = false;
                 }
                 return true;

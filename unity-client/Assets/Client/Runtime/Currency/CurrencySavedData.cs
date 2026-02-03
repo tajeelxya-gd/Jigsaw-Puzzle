@@ -9,10 +9,12 @@ namespace Client.Runtime
     {
         [SerializeField] private string _id;
         [SerializeField] private long _modifiedTimestamp;
-        [SerializeField] private int _amount;
+        [SerializeField] private double _amount;
 
         public string Id => _id;
         public long ModifiedTimestamp { get => _modifiedTimestamp; set => _modifiedTimestamp = value; }
-        public int Amount => _amount;
+        public double Amount => _amount;
+
+        public void SetAmount(double amount) => _amount = amount;
     }
 }
