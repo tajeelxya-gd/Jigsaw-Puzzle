@@ -39,6 +39,7 @@ namespace Client.Runtime
             _binder.BindAsSingleton<EntityService>();
             _binder.BindAsSingleton<RewardProcessor>();
             _binder.BindAsSingleton<CellActionProcessor>();
+            _binder.BindAsSingleton<PuzzleTraySorter>();
 
             _binder.BindAsSingleton(_savedDataHandler);
             _binder.BindAsSingleton<JigsawWinConditionChecker>();

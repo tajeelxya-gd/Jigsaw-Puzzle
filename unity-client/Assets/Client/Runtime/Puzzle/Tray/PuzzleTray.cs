@@ -30,6 +30,7 @@ namespace Client.Runtime
         private readonly List<JigsawPiece> _activePieces = new();
         private Camera _cam;
         private IPuzzleService _puzzleService;
+        private IPuzzleTraySorter _sorter;
         private JigsawPiece _hitPiece;
         private JigsawPiece _hoverPiece;
         private float _scrollX = 0f;
@@ -53,7 +54,11 @@ namespace Client.Runtime
 
         public Transform Transform => transform;
 
-        public void Inject(IResolver resolver) => _puzzleService = resolver.Resolve<IPuzzleService>();
+        public void Inject(IResolver resolver)
+        {
+            _puzzleService = resolver.Resolve<IPuzzleService>();
+            _sorter = resolver.Resolve<IPuzzleTraySorter>();
+        }
 
         public void Reset()
         {
@@ -72,67 +77,21 @@ namespace Client.Runtime
             SetSpacing();
             if (pieces == null) return;
 
-            var board = _puzzleService.GetCurrentBoard();
-            if (board == null) return;
-
-            var difficulty = _puzzleService.GetCurrentLevelData().Difficulty; // 0 - 10, 0 -> easiest
-            var edgePieces = new List<JigsawPiece>();
-            var otherPieces = new List<JigsawPiece>();
-
             foreach (var p in pieces)
             {
                 p.OnEnterTray();
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
-
-                if (JigsawBoardCalculator.IsEdge(p.CorrectIdx)) edgePieces.Add(p);
-                else otherPieces.Add(p);
             }
 
-            ShuffleList(edgePieces);
-            ShuffleList(otherPieces);
+            var difficulty = _puzzleService.GetCurrentLevelData().Difficulty;
+            var sortedPieces = _sorter.Sort(pieces, difficulty);
 
             _activePieces.Clear();
-
-            if (difficulty <= 5)
-            {
-                float ratio = 1f - (difficulty / 5f);
-                int count = Mathf.FloorToInt(edgePieces.Count * ratio);
-
-                var front = edgePieces.GetRange(0, count);
-                front.Sort((a, b) => a.CorrectIdx.CompareTo(b.CorrectIdx));
-                _activePieces.AddRange(front);
-
-                var remaining = edgePieces.GetRange(count, edgePieces.Count - count);
-                remaining.AddRange(otherPieces);
-                ShuffleList(remaining);
-                _activePieces.AddRange(remaining);
-            }
-            else
-            {
-                float ratio = (difficulty - 5f) / 5f;
-                int count = Mathf.FloorToInt(otherPieces.Count * ratio);
-
-                var front = otherPieces.GetRange(0, count);
-                _activePieces.AddRange(front);
-
-                var remaining = otherPieces.GetRange(count, otherPieces.Count - count);
-                remaining.AddRange(edgePieces);
-                ShuffleList(remaining);
-                _activePieces.AddRange(remaining);
-            }
+            _activePieces.AddRange(sortedPieces);
 
             _scrollX = 0;
             _scrollVelocity = 0f;
-        }
-
-        private void ShuffleList<T>(List<T> list)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                int randomIndex = UnityEngine.Random.Range(i, list.Count);
-                (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
-            }
         }
 
         public void SetHoverPiece(JigsawPiece piece)
