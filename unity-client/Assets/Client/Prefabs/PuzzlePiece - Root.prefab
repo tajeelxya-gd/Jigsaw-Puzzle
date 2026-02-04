@@ -187,7 +187,7 @@ MonoBehaviour:
   _potency: 3.33
   _lerpSpeed: 20
   _maxZDelta: 0.08
-  _startZOffset: 0.055
+  _startZOffset: 0.045
 --- !u!114 &4325325926952226782
 MonoBehaviour:
   m_ObjectHideFlags: 0

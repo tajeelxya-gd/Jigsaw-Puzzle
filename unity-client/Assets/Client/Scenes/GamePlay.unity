@@ -1022,8 +1022,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.VFXController
   _liftAmount: 0.03
   _duration: 0.65
-  _delayBetweenPiecesInGroup: 0.06
-  _delayBetweenGroup: 0.1
+  _delayBetweenPiecesInGroup: 0.03
+  _delayBetweenGroup: 0.05
   _vfxDelayInPieces: 0.025
   _vfxDelayInClockwise: 0.1
   _maxHighlightPieces: 9
