@@ -421,7 +421,7 @@ namespace Client.Runtime
 
                         p.transform.SetParent(null);
                         p.OnExitTray();
-                        p.StartManualDrag(_draggingStartWorldPos, _draggingStartHitPoint);
+                        p.StartManualDrag();
                     }
                 }
 
