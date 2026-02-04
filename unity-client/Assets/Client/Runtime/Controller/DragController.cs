@@ -12,6 +12,7 @@ namespace Client.Runtime
         public event Action OnDragEnded;
 
         [SerializeField] private float _potency;
+        [SerializeField] private float _potencyRate;
         [SerializeField] private float _lerpSpeed = 20f;
         [SerializeField] private float _maxZDelta;
         [SerializeField] private float _startZOffset;
@@ -116,7 +117,8 @@ namespace Client.Runtime
             {
                 Vector3 rawDelta = currentHit - _startHitPoint;
                 float zDelta = rawDelta.z;
-                float modifiedZ = zDelta > -0.02f ? zDelta * (1f + (zDelta + 0.02f) * _potency) : zDelta;
+                float currentPotency = _potency + (zDelta > -0.02f ? (zDelta + 0.02f) * _potencyRate : 0f);
+                float modifiedZ = zDelta * currentPotency;
                 modifiedZ = Mathf.Min(modifiedZ, zDelta + _maxZDelta);
                 instantTarget = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
             }
