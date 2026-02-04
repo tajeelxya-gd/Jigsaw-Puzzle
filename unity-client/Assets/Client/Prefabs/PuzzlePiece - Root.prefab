@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280dc6874dbd8c24a8fe400569ba9a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.DragController
-  _potency: 3
+  _potency: 3.33
   _lerpSpeed: 20
 --- !u!114 &4325325926952226782
 MonoBehaviour:
