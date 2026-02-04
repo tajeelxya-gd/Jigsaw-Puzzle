@@ -2,7 +2,7 @@
   {
     "_id": "mg_level_1",
     "_name": "Level 1",
-    "_gridId": "mg_7x5_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_1",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -26,7 +26,7 @@
   {
     "_id": "mg_level_3",
     "_name": "Level 3",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_3",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -37,7 +37,7 @@
   {
     "_id": "mg_level_4",
     "_name": "Level 4",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_4",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -74,7 +74,7 @@
   {
     "_id": "mg_level_7",
     "_name": "Level 7",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_7",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -85,7 +85,7 @@
   {
     "_id": "mg_level_8",
     "_name": "Level 8",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_4x3_standard",
     "_imageKey": "level_8",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -98,7 +98,7 @@
   {
     "_id": "mg_level_9",
     "_name": "Level 9",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_6x4_standard",
     "_imageKey": "level_9",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -109,7 +109,7 @@
   {
     "_id": "mg_level_10",
     "_name": "Level 10",
-    "_gridId": "mg_6x4_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_10",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -122,7 +122,7 @@
   {
     "_id": "mg_level_11",
     "_name": "Level 11",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_11",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -218,7 +218,7 @@
   {
     "_id": "mg_level_19",
     "_name": "Level 19",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_19",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -362,7 +362,7 @@
   {
     "_id": "mg_level_31",
     "_name": "Level 31",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_31",
     "_difficulty": 0,
     "_cellActionIds": [
@@ -482,7 +482,7 @@
   {
     "_id": "mg_level_41",
     "_name": "Level 41",
-    "_gridId": "mg_4x3_standard",
+    "_gridId": "mg_7x5_standard",
     "_imageKey": "level_41",
     "_difficulty": 0,
     "_cellActionIds": [
