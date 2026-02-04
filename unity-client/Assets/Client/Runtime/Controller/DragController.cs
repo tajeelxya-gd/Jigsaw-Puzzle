@@ -13,6 +13,8 @@ namespace Client.Runtime
 
         [SerializeField] private float _potency;
         [SerializeField] private float _lerpSpeed = 20f;
+        [SerializeField] private float _maxZDelta;
+        [SerializeField] private float _startZOffset;
 
         private Camera _cam;
         private bool _isDragging;
@@ -21,6 +23,8 @@ namespace Client.Runtime
         private Vector3 _startPosition;
         private Vector3 _startHitPoint;
         private Vector3 _currentSmoothTarget;
+
+        public bool OffsetEnabled { get; set; } = true;
 
         private void Awake() => _cam = Camera.main;
 
@@ -91,6 +95,7 @@ namespace Client.Runtime
         private void BeginDragSequence()
         {
             _isDragging = true;
+            _startPosition.z = _startHitPoint.z + _startZOffset;
             _currentSmoothTarget = transform.position;
             OnDragStarted.Broadcast();
         }
@@ -104,12 +109,21 @@ namespace Client.Runtime
             if (!_dragPlane.Raycast(ray, out float enter)) return;
 
             Vector3 currentHit = ray.GetPoint(enter);
-            Vector3 rawDelta = currentHit - _startHitPoint;
 
-            float zDelta = rawDelta.z;
-            float modifiedZ = zDelta > -0.02f ? zDelta * (1f + (zDelta + 0.02f) * _potency) : zDelta;
+            Vector3 instantTarget;
+            if (OffsetEnabled)
+            {
+                Vector3 rawDelta = currentHit - _startHitPoint;
+                float zDelta = rawDelta.z;
+                float modifiedZ = zDelta > -0.02f ? zDelta * (1f + (zDelta + 0.02f) * _potency) : zDelta;
+                modifiedZ = Mathf.Min(modifiedZ, zDelta + _maxZDelta);
+                instantTarget = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
+            }
+            else
+            {
+                instantTarget = currentHit;
+            }
 
-            Vector3 instantTarget = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
             _currentSmoothTarget = Vector3.Lerp(_currentSmoothTarget, instantTarget, Time.deltaTime * _lerpSpeed);
 
             Vector3 moveDelta = _currentSmoothTarget - transform.position;

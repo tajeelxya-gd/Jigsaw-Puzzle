@@ -68,6 +68,7 @@ namespace Client.Runtime
 
         public void OnExitTray()
         {
+            _dragController.OffsetEnabled = true;
             IsOverTray = false;
             if (Group.Count > 1) return;
             _renderer.OnTrayExit();
@@ -76,6 +77,7 @@ namespace Client.Runtime
 
         public void OnEnterTray()
         {
+            _dragController.OffsetEnabled = false;
             IsOverTray = true;
             if (Group.Count > 1) return;
             _renderer.OnTrayEnter();
