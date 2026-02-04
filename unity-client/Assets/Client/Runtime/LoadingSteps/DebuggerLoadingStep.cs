@@ -12,6 +12,7 @@ namespace Client.Runtime
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
+            if (_debugger == null) return UniTask.CompletedTask;
             _debugger.SetActive(_activeDebugger);
             return UniTask.CompletedTask;
         }
