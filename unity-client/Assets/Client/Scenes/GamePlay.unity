@@ -1025,7 +1025,7 @@ MonoBehaviour:
   _delayBetweenPiecesInGroup: 0.06
   _delayBetweenGroup: 0.1
   _vfxDelayInPieces: 0.025
-  _vfxDelayInClockwise: 0.2
+  _vfxDelayInClockwise: 0.1
   _maxHighlightPieces: 9
   _pieceLocked: {fileID: 11400000, guid: 978c1bee9b791f64a8718bcccc53aba4, type: 2}
 --- !u!1 &529685693
