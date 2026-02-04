@@ -95,6 +95,7 @@ namespace Client.Runtime
         private void BeginDragSequence()
         {
             _isDragging = true;
+            _startPosition.x = _startHitPoint.x;
             _startPosition.z = _startHitPoint.z + _startZOffset;
             _currentSmoothTarget = transform.position;
             OnDragStarted.Broadcast();
