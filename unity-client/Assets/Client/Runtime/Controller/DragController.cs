@@ -117,8 +117,8 @@ namespace Client.Runtime
             {
                 Vector3 rawDelta = currentHit - _startHitPoint;
                 float zDelta = rawDelta.z;
-                float currentPotency = _potency + (zDelta > -0.02f ? (zDelta + 0.02f) * _potencyRate : 0f);
-                float modifiedZ = zDelta * currentPotency;
+                float multiplier = zDelta > 0 ? (_potency + zDelta * _potencyRate) : 1f;
+                float modifiedZ = zDelta * multiplier;
                 modifiedZ = Mathf.Min(modifiedZ, zDelta + _maxZDelta);
                 instantTarget = _startPosition + new Vector3(rawDelta.x, 0, modifiedZ);
             }
