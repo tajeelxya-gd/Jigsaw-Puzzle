@@ -70,3 +70,10 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - _key: mg_7x5_standard_mat_outline
+    _reference:
+      m_AssetGUID: 5ae4cc8ef30fe37409b17568367d5a64
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

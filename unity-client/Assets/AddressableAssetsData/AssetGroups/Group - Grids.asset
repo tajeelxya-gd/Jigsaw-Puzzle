@@ -40,6 +40,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ae4cc8ef30fe37409b17568367d5a64
+    m_Address: Baking 7x5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7fb660798ed14c6498b9b754e939a5dd
     m_Address: Jigsaw Final 7x5 Grid
     m_ReadOnly: 0
