@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Client.Runtime
 {
-    public class LevelCompletedWidgetRefs : WidgetRefs
+    public sealed class LevelCompletedWidgetRefs : WidgetRefs
     {
         [SerializeField] private Button _nextLevelBtn;
         [SerializeField] private TMP_Text _nextLevelText;

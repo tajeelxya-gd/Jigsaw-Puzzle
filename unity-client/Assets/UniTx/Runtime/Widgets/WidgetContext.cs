@@ -26,7 +26,7 @@ namespace UniTx.Runtime.Widgets
         /// <summary>
         /// Gets the cancellation token for the widget's lifecycle.
         /// </summary>
-        public CancellationToken CancellationToken { get; internal set; }
+        public CancellationToken CancellationTokenOnDestroy { get; internal set; }
 
         public virtual void Inject(IResolver resolver) { }
     }

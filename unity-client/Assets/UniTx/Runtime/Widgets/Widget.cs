@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using UniTx.Runtime;
 using UniTx.Runtime.IoC;
 using UnityEngine;
 
@@ -54,7 +53,7 @@ namespace UniTx.Runtime.Widgets
         /// </summary>
         public virtual void Initialise()
         {
-            _context.CancellationToken = this.GetCancellationTokenOnDestroy();
+            _context.CancellationTokenOnDestroy = this.GetCancellationTokenOnDestroy();
         }
 
         /// <summary>

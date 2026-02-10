@@ -3,7 +3,7 @@ using UniTx.Runtime.Widgets;
 
 namespace Client.Runtime
 {
-    public sealed class LevelCompletedWidgetContext : WidgetContext<LevelCompletedWidgetData, LevelCompletedWidgetRefs>
+    public sealed class RestartLevelWidgetContext : WidgetContext<RestartLevelWidgetData, RestartLevelWidgetRefs>
     {
         public IPuzzleService PuzzleService { get; private set; }
 

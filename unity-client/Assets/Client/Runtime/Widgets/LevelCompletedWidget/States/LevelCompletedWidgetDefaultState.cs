@@ -5,7 +5,7 @@ using UniTx.Runtime.Widgets;
 
 namespace Client.Runtime
 {
-    public class LevelCompletedWidgetDefaultState : WidgetState<LevelCompletedWidgetContext, LevelCompletedWidgetData, LevelCompletedWidgetRefs>
+    public sealed class LevelCompletedWidgetDefaultState : WidgetState<LevelCompletedWidgetContext, LevelCompletedWidgetData, LevelCompletedWidgetRefs>
     {
         public override void OnEnter()
         {
@@ -19,7 +19,7 @@ namespace Client.Runtime
             Context.Refs.NextLevelBtn.onClick.RemoveListener(HandleNextLevel);
         }
 
-        private void HandleNextLevel() => UniTask.Void(HandleNextLevelAsync, Context.CancellationToken);
+        private void HandleNextLevel() => UniTask.Void(HandleNextLevelAsync, Context.CancellationTokenOnDestroy);
 
         private async UniTaskVoid HandleNextLevelAsync(CancellationToken cToken)
         {
