@@ -1,6 +1,6 @@
 using System;
 
-namespace UniTx.Runtime.StateMachine
+namespace UniTx.Runtime
 {
     /// <summary>
     /// Defines the contract for a state machine that manages transitions between registered states.

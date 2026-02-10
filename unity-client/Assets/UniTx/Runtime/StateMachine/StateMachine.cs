@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UniTx.Runtime.StateMachine
+namespace UniTx.Runtime
 {
     /// <summary>
     /// A state machine implementation that manages transitions between registered states.

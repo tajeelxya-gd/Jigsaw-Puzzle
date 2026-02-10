@@ -1,4 +1,4 @@
-namespace UniTx.Runtime.StateMachine
+namespace UniTx.Runtime
 {
     /// <summary>
     /// Defines the contract for a state in a state machine.

@@ -617,6 +617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6841883903222429367}
   - component: {fileID: 1304401259652227208}
+  - component: {fileID: 7978082773929969591}
   m_Layer: 5
   m_Name: LevelCompletedWidget
   m_TagString: Untagged
@@ -657,6 +658,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba6de5c347177043bec3db14ca143d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.LevelCompletedWidget
+  _refs: {fileID: 7978082773929969591}
+--- !u!114 &7978082773929969591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380428640312459254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4979f99ea3f42d469c993480f2fea5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.LevelCompletedWidgetRefs
   _nextLevelBtn: {fileID: 2145238682156383290}
   _nextLevelText: {fileID: 6224538250903298658}
   _levelCompleted: {fileID: 11400000, guid: 7c68b90508f120340a682bb47506ca27, type: 2}
