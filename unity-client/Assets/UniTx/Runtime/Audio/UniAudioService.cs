@@ -9,6 +9,33 @@ namespace UniTx.Runtime.Audio
     {
         private readonly UniSpawner _spawner = new();
         private UniAudioSource _musicSource;
+        private bool _isSoundOn = true;
+        private bool _isMusicOn = true;
+
+        public bool IsSoundOn
+        {
+            get => _isSoundOn;
+            set
+            {
+                if (_isSoundOn == value) return;
+                _isSoundOn = value;
+                _spawner.ForEachActive(item =>
+                {
+                    if (item is UniAudioSource source) source.Mute = !_isSoundOn;
+                });
+            }
+        }
+
+        public bool IsMusicOn
+        {
+            get => _isMusicOn;
+            set
+            {
+                if (_isMusicOn == value) return;
+                _isMusicOn = value;
+                if (_musicSource != null) _musicSource.Mute = !_isMusicOn;
+            }
+        }
 
         public UniTask InitialiseAsync(CancellationToken cToken = default)
         {
@@ -23,14 +50,16 @@ namespace UniTx.Runtime.Audio
         {
             config.Data.SpatialBlend = 0f;
             var data = (UniAudioConfigData)config.Data;
-            _spawner.Spawn(data);
+            var item = _spawner.Spawn(data);
+            if (item is UniAudioSource source) source.Mute = !IsSoundOn;
         }
 
         public void Play3D(IAudioConfig config, Vector3 position)
         {
             config.Data.SpatialBlend = 1f;
             var data = (UniAudioConfigData)config.Data;
-            _spawner.Spawn(data, position);
+            var item = _spawner.Spawn(data, position);
+            if (item is UniAudioSource source) source.Mute = !IsSoundOn;
         }
 
         public void PlayAttached(IAudioConfig config, Transform parent)
@@ -38,7 +67,8 @@ namespace UniTx.Runtime.Audio
             config.Data.SpatialBlend = 1f;
             var data = (UniAudioConfigData)config.Data;
             data.ToFollow = parent;
-            _spawner.Spawn(data, parent.position, parent.rotation);
+            var item = _spawner.Spawn(data, parent.position, parent.rotation);
+            if (item is UniAudioSource source) source.Mute = !IsSoundOn;
         }
 
         public void PlayMusic(IAudioConfig config)
@@ -48,6 +78,7 @@ namespace UniTx.Runtime.Audio
             _musicSource.SetData(data);
             _musicSource.Reset();
             _musicSource.Initialise();
+            _musicSource.Mute = !IsMusicOn;
         }
     }
 }

@@ -48,7 +48,15 @@ namespace UniTx.Runtime.Pool
             _activeItems.Clear();
         }
 
-        public void Spawn(IPoolItemData data = null, Vector3 spawnPosition = default, Quaternion spawnRotation = default)
+        public void ForEachActive(Action<IPoolItem> action)
+        {
+            foreach (var kvp in _activeItems)
+            {
+                action?.Invoke(kvp.Value);
+            }
+        }
+
+        public IPoolItem Spawn(IPoolItemData data = null, Vector3 spawnPosition = default, Quaternion spawnRotation = default)
         {
             var item = _pool.Get();
 
@@ -61,6 +69,7 @@ namespace UniTx.Runtime.Pool
 
             item.Initialise();
             _activeItems.Add(item.GameObject.GetInstanceID(), item);
+            return item;
         }
 
         private Func<IPoolItem> CreateFunc(IPoolItem prefab, Transform parent)

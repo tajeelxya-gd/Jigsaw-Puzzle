@@ -15,6 +15,18 @@ namespace UniTx.Runtime.Audio
             return _audioService.InitialiseAsync(cToken);
         }
 
+        public static bool IsSoundOn
+        {
+            get => _audioService.IsSoundOn;
+            set => _audioService.IsSoundOn = value;
+        }
+
+        public static bool IsMusicOn
+        {
+            get => _audioService.IsMusicOn;
+            set => _audioService.IsMusicOn = value;
+        }
+
         public static void Play2D(IAudioConfig config)
             => _audioService.Play2D(config);
 

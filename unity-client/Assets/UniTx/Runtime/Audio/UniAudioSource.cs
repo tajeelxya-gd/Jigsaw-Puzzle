@@ -16,6 +16,12 @@ namespace UniTx.Runtime.Audio
 
         public Transform Transform => transform;
 
+        public bool Mute
+        {
+            get => _source.mute;
+            set => _source.mute = value;
+        }
+
         public void Initialise()
         {
             _source.clip = Data.Clip;
