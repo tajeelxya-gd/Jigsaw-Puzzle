@@ -498,6 +498,8 @@ MonoBehaviour:
   _txtAmount: {fileID: 6158920497157177509}
   _currencyImg: {fileID: 1552473030990257388}
   _duration: 0.5
+  _effectCount: 5
+  _delayBetweenEffects: 0.05
 --- !u!1 &6003641929114339411
 GameObject:
   m_ObjectHideFlags: 0

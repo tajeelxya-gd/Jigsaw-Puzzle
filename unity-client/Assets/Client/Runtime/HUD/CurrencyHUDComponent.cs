@@ -18,6 +18,8 @@ namespace Client.Runtime
         [SerializeField] private TMP_Text _txtAmount;
         [SerializeField] private Image _currencyImg;
         [SerializeField] private float _duration;
+        [SerializeField] private int _effectCount;
+        [SerializeField] private float _delayBetweenEffects;
 
         private IEntityService _entityService;
         private ICurrency _currency;
@@ -39,6 +41,7 @@ namespace Client.Runtime
             UnRegisterEvents();
             _currency = null;
             UpdateText(0);
+            UnloadSprite();
         }
 
         private void RegisterEvents()
@@ -75,13 +78,21 @@ namespace Client.Runtime
 
         private async UniTaskVoid AnimateCollectEffectAsync(Vector3 worldPos, CancellationToken cToken = default)
         {
+            var screenPos = _cam.WorldToScreenPoint(worldPos);
+
+            for (var i = 0; i < _effectCount; i++)
+            {
+                AnimateSingleEffectAsync(screenPos, cToken).Forget();
+                await UniTask.Delay(TimeSpan.FromSeconds(_delayBetweenEffects), cancellationToken: cToken);
+            }
+        }
+
+        private async UniTaskVoid AnimateSingleEffectAsync(Vector3 startPos, CancellationToken cToken)
+        {
             var duplicate = Instantiate(_currencyImg, _currencyImg.transform.parent);
             duplicate.sprite = _sprite;
+            duplicate.transform.position = startPos;
 
-            var screenPos = _cam.WorldToScreenPoint(worldPos);
-            duplicate.transform.position = screenPos;
-
-            var startPos = duplicate.transform.position;
             var endPos = _currencyImg.transform.position;
             var elapsed = 0f;
 
@@ -98,7 +109,7 @@ namespace Client.Runtime
                 await UniTask.Yield(PlayerLoopTiming.Update, cToken);
             }
 
-            UpdateText(_currency.Amount);
+            if (_currency != null) UpdateText(_currency.Amount);
 
             if (duplicate != null) Destroy(duplicate.gameObject);
         }
