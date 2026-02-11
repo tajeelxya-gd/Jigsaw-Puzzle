@@ -183,8 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d69f0189bf48545b498556d7403cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.DebuggerLoadingStep
-  _activeDebugger: 1
-  _debugger: {fileID: 0}
+  _activateDebugger: 1
 --- !u!1 &3012221156267686699
 GameObject:
   m_ObjectHideFlags: 0

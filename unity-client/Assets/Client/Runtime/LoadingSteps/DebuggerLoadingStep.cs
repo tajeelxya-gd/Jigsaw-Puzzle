@@ -7,13 +7,15 @@ namespace Client.Runtime
 {
     public sealed class DebuggerLoadingStep : LoadingStepBase
     {
-        [SerializeField] private bool _activeDebugger;
-        [SerializeField] private GameObject _debugger;
+        [SerializeField] private bool _activateDebugger;
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
-            if (_debugger == null) return UniTask.CompletedTask;
-            _debugger.SetActive(_activeDebugger);
+            if (_activateDebugger)
+            {
+                SRDebug.Init();
+            }
+
             return UniTask.CompletedTask;
         }
     }
