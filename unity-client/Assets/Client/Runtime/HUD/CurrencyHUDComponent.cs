@@ -21,6 +21,9 @@ namespace Client.Runtime
         [SerializeField] private int _effectCount;
         [SerializeField] private float _delayBetweenEffects;
 
+        [SerializeField] private float _spawnOffsetDelta;
+        [SerializeField] private float _delayBeforeMove;
+
         private IEntityService _entityService;
         private ICurrency _currency;
         private Sprite _sprite;
@@ -82,7 +85,12 @@ namespace Client.Runtime
 
             for (var i = 0; i < _effectCount; i++)
             {
-                AnimateSingleEffectAsync(screenPos, cToken).Forget();
+                var randomOffset = new Vector3(
+                    UnityEngine.Random.Range(-_spawnOffsetDelta, _spawnOffsetDelta),
+                    UnityEngine.Random.Range(-_spawnOffsetDelta, _spawnOffsetDelta),
+                    0);
+
+                AnimateSingleEffectAsync(screenPos + randomOffset, cToken).Forget();
                 await UniTask.Delay(TimeSpan.FromSeconds(_delayBetweenEffects), cancellationToken: cToken);
             }
         }
@@ -92,6 +100,11 @@ namespace Client.Runtime
             var duplicate = Instantiate(_currencyImg, _currencyImg.transform.parent);
             duplicate.sprite = _sprite;
             duplicate.transform.position = startPos;
+
+            if (_delayBeforeMove > 0)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeMove), cancellationToken: cToken);
+            }
 
             var endPos = _currencyImg.transform.position;
             var elapsed = 0f;
