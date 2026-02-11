@@ -16,6 +16,7 @@ namespace Client.Runtime
     public sealed class HUDComponent : MonoBehaviour, IInjectable, IInitialisable, IResettable
     {
         [SerializeField] private CurrencyHUDComponent _currencyHudComponent;
+        [SerializeField] private GameObject _bottomHud;
         [SerializeField] private Button _reset;
         [SerializeField] private Toggle _dropPieces;
         [SerializeField] private Button _eye;
@@ -84,6 +85,7 @@ namespace Client.Runtime
 
         private void HandleLevelStart(LevelStartEvent @event)
         {
+            SetActiveHudState(true);
             _levelName.SetText(_puzzleService.GetCurrentLevelData().Name);
             SetToggles(true);
             SetDropButton(true);
@@ -93,7 +95,15 @@ namespace Client.Runtime
 
         private void HandleLevelReset(LevelResetEvent @event)
         {
+            SetActiveHudState(false);
             _currencyHudComponent.Reset();
+        }
+
+        private void SetActiveHudState(bool active)
+        {
+            _bottomHud.SetActive(active);
+            _levelName.gameObject.SetActive(active);
+            _slider.gameObject.SetActive(active);
         }
 
         private void SetCurrentSliderValue(bool instant = false)

@@ -695,7 +695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247037120825128141, guid: dcfa667ba9aeef24dabcbd6efc5b002b, type: 3}
       propertyPath: m_Name
-      value: Top - HUD
+      value: HUD
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
