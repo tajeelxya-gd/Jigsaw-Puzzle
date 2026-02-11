@@ -23,7 +23,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleNextLevelAsync(CancellationToken cToken)
         {
-            await UniWidgets.PushAsync<LoadingWidget>(cToken);
+            await UniWidgets.PushAsync<LoadingWidget>(PushLayer.Overlay, cToken);
             Context.PuzzleService.UnLoadPuzzle();
             await Context.PuzzleService.LoadPuzzleAsync(cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);

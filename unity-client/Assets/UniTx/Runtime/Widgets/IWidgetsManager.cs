@@ -1,13 +1,14 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using UniTx.Runtime.IoC;
 
 namespace UniTx.Runtime.Widgets
 {
     /// <summary>
     /// Manages in-game UI widgets, including pushing, popping based on the provided database.
     /// </summary>
-    public interface IWidgetsManager : IInitialisableAsync
+    public interface IWidgetsManager : IInitialisableAsync, IInjectable
     {
         /// <summary>
         /// Triggered when a widget is pushed onto the stack.
@@ -22,13 +23,13 @@ namespace UniTx.Runtime.Widgets
         /// <summary>
         /// Asynchronously pushes a widget of the given type without data.
         /// </summary>
-        UniTask PushAsync<TWidgetType>(CancellationToken cToken = default)
+        UniTask PushAsync<TWidgetType>(PushLayer layer, CancellationToken cToken = default)
             where TWidgetType : IWidget;
 
         /// <summary>
         /// Asynchronously pushes a widget of the given type with data.
         /// </summary>
-        UniTask PushAsync<TWidgetType>(IWidgetData widgetData, CancellationToken cToken = default)
+        UniTask PushAsync<TWidgetType>(IWidgetData widgetData, PushLayer layer, CancellationToken cToken = default)
             where TWidgetType : IWidget, IWidgetDataReceiver;
 
         /// <summary>

@@ -12,6 +12,8 @@ namespace UniTx.Runtime.Bootstrap
 {
     public class UniTxStep : LoadingStepBase
     {
+        [SerializeField] private UniWidgetsManager _widgetsManager;
+
         public async sealed override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
             SetupRoot();
@@ -33,7 +35,11 @@ namespace UniTx.Runtime.Bootstrap
 
         protected virtual IResourceLoadingStrategy CreateResourceLoadingStrategy() => new AddressablesLoadingStrategy();
 
-        protected virtual IWidgetsManager CreateWidgetsManager() => new UniWidgetsManager();
+        protected virtual IWidgetsManager CreateWidgetsManager()
+        {
+            _widgetsManager.Inject(UniStatics.Resolver);
+            return _widgetsManager;
+        }
 
         protected virtual IAudioService CreateAudioService() => new UniAudioService();
 

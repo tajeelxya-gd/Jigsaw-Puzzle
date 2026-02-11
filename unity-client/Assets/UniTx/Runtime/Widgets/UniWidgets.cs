@@ -35,16 +35,16 @@ namespace UniTx.Runtime.Widgets
         /// <summary>
         /// Asynchronously pushes a widget of the given type without data.
         /// </summary>
-        public static UniTask PushAsync<TWidgetType>(CancellationToken cToken = default)
+        public static UniTask PushAsync<TWidgetType>(PushLayer layer = PushLayer.Widgets, CancellationToken cToken = default)
             where TWidgetType : IWidget
-            => _widgetsManager.PushAsync<TWidgetType>(cToken);
+            => _widgetsManager.PushAsync<TWidgetType>(layer, cToken);
 
         /// <summary>
         /// Asynchronously pushes a widget of the given type with data.
         /// </summary>
-        public static UniTask PushAsync<TWidgetType>(IWidgetData widgetData, CancellationToken cToken = default)
+        public static UniTask PushAsync<TWidgetType>(IWidgetData widgetData, PushLayer layer = PushLayer.Widgets, CancellationToken cToken = default)
             where TWidgetType : IWidget, IWidgetDataReceiver
-            => _widgetsManager.PushAsync<TWidgetType>(widgetData, cToken);
+            => _widgetsManager.PushAsync<TWidgetType>(widgetData, layer, cToken);
 
         /// <summary>
         /// Asynchronously pops the widget from the stack.
