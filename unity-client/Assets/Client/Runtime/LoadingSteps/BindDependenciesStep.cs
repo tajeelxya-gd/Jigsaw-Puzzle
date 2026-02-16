@@ -17,7 +17,6 @@ namespace Client.Runtime
         [SerializeField] private PuzzleTray _puzzleTray;
         [SerializeField] private CameraEffects _cameraEffects;
         [SerializeField] private JigsawResourceLoader _jigsawResourceLoader;
-        [SerializeField] private HUDComponent _hudComponent;
         [SerializeField] private VFXController _vfxController;
         [SerializeField] private FullImageHandler _fullImageHandler;
         [SerializeField] private SavedDataHandler _savedDataHandler;
@@ -48,7 +47,6 @@ namespace Client.Runtime
             _binder.Bind(_puzzleTray);
             _binder.Bind(_cameraEffects);
             _binder.Bind(_jigsawResourceLoader);
-            _binder.Bind(_hudComponent);
             _binder.Bind(_fullImageHandler);
             _binder.Bind(_toastHandler);
 
