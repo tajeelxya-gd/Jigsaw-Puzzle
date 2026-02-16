@@ -1,0 +1,19 @@
+public enum ColorType
+{
+    Red,
+    Blue,
+    Green,
+    Yellow,
+    Purple,
+    Black,
+    Pink,
+    Cyan,
+    Orange,
+    Brown,
+    Clear,
+    White,
+    Turquoise,
+    CreamWhite,
+    DarkPink,
+    LightGrey,
+}

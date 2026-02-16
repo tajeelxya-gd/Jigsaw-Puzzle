@@ -1,0 +1,17 @@
+﻿using Monetization.Runtime.Ads;
+using UnityEngine;
+using UnityEngine.Events;
+
+namespace Monetization.Runtime.Ads
+{
+    sealed class RewardedAdAdapter : MonoBehaviour
+    {
+        public string PlacementName;
+        public UnityEvent OnRewardComplete;
+
+        public void CallRewardedAd()
+        {
+            AdsManager.ShowRewarded(PlacementName, () => { OnRewardComplete?.Invoke(); });
+        }
+    }
+}

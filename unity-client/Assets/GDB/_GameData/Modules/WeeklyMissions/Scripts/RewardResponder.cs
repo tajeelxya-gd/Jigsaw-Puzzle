@@ -1,0 +1,46 @@
+using System;
+using UnityEngine;
+
+public class RewardResponder : MonoBehaviour
+{
+    void OnClaimReward(RewardProgressHolder _currentRewardProgressData)
+    {
+        if (_currentRewardProgressData == null) return;
+        GameData _gameData = GlobalService.GameData;
+        IBulkPopService _bulkPopService = GlobalService.IBulkPopService;
+        foreach (var _reward in _currentRewardProgressData._rewards)
+        {
+            switch (_reward.rewardType)
+            {
+                case WeeklyRewardType.None:
+                    break;
+                case WeeklyRewardType.Hammer:
+                    _gameData.Data.Hammer += _reward.rewardChestAmount;
+                    break;
+                case WeeklyRewardType.InfiniteHealth:
+                  //  _bulkPopService.PlayEffect(PopBulkService.BulkPopUpServiceType.Health,_rewardItemContainer.transform.position);
+                    SignalBus.Publish(new OnHealthUpdateSignal{TimeToAdd = _reward.rewardChestAmount});
+                    break;
+                case WeeklyRewardType.Coin:
+                   // _bulkPopService.PlayEffect(PopBulkService.BulkPopUpServiceType.Coins,_rewardItemContainer.transform.position);
+                    SignalBus.Publish(new OnCoinsUpdateSignal{Amount = _reward.rewardChestAmount});
+                    break;
+                case WeeklyRewardType.PremiumCoin:
+                    _gameData.Data.PremiumCoins += _reward.rewardChestAmount;
+                    break;
+                case WeeklyRewardType.MagicWand:
+                    _gameData.Data.Wand += _reward.rewardChestAmount;
+                    break;
+                case WeeklyRewardType.Magnet:
+                    _gameData.Data.Magnets += _reward.rewardChestAmount;
+                    break;
+                case WeeklyRewardType.PopTreasureBox:
+                    _gameData.Data.SlotPopper += _reward.rewardChestAmount;
+                    
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+}

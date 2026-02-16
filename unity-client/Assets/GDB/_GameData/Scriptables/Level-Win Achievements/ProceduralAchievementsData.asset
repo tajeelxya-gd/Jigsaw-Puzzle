@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51993c8601495845b94c149b08bac36, type: 3}
+  m_Name: ProceduralAchievementsData
+  m_EditorClassIdentifier: 
+  ProceduralAchievements:
+  - Name: 
+    StartLevel: 1
+    EndLevel: 4
+    RewardSprite: {fileID: 21300000, guid: 751a17c6cb4cc6b44985911fcff006e8, type: 3}
+  - Name: 
+    StartLevel: 5
+    EndLevel: 7
+    RewardSprite: {fileID: 21300000, guid: 248c8f6b51d183b4e953697eff36ddfd, type: 3}
+  - Name: 
+    StartLevel: 8
+    EndLevel: 15
+    RewardSprite: {fileID: 21300000, guid: d3df4c24bc9914945a1a276a530bcbe2, type: 3}
+  - Name: 
+    StartLevel: 16
+    EndLevel: 21
+    RewardSprite: {fileID: 21300000, guid: 148767d8edf91274cbed473c87f1176b, type: 3}
+  - Name: 
+    StartLevel: 22
+    EndLevel: 35
+    RewardSprite: {fileID: 21300000, guid: 8e50b2980828e70459a1fbbaee7ff6bb, type: 3}
+  - Name: 
+    StartLevel: 36
+    EndLevel: 55
+    RewardSprite: {fileID: 21300000, guid: e6f6c86cf90b4444bb2c024775cf91d7, type: 3}
+  - Name: 
+    StartLevel: 56
+    EndLevel: 69
+    RewardSprite: {fileID: 21300000, guid: 52cf2e6aac8786a43a7443952b92e2c0, type: 3}
+  - Name: 
+    StartLevel: 70
+    EndLevel: 140
+    RewardSprite: {fileID: 21300000, guid: 21869a353049253469b4e5346b65ac87, type: 3}
+  - Name: 
+    StartLevel: 141
+    EndLevel: 180
+    RewardSprite: {fileID: 21300000, guid: 78df054aabc82e145b00f92c0f5513a0, type: 3}
+  - Name: 
+    StartLevel: 181
+    EndLevel: 400
+    RewardSprite: {fileID: 21300000, guid: 80b775f873ea82b46b746ea38f483894, type: 3}

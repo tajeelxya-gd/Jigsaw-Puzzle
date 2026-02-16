@@ -1,0 +1,5096 @@
+{
+    "AvailableStartingSpaces": 5,
+    "CoinRewardAmount": 10,
+    "ColumnDelayTime": 1.0,
+    "HasGoal": false,
+    "GoalAmount": 0,
+    "levelType": 1,
+    "cannonData": [
+        {
+            "cannonColumns": [
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 0
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 3
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 2
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 7
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 6
+                }
+            ]
+        },
+        {
+            "cannonColumns": [
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 0
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 2
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                }
+            ]
+        },
+        {
+            "cannonColumns": [
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 2
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 0,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "colorType": 8,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 7
+                },
+                {
+                    "colorType": 3,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 6
+                }
+            ]
+        }
+    ],
+    "enemyData": [
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 0,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 8,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                },
+                {
+                    "colorType": 3,
+                    "enemyType": 0,
+                    "EnemyHealth": 1
+                }
+            ]
+        }
+    ]
+}

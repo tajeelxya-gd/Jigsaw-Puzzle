@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12acd6b97ab67de41bc3004ac4774bee, type: 3}
+  m_Name: BoggieFaceData
+  m_EditorClassIdentifier: 
+  EyeBallMat: {fileID: 2100000, guid: f4812af4aeabad14e94cdc268c7f8a27, type: 2}
+  EyeMat: {fileID: 2100000, guid: 107afa469c6e9294a85e8ae2abcd34bc, type: 2}
+  FaceMesh: {fileID: 2897120478318003291, guid: 177fd94aa5181be42b4fcbde770daad9, type: 3}

@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310f315313148964facbe0f5d6bcfcfe, type: 3}
+  m_Name: ColorData
+  m_EditorClassIdentifier: 
+  _ColorInfo:
+  - color: {r: 0.8784314, g: 0.13725491, b: 0.16078432, a: 1}
+    colorType: 0
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 38d6679f245ca374e9540cfd23fce4f1, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 9c54347861c0e444c96f746d09703184, type: 2}
+  - color: {r: 0.10980392, g: 0.42352942, b: 0.85882354, a: 1}
+    colorType: 1
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: ab40cfecf2d0b4941b0df7f8b2b7554f, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 914e9c552fdddce4e98748c8fac3d9e9, type: 2}
+  - color: {r: 0.3254902, g: 0.67058825, b: 0.011764706, a: 1}
+    colorType: 2
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 19987afa83610cd4c81d9d3fb9bd95c4, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: ce2992f577f598c4c8efb2d41a5540cf, type: 2}
+  - color: {r: 0.9254902, g: 0.6117647, b: 0.039215688, a: 1}
+    colorType: 3
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 19d656de730c45f4daf28312807e3993, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 851781c4dd3d3594aa7989690a214936, type: 2}
+  - color: {r: 0.5411765, g: 0.23529412, b: 0.8666667, a: 1}
+    colorType: 4
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: c918cd9e04f4f034b803967d41f181c6, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: f1f9885caa791954dbccb55ae4fc17be, type: 2}
+  - color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    colorType: 5
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: a1e46021777b29d4e98d92db97646f36, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: dd55e7abef448124b9b8af37ba62bf0c, type: 2}
+  - color: {r: 0.87058824, g: 0.26666668, b: 0.41568628, a: 1}
+    colorType: 6
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 4ad0e0d34de9dfa4b8042523e518eeda, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 6b274b17383742f4f92169a2798f0fdc, type: 2}
+  - color: {r: 0.07662869, g: 0.7497163, b: 0.7735849, a: 1}
+    colorType: 7
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: da938ddb6f1447d4089af2178e7693d7, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 26a4c6bb0e66aed4ead09b90c592e5b1, type: 2}
+  - color: {r: 1, g: 0.4313832, b: 0, a: 1}
+    colorType: 8
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: efd8afe8d8092a345bd91184798fd138, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 0a323abc92f505140928da868482acce, type: 2}
+  - color: {r: 0.5294118, g: 0.22745098, b: 0.08235294, a: 1}
+    colorType: 9
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 0cea9a7091416ab4996bfcd4f18773d6, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 43478b27b2e8d9f4a86525a484e57dc9, type: 2}
+  - color: {r: 0.79607844, g: 0.77254903, b: 0.74509805, a: 1}
+    colorType: 11
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: a03056b3c0182ff40917602e50e20a0f, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: b204821c9c49e1944888909a982cc573, type: 2}
+  - color: {r: 0, g: 0.6037736, b: 0.370731, a: 1}
+    colorType: 12
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 619d86a2ae242744a8efa658b444da63, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 78f0e444f10b9c84094056fa4785c590, type: 2}
+  - color: {r: 0.87058824, g: 0.6745098, b: 0.42352942, a: 1}
+    colorType: 13
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: 6d80f5ff8e9e17a4ea6500d3ab947140, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 7032ec91e19e7d04181f2bee634291e3, type: 2}
+  - color: {r: 0.7490196, g: 0.13333334, b: 0.34901962, a: 1}
+    colorType: 14
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: c6e882fba8d919f40859bdfa4ed75a88, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: b730a50c81b413d438cfb04c9afe1711, type: 2}
+  - color: {r: 0.5377358, g: 0.5250534, b: 0.5250534, a: 1}
+    colorType: 15
+    materialData:
+    - enemyType: 0
+      material: {fileID: 2100000, guid: cb5a7342b4bd0b7449fc8e5500f00a25, type: 2}
+    - enemyType: 1
+      material: {fileID: 2100000, guid: 0aa0d1a7150d7f04895f839b4e335d05, type: 2}
+  QuestionMarkTexture: {fileID: 2800000, guid: 0f2f44f3b75e8e34fabdb92c85cd3cb6, type: 3}
+  BigCannonQuestionMarkTexture: {fileID: 2800000, guid: 18c7557a0d68e1048bf83a3adedaf3f3, type: 3}

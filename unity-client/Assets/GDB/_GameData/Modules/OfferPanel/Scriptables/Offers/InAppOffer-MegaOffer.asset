@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a5bf12779d0234490f6d4423dfd723, type: 3}
+  m_Name: InAppOffer-MegaOffer
+  m_EditorClassIdentifier: 
+  offerName: MegaOffer
+  _id: iap.mega.offer.bundle
+  _isConsumeable: 0
+  _isRemoveAd: 0
+  _allOffersRewards:
+  - _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
+    rewardType: 3
+    rewardChestAmount: 1000
+  - _rewardIcon: {fileID: 21300000, guid: fec395feb7b37cf40baa309c4db75cf0, type: 3}
+    rewardType: 6
+    rewardChestAmount: 2
+  - _rewardIcon: {fileID: 21300000, guid: 8050f256be7c76f478ae280d23350343, type: 3}
+    rewardType: 5
+    rewardChestAmount: 2
+  - _rewardIcon: {fileID: 21300000, guid: 6c7719b78b8785745b799021d87d302f, type: 3}
+    rewardType: 1
+    rewardChestAmount: 2
+  - _rewardIcon: {fileID: 21300000, guid: e4a826ad4c15ca142a40c57c820289e0, type: 3}
+    rewardType: 7
+    rewardChestAmount: 2
+  - _rewardIcon: {fileID: 21300000, guid: 3c37316002461aa46b05900c05f8b5f1, type: 3}
+    rewardType: 2
+    rewardChestAmount: 20

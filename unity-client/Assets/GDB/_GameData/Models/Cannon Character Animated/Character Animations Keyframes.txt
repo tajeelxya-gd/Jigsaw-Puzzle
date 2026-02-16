@@ -1,0 +1,8 @@
+Character Animations   
+
+
+Happy Idle               1-60  (Loop)
+
+Angry                    65-292 (Loop)
+
+Happy                    310-400 (Loop)

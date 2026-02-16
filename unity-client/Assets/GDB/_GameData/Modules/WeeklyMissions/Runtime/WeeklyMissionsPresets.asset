@@ -1,0 +1,408 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38da9dedd643fde448b972ff76597027, type: 3}
+  m_Name: WeeklyMissionsPresets
+  m_EditorClassIdentifier: 
+  _weeklyMissionsPresetsData:
+  - _missions:
+    - Day: 1
+      _isInteractable: 0
+      _text: LOGIN DAY 1
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 20
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 1
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 1
+      _isInteractable: 1
+      _text: COMPLETE LEVELS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 30
+      _extraReward: 0
+      _missionType: 3
+      _targetAmount: 20
+      _taskImage: {fileID: 21300000, guid: f79b88669159214428f950afc99123cb, type: 3}
+    - Day: 1
+      _isInteractable: 1
+      _text: JOIN CANNONS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 20
+      _extraReward: 0
+      _missionType: 4
+      _targetAmount: 30
+      _taskImage: {fileID: 21300000, guid: 56d9db27c712d0b49a0ba24a9992540f, type: 3}
+    - Day: 1
+      _isInteractable: 1
+      _text: USE MAGNET
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 20
+      _extraReward: 0
+      _missionType: 11
+      _targetAmount: 1
+      _taskImage: {fileID: 21300000, guid: b6ed711ee0bf8c1488a2f4aac1635498, type: 3}
+    - Day: 1
+      _isInteractable: 1
+      _text: WINS STREAK
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 30
+      _extraReward: 0
+      _missionType: 6
+      _targetAmount: 6
+      _taskImage: {fileID: 21300000, guid: 9e7b85402adad944f8e1dd654dbb012f, type: 3}
+  - _missions:
+    - Day: 2
+      _isInteractable: 1
+      _text: LOGIN DAY 2
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 40
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 2
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 2
+      _isInteractable: 1
+      _text: USE COINS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 30
+      _extraReward: 3
+      _missionType: 10
+      _targetAmount: 1500
+      _taskImage: {fileID: 21300000, guid: 57e6d0d9e1291fd4c8697dddceac9041, type: 3}
+    - Day: 2
+      _isInteractable: 1
+      _text: COMPLETE A HARD LEVEL
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 40
+      _extraReward: 0
+      _missionType: 7
+      _targetAmount: 4
+      _taskImage: {fileID: 21300000, guid: ed0243c0be9d51f4e8b3749963755928, type: 3}
+    - Day: 2
+      _isInteractable: 1
+      _text: USE HAMMER
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 30
+      _extraReward: 0
+      _missionType: 8
+      _targetAmount: 3
+      _taskImage: {fileID: 21300000, guid: 9ad769340e656ae478a98988de073bc3, type: 3}
+    - Day: 2
+      _isInteractable: 1
+      _text: GET X2 COINS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 70
+      _extraReward: 0
+      _missionType: 5
+      _targetAmount: 2
+      _taskImage: {fileID: 21300000, guid: eed192e32aec5f84ba28498eb11b9f42, type: 3}
+  - _missions:
+    - Day: 3
+      _isInteractable: 1
+      _text: LOGIN DAY 3
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 60
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 3
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 3
+      _isInteractable: 1
+      _text: JOIN TURBO RACE
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 20
+      _extraReward: 0
+      _missionType: 13
+      _targetAmount: 1
+      _taskImage: {fileID: 21300000, guid: e03f2b98036592f4e92b552bd4d78aba, type: 3}
+    - Day: 3
+      _isInteractable: 1
+      _text: COMPLETE LEVELS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 80
+      _extraReward: 3
+      _missionType: 3
+      _targetAmount: 60
+      _taskImage: {fileID: 21300000, guid: f79b88669159214428f950afc99123cb, type: 3}
+    - Day: 3
+      _isInteractable: 1
+      _text: EARN COINS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 120
+      _extraReward: 3
+      _missionType: 12
+      _targetAmount: 1500
+      _taskImage: {fileID: 21300000, guid: eecc3bff2d63d2c4bad4b6d21e9bf001, type: 3}
+    - Day: 3
+      _isInteractable: 1
+      _text: USE MAGNET
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 70
+      _extraReward: 0
+      _missionType: 7
+      _targetAmount: 5
+      _taskImage: {fileID: 21300000, guid: b6ed711ee0bf8c1488a2f4aac1635498, type: 3}
+  - _missions:
+    - Day: 4
+      _isInteractable: 1
+      _text: LOGIN DAY 4
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 80
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 4
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 4
+      _isInteractable: 1
+      _text: USE HAMMER
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 70
+      _extraReward: 0
+      _missionType: 8
+      _targetAmount: 8
+      _taskImage: {fileID: 21300000, guid: 9ad769340e656ae478a98988de073bc3, type: 3}
+    - Day: 4
+      _isInteractable: 1
+      _text: GET X2 COINS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 80
+      _extraReward: 3
+      _missionType: 5
+      _targetAmount: 4
+      _taskImage: {fileID: 21300000, guid: eed192e32aec5f84ba28498eb11b9f42, type: 3}
+    - Day: 4
+      _isInteractable: 1
+      _text: USE SPACE MAKER
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 70
+      _extraReward: 0
+      _missionType: 14
+      _targetAmount: 3
+      _taskImage: {fileID: 21300000, guid: 470c28df283a5ac4a80a9472854c81fd, type: 3}
+    - Day: 4
+      _isInteractable: 1
+      _text: COMPLETE HARD LEVEL
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 80
+      _extraReward: 0
+      _missionType: 7
+      _targetAmount: 8
+      _taskImage: {fileID: 21300000, guid: 9e5df2ab8302393408b037b6b0ece385, type: 3}
+  - _missions:
+    - Day: 5
+      _isInteractable: 1
+      _text: LOGIN DAY 5
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 100
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 5
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 5
+      _isInteractable: 1
+      _text: USE MAGIC WAND
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 100
+      _extraReward: 0
+      _missionType: 9
+      _targetAmount: 5
+      _taskImage: {fileID: 21300000, guid: 193c60a827bb1aa46bd171272b824365, type: 3}
+    - Day: 5
+      _isInteractable: 1
+      _text: USE COINS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 100
+      _extraReward: 3
+      _missionType: 10
+      _targetAmount: 3500
+      _taskImage: {fileID: 21300000, guid: 57e6d0d9e1291fd4c8697dddceac9041, type: 3}
+    - Day: 5
+      _isInteractable: 1
+      _text: WIN TURBO RACER
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 120
+      _extraReward: 0
+      _missionType: 15
+      _targetAmount: 1
+      _taskImage: {fileID: 21300000, guid: 076698d872027d244840046ee0cfe151, type: 3}
+    - Day: 5
+      _isInteractable: 1
+      _text: COMPLETE LEVEL
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 120
+      _extraReward: 0
+      _missionType: 3
+      _targetAmount: 100
+      _taskImage: {fileID: 21300000, guid: f79b88669159214428f950afc99123cb, type: 3}
+  - _missions:
+    - Day: 6
+      _isInteractable: 1
+      _text: LOGIN DAY 6
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 120
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 6
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 6
+      _isInteractable: 1
+      _text: COMPLETE HARD LEVELS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 150
+      _extraReward: 0
+      _missionType: 7
+      _targetAmount: 20
+      _taskImage: {fileID: 21300000, guid: ed0243c0be9d51f4e8b3749963755928, type: 3}
+    - Day: 6
+      _isInteractable: 1
+      _text: USE SPACE MAKER
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 150
+      _extraReward: 0
+      _missionType: 14
+      _targetAmount: 7
+      _taskImage: {fileID: 21300000, guid: 470c28df283a5ac4a80a9472854c81fd, type: 3}
+    - Day: 6
+      _isInteractable: 1
+      _text: FINISH TOP 3 IN LEAGUE
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 100
+      _extraReward: 0
+      _missionType: 17
+      _targetAmount: 1
+      _taskImage: {fileID: 21300000, guid: ff8ccd2c6c355974a98fa8153caa6b98, type: 3}
+    - Day: 6
+      _isInteractable: 1
+      _text: COMPLETE SUPER HARD LEVEL
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 120
+      _extraReward: 0
+      _missionType: 16
+      _targetAmount: 15
+      _taskImage: {fileID: 21300000, guid: 9e5df2ab8302393408b037b6b0ece385, type: 3}
+  - _missions:
+    - Day: 7
+      _isInteractable: 1
+      _text: LOGIN DAY 7
+      _rewardIcon:
+      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 100
+      _extraReward: 2
+      _missionType: 1
+      _targetAmount: 7
+      _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
+    - Day: 7
+      _isInteractable: 1
+      _text: EARN COINS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
+      _multipleReward: 1
+      _rewardAmount: 150
+      _extraReward: 3
+      _missionType: 12
+      _targetAmount: 10000
+      _taskImage: {fileID: 21300000, guid: eecc3bff2d63d2c4bad4b6d21e9bf001, type: 3}
+    - Day: 7
+      _isInteractable: 1
+      _text: WINS STREAK
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 100
+      _extraReward: 0
+      _missionType: 6
+      _targetAmount: 30
+      _taskImage: {fileID: 21300000, guid: 9e7b85402adad944f8e1dd654dbb012f, type: 3}
+    - Day: 7
+      _isInteractable: 1
+      _text: USE POWERUPS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 180
+      _extraReward: 0
+      _missionType: 2
+      _targetAmount: 40
+      _taskImage: {fileID: 21300000, guid: cfc94f1e6a7b4434f8c64aad3762464e, type: 3}
+    - Day: 7
+      _isInteractable: 1
+      _text: COMPLETE LEVEL
+      _rewardIcon:
+      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 180
+      _extraReward: 0
+      _missionType: 3
+      _targetAmount: 150
+      _taskImage: {fileID: 21300000, guid: f79b88669159214428f950afc99123cb, type: 3}

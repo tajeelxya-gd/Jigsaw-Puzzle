@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7577175d1fc794797fa4c9dd819622, type: 3}
+  m_Name: LoadingScreenUIData
+  m_EditorClassIdentifier: 
+  _LoadingUiData:
+  - levelType: 0
+    LoadingPanelSprite: {fileID: 21300000, guid: 534ee338bf3859b4c903db4734e49f54, type: 3}
+    LoadingTxtSp: {fileID: 21300000, guid: bfa6578c6e4d83544a54c35ef2e606b0, type: 3}
+    EmptBarSp: {fileID: 21300000, guid: d298f9a5b47e8da4bb9f7a0d4959772b, type: 3}
+    RaceSp: {fileID: 21300000, guid: d6e5f1df4c3a8364eac9e2b84500b007, type: 3}
+  - levelType: 1
+    LoadingPanelSprite: {fileID: 21300000, guid: 908ad882e57ea1645b800e452114dd0c, type: 3}
+    LoadingTxtSp: {fileID: 21300000, guid: 65bc7cbd3c22c5b4e8fedfb3269546b4, type: 3}
+    EmptBarSp: {fileID: 21300000, guid: 5b22245eb2457f642bc9e1aedfd81e92, type: 3}
+    RaceSp: {fileID: 21300000, guid: b8beb75210ca75e48a86b88ddffa5d43, type: 3}
+  - levelType: 2
+    LoadingPanelSprite: {fileID: 21300000, guid: b1e496c9e3f670a469cef53d6ed9a659, type: 3}
+    LoadingTxtSp: {fileID: 21300000, guid: 094742a82ebe77148a512ad42580b3dc, type: 3}
+    EmptBarSp: {fileID: 21300000, guid: e08ba47b6e0af3540a703587b24ef507, type: 3}
+    RaceSp: {fileID: 21300000, guid: 33576680d5f020748bef9a290115bdef, type: 3}

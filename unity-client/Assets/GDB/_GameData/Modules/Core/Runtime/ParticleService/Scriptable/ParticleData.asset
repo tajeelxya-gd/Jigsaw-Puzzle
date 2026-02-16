@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089eec8eda6d0dc4886c0ba2fe41446b, type: 3}
+  m_Name: ParticleData
+  m_EditorClassIdentifier: 
+  Data:
+  - Type: 0
+    Particle: {fileID: 4779800762643391563, guid: 4f8e2dbaa3d5f9f41aeadb599a90b231, type: 3}
+  - Type: 1
+    Particle: {fileID: 193062, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
+  - Type: 2
+    Particle: {fileID: 8509480828097378841, guid: c36e19db5bcc18e4e98dd0d215d60242, type: 3}
+  - Type: 3
+    Particle: {fileID: 4896387581593038311, guid: 82211e00c56acab419c106b14c9a5cba, type: 3}
+  - Type: 4
+    Particle: {fileID: 153256, guid: fe394d041df1a0547990f49cf653249f, type: 3}
+  - Type: 5
+    Particle: {fileID: 183222, guid: f2ee009e61b1177489331d95174281b1, type: 3}
+  - Type: 6
+    Particle: {fileID: 115286, guid: ec1c5863f61e8ff4a84dbdb8a282a7ac, type: 3}
+  - Type: 7
+    Particle: {fileID: 108496, guid: 9acec412cf3cb0b4ea6bd5b99ee797bc, type: 3}
+  - Type: 8
+    Particle: {fileID: 164832, guid: cc4edba986607ba48b17927b27d25e4e, type: 3}

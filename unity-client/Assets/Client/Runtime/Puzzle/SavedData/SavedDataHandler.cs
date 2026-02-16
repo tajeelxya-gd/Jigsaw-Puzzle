@@ -27,7 +27,7 @@ namespace Client.Runtime
             _serialisationService = resolver.Resolve<ISerialisationService>();
             _savedData = _serialisationService.Load<UserSavedData>(_userSavedDataKey);
             var binder = resolver.Resolve<IBinder>();
-            binder.BindAsSingleton(_savedData);
+            binder.Bind(_savedData);
         }
 
         public void Initialise()
@@ -63,7 +63,7 @@ namespace Client.Runtime
             Save();
         }
 
-         private void HandleOnLevelStart(LevelStartEvent @event)
+        private void HandleOnLevelStart(LevelStartEvent @event)
         {
             var levelData = _puzzleService.GetCurrentLevelData();
             _levelId = levelData.Id;

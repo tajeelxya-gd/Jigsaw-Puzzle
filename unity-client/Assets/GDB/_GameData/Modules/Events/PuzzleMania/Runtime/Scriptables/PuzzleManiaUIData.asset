@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4663cc2105454b43ac0b062735a8256, type: 3}
+  m_Name: PuzzleManiaUIData
+  m_EditorClassIdentifier: 
+  _maniaUIPresets:
+  - _maniaRewards:
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 10
+      _number: 1
+      _requiredBlocks: 500
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 006463f749f2774439d8e4c4ea8c18a5, type: 3}
+        rewardType: 2
+        rewardChestAmount: 10
+      _number: 2
+      _requiredBlocks: 750
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: c6c181d1407062c40b254c713b96ad8a, type: 3}
+        rewardType: 5
+        rewardChestAmount: 1
+      _number: 3
+      _requiredBlocks: 750
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e310cb3d68033024c989e5ef71b13c35, type: 3}
+        rewardType: 1
+        rewardChestAmount: 1
+      _number: 4
+      _requiredBlocks: 1000
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 20
+      _number: 5
+      _requiredBlocks: 1000
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: fb9a930e6f197d54abb7cfe762baf4ed, type: 3}
+        rewardType: 6
+        rewardChestAmount: 1
+      _number: 6
+      _requiredBlocks: 1200
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: b01012328c9eb59418ab9ca55459e4ea, type: 3}
+        rewardType: 7
+        rewardChestAmount: 1
+      _number: 7
+      _requiredBlocks: 1200
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 006463f749f2774439d8e4c4ea8c18a5, type: 3}
+        rewardType: 2
+        rewardChestAmount: 15
+      _number: 8
+      _requiredBlocks: 1400
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e310cb3d68033024c989e5ef71b13c35, type: 3}
+        rewardType: 1
+        rewardChestAmount: 2
+      _number: 9
+      _requiredBlocks: 1400
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 50
+      _number: 10
+      _requiredBlocks: 1500
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: c6c181d1407062c40b254c713b96ad8a, type: 3}
+        rewardType: 5
+        rewardChestAmount: 2
+      _number: 11
+      _requiredBlocks: 1500
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 4
+        rewardChestAmount: 10
+      _number: 12
+      _requiredBlocks: 1750
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 006463f749f2774439d8e4c4ea8c18a5, type: 3}
+        rewardType: 2
+        rewardChestAmount: 30
+      _number: 13
+      _requiredBlocks: 1750
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 125
+      _number: 14
+      _requiredBlocks: 1800
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 637b9ccbd747d554bb77ed9f5ce1419c, type: 3}
+        rewardType: 4
+        rewardChestAmount: 30
+      _number: 15
+      _requiredBlocks: 1800
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: c6c181d1407062c40b254c713b96ad8a, type: 3}
+        rewardType: 5
+        rewardChestAmount: 2
+      _number: 16
+      _requiredBlocks: 1850
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 200
+      _number: 17
+      _requiredBlocks: 1850
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e310cb3d68033024c989e5ef71b13c35, type: 3}
+        rewardType: 1
+        rewardChestAmount: 3
+      _number: 18
+      _requiredBlocks: 1900
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: b01012328c9eb59418ab9ca55459e4ea, type: 3}
+        rewardType: 7
+        rewardChestAmount: 2
+      _number: 19
+      _requiredBlocks: 1900
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 006463f749f2774439d8e4c4ea8c18a5, type: 3}
+        rewardType: 2
+        rewardChestAmount: 45
+      _number: 20
+      _requiredBlocks: 2000
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 500
+      _number: 21
+      _requiredBlocks: 2000
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 500
+      _number: 22
+      _requiredBlocks: 2000
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: b01012328c9eb59418ab9ca55459e4ea, type: 3}
+        rewardType: 7
+        rewardChestAmount: 3
+      _number: 23
+      _requiredBlocks: 2250
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 006463f749f2774439d8e4c4ea8c18a5, type: 3}
+        rewardType: 2
+        rewardChestAmount: 60
+      _number: 24
+      _requiredBlocks: 2250
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 1000
+      _number: 25
+      _requiredBlocks: 2500
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 637b9ccbd747d554bb77ed9f5ce1419c, type: 3}
+        rewardType: 4
+        rewardChestAmount: 60
+      _number: 26
+      _requiredBlocks: 2500
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: e1112eb8afff3f5479d214f61270ba10, type: 3}
+        rewardType: 3
+        rewardChestAmount: 1500
+      _number: 27
+      _requiredBlocks: 3000

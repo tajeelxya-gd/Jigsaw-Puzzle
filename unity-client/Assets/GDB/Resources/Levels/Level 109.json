@@ -1,0 +1,5620 @@
+{
+    "AvailableStartingSpaces": 5,
+    "CoinRewardAmount": 10,
+    "ColumnDelayTime": 1.0,
+    "HasGoal": false,
+    "GoalAmount": 0,
+    "levelType": 0,
+    "cannonData": [
+        {
+            "cannonColumns": [
+                {
+                    "shooterType": 0,
+                    "colorType": 7,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 0
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 14,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 2
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 7,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 14,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 4
+                }
+            ]
+        },
+        {
+            "cannonColumns": [
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 0
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 14,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 1
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 7,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 2
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 3
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 0,
+                    "connectedRow": 4
+                }
+            ]
+        },
+        {
+            "cannonColumns": [
+                {
+                    "shooterType": 0,
+                    "colorType": 7,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 3,
+                    "connectedRow": 0
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 14,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 1
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 3,
+                    "connectedRow": 2
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 14,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 1,
+                    "connectedRow": 3
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 3,
+                    "connectedRow": 4
+                }
+            ]
+        },
+        {
+            "cannonColumns": [
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": false,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 0
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 7,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 14,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 2
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 4,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": false,
+                    "connectedColumn": -1,
+                    "connectedRow": -1
+                },
+                {
+                    "shooterType": 0,
+                    "colorType": 7,
+                    "ProjectileAmount": 40,
+                    "isHidden": true,
+                    "isConnected": true,
+                    "connectedColumn": 2,
+                    "connectedRow": 4
+                }
+            ]
+        }
+    ],
+    "enemyData": [
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 10,
+                    "enemyType": 7,
+                    "EnemyHealth": 1,
+                    "PropID": 0,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 10,
+                    "enemyType": 7,
+                    "EnemyHealth": 1,
+                    "PropID": 0,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        },
+        {
+            "enemyColumns": [
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 14,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 4,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                },
+                {
+                    "colorType": 7,
+                    "enemyType": 0,
+                    "EnemyHealth": 1,
+                    "PropID": -1,
+                    "subPropID": -1
+                }
+            ]
+        }
+    ],
+    "boxData": [
+        {
+            "PropID": 0,
+            "ColumnID": 9,
+            "SecondColumnID": 10,
+            "enemyData": [
+                {
+                    "Enemies": [
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        }
+                    ]
+                },
+                {
+                    "Enemies": [
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 14,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        },
+                        {
+                            "colorType": 4,
+                            "enemyType": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "boggiesData": []
+}

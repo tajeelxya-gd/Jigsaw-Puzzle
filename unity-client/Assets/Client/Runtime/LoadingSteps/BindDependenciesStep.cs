@@ -32,25 +32,25 @@ namespace Client.Runtime
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
-            _binder.BindAsSingleton<UnityEventListener>();
-            _binder.BindAsSingleton<LocalClock>(); // replace with server clock for prod
-            _binder.BindAsSingleton<ContentService>();
-            _binder.BindAsSingleton<SerialisationService>();
-            _binder.BindAsSingleton<EntityService>();
-            _binder.BindAsSingleton<RewardProcessor>();
-            _binder.BindAsSingleton<CellActionProcessor>();
-            _binder.BindAsSingleton<PuzzleTraySorter>();
+            _binder.Bind<UnityEventListener>();
+            _binder.Bind<LocalClock>(); // replace with server clock for prod
+            _binder.Bind<ContentService>();
+            _binder.Bind<SerialisationService>();
+            _binder.Bind<EntityService>();
+            _binder.Bind<RewardProcessor>();
+            _binder.Bind<CellActionProcessor>();
+            _binder.Bind<PuzzleTraySorter>();
 
-            _binder.BindAsSingleton(_savedDataHandler);
-            _binder.BindAsSingleton<JigsawWinConditionChecker>();
-            _binder.BindAsSingleton(_puzzleService);
-            _binder.BindAsSingleton(_vfxController);
-            _binder.BindAsSingleton(_puzzleTray);
-            _binder.BindAsSingleton(_cameraEffects);
-            _binder.BindAsSingleton(_jigsawResourceLoader);
-            _binder.BindAsSingleton(_hudComponent);
-            _binder.BindAsSingleton(_fullImageHandler);
-            _binder.BindAsSingleton(_toastHandler);
+            _binder.Bind(_savedDataHandler);
+            _binder.Bind<JigsawWinConditionChecker>();
+            _binder.Bind(_puzzleService);
+            _binder.Bind(_vfxController);
+            _binder.Bind(_puzzleTray);
+            _binder.Bind(_cameraEffects);
+            _binder.Bind(_jigsawResourceLoader);
+            _binder.Bind(_hudComponent);
+            _binder.Bind(_fullImageHandler);
+            _binder.Bind(_toastHandler);
 
             return UniTask.CompletedTask;
         }

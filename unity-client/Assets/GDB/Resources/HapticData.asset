@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6b3c1445c15a94e95ffb3f2a452694, type: 3}
+  m_Name: HapticData
+  m_EditorClassIdentifier: 
+  _haptics:
+  - hapticType: 0
+    hapticClip: {fileID: -8404250095460277587, guid: 7bf72c2095a70d34493b3375efa62f77, type: 3}
+  - hapticType: 1
+    hapticClip: {fileID: -8404250095460277587, guid: 2c2590c0af1145c4da20fb89b0782c07, type: 3}
+  - hapticType: 6
+    hapticClip: {fileID: -8404250095460277587, guid: e51c363bda940e44a85f24183c8d9fc5, type: 3}
+  - hapticType: 4
+    hapticClip: {fileID: -8404250095460277587, guid: eb003c54cb9a38b4a941db2c7e276b86, type: 3}
+  - hapticType: 5
+    hapticClip: {fileID: -8404250095460277587, guid: ad3d534caac1e4e4d9e7cbcd37949a33, type: 3}
+  - hapticType: 3
+    hapticClip: {fileID: -8404250095460277587, guid: 415ce744d7bfaee4e93833f03e48046b, type: 3}
+  - hapticType: 2
+    hapticClip: {fileID: -8404250095460277587, guid: 21031882f4ab916458fb876c5581397c, type: 3}
+  - hapticType: 8
+    hapticClip: {fileID: -8404250095460277587, guid: a545d5fd8a4a0d44a98136af08bbaf80, type: 3}
+  - hapticType: 7
+    hapticClip: {fileID: -8404250095460277587, guid: bfa611000703a044e92943cc95ddc3a2, type: 3}
+  - hapticType: 9
+    hapticClip: {fileID: -8404250095460277587, guid: aabf078e9c398464a8e679c9ad4d3494, type: 3}
+  - hapticType: 10
+    hapticClip: {fileID: -8404250095460277587, guid: cf6c40d7eb44f3a48bb322a1f00bfb26, type: 3}
