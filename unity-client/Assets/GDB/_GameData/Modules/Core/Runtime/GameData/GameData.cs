@@ -34,7 +34,7 @@ public class GameData
         public int PlayerEarnedTrophies = 0;
         public int CurrentWinStreakLevel = 0;
         public List<PowerupType> OnBoardPowerUpType = new List<PowerupType>();
-        public bool IsPuzzleManiaUnlocked = false;
+        public bool IsPuzzleManiaUnlocked = true;
         public bool IsLeaderBoardUnlocked = false;
         public int CurrentLevelEnemies = 0;
         public int TempCollectedEnemies = 0;

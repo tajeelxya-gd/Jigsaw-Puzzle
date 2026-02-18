@@ -20,6 +20,8 @@ namespace Client.Runtime
             {
                 case CellActionRewardData rewardData:
                     return _rewardProcessor.GetImageKey(rewardData.RewardId);
+                case CellActionPuzzleManiaData puzzleManiaData:
+                    return "3 Stickman Coin";
                 default:
                     return null;
             }
@@ -34,11 +36,18 @@ namespace Client.Runtime
                 case CellActionRewardData rewardData:
                     ProcessCellActionReward(rewardData);
                     break;
+                case CellActionPuzzleManiaData puzzleManiaData:
+                    ProcessCellActionPuzzleMania(puzzleManiaData);
+                    break;
                 default:
                     break;
             }
         }
 
         private void ProcessCellActionReward(CellActionRewardData data) => _rewardProcessor.Process(data.RewardId);
+        private void ProcessCellActionPuzzleMania(CellActionPuzzleManiaData data)
+        {
+            SignalBus.Publish(new OnEnemyDieSignal());
+        }
     }
 }

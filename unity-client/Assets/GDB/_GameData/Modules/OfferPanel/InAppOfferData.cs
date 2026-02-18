@@ -131,7 +131,7 @@ public class InAppOfferData : ScriptableObject
 
     bool IsGameScene()
     {
-        return SceneManager.GetActiveScene().name == "GamePlay";
+        return SceneManager.GetActiveScene().name == "GamePlay" || SceneManager.GetActiveScene().name == "Game";
     }
 
 }

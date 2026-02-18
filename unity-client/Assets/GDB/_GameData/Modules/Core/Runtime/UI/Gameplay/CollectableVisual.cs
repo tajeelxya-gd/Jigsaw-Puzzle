@@ -7,8 +7,8 @@ public class CollectableVisual : MonoBehaviour
 
     public virtual void Initialize()
     {
-        _amountText.gameObject.SetActive(false);
-        UpdateText(0);
+        var amount = 0;
+        UpdateText(amount);
     }
 
     public virtual void UpdateCount(float count)

@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyCollectableUI : CollectableVisual
 {
     [SerializeField] private RectTransform _icon;
+    [SerializeField] private BulkPopUpEffect bulkPopUpEffect;
 
     [Header("Animation")]
     [SerializeField] private float _punchScale = 0.25f;
@@ -15,11 +16,11 @@ public class EnemyCollectableUI : CollectableVisual
 
     public override void Initialize()
     {
-        if (!GlobalService.GameData.Data.IsPuzzleManiaUnlocked)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
+        // if (!GlobalService.GameData.Data.IsPuzzleManiaUnlocked)
+        // {
+        //     gameObject.SetActive(false);
+        //     return;
+        // }
         GlobalService.GameData.Data.TempCollectedEnemies = 0;
         base.Initialize();
         _canCount = true;
@@ -27,6 +28,7 @@ public class EnemyCollectableUI : CollectableVisual
     }
     private void OnEnemyDie(ISignal signal)
     {
+        bulkPopUpEffect.Generate(null, 1);
         UpdateCount(1);
         PlayPopAnimation();
     }

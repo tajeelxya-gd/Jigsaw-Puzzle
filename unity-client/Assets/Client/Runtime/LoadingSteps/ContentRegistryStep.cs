@@ -14,6 +14,7 @@ namespace Client.Runtime
             ContentRegistry.Register<CellActionRewardData>("CellActionRewardData");
             ContentRegistry.Register<CurrencyData>("CurrencyData");
             ContentRegistry.Register<CurrencyRewardData>("CurrencyRewardData");
+            ContentRegistry.Register<CellActionPuzzleManiaData>("CellActionPuzzleManiaData");
             return UniTask.CompletedTask;
         }
     }

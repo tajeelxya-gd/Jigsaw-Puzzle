@@ -6,8 +6,9 @@
     "_imageKey": "level_1",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_2_action_reward"
+      "cell_0_action_puzzle_mania",
+      "cell_2_action_reward",
+      "cell_11_action_puzzle_mania"
     ]
   },
   {
