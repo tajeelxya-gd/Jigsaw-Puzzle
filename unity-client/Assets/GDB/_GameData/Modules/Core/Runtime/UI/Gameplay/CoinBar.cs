@@ -34,11 +34,11 @@ public class CoinBar : MonoBehaviour
         StartOrUpdateAnimation();
         ReceiveSpendCoins(signal.Amount);
     }
-    
+
     void ReceiveSpendCoins(int rewardAmount)
     {
-        if(rewardAmount < 0)
-            SignalBus.Publish(new OnMissionObjectiveCompleteSignal{MissionType = MissionType.SpendCoins,Amount = Mathf.Abs(rewardAmount)});
+        if (rewardAmount < 0)
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.SpendCoins, Amount = Mathf.Abs(rewardAmount) });
     }
     private void OnShowCoinPanel()
     {
@@ -101,7 +101,7 @@ public class CoinBar : MonoBehaviour
     {
         SignalBus.Unsubscribe<AddCoinsSignal>(OnAddCoinsSignal);
         SignalBus.Unsubscribe<OnCoinsUpdateSignal>(OnCoinsUpdateSignal);
-        
+
         _countTween?.Kill();
     }
 }

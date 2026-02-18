@@ -40,7 +40,6 @@ public class EnemyCollectableUI : CollectableVisual
             _canCount = true;
             return;
         }
-        _canCount = false;
         GlobalService.GameData.Data.TempCollectedEnemies += count;
         if (GlobalService.GameData.Data.TempCollectedEnemies == 1)
             _amountText.gameObject.SetActive(true);
