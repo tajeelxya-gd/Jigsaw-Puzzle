@@ -16,13 +16,13 @@ public class LevelStateMainMenue : MonoBehaviour
     private LevelData _leveldata;
     public void Inject(LevelData levelData)
     {
-        _leveldata =  levelData;
+        _leveldata = levelData;
         LoadLevelStatus();
         _levelSelectionButton.interactable = false;
         DOVirtual.DelayedCall(2, LoadButtonEnable);
     }
 
-    void LoadButtonEnable() =>_levelSelectionButton.interactable = true;
+    void LoadButtonEnable() => _levelSelectionButton.interactable = true;
 
     const int FIRST_REPEAT_LEVEL = 101;
     int GetWrappedLevel(int level)
@@ -38,12 +38,12 @@ public class LevelStateMainMenue : MonoBehaviour
     {
         GameData gameData = GlobalService.GameData;
         int currentLevel = gameData.Data.LevelNumber;
-        _lvlNo_txt.text = $"Level {currentLevel}";
+        _lvlNo_txt.text = $"Level {currentLevel + 1}";
         _lvlDifficulty_txt.text = _leveldata.levelType.ToString();
         _gameSoundController = new GameSoundController(_leveldata);
         _gameSoundController.PlayBG();
         _levelMainButton.Inject(_leveldata);
-        
+
         switch (_leveldata.levelType)
         {
             case LevelType.Easy:
@@ -58,7 +58,7 @@ public class LevelStateMainMenue : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-        SignalBus.Publish(new OnGraphicsUtilityActivatedSignal{LvlType = _leveldata.levelType});
+        SignalBus.Publish(new OnGraphicsUtilityActivatedSignal { LvlType = _leveldata.levelType });
 
     }
 }

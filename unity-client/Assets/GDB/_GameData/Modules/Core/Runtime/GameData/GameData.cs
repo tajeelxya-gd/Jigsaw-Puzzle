@@ -22,7 +22,7 @@ public class GameData
     public class GData
     {
         public bool IsTutorial = false;
-        public int LevelNumber = 1;
+        public int LevelNumber = 0;
         public int Coins = 10;
         public int PremiumCoins = 10;
         public int TrophiesWinInGame = 0;
