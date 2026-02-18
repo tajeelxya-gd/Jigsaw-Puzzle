@@ -42,10 +42,9 @@
     "_imageKey": "level_4",
     "_difficulty": 1,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_6_action_reward",
-      "cell_8_action_reward",
-      "cell_3_action_reward"
+      "cell_0_action_puzzle_mania",
+      "cell_2_action_reward",
+      "cell_11_action_puzzle_mania"
     ]
   },
   {

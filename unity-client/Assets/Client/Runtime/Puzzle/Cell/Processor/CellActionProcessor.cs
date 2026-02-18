@@ -47,7 +47,9 @@ namespace Client.Runtime
         private void ProcessCellActionReward(CellActionRewardData data) => _rewardProcessor.Process(data.RewardId);
         private void ProcessCellActionPuzzleMania(CellActionPuzzleManiaData data)
         {
-            SignalBus.Publish(new OnEnemyDieSignal());
+            var signal = new OnEnemyDieSignal();
+            signal.Count = data.RewardAmount;
+            SignalBus.Publish(signal);
         }
     }
 }

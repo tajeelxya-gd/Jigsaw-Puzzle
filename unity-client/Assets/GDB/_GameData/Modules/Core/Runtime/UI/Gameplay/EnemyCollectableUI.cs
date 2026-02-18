@@ -26,10 +26,10 @@ public class EnemyCollectableUI : CollectableVisual
         _canCount = true;
         SignalBus.Subscribe<OnEnemyDieSignal>(OnEnemyDie);
     }
-    private void OnEnemyDie(ISignal signal)
+    private void OnEnemyDie(OnEnemyDieSignal signal)
     {
-        bulkPopUpEffect.Generate(null, 1);
-        UpdateCount(1);
+        bulkPopUpEffect.Generate(null, signal.Count);
+        UpdateCount(signal.Count);
         PlayPopAnimation();
     }
     private bool _canCount = false;
@@ -41,9 +41,9 @@ public class EnemyCollectableUI : CollectableVisual
             return;
         }
         GlobalService.GameData.Data.TempCollectedEnemies += count;
-        if (GlobalService.GameData.Data.TempCollectedEnemies == 1)
-            _amountText.gameObject.SetActive(true);
         base.UpdateCount(GlobalService.GameData.Data.TempCollectedEnemies);
+        GlobalService.GameData.Data.CurrentLevelEnemies = GlobalService.GameData.Data.TempCollectedEnemies;
+        GlobalService.GameData.Save();
     }
     private void OnDestroy()
     {
