@@ -50,7 +50,9 @@ public class UIController : MonoBehaviour
     {
         SignalBus.Unsubscribe<OnLevelCompleteSignal>(OnLevelCompleted);
         SignalBus.Unsubscribe<OnlevelFailSignal>(OnLevelFail);
-        _winConditionChecker.OnAdvance -= OnAdvance;
+
+        if (_winConditionChecker != null)
+            _winConditionChecker.OnAdvance -= OnAdvance;
 
     }
 }
