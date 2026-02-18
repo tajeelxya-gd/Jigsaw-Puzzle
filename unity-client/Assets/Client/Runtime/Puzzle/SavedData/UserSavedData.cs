@@ -14,10 +14,10 @@ namespace Client.Runtime
         public long ModifiedTimestamp { get => _modifiedTimestamp; set => _modifiedTimestamp = value; }
         public int CurrentLevel
         {
-            get => GlobalService.GameData.Data.LevelNumber;
+            get => GlobalService.GameData.Data.LevelIndex;
             set
             {
-                GlobalService.GameData.Data.LevelNumber = value;
+                GlobalService.GameData.Data.LevelIndex = value;
                 GlobalService.GameData.Save();
             }
         }

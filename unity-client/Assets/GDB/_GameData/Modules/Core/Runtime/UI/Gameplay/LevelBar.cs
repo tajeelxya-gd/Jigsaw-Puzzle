@@ -10,7 +10,7 @@ public class LevelBar : MonoBehaviour
 
     public void Initialize(LevelType levelType)
     {
-        _levelLabel.text = "Lvl " + GlobalService.GameData.Data.LevelNumber;
+        _levelLabel.text = "Lvl " + (GlobalService.GameData.Data.LevelIndex + 1);
 
         _tagImg.gameObject.SetActive(levelType != LevelType.Easy);
 

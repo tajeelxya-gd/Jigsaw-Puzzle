@@ -39,7 +39,7 @@ public class PowerUpButton : MonoBehaviour
     {
         _availablePower = GetAmount();
 
-        if (GlobalService.GameData.Data.LevelNumber < LevelToUnlock)
+        if (GlobalService.GameData.Data.LevelIndex < LevelToUnlock)
             LockState();
         else
             UnlockState();

@@ -58,6 +58,7 @@ namespace Client.Runtime
             var currency = _entityService.Get<ICurrency>(data.CurrencyId);
             var amount = Random.Range(data.AmountMin, data.AmountMax + 1);
             currency.Add(amount);
+            SignalBus.Publish(new OnCoinsUpdateSignal { Amount = amount });
         }
     }
 }

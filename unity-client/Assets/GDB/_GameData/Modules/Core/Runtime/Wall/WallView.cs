@@ -34,7 +34,7 @@ public class WallView : MonoBehaviour
         _canvasGroup.alpha = 0f;
         _canvas.SetActive(false);
 
-        if (TutorialManager.IsTutorialActivated && GlobalService.GameData.Data.LevelNumber == 2)
+        if (TutorialManager.IsTutorialActivated && GlobalService.GameData.Data.LevelIndex == 2)
             ShowCanvas();
     }
 

@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
         _spaceController.Initialize(_levelController.levelData, _environmentController);
         _cannonController.Initialize(_levelController.levelData, _spaceController);
         _playerController.Initilize(_spaceController, _cannonController);
-        _uiController.Initialize(_levelController.levelData, _cannonController, _spaceController);
+        _uiController.Initialize(_levelController.levelData);
         _enemyController.Initialize(_levelController.levelData, _tutorialManager, _uiController.LevelProgressVisual);
         _environmentController.Initialize(_levelController.levelData.levelType);
         _poweupController.Initialize(_cannonController, _enemyController, _spaceController);

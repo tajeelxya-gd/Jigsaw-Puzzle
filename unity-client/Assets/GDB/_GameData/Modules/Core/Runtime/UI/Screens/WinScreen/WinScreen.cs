@@ -198,7 +198,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             DOVirtual.DelayedCall(0.75f, ShowAd);
             _doubleRewardButton.enabled = false;
             _continueButton.enabled = false;
-            int upcomingLevel = GlobalService.GameData.Data.LevelNumber;
+            int upcomingLevel = GlobalService.GameData.Data.LevelIndex;
             if (upcomingLevel >= (int)OnBoardingConfig.OnBoardingType.WeeklyRewards)
             {
                 GoToMainMenu();
@@ -349,7 +349,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             }
             _gameData.Data.Coins += GetTotalReward();
 
-            int currentPlayedLevel = _gameData.Data.LevelNumber;
+            int currentPlayedLevel = _gameData.Data.LevelIndex;
             if (!_gameData.Data.IsLeaderBoardUnlocked)
                 if ((currentPlayedLevel + 1) >= (int)OnBoardingConfig.OnBoardingType.LeaderBoard)
                 {

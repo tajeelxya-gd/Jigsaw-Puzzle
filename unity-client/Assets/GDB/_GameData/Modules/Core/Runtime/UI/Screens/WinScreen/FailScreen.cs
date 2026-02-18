@@ -602,7 +602,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private void GoToHome()
         {
             AudioController.PlaySFX(AudioType.ButtonClick);
-             HapticController.Vibrate(HapticType.Btn);
+            HapticController.Vibrate(HapticType.Btn);
             if (!_isInfinite)
             {
                 GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);
@@ -682,7 +682,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void SendLevelFailAnalytics()
         {
-            int level = GlobalService.GameData.Data.LevelNumber;
+            int level = GlobalService.GameData.Data.LevelIndex;
             GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression", "Level " + level, "Fail", "Screen1", "Show");
         }
     }

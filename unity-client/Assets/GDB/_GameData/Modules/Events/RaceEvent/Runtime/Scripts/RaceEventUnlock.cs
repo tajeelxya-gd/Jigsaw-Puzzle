@@ -35,8 +35,8 @@ public class RaceEventUnlock : MonoBehaviour
     }
     void UpdateUI()
     {
-        _lockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelNumber < (int)_onBoardingType);
-        _unlockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelNumber >= (int)_onBoardingType);
+        _lockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelIndex < (int)_onBoardingType);
+        _unlockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelIndex >= (int)_onBoardingType);
     }
 
     void LookForOnBoardingPanel()

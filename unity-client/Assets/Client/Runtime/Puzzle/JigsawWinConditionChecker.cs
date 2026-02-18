@@ -10,7 +10,7 @@ namespace Client.Runtime
     {
         public event Action OnWin;
         public event Action OnLose;
-        public event Action OnAdvance;
+        public event Action<float> OnAdvance;
 
         private JigsawBoard _board;
 
@@ -36,6 +36,9 @@ namespace Client.Runtime
 
         private void OnPiecePlaced(GroupPlacedEvent @event)
         {
+            var progress = (float)_board.Cells.Count(itm => itm.IsLocked) / _board.Cells.Count;
+            OnAdvance.Broadcast(progress);
+
             if (CheckWin())
             {
                 OnWin.Broadcast();
@@ -48,8 +51,6 @@ namespace Client.Runtime
                 OnLose.Broadcast();
                 return;
             }
-
-            OnAdvance.Broadcast();
         }
     }
 }

@@ -16,16 +16,16 @@ public class WeekllyRewardReferences : MonoBehaviour
 
     private void Initialize()
     {
-        if(GlobalService.GameData.Data.LevelNumber >= (int)OnBoardingConfig.OnBoardingType.WeeklyRewards)
+        if (GlobalService.GameData.Data.LevelIndex >= (int)OnBoardingConfig.OnBoardingType.WeeklyRewards)
             WeeklyRewardManager.Init();
     }
 
     void TrackPlayerLogin()
     {
         WeeklyRewardManager.TrackLogin();
-        
+
     }
-    
+
     IEnumerator EnqueAllCompletedMissions()
     {
         WaitForSeconds wait = new WaitForSeconds(0.1f);

@@ -11,16 +11,16 @@ public class LeaderBoardControllerUI : MonoBehaviour
     [SerializeField] private GameObject _lockedButton;
     [SerializeField] private GameObject _unlockedButton;
     [SerializeField] private BulkPopUpEffect medalsBulkEffect;
-    private const string  Key="LEADERBOARD_MISSIONS_ONBOARDING";
+    private const string Key = "LEADERBOARD_MISSIONS_ONBOARDING";
 
     private void Start()
     {
         _gameData = GlobalService.GameData;
         UpdateUI();
-        DOVirtual.DelayedCall(Time.deltaTime*10, LookForOnBoardingPanel);
+        DOVirtual.DelayedCall(Time.deltaTime * 10, LookForOnBoardingPanel);
     }
 
-        
+
     [Button("Clear Onboarding")]
     public void ClearOnBoarding()
     {
@@ -30,16 +30,17 @@ public class LeaderBoardControllerUI : MonoBehaviour
     {
         if (_unlockedButton.activeInHierarchy)
         {
-            if(!OnBoardingConfig.HasOnBoardingActivatedBefore(_onBoardingType)){
-                PopCommandExecutionResponder.AddCommand(new LeaderBoardUnlockCommand(PopCommandExecutionResponder.PopupPriority.Low,execution=>{ medalsBulkEffect.Generate(null,10);}));
+            if (!OnBoardingConfig.HasOnBoardingActivatedBefore(_onBoardingType))
+            {
+                PopCommandExecutionResponder.AddCommand(new LeaderBoardUnlockCommand(PopCommandExecutionResponder.PopupPriority.Low, execution => { medalsBulkEffect.Generate(null, 10); }));
                 OnBoardingConfig.SetOnBoardingDone(_onBoardingType);
             }
         }
     }
     void UpdateUI()
     {
-        _lockedButton.gameObject.SetActive(_gameData.Data.LevelNumber < (int)_onBoardingType);
-        _unlockedButton.gameObject.SetActive(_gameData.Data.LevelNumber >= (int)_onBoardingType);
+        _lockedButton.gameObject.SetActive(_gameData.Data.LevelIndex < (int)_onBoardingType);
+        _unlockedButton.gameObject.SetActive(_gameData.Data.LevelIndex >= (int)_onBoardingType);
     }
     private GameData _gameData;
 }

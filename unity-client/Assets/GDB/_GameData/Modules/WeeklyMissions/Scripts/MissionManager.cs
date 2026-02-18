@@ -21,7 +21,7 @@ public class MissionManager : MonoBehaviour
 
     private void PlayerDidAction(OnPlayerDidActionSignal signal)
     {
-        if (GlobalService.GameData.Data.LevelNumber < _weeklyRewardManager.MinLevelToUnlock) return;
+        if (GlobalService.GameData.Data.LevelIndex < _weeklyRewardManager.MinLevelToUnlock) return;
         bool updated = false;
         foreach (var mission in _missions)
         {

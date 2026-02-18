@@ -17,7 +17,7 @@ public class LevelController : MonoBehaviour
         if (_canTest)
             LoadLevel(_testLevelNumber);
         else
-            LoadLevel(GlobalService.GameData.Data.LevelNumber);
+            LoadLevel(GlobalService.GameData.Data.LevelIndex);
 
         SignalBus.Subscribe<OnLevelCompleteSignal>(OnLevelComplete);
         SignalBus.Subscribe<OnlevelFailSignal>(OnLevelFail);
@@ -25,7 +25,7 @@ public class LevelController : MonoBehaviour
 
     public int GetCurrentLevel()
     {
-        return _canTest ? _testLevelNumber : GlobalService.GameData.Data.LevelNumber;
+        return _canTest ? _testLevelNumber : GlobalService.GameData.Data.LevelIndex;
     }
     private void LoadLevel(int id)
     {
@@ -43,7 +43,7 @@ public class LevelController : MonoBehaviour
     void OnLevelLoaded(int id) => SignalBus.Publish(new OnLevelLoadedSignal { levelNo = id });
     private void OnLevelComplete(ISignal signal)
     {
-        GlobalService.GameData.Data.LevelNumber += 1;
+        GlobalService.GameData.Data.LevelIndex += 1;
         GlobalService.GameData.Save();
         Time.timeScale = 1;
         PublishMissionObjectiveSignals();

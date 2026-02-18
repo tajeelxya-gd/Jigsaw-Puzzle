@@ -35,18 +35,18 @@ public class RaceManager : MonoBehaviour
     private IEnumerator Start()
     {
         _findOpponentButton.onClick.RemoveAllListeners();
-        _currentLevel = GlobalService.GameData.Data.LevelNumber;
+        _currentLevel = GlobalService.GameData.Data.LevelIndex;
         _panelScaling = _mainPanel.GetComponent<PanelScaling>();
         SignalBus.Subscribe<OnRaceEventEndSignal>(EndEvent);
         _eventDataService = new DataBaseService<EventData>();
         _eventData = _eventDataService.Load_Get();
         _findOpponentButton.onClick.AddListener(OpenSearchingPanel);
-        
+
         if (_eventData == null)
         {
             _eventData = new EventData();
             _eventData.isEventActive = false;
-            _eventData._levelAtEventStart = GlobalService.GameData.Data.LevelNumber;
+            _eventData._levelAtEventStart = GlobalService.GameData.Data.LevelIndex;
             _eventData.raceStart = false;
         }
 
@@ -55,7 +55,7 @@ public class RaceManager : MonoBehaviour
         _levelAtEventStart = _eventData._levelAtEventStart;
         _raceStart = _eventData.raceStart;
         yield return _startWait;
-        
+
 
         if (_isEventActive)
         {
@@ -79,7 +79,7 @@ public class RaceManager : MonoBehaviour
 
         Debug.LogError("_levelAtEventStart:" + _levelAtEventStart);
         Debug.LogError("Current level:" + _currentLevel);
-        if (!_isEventActive  && _currentLevel > (int)OnBoardingConfig.OnBoardingType.TheGreatRace)
+        if (!_isEventActive && _currentLevel > (int)OnBoardingConfig.OnBoardingType.TheGreatRace)
         {
             EndEvent(null);
             yield break;
@@ -99,7 +99,7 @@ public class RaceManager : MonoBehaviour
     void ShowOpenRaceRequest()
     {
         GameData data = GlobalService.GameData;
-        bool hasLevelReached = data.Data.LevelNumber > (int)OnBoardingConfig.OnBoardingType.TheGreatRace;
+        bool hasLevelReached = data.Data.LevelIndex > (int)OnBoardingConfig.OnBoardingType.TheGreatRace;
         if (GameStateGlobal.GreatRaceRequestedAlready) return;
         if (_isEventActive || !hasLevelReached) return;
         PopCommandExecutionResponder.AddCommand(new OnShowGreatRaceInfoCommand(PopCommandExecutionResponder.PopupPriority.Medium,
@@ -107,8 +107,8 @@ public class RaceManager : MonoBehaviour
             {
                 GameStateGlobal.GreatRaceRequestedAlready = true;
                 _startRaceInfoPanel.gameObject.SetActive(true);
-                DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
-                
+                DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
+
             }));
     }
 
@@ -118,7 +118,7 @@ public class RaceManager : MonoBehaviour
         AudioController.PlaySFX(AudioType.PanelClose);
         PopCommandExecutionResponder.RemoveCommand<OnShowGreatRaceInfoCommand>();
     }
-    
+
     private void OnDestroy()
     {
         SignalBus.Unsubscribe<WinCheck>(CheckWinner);
@@ -161,14 +161,14 @@ public class RaceManager : MonoBehaviour
         PublishOnMissionCompleteSignal();
         if (_raceStart) return;
         _raceStart = true;
-        _levelAtEventStart = GlobalService.GameData.Data.LevelNumber;
+        _levelAtEventStart = GlobalService.GameData.Data.LevelIndex;
         _eventData._levelAtEventStart = _levelAtEventStart;
         _eventData.raceStart = _raceStart;
         Debug.LogError("Level at start:" + _levelAtEventStart);
         _eventDataService.Save(_eventData);
         SignalBus.Publish(new OnRaceEventStartSignal());
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.RaceEvent), "Start");
-        
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.RaceEvent), "Start");
+
     }
 
     void PublishOnMissionCompleteSignal()
@@ -209,9 +209,9 @@ public class RaceManager : MonoBehaviour
         HapticController.Vibrate(HapticType.Btn);
         _mainPanel.SetActive(true);
         _panelScaling.ScaleIn();
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.RaceEvent), "Shown");
-        
-        
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.RaceEvent), "Shown");
+
+
     }
 
     public void ClosePanel()
@@ -221,16 +221,16 @@ public class RaceManager : MonoBehaviour
         _panelScaling.ScaleOut();
         StartCoroutine(CloseAfterDelay());
         CloseOnBoardingCommandIfYes();
-        
+
     }
-    
+
     void CloseOnBoardingCommandIfYes()
     {
         Debug.Log("CloseOnBoardingCommandIfYes :: " + PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>());
-       // if (PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>())
-      //  {
-            PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
-       // }
+        // if (PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>())
+        //  {
+        PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
+        // }
     }
 
     private IEnumerator CloseAfterDelay()

@@ -17,11 +17,11 @@ public class GameplayPanel : MonoBehaviour
 
     public IProgress LevelProgressVisual => _levelProgressBar;
     private SettingsManager _settingsManager;
-    public void Initialize(LevelData levelData, SettingsManager settingsManager, CannonController cannonController, SpaceController spaceController)
+    public void Initialize(LevelData levelData, SettingsManager settingsManager)
     {
         _settingsManager = settingsManager;
 
-        _powerUpButtonController.Initialize(spaceController, cannonController);
+        _powerUpButtonController.Initialize();
         _powerUpInfoPanel.Initialize(_powerUpButtonController);
         _levelBar.Initialize(levelData.levelType);
         _levelProgressBar.Initialize();

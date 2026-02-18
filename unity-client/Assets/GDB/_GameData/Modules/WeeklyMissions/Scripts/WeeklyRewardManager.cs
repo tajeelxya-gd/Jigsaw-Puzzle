@@ -26,7 +26,7 @@ public class WeeklyRewardManager : MonoBehaviour
     [SerializeField] private Button _unlockWeeklyRewardButton;
     [SerializeField] private Button _infoButton;
 
-    [Title("OnBoarding")] [SerializeField] private OnBoardingConfig.OnBoardingType _onBoardingType;
+    [Title("OnBoarding")][SerializeField] private OnBoardingConfig.OnBoardingType _onBoardingType;
     GameData _gameData;
     public int MinLevelToUnlock => (int)_onBoardingType;
     private void Start()
@@ -34,7 +34,7 @@ public class WeeklyRewardManager : MonoBehaviour
         _gameData = GlobalService.GameData;
         UpdateUI();
         DOVirtual.DelayedCall(Time.deltaTime * 10, LookForOnBoardingPanel);
-        
+
     }
 
     public void ShowPanel(bool status)
@@ -44,40 +44,41 @@ public class WeeklyRewardManager : MonoBehaviour
             _weeklyRewardPanel.transform.localScale = Vector3.one;
             _weeklyRewardPanel.SetActive(status);
             _weeklyRewardPanel.GetComponent<CanvasGroup>().alpha = 1;
-            DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
-            
+            DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
+
         }
 
-        if(status == false){
+        if (status == false)
+        {
             Sequence _closeSequence = DOTween.Sequence();
             _closeSequence.Join(_weeklyRewardPanel.GetComponent<CanvasGroup>().DOFade(0, 0.3f).From(1))
                 .Join(_weeklyRewardPanel.transform.DOScale(1.2f, 0.3f).From(1).OnComplete(() =>
                 {
-                   
+
                     CloseOnBoardingCommandIfYes();
                 }))
-                .AppendCallback(()=>_weeklyRewardPanel.gameObject.SetActive(false));
+                .AppendCallback(() => _weeklyRewardPanel.gameObject.SetActive(false));
         }
-        
+
         AudioController.PlaySFX(status ? AudioType.RewardPopUp : AudioType.PanelClose);
     }
 
     void CloseOnBoardingCommandIfYes()
     {
         Debug.Log("CloseOnBoardingCommandIfYes :: " + PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>());
-      //  if (PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>())
-      //  {
-            PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
-       // }
+        //  if (PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>())
+        //  {
+        PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
+        // }
     }
-    
+
     public void Init()
     {
         for (int i = 0; i < _weeklyRewardCards.Length; i++)
             _weeklyRewardCards[i].Inject(this);
 
         _saveData = _database.Load_Get();
-        _currentDay = _customTimer != null 
+        _currentDay = _customTimer != null
             ? Mathf.Clamp(_customTimer._currentDay, 1, _weeklyMissionsPresets._weeklyMissionsPresetsData.Length)
             : Mathf.Clamp(_saveData.CurrentDay, 1, _weeklyMissionsPresets._weeklyMissionsPresetsData.Length);
 
@@ -85,36 +86,37 @@ public class WeeklyRewardManager : MonoBehaviour
         BuildMissionLookup();
         UnlockCurrentDayMissions();
         LoadWeeklyMissions();
-      
+
         SignalBus.Subscribe<OnDayChangedSignal>(OnDayChanged);
         SignalBus.Subscribe<OnUnlockNextDayPreset>(UnlockNextDay);
-        
-        
-            
+
+
+
     }
 
     public void TrackLogin()
     {
         if (_saveData == null) return;
-        if(_saveData.CurrentDay > _saveData.LastLogin){
+        if (_saveData.CurrentDay > _saveData.LastLogin)
+        {
             Debug.LogError("New Login");
             SignalBus.Publish(new OnPlayerDidActionSignal()
             {
                 MissionType = MissionType.Login,
                 Amount = 1
-            }); 
+            });
             _saveData.LastLogin = _currentDay;
             _database.Save(_saveData);
         }
     }
-    
+
 
     void UpdateUI()
     {
-        _lockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelNumber < (int)_onBoardingType);
-        _unlockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelNumber >= (int)_onBoardingType);
+        _lockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelIndex < (int)_onBoardingType);
+        _unlockedRaceEvent.gameObject.SetActive(_gameData.Data.LevelIndex >= (int)_onBoardingType);
     }
-    
+
     void LookForOnBoardingPanel()
     {
         if (_unlockedRaceEvent.activeInHierarchy) SendMessage("InitOnBoarding");
@@ -131,8 +133,8 @@ public class WeeklyRewardManager : MonoBehaviour
         _missionSaveLookup.Clear();
         foreach (var missionSave in _saveData.Missions)
             _missionSaveLookup[missionSave.MissionID] = missionSave;
-        
-        Debug.LogError("mission lookup :: "+_missionSaveLookup.Count);
+
+        Debug.LogError("mission lookup :: " + _missionSaveLookup.Count);
     }
 
     private void UnlockCurrentDayMissions()
@@ -140,24 +142,24 @@ public class WeeklyRewardManager : MonoBehaviour
         int dayIndex = Mathf.Clamp(_currentDay - 1, 0, _weeklyMissionsPresets._weeklyMissionsPresetsData.Length - 1);
         var currentDayData = _weeklyMissionsPresets._weeklyMissionsPresetsData[dayIndex];
         foreach (var mission in currentDayData._missions)
-            mission._isInteractable = !_missionSaveLookup.ContainsKey(mission._text+mission.Day) || _missionSaveLookup[mission._text+mission.Day].IsInteractable;
+            mission._isInteractable = !_missionSaveLookup.ContainsKey(mission._text + mission.Day) || _missionSaveLookup[mission._text + mission.Day].IsInteractable;
     }
 
     private void UnlockNextDay(OnUnlockNextDayPreset signal)
     {
         if (signal.Day == 1)
         {
-            for(int i=0;i<_weeklyMissionsPresets._weeklyMissionsPresetsData.Length;i++)
+            for (int i = 0; i < _weeklyMissionsPresets._weeklyMissionsPresetsData.Length; i++)
             {
                 var dayData = _weeklyMissionsPresets._weeklyMissionsPresetsData[i];
                 foreach (var mission in dayData._missions)
-                    SaveOrUpdateMission(mission, 0, false);   
+                    SaveOrUpdateMission(mission, 0, false);
             }
         }
         BuildMissionLookup();
         LoadWeeklyMissions();
         Debug.LogError("Login");
-        SignalBus.Publish(new OnMissionObjectiveCompleteSignal{MissionType = MissionType.Login,Amount = 1});
+        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.Login, Amount = 1 });
     }
 
     private void LoadWeeklyMissions()
@@ -167,8 +169,8 @@ public class WeeklyRewardManager : MonoBehaviour
 
         int cardIndex = 0;
 
-         //for (int day = 1; day <= _currentDay; day++)
-         for (int day = 1; day <= _weeklyMissionsPresets._weeklyMissionsPresetsData.Length; day++)
+        //for (int day = 1; day <= _currentDay; day++)
+        for (int day = 1; day <= _weeklyMissionsPresets._weeklyMissionsPresetsData.Length; day++)
         {
             if (day < 1 || day > _weeklyMissionsPresets._weeklyMissionsPresetsData.Length) continue;
 
@@ -181,7 +183,7 @@ public class WeeklyRewardManager : MonoBehaviour
                 int savedAmount = 0;
                 bool isInteractable = true;
 
-                if (_missionSaveLookup.TryGetValue(mission._text+mission.Day, out var saved))
+                if (_missionSaveLookup.TryGetValue(mission._text + mission.Day, out var saved))
                 {
                     savedAmount = saved.CurrentAmount;
                     isInteractable = saved.IsInteractable;
@@ -194,10 +196,10 @@ public class WeeklyRewardManager : MonoBehaviour
                     Mission = mission,
                     CurrentAmount = savedAmount,
                     IsClaimed = saved != null && saved.IsClaimed
-                    
+
                 };
 
-               // if (String.CompareOrdinal(dayProgress[i].Mission._text, "LOGIN DAY 1") == 0)  {dayProgress[i].CurrentAmount = 1;}
+                // if (String.CompareOrdinal(dayProgress[i].Mission._text, "LOGIN DAY 1") == 0)  {dayProgress[i].CurrentAmount = 1;}
 
                 if (cardIndex < _weeklyRewardCards.Length)
                 {
@@ -217,10 +219,10 @@ public class WeeklyRewardManager : MonoBehaviour
 
         EnableCollectButtonsBasedOnTimer();
     }
-    private void SaveOrUpdateMission(MissionData mission, int currentAmount, bool interactable,bool isClaimed = false)
+    private void SaveOrUpdateMission(MissionData mission, int currentAmount, bool interactable, bool isClaimed = false)
     {
-        Debug.LogError("sending claimed progress :: "+isClaimed);
-        if (_missionSaveLookup.TryGetValue(mission._text+mission.Day, out var existing))
+        Debug.LogError("sending claimed progress :: " + isClaimed);
+        if (_missionSaveLookup.TryGetValue(mission._text + mission.Day, out var existing))
         {
             Debug.LogError("Getting here!!!");
             existing.CurrentAmount = currentAmount;
@@ -233,16 +235,16 @@ public class WeeklyRewardManager : MonoBehaviour
         {
             var newSave = new MissionSaveData
             {
-                
+
                 MissionID = mission._text + mission.Day,
                 CurrentAmount = currentAmount,
                 IsInteractable = interactable,
                 IsClaimed = isClaimed
             };
             Debug.LogError("Getting here    sfsds!!!");
-            
+
             _saveData.Missions.Add(newSave);
-            _missionSaveLookup[mission._text+mission.Day] = newSave;
+            _missionSaveLookup[mission._text + mission.Day] = newSave;
         }
 
         _database.Save(_saveData);
@@ -262,15 +264,15 @@ public class WeeklyRewardManager : MonoBehaviour
                 {
                     if (dayMissions[i].Mission.Day == missionProgress.Mission.Day)
                         dayMissions[i].IsClaimed = missionProgress.IsClaimed;
-                    
+
                     dayMissions[i].CurrentAmount = missionProgress.CurrentAmount;
-                    dayMissions[i].Mission =  missionProgress.Mission;
+                    dayMissions[i].Mission = missionProgress.Mission;
                 }
                 //updating value on all days for specific key
             }
         }
 
-        SaveOrUpdateMission(missionProgress.Mission, missionProgress.CurrentAmount, missionProgress.Mission._isInteractable,missionProgress.IsClaimed);
+        SaveOrUpdateMission(missionProgress.Mission, missionProgress.CurrentAmount, missionProgress.Mission._isInteractable, missionProgress.IsClaimed);
     }
 
     public void SaveMissionProgressBulk(MissionProgress[] missions)
@@ -279,14 +281,14 @@ public class WeeklyRewardManager : MonoBehaviour
             SaveOrUpdateMission(mission.Mission, mission.CurrentAmount, mission.Mission._isInteractable, mission.IsClaimed);
     }
 
-    
+
     [Button("clear")]
     public void ClearDaysProgress()
     {
         PlayerPrefs.DeleteKey("CurrentDay");
         PlayerPrefs.Save();
     }
-    
+
     private void OnDayChanged(OnDayChangedSignal signal)
     {
         _currentDay = signal.NewDay;

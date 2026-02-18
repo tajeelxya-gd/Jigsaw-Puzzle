@@ -1,16 +1,27 @@
 using System;
+using Client.Runtime;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameplayPanel _gamePlayPanel;
     public IProgress LevelProgressVisual => _gamePlayPanel.LevelProgressVisual;
-    [SerializeField] private PowerupVisualController _powerupVisualController;
     [SerializeField] private ScreenBase _winScreen;
     [SerializeField] private ScreenBase _loseScreen;
-    [SerializeField] private PowerUpTutorialPanel _powerUpTutorialPanel;
-    [SerializeField] private PowerUpAdditionPanel _powerUpAdditionPanel;
     [SerializeField] private SettingsManager _settingsManager;
+
+    private IWinConditionChecker _winConditionChecker;
+
+    public void Inject(IWinConditionChecker winConditionChecker)
+    {
+        _winConditionChecker = winConditionChecker;
+        _winConditionChecker.OnAdvance += OnAdvance;
+    }
+
+    private void OnAdvance(float progress)
+    {
+        _gamePlayPanel.LevelProgressVisual.UpdateProgress(progress);
+    }
 
     private void Start()
     {
@@ -18,12 +29,10 @@ public class UIController : MonoBehaviour
         SignalBus.Subscribe<OnlevelFailSignal>(OnLevelFail);
     }
 
-    public void Initialize(LevelData levelData, CannonController cannonController, SpaceController spaceController)
+    public void Initialize(LevelData levelData)
     {
-        _powerUpTutorialPanel.Initialize();
-        _gamePlayPanel.Initialize(levelData, _settingsManager, cannonController, spaceController);
-        _powerupVisualController.Initialize();
-        _powerUpAdditionPanel.Initialize();
+        _settingsManager.Inject(levelData);
+        _gamePlayPanel.Initialize(levelData, _settingsManager);
     }
 
     void OnLevelCompleted(OnLevelCompleteSignal signal)
@@ -41,5 +50,7 @@ public class UIController : MonoBehaviour
     {
         SignalBus.Unsubscribe<OnLevelCompleteSignal>(OnLevelCompleted);
         SignalBus.Unsubscribe<OnlevelFailSignal>(OnLevelFail);
+        _winConditionChecker.OnAdvance -= OnAdvance;
+
     }
 }

@@ -79,7 +79,7 @@ public class CannonController : MonoBehaviour
             }
         }
 
-        if (!GlobalService.GameData.Data.OnBoardPowerUpType.Contains(PowerupType.SlotPopper) && GlobalService.GameData.Data.LevelNumber == 25)
+        if (!GlobalService.GameData.Data.OnBoardPowerUpType.Contains(PowerupType.SlotPopper) && GlobalService.GameData.Data.LevelIndex == 25)
             AutoMateCannonMovementForSlotPopperOnBoard();
     }
 

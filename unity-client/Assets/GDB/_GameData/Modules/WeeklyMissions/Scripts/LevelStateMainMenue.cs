@@ -37,7 +37,7 @@ public class LevelStateMainMenue : MonoBehaviour
     void LoadLevelStatus()
     {
         GameData gameData = GlobalService.GameData;
-        int currentLevel = gameData.Data.LevelNumber;
+        int currentLevel = gameData.Data.LevelIndex;
         _lvlNo_txt.text = $"Level {currentLevel + 1}";
         _lvlDifficulty_txt.text = _leveldata.levelType.ToString();
         _gameSoundController = new GameSoundController(_leveldata);

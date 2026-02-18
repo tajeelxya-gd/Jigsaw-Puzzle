@@ -128,7 +128,7 @@ public class NoMoreLives : MonoBehaviour
     private void RewardedAd()
     {
         // First Rewarded Ad then give one life
-        AdsManager.ShowRewarded("FreeLife " + GlobalService.GameData.Data.LevelNumber, () =>
+        AdsManager.ShowRewarded("FreeLife " + GlobalService.GameData.Data.LevelIndex, () =>
         {
             _gameData.Data.AvailableLives += 1;
             _gameData.Save();

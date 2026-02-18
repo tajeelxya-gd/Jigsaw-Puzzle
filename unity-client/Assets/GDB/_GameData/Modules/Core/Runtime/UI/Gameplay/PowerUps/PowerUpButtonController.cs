@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PowerUpButtonController : MonoBehaviour
@@ -10,10 +9,8 @@ public class PowerUpButtonController : MonoBehaviour
     private SpaceController _spaceController;
     private CannonController _cannonController;
 
-    public void Initialize(SpaceController spaceController, CannonController cannonController)
+    public void Initialize()
     {
-        _spaceController = spaceController;
-        _cannonController = cannonController;
         SignalBus.Subscribe<OnShooterEmptySignal>(EnableMagnet);
         SignalBus.Subscribe<OnShooterEmptySignal>(DisableSlotPopper);
         SignalBus.Subscribe<OnBoosterEnableSignal>(OnBoosterEnable);
@@ -34,7 +31,7 @@ public class PowerUpButtonController : MonoBehaviour
         _magnetPowerUpBtn.ChangeToColor();
         _shufflePowerUpBtn.ChangeToColor();
         _hammerPowerUpBtn.ChangeToColor();
-        if (GlobalService.GameData.Data.LevelNumber == 25)
+        if (GlobalService.GameData.Data.LevelIndex == 25)
         {
             _slotPowerUpBtn.ChangeToColor();
         }
@@ -95,7 +92,7 @@ public class PowerUpButtonController : MonoBehaviour
             _slotPowerUpBtn.ChangeToColor();
         }
 
-//SLOT POPPER
+        //SLOT POPPER
         if (_spaceController.AnySpaceOccupied() && _cannonController.HasCannon())
         {
             _slotPowerUpBtn.ChangeToColor();
@@ -109,7 +106,7 @@ public class PowerUpButtonController : MonoBehaviour
             _slotPowerUpBtn.ChangeToLock();
         }
 
-//MAGNET 
+        //MAGNET 
         if (!_cannonController.HasCannon() || _spaceController.AllSpacesFull(5))
         {
             _magnetPowerUpBtn.ChangeToLock();
