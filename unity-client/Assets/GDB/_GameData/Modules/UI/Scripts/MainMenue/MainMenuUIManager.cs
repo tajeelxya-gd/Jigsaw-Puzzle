@@ -20,22 +20,23 @@ public sealed class MainMenuUIManager : MonoBehaviour
         SignalBus.Reset();
         PopCommandExecutionResponder.ClearAllCommands();
         SetRaycastState(false);
+        currentHaultTime = 3;
     }
-
+    
 
     IEnumerator SetUpRoutine()
     {
-        int totalLevelCount = GlobalService.MaxLevel;
+        int totalLevelCount = GlobalService.MaxLevel; 
 
         int currentLevel = GlobalService.GameData.Data.LevelNumber;
         int nextLevel = GetWrappedLevel(currentLevel);
 
         ResourceRequest request = Resources.LoadAsync<TextAsset>($"Levels/Level {nextLevel}");
-
+    
         while (!request.isDone)
         {
             // You can update a loading bar here if you want!
-            yield return null;
+            yield return null; 
         }
 
         TextAsset json = request.asset as TextAsset;
@@ -47,12 +48,12 @@ public sealed class MainMenuUIManager : MonoBehaviour
 
             settingsManager.Inject(leveldata);
             levelStateMainMenue.Inject(leveldata);
-
+        
             // Clean up the string memory
             Resources.UnloadAsset(json);
         }
     }
-
+    
     const int FIRST_REPEAT_LEVEL = 101;
     int GetWrappedLevel(int level)
     {
@@ -69,6 +70,7 @@ public sealed class MainMenuUIManager : MonoBehaviour
         StartCoroutine(CommandStateWatcher());
         StartCoroutine(SetUpRoutine());
         SignalBus.Subscribe<OnInAppBuySignal>(OnInAppBuySignal);
+        SignalBus.Subscribe<OnHaltMainMenuExecutionSignal>(OnHaltExecutionSignal);
     }
 
     void OnInAppBuySignal(ISignal signal)
@@ -76,17 +78,23 @@ public sealed class MainMenuUIManager : MonoBehaviour
         currentHaultTime = 3;
     }
 
-    private void Update()
+    void OnHaltExecutionSignal(ISignal signal)
     {
-        if (currentHaultTime > 0)
-            currentHaultTime -= Time.deltaTime;
-        currentHaultTime = Mathf.Clamp(currentHaultTime, 0, Mathf.Infinity);
+        currentHaultTime = 3;
+        
     }
 
-    [ReadOnly]
+    private void Update()
+    {
+        if(currentHaultTime >0 )
+            currentHaultTime -= Time.deltaTime;
+        currentHaultTime = Mathf.Clamp(currentHaultTime,0,Mathf.Infinity);
+    }
+
+    [ReadOnly,SerializeField]
     private bool haultStateActive => currentHaultTime > 0;
-    [ReadOnly]
-    private float currentHaultTime = 0;
+    [ReadOnly,SerializeField]
+    private float currentHaultTime = 3;
 
     private void SetRaycastState(bool state)
     {
@@ -97,7 +105,7 @@ public sealed class MainMenuUIManager : MonoBehaviour
 
         for (int i = 0; i < mainHudButtons.Length; i++)
         {
-            if (mainHudButtons[i] != null && mainHudButtons[i].image)
+            if (mainHudButtons[i] != null &&  mainHudButtons[i].image)
                 mainHudButtons[i].enabled = state;
         }
     }
@@ -107,14 +115,17 @@ public sealed class MainMenuUIManager : MonoBehaviour
         var wait = new WaitForSeconds(0.1f);
         while (true)
         {
-
+         
             SetRaycastState(!PopCommandExecutionResponder.DoCommandsExists() && !haultStateActive);
             yield return wait;
         }
     }
 
     private void OnDisable()
-    {
+    { 
         SignalBus.Unsubscribe<OnInAppBuySignal>(OnInAppBuySignal);
+        SignalBus.Unsubscribe<OnHaltMainMenuExecutionSignal>(OnHaltExecutionSignal);
     }
 }
+
+public class OnHaltMainMenuExecutionSignal:ISignal{}

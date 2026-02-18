@@ -8,7 +8,6 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
-using UniTx.Runtime;
 
 namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 {
@@ -131,7 +130,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private void Start()
         {
             PlayHeartBeatEffect();
-            SignalBus.Subscribe<OnlevelFailSignal>(AssignLevelFailType);
+            //SignalBus.Subscribe<OnlevelFailSignal>(AssignLevelFailType);
             SignalBus.Subscribe<CloseFailPanelSignal>(CloseFailPanel);
             SignalBus.Subscribe<OnLevelLoadedSignal>(OnLevelLoaded);
             SignalBus.Subscribe<SlotsFullSignal>(SlotChecker);
@@ -160,11 +159,11 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _isInfinite = timeService_freeTimer.IsRunning();
         }
 
-        private void AssignLevelFailType(OnlevelFailSignal signal)
-        {
-            UniStatics.LogInfo(signal.levelFailType);
-            _levelFailType = signal.levelFailType;
-        }
+        // private void AssignLevelFailType(OnlevelFailSignal signal)
+        // {
+        //     Debug.LogError(signal.levelFailType);
+        //     _levelFailType = signal.levelFailType;
+        // }
         void OnLevelLoaded(OnLevelLoadedSignal signal)
         {
             _currentPlayedLevel = signal.levelNo;
@@ -226,6 +225,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         void OnClick_InfiniteContinueButton()
         {
             //ContinueButton();
+            AudioController.PlaySFX(AudioType.ButtonClick);
+            HapticController.Vibrate(HapticType.Btn);
             _infinitePanel.transform.GetChild(0).DOScale(0.2f, 0.25f);
             SignalBus.Publish(new OnSceneShiftSignal { DoFakeLoad = true, FakeLoadTime = 3 });
             DOVirtual.DelayedCall(0.1f, ResetAll);
@@ -244,6 +245,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         void OnClick_TryAgain()
         {
+            AudioController.PlaySFX(AudioType.ButtonClick);
+            HapticController.Vibrate(HapticType.Btn);
             if (GlobalService.GameData.Data.AvailableLives > 0)
             {
                 DOVirtual.DelayedCall(0.1f, ResetAll);
@@ -292,6 +295,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private int _plaYOnCounter = 1;
         void OnClick_PlayOnForCoins()
         {
+            AudioController.PlaySFX(AudioType.ButtonClick);
+            HapticController.Vibrate(HapticType.Btn);
             _plaYOnCounter++;
             int _totalUserCoins = GlobalService.GameData.Data.Coins;
             if (_totalUserCoins >= _playOnAmount && _levelFailType == LevelFailType.OutOFSpace)
@@ -441,11 +446,13 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _hasCannonSlotFilled = signal.isSlotsFull;
         }
         [Button("Show Panel")]
-        public override void ShowScreen()
+        public override void ShowScreen<T>(T data)
         {
+            if (data is LevelFailType levelFailTypeType)
+                _levelFailType = levelFailTypeType;
             LoadAndUpdateHealthTimerData();
             SignalBus.Publish(new OnSpacesFullSignal());
-            //UniStatics.LogInfo("Play on Counter" + _plaYOnCounter);
+            //Debug.LogError("Play on Counter" + _plaYOnCounter);
             if (_plaYOnCounter > 2)
             {
                 PlayOnButtonCheck();
@@ -453,7 +460,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 return;
             }
             if (_hasFailPanelShown) return;
-            UniStatics.LogInfo("Screen Shown");
+            Debug.LogError("Screen Shown");
             base.ShowScreen();
             ResetAll();
             PlayFailSequence();
@@ -484,12 +491,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 .SetUpdate(true)
                 ;
             ShowTryAgainPanel();
-            UniStatics.LogInfo(_levelFailType);
+            Debug.LogError(_levelFailType);
             if (_levelFailType == LevelFailType.OutOFSpace)
             {
                 _cannonPanel.SetActive(true);
             }
-            else
+            else if (_levelFailType == LevelFailType.WallBreak)
             {
                 _wallBreakPanel.SetActive(true);
                 PlayWallBreakAnimation();
@@ -594,6 +601,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void GoToHome()
         {
+            AudioController.PlaySFX(AudioType.ButtonClick);
+             HapticController.Vibrate(HapticType.Btn);
             if (!_isInfinite)
             {
                 GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);

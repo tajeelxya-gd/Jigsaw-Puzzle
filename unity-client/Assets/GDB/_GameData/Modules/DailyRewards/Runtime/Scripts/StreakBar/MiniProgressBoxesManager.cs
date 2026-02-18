@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,7 +41,7 @@ public class MiniProgressBoxesManager : MonoBehaviour
             var ui = Instantiate(_rewardContainerUI, _infoContainer.transform);
             ui.gameObject.SetActive(false);
             _pool.Add(ui.GetComponent<RewardContainerUI>());
-            UniStatics.LogInfo("Instantieated");
+            Debug.LogError("Instantieated");
         }
 
         for (int i = 0; i < data._rewards.Count; i++)

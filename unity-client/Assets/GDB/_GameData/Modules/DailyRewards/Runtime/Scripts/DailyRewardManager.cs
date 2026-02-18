@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 
 public class DailyRewardManager : MonoBehaviour
@@ -13,19 +13,19 @@ public class DailyRewardManager : MonoBehaviour
     [SerializeField] private GameObject _infoText;
     [SerializeField] private DailyRewardPresets _dailyRewardPresets;
     [SerializeField] private RewardCard[] _rewardCards;
-    [ReadOnly, SerializeField]
+    [ReadOnly,SerializeField]
     private int _currentDay = 1;
     private PanelScaling _rewardPanelScaling;
     DailyRewardTimer _dailyRewardTimer;
 
     public void Inject(DailyRewardTimer dailyRewardTimer)
     {
-        _dailyRewardTimer = dailyRewardTimer;
+        _dailyRewardTimer =  dailyRewardTimer;
         if (_presetIndex >= _dailyRewardPresets._dailyRewardPresetsData.Length)
         {
             _presetIndex = 0;
         }
-
+        
         ApplyPreset(_presetIndex);
         Initialize();
     }
@@ -33,11 +33,12 @@ public class DailyRewardManager : MonoBehaviour
 
     private void Start()
     {
-
+  
     }
 
     void Initialize()
     {
+        SignalBus.Subscribe<StreakBreakSignal>(OnResetStreakSignal);
         _rewardPanelScaling = _dailyRewardPanel.GetComponent<PanelScaling>();
         _currentDay = _dailyRewardTimer.GetActiveRewardCollectionDay();
         UpdateClaimButtons(_currentDay);
@@ -55,7 +56,44 @@ public class DailyRewardManager : MonoBehaviour
             SignalBus.Publish(new RewardMissSignal());
         }
     }
+    Sequence onStreakResetSequence;
+    void OnResetStreakSignal(StreakBreakSignal signal)
+    {
+        // Kill any previous sequence to prevent overlaps
+        onStreakResetSequence?.Kill();
+        AudioController.PlaySFX(AudioType.Loss);
+        onStreakResetSequence = DOTween.Sequence();
+        _claimButton.gameObject.SetActive(false);
 
+        float scaleDuration = 0.2f; // Speed of the scale
+        float staggerDelay = 0.02f;    // Delay between each card starting
+        float waitTime = 0.2f;       // Time to stay at zero scale
+
+        // 1. Scale down all cards with a stagger
+        for (int i = 0; i < _rewardCards.Length; i++)
+        {
+            onStreakResetSequence.Join(_rewardCards[i].transform.DOScale(Vector3.zero, scaleDuration)
+                .SetDelay(i * staggerDelay)
+                .SetEase(Ease.InBack));
+        }
+
+        // 2. Wait for a moment
+        onStreakResetSequence.AppendInterval(waitTime);
+
+        // 3. Scale them back up to 1
+        for (int i = 0; i < _rewardCards.Length; i++)
+        {
+            onStreakResetSequence.Join(_rewardCards[i].transform.DOScale(Vector3.one, scaleDuration)
+                .SetDelay(i * staggerDelay)
+                .SetEase(Ease.OutBack));
+        }
+        
+        
+        onStreakResetSequence.AppendCallback(() => {
+            _claimButton.gameObject.SetActive(true);
+        });
+    }
+    
     private void OpenDailyRewardPanel()
     {
         PopCommandExecutionResponder.AddCommand(
@@ -69,13 +107,13 @@ public class DailyRewardManager : MonoBehaviour
     void ShowDailyRewardPanel()
     {
         _dailyRewardPanel.SetActive(true);
-        if (_rewardPanelScaling)
+        if(_rewardPanelScaling)
             _rewardPanelScaling.ScaleIn();
 
-        UniStatics.LogInfo("SOUND SHOULD HAVE PLAYED");
+        Debug.LogError("SOUND SHOULD HAVE PLAYED");
         DOVirtual.DelayedCall(0.3f, () => AudioController.PlaySFX(AudioType.DailyRewards));
-        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
-
+        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
+        
     }
 
     private bool IsRewardAvailableToday()
@@ -123,14 +161,14 @@ public class DailyRewardManager : MonoBehaviour
         UpdateCurrentDayIndicator();
         // if (_currentDay == 1)
         // {
-
+        
         // }
 
         UpdateClaimButtons(_currentDay);
     }
 
-
-
+    
+    
     private void UpdateClaimButtons(int currentDay)
     {
         int index = currentDay - 1;
@@ -158,7 +196,7 @@ public class DailyRewardManager : MonoBehaviour
         //_claimX2Button.SetActive(false);
         //_infoText.SetActive(true);
         SignalBus.Publish(new OnDailyRewardClaim());
-        UniStatics.LogInfo($"Claimed Day {_currentDay} reward (x1)");
+        Debug.LogError($"Claimed Day {_currentDay} reward (x1)");
         AudioController.PlaySFX(AudioType.CollectSoft);
         StartCoroutine(ClosePanel());
     }
@@ -166,7 +204,7 @@ public class DailyRewardManager : MonoBehaviour
     private IEnumerator ClosePanel()
     {
         yield return new WaitForSeconds(1.5f);
-        if (_rewardPanelScaling)
+        if(_rewardPanelScaling)
             _rewardPanelScaling.ScaleOut();
         _dailyRewardPanel.GetComponent<CanvasGroup>().DOFade(0f, 0.3f).From(1)
             .OnComplete(() => { _dailyRewardPanel.SetActive(false); });
@@ -189,7 +227,7 @@ public class DailyRewardManager : MonoBehaviour
             if (i < preset._dailyRewards.Length)
             {
                 var data = preset._dailyRewards[i];
-                UniStatics.LogInfo("Daily Reward: " + data._dayText);
+                Debug.LogError("Daily Reward: "+data._dayText);
                 data._currentDay = i + 1;
                 _rewardCards[i].Initialize(data);
             }
@@ -203,8 +241,13 @@ public class DailyRewardManager : MonoBehaviour
         {
             _presetIndex = 0;
         }
-
+        
         ApplyPreset(_presetIndex);
+    }
+
+    private void OnDisable()
+    {
+        SignalBus.Unsubscribe<StreakBreakSignal>(OnResetStreakSignal);
     }
 }
 
@@ -213,7 +256,7 @@ public class OnDailyRewardClaim : ISignal
     public bool IsStreakCompleted = false;
 }
 
-public class OnShowDailyRewardPopUpEffect : ISignal { }
+public class OnShowDailyRewardPopUpEffect : ISignal{}
 
 
 // public void OnClaimButtonClickedX2()
@@ -231,5 +274,5 @@ public class OnShowDailyRewardPopUpEffect : ISignal { }
 //     _claimButton.SetActive(false);
 //     //_claimX2Button.SetActive(false);
 //     //_infoText.SetActive(true);
-//     UniStatics.LogInfo($"Claimed Day {_currentDay} reward (x2)");
+//     Debug.LogError($"Claimed Day {_currentDay} reward (x2)");
 // }

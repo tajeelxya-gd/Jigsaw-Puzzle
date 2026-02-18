@@ -20,7 +20,6 @@ public class WinFailManager : MonoBehaviour
     private PlayerProfileData _playerProfileData;
     private IGetRank _getRank;
     private IGetRank[] _getAIRank;
-
     private void OnEnable()
     {
         _profileDataBase = new DataBaseService<PlayerProfileData>();
@@ -44,7 +43,6 @@ public class WinFailManager : MonoBehaviour
         }
         ApplyRank(_getRank.GetRank());
         GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.RaceEvent), "End",((int)_getRank.GetRank()).ToString());
-        
     }
 
     private void OnDisable()

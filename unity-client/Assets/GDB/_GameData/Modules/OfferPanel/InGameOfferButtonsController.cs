@@ -4,16 +4,10 @@ using UnityEngine;
 public class InGameOfferButtonsController : MonoBehaviour
 {
    [SerializeField] private InGameOffersButton[] offerButtons;
-
-   private void OnEnable()
+   private void Start()
    {
        SignalBus.Subscribe<OnShowInAppHomeButton>(OnShowOfferButton);
        SignalBus.Subscribe<OnInAppBuySignal>(OnInAppBuySignal);
-   }
-
-   private void Start()
-   {
-    
      DisplayAllTimedOffers();
    }
 
@@ -39,11 +33,12 @@ public class InGameOfferButtonsController : MonoBehaviour
 
    void OnShowOfferButton(OnShowInAppHomeButton signal)
    {
+       Debug.LogError("Requested To Show Offer Button:: "+signal.OfferDataType);
        foreach (var button in offerButtons)
        {
            button.gameObject.SetActive(
-               button.IsTimerRunning() 
-               && button.OfferData.IsOfferAvailable()
+               button.OfferData ==  signal.OfferDataType &&
+                button.OfferData.IsOfferAvailable()
            );
        }
    }

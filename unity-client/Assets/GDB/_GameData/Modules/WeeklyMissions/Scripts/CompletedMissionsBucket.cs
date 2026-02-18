@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 [CreateAssetMenu(fileName = "WeeklyMissionsRuntimeBucket", menuName = "Scriptable Objects/WeeklyMissionsBucket")]
 public class CompletedMissionsBucket : ScriptableObject
@@ -21,13 +20,13 @@ public class CompletedMissionsBucket : ScriptableObject
     {
         if (!_weeklyMissionsContainer.HasItem(missionType))
         {
-            UniStatics.LogInfo("No item found for mission type: " + missionType);
+            Debug.LogError("No item found for mission type: " + missionType);
             _weeklyMissionsContainer._data.Add(new WeeklyMissionBucketData { CompletedMissionType = missionType, CollectedAmount = 0 });
         }
     }
     public void AddToBucket(MissionType missionType, int amount = 1)
     {
-        UniStatics.LogInfo("Added to bucket " + missionType);
+         Debug.LogError("Added to bucket " + missionType);
         AddItemToBucket(missionType);//create new item if no new item available
         foreach (var weeklyMissionBucketData in _weeklyMissionsContainer._data)
         {

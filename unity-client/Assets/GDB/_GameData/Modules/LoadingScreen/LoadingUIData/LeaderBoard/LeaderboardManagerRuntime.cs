@@ -41,18 +41,18 @@ public class LeaderboardManagerRuntime : MonoBehaviour
     [SerializeField] LeagueCategoryBase leagueControllerUI;
     [SerializeField] LeagueCategoryBase globalLeagueControllerUI;
     [SerializeField] ProfileAvatarsData profileAvatarsData;
-    public ProfileAvatarsData ProfileAvatarsData => profileAvatarsData;
+    public ProfileAvatarsData  ProfileAvatarsData => profileAvatarsData;
     [SerializeField] private List<LeaderboardData.PlayerData> globalTop30 = new List<LeaderboardData.PlayerData>();
     [SerializeField] private List<LeaderboardData.PlayerData> leagueTop30 = new List<LeaderboardData.PlayerData>();
     public List<LeaderboardData.PlayerData> GlobalTop30 => globalTop30;
     [SerializeField] private List<LeaderboardData.PlayerData> globalProgressiveTop30 = new List<LeaderboardData.PlayerData>();
     public List<LeaderboardData.PlayerData> GlobalProgressiveTop30 => globalProgressiveTop30;
-    [ReadOnly] public List<LeaderboardData.PlayerData> LeagueTop30 => leagueTop30;
-    [ReadOnly, SerializeField] private List<LeaderboardData.PlayerData> leagueBronze = new List<LeaderboardData.PlayerData>();
-    [ReadOnly, SerializeField] private List<LeaderboardData.PlayerData> leagueSilver = new List<LeaderboardData.PlayerData>();
-    [ReadOnly, SerializeField] private List<LeaderboardData.PlayerData> leagueGold = new List<LeaderboardData.PlayerData>();
-    [ReadOnly, SerializeField] private List<LeaderboardData.PlayerData> leagueDiamond = new List<LeaderboardData.PlayerData>();
-
+    [ReadOnly,SerializeField] public List<LeaderboardData.PlayerData> LeagueTop30 => leagueTop30;
+    [ReadOnly,SerializeField] private List<LeaderboardData.PlayerData> leagueBronze = new List<LeaderboardData.PlayerData>();
+    [ReadOnly,SerializeField] private List<LeaderboardData.PlayerData> leagueSilver = new List<LeaderboardData.PlayerData>();
+    [ReadOnly,SerializeField] private List<LeaderboardData.PlayerData> leagueGold = new List<LeaderboardData.PlayerData>();
+    [ReadOnly,SerializeField] private List<LeaderboardData.PlayerData> leagueDiamond = new List<LeaderboardData.PlayerData>();
+    
     [Header("JSON file in Resources (no extension)")]
     [SerializeField]
     public string jsonFileName = "InitialLeaderboard";
@@ -80,7 +80,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         AddHumanPlayer();
         SimulateOfflineAI();
         SaveLeaderboard();
-        DOVirtual.DelayedCall(0.5f, UpdatePlayerStats);
+       DOVirtual.DelayedCall(0.5f, UpdatePlayerStats);
     }
 
     private void Start()
@@ -97,7 +97,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
 
     public void ResetAllData()
     {
-
+        
     }
 
     #region Load / Save
@@ -122,11 +122,11 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         if (jsonFile != null)
         {
             leaderboardData = JsonUtility.FromJson<LeaderboardData>(jsonFile.text);
-            // Debug.Log($"Leaderboard loaded from Resources: {leaderboardData.AllPlayers.Count} AI players.");
+           // Debug.Log($"Leaderboard loaded from Resources: {leaderboardData.AllPlayers.Count} AI players.");
         }
         else
         {
-            //  Debug.LogWarning($"Leaderboard JSON '{jsonFileName}' not found. Creating empty leaderboard.");
+          //  Debug.LogWarning($"Leaderboard JSON '{jsonFileName}' not found. Creating empty leaderboard.");
             leaderboardData = new LeaderboardData();
         }
     }
@@ -135,7 +135,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
     {
         string json = JsonUtility.ToJson(leaderboardData, true);
         File.WriteAllText(savePath, json);
-        // Debug.Log("Leaderboard saved to persistentDataPath.");
+       // Debug.Log("Leaderboard saved to persistentDataPath.");
     }
     #endregion
 
@@ -175,17 +175,17 @@ public class LeaderboardManagerRuntime : MonoBehaviour
             LastSimulatedTime = DateTime.UtcNow.ToString("o"),
             IsPlayer = true
         };
-
+      
         leaderboardData.AllPlayers.Add(myProfile);
         UpdateGlobalTop30();
         UpdateLeagueTop30(myProfile.CurrentLeague);
         UpdateMyProfileName();
-        DOVirtual.DelayedCall(0.1f, () => UpdateMyProfileName());
+        DOVirtual.DelayedCall(0.1f, ()=>UpdateMyProfileName());
     }
 
     void UpdateRewardStatusOfPlayer()
     {
-
+        
     }
 
     #endregion
@@ -197,7 +197,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         sortedPlayerData.Sort((a, b) => b.Trophies.CompareTo(a.Trophies));
         for (int i = 0; i < sortedPlayerData.Count; i++)
         {
-            sortedPlayerData[i].PlayerRank = i;
+            sortedPlayerData[i].PlayerRank =  i;    
         }
         globalTop30 = new List<LeaderboardData.PlayerData>(leaderboardData.AllPlayers);
         globalTop30.Sort((a, b) => b.Trophies.CompareTo(a.Trophies));
@@ -207,7 +207,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         UpdateAllLeagues();
         UpdateGlobalProgressiveTop30();
     }
-
+    
     public void UpdateGlobalProgressiveTop30()
     {
         if (leaderboardData == null || leaderboardData.AllPlayers == null || leaderboardData.AllPlayers.Count == 0)
@@ -255,7 +255,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         {
             globalProgressiveTop30[globalProgressiveTop30.Count - 1] = human;
         }
-
+        
         globalProgressiveTop30.Sort((a, b) => b.Trophies.CompareTo(a.Trophies));
         UpdateAllLeagues();
     }
@@ -268,68 +268,68 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         leagueGold = leaderboardData.AllPlayers.FindAll(p => p.CurrentLeague.Equals(LeagueRankType.Gold));
         leagueDiamond = leaderboardData.AllPlayers.FindAll(p => p.CurrentLeague.Equals(LeagueRankType.Diamond));
     }
-    public void UpdateLeagueTop30(LeagueRankType league)
+public void UpdateLeagueTop30(LeagueRankType league)
+{
+    List<LeaderboardData.PlayerData> leaguePlayers = leaderboardData.AllPlayers
+        .FindAll(p => p.CurrentLeague.Equals(league));
+    leaguePlayers.Sort((a, b) => b.Trophies.CompareTo(a.Trophies));
+
+    int humanIndex = leaguePlayers.FindIndex(p => p.PlayerID == humanPlayerID);
+    if (humanIndex == -1) humanIndex = 0; // fallback if not found
+
+    List<LeaderboardData.PlayerData> newTop30 = new List<LeaderboardData.PlayerData>();
+
+    int maxListCount = Math.Min(30, leaguePlayers.Count);
+
+    // 1️⃣ Always add top 3 players
+    int topCount = Math.Min(3, leaguePlayers.Count);
+    for (int i = 0; i < topCount; i++)
+        newTop30.Add(leaguePlayers[i]);
+
+    int remainingSlots = maxListCount - newTop30.Count;
+
+    // 2️⃣ Decide sliding window around human
+    int windowSize = remainingSlots - 1; // minus 1 for human
+    int halfWindow = windowSize / 2;
+
+    int start = humanIndex - halfWindow;
+    int end = humanIndex + (windowSize - halfWindow);
+
+    // Clamp to league bounds
+    start = Mathf.Max(3, start); // never overwrite top 3
+    end = Mathf.Min(leaguePlayers.Count - 1, end);
+
+    // Adjust start/end if we have fewer than remainingSlots
+    int actualCount = end - start + 1;
+    if (actualCount < windowSize)
     {
-        List<LeaderboardData.PlayerData> leaguePlayers = leaderboardData.AllPlayers
-            .FindAll(p => p.CurrentLeague.Equals(league));
-        leaguePlayers.Sort((a, b) => b.Trophies.CompareTo(a.Trophies));
-
-        int humanIndex = leaguePlayers.FindIndex(p => p.PlayerID == humanPlayerID);
-        if (humanIndex == -1) humanIndex = 0; // fallback if not found
-
-        List<LeaderboardData.PlayerData> newTop30 = new List<LeaderboardData.PlayerData>();
-
-        int maxListCount = Math.Min(30, leaguePlayers.Count);
-
-        // 1️⃣ Always add top 3 players
-        int topCount = Math.Min(3, leaguePlayers.Count);
-        for (int i = 0; i < topCount; i++)
-            newTop30.Add(leaguePlayers[i]);
-
-        int remainingSlots = maxListCount - newTop30.Count;
-
-        // 2️⃣ Decide sliding window around human
-        int windowSize = remainingSlots - 1; // minus 1 for human
-        int halfWindow = windowSize / 2;
-
-        int start = humanIndex - halfWindow;
-        int end = humanIndex + (windowSize - halfWindow);
-
-        // Clamp to league bounds
-        start = Mathf.Max(3, start); // never overwrite top 3
-        end = Mathf.Min(leaguePlayers.Count - 1, end);
-
-        // Adjust start/end if we have fewer than remainingSlots
-        int actualCount = end - start + 1;
-        if (actualCount < windowSize)
-        {
-            // try to extend start backwards
-            start = Mathf.Max(3, start - (windowSize - actualCount));
-            actualCount = end - start + 1;
-        }
-        if (actualCount < windowSize)
-        {
-            // try to extend end forward
-            end = Mathf.Min(leaguePlayers.Count - 1, end + (windowSize - actualCount));
-        }
-
-        // 3️⃣ Add players above/below human (window)
-        for (int i = start; i <= end; i++)
-        {
-            if (!newTop30.Contains(leaguePlayers[i]))
-                newTop30.Add(leaguePlayers[i]);
-        }
-
-        // 4️⃣ Add human explicitly if not in list (rare case)
-        if (!newTop30.Contains(leaguePlayers[humanIndex]))
-            newTop30.Add(leaguePlayers[humanIndex]);
-
-        // 5️⃣ Trim to max 30 just in case
-        if (newTop30.Count > maxListCount)
-            newTop30 = newTop30.GetRange(0, maxListCount);
-
-        leagueTop30 = newTop30;
+        // try to extend start backwards
+        start = Mathf.Max(3, start - (windowSize - actualCount));
+        actualCount = end - start + 1;
     }
+    if (actualCount < windowSize)
+    {
+        // try to extend end forward
+        end = Mathf.Min(leaguePlayers.Count - 1, end + (windowSize - actualCount));
+    }
+
+    // 3️⃣ Add players above/below human (window)
+    for (int i = start; i <= end; i++)
+    {
+        if (!newTop30.Contains(leaguePlayers[i]))
+            newTop30.Add(leaguePlayers[i]);
+    }
+
+    // 4️⃣ Add human explicitly if not in list (rare case)
+    if (!newTop30.Contains(leaguePlayers[humanIndex]))
+        newTop30.Add(leaguePlayers[humanIndex]);
+
+    // 5️⃣ Trim to max 30 just in case
+    if (newTop30.Count > maxListCount)
+        newTop30 = newTop30.GetRange(0, maxListCount);
+
+    leagueTop30 = newTop30;
+}
 
 
 
@@ -378,14 +378,14 @@ public class LeaderboardManagerRuntime : MonoBehaviour
 
         int[] multipliers = { 1, 2, 3, 5, 10 };
         int streakIndex = Mathf.Clamp(player.IsPlayer ? 0 : player.Streak, 0, multipliers.Length - 1);
-        // Debug.LogError(player.BaseGainPerLevel+"  "+ multipliers[streakIndex] + "" +streakIndex);
+       // Debug.LogError(player.BaseGainPerLevel+"  "+ multipliers[streakIndex] + "" +streakIndex);
         int gain = player.BaseGainPerLevel * multipliers[streakIndex];
-        GameData gameData = GlobalService.GameData;
+        GameData gameData =  GlobalService.GameData;
         gameData.Data.TrophiesWinInGame = isTest ? gain : gameData.Data.TrophiesWinInGame;
         player.Trophies += gameData.Data.TrophiesWinInGame;
         gameData.Data.TrophiesWinInGame = 0;
         gameData.Save();
-        if (player.IsPlayer)
+        if(player.IsPlayer)
             player.Streak = 1;
         else player.Streak += 1;
         player.LastSimulatedTime = DateTime.UtcNow.ToString("o");
@@ -395,7 +395,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         UpdateLeagueTop30(player.CurrentLeague);
         SaveLeaderboard();
         UpdateModelView(Time.deltaTime);
-        // Debug.Log($"{player.PlayerName} won a level: +{gain} trophies, streak {player.Streak}");
+       // Debug.Log($"{player.PlayerName} won a level: +{gain} trophies, streak {player.Streak}");
     }
 
     void UpdateModelView(float delay = 0.02f)
@@ -441,33 +441,33 @@ public class LeaderboardManagerRuntime : MonoBehaviour
 
         List<LeaderboardData.PlayerData> playersChanged = new List<LeaderboardData.PlayerData>();
 
-        foreach (var ai in leaderboardData.AllPlayers)
-        {
-            if (ai.IsPlayer) continue;
-
-            DateTime lastSim = DateTime.Parse(ai.LastSimulatedTime);
-            double hoursPassed = (now - lastSim).TotalHours;
-
-            if (hoursPassed < 0.01)
-                hoursPassed = 1;   // make sure something can happen in tests
-
-            int gain = ComputeAIGain(ai, hoursPassed, rnd);
-
-            if (gain != 0)
+            foreach (var ai in leaderboardData.AllPlayers)
             {
-                ai.Trophies += gain;
-                ai.LastSimulatedTime = now.ToString("o");
-                playersChanged.Add(ai);
+                if (ai.IsPlayer) continue;
+
+                DateTime lastSim = DateTime.Parse(ai.LastSimulatedTime);
+                double hoursPassed = (now - lastSim).TotalHours;
+
+                if (hoursPassed < 0.01)
+                    hoursPassed = 1;   // make sure something can happen in tests
+
+                int gain = ComputeAIGain(ai, hoursPassed, rnd);
+
+                if (gain != 0)
+                {
+                    ai.Trophies += gain;
+                    ai.LastSimulatedTime = now.ToString("o");
+                    playersChanged.Add(ai);
+                }
+
+                // streak behavior
+                if (rnd.NextDouble() < 0.1)
+                    ai.Streak = 0;
+                else
+                    ai.Streak = Mathf.Clamp(ai.Streak + 1, 0, 5);
+
+                CheckLeaguePromotion(ai);
             }
-
-            // streak behavior
-            if (rnd.NextDouble() < 0.1)
-                ai.Streak = 0;
-            else
-                ai.Streak = Mathf.Clamp(ai.Streak + 1, 0, 5);
-
-            CheckLeaguePromotion(ai);
-        }
 
         UpdateGlobalTop30();
         UpdateLeagueTop30(GetPlayerByID(humanPlayerID).CurrentLeague);
@@ -482,7 +482,7 @@ public class LeaderboardManagerRuntime : MonoBehaviour
             var beforeData = before[ai.PlayerID];
             int newRank = GetPlayerGlobalRankFull(ai.PlayerID);
 
-            // Debug.Log(
+           // Debug.Log(
             //     $"AI Updated: {ai.PlayerName} | " +
             //     $"Trophies: {beforeData.trophies} → {ai.Trophies} | " +
             //     $"Rank: {beforeData.rank} → {newRank} | " +
@@ -497,10 +497,10 @@ public class LeaderboardManagerRuntime : MonoBehaviour
         double activityFactor = ai.ActivityLevel switch
         {
             "VeryActive" => 1.0,
-            "Regular" => 0.7,
-            "Casual" => 0.5,
-            "Rare" => 0.2,
-            _ => 0.3
+            "Regular"    => 0.7,
+            "Casual"     => 0.5,
+            "Rare"       => 0.2,
+            _            => 0.3
         };
 
         double baseGain = ai.BaseGainPerLevel;
@@ -534,6 +534,6 @@ public class LeaderboardManagerRuntime : MonoBehaviour
     }
 
     #endregion
-
+    
 }
 

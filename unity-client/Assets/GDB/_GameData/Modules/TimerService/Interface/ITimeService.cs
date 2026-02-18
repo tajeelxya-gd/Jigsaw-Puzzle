@@ -8,5 +8,6 @@ public interface ITimeService
     public bool IsRunning();
     public void SaveTimer();
     public void Update();
+    public void EndTimer();
     public void DeleteTimerFile();
 }

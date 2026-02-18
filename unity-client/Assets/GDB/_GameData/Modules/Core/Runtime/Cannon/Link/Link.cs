@@ -4,6 +4,7 @@ public class Link : MonoBehaviour
 {
     [SerializeField] private Transform _from, _to;
     [SerializeField] private Renderer _fromRendrer, _toRendrer;
+    [SerializeField] private Outline _outline;
 
     public void ApplyColorToFirstRendrer(Color color)
     {

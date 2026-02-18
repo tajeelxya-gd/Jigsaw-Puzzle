@@ -1,5 +1,4 @@
 using System;
-using UniTx.Runtime;
 using UnityEngine;
 
 public class WeeklyMissionRuntimeBucketController : MonoBehaviour
@@ -12,7 +11,7 @@ public class WeeklyMissionRuntimeBucketController : MonoBehaviour
 
     private void Start()
     {
-
+      
         if (_dataAsset == null)
             return;
 
@@ -33,8 +32,8 @@ public class WeeklyMissionRuntimeBucketController : MonoBehaviour
 
     private void OnMissionCompletedSignal(OnMissionObjectiveCompleteSignal signal)
     {
-        UniStatics.LogInfo("Recieving objective To Add");
-        if (CanCollectData())
+            Debug.LogError("Recieving objective To Add");
+        if(CanCollectData())
             _dataAsset.AddToBucket(signal.MissionType, signal.Amount);
         else
             Debug.Log("Can't collect data !! weekly mission runtime bucket");

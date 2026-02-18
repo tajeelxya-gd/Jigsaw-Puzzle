@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -32,7 +31,7 @@ public class PuzzleManiaManager : MonoBehaviour
     [SerializeField] private Image _puzzleImage;
     [SerializeField] private Sprite[] _fullPuzzles;
 
-    [Title("OnBoarding")][SerializeField] private OnBoardingConfig.OnBoardingType _onBoardingType;
+    [Title("OnBoarding")] [SerializeField] private OnBoardingConfig.OnBoardingType _onBoardingType;
 
     GameData _gameData;
     private int _currentPuzzleIndex = 0;
@@ -47,7 +46,7 @@ public class PuzzleManiaManager : MonoBehaviour
         _currentMilestoneIndex = _saveData._currentMilestoneIndex;
         _currentPuzzleIndex = _saveData._puzzleIndex;
         _totalBlocksUsed = _saveData._totalBlocksUsed;
-        UniStatics.LogInfo("BlocksUsed: " + _totalBlocksUsed);
+        Debug.LogError("BlocksUsed: " + _totalBlocksUsed);
 
         _milestones = _maniaUIData._maniaUIPresets[_currentPreset]._maniaRewards;
 
@@ -82,7 +81,7 @@ public class PuzzleManiaManager : MonoBehaviour
         {
             if (_puzzle.IsPuzzleCompleted(x))
             {
-                UniStatics.LogInfo("SHOWING COMPLETED PUZZLE: " + x);
+                Debug.LogError("SHOWING COMPLETED PUZZLE: " + x);
                 _puzzle.ShowFullPuzzle(x);
             }
         }
@@ -115,14 +114,14 @@ public class PuzzleManiaManager : MonoBehaviour
 
         DOVirtual.DelayedCall(Time.deltaTime * 10, LookForOnBoardingPanel);
     }
-
+    
 
     private IEnumerator WaitBeforeGift(int rewardAmount)
     {
         yield return null;
         UnityAction onCompleteAction = () =>
         {
-            UniStatics.LogInfo("Puzzle Mania Value Updated!!");
+            Debug.LogError("Puzzle Mania Value Updated!!");
             OnBlocksUsed(
                 new PuzzleManiaBlocksUsed() { _blocksNumber = GlobalService.GameData.Data.CurrentLevelEnemies });
             GlobalService.GameData.Data.CurrentLevelEnemies = 0;
@@ -155,7 +154,7 @@ public class PuzzleManiaManager : MonoBehaviour
     private IEnumerator ScrollToCurrentMilestone()
     {
         yield return new WaitForEndOfFrame();
-        //UniStatics.LogInfo("ADSKLJHJKLASDHFKLJHSAD");
+        //Debug.LogError("ADSKLJHJKLASDHFKLJHSAD");
         _scroll.SnapToItem(_currentMilestoneIndex);
         _scrollSnap.SnapToItemInstant(_currentPuzzleIndex);
     }
@@ -184,13 +183,13 @@ public class PuzzleManiaManager : MonoBehaviour
             _saveData._puzzleIndex = _currentPuzzleIndex;
             _saveDatabase.Save(_saveData);
 
-            //UniStatics.LogInfo($"Puzzle {_currentPuzzleIndex - 1} completed!");
+            //Debug.LogError($"Puzzle {_currentPuzzleIndex - 1} completed!");
         }
 
         // If ALL puzzles completed -> reset everything
         if (_currentPuzzleIndex >= _puzzle.TotalPuzzleCount())
         {
-            //UniStatics.LogInfo("All puzzles completed - resetting Puzzle Mania");
+            //Debug.LogError("All puzzles completed - resetting Puzzle Mania");
 
             _currentPuzzleIndex = 0;
             _saveData._puzzleIndex = 0;
@@ -204,7 +203,7 @@ public class PuzzleManiaManager : MonoBehaviour
     {
         bool hasRequestedMilestone = false;
         while (_currentMilestoneIndex < _milestones.Length &&
-               _totalBlocksUsed >= _milestones[_currentMilestoneIndex]._requiredBlocks * _targetMultiplier)
+               _totalBlocksUsed >= _milestones[_currentMilestoneIndex]._requiredBlocks*_targetMultiplier)
         {
             UIData data = _milestones[_currentMilestoneIndex];
 
@@ -220,15 +219,15 @@ public class PuzzleManiaManager : MonoBehaviour
             {
                 _scrollSnap.SnapToItemInstant(_currentPuzzleIndex);
                 _puzzle.UnlockPiece(_currentPuzzleIndex, milestoneIndex / 3);
-                SignalBus.Publish(new OpenPuzzleManiaSignal() { _playAnimation = true });
+                SignalBus.Publish(new OpenPuzzleManiaSignal(){_playAnimation = true});
                 hasRequestedMilestone = true;
-                //UniStatics.LogInfo("RUNNING");
+                //Debug.LogError("RUNNING");
             }
-
+           
             if (milestoneIndex >= 27)
             {
                 _puzzleCompletePanel.SetActive(true);
-                _puzzleImage.sprite = _fullPuzzles[_currentPuzzleIndex];
+                _puzzleImage.sprite= _fullPuzzles[_currentPuzzleIndex];
             }
             _totalBlocksUsed -= (int)(data._requiredBlocks * _targetMultiplier);
             _currentMilestoneIndex++;
@@ -240,7 +239,7 @@ public class PuzzleManiaManager : MonoBehaviour
                 _puzzleManiaBar.UpdateRewardImage(_milestones[_currentMilestoneIndex]._RewardProgress._rewardIcon);
                 _holder[_currentMilestoneIndex].SetHolderImage(_green);
             }
-
+            
             _saveData._currentMilestoneIndex = _currentMilestoneIndex;
             _saveData._totalBlocksUsed = _totalBlocksUsed;
             _saveDatabase.Save(_saveData);
@@ -255,7 +254,7 @@ public class PuzzleManiaManager : MonoBehaviour
 
     void SendAnalyticEvent()
     {
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.PuzzleMania), "Progression", "Step", (_currentMilestoneIndex + 1).ToString());
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.PuzzleMania), "Progression", "Step",(_currentMilestoneIndex +1).ToString());
     }
 
     private void UpdateBar()
@@ -270,7 +269,7 @@ public class PuzzleManiaManager : MonoBehaviour
                     (int)(_milestones[^1]._requiredBlocks * _targetMultiplier),
                     (int)(_milestones[^1]._requiredBlocks * _targetMultiplier)
                 );
-            //UniStatics.LogInfo("Milestone Achieved !!!");
+            //Debug.LogError("Milestone Achieved !!!");
             return;
         }
 
@@ -297,7 +296,7 @@ public class PuzzleManiaManager : MonoBehaviour
             _puzzleManiaBar.UpdateProgressText(
                 (int)(_milestones[^1]._requiredBlocks * _targetMultiplier),
                 (int)(_milestones[^1]._requiredBlocks * _targetMultiplier)
-            ); int index = Mathf.Min(_saveData._currentMilestoneIndex, _milestones.Length - 1);
+            );            int index = Mathf.Min(_saveData._currentMilestoneIndex, _milestones.Length - 1);
             _puzzleManiaBar.UpdateRewardImage(_milestones[index]._RewardProgress._rewardIcon);
             return;
         }
@@ -327,8 +326,8 @@ public class PuzzleManiaManager : MonoBehaviour
 
         UpdateBar();
         StartCoroutine(ScrollToCurrentMilestone());
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.PuzzleMania), "Reset");
-
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.PuzzleMania), "Reset");
+        
     }
 
     [Button]

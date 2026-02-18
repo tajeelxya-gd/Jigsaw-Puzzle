@@ -1,6 +1,5 @@
 using System;
 using Lofelt.NiceVibrations;
-using UniTx.Runtime;
 using UnityEngine;
 
 public class Magnet : IPowerup, IDisposable
@@ -30,14 +29,14 @@ public class Magnet : IPowerup, IDisposable
             SignalBus.Publish(new OnShooterRemoveFromGridSignal { shootable = new System.Collections.Generic.List<IShootable> { _shootable } });
             AudioController.PlaySFX(AudioType.MagnetEffect);
             HapticController.Vibrate(HapticType.Hammer);
-            UniStatics.LogInfo("Publishing signal here");
+            Debug.LogError("Publishing signal here");
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseSelect, Amount = 1 });
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
         }
 
         _shootable = null;
         _spaceController = null;
-
+       
         // SignalBus.Publish(new OnMagnetEnableSignal { IsEnable = false });
         if (TutorialManager.IsTutorialActivated)
             SignalBus.Publish(new OnTutorialActivated { IsActivated = false });

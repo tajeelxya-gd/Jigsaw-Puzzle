@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using UniTx.Runtime;
 
 public class RewardCard : MonoBehaviour
 {
@@ -20,13 +19,13 @@ public class RewardCard : MonoBehaviour
     [SerializeField] private ParticleSystem _claimParticle;
     [SerializeField] private GameObject _bgShineEffect;
     [SerializeField] private UIParticle _particle;
-    [SerializeField] private RewardContainerUI[] _rewardContainerUI;
+    [SerializeField] private RewardContainerUI []_rewardContainerUI;
     [SerializeField] private RectTransform _rewardContainerRectTransform;
     [SerializeField] private float _overrideScaleFactor = 1;
     [SerializeField] private UnityEvent _onClaimedReward;
-    [ReadOnly, SerializeField]
+    [ReadOnly,SerializeField]
     private int _currentDay; // Set by DailyRewardManager
-    [ReadOnly, SerializeField]
+    [ReadOnly,SerializeField]
     private bool _rewardCollected;
     private bool _pastDay = false;
     private const string RewardCollectedKey = "RewardCollected_Day";
@@ -35,7 +34,7 @@ public class RewardCard : MonoBehaviour
 
     private void Awake()
     {
-        SignalBus.Subscribe<OnDailyRewardClaim>((_) => OnClaimRewardButtonClicked());
+        SignalBus.Subscribe<OnDailyRewardClaim>((_)=>OnClaimRewardButtonClicked());
         SignalBus.Subscribe<OnShowDailyRewardPopUpEffect>(OnShowRewadPopBulk);
     }
 
@@ -71,14 +70,13 @@ public class RewardCard : MonoBehaviour
     }
 
 
-    [ReadOnly, SerializeField]
+    [ReadOnly,SerializeField]
     private DailyRewardData _rewardData;
 
     void RemoveExistingContainerElements()
     {
         if (_rewardContainerRectTransform.childCount == 0) return;
-        foreach (Transform child in _rewardContainerRectTransform)
-        {
+        foreach (Transform child in _rewardContainerRectTransform) {
             GameObject.Destroy(child.gameObject);
         }
     }
@@ -89,13 +87,13 @@ public class RewardCard : MonoBehaviour
             _dayText.text = rewardData._dayText;
 
         //RemoveExistingContainerElements();
-
+    
         for (int i = 0; i < rewardData._progressModels.Length; i++)
         {
             RewardContainerUI _dataContainer = _rewardContainerUI[i];//Instantiate(_rewardContainerUI,_rewardContainerRectTransform);
             _dataContainer.transform.parent = _rewardContainerRectTransform;
-            _dataContainer.transform.localScale = Vector3.one * _overrideScaleFactor;
-            _dataContainer.Init(rewardData._progressModels[i]._rewardIcon, rewardData._progressModels[i].rewardChestAmount);
+            _dataContainer.transform.localScale = Vector3.one* _overrideScaleFactor;
+            _dataContainer.Init(rewardData._progressModels[i]._rewardIcon,rewardData._progressModels[i].rewardChestAmount);
             _dataContainer.gameObject.SetActive(true);
         }
         _day = rewardData._currentDay;
@@ -143,20 +141,20 @@ public class RewardCard : MonoBehaviour
     void SendAnalyticEvent()
     {
         int currentWeekDay = GlobalService.GameData.Data.CurrentDailyRewardWeek;
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,
-            "Events", nameof(AnalyticEventType.DailyRewards),
-            "Week", currentWeekDay.ToString(),
-            "Day", _day.ToString());
-        if (_day == 7)
-        {
-            ++GlobalService.GameData.Data.CurrentDailyRewardWeek;
-            GlobalService.GameData.Save();
-        }
+            GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,
+                "Events",nameof(AnalyticEventType.DailyRewards),
+                "Week "+ currentWeekDay.ToString(),
+                "Day "+_day.ToString());
+            if (_day == 7)
+            {
+                ++GlobalService.GameData.Data.CurrentDailyRewardWeek;
+                GlobalService.GameData.Save();
+            }
         Debug.Log("Analytic Event Send :: Daily Reward");
     }
-    void OnShowCommandDisabled()
+    void  OnShowCommandDisabled()
     {
-        PopCommandExecutionResponder.RemoveCommand<DailyRewardShowCommand>();
+       PopCommandExecutionResponder.RemoveCommand<DailyRewardShowCommand>();
     }
     void OnClaimReward(DailyRewardData _currentRewardProgressData)
     {
@@ -165,36 +163,36 @@ public class RewardCard : MonoBehaviour
         IBulkPopService _bulkPopService = GlobalService.IBulkPopService;
         foreach (var _reward in _currentRewardProgressData._progressModels)
         {
-            UniStatics.LogInfo("showing reward of type :: " + _reward.rewardType);
+            Debug.LogError("showing reward of type :: "+_reward.rewardType);
             switch (_reward.rewardType)
             {
                 case WeeklyRewardType.None:
                     break;
                 case WeeklyRewardType.Hammer:
                     //_gameData.Data.Hammer += _reward.rewardChestAmount;
-                    _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Hammer, transform.position, 3, OnShowCommandDisabled);
+                    _bulkPopService.PlayEffect(_reward.rewardChestAmount,PopBulkService.BulkPopUpServiceType.Hammer,transform.position, 3,OnShowCommandDisabled);
                     break;
                 case WeeklyRewardType.InfiniteHealth:
-                    _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Health, transform.position, 10, OnShowCommandDisabled);
+                      _bulkPopService.PlayEffect(_reward.rewardChestAmount,PopBulkService.BulkPopUpServiceType.Health,transform.position,10,OnShowCommandDisabled);
                     break;
                 case WeeklyRewardType.Coin:
-                    _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Coins, transform.position, 10, OnShowCommandDisabled);
+                     _bulkPopService.PlayEffect(_reward.rewardChestAmount,PopBulkService.BulkPopUpServiceType.Coins,transform.position,10,OnShowCommandDisabled);
                     break;
                 case WeeklyRewardType.PremiumCoin:
                     _gameData.Data.PremiumCoins += _reward.rewardChestAmount;
                     break;
                 case WeeklyRewardType.MagicWand:
                     //_gameData.Data.Wand += _reward.rewardChestAmount;
-                    _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Wand, transform.position, 4, OnShowCommandDisabled);
+                    _bulkPopService.PlayEffect(_reward.rewardChestAmount,PopBulkService.BulkPopUpServiceType.Wand,transform.position, 4,OnShowCommandDisabled);
                     break;
                 case WeeklyRewardType.Magnet:
                     //_gameData.Data.Magnets += _reward.rewardChestAmount;
-                    _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Magnets, transform.position, 4, OnShowCommandDisabled);
+                    _bulkPopService.PlayEffect(_reward.rewardChestAmount,PopBulkService.BulkPopUpServiceType.Magnets,transform.position, 4,OnShowCommandDisabled);
 
                     break;
                 case WeeklyRewardType.PopTreasureBox:
                     //_gameData.Data.SlotPopper += _reward.rewardChestAmount;
-                    _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.SlotPopper, transform.position, 4, OnShowCommandDisabled);
+                    _bulkPopService.PlayEffect(_reward.rewardChestAmount,PopBulkService.BulkPopUpServiceType.SlotPopper,transform.position, 4,OnShowCommandDisabled);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -276,7 +274,7 @@ public class RewardCard : MonoBehaviour
 
     private void SaveCollectedState()
     {
-        UniStatics.LogInfo("reward collected :: for day : " + _day + _rewardCollected);
+        Debug.LogError("reward collected :: for day : " + _day + _rewardCollected);
         PlayerPrefs.SetInt(RewardCollectedKey + _day, _rewardCollected ? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -293,7 +291,7 @@ public class RewardCard : MonoBehaviour
 
     private void OnDestroy()
     {
-        SignalBus.Unsubscribe<OnDailyRewardClaim>((_) => OnClaimRewardButtonClicked());
+        SignalBus.Unsubscribe<OnDailyRewardClaim>((_)=>OnClaimRewardButtonClicked());
         SignalBus.Unsubscribe<OnShowDailyRewardPopUpEffect>(OnShowRewadPopBulk);
 
     }

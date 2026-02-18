@@ -112,7 +112,11 @@ public class WeeklyRewardCard : MonoBehaviour
 
     void SendAnalyticEvent()
     {
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.AchievementEvent), "Day",_currentday.ToString(),"AchievementName",_missionProgress.Mission._text);
+        GameAnalytics.PublishAnalytic(
+            AnalyticEventType.GameData,"Events",
+            nameof(AnalyticEventType.AchievementEvent), 
+            "Day "+_currentday.ToString(),
+            _missionProgress.Mission._text);
     }
     public void OnCollectButtonPressed()
     {

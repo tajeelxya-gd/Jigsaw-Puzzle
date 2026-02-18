@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using TMPro;
-using UniTx.Runtime;
 using UnityEngine;
 
 public class DailyRewardTimer : MonoBehaviour
@@ -60,8 +59,8 @@ public class DailyRewardTimer : MonoBehaviour
 
         int daysPassed = (today - lastClaimDate).Days;
 
-        UniStatics.LogInfo("days passed :: " + _currentDay + " " + daysPassed);
-        return (_currentDay - 1) + Mathf.Max(0, daysPassed);
+        Debug.LogError("days passed :: "+_currentDay+" "+daysPassed);
+        return (_currentDay-1) + Mathf.Max(0, daysPassed);
     }
 
     // =========================================================

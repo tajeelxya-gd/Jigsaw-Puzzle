@@ -9,7 +9,6 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Monetization.Runtime.RemoteConfig;
 using Monetization.Runtime.Ads;
-using UniTx.Runtime;
 
 namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 {
@@ -332,13 +331,13 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             }
 
             _hasReported = true;
-            UniStatics.LogInfo("Reporting mission objectives");
+            Debug.LogError("Reporting mission objectives");
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.WinStreak, Amount = 1 });
         }
 
         private void PlayWinSequence()
         {
-            UniStatics.LogInfo("Playing Win sequence");
+            Debug.LogError("Playing Win sequence");
 
             GameData _gameData = GlobalService.GameData;
             GetLevelData(_currentPlayedLevel);
@@ -355,7 +354,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 if ((currentPlayedLevel + 1) >= (int)OnBoardingConfig.OnBoardingType.LeaderBoard)
                 {
                     _gameData.Data.IsLeaderBoardUnlocked = true;
-                    UniStatics.LogInfo("LeaderBoard Unlocked!!");
+                    Debug.LogError("LeaderBoard Unlocked!!");
                 }
             _yourRewardObj.SetActive(!_gameData.Data.IsLeaderBoardUnlocked);
             _trophyRewardObject.gameObject.SetActive(_gameData.Data.IsLeaderBoardUnlocked);

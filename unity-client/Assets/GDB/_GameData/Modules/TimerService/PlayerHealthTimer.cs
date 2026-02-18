@@ -3,7 +3,6 @@ using System.Globalization;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
-using UniTx.Runtime;
 using UnityEngine;
 
 public enum PlayerHealthTimerType
@@ -67,7 +66,7 @@ public class PlayerHealthTimer : MonoBehaviour
             {
                 timeService_resetHealthTimer.StartTimer(resetHealthTimeInSec);
                 gameData.Data.PreviousHealthResetTime = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
-                UniStatics.LogInfo("reset Timer start set successfully");
+                Debug.LogError("reset Timer start set successfully");
                 gameData.Save();
             }
             //timeService_resetHealthTimer.StartTimer(1500);
@@ -132,7 +131,7 @@ public class PlayerHealthTimer : MonoBehaviour
     {
         Debug.Log("Reset Timer has ended!");
         int totalLives = gameData.Data.AvailableLives;
-
+        
         if (totalLives < 5)
         {
             if (DateTime.TryParse(gameData.Data.PreviousHealthResetTime, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime savedTime))
@@ -140,7 +139,7 @@ public class PlayerHealthTimer : MonoBehaviour
                 double secondsPassed = (DateTime.UtcNow - savedTime).TotalSeconds;
                 Debug.Log("Total Seconds Passed Since Last Save: " + secondsPassed);
                 int livesToAdd = Mathf.FloorToInt((float)(secondsPassed / resetHealthTimeInSec));
-                livesToAdd = Mathf.Clamp(livesToAdd, 1, 5 - totalLives);
+                livesToAdd = Mathf.Clamp(livesToAdd, 1, 5 - totalLives); 
                 gameData.Data.AvailableLives += livesToAdd;
                 gameData.Data.AvailableLives = Mathf.Clamp(gameData.Data.AvailableLives, 0, 5);
                 Debug.Log($"Added {livesToAdd} lives based on time elapsed.");
@@ -182,10 +181,10 @@ public class PlayerHealthTimer : MonoBehaviour
     {
         SaveTimer();
     }
-
+    
     [Button]
     public void Test(int time)
     {
-        SignalBus.Publish(new OnHealthUpdateSignal() { TimeToAdd = time });
+        SignalBus.Publish(new OnHealthUpdateSignal(){ TimeToAdd = time });
     }
 }

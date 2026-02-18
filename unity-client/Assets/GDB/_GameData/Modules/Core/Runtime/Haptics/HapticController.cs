@@ -1,5 +1,4 @@
 using Lofelt.NiceVibrations;
-using UniTx.Runtime;
 using UnityEngine;
 public static class HapticController
 {
@@ -15,7 +14,7 @@ public static class HapticController
 
         if (Lofelt.NiceVibrations.HapticController.Init())
             _supportAdvanceHaptics = true;
-        UniStatics.LogInfo("Device Vibration " + Lofelt.NiceVibrations.HapticController.Init());
+        Debug.LogError("Device Vibration " + Lofelt.NiceVibrations.HapticController.Init());
     }
 
     public static void Vibrate(HapticPatterns.PresetType presetType)

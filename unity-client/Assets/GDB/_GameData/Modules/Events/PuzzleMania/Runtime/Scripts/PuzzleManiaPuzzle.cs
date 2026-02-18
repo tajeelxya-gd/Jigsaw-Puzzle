@@ -3,12 +3,10 @@ using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
-using UniTx.Runtime;
 
 public class PuzzleManiaPuzzle : MonoBehaviour
 {
-    [Header("All Puzzles")]
-    [SerializeField]
+    [Header("All Puzzles")] [SerializeField]
     private FullPuzzleData[] _puzzles;
 
     private DataBaseService<PuzzleCompleteSave> _puzzleSaveData;
@@ -22,7 +20,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
 
     private void Init()
     {
-        //UniStatics.LogInfo("HEREEEEEEEEEEEEEEEJKFAHSDKFJHAJSKDHFJKLA");
+        //Debug.LogError("HEREEEEEEEEEEEEEEEJKFAHSDKFJHAJSKDHFJKLA");
         if (_puzzleData != null)
         {
             //return;
@@ -106,9 +104,9 @@ public class PuzzleManiaPuzzle : MonoBehaviour
             if (x < _puzzleData._piecesUnlocked.Length)
             {
                 _puzzles[x]._piecesUnlocked = _puzzleData._piecesUnlocked[x];
-                //UniStatics.LogInfo("cOMING HERE IN ASSIGNING SPRITES");
+                //Debug.LogError("cOMING HERE IN ASSIGNING SPRITES");
             }
-
+            
             if (x < _puzzleData._piecesAnimated.Length)
             {
                 _puzzles[x]._hasAnimated = _puzzleData._piecesAnimated[x]._piecesAnimated;
@@ -150,7 +148,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
     {
         _shouldPlayAnimation = signal._playAnimation;
     }
-    [SerializeField] private PuzzleHandler _puzzleHandler;
+[SerializeField] private PuzzleHandler _puzzleHandler;
     private void OnPanelOpen(PuzzleRewardGiven signal)
     {
         if (!_shouldPlayAnimation) return;
@@ -179,11 +177,11 @@ public class PuzzleManiaPuzzle : MonoBehaviour
             if (i >= puzzle._hasAnimated.Length || puzzle._hasAnimated[i])
             {
                 puzzle._puzzlePieces[i].sprite = puzzle._unlockedPuzzle[i];
-                // UniStatics.LogInfo("COMING HERE IN HAS ANIMATED IF CONDITION");
+               // Debug.LogError("COMING HERE IN HAS ANIMATED IF CONDITION");
                 continue;
             }
 
-            //UniStatics.LogInfo("Coming here for puzzle Animation");
+            //Debug.LogError("Coming here for puzzle Animation");
             yield return _wait;
             invisibleLayer.SetActive(true);
             SignalBus.Publish(new PuzzleManiaBreakAnimationSignal
@@ -252,7 +250,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
                 {
                     _puzzleData._puzzlesCompleted[puzzleIndex] = true;
                     _puzzleSaveData.Save(_puzzleData);
-                    UniStatics.LogInfo("PUZZLE COMPLETED INDEX: " + puzzleIndex);
+                    Debug.LogError("PUZZLE COMPLETED INDEX: " + puzzleIndex);
                 }
             }
         }
@@ -347,7 +345,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
     public void ResetPuzzle()
     {
         Init();
-        //UniStatics.LogInfo("RESET FUNCTION CALLED");
+        //Debug.LogError("RESET FUNCTION CALLED");
 
         // Reset Visuals
         for (int x = 0; x < _puzzles.Length; x++)
@@ -420,6 +418,6 @@ public class PuzzlePieceAnimationData
     public bool[] _piecesAnimated;
 }
 
-public class PuzzleRewardGiven : ISignal
+public class PuzzleRewardGiven:ISignal
 {
 }

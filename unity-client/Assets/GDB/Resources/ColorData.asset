@@ -104,7 +104,7 @@ MonoBehaviour:
       material: {fileID: 2100000, guid: 6d80f5ff8e9e17a4ea6500d3ab947140, type: 2}
     - enemyType: 1
       material: {fileID: 2100000, guid: 7032ec91e19e7d04181f2bee634291e3, type: 2}
-  - color: {r: 0.7490196, g: 0.13333334, b: 0.34901962, a: 1}
+  - color: {r: 0.6509434, g: 0.107467055, b: 0.3469175, a: 1}
     colorType: 14
     materialData:
     - enemyType: 0

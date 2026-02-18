@@ -1,5 +1,4 @@
 using System;
-using UniTx.Runtime;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
@@ -32,10 +31,10 @@ public class UIController : MonoBehaviour
         _winScreen.ShowScreen<LevelType>(signal.levelType);
     }
 
-    void OnLevelFail(ISignal signal)
+    void OnLevelFail(OnlevelFailSignal signal)
     {
-        UniStatics.LogInfo("LEVEL FAILED");
-        _loseScreen.ShowScreen();
+        //Debug.LogError("LEVEL FAILED");
+        _loseScreen.ShowScreen<LevelFailType>(signal.levelFailType);
     }
 
     private void OnDestroy()

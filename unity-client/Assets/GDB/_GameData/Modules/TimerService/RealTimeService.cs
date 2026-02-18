@@ -113,7 +113,38 @@ public class RealTimeService : ITimeService
 
     public void DeleteTimerFile()
     {
-        throw new NotImplementedException();
+        isRunning = false;
+        pendingCompletion = false;
+        completionConsumed = true;
+
+        endTime = DateTime.MinValue;
+
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to delete timer file: {e.Message}");
+        }
+    }
+
+
+    public void EndTimer()
+    {
+        if (!isRunning && !pendingCompletion)
+            return;
+
+        isRunning = false;
+        pendingCompletion = false;
+        completionConsumed = true;
+
+        endTime = DateTime.MinValue;
+
+        SaveTimer();
     }
 
     private void LoadTimer()

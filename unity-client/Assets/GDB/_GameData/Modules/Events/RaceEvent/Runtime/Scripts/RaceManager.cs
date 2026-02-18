@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +28,7 @@ public class RaceManager : MonoBehaviour
     private int _levelAtEventStart = 1;
     private int _currentLevel;
     private bool _raceStart = false;
+    private bool _hasRaceEventEnded = false;
 
     [SerializeField] private Button _findOpponentButton;
     private WaitForSeconds _startWait = new WaitForSeconds(0.5f);
@@ -41,6 +41,7 @@ public class RaceManager : MonoBehaviour
         _eventDataService = new DataBaseService<EventData>();
         _eventData = _eventDataService.Load_Get();
         _findOpponentButton.onClick.AddListener(OpenSearchingPanel);
+        
         if (_eventData == null)
         {
             _eventData = new EventData();
@@ -54,6 +55,7 @@ public class RaceManager : MonoBehaviour
         _levelAtEventStart = _eventData._levelAtEventStart;
         _raceStart = _eventData.raceStart;
         yield return _startWait;
+        
 
         if (_isEventActive)
         {
@@ -75,16 +77,18 @@ public class RaceManager : MonoBehaviour
             _carTypeGetter[i] = _racers[i].GetComponent<IGetCarType>();
         }
 
-        UniStatics.LogInfo("_levelAtEventStart:" + _levelAtEventStart);
-        UniStatics.LogInfo("Current level:" + _currentLevel);
-        if (!_isEventActive)
+        Debug.LogError("_levelAtEventStart:" + _levelAtEventStart);
+        Debug.LogError("Current level:" + _currentLevel);
+        if (!_isEventActive  && _currentLevel > (int)OnBoardingConfig.OnBoardingType.TheGreatRace)
+        {
+            EndEvent(null);
             yield break;
-
+        }
         int temp = _currentLevel - _levelAtEventStart;
         int _wonLevels = Mathf.Clamp(temp, 0, 5);
         for (int i = 0; i < _wonLevels; i++)
         {
-            UniStatics.LogInfo("Signal Sent");
+            Debug.LogError("Signal Sent");
             SignalBus.Publish(new LevelWin());
             _levelAtEventStart = _currentLevel;
             _eventData._levelAtEventStart = _levelAtEventStart;
@@ -103,8 +107,8 @@ public class RaceManager : MonoBehaviour
             {
                 GameStateGlobal.GreatRaceRequestedAlready = true;
                 _startRaceInfoPanel.gameObject.SetActive(true);
-                DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
-
+                DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
+                
             }));
     }
 
@@ -114,7 +118,7 @@ public class RaceManager : MonoBehaviour
         AudioController.PlaySFX(AudioType.PanelClose);
         PopCommandExecutionResponder.RemoveCommand<OnShowGreatRaceInfoCommand>();
     }
-
+    
     private void OnDestroy()
     {
         SignalBus.Unsubscribe<WinCheck>(CheckWinner);
@@ -129,6 +133,9 @@ public class RaceManager : MonoBehaviour
             if (wins == _totalWinsToWin)
             {
                 _aiManager.StopAutoAI();
+                _isEventActive = false;
+                _eventData.isEventActive = _isEventActive;
+                _eventDataService.Save(_eventData);
                 StartCoroutine(OpenWinFailPanelAfterDelay(2f));
             }
         }
@@ -157,11 +164,11 @@ public class RaceManager : MonoBehaviour
         _levelAtEventStart = GlobalService.GameData.Data.LevelNumber;
         _eventData._levelAtEventStart = _levelAtEventStart;
         _eventData.raceStart = _raceStart;
-        UniStatics.LogInfo("Level at start:" + _levelAtEventStart);
+        Debug.LogError("Level at start:" + _levelAtEventStart);
         _eventDataService.Save(_eventData);
         SignalBus.Publish(new OnRaceEventStartSignal());
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.RaceEvent), "Start");
-
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.RaceEvent), "Start");
+        
     }
 
     void PublishOnMissionCompleteSignal()
@@ -188,7 +195,7 @@ public class RaceManager : MonoBehaviour
 
     public void OpenSearchingPanel()
     {
-        UniStatics.LogInfo("ENTER RACE OH YEAH");
+        Debug.LogError("ENTER RACE OH YEAH");
         _searchingPanel.SetActive(true);
         Reset();
         StartEvent();
@@ -202,9 +209,9 @@ public class RaceManager : MonoBehaviour
         HapticController.Vibrate(HapticType.Btn);
         _mainPanel.SetActive(true);
         _panelScaling.ScaleIn();
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.RaceEvent), "Shown");
-
-
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.RaceEvent), "Shown");
+        
+        
     }
 
     public void ClosePanel()
@@ -214,16 +221,16 @@ public class RaceManager : MonoBehaviour
         _panelScaling.ScaleOut();
         StartCoroutine(CloseAfterDelay());
         CloseOnBoardingCommandIfYes();
-
+        
     }
-
+    
     void CloseOnBoardingCommandIfYes()
     {
         Debug.Log("CloseOnBoardingCommandIfYes :: " + PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>());
-        // if (PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>())
-        //  {
-        PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
-        // }
+       // if (PopCommandExecutionResponder.HasCommand<OnBoardingMenuCommand>())
+      //  {
+            PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
+       // }
     }
 
     private IEnumerator CloseAfterDelay()

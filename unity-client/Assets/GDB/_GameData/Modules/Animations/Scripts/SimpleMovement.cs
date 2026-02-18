@@ -4,9 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
-using UniTx.Runtime;
-
-public class SimpleMovement : MonoBehaviour, IMenuScreen
+public class SimpleMovement : MonoBehaviour,IMenuScreen
 {
     [SerializeField] private GameObject _screenRoot;
     [SerializeField] private Transform _endPosition;
@@ -27,7 +25,7 @@ public class SimpleMovement : MonoBehaviour, IMenuScreen
     }
 
     [Button]
-    public void Move(UnityAction callBack, Transform overrideTransform = null)
+    public void Move(UnityAction callBack ,Transform overrideTransform = null)
     {
         ShowScreen(true);
         Sequence seq = DOTween.Sequence();
@@ -37,7 +35,7 @@ public class SimpleMovement : MonoBehaviour, IMenuScreen
         {
             seq.Append(transform.DOMove(overrideTransform.position, _duration).OnComplete(() =>
             {
-                if (callBack != null)
+                if(callBack != null)
                     callBack?.Invoke();
             }));
             return;
@@ -52,9 +50,9 @@ public class SimpleMovement : MonoBehaviour, IMenuScreen
 
         seq.Append(_tween = transform.DOMove(_endPosition.position, _duration));
         _onComplete?.Invoke();
-        UniStatics.LogInfo(gameObject.name + " moving to default Position");
-
-
+        Debug.LogError(gameObject.name +" moving to default Position");
+        
+        
     }
 
     public bool IsActive() => _screenRoot.activeInHierarchy;
@@ -66,19 +64,19 @@ public class SimpleMovement : MonoBehaviour, IMenuScreen
 
     public void ResetMove()
     {
-        transform.DOMove(_startPosition, _duration).OnComplete(() => ShowScreen(false));
+        transform.DOMove(_startPosition, _duration).OnComplete(()=> ShowScreen(false));
         _onComplete?.Invoke();
-
-        UniStatics.LogInfo(gameObject.name + " moving to default Position");
-
+       
+        Debug.LogError(gameObject.name +" moving to default Position");
+        
     }
 
     public void ShowScreen(bool status)
     {
         if (_screenRoot == null) return;
         _screenRoot.gameObject.SetActive(status);
-
-        if (status)
-            DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
+        
+        if(status)
+            DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
     }
 }

@@ -44,6 +44,7 @@ public class GameData
         public bool BackFromWin = false;
         public string PreviousHealthResetTime;
         public int CurrentDailyRewardWeek = 1;
+        public int CurrentInterstitialCount = 0;
         public int CurrentAchievementRewardWeek = 1;
     }
 }

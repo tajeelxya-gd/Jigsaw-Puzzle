@@ -1,5 +1,4 @@
 using System;
-using UniTx.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,24 +13,23 @@ public class LeaderBoardLeagueSelectorUI : MonoBehaviour
     {
         for (int i = 0; i < selectorButtons.Length; i++)
         {
-            int index = i;
-
-            selectorButtons[i].GetComponent<Button>().onClick.AddListener(() =>
-            {
+            int index = i; 
+        
+            selectorButtons[i].GetComponent<Button>().onClick.AddListener(() => 
+            { 
                 OnSelected(index); // Use the local copy
             });
         }
-
+    
         OnSelected(0);
     }
 
     void OnSelected(int id)
     {
-        UniStatics.LogInfo("ON Selected :: " + id);
-        for (int i = 0; i < selectorButtons.Length; i++)
-        {
+        Debug.LogError("ON Selected :: "+id);
+        for (int i = 0; i < selectorButtons.Length; i++){
             selectorButtons[i].OnSelected(i == id);
-            selectorButtons[i].GetComponent<Image>().sprite = i == id ? selectedSprite : unselectedSprite;
+            selectorButtons[i].GetComponent<Image>().sprite = i == id ?  selectedSprite : unselectedSprite;
         }
     }
 }

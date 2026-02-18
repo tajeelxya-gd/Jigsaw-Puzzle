@@ -4,12 +4,11 @@ using Monetization.Runtime.Ads;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
-using UniTx.Runtime;
 
 [CreateAssetMenu(fileName = "InAppOffer", menuName = "Scriptable Objects/InAppOffer")]
 public class InAppOfferData : ScriptableObject
 {
-    private const string KEY = "IAP-OFFERS";
+    private  const string KEY = "IAP-OFFERS";
     public string OfferName => offerName;
     [SerializeField] private string offerName;
     [Title("InApp-Key")]
@@ -18,10 +17,10 @@ public class InAppOfferData : ScriptableObject
     [Title("Consumeable")]
     [SerializeField] private bool _isConsumeable = false;
     public bool IsConsumeable => _isConsumeable;
-
+    
     [Title("Remove Ad")]
     [SerializeField] private bool _isRemoveAd = false;
-    public bool IsRemoveAd => _isRemoveAd;
+    public  bool IsRemoveAd => _isRemoveAd;
     [Title("Other Offers")]
     [SerializeField] private RewardProgressModelView[] _allOffersRewards;
 
@@ -62,56 +61,56 @@ public class InAppOfferData : ScriptableObject
     }
 
 
-    private void ProcessReward(RewardProgressModelView reward, IBulkPopService bulkPop, GameData data, Vector2 center)
+private void ProcessReward(RewardProgressModelView reward, IBulkPopService bulkPop, GameData data, Vector2 center)
+{
+    int amount = reward.rewardChestAmount;
+    Debug.LogError("IAP Purchase Executing");
+    switch (reward.rewardType)
     {
-        int amount = reward.rewardChestAmount;
-        UniStatics.LogInfo("IAP Purchase Executing");
-        switch (reward.rewardType)
-        {
-            case WeeklyRewardType.Hammer:
-                HandlePowerup(PowerupType.Hammer, PopBulkService.BulkPopUpServiceType.Hammer, amount, center, 3);
-                break;
-            case WeeklyRewardType.MagicWand:
-                HandlePowerup(PowerupType.MagicWand, PopBulkService.BulkPopUpServiceType.Wand, amount, center, 4);
-                break;
-            case WeeklyRewardType.Magnet:
-                HandlePowerup(PowerupType.Magnet, PopBulkService.BulkPopUpServiceType.Magnets, amount, center, 4);
-                break;
-            case WeeklyRewardType.PopTreasureBox:
-                HandlePowerup(PowerupType.SlotPopper, PopBulkService.BulkPopUpServiceType.SlotPopper, amount, center, 4);
-                break;
-            case WeeklyRewardType.InfiniteHealth:
-                if (IsGameScene()) { SignalBus.Publish(new OnHealthUpdateSignal() { TimeToAdd = amount }); break; }
-                bulkPop.PlayEffect(amount, PopBulkService.BulkPopUpServiceType.Health, center, 10);
-                break;
-            case WeeklyRewardType.Coin:
-                UniStatics.LogInfo("adding coins effect");
-                if (IsGameScene()) { SignalBus.Publish(new AddCoinsSignal { IsAdd = true, Amount = amount }); break; }
-                bulkPop.PlayEffect(amount, PopBulkService.BulkPopUpServiceType.Coins, center, 10);
-                break;
-            case WeeklyRewardType.PremiumCoin:
-                data.Data.PremiumCoins += amount;
-                break;
-            case WeeklyRewardType.None:
-                break;
-            default:
-                Debug.LogWarning($"Unhandled reward type: {reward.rewardType}");
-                break;
-        }
-
+        case WeeklyRewardType.Hammer:
+            HandlePowerup(PowerupType.Hammer, PopBulkService.BulkPopUpServiceType.Hammer, amount, center, 3);
+            break;
+        case WeeklyRewardType.MagicWand:
+            HandlePowerup(PowerupType.MagicWand, PopBulkService.BulkPopUpServiceType.Wand, amount, center, 4);
+            break;
+        case WeeklyRewardType.Magnet:
+            HandlePowerup(PowerupType.Magnet, PopBulkService.BulkPopUpServiceType.Magnets, amount, center, 4);
+            break;
+        case WeeklyRewardType.PopTreasureBox:
+            HandlePowerup(PowerupType.SlotPopper, PopBulkService.BulkPopUpServiceType.SlotPopper, amount, center, 4);
+            break;
+        case WeeklyRewardType.InfiniteHealth:
+            if(IsGameScene()){ SignalBus.Publish(new OnHealthUpdateSignal(){TimeToAdd= amount }); break; }
+            bulkPop.PlayEffect(amount, PopBulkService.BulkPopUpServiceType.Health, center, 10);
+            break;
+        case WeeklyRewardType.Coin:
+            Debug.LogError("adding coins effect");
+            if(IsGameScene()){ SignalBus.Publish(new AddCoinsSignal{IsAdd = true,Amount =amount }); break; }
+            bulkPop.PlayEffect(amount, PopBulkService.BulkPopUpServiceType.Coins, center, 10);
+            break;
+        case WeeklyRewardType.PremiumCoin:
+            data.Data.PremiumCoins += amount;
+            break;
+        case WeeklyRewardType.None:
+            break;
+        default:
+            Debug.LogWarning($"Unhandled reward type: {reward.rewardType}");
+            break;
     }
+    
+}
 
-    private void HandlePowerup(PowerupType pType, PopBulkService.BulkPopUpServiceType vfxType, int amount, Vector2 center, int effectCount)
+private void HandlePowerup(PowerupType pType, PopBulkService.BulkPopUpServiceType vfxType, int amount, Vector2 center, int effectCount)
+{
+    if (IsGameScene())
     {
-        if (IsGameScene())
-        {
-            SignalBus.Publish(new PowerUpAddSignal { powerupType = pType, Amount = amount });
-        }
-        else
-        {
-            GlobalService.IBulkPopService.PlayEffect(amount, vfxType, center, effectCount);
-        }
+        SignalBus.Publish(new PowerUpAddSignal { powerupType = pType, Amount = amount });
     }
+    else
+    {
+        GlobalService.IBulkPopService.PlayEffect(amount, vfxType, center, effectCount);
+    }
+}
 
     void BuyRemoveAd()
     {
@@ -122,17 +121,17 @@ public class InAppOfferData : ScriptableObject
 
     public bool IsOfferAvailable()
     {
-        return PlayerPrefs.GetInt(KEY + Id, 0) == 0;
+        return PlayerPrefs.GetInt(KEY+ Id, 0) == 0;
     }
 
     void SetBuyState()
     {
-        PlayerPrefs.SetInt(KEY + Id, 1);
+        PlayerPrefs.SetInt(KEY+ Id,1);
     }
-
+    
     bool IsGameScene()
     {
         return SceneManager.GetActiveScene().name == "Game";
     }
-
+    
 }

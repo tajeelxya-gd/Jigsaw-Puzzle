@@ -16,6 +16,7 @@ public class GameInitializer : MonoBehaviour
     [SerializeField] private int minLvlsRequireForGamePlay = 19;
     private float maxBarWidth;
     private const string ManuSceneName = "MainMenu";
+    private const string GameplaySceneName = "Game";
 
     private string sceneToLoad = "MainMenu";
     GameData gameData;
@@ -36,15 +37,15 @@ public class GameInitializer : MonoBehaviour
 
         fillBarRect.sizeDelta = new Vector2(0, fillBarRect.sizeDelta.y);
 
-#if !UNITY_EDITOR
+        #if !UNITY_EDITOR
         //Debug.unityLogger.logEnabled = false;
-#endif
+        #endif
     }
 
     private void Load()
     {
         gameData = GlobalService.GameData;
-        sceneToLoad = ManuSceneName;
+        sceneToLoad = gameData.Data.LevelNumber > minLvlsRequireForGamePlay ? ManuSceneName : GameplaySceneName;
         LoadGamePlay();
     }
 

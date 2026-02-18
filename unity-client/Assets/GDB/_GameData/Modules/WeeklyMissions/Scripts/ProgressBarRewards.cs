@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ProgressBarRewards : MonoBehaviour
 {
-    [SerializeField] RewardProgressHolder[] _rewardProgressHolder;
+    [SerializeField] RewardProgressHolder  []_rewardProgressHolder;
     private bool[] _claimed;
 
     private void Awake()
@@ -34,19 +33,19 @@ public class ProgressBarRewards : MonoBehaviour
         {
             if (!_claimed[i] && amount >= _rewardProgressHolder[i]._threshold)
             {
-                _claimed[i] = true;
+                _claimed[i] = true; 
                 SaveClaimedReward(i);
                 GiveReward(i);
             }
         }
     }
 
-
+   
     [Button("Test Reward")]
     private void GiveReward(int index)
     {
-        UniStatics.LogInfo($"Reward {index + 1} claimed!");
-        SignalBus.Publish(new OnShowRewardProgressSignal { RewardsData = _rewardProgressHolder[index] });
+        Debug.LogError($"Reward {index + 1} claimed!");
+        SignalBus.Publish(new OnShowRewardProgressSignal{RewardsData = _rewardProgressHolder[index]});
         // Add reward logic here
     }
 
@@ -86,7 +85,7 @@ public class RewardProgressHolder
     [Title("Progress")]
     [SerializeField] public RewardProgressModelView.RewardCrateType _rewardCrateType;
     [SerializeField] public int _threshold;
-    [SerializeField] public List<RewardProgressModelView> _rewards = new List<RewardProgressModelView>();
+    [SerializeField] public List<RewardProgressModelView>  _rewards = new List<RewardProgressModelView>();
 }
 
 [System.Serializable]
@@ -102,9 +101,9 @@ public class RewardProgressModelView
     [VerticalGroup("Row/Right")]
     [LabelText("Chest Amount")]
     public int rewardChestAmount;
-
-
-
-    public enum RewardCrateType { Blue, Purple, Yellow, Green }
-
+   
+    
+   
+    public enum  RewardCrateType{Blue,Purple,Yellow,Green}
+   
 }

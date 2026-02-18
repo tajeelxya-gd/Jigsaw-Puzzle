@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Monetization.Runtime.Ads;
 using UnityEngine;
 
 public class ExplicOffersController : MonoBehaviour
@@ -17,17 +18,25 @@ public class ExplicOffersController : MonoBehaviour
     }
     private const string RemoveAdsOfferName = "RemoveAds";
 
+    private int minAdIterationCount = 3;
+    bool HasValidAddSession()
+    {
+        GameData gameData = GlobalService.GameData;
+        if (gameData.Data.CurrentInterstitialCount == 0) return false;
+        return gameData.Data.CurrentInterstitialCount % minAdIterationCount == 0;
+    }
+    
     void ShowRemoveAdOfferIfAvailable()
     {
         if (!GameStateGlobal.AdShownSuccessfully) return;
-
         GameStateGlobal.AdShownSuccessfully = false;
+      
         var offer = explicOffer
             .FirstOrDefault(o => o.GetOfferName() == RemoveAdsOfferName);
 
-        if (offer == null || !offer.HasOffer())
-            return;
+        if (offer == null || !offer.HasOffer()) return;
 
+        if (!HasValidAddSession()) return;
         PopCommandExecutionResponder.AddCommand(
             new OnShowExplicitOfferCommand(
                 PopCommandExecutionResponder.PopupPriority.Critical,
@@ -39,6 +48,8 @@ public class ExplicOffersController : MonoBehaviour
                     });
                 })
         );
+      
+
     }
 
     void OnOfferClosed()

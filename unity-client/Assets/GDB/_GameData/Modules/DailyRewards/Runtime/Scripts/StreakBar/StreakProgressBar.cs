@@ -13,6 +13,7 @@ public class StreakProgressBar : MonoBehaviour
 
     public void ResetBar()
     {
-        _filledBar.fillAmount = 0;
+        _filledBar.DOFillAmount(0, _fillTimer);
+       // _filledBar.fillAmount = 0;
     }
 }

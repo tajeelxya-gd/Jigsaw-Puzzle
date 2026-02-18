@@ -1,7 +1,6 @@
 using System;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using UniTx.Runtime;
 using UnityEngine;
 
 public class InAppBoughtSuccessBoughtMessage : MonoBehaviour
@@ -16,13 +15,12 @@ public class InAppBoughtSuccessBoughtMessage : MonoBehaviour
 
     void OnInAppBoughtSuccessMessage(OnInAppSuccessFullyBought signal)
     {
-        UniStatics.LogInfo("showing inapp message");
+        Debug.LogError("showing inapp message");
         GameObject panelToShow = signal.IsSuccess ? _successPanel.gameObject : _failedPanel.gameObject;
-        DOVirtual.DelayedCall(1.5f, () =>
-        {
-            if (panelToShow != null)
+        DOVirtual.DelayedCall(1.5f, () => {
+            if (panelToShow != null) 
                 panelToShow.SetActive(true);
-        }).SetTarget(this);
+        }).SetTarget(this); 
         AudioController.PlaySFX(signal.IsSuccess ? AudioType.RewardPopUp : AudioType.PanelPop);
     }
 
@@ -35,7 +33,7 @@ public class InAppBoughtSuccessBoughtMessage : MonoBehaviour
     private void OnDisable()
     {
         SignalBus.Unsubscribe<OnInAppSuccessFullyBought>(OnInAppBoughtSuccessMessage);
-
+        
     }
 }
 

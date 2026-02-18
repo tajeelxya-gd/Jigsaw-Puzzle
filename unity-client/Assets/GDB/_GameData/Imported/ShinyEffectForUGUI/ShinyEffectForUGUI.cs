@@ -105,7 +105,7 @@ namespace Coffee.UIExtensions
 		{
 			graphic.material = effectMaterial;
 			base.OnEnable();
-			Play(3);
+			Play(3,AnimatorUpdateMode.UnscaledTime);
 		}
 
 		/// <summary>
@@ -204,7 +204,7 @@ namespace Coffee.UIExtensions
 		public void Play(float duration)
 		{
 			StopAllCoroutines();
-			StartCoroutine(CoPlay(duration, AnimatorUpdateMode.Normal));
+			StartCoroutine(CoPlay(duration, AnimatorUpdateMode.UnscaledTime));
 		}
 
 		/// <summary>
@@ -241,7 +241,7 @@ namespace Coffee.UIExtensions
 						: Time.deltaTime;
 					yield return null;
 				}
-				yield return new WaitForSeconds(1f);
+				yield return new WaitForSecondsRealtime(1f);
 			}
 		}
 

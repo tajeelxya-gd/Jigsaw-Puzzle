@@ -20,5 +20,10 @@
         {
             PlayerPrefs.DeleteKey(KEY+onBoardingType);
         }
+        
+        public static void SetUpOnBoardingDone(OnBoardingType onBoardingType)
+        {
+            PlayerPrefs.SetInt(KEY+onBoardingType, 1);
+        }
     }
 
