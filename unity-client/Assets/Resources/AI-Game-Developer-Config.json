@@ -406,5 +406,6 @@
   ],
   "host": "http://localhost:57964",
   "timeoutMs": 10000,
-  "keepConnected": true
+  "keepConnected": true,
+  "token": null
 }
