@@ -41,7 +41,7 @@ namespace Client.Runtime
             {
                 if (TryBeginDrag())
                 {
-                    BeginDragSequence();
+                    BeginDragSequence(false);
                 }
             }
 
@@ -78,7 +78,7 @@ namespace Client.Runtime
                 Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
                 InitializeDragMath(ray);
             }
-            BeginDragSequence();
+            BeginDragSequence(true);
         }
 
         private void InitializeDragMath(Ray ray)
@@ -93,11 +93,14 @@ namespace Client.Runtime
             }
         }
 
-        private void BeginDragSequence()
+        private void BeginDragSequence(bool applyOffset)
         {
             _isDragging = true;
-            _startPosition.x = _startHitPoint.x;
-            _startPosition.z = _startHitPoint.z + _startZOffset;
+            if (applyOffset)
+            {
+                _startPosition.x = _startHitPoint.x;
+                _startPosition.z = _startHitPoint.z + _startZOffset;
+            }
             _currentSmoothTarget = transform.position;
             OnDragStarted.Broadcast();
         }
