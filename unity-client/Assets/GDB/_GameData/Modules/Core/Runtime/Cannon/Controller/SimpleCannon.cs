@@ -15,9 +15,6 @@ public class SimpleCannon : Cannon, IMoveable, IRejection, ILink<Cannon>, IColor
     [SerializeField] private SkinnedMeshRenderer _meshFilter;
     [SerializeField][Range(0.1f, 3)] private float _animSpeed = 1;
 
-    [InfoBox("Outline")]
-    [SerializeField] private Outline _outline;
-
     [InfoBox("Visual")]
     [SerializeField] private TextMeshPro _amountVisualTxt;
     [SerializeField] private Renderer _renderer;
