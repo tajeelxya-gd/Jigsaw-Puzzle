@@ -19,11 +19,6 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private GameObject _racePanel;
     [SerializeField] private GameObject _winFailPanel;
     [SerializeField] private Transform _startPoint;
-    [SerializeField] private Image _headerImg;
-    [SerializeField] private Sprite _findOpponentHeaderSprite;
-    [SerializeField] private Sprite _raceHeaderSprite;
-    [SerializeField] private Sprite _winHeaderSprite;
-    [SerializeField] private Sprite _failHeaderSprite;
 
     private IGetWins[] _racersWins;
     private IGetCarType[] _carTypeGetter;
