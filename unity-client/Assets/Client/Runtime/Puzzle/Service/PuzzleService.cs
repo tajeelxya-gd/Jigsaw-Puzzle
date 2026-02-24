@@ -30,6 +30,10 @@ namespace Client.Runtime
         private JigsawBoard _board;
         private JigsawLevelData[] _levelsData;
 
+        public event Action<float> OnTimerTick;
+
+        public float RemainingTime => _winConditionChecker.RemainingTime;
+
         public Transform PuzzleRoot => _puzzleBoard;
 
         public Transform FrameMesh => _frameMesh;
@@ -46,9 +50,19 @@ namespace Client.Runtime
             _savedData = resolver.Resolve<IUserSavedData>();
         }
 
-        public void Initialise() => _winConditionChecker.OnWin += HandleOnWin;
+        public void Initialise()
+        {
+            _winConditionChecker.OnWin += HandleOnWin;
+            _winConditionChecker.OnLose += HandleOnLose;
+            _winConditionChecker.OnTimerTick += HandleOnTimerTick;
+        }
 
-        public void Reset() => _winConditionChecker.OnWin -= HandleOnWin;
+        public void Reset()
+        {
+            _winConditionChecker.OnWin -= HandleOnWin;
+            _winConditionChecker.OnLose -= HandleOnLose;
+            _winConditionChecker.OnTimerTick -= HandleOnTimerTick;
+        }
 
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
@@ -111,6 +125,15 @@ namespace Client.Runtime
             await _fullImageHandler.PlayLevelCompletedAnimationAsync(cToken);
             await UniWidgets.PushAsync<LevelCompletedWidget>();
         }
+
+        private void HandleOnLose() => UniTask.Void(HandleOnLoseAsync, default);
+
+        private async UniTaskVoid HandleOnLoseAsync(CancellationToken cToken = default)
+        {
+            await UniWidgets.PushAsync<RestartLevelWidget>();
+        }
+
+        private void HandleOnTimerTick(float time) => OnTimerTick?.Invoke(time);
 
         private int GetCurrentIdx() => Math.Clamp(_savedData.CurrentLevel, 0, _levelsData.Length - 1);
 

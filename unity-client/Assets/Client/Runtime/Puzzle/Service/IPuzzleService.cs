@@ -21,5 +21,8 @@ namespace Client.Runtime
         JigsawLevelData GetCurrentLevelData();
 
         JigsawLevelData GetNextLevelData();
+
+        float RemainingTime { get; }
+        event System.Action<float> OnTimerTick;
     }
 }

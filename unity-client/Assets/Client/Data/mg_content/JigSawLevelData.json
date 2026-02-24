@@ -9,7 +9,8 @@
       "cell_0_action_puzzle_mania",
       "cell_2_action_reward",
       "cell_11_action_puzzle_mania"
-    ]
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_2",

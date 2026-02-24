@@ -13,6 +13,7 @@ namespace Client.Runtime
         [SerializeField] private string _imageKey;
         [SerializeField] private int _difficulty;
         [SerializeField] private string[] _cellActionIds;
+        [SerializeField] private int _maxDuration;
 
         public string Id => _id;
         public string Name => _name;
@@ -20,5 +21,6 @@ namespace Client.Runtime
         public string ImageKey => _imageKey;
         public int Difficulty => _difficulty;
         public string[] CellActionIds => _cellActionIds;
+        public int MaxDuration => _maxDuration;
     }
 }

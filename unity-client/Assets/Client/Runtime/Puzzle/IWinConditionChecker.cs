@@ -7,6 +7,9 @@ namespace Client.Runtime
         event Action OnWin;
         event Action OnLose;
         event Action<float> OnAdvance;
+        event Action<float> OnTimerTick;
+
+        float RemainingTime { get; }
 
         bool CheckWin();
         bool CheckLose();
