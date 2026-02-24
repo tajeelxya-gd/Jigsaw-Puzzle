@@ -70,17 +70,19 @@ namespace Client.Runtime
         {
             _dragController.OffsetEnabled = true;
             IsOverTray = false;
-            if (Group.Count > 1) return;
             _renderer.OnTrayExit();
             _scaleController.ScaleTo(1f);
         }
 
-        public void OnEnterTray()
+        public void OnEnterTray(bool skipScale = false)
         {
             _dragController.OffsetEnabled = false;
             IsOverTray = true;
             if (Group.Count > 1) return;
             _renderer.OnTrayEnter();
+
+            if (skipScale) return;
+
             var scale = _puzzleService.GetCurrentBoard().Data.TrayScale;
             _scaleController.ScaleTo(scale);
         }

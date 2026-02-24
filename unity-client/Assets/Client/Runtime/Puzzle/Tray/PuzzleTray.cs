@@ -113,8 +113,9 @@ namespace Client.Runtime
                 _activePieces.Insert(Mathf.Clamp(targetIndex, 0, _activePieces.Count), piece);
                 piece.transform.SetParent(transform);
             }
+            piece.OnEnterTray(false); // false indicates it's submitted, not just hovered
             piece.Deselect();
-            _hoverPiece = null;
+            _hoverPiece = null; // Clear hover piece after submission
         }
 
         public UniTask DropPiecesAsync(CancellationToken cToken = default)
@@ -208,7 +209,7 @@ namespace Client.Runtime
 
             if (isOver && !_hoverPiece.IsOverTray)
             {
-                _hoverPiece.OnEnterTray();
+                _hoverPiece.OnEnterTray(true);
             }
             else if (!isOver && _hoverPiece.IsOverTray)
             {
@@ -222,8 +223,7 @@ namespace Client.Runtime
 
             Vector3 localAnchor = GetLocalMiddleLeftAnchor();
 
-            bool shouldShowInsertionSpace = (_hoverPiece != null &&
-                _hoverPiece.Group.Count == 1 && _hoverPiece.IsOverTray) || (_draggingPiece != null);
+            bool shouldShowInsertionSpace = _draggingPiece != null;
 
             int insertionIndex = shouldShowInsertionSpace ? GetInsertionIndex() : -1;
 
@@ -417,6 +417,7 @@ namespace Client.Runtime
         {
             _activePieces.Remove(piece);
             piece.transform.SetParent(null);
+            piece.OnExitTray();
             piece.StartManualDrag();
         }
 
