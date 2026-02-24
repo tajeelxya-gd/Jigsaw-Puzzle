@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -77,18 +78,16 @@ namespace Client.Runtime
             SetSpacing();
             if (pieces == null) return;
 
-            foreach (var p in pieces)
+            var shuffledList = pieces.OrderBy(x => Guid.NewGuid()).ToList();
+            _activePieces.Clear();
+            _activePieces.AddRange(shuffledList);
+
+            foreach (var p in _activePieces)
             {
-                p.OnEnterTray();
+                p.OnEnterTray(false);
                 p.transform.SetParent(transform);
                 p.gameObject.SetActive(true);
             }
-
-            var difficulty = _puzzleService.GetCurrentLevelData().Difficulty;
-            var sortedPieces = _sorter.Sort(pieces, difficulty);
-
-            _activePieces.Clear();
-            _activePieces.AddRange(sortedPieces);
 
             _scrollX = 0;
             _scrollVelocity = 0f;
@@ -150,7 +149,7 @@ namespace Client.Runtime
                 var group = piece.Group;
                 if (group.Count > 1) continue;
                 group.RemoveFromCurrentCells();
-                piece.OnEnterTray();
+                piece.OnEnterTray(false);
                 SubmitPiece(piece);
             }
         }

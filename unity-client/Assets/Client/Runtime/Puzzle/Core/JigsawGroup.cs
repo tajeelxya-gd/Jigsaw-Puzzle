@@ -150,6 +150,14 @@ namespace Client.Runtime
             }
         }
 
+        public void SetLayer(int layer)
+        {
+            foreach (var piece in this)
+            {
+                piece.Renderer.SetMeshLayer(layer);
+            }
+        }
+
         private void RemovePieceFromStack(JigsawBoardCell cell, JigsawPiece pieceToRemove)
         {
             // Use a temporary list to filter out the piece

@@ -102,6 +102,12 @@ namespace Client.Runtime
 
         public void SetShadowLayer(int layer) => _shadowProxy.gameObject.layer = layer;
 
+        public void SetMeshLayer(int layer)
+        {
+            _data.Mesh.gameObject.layer = layer;
+            _shadowProxy.gameObject.layer = layer;
+        }
+
         private async UniTaskVoid SetShadowAsync(Vector3 offset, float duration, CancellationToken cToken = default)
         {
             var targetX = offset.x;

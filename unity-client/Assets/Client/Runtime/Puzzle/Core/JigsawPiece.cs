@@ -72,16 +72,21 @@ namespace Client.Runtime
             IsOverTray = false;
             _renderer.OnTrayExit();
             _scaleController.ScaleTo(1f);
+            Group.SetLayer(LayerMask.NameToLayer("JigsawPiece"));
         }
 
-        public void OnEnterTray(bool skipScale = false)
+        public void OnEnterTray(bool isHover)
         {
             _dragController.OffsetEnabled = false;
             IsOverTray = true;
+
+            int layer = isHover ? LayerMask.NameToLayer("JigsawFullImage") : LayerMask.NameToLayer("JigsawPiece");
+            Group.SetLayer(layer);
+
             if (Group.Count > 1) return;
             _renderer.OnTrayEnter();
 
-            if (skipScale) return;
+            if (isHover) return;
 
             var scale = _puzzleService.GetCurrentBoard().Data.TrayScale;
             _scaleController.ScaleTo(scale);
@@ -162,6 +167,11 @@ namespace Client.Runtime
             {
                 _puzzleTray.SubmitPiece(this);
                 return;
+            }
+
+            if (IsOverTray)
+            {
+                OnExitTray();
             }
 
             Group.SetIdleShadow();
