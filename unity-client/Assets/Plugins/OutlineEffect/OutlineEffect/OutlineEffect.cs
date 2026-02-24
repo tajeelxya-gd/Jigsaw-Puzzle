@@ -16,10 +16,10 @@ namespace cakeslice
         public float lineThickness = 1.25f;
         [Range(0, 10)]
         public float lineIntensity = .5f;
-        
+
         [Range(0.01f, 1.0f)] // Changed range for better smoothstep control
         [Tooltip("Lower values make the outline softer/blurry. Higher values make it sharper.")]
-        public float lineSoftness = 0.5f; 
+        public float lineSoftness = 0.5f;
 
         [Range(0, 1)]
         public float fillAmount = 0.2f;
@@ -30,6 +30,7 @@ namespace cakeslice
 
         public bool additiveRendering = false;
         public bool backfaceCulling = true;
+        public bool useOcclusion = true;
 
         public Color fillColor = Color.blue;
         public bool useFillColor = false;
@@ -132,7 +133,8 @@ namespace cakeslice
             UpdateOutlineCameraFromSource();
 
             commandBuffer = new CommandBuffer();
-            outlineCamera.AddCommandBuffer(CameraEvent.BeforeImageEffects, commandBuffer);
+            commandBuffer.name = "Outline Effect";
+            sourceCamera.AddCommandBuffer(CameraEvent.AfterForwardOpaque, commandBuffer);
         }
 
         // Helper to ensure textures are created with AA and Filtering
@@ -146,7 +148,7 @@ namespace cakeslice
             renderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
             renderTexture.antiAliasing = aaSamples;
             renderTexture.filterMode = FilterMode.Bilinear; // Critical for smoothness
-            
+
             extraRenderTexture = new RenderTexture(sourceCamera.pixelWidth, sourceCamera.pixelHeight, 16, RenderTextureFormat.Default);
             extraRenderTexture.antiAliasing = aaSamples;
             extraRenderTexture.filterMode = FilterMode.Bilinear;
@@ -177,9 +179,18 @@ namespace cakeslice
 
             UpdateMaterialsPublicProperties();
             UpdateOutlineCameraFromSource();
-            
-            commandBuffer.SetRenderTarget(renderTexture);
+
             commandBuffer.Clear();
+            if (useOcclusion)
+            {
+                commandBuffer.SetRenderTarget(new RenderTargetIdentifier(renderTexture), BuiltinRenderTextureType.CameraTarget);
+                commandBuffer.ClearRenderTarget(false, true, Color.clear);
+            }
+            else
+            {
+                commandBuffer.SetRenderTarget(renderTexture);
+                commandBuffer.ClearRenderTarget(true, true, Color.clear);
+            }
 
             foreach (Outline outline in outlines)
             {
@@ -231,8 +242,9 @@ namespace cakeslice
                     }
                 }
             }
-
-            outlineCamera.Render();
+            // The command buffer is added to the sourceCamera and will be executed by it.
+            // No explicit camera render call is needed here.
+            // The command buffer is cleared at the beginning of this method.
         }
 
         private void OnEnable()
@@ -245,6 +257,14 @@ namespace cakeslice
             else
             {
                 foreach (Outline oL in o) { if (!outlines.Contains(oL)) outlines.Add(oL); }
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (sourceCamera != null && commandBuffer != null)
+            {
+                sourceCamera.RemoveCommandBuffer(CameraEvent.AfterForwardOpaque, commandBuffer);
             }
         }
 
@@ -274,7 +294,7 @@ namespace cakeslice
         {
             if (outlineShader == null) outlineShader = Resources.Load<Shader>("OutlineShader");
             if (outlineBufferShader == null) outlineBufferShader = Resources.Load<Shader>("OutlineBufferShader");
-            
+
             if (outlineShaderMaterial == null)
             {
                 outlineShaderMaterial = new Material(outlineShader);
@@ -328,7 +348,7 @@ namespace cakeslice
                 outlineShaderMaterial.SetColor("_LineColor1", lineColor0 * lineColor0);
                 outlineShaderMaterial.SetColor("_LineColor2", lineColor1 * lineColor1);
                 outlineShaderMaterial.SetColor("_LineColor3", lineColor2 * lineColor2);
-                
+
                 // Pass softness to shader
                 outlineShaderMaterial.SetFloat("_Softness", lineSoftness);
 
