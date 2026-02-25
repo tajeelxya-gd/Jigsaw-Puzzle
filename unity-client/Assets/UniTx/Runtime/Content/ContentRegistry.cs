@@ -7,6 +7,8 @@ namespace UniTx.Runtime.Content
     {
         private static readonly Dictionary<string, IDataLoader> _loaders = new();
 
+        public static void Clear() => _loaders.Clear();
+
         public static void Register<T>(string fileName)
             where T : class, IData
         {

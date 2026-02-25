@@ -1,62 +1,232 @@
 [
   {
-    "_id": "cell_0_action_puzzle_mania",
+    "_id": "cell_0_4x3_action_puzzle_mania",
     "_cellIdx": 0,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_1_action_puzzle_mania",
+    "_id": "cell_1_4x3_action_puzzle_mania",
     "_cellIdx": 1,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_2_action_puzzle_mania",
+    "_id": "cell_2_4x3_action_puzzle_mania",
     "_cellIdx": 2,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_3_action_puzzle_mania",
+    "_id": "cell_3_4x3_action_puzzle_mania",
     "_cellIdx": 3,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_4_action_puzzle_mania",
-    "_cellIdx": 4,
-    "_rewardAmount": 1
-  },
-  {
-    "_id": "cell_5_action_puzzle_mania",
+    "_id": "cell_5_4x3_action_puzzle_mania",
     "_cellIdx": 5,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_6_action_puzzle_mania",
+    "_id": "cell_6_4x3_action_puzzle_mania",
     "_cellIdx": 6,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_7_action_puzzle_mania",
-    "_cellIdx": 7,
-    "_rewardAmount": 1
-  },
-  {
-    "_id": "cell_8_action_puzzle_mania",
+    "_id": "cell_8_4x3_action_puzzle_mania",
     "_cellIdx": 8,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_9_action_puzzle_mania",
+    "_id": "cell_9_4x3_action_puzzle_mania",
     "_cellIdx": 9,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_10_action_puzzle_mania",
+    "_id": "cell_10_4x3_action_puzzle_mania",
     "_cellIdx": 10,
     "_rewardAmount": 1
   },
   {
-    "_id": "cell_11_action_puzzle_mania",
+    "_id": "cell_11_4x3_action_puzzle_mania",
     "_cellIdx": 11,
-    "_rewardAmount": 10
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_0_6x4_action_puzzle_mania",
+    "_cellIdx": 0,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_1_6x4_action_puzzle_mania",
+    "_cellIdx": 1,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_2_6x4_action_puzzle_mania",
+    "_cellIdx": 2,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_3_6x4_action_puzzle_mania",
+    "_cellIdx": 3,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_4_6x4_action_puzzle_mania",
+    "_cellIdx": 4,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_7_6x4_action_puzzle_mania",
+    "_cellIdx": 7,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_8_6x4_action_puzzle_mania",
+    "_cellIdx": 8,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_11_6x4_action_puzzle_mania",
+    "_cellIdx": 11,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_12_6x4_action_puzzle_mania",
+    "_cellIdx": 12,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_15_6x4_action_puzzle_mania",
+    "_cellIdx": 15,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_16_6x4_action_puzzle_mania",
+    "_cellIdx": 16,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_19_6x4_action_puzzle_mania",
+    "_cellIdx": 19,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_20_6x4_action_puzzle_mania",
+    "_cellIdx": 20,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_21_6x4_action_puzzle_mania",
+    "_cellIdx": 21,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_22_6x4_action_puzzle_mania",
+    "_cellIdx": 22,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_23_6x4_action_puzzle_mania",
+    "_cellIdx": 23,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_0_7x5_action_puzzle_mania",
+    "_cellIdx": 0,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_1_7x5_action_puzzle_mania",
+    "_cellIdx": 1,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_2_7x5_action_puzzle_mania",
+    "_cellIdx": 2,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_3_7x5_action_puzzle_mania",
+    "_cellIdx": 3,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_4_7x5_action_puzzle_mania",
+    "_cellIdx": 4,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_5_7x5_action_puzzle_mania",
+    "_cellIdx": 5,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_9_7x5_action_puzzle_mania",
+    "_cellIdx": 9,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_10_7x5_action_puzzle_mania",
+    "_cellIdx": 10,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_14_7x5_action_puzzle_mania",
+    "_cellIdx": 14,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_15_7x5_action_puzzle_mania",
+    "_cellIdx": 15,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_19_7x5_action_puzzle_mania",
+    "_cellIdx": 19,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_20_7x5_action_puzzle_mania",
+    "_cellIdx": 20,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_24_7x5_action_puzzle_mania",
+    "_cellIdx": 24,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_25_7x5_action_puzzle_mania",
+    "_cellIdx": 25,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_29_7x5_action_puzzle_mania",
+    "_cellIdx": 29,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_30_7x5_action_puzzle_mania",
+    "_cellIdx": 30,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_31_7x5_action_puzzle_mania",
+    "_cellIdx": 31,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_32_7x5_action_puzzle_mania",
+    "_cellIdx": 32,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_33_7x5_action_puzzle_mania",
+    "_cellIdx": 33,
+    "_rewardAmount": 1
+  },
+  {
+    "_id": "cell_34_7x5_action_puzzle_mania",
+    "_cellIdx": 34,
+    "_rewardAmount": 1
   }
 ]

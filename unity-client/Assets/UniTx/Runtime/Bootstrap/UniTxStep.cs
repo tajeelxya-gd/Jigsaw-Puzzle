@@ -41,7 +41,6 @@ namespace UniTx.Runtime.Bootstrap
         private void SetupRoot()
         {
             UniStatics.Root = new GameObject("UniTx - Root");
-            DontDestroyOnLoad(UniStatics.Root);
         }
 
         private void SetupIoC()

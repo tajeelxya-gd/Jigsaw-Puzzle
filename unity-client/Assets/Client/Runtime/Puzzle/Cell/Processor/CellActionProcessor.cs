@@ -19,9 +19,9 @@ namespace Client.Runtime
             switch (data)
             {
                 case CellActionRewardData rewardData:
-                    return _rewardProcessor.GetImageKey(rewardData.RewardId);
+                    return "3d Coin";
                 case CellActionPuzzleManiaData puzzleManiaData:
-                    return "3 Stickman Coin";
+                    return "Brush";
                 default:
                     return null;
             }

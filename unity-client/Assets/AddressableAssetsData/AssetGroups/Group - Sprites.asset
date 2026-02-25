@@ -15,8 +15,13 @@ MonoBehaviour:
   m_GroupName: Group - Sprites
   m_GUID: d47636466c4f2de428db14b0dc541de2
   m_SerializeEntries:
-  - m_GUID: 6f6a75934daa0704390481423c44299b
-    m_Address: 3 Stickman Coin
+  - m_GUID: 19b4f949395d56746a88d8f3c7e85499
+    m_Address: Brush
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a832c10928fd78429499255d08be3e8
+    m_Address: 3d Coin
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,62 +1,127 @@
 [
   {
-    "_id": "cell_0_action_reward",
-    "_cellIdx": 0,
-    "_rewardId": "mg_reward_currency_1-1"
-  },
-  {
-    "_id": "cell_1_action_reward",
-    "_cellIdx": 1,
-    "_rewardId": "mg_reward_currency_1-3"
-  },
-  {
-    "_id": "cell_2_action_reward",
-    "_cellIdx": 2,
-    "_rewardId": "mg_reward_currency_1-1"
-  },
-  {
-    "_id": "cell_3_action_reward",
-    "_cellIdx": 3,
-    "_rewardId": "mg_reward_currency_1-3"
-  },
-  {
-    "_id": "cell_4_action_reward",
+    "_id": "cell_4_4x3_action_reward",
     "_cellIdx": 4,
     "_rewardId": "mg_reward_currency_1-1"
   },
   {
-    "_id": "cell_5_action_reward",
-    "_cellIdx": 5,
-    "_rewardId": "mg_reward_currency_1-3"
-  },
-  {
-    "_id": "cell_6_action_reward",
-    "_cellIdx": 6,
-    "_rewardId": "mg_reward_currency_1-1"
-  },
-  {
-    "_id": "cell_7_action_reward",
+    "_id": "cell_7_4x3_action_reward",
     "_cellIdx": 7,
     "_rewardId": "mg_reward_currency_1-3"
   },
   {
-    "_id": "cell_8_action_reward",
-    "_cellIdx": 8,
+    "_id": "cell_5_6x4_action_reward",
+    "_cellIdx": 5,
     "_rewardId": "mg_reward_currency_1-1"
   },
   {
-    "_id": "cell_9_action_reward",
-    "_cellIdx": 9,
-    "_rewardId": "mg_reward_currency_1-3"
+    "_id": "cell_6_6x4_action_reward",
+    "_cellIdx": 6,
+    "_rewardId": "mg_reward_currency_1-1"
   },
   {
-    "_id": "cell_10_action_reward",
+    "_id": "cell_9_6x4_action_reward",
+    "_cellIdx": 9,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_10_6x4_action_reward",
     "_cellIdx": 10,
     "_rewardId": "mg_reward_currency_1-1"
   },
   {
-    "_id": "cell_11_action_reward",
+    "_id": "cell_13_6x4_action_reward",
+    "_cellIdx": 13,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_14_6x4_action_reward",
+    "_cellIdx": 14,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_17_6x4_action_reward",
+    "_cellIdx": 17,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_18_6x4_action_reward",
+    "_cellIdx": 18,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_6_7x5_action_reward",
+    "_cellIdx": 6,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_7_7x5_action_reward",
+    "_cellIdx": 7,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_8_7x5_action_reward",
+    "_cellIdx": 8,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_11_7x5_action_reward",
     "_cellIdx": 11,
-    "_rewardId": "mg_reward_currency_1-3"
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_12_7x5_action_reward",
+    "_cellIdx": 12,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_13_7x5_action_reward",
+    "_cellIdx": 13,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_16_7x5_action_reward",
+    "_cellIdx": 16,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_17_7x5_action_reward",
+    "_cellIdx": 17,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_18_7x5_action_reward",
+    "_cellIdx": 18,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_21_7x5_action_reward",
+    "_cellIdx": 21,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_22_7x5_action_reward",
+    "_cellIdx": 22,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_23_7x5_action_reward",
+    "_cellIdx": 23,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_26_7x5_action_reward",
+    "_cellIdx": 26,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_27_7x5_action_reward",
+    "_cellIdx": 27,
+    "_rewardId": "mg_reward_currency_1-1"
+  },
+  {
+    "_id": "cell_28_7x5_action_reward",
+    "_cellIdx": 28,
+    "_rewardId": "mg_reward_currency_1-1"
   }
 ]

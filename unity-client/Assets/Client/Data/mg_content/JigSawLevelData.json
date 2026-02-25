@@ -6,9 +6,9 @@
     "_imageKey": "level_1",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_0_action_puzzle_mania",
-      "cell_2_action_reward",
-      "cell_11_action_puzzle_mania"
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
     ],
     "_maxDuration": 60
   },
@@ -19,11 +19,11 @@
     "_imageKey": "level_2",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_0_action_reward",
-      "cell_5_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_5_4x3_action_puzzle_mania",
+      "cell_7_4x3_action_reward",
+      "cell_8_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_3",
@@ -32,9 +32,11 @@
     "_imageKey": "level_3",
     "_difficulty": 0,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_4",
@@ -43,10 +45,11 @@
     "_imageKey": "level_4",
     "_difficulty": 1,
     "_cellActionIds": [
-      "cell_0_action_puzzle_mania",
-      "cell_2_action_reward",
-      "cell_11_action_puzzle_mania"
-    ]
+      "cell_5_4x3_action_puzzle_mania",
+      "cell_7_4x3_action_reward",
+      "cell_8_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_5",
@@ -55,9 +58,11 @@
     "_imageKey": "level_5",
     "_difficulty": 1,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_6",
@@ -66,11 +71,11 @@
     "_imageKey": "level_6",
     "_difficulty": 1,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_8_action_reward",
-      "cell_6_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_5_4x3_action_puzzle_mania",
+      "cell_7_4x3_action_reward",
+      "cell_8_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_7",
@@ -79,9 +84,11 @@
     "_imageKey": "level_7",
     "_difficulty": 2,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_8",
@@ -90,11 +97,11 @@
     "_imageKey": "level_8",
     "_difficulty": 2,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_5_action_reward",
-      "cell_7_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_5_4x3_action_puzzle_mania",
+      "cell_7_4x3_action_reward",
+      "cell_8_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_9",
@@ -103,9 +110,12 @@
     "_imageKey": "level_9",
     "_difficulty": 3,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_10_6x4_action_reward",
+      "cell_13_6x4_action_reward",
+      "cell_4_6x4_action_puzzle_mania",
+      "cell_7_6x4_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_10",
@@ -114,11 +124,11 @@
     "_imageKey": "level_10",
     "_difficulty": 3,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_0_action_reward",
-      "cell_11_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_11",
@@ -127,9 +137,11 @@
     "_imageKey": "level_11",
     "_difficulty": 3,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_5_4x3_action_puzzle_mania",
+      "cell_7_4x3_action_reward",
+      "cell_8_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_12",
@@ -138,11 +150,12 @@
     "_imageKey": "level_12",
     "_difficulty": 3,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_10_action_reward",
-      "cell_1_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_10_6x4_action_reward",
+      "cell_13_6x4_action_reward",
+      "cell_4_6x4_action_puzzle_mania",
+      "cell_7_6x4_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_13",
@@ -151,9 +164,11 @@
     "_imageKey": "level_13",
     "_difficulty": 4,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_14",
@@ -162,11 +177,11 @@
     "_imageKey": "level_14",
     "_difficulty": 4,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_10_action_reward",
-      "cell_6_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_5_4x3_action_puzzle_mania",
+      "cell_7_4x3_action_reward",
+      "cell_8_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_15",
@@ -175,9 +190,11 @@
     "_imageKey": "level_15",
     "_difficulty": 4,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_8_6x4_action_puzzle_mania",
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_16",
@@ -186,11 +203,11 @@
     "_imageKey": "level_16",
     "_difficulty": 4,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_11_action_reward",
-      "cell_5_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward",
+      "cell_11_4x3_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_17",
@@ -199,9 +216,10 @@
     "_imageKey": "level_17",
     "_difficulty": 4,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_18",
@@ -210,11 +228,10 @@
     "_imageKey": "level_18",
     "_difficulty": 4,
     "_cellActionIds": [
-      "cell_8_action_reward",
-      "cell_3_action_reward",
-      "cell_10_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_19",
@@ -223,9 +240,10 @@
     "_imageKey": "level_19",
     "_difficulty": 5,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_6_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_20",
@@ -234,11 +252,10 @@
     "_imageKey": "level_20",
     "_difficulty": 5,
     "_cellActionIds": [
-      "cell_11_action_reward",
-      "cell_4_action_reward",
-      "cell_2_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_21",
@@ -247,9 +264,10 @@
     "_imageKey": "level_21",
     "_difficulty": 5,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_22",
@@ -258,11 +276,10 @@
     "_imageKey": "level_22",
     "_difficulty": 5,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_6_action_reward",
-      "cell_4_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_0_4x3_action_puzzle_mania",
+      "cell_4_4x3_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_23",
@@ -271,9 +288,10 @@
     "_imageKey": "level_23",
     "_difficulty": 5,
     "_cellActionIds": [
-      "cell_3_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_24",
@@ -282,11 +300,10 @@
     "_imageKey": "level_24",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_1_action_reward",
-      "cell_10_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_25",
@@ -295,9 +312,10 @@
     "_imageKey": "level_25",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_6_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_26",
@@ -306,11 +324,10 @@
     "_imageKey": "level_26",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_3_action_reward",
-      "cell_9_action_reward",
-      "cell_1_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_27",
@@ -319,9 +336,10 @@
     "_imageKey": "level_27",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_28",
@@ -330,11 +348,10 @@
     "_imageKey": "level_28",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_10_action_reward",
-      "cell_7_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_29",
@@ -343,9 +360,10 @@
     "_imageKey": "level_29",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_30",
@@ -354,11 +372,10 @@
     "_imageKey": "level_30",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_0_action_reward",
-      "cell_6_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_31",
@@ -367,9 +384,10 @@
     "_imageKey": "level_31",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_32",
@@ -378,11 +396,10 @@
     "_imageKey": "level_32",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_11_action_reward",
-      "cell_4_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_33",
@@ -391,9 +408,10 @@
     "_imageKey": "level_33",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_34",
@@ -402,11 +420,10 @@
     "_imageKey": "level_34",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_11_action_reward",
-      "cell_0_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_35",
@@ -415,9 +432,10 @@
     "_imageKey": "level_35",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_10_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_36",
@@ -426,11 +444,10 @@
     "_imageKey": "level_36",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_9_action_reward",
-      "cell_6_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_37",
@@ -439,9 +456,10 @@
     "_imageKey": "level_37",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_8_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_38",
@@ -450,11 +468,10 @@
     "_imageKey": "level_38",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_2_action_reward",
-      "cell_10_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_39",
@@ -463,9 +480,10 @@
     "_imageKey": "level_39",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_40",
@@ -474,11 +492,10 @@
     "_imageKey": "level_40",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_11_action_reward",
-      "cell_4_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_41",
@@ -487,9 +504,10 @@
     "_imageKey": "level_41",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_3_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_42",
@@ -498,11 +516,10 @@
     "_imageKey": "level_42",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_9_action_reward",
-      "cell_0_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_43",
@@ -511,9 +528,10 @@
     "_imageKey": "level_43",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_10_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_44",
@@ -522,11 +540,10 @@
     "_imageKey": "level_44",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_11_action_reward",
-      "cell_5_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_45",
@@ -535,9 +552,10 @@
     "_imageKey": "level_45",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_46",
@@ -546,11 +564,10 @@
     "_imageKey": "level_46",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_11_action_reward",
-      "cell_0_action_reward",
-      "cell_8_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_47",
@@ -559,9 +576,10 @@
     "_imageKey": "level_47",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_48",
@@ -570,11 +588,10 @@
     "_imageKey": "level_48",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_4_action_reward",
-      "cell_6_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_49",
@@ -583,9 +600,10 @@
     "_imageKey": "level_49",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_50",
@@ -594,11 +612,10 @@
     "_imageKey": "level_50",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_11_action_reward",
-      "cell_0_action_reward",
-      "cell_8_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_51",
@@ -607,9 +624,10 @@
     "_imageKey": "level_51",
     "_difficulty": 9,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_52",
@@ -618,9 +636,10 @@
     "_imageKey": "level_52",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_53",
@@ -629,9 +648,10 @@
     "_imageKey": "level_53",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_54",
@@ -640,9 +660,10 @@
     "_imageKey": "level_54",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_55",
@@ -651,9 +672,10 @@
     "_imageKey": "level_55",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_56",
@@ -662,9 +684,10 @@
     "_imageKey": "level_56",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_57",
@@ -673,9 +696,10 @@
     "_imageKey": "level_57",
     "_difficulty": 9,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_58",
@@ -684,9 +708,10 @@
     "_imageKey": "level_58",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_6_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_59",
@@ -695,9 +720,10 @@
     "_imageKey": "level_59",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_8_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_60",
@@ -706,9 +732,10 @@
     "_imageKey": "level_60",
     "_difficulty": 9,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_61",
@@ -717,9 +744,10 @@
     "_imageKey": "level_61",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_62",
@@ -728,9 +756,10 @@
     "_imageKey": "level_62",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_63",
@@ -739,9 +768,10 @@
     "_imageKey": "level_63",
     "_difficulty": 9,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_64",
@@ -750,9 +780,10 @@
     "_imageKey": "level_64",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_5_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_65",
@@ -761,9 +792,10 @@
     "_imageKey": "level_65",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_66",
@@ -772,9 +804,10 @@
     "_imageKey": "level_66",
     "_difficulty": 9,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_67",
@@ -783,9 +816,10 @@
     "_imageKey": "level_67",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_68",
@@ -794,9 +828,10 @@
     "_imageKey": "level_68",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_11_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_69",
@@ -805,9 +840,10 @@
     "_imageKey": "level_69",
     "_difficulty": 9,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_70",
@@ -816,9 +852,10 @@
     "_imageKey": "level_70",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_10_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_71",
@@ -827,9 +864,10 @@
     "_imageKey": "level_71",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_72",
@@ -838,9 +876,10 @@
     "_imageKey": "level_72",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_73",
@@ -849,9 +888,10 @@
     "_imageKey": "level_73",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_10_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_74",
@@ -860,9 +900,10 @@
     "_imageKey": "level_74",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_75",
@@ -871,9 +912,10 @@
     "_imageKey": "level_75",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_76",
@@ -882,9 +924,10 @@
     "_imageKey": "level_76",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_77",
@@ -893,9 +936,10 @@
     "_imageKey": "level_77",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_78",
@@ -904,9 +948,10 @@
     "_imageKey": "level_78",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_79",
@@ -915,9 +960,10 @@
     "_imageKey": "level_79",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_8_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_80",
@@ -926,9 +972,10 @@
     "_imageKey": "level_80",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_81",
@@ -937,9 +984,10 @@
     "_imageKey": "level_81",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_6_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_82",
@@ -948,9 +996,10 @@
     "_imageKey": "level_82",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_11_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_83",
@@ -959,9 +1008,10 @@
     "_imageKey": "level_83",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_84",
@@ -970,9 +1020,10 @@
     "_imageKey": "level_84",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_85",
@@ -981,9 +1032,10 @@
     "_imageKey": "level_85",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_6_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_86",
@@ -992,9 +1044,10 @@
     "_imageKey": "level_86",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_4_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_87",
@@ -1003,9 +1056,10 @@
     "_imageKey": "level_87",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_3_action_reward",
-      "cell_7_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_88",
@@ -1014,9 +1068,10 @@
     "_imageKey": "level_88",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_89",
@@ -1025,9 +1080,10 @@
     "_imageKey": "level_89",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_90",
@@ -1036,9 +1092,10 @@
     "_imageKey": "level_90",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_0_action_reward",
-      "cell_6_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_91",
@@ -1047,9 +1104,10 @@
     "_imageKey": "level_91",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_3_action_reward",
-      "cell_9_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_92",
@@ -1058,9 +1116,10 @@
     "_imageKey": "level_92",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_1_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_93",
@@ -1069,9 +1128,10 @@
     "_imageKey": "level_93",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_11_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_94",
@@ -1080,9 +1140,10 @@
     "_imageKey": "level_94",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_2_action_reward",
-      "cell_10_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_95",
@@ -1091,9 +1152,10 @@
     "_imageKey": "level_95",
     "_difficulty": 6,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_4_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_96",
@@ -1102,9 +1164,10 @@
     "_imageKey": "level_96",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_10_action_reward",
-      "cell_3_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_97",
@@ -1113,9 +1176,10 @@
     "_imageKey": "level_97",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_7_action_reward",
-      "cell_0_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_98",
@@ -1124,9 +1188,10 @@
     "_imageKey": "level_98",
     "_difficulty": 8,
     "_cellActionIds": [
-      "cell_6_action_reward",
-      "cell_2_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_99",
@@ -1135,9 +1200,10 @@
     "_imageKey": "level_99",
     "_difficulty": 10,
     "_cellActionIds": [
-      "cell_5_action_reward",
-      "cell_1_action_reward"
-    ]
+      "cell_21_7x5_action_reward",
+      "cell_24_7x5_action_puzzle_mania"
+    ],
+    "_maxDuration": 60
   },
   {
     "_id": "mg_level_100",
@@ -1146,10 +1212,9 @@
     "_imageKey": "level_100",
     "_difficulty": 7,
     "_cellActionIds": [
-      "cell_9_action_reward",
-      "cell_11_action_reward",
-      "cell_4_action_reward",
-      "cell_8_action_reward"
-    ]
+      "cell_11_6x4_action_puzzle_mania",
+      "cell_18_6x4_action_reward"
+    ],
+    "_maxDuration": 60
   }
 ]
