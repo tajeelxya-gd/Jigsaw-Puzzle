@@ -13,5 +13,5 @@ public enum AudioType
 {
     BGSimple, BGHard, BGSuperHard, Hit, ButtonClick, CoinAddition, HealthAddition, EnemiesAddition, TrophiesAddition, Win, Loss, MagnetEffect, ShuffleEffect,
     HammerEffect, SlotPopperEffect, CannonTouch, CannonMerge, ItemRattle, WallHit, SettingButtonClick, DailyRewards, PuzzleUnlock, RaceWin, RaceFail,
-    InstantiatingSound, Piggy, ChestOpen, CollectSoft, KeyCollect,PanelPop,RewardPopUp,PanelClose
+    InstantiatingSound, Piggy, ChestOpen, CollectSoft, KeyCollect, PanelPop, RewardPopUp, PanelClose
 } //Audio Type Here

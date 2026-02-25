@@ -15,28 +15,20 @@ public class LevelMainButton : MonoBehaviour
         timeService_freeTimer =
             new RealTimeService(PlayerHealthTimerType.InfiniteHealthTimer.ToString(), OnInfiniteHealth);
     }
-    private void Start()
-    {
-
-
-    }
 
     public void LoadLevel()
     {
         if (_gameData == null || _gameData.Data == null || timeService_freeTimer == null) return;
 
-
-
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
 
-        // if (_gameData.Data.AvailableLives == 0 && !timeService_freeTimer.IsRunning())
-        // {
-        //     SignalBus.Publish(new OnNoMoreLivesSignal());
-        //     return;
-        // }
+        if (_gameData.Data.AvailableLives == 0 && !timeService_freeTimer.IsRunning())
+        {
+            SignalBus.Publish(new OnNoMoreLivesSignal());
+            return;
+        }
         SignalBus.Publish(new OnSceneShiftSignal { SceneName = "GamePlay", DoFakeLoad = false, levelType = _leveldata.levelType });
-        //SceneManager.LoadScene(1);
     }
     void OnInfiniteHealth() { }
 }
