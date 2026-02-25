@@ -16,8 +16,6 @@ public class WinFailManager : MonoBehaviour
     [SerializeField] private Image[] _leaderBoardImages;
     [SerializeField] private TextMeshProUGUI[] _playerName;
     [SerializeField] private TextMeshProUGUI[] _rankText;
-    [SerializeField] private GameObject _winHeader;
-    [SerializeField] private GameObject _loseHeader;
 
     private DataBaseService<PlayerProfileData> _profileDataBase;
     private PlayerProfileData _playerProfileData;
@@ -93,8 +91,6 @@ public class WinFailManager : MonoBehaviour
                 SetPlayerName(i);
                 SetPlayerProfileImage(i);
                 PublishOnMissionCompleteSignal();
-                _winHeader.SetActive(true);
-                _loseHeader.SetActive(false);
             }
             else
             {
@@ -117,8 +113,6 @@ public class WinFailManager : MonoBehaviour
                 }
                 _playerName[i].text = aiName;
                 _leaderBoardImages[i].sprite = aiProfileSprite;
-                _winHeader.SetActive(false);
-                _loseHeader.SetActive(true);
             }
         }
     }

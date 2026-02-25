@@ -19,13 +19,16 @@ public class WinFailSpriteHandler : MonoBehaviour
         {
             _failPanel.SetActive(false);
             _winPanel.SetActive(true);
-            
+
         }
         else
         {
             _failPanel.SetActive(true);
             _winPanel.SetActive(false);
-            _rankText.text = signal._rank.ToString();
+            if (_rankText != null)
+            {
+                _rankText.text = signal._rank.ToString();
+            }
         }
     }
 
