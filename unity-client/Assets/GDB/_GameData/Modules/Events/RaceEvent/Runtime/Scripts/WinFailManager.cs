@@ -16,6 +16,9 @@ public class WinFailManager : MonoBehaviour
     [SerializeField] private Image[] _leaderBoardImages;
     [SerializeField] private TextMeshProUGUI[] _playerName;
     [SerializeField] private TextMeshProUGUI[] _rankText;
+    [SerializeField] private GameObject _winHeader;
+    [SerializeField] private GameObject _loseHeader;
+
     private DataBaseService<PlayerProfileData> _profileDataBase;
     private PlayerProfileData _playerProfileData;
     private IGetRank _getRank;
@@ -42,7 +45,7 @@ public class WinFailManager : MonoBehaviour
             _getAIRank[i] = _ai[i].GetComponent<IGetRank>();
         }
         ApplyRank(_getRank.GetRank());
-        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData,"Events",nameof(AnalyticEventType.RaceEvent), "End",((int)_getRank.GetRank()).ToString());
+        GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Events", nameof(AnalyticEventType.RaceEvent), "End", ((int)_getRank.GetRank()).ToString());
     }
 
     private void OnDisable()
@@ -53,16 +56,16 @@ public class WinFailManager : MonoBehaviour
 
     void PublishOnMissionCompleteSignal()
     {
-        SignalBus.Publish(new OnMissionObjectiveCompleteSignal{MissionType = MissionType.WinTinyRace,Amount = 1});
+        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.WinTinyRace, Amount = 1 });
     }
 
     private void SetPlayerName(int index)
     {
         _playerName[index].text = _playerProfileData._playerName;
-        _playerName[index].color=Color.white;
-        _rankText[index].color=Color.white;
+        _playerName[index].color = Color.white;
+        _rankText[index].color = Color.white;
     }
-    
+
     private void SetPlayerProfileImage(int index)
     {
         _leaderBoardImages[index].sprite = _playerProfileSprites[_playerProfileData._pictureIndex];
@@ -71,14 +74,14 @@ public class WinFailManager : MonoBehaviour
     private void ApplyRank(Ranks playerRank)
     {
         int rankValue = (int)playerRank;
-        if (rankValue-1 == 0)
+        if (rankValue - 1 == 0)
         {
-            SignalBus.Publish(new RaceEventResultSignal{_hasWin = true, _rank = (int)_getRank.GetRank()});
+            SignalBus.Publish(new RaceEventResultSignal { _hasWin = true, _rank = (int)_getRank.GetRank() });
             AudioController.PlaySFX(AudioType.RaceWin);
         }
         else
-        {               
-            SignalBus.Publish(new RaceEventResultSignal{_hasWin = false, _rank = (int)_getRank.GetRank()});
+        {
+            SignalBus.Publish(new RaceEventResultSignal { _hasWin = false, _rank = (int)_getRank.GetRank() });
             AudioController.PlaySFX(AudioType.RaceFail);
         }
 
@@ -90,11 +93,13 @@ public class WinFailManager : MonoBehaviour
                 SetPlayerName(i);
                 SetPlayerProfileImage(i);
                 PublishOnMissionCompleteSignal();
+                _winHeader.SetActive(true);
+                _loseHeader.SetActive(false);
             }
-            else 
+            else
             {
                 _boxes[i].sprite = _aiBox;
-                string aiName = "AI"; 
+                string aiName = "AI";
                 Sprite aiProfileSprite = null;
                 for (int j = 0; j < _ai.Length; j++)
                 {
@@ -106,12 +111,14 @@ public class WinFailManager : MonoBehaviour
                         {
                             aiName = aiRacerName.GetName();
                             aiProfileSprite = aiProfilePicture.GetProfilePicture();
-                            break; 
+                            break;
                         }
                     }
                 }
                 _playerName[i].text = aiName;
                 _leaderBoardImages[i].sprite = aiProfileSprite;
+                _winHeader.SetActive(false);
+                _loseHeader.SetActive(true);
             }
         }
     }
