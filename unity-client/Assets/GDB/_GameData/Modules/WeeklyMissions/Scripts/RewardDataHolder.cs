@@ -49,16 +49,8 @@ public class RewardDataHolder : MonoBehaviour
                     popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.Coins,
                         signal.RewardPoint.position, 10);
                     break;
-                case WeeklyRewardType.Hammer:
-                    popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.Hammer,
-                        signal.RewardPoint.position, 4);
-                    break;
                 case WeeklyRewardType.Magnet:
                     popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.Magnets,
-                        signal.RewardPoint.position, 4);
-                    break;
-                case WeeklyRewardType.PopTreasureBox:
-                    popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.SlotPopper,
                         signal.RewardPoint.position, 4);
                     break;
                 case WeeklyRewardType.MagicWand:

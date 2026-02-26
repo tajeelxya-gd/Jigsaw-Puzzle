@@ -20,7 +20,7 @@ public class Wand : IPowerup, IDisposable
     private void OnPerformEnd()
     {
         _cannonController.Shuffle();
-        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseShuffle, Amount = 1 });
+        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = default, Amount = 1 });
         SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
         if (TutorialManager.IsTutorialActivated)
             SignalBus.Publish(new OnTutorialActivated { IsActivated = false });

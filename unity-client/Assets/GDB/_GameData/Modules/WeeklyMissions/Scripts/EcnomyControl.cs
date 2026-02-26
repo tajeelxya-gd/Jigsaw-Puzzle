@@ -22,32 +22,32 @@ public class EconomyControl : MonoBehaviour
 
         coinsCanvasGroup = coinsAnimText.GetComponent<CanvasGroup>();
         livesCanvasGroup = livesAnimText.GetComponent<CanvasGroup>();
-        
+
     }
 
 
     void ShowWinCoinsPop()
     {
-            gameData.Data.BackFromWin = false;
-            PopCommandExecutionResponder.AddCommand(new GameplayRewardShowCommand(
-                PopCommandExecutionResponder.PopupPriority.Low,
-                execution =>
-                {
-                    IBulkPopService popBulkService = GlobalService.IBulkPopService;
-                    popBulkService.PlayEffect(0, PopBulkService.BulkPopUpServiceType.Coins,
-                        new Vector2(Screen.width / 2f, Screen.height / 2f), 10,CloseExecutionCommand);
-                    DOVirtual.DelayedCall(0.25f, CloseExecutionCommand);
-                } 
-            ));
+        gameData.Data.BackFromWin = false;
+        PopCommandExecutionResponder.AddCommand(new GameplayRewardShowCommand(
+            PopCommandExecutionResponder.PopupPriority.Low,
+            execution =>
+            {
+                IBulkPopService popBulkService = GlobalService.IBulkPopService;
+                popBulkService.PlayEffect(0, PopBulkService.BulkPopUpServiceType.Coins,
+                    new Vector2(Screen.width / 2f, Screen.height / 2f), 10, CloseExecutionCommand);
+                DOVirtual.DelayedCall(0.25f, CloseExecutionCommand);
+            }
+        ));
     }
-    
+
     void CloseExecutionCommand()
     {
         Debug.Log("CloseOnBoardingCommandIfYes :: " + PopCommandExecutionResponder.HasCommand<GameplayRewardShowCommand>());
-      //  if (PopCommandExecutionResponder.HasCommand<GameplayRewardShowCommand>())
-                    PopCommandExecutionResponder.RemoveCommand<GameplayRewardShowCommand>();
+        //  if (PopCommandExecutionResponder.HasCommand<GameplayRewardShowCommand>())
+        PopCommandExecutionResponder.RemoveCommand<GameplayRewardShowCommand>();
     }
-    
+
 
     private void Start()
     {
@@ -58,7 +58,7 @@ public class EconomyControl : MonoBehaviour
         SignalBus.Subscribe<OnMagnetUpdateSignal>(OnUpdateMagnet);
         LoadData();
         UpdateUI();
-     
+
         GameData gameData = GlobalService.GameData;
         if (gameData.Data.BackFromWin)
             ShowWinCoinsPop();
@@ -100,8 +100,8 @@ public class EconomyControl : MonoBehaviour
 
     void ReceiveSpendCoins(int rewardAmount)
     {
-        if(rewardAmount < 0)
-            SignalBus.Publish(new OnMissionObjectiveCompleteSignal{MissionType = MissionType.SpendCoins,Amount = Mathf.Abs(rewardAmount)});
+        if (rewardAmount < 0)
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.SpendCoins, Amount = Mathf.Abs(rewardAmount) });
     }
 
     private void OnUpdateLives(OnHealthUpdateSignal signal)
@@ -113,7 +113,7 @@ public class EconomyControl : MonoBehaviour
 
     private void OnUpdateHammer(OnHammerUpdateSignal signal)
     {
-        gameData.Data.Hammer += signal.Amount;
+        // gameData.Data.Hammer += signal.Amount;
         //PlayAnimation(livesAnimText, livesCanvasGroup, healthText.transform.position, signal.Amount);
         SaveAndRefresh();
     }
@@ -125,7 +125,7 @@ public class EconomyControl : MonoBehaviour
     }
     private void OnUpdateSlotPopper(OnSlotPopperUpdateSignal signal)
     {
-        gameData.Data.SlotPopper += signal.Amount;
+        // gameData.Data.SlotPopper += signal.Amount;
         //PlayAnimation(livesAnimText, livesCanvasGroup, healthText.transform.position, signal.Amount);
         SaveAndRefresh();
     }

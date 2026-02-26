@@ -23,10 +23,6 @@ public class PowerUpButtonController : MonoBehaviour
                 _magnetPowerUpBtn = _powerUpButtons[i];
             else if (_powerUpButtons[i].PowerupType == PowerupType.MagicWand)
                 _shufflePowerUpBtn = _powerUpButtons[i];
-            else if (_powerUpButtons[i].PowerupType == PowerupType.SlotPopper)
-                _slotPowerUpBtn = _powerUpButtons[i];
-            else if (_powerUpButtons[i].PowerupType == PowerupType.Hammer)
-                _hammerPowerUpBtn = _powerUpButtons[i];
         }
         _magnetPowerUpBtn.ChangeToColor();
         _shufflePowerUpBtn.ChangeToColor();

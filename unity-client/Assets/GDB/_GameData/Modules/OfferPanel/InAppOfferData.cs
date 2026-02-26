@@ -1,8 +1,8 @@
 using System;
 using DG.Tweening;
 using Monetization.Runtime.Ads;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "InAppOffer", menuName = "Scriptable Objects/InAppOffer")]
@@ -67,17 +67,11 @@ public class InAppOfferData : ScriptableObject
         Debug.LogError("IAP Purchase Executing");
         switch (reward.rewardType)
         {
-            case WeeklyRewardType.Hammer:
-                HandlePowerup(PowerupType.Hammer, PopBulkService.BulkPopUpServiceType.Hammer, amount, center, 3);
-                break;
             case WeeklyRewardType.MagicWand:
                 HandlePowerup(PowerupType.MagicWand, PopBulkService.BulkPopUpServiceType.Wand, amount, center, 4);
                 break;
             case WeeklyRewardType.Magnet:
                 HandlePowerup(PowerupType.Magnet, PopBulkService.BulkPopUpServiceType.Magnets, amount, center, 4);
-                break;
-            case WeeklyRewardType.PopTreasureBox:
-                HandlePowerup(PowerupType.SlotPopper, PopBulkService.BulkPopUpServiceType.SlotPopper, amount, center, 4);
                 break;
             case WeeklyRewardType.InfiniteHealth:
                 if (IsGameScene()) { SignalBus.Publish(new OnHealthUpdateSignal() { TimeToAdd = amount }); break; }
@@ -87,9 +81,6 @@ public class InAppOfferData : ScriptableObject
                 Debug.LogError("adding coins effect");
                 if (IsGameScene()) { SignalBus.Publish(new AddCoinsSignal { IsAdd = true, Amount = amount }); break; }
                 bulkPop.PlayEffect(amount, PopBulkService.BulkPopUpServiceType.Coins, center, 10);
-                break;
-            case WeeklyRewardType.PremiumCoin:
-                data.Data.PremiumCoins += amount;
                 break;
             case WeeklyRewardType.None:
                 break;

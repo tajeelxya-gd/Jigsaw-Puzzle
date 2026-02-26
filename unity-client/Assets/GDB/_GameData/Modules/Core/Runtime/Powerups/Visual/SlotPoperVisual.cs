@@ -1,6 +1,6 @@
 using System;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 public class SlotPoperVisual : MonoBehaviour, IPowerupVisual
 {
     public Action OnVisualEnd { get; set; }
@@ -17,12 +17,12 @@ public class SlotPoperVisual : MonoBehaviour, IPowerupVisual
 
     public void PerformVisual()
     {
-        SignalBus.Publish(new PowerUpVisualStartSignal { powerupType = PowerupType.SlotPopper, OnClose = null });
+        SignalBus.Publish(new PowerUpVisualStartSignal { powerupType = default, OnClose = null });
     }
 
     private void OnPowerVisualEnd(PowerUpVisualPanelEndSignal signal)
     {
-        if (signal.powerupType != PowerupType.SlotPopper) return;
+        if (signal.powerupType != default) return;
         PlayEffect();
     }
 

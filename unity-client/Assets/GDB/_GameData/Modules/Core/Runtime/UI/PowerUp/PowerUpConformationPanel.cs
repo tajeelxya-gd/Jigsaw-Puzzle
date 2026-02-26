@@ -47,8 +47,6 @@ public class PowerUpConformationPanel : MonoBehaviour
             _actionBtn.gameObject.transform.DOScale(1, 1).From(0).SetEase(Ease.OutBack);
 
         _magnetMask.SetActive(confirmationData.powerupType == PowerupType.Magnet);
-        _popMask.SetActive(confirmationData.powerupType == PowerupType.SlotPopper);
-        _hammerMask.SetActive(confirmationData.powerupType == PowerupType.Hammer);
         _shuffleMask.SetActive(confirmationData.powerupType == PowerupType.MagicWand);
 
         _maskParent.SetActive(true);
@@ -90,10 +88,8 @@ public class PowerUpConformationPanel : MonoBehaviour
     {
         switch (powerupType)
         {
-            case PowerupType.Hammer: GlobalService.GameData.Data.Hammer -= n; break;
             case PowerupType.MagicWand: GlobalService.GameData.Data.Wand -= n; break;
             case PowerupType.Magnet: GlobalService.GameData.Data.Magnets -= n; break;
-            case PowerupType.SlotPopper: GlobalService.GameData.Data.SlotPopper -= n; break;
             default: break;
         }
         GlobalService.GameData.Save();

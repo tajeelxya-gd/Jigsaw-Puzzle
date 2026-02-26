@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 public class GeneralChestRewardController : MonoBehaviour
 {
-    [SerializeField] private CrassModelViewConfiguration []_cratesModelConfigurationUI;
+    [SerializeField] private CrassModelViewConfiguration[] _cratesModelConfigurationUI;
     [SerializeField] private Image[] _backFlares;
     [SerializeField] private Image _mainCrateImage;
     [SerializeField] private CanvasGroup _crateFlareImage;
@@ -19,7 +19,7 @@ public class GeneralChestRewardController : MonoBehaviour
     [SerializeField] private Button _claimRewardButton;
     [SerializeField] private RectTransform _rewardItemContainer;
     [SerializeField] private RewardContainerUI _rewardContainerUI;
-    [ReadOnly,SerializeField]
+    [ReadOnly, SerializeField]
     private RewardProgressHolder _currentRewardProgressData;
     [SerializeField] private float _signalTimer = 0.3f;
     private UnityAction _onCompleteAction;
@@ -51,13 +51,13 @@ public class GeneralChestRewardController : MonoBehaviour
 
     void ShowRewardsPanel()
     {
-        Sequence  seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
         seq.AppendCallback(OnChangeCrateVisuals)
             .AppendInterval(0.5f)
-            .AppendCallback(()=>{_bgRoot.gameObject.SetActive(true);})
+            .AppendCallback(() => { _bgRoot.gameObject.SetActive(true); })
             .Append(_crateRoot.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).From(Vector3.one * 0.5f))
             .AppendInterval(0.5f).AppendCallback(PlayPopLoopAnimation);
-            DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.RewardPopUp);});
+        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.RewardPopUp); });
 
 
 
@@ -67,7 +67,7 @@ public class GeneralChestRewardController : MonoBehaviour
     public void OpeningCrate()
     {
         _openCrateButton.gameObject.SetActive(false);
-        if(_crateOpeningSequence != null )
+        if (_crateOpeningSequence != null)
             _crateOpeningSequence.Kill();
 
         if (popLoop != null)
@@ -80,12 +80,12 @@ public class GeneralChestRewardController : MonoBehaviour
         _crateOpeningSequence = DOTween.Sequence();
         _crateOpeningSequence
             .Join(_crateRoot.transform.DOScale(Vector3.one * 1.3f, sequanceTime).SetEase(Ease.Linear).From(Vector3.one))
-            .Join(_crateRoot.transform.DOShakePosition(sequanceTime, 5, 50,90,false,false)).SetEase(Ease.Linear)
+            .Join(_crateRoot.transform.DOShakePosition(sequanceTime, 5, 50, 90, false, false)).SetEase(Ease.Linear)
             .Join(_crateFlareImage.DOFade(1, sequanceTime).From(0)).OnComplete(() =>
             {
                 _crateFlareImage.DOFade(0, 0);
-                _crateRoot.transform.DOScale(Vector3.one,0.3f);
-                _mainCrateImage.transform.DOPunchScale(new Vector3(-0.5f, 0.5f, 0.5f), 0.3f, 0,1);
+                _crateRoot.transform.DOScale(Vector3.one, 0.3f);
+                _mainCrateImage.transform.DOPunchScale(new Vector3(-0.5f, 0.5f, 0.5f), 0.3f, 0, 1);
                 PlayBlinkAndPopReward();
             });
     }
@@ -93,7 +93,7 @@ public class GeneralChestRewardController : MonoBehaviour
     private Sequence _crateOpenSequence;
     void OnCrateOpenEffect()
     {
-        if(_crateOpeningSequence != null )
+        if (_crateOpeningSequence != null)
             _crateOpeningSequence.Kill();
         float sequanceTime = 0.5f;
         _crateOpenSequence = DOTween.Sequence();
@@ -110,19 +110,19 @@ public class GeneralChestRewardController : MonoBehaviour
         foreach (var _reward in _currentRewardProgressData._rewards)
         {
             RewardContainerUI rewardContainer = Instantiate(_rewardContainerUI, _rewardItemContainer);
-            rewardContainer.Init(_reward._rewardIcon,_reward.rewardChestAmount);
+            rewardContainer.Init(_reward._rewardIcon, _reward.rewardChestAmount);
             rewardContainer.gameObject.SetActive(true);
-            
+
         }
         _rewardItemContainer.gameObject.SetActive(true);
-        _rewardItemContainer.DOAnchorPos(new Vector2(0,350f), 0.5f).SetEase(Ease.OutBack);
-        _rewardItemContainer.DOScale(Vector3.one,0.5f).SetEase(Ease.OutBack).From(Vector3.zero);
+        _rewardItemContainer.DOAnchorPos(new Vector2(0, 350f), 0.5f).SetEase(Ease.OutBack);
+        _rewardItemContainer.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).From(Vector3.zero);
         _claimRewardButton.gameObject.SetActive(true);
-        _claimRewardButton.transform.DOScale(Vector3.one,0.5f).SetEase(Ease.OutBack).From(Vector3.one * 0.7f);
-        
+        _claimRewardButton.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).From(Vector3.one * 0.7f);
+
     }
-    
-    
+
+
 
     void PlayBlinkAndPopReward()
     {
@@ -151,14 +151,6 @@ public class GeneralChestRewardController : MonoBehaviour
                 case WeeklyRewardType.None:
                     continue;
 
-                case WeeklyRewardType.PremiumCoin:
-                    gameData.Data.PremiumCoins += reward.rewardChestAmount;
-                    continue;
-
-                case WeeklyRewardType.Hammer:
-                    popType = PopBulkService.BulkPopUpServiceType.Hammer;
-                    break;
-
                 case WeeklyRewardType.InfiniteHealth:
                     popType = PopBulkService.BulkPopUpServiceType.Health;
                     animatedCoinsAmount = 10;
@@ -177,10 +169,6 @@ public class GeneralChestRewardController : MonoBehaviour
                     popType = PopBulkService.BulkPopUpServiceType.Magnets;
                     break;
 
-                case WeeklyRewardType.PopTreasureBox:
-                    popType = PopBulkService.BulkPopUpServiceType.SlotPopper;
-                    break;
-
                 default:
                     continue;
             }
@@ -197,12 +185,12 @@ public class GeneralChestRewardController : MonoBehaviour
         StartCoroutine(SendClaimSignalAfterDelay());
     }
 
-    
+
     private IEnumerator SendClaimSignalAfterDelay()
     {
         yield return new WaitForSeconds(_signalTimer);
         SignalBus.Publish(new OnRewardClaimedSignal());
-        SignalBus.Publish(new PuzzleRewardGiven(){});
+        SignalBus.Publish(new PuzzleRewardGiven() { });
     }
 
 
@@ -216,18 +204,18 @@ public class GeneralChestRewardController : MonoBehaviour
 
         popLoop.Append(
             _mainCrateImage.transform.DOPunchPosition(
-                new Vector3(0, 20, 0), 
-                1f, 
-                1, 
+                new Vector3(0, 20, 0),
+                1f,
+                1,
                 1
             ).SetEase(Ease.OutBounce)
         );
 
         popLoop.Join(
             _mainCrateImage.transform.DOPunchScale(
-                new Vector3(-0.1f, 0, 0), 
-                0.25f, 
-                1, 
+                new Vector3(-0.1f, 0, 0),
+                0.25f,
+                1,
                 0.245f
             ).SetEase(Ease.OutQuad)
         );
@@ -243,7 +231,8 @@ public class GeneralChestRewardController : MonoBehaviour
         _currentViewConfiguration = null;
         foreach (var config in _cratesModelConfigurationUI)
         {
-            if (config.CrateType == _currentRewardProgressData._rewardCrateType){
+            if (config.CrateType == _currentRewardProgressData._rewardCrateType)
+            {
                 _currentViewConfiguration = config;
                 break;
             }
@@ -251,7 +240,7 @@ public class GeneralChestRewardController : MonoBehaviour
 
         if (_currentViewConfiguration == null)
         {
-            Debug.LogError("No reward configuration found for "+ _currentRewardProgressData._rewardCrateType);
+            Debug.LogError("No reward configuration found for " + _currentRewardProgressData._rewardCrateType);
             return;
         }
 
@@ -267,7 +256,7 @@ public class GeneralChestRewardController : MonoBehaviour
             flare.color = c;
         }
 
-        
+
     }
 
 
@@ -287,7 +276,7 @@ public class GeneralChestRewardController : MonoBehaviour
 }
 
 
-public class OnRewardClaimedSignal:ISignal
+public class OnRewardClaimedSignal : ISignal
 {
 }
 

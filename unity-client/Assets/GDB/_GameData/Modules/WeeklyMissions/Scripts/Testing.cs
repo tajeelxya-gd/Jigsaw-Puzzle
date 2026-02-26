@@ -10,7 +10,7 @@ public class Testing : MonoBehaviour
         {
             MissionType = MissionType.Get2XCoins,
             Amount = 1
-        }); 
+        });
     }
     [Button]
     public void Login()
@@ -19,7 +19,7 @@ public class Testing : MonoBehaviour
         {
             MissionType = MissionType.Login,
             Amount = 1
-        }); 
+        });
     }
     [Button]
 
@@ -29,15 +29,15 @@ public class Testing : MonoBehaviour
         {
             MissionType = MissionType.WinStreak,
             Amount = 3
-        }); 
+        });
     }
     [Button]
-    public void UseSelect()
+    public void UseMagnet()
     {
         SignalBus.Publish(new OnPlayerDidActionSignal()
         {
-            MissionType = MissionType.UseSelect,
+            MissionType = MissionType.UseMagnet,
             Amount = 5
-        }); 
+        });
     }
 }
