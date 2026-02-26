@@ -22,8 +22,8 @@ public class RewardResponder : MonoBehaviour
                     // _bulkPopService.PlayEffect(PopBulkService.BulkPopUpServiceType.Coins,_rewardItemContainer.transform.position);
                     SignalBus.Publish(new OnCoinsUpdateSignal { Amount = _reward.rewardChestAmount });
                     break;
-                case WeeklyRewardType.MagicWand:
-                    _gameData.Data.Wand += _reward.rewardChestAmount;
+                case WeeklyRewardType.Eye:
+                    _gameData.Data.Eye += _reward.rewardChestAmount;
                     break;
                 case WeeklyRewardType.Magnet:
                     _gameData.Data.Magnets += _reward.rewardChestAmount;

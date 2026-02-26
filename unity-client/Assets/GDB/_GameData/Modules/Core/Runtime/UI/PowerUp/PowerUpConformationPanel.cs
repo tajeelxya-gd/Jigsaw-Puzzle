@@ -88,7 +88,7 @@ public class PowerUpConformationPanel : MonoBehaviour
     {
         switch (powerupType)
         {
-            case PowerupType.MagicWand: GlobalService.GameData.Data.Wand -= n; break;
+            case PowerupType.MagicWand: GlobalService.GameData.Data.Eye -= n; break;
             case PowerupType.Magnet: GlobalService.GameData.Data.Magnets -= n; break;
             default: break;
         }

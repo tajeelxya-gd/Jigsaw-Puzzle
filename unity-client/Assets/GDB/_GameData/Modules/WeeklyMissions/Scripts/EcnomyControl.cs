@@ -119,7 +119,7 @@ public class EconomyControl : MonoBehaviour
     }
     private void OnUpdateWand(OnWandUpdateSignal signal)
     {
-        gameData.Data.Wand += signal.Amount;
+        gameData.Data.Eye += signal.Amount;
         //PlayAnimation(livesAnimText, livesCanvasGroup, healthText.transform.position, signal.Amount);
         SaveAndRefresh();
     }

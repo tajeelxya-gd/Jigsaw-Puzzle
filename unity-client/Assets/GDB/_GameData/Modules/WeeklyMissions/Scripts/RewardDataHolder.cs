@@ -53,7 +53,7 @@ public class RewardDataHolder : MonoBehaviour
                     popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.Magnets,
                         signal.RewardPoint.position, 4);
                     break;
-                case WeeklyRewardType.MagicWand:
+                case WeeklyRewardType.Eye:
                     popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.Wand,
                         signal.RewardPoint.position, 4);
                     break;

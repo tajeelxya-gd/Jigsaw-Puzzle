@@ -175,7 +175,7 @@ public class RewardCard : MonoBehaviour
                 case WeeklyRewardType.Coin:
                     _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Coins, transform.position, 10, OnShowCommandDisabled);
                     break;
-                case WeeklyRewardType.MagicWand:
+                case WeeklyRewardType.Eye:
                     //_gameData.Data.Wand += _reward.rewardChestAmount;
                     _bulkPopService.PlayEffect(_reward.rewardChestAmount, PopBulkService.BulkPopUpServiceType.Wand, transform.position, 4, OnShowCommandDisabled);
                     break;

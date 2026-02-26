@@ -165,7 +165,7 @@ public class PowerUpButton : MonoBehaviour
         switch (_powerupType)
         {
             case PowerupType.Magnet: return GlobalService.GameData.Data.Magnets;
-            case PowerupType.MagicWand: return GlobalService.GameData.Data.Wand;
+            case PowerupType.MagicWand: return GlobalService.GameData.Data.Eye;
             default: return 0;
         }
     }
@@ -193,7 +193,7 @@ public class PowerUpButton : MonoBehaviour
         switch (_powerupType)
         {
             case PowerupType.Magnet: GlobalService.GameData.Data.Magnets += Amount; break;
-            case PowerupType.MagicWand: GlobalService.GameData.Data.Wand += Amount; break;
+            case PowerupType.MagicWand: GlobalService.GameData.Data.Eye += Amount; break;
             default: break;
         }
         GlobalService.GameData.Save();

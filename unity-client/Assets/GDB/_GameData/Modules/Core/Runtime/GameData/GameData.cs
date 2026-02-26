@@ -27,7 +27,7 @@ public class GameData
         public int TrophiesWinInGame = 0;
         public int AvailableLives = 5;
         public int Magnets = 0;
-        public int Wand = 0;
+        public int Eye = 0;
         public int PlayerEarnedTrophies = 0;
         public int CurrentWinStreakLevel = 0;
         public List<PowerupType> OnBoardPowerUpType = new List<PowerupType>();

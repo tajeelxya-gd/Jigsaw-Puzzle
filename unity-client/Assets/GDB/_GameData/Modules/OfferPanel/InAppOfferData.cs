@@ -67,7 +67,7 @@ public class InAppOfferData : ScriptableObject
         Debug.LogError("IAP Purchase Executing");
         switch (reward.rewardType)
         {
-            case WeeklyRewardType.MagicWand:
+            case WeeklyRewardType.Eye:
                 HandlePowerup(PowerupType.MagicWand, PopBulkService.BulkPopUpServiceType.Wand, amount, center, 4);
                 break;
             case WeeklyRewardType.Magnet:

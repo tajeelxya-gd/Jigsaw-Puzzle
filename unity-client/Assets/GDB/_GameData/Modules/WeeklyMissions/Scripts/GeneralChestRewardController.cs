@@ -161,7 +161,7 @@ public class GeneralChestRewardController : MonoBehaviour
                     animatedCoinsAmount = 10;
                     break;
 
-                case WeeklyRewardType.MagicWand:
+                case WeeklyRewardType.Eye:
                     popType = PopBulkService.BulkPopUpServiceType.Wand;
                     break;
 

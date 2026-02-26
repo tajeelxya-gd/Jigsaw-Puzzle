@@ -62,7 +62,7 @@ public enum WeeklyRewardType
     None,
     InfiniteHealth,
     Coin,
-    MagicWand,
+    Eye,
     Magnet
 }
 
@@ -82,5 +82,5 @@ public enum MissionType
     WinSuperHardLevel,
     Top3inLeague,
     UseMagnet,
-    UseWand
+    UseEye
 }
