@@ -44,6 +44,7 @@ namespace Client.Runtime
         {
             _puzzleTray.DropRandomPiecesAsync(_magnetPiecesCount, this.GetCancellationTokenOnDestroy());
             GlobalService.GameData.Data.Magnets -= 1;
+            GlobalService.GameData.Save();
             UpdateMagnetButtonState();
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseMagnet, Amount = 1 });
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
@@ -55,6 +56,7 @@ namespace Client.Runtime
 
             _fullImageHandler.ShowFullImage();
             GlobalService.GameData.Data.Eye -= 1;
+            GlobalService.GameData.Save();
             UpdateEyeButtonState();
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseEye, Amount = 1 });
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
