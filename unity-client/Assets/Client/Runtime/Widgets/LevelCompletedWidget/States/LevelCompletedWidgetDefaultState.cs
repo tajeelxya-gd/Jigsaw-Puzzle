@@ -12,6 +12,13 @@ namespace Client.Runtime
             Context.Refs.NextLevelBtn.onClick.AddListener(HandleNextLevel);
             SetLevelText();
             UniAudio.Play2D((IAudioConfig)Context.Refs.LevelCompleted);
+
+            var gameData = GlobalService.GameData;
+            if (gameData.Data.IsPuzzleManiaUnlocked)
+            {
+                gameData.Data.CurrentLevelEnemies = gameData.Data.TempCollectedEnemies;
+                gameData.Data.TempCollectedEnemies = 0;
+            }
         }
 
         public override void OnExit()
