@@ -28,7 +28,7 @@ public class EnemyCollectableUI : CollectableVisual
     }
     private void OnEnemyDie(OnEnemyDieSignal signal)
     {
-        bulkPopUpEffect.Generate(null, signal.Count);
+        bulkPopUpEffect.Generate(null, 10);
         UpdateCount(signal.Count);
         PlayPopAnimation();
     }

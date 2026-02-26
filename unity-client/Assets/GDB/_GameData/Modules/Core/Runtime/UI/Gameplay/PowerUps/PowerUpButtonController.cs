@@ -26,14 +26,11 @@ public class PowerUpButtonController : MonoBehaviour
         }
         _magnetPowerUpBtn.ChangeToColor();
         _shufflePowerUpBtn.ChangeToColor();
-        _hammerPowerUpBtn.ChangeToColor();
         if (GlobalService.GameData.Data.LevelIndex == 25)
         {
-            _slotPowerUpBtn.ChangeToColor();
         }
         else
         {
-            _slotPowerUpBtn.ChangeToLock();
         }
     }
 
@@ -68,8 +65,6 @@ public class PowerUpButtonController : MonoBehaviour
 
     private PowerUpButton _magnetPowerUpBtn;
     private PowerUpButton _shufflePowerUpBtn;
-    private PowerUpButton _hammerPowerUpBtn;
-    private PowerUpButton _slotPowerUpBtn;
 
     private void OnShooterRemoveFromGridSignal(OnShooterRemoveFromGridSignal signal)
     {
@@ -77,29 +72,22 @@ public class PowerUpButtonController : MonoBehaviour
         {
             _magnetPowerUpBtn.ChangeToLock();
             _shufflePowerUpBtn.ChangeToLock();
-            _hammerPowerUpBtn.ChangeToLock();
-            _slotPowerUpBtn.ChangeToLock();
         }
         else
         {
             _magnetPowerUpBtn.ChangeToColor();
             _shufflePowerUpBtn.ChangeToColor();
-            _hammerPowerUpBtn.ChangeToColor();
-            _slotPowerUpBtn.ChangeToColor();
         }
 
         //SLOT POPPER
         if (_spaceController.AnySpaceOccupied() && _cannonController.HasCannon())
         {
-            _slotPowerUpBtn.ChangeToColor();
         }
         else if (!_spaceController.AnySpaceOccupied() && _cannonController.HasCannon())
         {
-            _slotPowerUpBtn.ChangeToLock();
         }
         else
         {
-            _slotPowerUpBtn.ChangeToLock();
         }
 
         //MAGNET 
@@ -123,7 +111,6 @@ public class PowerUpButtonController : MonoBehaviour
     {
         if (!_spaceController.AnySpaceOccupied() && _cannonController.HasCannon())
         {
-            _slotPowerUpBtn.ChangeToLock();
         }
     }
 
