@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
@@ -13,6 +14,8 @@ namespace Client.Runtime
         [SerializeField] private int _magnetPiecesCount;
         [SerializeField] private Button _eyeButton;
         [SerializeField] private Button _magnetButton;
+        [SerializeField] private TMP_Text _eyeCount;
+        [SerializeField] private TMP_Text _magnetCount;
 
         private IFullImageHandler _fullImageHandler;
         private IPuzzleTray _puzzleTray;
@@ -66,11 +69,13 @@ namespace Client.Runtime
         private void UpdateEyeButtonState()
         {
             _eyeButton.interactable = GlobalService.GameData.Data.Eye > 0;
+            _eyeCount.SetText($"{GlobalService.GameData.Data.Eye}");
         }
 
         private void UpdateMagnetButtonState()
         {
             _magnetButton.interactable = GlobalService.GameData.Data.Magnets > 0;
+            _magnetCount.SetText($"{GlobalService.GameData.Data.Magnets}");
         }
     }
 }
