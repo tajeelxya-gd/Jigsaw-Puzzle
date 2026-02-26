@@ -59,8 +59,8 @@ public class DailyRewardTimer : MonoBehaviour
 
         int daysPassed = (today - lastClaimDate).Days;
 
-        Debug.LogError("days passed :: "+_currentDay+" "+daysPassed);
-        return (_currentDay-1) + Mathf.Max(0, daysPassed);
+        Debug.LogError("days passed :: " + _currentDay + " " + daysPassed);
+        return (_currentDay - 1) + Mathf.Max(0, daysPassed);
     }
 
     // =========================================================
@@ -198,6 +198,36 @@ public class DailyRewardTimer : MonoBehaviour
     private void OnDisable()
     {
         SignalBus.Unsubscribe<OnDailyRewardClaim>(OnClaimReward);
+    }
+
+    [Button("Force Move to Next Day")]
+    [GUIColor(0.4f, 0.8f, 1f)] // Makes the button a nice light blue in Odin
+    public void DebugMoveToNextDay()
+    {
+        // 1. Get the current "last claim" or assume today if none exists
+        DateTime lastDate;
+        if (PlayerPrefs.HasKey(_lastClaimDateKey))
+        {
+            long ticks = long.Parse(PlayerPrefs.GetString(_lastClaimDateKey));
+            lastDate = new DateTime(ticks);
+        }
+        else
+        {
+            lastDate = DateTime.UtcNow;
+        }
+
+        // 2. Subtract one day from the stored date
+        // This makes the logic think the last claim was yesterday
+        DateTime simulatedYesterday = lastDate.AddDays(-1);
+
+        PlayerPrefs.SetString(_lastClaimDateKey, simulatedYesterday.Ticks.ToString());
+        PlayerPrefs.Save();
+
+        // 3. Refresh the status so the UI and flags update immediately
+        CheckDailyStatus();
+
+        Debug.Log($"<color=cyan>Debug:</color> Last claim date moved back. " +
+                  $"Current Day: {_currentDay}. Can claim: {_canClaimToday}");
     }
 }
 

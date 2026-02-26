@@ -13,19 +13,19 @@ public class DailyRewardManager : MonoBehaviour
     [SerializeField] private GameObject _infoText;
     [SerializeField] private DailyRewardPresets _dailyRewardPresets;
     [SerializeField] private RewardCard[] _rewardCards;
-    [ReadOnly,SerializeField]
+    [ReadOnly, SerializeField]
     private int _currentDay = 1;
     private PanelScaling _rewardPanelScaling;
     DailyRewardTimer _dailyRewardTimer;
 
     public void Inject(DailyRewardTimer dailyRewardTimer)
     {
-        _dailyRewardTimer =  dailyRewardTimer;
+        _dailyRewardTimer = dailyRewardTimer;
         if (_presetIndex >= _dailyRewardPresets._dailyRewardPresetsData.Length)
         {
             _presetIndex = 0;
         }
-        
+
         ApplyPreset(_presetIndex);
         Initialize();
     }
@@ -33,7 +33,7 @@ public class DailyRewardManager : MonoBehaviour
 
     private void Start()
     {
-  
+
     }
 
     void Initialize()
@@ -87,14 +87,15 @@ public class DailyRewardManager : MonoBehaviour
                 .SetDelay(i * staggerDelay)
                 .SetEase(Ease.OutBack));
         }
-        
-        
-        onStreakResetSequence.AppendCallback(() => {
+
+
+        onStreakResetSequence.AppendCallback(() =>
+        {
             _claimButton.gameObject.SetActive(true);
         });
     }
-    
-    private void OpenDailyRewardPanel()
+
+    public void OpenDailyRewardPanel()
     {
         PopCommandExecutionResponder.AddCommand(
             new DailyRewardShowCommand(
@@ -107,13 +108,13 @@ public class DailyRewardManager : MonoBehaviour
     void ShowDailyRewardPanel()
     {
         _dailyRewardPanel.SetActive(true);
-        if(_rewardPanelScaling)
+        if (_rewardPanelScaling)
             _rewardPanelScaling.ScaleIn();
 
         Debug.LogError("SOUND SHOULD HAVE PLAYED");
         DOVirtual.DelayedCall(0.3f, () => AudioController.PlaySFX(AudioType.DailyRewards));
-        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
-        
+        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
+
     }
 
     private bool IsRewardAvailableToday()
@@ -161,14 +162,14 @@ public class DailyRewardManager : MonoBehaviour
         UpdateCurrentDayIndicator();
         // if (_currentDay == 1)
         // {
-        
+
         // }
 
         UpdateClaimButtons(_currentDay);
     }
 
-    
-    
+
+
     private void UpdateClaimButtons(int currentDay)
     {
         int index = currentDay - 1;
@@ -204,7 +205,7 @@ public class DailyRewardManager : MonoBehaviour
     private IEnumerator ClosePanel()
     {
         yield return new WaitForSeconds(1.5f);
-        if(_rewardPanelScaling)
+        if (_rewardPanelScaling)
             _rewardPanelScaling.ScaleOut();
         _dailyRewardPanel.GetComponent<CanvasGroup>().DOFade(0f, 0.3f).From(1)
             .OnComplete(() => { _dailyRewardPanel.SetActive(false); });
@@ -227,7 +228,7 @@ public class DailyRewardManager : MonoBehaviour
             if (i < preset._dailyRewards.Length)
             {
                 var data = preset._dailyRewards[i];
-                Debug.LogError("Daily Reward: "+data._dayText);
+                Debug.LogError("Daily Reward: " + data._dayText);
                 data._currentDay = i + 1;
                 _rewardCards[i].Initialize(data);
             }
@@ -241,7 +242,7 @@ public class DailyRewardManager : MonoBehaviour
         {
             _presetIndex = 0;
         }
-        
+
         ApplyPreset(_presetIndex);
     }
 
@@ -256,7 +257,7 @@ public class OnDailyRewardClaim : ISignal
     public bool IsStreakCompleted = false;
 }
 
-public class OnShowDailyRewardPopUpEffect : ISignal{}
+public class OnShowDailyRewardPopUpEffect : ISignal { }
 
 
 // public void OnClaimButtonClickedX2()
