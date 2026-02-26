@@ -46,6 +46,12 @@ namespace Client.Runtime
 
         public void ToggleFullImage() => Fade(!gameObject.activeSelf);
 
+        public void ShowFullImage() => Fade(true);
+
+        public void HideFullImage() => Fade(false);
+
+        public bool IsActive() => gameObject.activeSelf;
+
         public async UniTask PlayLevelCompletedAnimationAsync(CancellationToken cToken = default)
         {
             await FadeAsync(true, cToken);

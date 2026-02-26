@@ -21,6 +21,7 @@ namespace Client.Runtime
         [SerializeField] private FullImageHandler _fullImageHandler;
         [SerializeField] private SavedDataHandler _savedDataHandler;
         [SerializeField] private ToastHandler _toastHandler;
+        [SerializeField] private BoosterPanel _boosterPanel;
 
         private IBinder _binder;
 
@@ -49,6 +50,7 @@ namespace Client.Runtime
             _binder.Bind(_jigsawResourceLoader);
             _binder.Bind(_fullImageHandler);
             _binder.Bind(_toastHandler);
+            _binder.Bind(_boosterPanel);
 
             return UniTask.CompletedTask;
         }
