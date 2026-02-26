@@ -130,6 +130,23 @@ namespace Client.Runtime
             return UniTask.WhenAll(tasks);
         }
 
+        public UniTask DropRandomPiecesAsync(int count, CancellationToken cToken = default)
+        {
+            var tasks = new List<UniTask>();
+            for (var i = 0; i < count; i++)
+            {
+                if (_activePieces.Count == 0) break;
+                var rand = UnityEngine.Random.RandomRange(0, _activePieces.Count);
+                var piece = _activePieces[rand];
+                tasks.Add(DropPieceAsync(piece, piece.CorrectIdx, cToken));
+            }
+
+            _scrollX = 0;
+            _scrollVelocity = 0f;
+
+            return UniTask.WhenAll(tasks);
+        }
+
         public UniTask DropPieceAsync(JigsawPiece piece, int cellIdx, CancellationToken cToken = default)
         {
             _activePieces.Remove(piece);

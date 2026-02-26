@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
@@ -9,6 +10,7 @@ namespace Client.Runtime
 {
     public sealed class BoosterPanel : MonoBehaviour, IInjectable, IInitialisable, IResettable
     {
+        [SerializeField] private int _magnetPiecesCount;
         [SerializeField] private Button _eyeButton;
         [SerializeField] private Button _magnetButton;
 
@@ -37,6 +39,11 @@ namespace Client.Runtime
 
         private void HandleMagnetButton()
         {
+            _puzzleTray.DropRandomPiecesAsync(_magnetPiecesCount, this.GetCancellationTokenOnDestroy());
+            GlobalService.GameData.Data.Magnets -= 1;
+            UpdateMagnetButtonState();
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseMagnet, Amount = 1 });
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
         }
 
         private void HandleEyeButton()
@@ -46,6 +53,8 @@ namespace Client.Runtime
             _fullImageHandler.ShowFullImage();
             GlobalService.GameData.Data.Eye -= 1;
             UpdateEyeButtonState();
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseEye, Amount = 1 });
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
         }
 
         private void HandleLevelStart(LevelStartEvent @event)

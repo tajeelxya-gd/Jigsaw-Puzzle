@@ -17,6 +17,7 @@ namespace Client.Runtime
         void SubmitPiece(JigsawPiece piece);
         UniTask DropPiecesAsync(CancellationToken cToken = default);
         UniTask DropPieceAsync(JigsawPiece piece, int cellIdx, CancellationToken cToken = default);
+        UniTask DropRandomPiecesAsync(int count, CancellationToken cToken = default);
         void PickPieces();
         bool CanDropPieces();
         bool CanPickPieces();
