@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SlotPopper : IPowerup, IDisposable
 {
-    public PowerupType powerupType { get { return PowerupType.SlotPopper; } }
+    public PowerupType powerupType { get { return default; } }
 
     private IPowerupVisual _powerupVisual;
     private SpaceController _spaceController;
@@ -22,7 +22,7 @@ public class SlotPopper : IPowerup, IDisposable
         _spaceController.Pop_Shooter();
         AudioController.PlayOnDemandSFX(AudioType.SlotPopperEffect);
         HapticController.Vibrate(HapticType.Hammer);
-        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseSlotPopper, Amount = 1 });
+        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = default, Amount = 1 });
         SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
         if (TutorialManager.IsTutorialActivated)
             SignalBus.Publish(new OnTutorialActivated { IsActivated = false });

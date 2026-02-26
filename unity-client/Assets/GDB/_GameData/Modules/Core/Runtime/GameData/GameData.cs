@@ -24,13 +24,10 @@ public class GameData
         public bool IsTutorial = false;
         public int LevelIndex = 0;
         public int Coins = 10;
-        public int PremiumCoins = 10;
         public int TrophiesWinInGame = 0;
         public int AvailableLives = 5;
         public int Magnets = 0;
         public int Wand = 0;
-        public int Hammer = 0;
-        public int SlotPopper = 0;
         public int PlayerEarnedTrophies = 0;
         public int CurrentWinStreakLevel = 0;
         public List<PowerupType> OnBoardPowerUpType = new List<PowerupType>();

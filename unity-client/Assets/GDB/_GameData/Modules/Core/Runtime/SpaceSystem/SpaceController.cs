@@ -154,7 +154,7 @@ public class SpaceController : MonoBehaviour, ITickable
 
         DOVirtual.DelayedCall(0.4f, () =>
         {
-          SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.MergeShooter, Amount = 1 });
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = default, Amount = 1 });
             foreach (var c in cannons)
             {
                 c.Cannon.transform.DOMoveY(c.Cannon.transform.position.y + 1f, 0.15f).SetEase(Ease.OutQuad);

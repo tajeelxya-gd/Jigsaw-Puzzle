@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hammer : IPowerup, IDisposable
 {
-    public PowerupType powerupType { get { return PowerupType.Hammer; } }
+    public PowerupType powerupType { get { return default; } }
 
     private IPowerupVisual _powerupVisual;
     public Hammer(IPowerupVisual powerupVisual)
@@ -33,7 +33,7 @@ public class Hammer : IPowerup, IDisposable
         _onHammerHitConfirmationSignal = null;
         SignalBus.Publish(new OnBoosterEnableSignal { IsEnable = false });
         SignalBus.Publish(new OnHammerEnableSignal { IsEnable = false });
-        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseHammer, Amount = 1 });
+        SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = default, Amount = 1 });
         SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.UseBooster, Amount = 1 });
         AudioController.PlayOnDemandSFX(AudioType.HammerEffect);
         HapticController.Vibrate(HapticType.Hammer);

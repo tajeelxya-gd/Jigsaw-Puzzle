@@ -161,12 +161,12 @@ public class PlayerRaycastController : MonoBehaviour, ITickable
     }
     private void OnPowerUpVisual(PowerUpVisualStartSignal signal)
     {
-        if (signal.powerupType == PowerupType.MagicWand || signal.powerupType == PowerupType.SlotPopper)
+        if (signal.powerupType == PowerupType.MagicWand || signal.powerupType == default)
         {
             _canClick = false;
             return;
         }
-        else if (signal.powerupType == PowerupType.Hammer)
+        else if (signal.powerupType == default)
             _isHammerPowerUpEnable = true;
         else if (signal.powerupType == PowerupType.Magnet)
             _isMagnetEnable = true;

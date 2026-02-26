@@ -60,13 +60,10 @@ public class MissionProgress
 public enum WeeklyRewardType
 {
     None,
-    Hammer,
     InfiniteHealth,
     Coin,
-    PremiumCoin,
     MagicWand,
-    Magnet,
-    PopTreasureBox,
+    Magnet
 }
 
 public enum MissionType
@@ -75,18 +72,15 @@ public enum MissionType
     Login,
     UseBooster,
     WinLevel,
-    MergeShooter,
     Get2XCoins,
     WinStreak,
     WinHardLevel,
-    UseHammer,
-    UseShuffle,
     SpendCoins,
-    UseSelect,
     EarnCoins,
     JoinTinyRacer,
-    UseSlotPopper,
     WinTinyRace,
     WinSuperHardLevel,
-    Top3inLeague
+    Top3inLeague,
+    UseMagnet,
+    UseWand
 }

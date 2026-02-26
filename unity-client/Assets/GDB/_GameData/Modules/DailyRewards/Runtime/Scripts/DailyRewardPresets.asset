@@ -14,180 +14,124 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dailyRewardPresetsData:
   - _dailyRewards:
-    - _progressModels:
-      - rewardType: 3
-        rewardChestAmount: 10
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      _dayText: DAY1
-      _reward: 03000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
+    - _dayText: DAY1
       _currentDay: 1
-    - _progressModels:
-      - rewardType: 2
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
         rewardChestAmount: 10
-        _rewardIcon: {fileID: 21300000, guid: 038470198bf6e6448a918543c314320e, type: 3}
-      - rewardType: 1
-        rewardChestAmount: 2
-        _rewardIcon: {fileID: 21300000, guid: 72965849762a68549aa6d3850dd842ea, type: 3}
-      _dayText: DAY2
-      _reward: 0200000001000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      - {fileID: 21300000, guid: dc1e7446682894d41bd4f2df603f930a, type: 3}
+    - _dayText: DAY2
       _currentDay: 2
-    - _progressModels:
-      - rewardType: 3
-        rewardChestAmount: 30
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - rewardType: 4
-        rewardChestAmount: 30
-        _rewardIcon: {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      _dayText: DAY3
-      _reward: 0300000004000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      _currentDay: 3
-    - _progressModels:
-      - rewardType: 2
-        rewardChestAmount: 40
-        _rewardIcon: {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      - rewardType: 5
-        rewardChestAmount: 1
-        _rewardIcon: {fileID: 21300000, guid: 7f48246da171e664e8676d009f6fbc59, type: 3}
-      _dayText: DAY4
-      _reward: 0200000005000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      - {fileID: 21300000, guid: 7f48246da171e664e8676d009f6fbc59, type: 3}
-      _currentDay: 4
-    - _progressModels:
-      - rewardType: 3
-        rewardChestAmount: 60
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      _dayText: DAY5
-      _reward: 03000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      _currentDay: 5
-    - _progressModels:
-      - rewardType: 6
-        rewardChestAmount: 0
-        _rewardIcon: {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - rewardType: 4
-        rewardChestAmount: 0
-        _rewardIcon: {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      _dayText: DAY6
-      _reward: 060000000400000006000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      - {fileID: 21300000, guid: dc1e7446682894d41bd4f2df603f930a, type: 3}
-      _currentDay: 6
-    - _progressModels:
-      - rewardType: 6
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 10
+      - _rewardIcon: {fileID: 21300000, guid: 51a1dcdf4ba2d954abd745cc7c3a845d, type: 3}
+        rewardType: 1
         rewardChestAmount: 2
-        _rewardIcon: {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - rewardType: 3
+    - _dayText: DAY3
+      _currentDay: 3
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 58b4e4aece68f0b40a14d5552ea3c90f, type: 3}
+        rewardType: 3
+        rewardChestAmount: 1
+      - _rewardIcon: {fileID: 21300000, guid: 8a37c299f79004e44a2dc056aa319f21, type: 3}
+        rewardType: 4
+        rewardChestAmount: 1
+    - _dayText: DAY4
+      _currentDay: 4
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 40
+      - _rewardIcon: {fileID: 21300000, guid: 58b4e4aece68f0b40a14d5552ea3c90f, type: 3}
+        rewardType: 3
+        rewardChestAmount: 1
+    - _dayText: DAY5
+      _currentDay: 5
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
+        rewardType: 3
         rewardChestAmount: 60
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - rewardType: 2
-        rewardChestAmount: 20
-        _rewardIcon: {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      _dayText: DAY7
-      _reward: 060000000300000002000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
+    - _dayText: DAY6
+      _currentDay: 6
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 50
+      - _rewardIcon: {fileID: 21300000, guid: 58b4e4aece68f0b40a14d5552ea3c90f, type: 3}
+        rewardType: 3
+        rewardChestAmount: 2
+    - _dayText: DAY7
       _currentDay: 7
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 20
+      - _rewardIcon: {fileID: 21300000, guid: 58b4e4aece68f0b40a14d5552ea3c90f, type: 3}
+        rewardType: 3
+        rewardChestAmount: 2
+      - _rewardIcon: {fileID: 21300000, guid: 51a1dcdf4ba2d954abd745cc7c3a845d, type: 3}
+        rewardType: 1
+        rewardChestAmount: 2
   - _dailyRewards:
-    - _progressModels:
-      - rewardType: 3
-        rewardChestAmount: 10
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      _dayText: DAY1
-      _reward: 03000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
+    - _dayText: DAY1
       _currentDay: 1
-    - _progressModels:
-      - rewardType: 2
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
         rewardChestAmount: 10
-        _rewardIcon: {fileID: 21300000, guid: 038470198bf6e6448a918543c314320e, type: 3}
-      - rewardType: 1
-        rewardChestAmount: 2
-        _rewardIcon: {fileID: 21300000, guid: 72965849762a68549aa6d3850dd842ea, type: 3}
-      _dayText: DAY2
-      _reward: 0200000001000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      - {fileID: 21300000, guid: dc1e7446682894d41bd4f2df603f930a, type: 3}
+    - _dayText: DAY2
       _currentDay: 2
-    - _progressModels:
-      - rewardType: 3
-        rewardChestAmount: 30
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - rewardType: 4
-        rewardChestAmount: 30
-        _rewardIcon: {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      _dayText: DAY3
-      _reward: 0300000004000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      _currentDay: 3
-    - _progressModels:
-      - rewardType: 2
-        rewardChestAmount: 40
-        _rewardIcon: {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      - rewardType: 5
-        rewardChestAmount: 1
-        _rewardIcon: {fileID: 21300000, guid: 7f48246da171e664e8676d009f6fbc59, type: 3}
-      _dayText: DAY4
-      _reward: 0200000005000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      - {fileID: 21300000, guid: 7f48246da171e664e8676d009f6fbc59, type: 3}
-      _currentDay: 4
-    - _progressModels:
-      - rewardType: 3
-        rewardChestAmount: 60
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      _dayText: DAY5
-      _reward: 03000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      _currentDay: 5
-    - _progressModels:
-      - rewardType: 6
-        rewardChestAmount: 0
-        _rewardIcon: {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - rewardType: 4
-        rewardChestAmount: 0
-        _rewardIcon: {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      _dayText: DAY6
-      _reward: 060000000400000006000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - {fileID: 21300000, guid: 27343c47c920d5a41add00639def5bd2, type: 3}
-      - {fileID: 21300000, guid: dc1e7446682894d41bd4f2df603f930a, type: 3}
-      _currentDay: 6
-    - _progressModels:
-      - rewardType: 6
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 10
+      - _rewardIcon: {fileID: 21300000, guid: 51a1dcdf4ba2d954abd745cc7c3a845d, type: 3}
+        rewardType: 1
         rewardChestAmount: 2
-        _rewardIcon: {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - rewardType: 3
-        rewardChestAmount: 60
-        _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - rewardType: 2
-        rewardChestAmount: 20
-        _rewardIcon: {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-      _dayText: DAY7
-      _reward: 060000000300000002000000
-      _rewardIcon:
-      - {fileID: 21300000, guid: fd542fefaa8522c41ba2d68f37b485ff, type: 3}
-      - {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-      - {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
+    - _dayText: DAY3
+      _currentDay: 3
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 58b4e4aece68f0b40a14d5552ea3c90f, type: 3}
+        rewardType: 3
+        rewardChestAmount: 3
+      - _rewardIcon: {fileID: 21300000, guid: 8a37c299f79004e44a2dc056aa319f21, type: 3}
+        rewardType: 4
+        rewardChestAmount: 3
+    - _dayText: DAY4
+      _currentDay: 4
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 40
+      - _rewardIcon: {fileID: 21300000, guid: 51a1dcdf4ba2d954abd745cc7c3a845d, type: 3}
+        rewardType: 1
+        rewardChestAmount: 1
+    - _dayText: DAY5
+      _currentDay: 5
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 58b4e4aece68f0b40a14d5552ea3c90f, type: 3}
+        rewardType: 3
+        rewardChestAmount: 6
+    - _dayText: DAY6
+      _currentDay: 6
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 8a37c299f79004e44a2dc056aa319f21, type: 3}
+        rewardType: 4
+        rewardChestAmount: 2
+      - _rewardIcon: {fileID: 21300000, guid: 51a1dcdf4ba2d954abd745cc7c3a845d, type: 3}
+        rewardType: 1
+        rewardChestAmount: 2
+    - _dayText: DAY7
       _currentDay: 7
+      _progressModels:
+      - _rewardIcon: {fileID: 21300000, guid: 8a37c299f79004e44a2dc056aa319f21, type: 3}
+        rewardType: 4
+        rewardChestAmount: 2
+      - _rewardIcon: {fileID: 21300000, guid: 47d5b245b4dd1de409a3d4ef3fc6f21d, type: 3}
+        rewardType: 2
+        rewardChestAmount: 60
+      - _rewardIcon: {fileID: 21300000, guid: 51a1dcdf4ba2d954abd745cc7c3a845d, type: 3}
+        rewardType: 1
+        rewardChestAmount: 2

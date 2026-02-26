@@ -166,8 +166,6 @@ public class PowerUpButton : MonoBehaviour
         {
             case PowerupType.Magnet: return GlobalService.GameData.Data.Magnets;
             case PowerupType.MagicWand: return GlobalService.GameData.Data.Wand;
-            case PowerupType.Hammer: return GlobalService.GameData.Data.Hammer;
-            case PowerupType.SlotPopper: return GlobalService.GameData.Data.SlotPopper;
             default: return 0;
         }
     }
@@ -196,8 +194,6 @@ public class PowerUpButton : MonoBehaviour
         {
             case PowerupType.Magnet: GlobalService.GameData.Data.Magnets += Amount; break;
             case PowerupType.MagicWand: GlobalService.GameData.Data.Wand += Amount; break;
-            case PowerupType.Hammer: GlobalService.GameData.Data.Hammer += Amount; break;
-            case PowerupType.SlotPopper: GlobalService.GameData.Data.SlotPopper += Amount; break;
             default: break;
         }
         GlobalService.GameData.Save();

@@ -16,12 +16,12 @@ public class HammerVisual : MonoBehaviour, IPowerupVisual
 
     public void PerformVisual()
     {
-        SignalBus.Publish(new PowerUpVisualStartSignal { powerupType = PowerupType.Hammer, OnClose = () => SignalBus.Publish(new OnHammerEnableSignal { IsEnable = false }) });
+        SignalBus.Publish(new PowerUpVisualStartSignal { powerupType = default, OnClose = () => SignalBus.Publish(new OnHammerEnableSignal { IsEnable = false }) });
     }
 
     private void OnPowerVisualEnd(PowerUpVisualPanelEndSignal signal)
     {
-        if (signal.powerupType != PowerupType.Hammer) return;
+        if (signal.powerupType != default) return;
         PlayHitHammer();
     }
 
