@@ -16,12 +16,12 @@ public class HolderManager : MonoBehaviour
     [SerializeField] private Sprite _dimHolder;
     [SerializeField] private Sprite _originalSprite;
     [SerializeField] private RewardContainerUI _rewardContainer;
-    public void SetupHolder(int number, Sprite icon,int rewardAmount)
+    public void SetupHolder(int number, Sprite icon, int rewardAmount)
     {
         _number.text = number.ToString();
         _number_special.text = number.ToString();
         _icon.sprite = icon;
-        _rewardContainer.Init(icon,rewardAmount);
+        _rewardContainer.Init(icon, rewardAmount);
         _number.gameObject.SetActive(number_icon.sprite != _puzzleSprite);
         _number_special.gameObject.SetActive(number_icon.sprite == _puzzleSprite);
     }
@@ -37,7 +37,7 @@ public class HolderManager : MonoBehaviour
 
     public void ShowCollectedIcon()
     {
-        _number.gameObject.SetActive(false);
+        // _number.gameObject.SetActive(false);
         _collectedImage.SetActive(true);
     }
 
@@ -52,7 +52,7 @@ public class HolderManager : MonoBehaviour
     {
         return (RectTransform)transform;
     }
-    
+
     public void Reset()
     {
         _number.gameObject.SetActive(true);
