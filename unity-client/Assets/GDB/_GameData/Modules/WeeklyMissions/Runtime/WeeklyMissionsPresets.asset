@@ -29,7 +29,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE LEVELS
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 30
       _extraReward: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: JOIN CANNONS
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 20
       _extraReward: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE MAGNET
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 20
       _extraReward: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: WINS STREAK
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 30
       _extraReward: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE A HARD LEVEL
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 40
       _extraReward: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE HAMMER
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 30
       _extraReward: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: GET X2 COINS
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 70
       _extraReward: 0
@@ -138,10 +138,10 @@ MonoBehaviour:
       _targetAmount: 3
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
     - Day: 3
-      _isInteractable: 1
+      _isInteractable: 0
       _text: JOIN TURBO RACE
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 20
       _extraReward: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE LEVELS
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 80
       _extraReward: 3
@@ -174,7 +174,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE MAGNET
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 70
       _extraReward: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE HAMMER
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 70
       _extraReward: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE SPACE MAKER
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 70
       _extraReward: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE HARD LEVEL
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 80
       _extraReward: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE MAGIC WAND
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 100
       _extraReward: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: WIN TURBO RACER
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 120
       _extraReward: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE LEVEL
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 120
       _extraReward: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE HARD LEVELS
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 150
       _extraReward: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE SPACE MAKER
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 150
       _extraReward: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: FINISH TOP 3 IN LEAGUE
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 100
       _extraReward: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE SUPER HARD LEVEL
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 120
       _extraReward: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: WINS STREAK
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 100
       _extraReward: 0
@@ -388,7 +388,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: USE POWERUPS
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 180
       _extraReward: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
       _isInteractable: 1
       _text: COMPLETE LEVEL
       _rewardIcon:
-      - {fileID: 21300000, guid: 57ee1ddf8108a024f9dd365de5789c14, type: 3}
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 180
       _extraReward: 0
