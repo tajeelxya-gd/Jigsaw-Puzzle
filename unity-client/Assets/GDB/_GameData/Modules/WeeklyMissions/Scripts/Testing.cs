@@ -28,7 +28,7 @@ public class Testing : MonoBehaviour
         SignalBus.Publish(new OnPlayerDidActionSignal()
         {
             MissionType = MissionType.WinStreak,
-            Amount = 3
+            Amount = 1
         });
     }
     [Button]
@@ -37,7 +37,16 @@ public class Testing : MonoBehaviour
         SignalBus.Publish(new OnPlayerDidActionSignal()
         {
             MissionType = MissionType.UseMagnet,
-            Amount = 5
+            Amount = 1
+        });
+    }
+    [Button]
+    public void UseEye()
+    {
+        SignalBus.Publish(new OnPlayerDidActionSignal()
+        {
+            MissionType = MissionType.UseEye,
+            Amount = 1
         });
     }
 }
