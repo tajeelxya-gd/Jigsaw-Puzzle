@@ -43,5 +43,6 @@ public class GameData
         public int CurrentDailyRewardWeek = 1;
         public int CurrentInterstitialCount = 0;
         public int CurrentAchievementRewardWeek = 1;
+        public bool PreviousWin = false;
     }
 }

@@ -83,5 +83,5 @@ public enum MissionType
     Top3inLeague,
     UseMagnet,
     UseEye,
-    JoinPieces
+    MergePieces
 }

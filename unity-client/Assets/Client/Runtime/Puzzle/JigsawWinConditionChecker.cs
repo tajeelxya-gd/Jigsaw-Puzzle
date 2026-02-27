@@ -107,11 +107,13 @@ namespace Client.Runtime
             var progress = (float)_board.Cells.Count(itm => itm.IsLocked) / _board.Cells.Count;
             OnAdvance.Broadcast(progress);
 
+            HandleJoinPiecesMissionSignal(@event.Group);
+
             if (CheckWin())
             {
                 StopTimer();
                 OnWin.Broadcast();
-                UniStatics.LogInfo("Board completed.", this);
+                HandleWinMissionSignals(true);
                 return;
             }
 
@@ -121,9 +123,44 @@ namespace Client.Runtime
                 {
                     _isLoseBroadcasted = true;
                     OnLose.Broadcast();
+                    HandleWinMissionSignals(false);
                 }
                 return;
             }
+        }
+        private void HandleJoinPiecesMissionSignal(JigsawGroup group)
+        {
+            if (group.Count <= 1) return;
+
+            SignalBus.Publish(new OnPlayerDidActionSignal()
+            {
+                MissionType = MissionType.MergePieces,
+                Amount = group.Count - 1
+            });
+        }
+
+        private void HandleWinMissionSignals(bool isCurrentWin)
+        {
+            if (GlobalService.GameData.Data.PreviousWin && isCurrentWin)
+            {
+                SignalBus.Publish(new OnPlayerDidActionSignal()
+                {
+                    MissionType = MissionType.WinStreak,
+                    Amount = 1
+                });
+            }
+
+            if (isCurrentWin)
+            {
+                SignalBus.Publish(new OnPlayerDidActionSignal()
+                {
+                    MissionType = MissionType.WinLevel,
+                    Amount = 1
+                });
+            }
+
+            GlobalService.GameData.Data.PreviousWin = isCurrentWin;
+            GlobalService.GameData.Save();
         }
     }
 }
