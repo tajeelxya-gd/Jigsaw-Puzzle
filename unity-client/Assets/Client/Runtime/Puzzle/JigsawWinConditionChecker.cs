@@ -132,7 +132,7 @@ namespace Client.Runtime
         {
             if (group.Count <= 1) return;
 
-            SignalBus.Publish(new OnPlayerDidActionSignal()
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
             {
                 MissionType = MissionType.MergePieces,
                 Amount = group.Count - 1
@@ -143,7 +143,7 @@ namespace Client.Runtime
         {
             if (GlobalService.GameData.Data.PreviousWin && isCurrentWin)
             {
-                SignalBus.Publish(new OnPlayerDidActionSignal()
+                SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
                 {
                     MissionType = MissionType.WinStreak,
                     Amount = 1
@@ -152,7 +152,7 @@ namespace Client.Runtime
 
             if (isCurrentWin)
             {
-                SignalBus.Publish(new OnPlayerDidActionSignal()
+                SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
                 {
                     MissionType = MissionType.WinLevel,
                     Amount = 1
