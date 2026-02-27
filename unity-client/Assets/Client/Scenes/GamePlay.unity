@@ -3207,6 +3207,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608989427184455533, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+      propertyPath: _padding.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4189858505960107931, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_Name
       value: PuzzleTray
