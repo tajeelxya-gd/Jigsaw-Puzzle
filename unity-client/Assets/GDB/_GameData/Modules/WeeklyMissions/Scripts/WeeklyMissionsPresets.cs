@@ -82,5 +82,6 @@ public enum MissionType
     WinSuperHardLevel,
     Top3inLeague,
     UseMagnet,
-    UseEye
+    UseEye,
+    JoinPieces
 }

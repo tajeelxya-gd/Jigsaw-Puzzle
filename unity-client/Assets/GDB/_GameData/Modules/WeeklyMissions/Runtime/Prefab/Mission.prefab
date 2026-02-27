@@ -763,7 +763,7 @@ MonoBehaviour:
   forcedTargetType: 0
   autoPlay: 1
   useTargetAsV3: 0
-  endValueFloat: 1.3
+  endValueFloat: 1.05
   endValueV3: {x: 0, y: 0, z: 0}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   isValid: 1
   target: {fileID: 1542833793644978912}
   animationType: 7
-  targetType: 3
+  targetType: 2
   forcedTargetType: 2
   autoPlay: 1
   useTargetAsV3: 0
