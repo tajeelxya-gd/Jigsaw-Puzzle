@@ -23,6 +23,7 @@ public class WeeklyRewardCard : MonoBehaviour
     [SerializeField] private GameObject _progressRoot;
     [SerializeField] private GameObject _titleRoot;
     [SerializeField] private Image _completionImage;
+    [SerializeField] private LayoutGroup _layout;
     private MissionProgress _missionProgress;
     private WeeklyRewardManager _weeklyRewardManager;
 
@@ -84,7 +85,7 @@ public class WeeklyRewardCard : MonoBehaviour
     {
         lockSeq.Restart();
         HapticController.VibrateForcefully(HapticType.Wrong);
-        
+
     }
 
     private void RefreshProgress()
@@ -94,15 +95,25 @@ public class WeeklyRewardCard : MonoBehaviour
         int clampedProgressAmount = Mathf.Clamp(_missionProgress.CurrentAmount, 0, _missionProgress.Mission._targetAmount);
         _progressText.text = $"{clampedProgressAmount}/{_missionProgress.Mission._targetAmount}";
         _collectButton.gameObject.SetActive(_missionProgress.IsCompleted && !_missionProgress.IsClaimed);
-        _textMeshProUGUI.gameObject.SetActive(!(_missionProgress.IsCompleted && !_missionProgress.IsClaimed));
-        _claimTextMeshProUGUI.gameObject.SetActive(_missionProgress.IsCompleted && !_missionProgress.IsClaimed);
+        // _textMeshProUGUI.gameObject.SetActive(!(_missionProgress.IsCompleted && !_missionProgress.IsClaimed));
+        var claimable = _missionProgress.IsCompleted && !_missionProgress.IsClaimed;
+        _claimTextMeshProUGUI.gameObject.SetActive(claimable);
+        if (_missionProgress.IsClaimed)
+        {
+            _progressRoot.gameObject.SetActive(false);
+            _layout.childAlignment = TextAnchor.MiddleCenter;
+        }
+        else
+        {
+            _progressRoot.gameObject.SetActive(!claimable);
+            _layout.childAlignment = TextAnchor.UpperCenter;
+        }
         float progress = (float)clampedProgressAmount / _missionProgress.Mission._targetAmount;
         _progressBar.FillBar(progress);
         GetComponent<CanvasGroup>().alpha = _missionProgress.IsClaimed ? 0.7f : 1;
         _claimedOverlay.gameObject.SetActive(_missionProgress.IsClaimed);
         _taskImage.gameObject.SetActive(!_missionProgress.IsClaimed);
         _completionImage.gameObject.SetActive(_missionProgress.IsClaimed);
-        _progressRoot.gameObject.SetActive(!_missionProgress.IsClaimed);
         _lockButton.gameObject.SetActive(!(_currentday <= _weeklyRewardManager._currentDay));
         _lockIcon.gameObject.SetActive(!(_currentday <= _weeklyRewardManager._currentDay));
         _rewardText_Extra.gameObject.SetActive(_missionProgress.Mission._extraReward != WeeklyRewardType.None);
@@ -113,9 +124,9 @@ public class WeeklyRewardCard : MonoBehaviour
     void SendAnalyticEvent()
     {
         GameAnalytics.PublishAnalytic(
-            AnalyticEventType.GameData,"Events",
-            nameof(AnalyticEventType.AchievementEvent), 
-            "Day "+_currentday.ToString(),
+            AnalyticEventType.GameData, "Events",
+            nameof(AnalyticEventType.AchievementEvent),
+            "Day " + _currentday.ToString(),
             _missionProgress.Mission._text);
     }
     public void OnCollectButtonPressed()

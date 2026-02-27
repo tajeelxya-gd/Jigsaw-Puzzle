@@ -14,7 +14,7 @@ public class RewardDataHolder : MonoBehaviour
     private void Start()
     {
         _rewardAmount = PlayerPrefs.GetInt("RewardAmount");
-        _rewardAmountText.text = _rewardAmount.ToString();
+        SetRewardAmount();
     }
 
     private void OnEnable()
@@ -33,6 +33,8 @@ public class RewardDataHolder : MonoBehaviour
     {
         signal.RewardAmount = _rewardAmount;
     }
+
+    private void SetRewardAmount() => _rewardAmountText.SetText($"{_rewardAmount}/{_totalAmount}");
 
     public void AddRewardAmount(OnRewardAdded signal)
     {
@@ -63,7 +65,7 @@ public class RewardDataHolder : MonoBehaviour
         }
 
         _rewardAmount += signal.RewardAmount;
-        _rewardAmountText.text = _rewardAmount.ToString();
+        SetRewardAmount();
         popBulkService.PlayEffect(signal.RewardAmount, PopBulkService.BulkPopUpServiceType.Trophy,
             signal.RewardPoint.position, 10);
 

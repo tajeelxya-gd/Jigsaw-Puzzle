@@ -98,4 +98,10 @@ public class HorizontalSnap : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             _placeholders[i].SetActive(active);
         }
     }
+
+    private void OnEnable()
+    {
+        activeImageIndex = 0;
+        SetActivePlaceHolders();
+    }
 }
