@@ -91,6 +91,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Bootstrap.UniTxStep
   _widgetsManager: {fileID: 0}
+--- !u!1 &2922848614070347533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3878465605262707308}
+  - component: {fileID: 7756152914180980237}
+  m_Layer: 0
+  m_Name: SceneConfigurationStep
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3878465605262707308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922848614070347533}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1739288844784335156}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7756152914180980237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922848614070347533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2a3356bdfeed34f9e4c3e3d450785f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
 --- !u!1 &3012221156267686699
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +262,7 @@ Transform:
   - {fileID: 8769689448654289113}
   - {fileID: 8527959072808278477}
   - {fileID: 4419784240397353602}
+  - {fileID: 3878465605262707308}
   - {fileID: 4573837418911441097}
   - {fileID: 4642768258062200488}
   m_Father: {fileID: 0}
@@ -240,6 +286,7 @@ MonoBehaviour:
   - {fileID: 9141284652492727019}
   - {fileID: 5465780741353055732}
   - {fileID: 4985582967801707493}
+  - {fileID: 7756152914180980237}
   - {fileID: 715410019087325436}
   - {fileID: 6860733710026532556}
 --- !u!1 &4950897299910891085

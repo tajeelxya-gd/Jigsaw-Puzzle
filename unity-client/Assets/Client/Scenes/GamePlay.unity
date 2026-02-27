@@ -3311,7 +3311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.046
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 4067124605036065529, guid: ddac0339ce8ca984ea2cf739caab938e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3530,6 +3530,10 @@ PrefabInstance:
       propertyPath: _loadingWidget
       value: 
       objectReference: {fileID: 1796932629}
+    - target: {fileID: 7756152914180980237, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 1996743874}
     - target: {fileID: 8206543326406449635, guid: 9d835604cceb61440b54c5ca332b5291, type: 3}
       propertyPath: _widgetsManager
       value: 
