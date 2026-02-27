@@ -6,7 +6,6 @@ public class HomeButtonsManager : MonoBehaviour
 {
     [SerializeField] private Button _homeButton, _storeButton, _goldMedalButton;
     [SerializeField] private PanelNavigator _page;
-    [SerializeField] private PanelNavigator _page_3d;
     [SerializeField] private ScrollRectArraySnapper _scrollSnapper;
     [SerializeField] private float _snapDuration = 0.5f;
     void Start()
@@ -19,7 +18,6 @@ public class HomeButtonsManager : MonoBehaviour
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
         _page.GoToPage(1);
-        _page_3d.GoToPage(1);
         _homeButton.interactable = false;
         _storeButton.interactable = true;
         _goldMedalButton.interactable = true;
@@ -27,9 +25,9 @@ public class HomeButtonsManager : MonoBehaviour
 
     void OnInappBuySignal(OnInAppBuySignal signal)
     {
-      _homeButton.onClick.Invoke();
+        _homeButton.onClick.Invoke();
     }
-    
+
     public void OpenStore()
     {
         //AudioController.PlaySFX(AudioType.ButtonClick);
@@ -57,7 +55,6 @@ public class HomeButtonsManager : MonoBehaviour
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
         _page.GoToPage(2);
-        _page_3d.GoToPage(2);
         _homeButton.interactable = true;
         _storeButton.interactable = true;
         _goldMedalButton.interactable = false;
@@ -68,7 +65,6 @@ public class HomeButtonsManager : MonoBehaviour
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
         _page.GoToPage(0);
-        _page_3d.GoToPage(0);
         _homeButton.interactable = true;
         _storeButton.interactable = false;
         _goldMedalButton.interactable = true;
@@ -82,7 +78,7 @@ public class HomeButtonsManager : MonoBehaviour
     {
         SignalBus.Unsubscribe<OpenStoreSignal>(OpenStoreSignal);
         SignalBus.Unsubscribe<OnInAppBuySignal>(OnInappBuySignal);
-        
+
     }
 }
 

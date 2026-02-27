@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private GameObject _racePanel;
     [SerializeField] private GameObject _winFailPanel;
     [SerializeField] private Transform _startPoint;
+    [SerializeField] private TMP_Text _raceTimerToCopyText;
+    [SerializeField] private TMP_Text _raceTimerModule;
 
     private IGetWins[] _racersWins;
     private IGetCarType[] _carTypeGetter;
@@ -63,6 +66,7 @@ public class RaceManager : MonoBehaviour
             StartEvent();
             _racePanel.SetActive(true);
             _findOpponentPanel.SetActive(false);
+            _raceTimerModule.SetText(_raceTimerToCopyText.text);
         }
 
         SignalBus.Subscribe<WinCheck>(CheckWinner);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RankSystem : MonoBehaviour
 {
+    [SerializeField] private Sprite[] _badges;
     [SerializeField] private RacerRank[] _racers;
     private IGetCarType[] _carTypeGetter;
     private IGetWins[] _racersWins;
@@ -19,7 +20,7 @@ public class RankSystem : MonoBehaviour
             _racersWins[i] = _racers[i].GetComponent<IGetWins>();
         }
     }
-    
+
     private void OnDestroy()
     {
         SignalBus.Unsubscribe<AssignRanks>(UpdateRanks);
@@ -27,18 +28,18 @@ public class RankSystem : MonoBehaviour
 
     private void UpdateRanks(AssignRanks signal)
     {
-        for(int i = 0; i < _racers.Length; i++)
+        for (int i = 0; i < _racers.Length; i++)
         {
             int rank = 1;
             int racerCurrentWins = _racersWins[i].GetWins();
-            for(int j = 0; j < _racers.Length; j++)
+            for (int j = 0; j < _racers.Length; j++)
             {
-                if(i == j) continue;
+                if (i == j) continue;
                 int otherRacerWins = _racersWins[j].GetWins();
 
-                if(racerCurrentWins < otherRacerWins)
+                if (racerCurrentWins < otherRacerWins)
                 {
-                    rank++; 
+                    rank++;
                 }
                 else if (racerCurrentWins == otherRacerWins)
                 {
@@ -48,7 +49,8 @@ public class RankSystem : MonoBehaviour
                     }
                 }
             }
-            _racers[i].SetRank((Ranks)rank);
+            var spriteIdx = Math.Clamp(rank - 1, 0, _badges.Length - 1);
+            _racers[i].SetRank((Ranks)rank, _badges[spriteIdx]);
         }
     }
 }
@@ -56,9 +58,9 @@ public class RankSystem : MonoBehaviour
 public enum Ranks
 {
     None,
-    First=1,
-    Second=2,
-    Third=3,
-    Fourth=4,
-    Fifth=5
+    First = 1,
+    Second = 2,
+    Third = 3,
+    Fourth = 4,
+    Fifth = 5
 }

@@ -42,7 +42,7 @@ public class AIManager : MonoBehaviour
 
     private bool initiated = false;
     private WaitForSeconds _startWait = new WaitForSeconds(0.1f);
-    private IEnumerator  Start()
+    private IEnumerator Start()
     {
         yield return _startWait;
         _aiDataService = new DataBaseService<AICarSaveData>();
@@ -64,8 +64,8 @@ public class AIManager : MonoBehaviour
             {
                 _aiData.aiCars[i] = new AICarData();
                 _aiData.aiCars[i].raceProgression = 0.25f;
-            yield return null;
-                
+                yield return null;
+
             }
 
             _aiData.nextAITickUtc = DateTime.UtcNow.AddSeconds(_timer).Ticks;
@@ -130,6 +130,8 @@ public class AIManager : MonoBehaviour
             IncreaseRandomAIs(GetRandomAIIncrementCount());
         }
 
+        SignalBus.Publish(new AssignRanks());
+
         _aiData.nextAITickUtc = nextTick.AddSeconds(_timer * ticksToApply).Ticks;
         _aiDataService.Save(_aiData);
 
@@ -161,7 +163,7 @@ public class AIManager : MonoBehaviour
 
         ResetNameAndPicture();
     }
-    
+
     private int GetRandomAIIncrementCount()
     {
         float r = Random.value;
