@@ -16,7 +16,7 @@ public class StreakBarManager : MonoBehaviour
     [SerializeField] private RectTransform _streakEffect;
     [SerializeField] private RectTransform _targetMovePoint;
     private bool[] _claimed;
-    [ReadOnly,SerializeField]
+    [ReadOnly, SerializeField]
     private int _streakCount = 0;
     private StreakData _streakData;
     private DataBaseService<StreakData> _dataBaseService;
@@ -26,7 +26,7 @@ public class StreakBarManager : MonoBehaviour
         _dataBaseService = new DataBaseService<StreakData>();
         _claimed = new bool[_rewardProgressHolder.Length];
         _streakData = _dataBaseService.Load_Get();
-        if(_streakData._rewardClaimed==null)
+        if (_streakData._rewardClaimed == null)
         {
             _streakData._rewardClaimed = new bool[_rewardProgressHolder.Length];
             _dataBaseService.Save(_streakData);
@@ -46,9 +46,9 @@ public class StreakBarManager : MonoBehaviour
         Debug.LogError(_streakCount);
         SignalBus.Subscribe<OnDailyRewardClaim>(IncreaseStreakCount);
         SignalBus.Subscribe<StreakBreakSignal>(ResetStreak);
-        _progressBar.UpdateProgressBar((float)_streakCount / _totalDays);
+        UpdateBar();
         _streakCountText.text = _streakCount.ToString();
-        _streakCount_EffectText.text = (_streakCount-1).ToString();
+        _streakCount_EffectText.text = (_streakCount - 1).ToString();
     }
 
     private Sequence sequence;
@@ -88,12 +88,12 @@ public class StreakBarManager : MonoBehaviour
             });
 
         DOVirtual.DelayedCall(1, () => { SignalBus.Publish(new OnCelebrationAchievementSignal()); });
-        _progressBar.UpdateProgressBar((float)_streakCount / _totalDays);
+        UpdateBar();
         bool rewardAvailable = false;
         for (int i = 0; i < _box.Length; i++)
         {
             int day = _box[i].GetDay();
-            if (!_claimed[i] && day == _streakCount || _streakCount ==_rewardProgressHolder[i]._threshold)
+            if (!_claimed[i] && day == _streakCount || _streakCount == _rewardProgressHolder[i]._threshold)
             {
                 _box[i].OpenVisual();
                 _claimed[i] = true;
@@ -102,11 +102,13 @@ public class StreakBarManager : MonoBehaviour
                 rewardAvailable = true;
             }
         }
-        
-        if(!rewardAvailable)
+
+        if (!rewardAvailable)
             SignalBus.Publish(new OnShowDailyRewardPopUpEffect());
     }
-    
+
+    private void UpdateBar() => _progressBar.UpdateProgressBar((float)(_streakCount + 1) / _totalDays);
+
     private void SaveClaimedReward(int index)
     {
         _streakData._rewardClaimed[index] = true;
@@ -127,12 +129,12 @@ public class StreakBarManager : MonoBehaviour
         _streakData._streakCount = 0;
         _progressBar.ResetBar();
         _streakCountText.text = _streakCount.ToString();
-        for(int i=0;i<_claimed.Length;i++)
+        for (int i = 0; i < _claimed.Length; i++)
         {
             _claimed[i] = false;
             _streakData._rewardClaimed[i] = false;
         }
-        
+
         foreach (var box in _box)
         {
             box.ResetBox();
@@ -142,11 +144,14 @@ public class StreakBarManager : MonoBehaviour
 
     private void GiveReward(int index)
     {
-         DOVirtual.DelayedCall(1.25f,()=>{SignalBus.Publish(new OnShowRewardProgressSignal
-         {
-             RewardsData = _rewardProgressHolder[index],
-             OnRewardComplete = () => { PopCommandExecutionResponder.RemoveCommand<DailyRewardShowCommand>();}
-         });});
+        DOVirtual.DelayedCall(1.25f, () =>
+        {
+            SignalBus.Publish(new OnShowRewardProgressSignal
+            {
+                RewardsData = _rewardProgressHolder[index],
+                OnRewardComplete = () => { PopCommandExecutionResponder.RemoveCommand<DailyRewardShowCommand>(); }
+            });
+        });
     }
 
     private void OnDestroy()
