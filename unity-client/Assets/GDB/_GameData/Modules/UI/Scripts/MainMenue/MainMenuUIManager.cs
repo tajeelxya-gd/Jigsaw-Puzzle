@@ -41,17 +41,16 @@ public sealed class MainMenuUIManager : MonoBehaviour
 
         TextAsset json = request.asset as TextAsset;
 
+        LevelData leveldata = ScriptableObject.CreateInstance<LevelData>();
         if (json != null)
         {
-            LevelData leveldata = ScriptableObject.CreateInstance<LevelData>();
             JsonUtility.FromJsonOverwrite(json.text, leveldata);
-
-            settingsManager.Inject(leveldata);
-            levelStateMainMenue.Inject(leveldata);
-
-            // Clean up the string memory
-            Resources.UnloadAsset(json);
         }
+        settingsManager.Inject(leveldata);
+        levelStateMainMenue.Inject(leveldata);
+
+        // Clean up the string memory
+        Resources.UnloadAsset(json);
     }
 
     const int FIRST_REPEAT_LEVEL = 101;

@@ -1,54 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &618795583707022249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2065658408855176768}
-  - component: {fileID: 6668461032344460425}
-  m_Layer: 0
-  m_Name: AppConfigurationStep
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2065658408855176768
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618795583707022249}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1739288844784335156}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6668461032344460425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618795583707022249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7d8a7696227b1143b51068f898fac41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.AppConfigurationStep
-  _runInBackground: 0
-  _sleepTimeout: 120
-  _multiTouchEnabled: 0
-  _targetFrameRate: 60
-  _culture: en-US
 --- !u!1 &948770187470475069
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,51 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8931e871bca5f744688566fd8d78e432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Bootstrap.UniTxStep
---- !u!1 &2163283308457766323
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1741022913879840197}
-  - component: {fileID: 1557576614899121432}
-  m_Layer: 0
-  m_Name: DebuggerLoadingStep
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1741022913879840197
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2163283308457766323}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1739288844784335156}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1557576614899121432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2163283308457766323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d69f0189bf48545b498556d7403cd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.DebuggerLoadingStep
-  _activateDebugger: 1
+  _widgetsManager: {fileID: 0}
 --- !u!1 &3012221156267686699
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,14 +212,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2312999655549581541}
-  - {fileID: 2065658408855176768}
-  - {fileID: 1741022913879840197}
   - {fileID: 4167015795686301782}
   - {fileID: 7662056636146617154}
   - {fileID: 8769689448654289113}
   - {fileID: 8527959072808278477}
   - {fileID: 4419784240397353602}
-  - {fileID: 2406801123389389508}
   - {fileID: 4573837418911441097}
   - {fileID: 4642768258062200488}
   m_Father: {fileID: 0}
@@ -331,8 +235,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: UniTx.Runtime::UniTx.Runtime.Bootstrap.AppLoader
   _loadingSteps:
   - {fileID: 5367084427883256268}
-  - {fileID: 6668461032344460425}
-  - {fileID: 1557576614899121432}
   - {fileID: 8206543326406449635}
   - {fileID: 2512506835383439055}
   - {fileID: 9141284652492727019}
@@ -428,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72779d23aef19ad4cb3f5521997130d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.GameStartingStep
+  _uiController: {fileID: 0}
 --- !u!1 &5420391855798609258
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,56 +425,8 @@ MonoBehaviour:
   _puzzleTray: {fileID: 0}
   _cameraEffects: {fileID: 0}
   _jigsawResourceLoader: {fileID: 0}
-  _hudComponent: {fileID: 0}
   _vfxController: {fileID: 0}
   _fullImageHandler: {fileID: 0}
   _savedDataHandler: {fileID: 0}
   _toastHandler: {fileID: 0}
---- !u!1 &7964194896348924751
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2406801123389389508}
-  - component: {fileID: 7959790900971533332}
-  m_Layer: 0
-  m_Name: SceneConfigurationStep
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2406801123389389508
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7964194896348924751}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1739288844784335156}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7959790900971533332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7964194896348924751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb2a3356bdfeed34f9e4c3e3d450785f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Client.Runtime::Client.Runtime.SceneConfigurationStep
-  _boardSection: {fileID: 0}
-  _puzzleTraySection: {fileID: 0}
-  _fitPadding: 0.95
-  _trayBgYScale: 0.08
+  _boosterPanel: {fileID: 0}
