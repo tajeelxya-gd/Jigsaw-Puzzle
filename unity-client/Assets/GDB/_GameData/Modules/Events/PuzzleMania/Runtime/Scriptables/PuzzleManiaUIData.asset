@@ -17,162 +17,162 @@ MonoBehaviour:
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 10
+        rewardChestAmount: 5
       _number: 1
-      _requiredBlocks: 500
+      _requiredBlocks: 250
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: d8312400f0b531048b9875a57dfaefa0, type: 3}
         rewardType: 1
         rewardChestAmount: 10
       _number: 2
-      _requiredBlocks: 750
+      _requiredBlocks: 265
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
         rewardType: 3
         rewardChestAmount: 1
       _number: 3
-      _requiredBlocks: 750
+      _requiredBlocks: 280
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
         rewardType: 4
         rewardChestAmount: 1
       _number: 4
-      _requiredBlocks: 1000
+      _requiredBlocks: 300
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 20
+        rewardChestAmount: 10
       _number: 5
-      _requiredBlocks: 1000
+      _requiredBlocks: 315
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
+        rewardType: 3
+        rewardChestAmount: 1
+      _number: 6
+      _requiredBlocks: 330
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
         rewardType: 4
         rewardChestAmount: 1
-      _number: 6
-      _requiredBlocks: 1200
-    - _RewardProgress:
-        _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
-        rewardType: 2
-        rewardChestAmount: 30
       _number: 7
-      _requiredBlocks: 1200
+      _requiredBlocks: 350
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: d8312400f0b531048b9875a57dfaefa0, type: 3}
         rewardType: 1
         rewardChestAmount: 15
       _number: 8
-      _requiredBlocks: 1400
+      _requiredBlocks: 360
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
         rewardType: 3
         rewardChestAmount: 1
       _number: 9
-      _requiredBlocks: 1400
+      _requiredBlocks: 380
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 50
+        rewardChestAmount: 25
       _number: 10
-      _requiredBlocks: 1500
+      _requiredBlocks: 400
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
+        rewardType: 4
+        rewardChestAmount: 1
+      _number: 11
+      _requiredBlocks: 415
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
         rewardType: 3
         rewardChestAmount: 1
-      _number: 11
-      _requiredBlocks: 1500
-    - _RewardProgress:
-        _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
-        rewardType: 2
-        rewardChestAmount: 10
       _number: 12
-      _requiredBlocks: 1750
+      _requiredBlocks: 430
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: d8312400f0b531048b9875a57dfaefa0, type: 3}
         rewardType: 1
         rewardChestAmount: 30
       _number: 13
-      _requiredBlocks: 1750
+      _requiredBlocks: 445
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 125
+        rewardChestAmount: 75
       _number: 14
-      _requiredBlocks: 1800
+      _requiredBlocks: 465
     - _RewardProgress:
-        _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
-        rewardType: 2
-        rewardChestAmount: 200
+        _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
+        rewardType: 4
+        rewardChestAmount: 1
       _number: 15
-      _requiredBlocks: 1800
+      _requiredBlocks: 470
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
-        rewardType: 5
-        rewardChestAmount: 2
+        rewardType: 3
+        rewardChestAmount: 1
       _number: 16
-      _requiredBlocks: 1850
+      _requiredBlocks: 495
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 200
+        rewardChestAmount: 100
       _number: 17
-      _requiredBlocks: 1850
-    - _RewardProgress:
-        _rewardIcon: {fileID: 21300000, guid: d8312400f0b531048b9875a57dfaefa0, type: 3}
-        rewardType: 1
-        rewardChestAmount: 30
-      _number: 18
-      _requiredBlocks: 1900
+      _requiredBlocks: 510
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
         rewardType: 4
         rewardChestAmount: 2
+      _number: 18
+      _requiredBlocks: 525
+    - _RewardProgress:
+        _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
+        rewardType: 3
+        rewardChestAmount: 1
       _number: 19
-      _requiredBlocks: 1900
+      _requiredBlocks: 545
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: d8312400f0b531048b9875a57dfaefa0, type: 3}
         rewardType: 1
         rewardChestAmount: 45
       _number: 20
-      _requiredBlocks: 2000
+      _requiredBlocks: 560
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 500
+        rewardChestAmount: 250
       _number: 21
-      _requiredBlocks: 2000
+      _requiredBlocks: 580
     - _RewardProgress:
-        _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
-        rewardType: 2
-        rewardChestAmount: 500
+        _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
+        rewardType: 4
+        rewardChestAmount: 1
       _number: 22
-      _requiredBlocks: 2000
+      _requiredBlocks: 600
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: c06f6ab2736515b40920f22267b61e51, type: 3}
         rewardType: 3
-        rewardChestAmount: 3
+        rewardChestAmount: 2
       _number: 23
-      _requiredBlocks: 2250
+      _requiredBlocks: 610
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: d8312400f0b531048b9875a57dfaefa0, type: 3}
         rewardType: 1
         rewardChestAmount: 60
       _number: 24
-      _requiredBlocks: 2250
+      _requiredBlocks: 630
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 1000
+        rewardChestAmount: 500
       _number: 25
-      _requiredBlocks: 2500
+      _requiredBlocks: 645
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 2717b0c62a00aa7418ef2968081ca727, type: 3}
         rewardType: 4
-        rewardChestAmount: 2
+        rewardChestAmount: 1
       _number: 26
-      _requiredBlocks: 2500
+      _requiredBlocks: 660
     - _RewardProgress:
         _rewardIcon: {fileID: 21300000, guid: 12b0a61bae0bc8e42aa01e62724d9e2d, type: 3}
         rewardType: 2
-        rewardChestAmount: 1500
+        rewardChestAmount: 750
       _number: 27
-      _requiredBlocks: 3000
+      _requiredBlocks: 700
