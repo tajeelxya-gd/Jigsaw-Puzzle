@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Monetization.Runtime.Analytics;
 using UnityEngine;
 
 public static class GameAnalytics
@@ -10,7 +9,7 @@ public static class GameAnalytics
     public static int SlotPopperUsed = 0;
     public static void PublishAnalytic(AnalyticEventType name, params string[] param)
     {
-        AnalyticsManager.SendAppMetricaEvent(name.ToString(), param);
+        // AnalyticsManager.SendAppMetricaEvent(name.ToString(), param);
     }
     public static void ResetBoosterData()
     {

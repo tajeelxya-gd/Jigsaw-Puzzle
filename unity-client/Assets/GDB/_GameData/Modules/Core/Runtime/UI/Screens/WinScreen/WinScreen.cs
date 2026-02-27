@@ -7,8 +7,6 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using Monetization.Runtime.RemoteConfig;
-using Monetization.Runtime.Ads;
 
 namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 {
@@ -173,8 +171,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         {
             _doubleRewardButton.enabled = false;
             _continueButton.enabled = false;
-            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.EarnCoins, Amount = levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier });
-            SignalBus.Publish(new AddCoinsSignal { Amount = levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier });
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.EarnCoins, Amount = levelData.CoinRewardAmount * 1 });
+            SignalBus.Publish(new AddCoinsSignal { Amount = levelData.CoinRewardAmount * 1 });
             PunchHideButtons();
             DOVirtual.DelayedCall(2f, OnClick_ContinueButton);
             AudioController.PlaySFX(AudioType.ButtonClick);
@@ -189,8 +187,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         void ShowAd()
         {
-            if (_currentPlayedLevel > RemoteConfigManager.Configuration.ShowAdAfter)
-                AdsManager.ShowInterstitial("LevelComplete " + _currentPlayedLevel);
+            // if (_currentPlayedLevel > RemoteConfigManager.Configuration.ShowAdAfter)
+            //     AdsManager.ShowInterstitial("LevelComplete " + _currentPlayedLevel);
         }
 
         void OnClick_ContinueButton()
@@ -226,23 +224,23 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         void OnClick_DoubleRewardButton()
         {
             //Implement Double Reward
-            AdsManager.ShowRewarded("DoubleReward " + _currentPlayedLevel, () =>
+            // AdsManager.ShowRewarded("DoubleReward " + _currentPlayedLevel, () =>
+            // {
+            PunchHideButtons();
+            _doubleRewardButton.enabled = false;
+            _continueButton.enabled = false;
+            SignalBus.Publish(new AddCoinsSignal { Amount = GetTotalReward() });
+            PoolManager.ReturnAllItems();
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.Get2XCoins, Amount = 1 });
+            DOVirtual.DelayedCall(Time.deltaTime, () =>
             {
-                PunchHideButtons();
-                _doubleRewardButton.enabled = false;
-                _continueButton.enabled = false;
-                SignalBus.Publish(new AddCoinsSignal { Amount = GetTotalReward() });
-                PoolManager.ReturnAllItems();
-                SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.Get2XCoins, Amount = 1 });
-                DOVirtual.DelayedCall(Time.deltaTime, () =>
-                {
-                    SignalBus.Publish(new OnMissionObjectiveCompleteSignal
-                    { MissionType = MissionType.EarnCoins, Amount = GetTotalReward() });
-                });
-                AudioController.PlaySFX(AudioType.ButtonClick);
-                HapticController.Vibrate(HapticType.Btn);
-                DOVirtual.DelayedCall(2f, OnClick_ContinueButton);
+                SignalBus.Publish(new OnMissionObjectiveCompleteSignal
+                { MissionType = MissionType.EarnCoins, Amount = GetTotalReward() });
             });
+            AudioController.PlaySFX(AudioType.ButtonClick);
+            HapticController.Vibrate(HapticType.Btn);
+            DOVirtual.DelayedCall(2f, OnClick_ContinueButton);
+            // });
         }
 
         void PunchHideButtons()
@@ -253,7 +251,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         }
         int GetTotalReward()
         {
-            return levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier;//return your reward from here
+            return levelData.CoinRewardAmount;
+            // return levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier;//return your reward from here
         }
 
         public void GrantRewardToPlayer()//Give Reward here
@@ -441,7 +440,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void PlayEconomyAnimation()
         {
-            _totalRewardText.text = (levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier).ToString();
+            _totalRewardText.text = (levelData.CoinRewardAmount * 1).ToString();
+            // _totalRewardText.text = (levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier).ToString();
             _totalEnemyCurrencyRewardTxt.text = _currentEnemyCurrency.ToString();
 
             _enemyCurrencyRewardObject.gameObject.SetActive(GlobalService.GameData.Data.IsPuzzleManiaUnlocked);

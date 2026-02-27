@@ -1,20 +1,19 @@
 using System;
 using System.Linq;
-using Monetization.Runtime.Ads;
 using UnityEngine;
 
 public class ExplicOffersController : MonoBehaviour
 {
-    [SerializeField] Offer []explicOffer;
+    [SerializeField] Offer[] explicOffer;
     void SetUp()
     {
         foreach (Offer offer in explicOffer)
-            offer.Inject(OnOfferBought,OnOfferClosed);
+            offer.Inject(OnOfferBought, OnOfferClosed);
     }
 
     void OnOfferBought(Offer offer)
     {
-        
+
     }
     private const string RemoveAdsOfferName = "RemoveAds";
 
@@ -25,12 +24,12 @@ public class ExplicOffersController : MonoBehaviour
         if (gameData.Data.CurrentInterstitialCount == 0) return false;
         return gameData.Data.CurrentInterstitialCount % minAdIterationCount == 0;
     }
-    
+
     void ShowRemoveAdOfferIfAvailable()
     {
         if (!GameStateGlobal.AdShownSuccessfully) return;
         GameStateGlobal.AdShownSuccessfully = false;
-      
+
         var offer = explicOffer
             .FirstOrDefault(o => o.GetOfferName() == RemoveAdsOfferName);
 
@@ -48,7 +47,7 @@ public class ExplicOffersController : MonoBehaviour
                     });
                 })
         );
-      
+
 
     }
 

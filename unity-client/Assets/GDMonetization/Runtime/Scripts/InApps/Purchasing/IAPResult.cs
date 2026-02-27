@@ -1,9 +1,0 @@
-namespace Monetization.Runtime.InAppPurchasing
-{
-    public enum IAPResult
-    {
-        Success,
-        Fail,
-        Cancel
-    }
-}

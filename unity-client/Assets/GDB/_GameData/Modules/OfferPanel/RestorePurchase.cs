@@ -1,5 +1,4 @@
 using System;
-using Monetization.Runtime.InAppPurchasing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +11,6 @@ public class RestorePurchase : MonoBehaviour
 
     void OnRestorePurchase()
     {
-       GDInAppPurchaseManager.RestorePurchases(); 
+        //    GDInAppPurchaseManager.RestorePurchases(); 
     }
 }

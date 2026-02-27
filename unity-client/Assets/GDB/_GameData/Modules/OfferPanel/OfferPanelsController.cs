@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Monetization.Runtime.RemoteConfig;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -45,8 +44,11 @@ public class OfferPanelsController : MonoBehaviour
     {
         SignalBus.Subscribe<ShowFullScreenOfferOnDemand>(OnShowFullScreenOfferOnDemand);
 
-        if(!isTest && RemoteConfigManager.Configuration != null)
-            showOfferEveryNEntries = RemoteConfigManager.Configuration.OfferPanelShowAfterLevels + 1;
+        // if(!isTest && RemoteConfigManager.Configuration != null)
+        //     showOfferEveryNEntries = RemoteConfigManager.Configuration.OfferPanelShowAfterLevels + 1;
+
+        if (!isTest)
+            showOfferEveryNEntries = 1;
 
         ResetAllAvailableOffers();
 
@@ -59,8 +61,8 @@ public class OfferPanelsController : MonoBehaviour
 
     void CloseOnBoardingCommandIfYes()
     {
-       // if (PopCommandExecutionResponder.HasCommand<OfferPanelsShowCommand>())
-            PopCommandExecutionResponder.RemoveCommand<OfferPanelsShowCommand>();
+        // if (PopCommandExecutionResponder.HasCommand<OfferPanelsShowCommand>())
+        PopCommandExecutionResponder.RemoveCommand<OfferPanelsShowCommand>();
     }
 
     void ResetAllAvailableOffers()
@@ -110,24 +112,24 @@ public class OfferPanelsController : MonoBehaviour
                         return;
                     }
                     attempts++;
-                    continue; 
+                    continue;
                 }
-                
+
                 // B: No timer is running. Check if we should start THIS one.
-                int candidateID = candidate.name.GetHashCode(); 
-                
+                int candidateID = candidate.name.GetHashCode();
+
                 // If it's the one that JUST expired, try to skip to the next available one
                 if (candidateID == lastTimedID && availableOffers.Count(o => o.IsTimedOffer) > 1)
                 {
                     attempts++;
-                    continue; 
+                    continue;
                 }
 
                 PlayerPrefs.SetInt(LAST_TIMED_OFFER_ID_KEY, candidateID);
                 DisplayOffer(candidate, targetIndex);
                 return;
             }
-            
+
             attempts++;
         }
 
@@ -159,12 +161,12 @@ public class OfferPanelsController : MonoBehaviour
 
     public void OnOfferBought(Offer offer)
     {
-        if (!offer.IsConsumeable) 
+        if (!offer.IsConsumeable)
             availableOffers.Remove(offer);
-            
+
         offer.gameObject.SetActive(false);
         // Reset index to 0 because the list order has changed
-        PlayerPrefs.SetInt(NEXT_SEQUENTIAL_INDEX_KEY, 0); 
+        PlayerPrefs.SetInt(NEXT_SEQUENTIAL_INDEX_KEY, 0);
     }
 
     void OnShowFullScreenOfferOnDemand(ShowFullScreenOfferOnDemand signal)

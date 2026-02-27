@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Monetization.Runtime.RemoteConfig;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +15,7 @@ public class Wall : MonoBehaviour, IDamageable
 
     public void Initialize()
     {
-        _health = RemoteConfigManager.Configuration.WallHealth;
+        // _health = RemoteConfigManager.Configuration.WallHealth;
         _tempHealth = _health;
         _isWallFall = false;
         _currentPieceIndex = -1;

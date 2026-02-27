@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
-using Monetization.Runtime.Consent; // Add DOTween
 
 public class GameInitializer : MonoBehaviour
 {
@@ -14,6 +13,8 @@ public class GameInitializer : MonoBehaviour
     [SerializeField] private ShaderVariantCollection _shaderVariantCollection;
     [SerializeField] private float minSplashTime = 5;
     [SerializeField] private int minLvlsRequireForGamePlay = 19;
+    [SerializeField] private GameObject _privacyPanel;
+
     private float maxBarWidth;
     private const string ManuSceneName = "MainMenu";
 
@@ -22,12 +23,13 @@ public class GameInitializer : MonoBehaviour
 
     private void OnEnable()
     {
-        PrivacyPolicyPanel.OnPolicyAcceptedEvent += Load;
+        _privacyPanel.SetActive(PlayerPrefs.GetInt("PrivacyPolicy", 0) == 0);
+        // PrivacyPolicyPanel.OnPolicyAcceptedEvent += Load;
     }
 
     private void OnDisable()
     {
-        PrivacyPolicyPanel.OnPolicyAcceptedEvent -= Load;
+        // PrivacyPolicyPanel.OnPolicyAcceptedEvent -= Load;
     }
 
     void Awake()
