@@ -15,59 +15,59 @@ MonoBehaviour:
   _weeklyMissionsPresetsData:
   - _missions:
     - Day: 1
-      _isInteractable: 0
+      _isInteractable: 1
       _text: LOGIN DAY 1
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 20
-      _extraReward: 2
+      _rewardAmount: 15
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 1
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
     - Day: 1
       _isInteractable: 1
-      _text: COMPLETE LEVELS
+      _text: MERGE PIECES
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 30
+      _rewardAmount: 15
       _extraReward: 0
-      _missionType: 3
+      _missionType: 15
       _targetAmount: 10
       _taskImage: {fileID: 21300000, guid: f79b88669159214428f950afc99123cb, type: 3}
     - Day: 1
       _isInteractable: 1
-      _text: JOIN PIECES
+      _text: WIN LEVELS
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 20
       _extraReward: 0
-      _missionType: 15
-      _targetAmount: 10
+      _missionType: 3
+      _targetAmount: 20
       _taskImage: {fileID: 21300000, guid: 56d9db27c712d0b49a0ba24a9992540f, type: 3}
     - Day: 1
       _isInteractable: 1
-      _text: USE MAGNET
+      _text: WIN STREAK
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
       _rewardAmount: 20
       _extraReward: 0
-      _missionType: 13
-      _targetAmount: 1
+      _missionType: 5
+      _targetAmount: 6
       _taskImage: {fileID: 21300000, guid: b6ed711ee0bf8c1488a2f4aac1635498, type: 3}
     - Day: 1
       _isInteractable: 1
-      _text: WIN HARD LEVEL
+      _text: USE EYE
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 30
+      _rewardAmount: 15
       _extraReward: 0
-      _missionType: 6
-      _targetAmount: 6
+      _missionType: 14
+      _targetAmount: 1
       _taskImage: {fileID: 21300000, guid: 9e7b85402adad944f8e1dd654dbb012f, type: 3}
   - _missions:
     - Day: 2
@@ -76,8 +76,8 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 40
-      _extraReward: 2
+      _rewardAmount: 30
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 2
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
@@ -87,43 +87,43 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
       _multipleReward: 1
-      _rewardAmount: 30
-      _extraReward: 3
+      _rewardAmount: 25
+      _extraReward: 2
       _missionType: 7
-      _targetAmount: 1500
+      _targetAmount: 750
       _taskImage: {fileID: 21300000, guid: 57e6d0d9e1291fd4c8697dddceac9041, type: 3}
     - Day: 2
       _isInteractable: 1
-      _text: COMPLETE A HARD LEVEL
+      _text: COMPLETE HARD LEVELS
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 40
+      _rewardAmount: 30
       _extraReward: 0
       _missionType: 6
       _targetAmount: 4
       _taskImage: {fileID: 21300000, guid: ed0243c0be9d51f4e8b3749963755928, type: 3}
     - Day: 2
       _isInteractable: 1
-      _text: USE EYE
+      _text: GET x2 COINS
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 30
-      _extraReward: 0
-      _missionType: 14
-      _targetAmount: 3
-      _taskImage: {fileID: 21300000, guid: 9ad769340e656ae478a98988de073bc3, type: 3}
-    - Day: 2
-      _isInteractable: 1
-      _text: GET X2 COINS
-      _rewardIcon:
-      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
-      _multipleReward: 0
-      _rewardAmount: 70
+      _rewardAmount: 50
       _extraReward: 0
       _missionType: 4
       _targetAmount: 2
+      _taskImage: {fileID: 21300000, guid: 9ad769340e656ae478a98988de073bc3, type: 3}
+    - Day: 2
+      _isInteractable: 1
+      _text: USE MAGNET
+      _rewardIcon:
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 20
+      _extraReward: 0
+      _missionType: 13
+      _targetAmount: 3
       _taskImage: {fileID: 21300000, guid: eed192e32aec5f84ba28498eb11b9f42, type: 3}
   - _missions:
     - Day: 3
@@ -132,8 +132,8 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 60
-      _extraReward: 2
+      _rewardAmount: 45
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 3
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
@@ -143,7 +143,7 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 20
+      _rewardAmount: 15
       _extraReward: 0
       _missionType: 9
       _targetAmount: 1
@@ -154,7 +154,7 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 80
+      _rewardAmount: 60
       _extraReward: 3
       _missionType: 3
       _targetAmount: 60
@@ -165,18 +165,18 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
       _multipleReward: 1
-      _rewardAmount: 120
-      _extraReward: 3
+      _rewardAmount: 90
+      _extraReward: 2
       _missionType: 8
-      _targetAmount: 1500
+      _targetAmount: 750
       _taskImage: {fileID: 21300000, guid: eecc3bff2d63d2c4bad4b6d21e9bf001, type: 3}
     - Day: 3
       _isInteractable: 1
-      _text: USE MAGNET
+      _text: USE MAGNETS
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 70
+      _rewardAmount: 40
       _extraReward: 0
       _missionType: 13
       _targetAmount: 5
@@ -188,8 +188,8 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 80
-      _extraReward: 2
+      _rewardAmount: 60
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 4
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
@@ -199,10 +199,10 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 70
+      _rewardAmount: 50
       _extraReward: 0
       _missionType: 14
-      _targetAmount: 8
+      _targetAmount: 4
       _taskImage: {fileID: 21300000, guid: 9ad769340e656ae478a98988de073bc3, type: 3}
     - Day: 4
       _isInteractable: 1
@@ -210,10 +210,10 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
       _multipleReward: 1
-      _rewardAmount: 80
-      _extraReward: 3
+      _rewardAmount: 60
+      _extraReward: 2
       _missionType: 4
-      _targetAmount: 4
+      _targetAmount: 2
       _taskImage: {fileID: 21300000, guid: eed192e32aec5f84ba28498eb11b9f42, type: 3}
     - Day: 4
       _isInteractable: 1
@@ -221,10 +221,10 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 70
+      _rewardAmount: 50
       _extraReward: 0
       _missionType: 13
-      _targetAmount: 3
+      _targetAmount: 2
       _taskImage: {fileID: 21300000, guid: 470c28df283a5ac4a80a9472854c81fd, type: 3}
     - Day: 4
       _isInteractable: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 80
+      _rewardAmount: 60
       _extraReward: 0
       _missionType: 6
       _targetAmount: 8
@@ -243,23 +243,22 @@ MonoBehaviour:
       _text: LOGIN DAY 5
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
-      - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 100
-      _extraReward: 2
+      _rewardAmount: 75
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 5
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
     - Day: 5
       _isInteractable: 1
-      _text: USE EYE
+      _text: USE MAGNET
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 100
+      _rewardAmount: 75
       _extraReward: 0
-      _missionType: 14
-      _targetAmount: 5
+      _missionType: 13
+      _targetAmount: 3
       _taskImage: {fileID: 21300000, guid: 193c60a827bb1aa46bd171272b824365, type: 3}
     - Day: 5
       _isInteractable: 1
@@ -267,10 +266,10 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
       _multipleReward: 1
-      _rewardAmount: 100
-      _extraReward: 3
+      _rewardAmount: 75
+      _extraReward: 2
       _missionType: 7
-      _targetAmount: 3500
+      _targetAmount: 1750
       _taskImage: {fileID: 21300000, guid: 57e6d0d9e1291fd4c8697dddceac9041, type: 3}
     - Day: 5
       _isInteractable: 1
@@ -278,7 +277,7 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 120
+      _rewardAmount: 90
       _extraReward: 0
       _missionType: 10
       _targetAmount: 1
@@ -289,7 +288,7 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 120
+      _rewardAmount: 90
       _extraReward: 0
       _missionType: 3
       _targetAmount: 100
@@ -301,40 +300,29 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 120
-      _extraReward: 2
+      _rewardAmount: 90
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 6
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
     - Day: 6
       _isInteractable: 1
-      _text: COMPLETE HARD LEVELS
+      _text: USE EYE
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 150
+      _rewardAmount: 110
       _extraReward: 0
-      _missionType: 6
-      _targetAmount: 20
+      _missionType: 14
+      _targetAmount: 5
       _taskImage: {fileID: 21300000, guid: ed0243c0be9d51f4e8b3749963755928, type: 3}
-    - Day: 6
-      _isInteractable: 1
-      _text: USE MAGNET
-      _rewardIcon:
-      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
-      _multipleReward: 0
-      _rewardAmount: 150
-      _extraReward: 0
-      _missionType: 13
-      _targetAmount: 7
-      _taskImage: {fileID: 21300000, guid: 470c28df283a5ac4a80a9472854c81fd, type: 3}
     - Day: 6
       _isInteractable: 1
       _text: FINISH TOP 3 IN LEAGUE
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 100
+      _rewardAmount: 75
       _extraReward: 0
       _missionType: 12
       _targetAmount: 1
@@ -345,11 +333,22 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 120
+      _rewardAmount: 90
       _extraReward: 0
       _missionType: 11
       _targetAmount: 15
       _taskImage: {fileID: 21300000, guid: 9e5df2ab8302393408b037b6b0ece385, type: 3}
+    - Day: 6
+      _isInteractable: 1
+      _text: COMPLETE HARD LEVELS
+      _rewardIcon:
+      - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
+      _multipleReward: 0
+      _rewardAmount: 110
+      _extraReward: 0
+      _missionType: 6
+      _targetAmount: 20
+      _taskImage: {fileID: 21300000, guid: 470c28df283a5ac4a80a9472854c81fd, type: 3}
   - _missions:
     - Day: 7
       _isInteractable: 1
@@ -357,8 +356,8 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 13ca9072bf08a1343bcf542749707650, type: 3}
       _multipleReward: 1
-      _rewardAmount: 100
-      _extraReward: 2
+      _rewardAmount: 75
+      _extraReward: 1
       _missionType: 1
       _targetAmount: 7
       _taskImage: {fileID: 21300000, guid: 912c07257e7b7514babef97912aac2c1, type: 3}
@@ -368,10 +367,10 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 6a462a7cfea032647a638aa92f3844ed, type: 3}
       _multipleReward: 1
-      _rewardAmount: 150
-      _extraReward: 3
+      _rewardAmount: 110
+      _extraReward: 2
       _missionType: 8
-      _targetAmount: 10000
+      _targetAmount: 5000
       _taskImage: {fileID: 21300000, guid: eecc3bff2d63d2c4bad4b6d21e9bf001, type: 3}
     - Day: 7
       _isInteractable: 1
@@ -379,21 +378,21 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 100
+      _rewardAmount: 75
       _extraReward: 0
       _missionType: 5
       _targetAmount: 30
       _taskImage: {fileID: 21300000, guid: 9e7b85402adad944f8e1dd654dbb012f, type: 3}
     - Day: 7
       _isInteractable: 1
-      _text: USE BOOSTERS
+      _text: USE MAGNETS
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 180
+      _rewardAmount: 135
       _extraReward: 0
-      _missionType: 2
-      _targetAmount: 40
+      _missionType: 13
+      _targetAmount: 20
       _taskImage: {fileID: 21300000, guid: cfc94f1e6a7b4434f8c64aad3762464e, type: 3}
     - Day: 7
       _isInteractable: 1
@@ -401,7 +400,7 @@ MonoBehaviour:
       _rewardIcon:
       - {fileID: 21300000, guid: 9691009810d44ac4899262bbe2fe6185, type: 3}
       _multipleReward: 0
-      _rewardAmount: 180
+      _rewardAmount: 135
       _extraReward: 0
       _missionType: 3
       _targetAmount: 150
