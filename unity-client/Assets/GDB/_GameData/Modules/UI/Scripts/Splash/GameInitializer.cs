@@ -23,6 +23,7 @@ public class GameInitializer : MonoBehaviour
 
     private void OnEnable()
     {
+        Load();
         // _privacyPanel.SetActive(PlayerPrefs.GetInt("PrivacyPolicy", 0) == 0);
         // PrivacyPolicyPanel.OnPolicyAcceptedEvent += Load;
     }
