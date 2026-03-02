@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Bootstrap;
@@ -15,6 +16,7 @@ namespace Client.Runtime
         [SerializeField] private Transform _board;
         [SerializeField] private Transform _tray;
         [SerializeField] private Transform _boosters;
+        [SerializeField] private BoxCollider _trayCollider;
 
         public override async UniTask InitialiseAsync(CancellationToken cToken = default)
         {
@@ -35,6 +37,7 @@ namespace Client.Runtime
             _board.position = Camera.main.ViewportToWorldPoint(_boardViewPort);
             _tray.position = Camera.main.ViewportToWorldPoint(_trayViewPort);
             _boosters.position = Camera.main.ViewportToWorldPoint(_boostersViewPort);
+            SetTrayCollider();
         }
         private void AdjustCamera()
         {
@@ -55,6 +58,32 @@ namespace Client.Runtime
                     camera.fieldOfView = _fieldOfView * (baseAspect / currentAspect);
                 }
             }
+        }
+
+        private void SetTrayCollider()
+        {
+            if (_trayCollider == null) return;
+
+            var cam = Camera.main;
+            if (cam == null) return;
+
+            // Get viewport boundaries transformed to world space at the tray's depth
+            Vector3 leftEdge = cam.ViewportToWorldPoint(new Vector3(0f, _trayViewPort.y, _trayViewPort.z));
+            Vector3 rightEdge = cam.ViewportToWorldPoint(new Vector3(1f, _trayViewPort.y, _trayViewPort.z));
+
+            float worldWidth = Vector3.Distance(leftEdge, rightEdge);
+            Vector3 worldCenter = (leftEdge + rightEdge) * 0.5f;
+
+            // Update collider size (X dimension only)
+            Vector3 size = _trayCollider.size;
+            size.x = worldWidth / _trayCollider.transform.lossyScale.x;
+            _trayCollider.size = size;
+
+            // Update collider center (X dimension only) to align with screen center
+            Vector3 localCenter = _trayCollider.transform.InverseTransformPoint(worldCenter);
+            Vector3 colliderCenter = _trayCollider.center;
+            colliderCenter.x = localCenter.x;
+            _trayCollider.center = colliderCenter;
         }
     }
 }
