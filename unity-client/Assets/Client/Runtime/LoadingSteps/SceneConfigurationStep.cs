@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime.Bootstrap;
@@ -10,18 +9,23 @@ namespace Client.Runtime
     {
         [SerializeField] private Vector3 _boardViewPort;
         [SerializeField] private Vector3 _trayViewPort;
+        [SerializeField] private Vector3 _boostersViewPort;
         [SerializeField] private float _fieldOfView;
         [SerializeField] private Camera[] _cameras;
         [SerializeField] private Transform _board;
         [SerializeField] private Transform _tray;
+        [SerializeField] private Transform _boosters;
 
         public override async UniTask InitialiseAsync(CancellationToken cToken = default)
         {
-            // Wait a frame to ensure correct screen dimensions
             await UniTask.Yield(PlayerLoopTiming.Update);
-
             AdjustCamera();
             UpdateViewPortsAsync(this.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private void Update()
+        {
+            _boosters.position = Camera.main.ViewportToWorldPoint(_boostersViewPort);
         }
 
         private async UniTask UpdateViewPortsAsync(CancellationToken cToken = default)
@@ -30,6 +34,7 @@ namespace Client.Runtime
             await UniTask.Yield(PlayerLoopTiming.Update);
             _board.position = Camera.main.ViewportToWorldPoint(_boardViewPort);
             _tray.position = Camera.main.ViewportToWorldPoint(_trayViewPort);
+            _boosters.position = Camera.main.ViewportToWorldPoint(_boostersViewPort);
         }
         private void AdjustCamera()
         {

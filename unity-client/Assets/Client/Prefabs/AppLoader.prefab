@@ -135,7 +135,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a3356bdfeed34f9e4c3e3d450785f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
+  _boardViewPort: {x: 0.5, y: 0.6, z: 0.8}
+  _trayViewPort: {x: 0.5, y: 0.155, z: 0.797}
+  _boostersViewPort: {x: 0.55, y: 0.575, z: 0.79}
+  _fieldOfView: 25
+  _cameras:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _board: {fileID: 0}
+  _tray: {fileID: 0}
+  _boosters: {fileID: 0}
 --- !u!1 &3012221156267686699
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +296,7 @@ MonoBehaviour:
   - {fileID: 9141284652492727019}
   - {fileID: 5465780741353055732}
   - {fileID: 4985582967801707493}
+  - {fileID: 7756152914180980237}
   - {fileID: 715410019087325436}
   - {fileID: 6860733710026532556}
 --- !u!1 &4950897299910891085
