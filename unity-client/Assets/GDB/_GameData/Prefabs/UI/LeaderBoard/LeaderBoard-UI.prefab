@@ -22122,6 +22122,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 417c69348c2abdd418d5fb6c7e19434f, type: 3}
     - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.g
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.r
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
       propertyPath: positionSprites.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -23903,6 +23915,18 @@ PrefabInstance:
       propertyPath: defaultSprite
       value: 
       objectReference: {fileID: 21300000, guid: a3c0f5d5f3e38b74ca566950d808f9ee, type: 3}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.b
+      value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.g
+      value: 0.3529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.r
+      value: 0.23921569
+      objectReference: {fileID: 0}
     - target: {fileID: 4622276087590222407, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
       propertyPath: m_fontColor.b
       value: 0.5764706
@@ -24435,6 +24459,18 @@ PrefabInstance:
       propertyPath: defaultSprite
       value: 
       objectReference: {fileID: 21300000, guid: 97aab0e5540189641b5778d95209c82c, type: 3}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.b
+      value: 0.101960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.g
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.r
+      value: 0.38431373
+      objectReference: {fileID: 0}
     - target: {fileID: 4622276087590222407, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
       propertyPath: m_fontColor.b
       value: 0.10196079
@@ -24727,7 +24763,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_fontSize
-      value: 51.25
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3337272674530757229, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -24811,7 +24855,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_fontSize
-      value: 51.25
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7206660917803348589, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_Sprite
@@ -25679,6 +25731,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a3c0f5d5f3e38b74ca566950d808f9ee, type: 3}
     - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.b
+      value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.g
+      value: 0.3529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.r
+      value: 0.23921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
       propertyPath: positionSprites.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -25968,6 +26032,18 @@ PrefabInstance:
       propertyPath: defaultSprite
       value: 
       objectReference: {fileID: 21300000, guid: 417c69348c2abdd418d5fb6c7e19434f, type: 3}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.g
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.r
+      value: 0.65882355
+      objectReference: {fileID: 0}
     - target: {fileID: 4622276087590222407, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
       propertyPath: m_fontColor.b
       value: 0
@@ -26133,6 +26209,18 @@ PrefabInstance:
       propertyPath: defaultSprite
       value: 
       objectReference: {fileID: 21300000, guid: 97aab0e5540189641b5778d95209c82c, type: 3}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.b
+      value: 0.101960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.g
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
+      propertyPath: _otherTextColor.r
+      value: 0.3882353
+      objectReference: {fileID: 0}
     - target: {fileID: 4314388804612151230, guid: 4bd1dd42532ab004f903834648c373e2, type: 3}
       propertyPath: positionSprites.Array.size
       value: 3
@@ -28397,10 +28485,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_fontSize
-      value: 41.45
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_enableAutoSizing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3337272674530757229, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
@@ -28473,10 +28569,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_fontSize
-      value: 41.45
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_enableAutoSizing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7621763305967498309, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
@@ -29037,7 +29141,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_fontSize
-      value: 48.3
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049394865447666236, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3337272674530757229, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -29113,7 +29225,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_fontSize
-      value: 48.3
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774968115043298435, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7206660917803348589, guid: eaa4e96e7b461e74ab5bfd194b4c4d0c, type: 3}
       propertyPath: m_Sprite

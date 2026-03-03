@@ -18,6 +18,8 @@ public class PlayerProfileModelView : MonoBehaviour
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private Image _playerRankBg;
     [SerializeField] private Image _playerPointer;
+    [SerializeField] private Color _playerTextColor;
+    [SerializeField] private Color _otherTextColor;
 
     public void Init(bool showRankedBadges, string playerId, int listRanking, int playerRank, int playerEarnedTrophies, Sprite profilePicture, bool isPlayer = false)
     {
@@ -36,6 +38,15 @@ public class PlayerProfileModelView : MonoBehaviour
         playerIdTxt.gameObject.SetActive(!isPlayer);
         mPlayerIdTxt.gameObject.SetActive(isPlayer);
         if (_playerPointer != null) _playerPointer.gameObject.SetActive(isPlayer);
+        SetTextColors(isPlayer);
+    }
+
+    private void SetTextColors(bool isPlayer)
+    {
+        var color = isPlayer ? _playerTextColor : _otherTextColor;
+        playerIdTxt.color = color;
+        mPlayerIdTxt.color = color;
+        playerEarnedTrophiesTxt.color = color;
     }
 
 
