@@ -19,6 +19,18 @@ public class TimerAnim : MonoBehaviour
     [SerializeField] private float _bumpDuration = 0.2f;
 
     private Sequence _mainSequence;
+    private Vector3 _originalScale;
+    private RectTransform _bumpTarget;
+
+    private void Awake()
+    {
+        // Cache the target and its original scale once to avoid guesswork later
+        _bumpTarget = _rootContainer != null ? _rootContainer : _minutesNeedle;
+        if (_bumpTarget != null)
+        {
+            _originalScale = _bumpTarget.localScale;
+        }
+    }
 
     private void OnEnable()
     {
@@ -32,16 +44,18 @@ public class TimerAnim : MonoBehaviour
 
     public void StartAnim()
     {
-        // 1. Stop any existing animation
         StopAnim();
 
-        // 2. Reset rotations to 00:00
+        // 1. Reset rotations to 00:00
         if (_minutesNeedle != null) _minutesNeedle.localRotation = Quaternion.identity;
         if (_hoursNeedle != null) _hoursNeedle.localRotation = Quaternion.identity;
-        if (_rootContainer != null)
+
+        if (_rootContainer != null) _rootContainer.localRotation = Quaternion.identity;
+
+        // 2. Reset scale to cached original
+        if (_bumpTarget != null)
         {
-            _rootContainer.localScale = Vector3.one;
-            _rootContainer.localRotation = Quaternion.identity;
+            _bumpTarget.localScale = _originalScale;
         }
 
         // 3. Begin the ticking cycle
@@ -51,13 +65,15 @@ public class TimerAnim : MonoBehaviour
     private void PlayNextTick()
     {
         _mainSequence = DOTween.Sequence();
-        var targetToBump = _rootContainer != null ? _rootContainer : _minutesNeedle;
 
         // A. Rotate Minute hand 90 degrees (15 minutes)
-        _mainSequence.Append(
-            _minutesNeedle.DOLocalRotate(new Vector3(0, 0, -90), _jumpDuration, RotateMode.LocalAxisAdd)
-                .SetEase(_jumpEase)
-        );
+        if (_minutesNeedle != null)
+        {
+            _mainSequence.Append(
+                _minutesNeedle.DOLocalRotate(new Vector3(0, 0, -90), _jumpDuration, RotateMode.LocalAxisAdd)
+                    .SetEase(_jumpEase)
+            );
+        }
 
         // B. Rotate Hour hand 7.5 degrees (1/4 of a 30-degree hour mark)
         if (_hoursNeedle != null)
@@ -68,13 +84,16 @@ public class TimerAnim : MonoBehaviour
             );
         }
 
-        // C. Trigger Visual Bump
-        _mainSequence.Append(targetToBump.DOPunchScale(Vector3.one * _bumpScaleAmount, _bumpDuration, 5, 0.5f));
+        // C. Trigger Visual Bump (using the stored original scale to determine punch magnitude)
+        if (_bumpTarget != null)
+        {
+            _mainSequence.Append(_bumpTarget.DOPunchScale(_originalScale * _bumpScaleAmount, _bumpDuration, 5, 0.5f));
+        }
 
         // D. Wait the pause duration
         _mainSequence.AppendInterval(_pauseDuration);
 
-        // E. Recursively call the next tick to ensure perfect continuity without resetting
+        // E. Recursively call the next tick
         _mainSequence.OnComplete(PlayNextTick);
     }
 
@@ -86,7 +105,10 @@ public class TimerAnim : MonoBehaviour
             _mainSequence = null;
         }
 
-        if (_rootContainer != null) _rootContainer.localScale = Vector3.one;
-        else if (_minutesNeedle != null) _minutesNeedle.localScale = Vector3.one;
+        // Reset scale to the cached original value
+        if (_bumpTarget != null)
+        {
+            _bumpTarget.localScale = _originalScale;
+        }
     }
 }
