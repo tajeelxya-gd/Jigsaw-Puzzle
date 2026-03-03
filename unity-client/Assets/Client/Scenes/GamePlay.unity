@@ -2805,7 +2805,6 @@ GameObject:
   - component: {fileID: 1664388755}
   - component: {fileID: 1664388754}
   - component: {fileID: 1664388753}
-  - component: {fileID: 1664388756}
   m_Layer: 0
   m_Name: BoosterCanvas
   m_TagString: Untagged
@@ -2897,19 +2896,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1664388756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664388751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a5d3618d3574d94cbc27a7a785a1ff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _viewPort: {x: 0, y: 0, z: 0}
 --- !u!224 &1717618965 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7891996861407238125, guid: c8d2924dc37f21649b6337d8cd8913a9, type: 3}
