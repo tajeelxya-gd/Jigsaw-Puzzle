@@ -16,18 +16,18 @@ public class StreakModelView : MonoBehaviour
     private void Awake()
     {
         _defaultSizeDelta = imageComponent.GetComponent<RectTransform>().sizeDelta;
-        _defaultSiblingIndex =  transform.GetSiblingIndex();
+        _defaultSiblingIndex = transform.GetSiblingIndex();
     }
 
     private void OnValidate()
     {
-        rewardText.text = "x"+rewardAmount.ToString();
+        rewardText.text = "x" + rewardAmount.ToString();
     }
 
     public void OnSelected(bool selected)
     {
         imageComponent.sprite = selected ? selectedSprite : unSelectedSprite;
-        imageComponent.transform.localScale = Vector3.one * (selected ? 1.5f : 1f); 
+        // imageComponent.transform.localScale = Vector3.one * (selected ? 1.5f : 1f); 
         if (selected) transform.SetAsLastSibling();
         else transform.SetSiblingIndex(_defaultSiblingIndex);
     }
