@@ -267,8 +267,12 @@ namespace Client.Runtime
                 pt.localRotation = Quaternion.Lerp(pt.localRotation, Quaternion.identity, Time.deltaTime * _lerpSpeed);
 
                 float localX = pt.localPosition.x;
+                float halfWidth = (_activePieces[i].Size.x * pt.localScale.x) / 2f;
                 float leftEdge = _trayCollider.center.x - (_trayCollider.size.x / 2f) - _visibilityBuffer;
                 float rightEdge = _trayCollider.center.x + (_trayCollider.size.x / 2f) + _visibilityBuffer;
+
+                bool isVisible = (localX - halfWidth >= leftEdge) && (localX + halfWidth <= rightEdge);
+                // _activePieces[i].gameObject.SetActive(isVisible);
             }
         }
 

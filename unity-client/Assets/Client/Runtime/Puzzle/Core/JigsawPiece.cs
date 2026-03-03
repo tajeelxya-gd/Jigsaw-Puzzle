@@ -33,6 +33,7 @@ namespace Client.Runtime
         public bool IsOverTray { get; private set; }
         public bool IsLocked { get; private set; }
         public JigsawPieceRenderer Renderer => _renderer;
+        public Vector3 Size => _collider.size;
 
         public void Inject(IResolver resolver)
         {
