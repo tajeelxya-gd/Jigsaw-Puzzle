@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using Client.Runtime;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using UniTx.Runtime.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -151,7 +153,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void Start()
         {
-            SignalBus.Subscribe<OnLevelLoadedSignal>(OnLevelLoaded);
+            UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
             RegisterButtonListeners();
         }
 
@@ -260,9 +262,9 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         }
 
-        void OnLevelLoaded(OnLevelLoadedSignal signal)
+        void OnLevelLoaded(LevelStartEvent signal)
         {
-            _currentPlayedLevel = signal.levelNo;
+            _currentPlayedLevel = signal.LevelIndex + 1;
         }
 
         public override void HideScreen()
@@ -342,9 +344,10 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             GetLevelData(_currentPlayedLevel);
             if (_gameData.Data.IsPuzzleManiaUnlocked)
             {
-                _currentEnemyCurrency = _gameData.Data.TempCollectedEnemies;
                 _gameData.Data.CurrentLevelEnemies = _gameData.Data.TempCollectedEnemies;
                 _gameData.Data.TempCollectedEnemies = 0;
+                _gameData.Data.CurrentLevelEnemies += UnityEngine.Random.Range(100, 300);
+                _currentEnemyCurrency = _gameData.Data.CurrentLevelEnemies;
             }
             _gameData.Data.Coins += GetTotalReward();
 
@@ -597,7 +600,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         {
             _sequence?.Kill();
             _trophySeq?.Kill();
-            SignalBus.Unsubscribe<OnLevelLoadedSignal>(OnLevelLoaded);
+            UniEvents.Unsubscribe<LevelStartEvent>(OnLevelLoaded);
         }
     }
 }

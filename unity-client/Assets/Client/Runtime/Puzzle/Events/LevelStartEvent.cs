@@ -4,6 +4,11 @@ namespace Client.Runtime
 {
     public readonly struct LevelStartEvent : IEvent
     {
-        // Empty yet.
+        public readonly int LevelIndex;
+
+        public LevelStartEvent(int levelIndex)
+        {
+            LevelIndex = levelIndex;
+        }
     }
 }

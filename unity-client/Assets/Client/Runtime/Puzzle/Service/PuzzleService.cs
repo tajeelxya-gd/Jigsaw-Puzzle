@@ -81,7 +81,7 @@ namespace Client.Runtime
             JigsawBoardCalculator.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
             // await SetLevelStateAsync(cToken);
-            UniEvents.Raise(new LevelStartEvent());
+            UniEvents.Raise(new LevelStartEvent(GetCurrentIdx()));
             InputHandler.SetActive(true);
         }
 
