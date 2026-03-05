@@ -40,7 +40,7 @@ public class PuzzleManiaReward : MonoBehaviour
         }
         _isShowing = true;
         RewardProgressHolder holder = new RewardProgressHolder();
-        holder._rewardCrateType = RewardProgressModelView.RewardCrateType.Yellow;
+        holder._rewardCrateType = RewardProgressModelView.RewardCrateType.Blue;
         holder._rewards.Add(_rewardQueue.Dequeue());
         SignalBus.Publish(new OnShowRewardProgressSignal
         {
