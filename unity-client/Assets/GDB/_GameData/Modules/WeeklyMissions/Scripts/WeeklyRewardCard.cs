@@ -112,7 +112,7 @@ public class WeeklyRewardCard : MonoBehaviour
         _progressBar.FillBar(progress);
         GetComponent<CanvasGroup>().alpha = _missionProgress.IsClaimed ? 0.7f : 1;
         _claimedOverlay.gameObject.SetActive(_missionProgress.IsClaimed);
-        _taskImage.gameObject.SetActive(!_missionProgress.IsClaimed);
+        // _taskImage.gameObject.SetActive(!_missionProgress.IsClaimed);
         _completionImage.gameObject.SetActive(_missionProgress.IsClaimed);
         _lockButton.gameObject.SetActive(!(_currentday <= _weeklyRewardManager._currentDay));
         _lockIcon.gameObject.SetActive(!(_currentday <= _weeklyRewardManager._currentDay));
