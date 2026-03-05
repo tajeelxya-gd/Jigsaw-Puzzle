@@ -122,6 +122,7 @@ namespace Client.Runtime
                 if (!_isLoseBroadcasted)
                 {
                     _isLoseBroadcasted = true;
+                    StopTimer();
                     OnLose.Broadcast();
                     HandleWinMissionSignals(false);
                 }
