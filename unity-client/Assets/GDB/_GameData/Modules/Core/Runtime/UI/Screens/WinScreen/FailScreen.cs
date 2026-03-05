@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
@@ -468,7 +468,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _hasFailPanelShown = true;
             AudioController.PlaySFX(AudioType.Loss);
             HapticController.Vibrate(HapticType.LevelFail);
-            Time.timeScale = 0f;
         }
 
         private void PlayFailSequence()

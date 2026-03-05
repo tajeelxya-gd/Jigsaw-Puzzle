@@ -20,11 +20,10 @@ namespace Client.Runtime
 
         public override UniTask InitialiseAsync(CancellationToken cToken = default)
         {
-            InputHandler.Init();
+            InputHandler.SetActive(true);
 
             var levelData = GetLevelData();
             _uiController.Initialize(levelData);
-            // return UniWidgets.PushAsync<MainMenuWidget>(PushLayer.Background, cToken);
             return _puzzleService.LoadPuzzleAsync(cToken);
         }
 

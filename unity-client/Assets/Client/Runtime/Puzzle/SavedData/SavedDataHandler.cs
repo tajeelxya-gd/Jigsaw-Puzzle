@@ -46,7 +46,7 @@ namespace Client.Runtime
 
         private void OnApplicationQuit()
         {
-            SaveCurrentLevelState();
+            // SaveCurrentLevelState();
             _serialisationService.SaveImmediate();
         }
 

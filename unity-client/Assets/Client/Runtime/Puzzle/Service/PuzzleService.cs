@@ -82,6 +82,7 @@ namespace Client.Runtime
             _puzzleTray.ShufflePieces(_board.Pieces);
             // await SetLevelStateAsync(cToken);
             UniEvents.Raise(new LevelStartEvent());
+            InputHandler.SetActive(true);
         }
 
         public void UnLoadPuzzle()
@@ -123,11 +124,11 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
+            InputHandler.SetActive(false);
             await _vfxController.WaitForHighlightsAsync(cToken);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             await _fullImageHandler.PlayLevelCompletedAnimationAsync(cToken);
-            // await UniWidgets.PushAsync<LevelCompletedWidget>();
             SignalBus.Publish(new OnLevelCompleteSignal() { levelType = _clearLevelType });
         }
 
@@ -135,7 +136,8 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandleOnLoseAsync(CancellationToken cToken = default)
         {
-            await UniWidgets.PushAsync<RestartLevelWidget>();
+            InputHandler.SetActive(false);
+            SignalBus.Publish(new OnlevelFailSignal() { levelFailType = LevelFailType.none });
         }
 
         private void HandleOnTimerTick(float time)
