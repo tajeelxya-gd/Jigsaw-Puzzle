@@ -198,11 +198,17 @@ public class DailyRewardTimer : MonoBehaviour
     private void OnDisable()
     {
         SignalBus.Unsubscribe<OnDailyRewardClaim>(OnClaimReward);
+        SignalBus.Unsubscribe<DebugForceMoveToNextDaySignal>(DebugMoveToNextDay);
+    }
+
+    private void OnEnable()
+    {
+        SignalBus.Subscribe<DebugForceMoveToNextDaySignal>(DebugMoveToNextDay);
     }
 
     [Button("Force Move to Next Day")]
     [GUIColor(0.4f, 0.8f, 1f)] // Makes the button a nice light blue in Odin
-    public void DebugMoveToNextDay()
+    public void DebugMoveToNextDay(DebugForceMoveToNextDaySignal signal)
     {
         // 1. Get the current "last claim" or assume today if none exists
         DateTime lastDate;
