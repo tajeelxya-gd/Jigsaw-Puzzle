@@ -3,10 +3,10 @@
     "_id": "mg_4x3_standard",
     "_xConstraint": 4,
     "_yConstraint": 3,
-    "_trayScale": 0.55,
+    "_trayScale": 0.47,
     "_traySpacing": {
       "x": 0.052,
-      "y": 0.052
+      "y": 0.047
     },
     "_idleShadowOffset": {
       "x": -0.00125,
