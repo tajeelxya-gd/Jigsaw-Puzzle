@@ -31,6 +31,7 @@ namespace Client.Runtime
         private IUserSavedData _savedData;
         private JigsawBoard _board;
         private JigsawLevelData[] _levelsData;
+        private LevelType _clearLevelType;
 
         public event Action<float> OnTimerTick;
 
@@ -69,6 +70,7 @@ namespace Client.Runtime
         public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
+            _clearLevelType = levelData.DifficultyType;
             _board = _entityService.Get<JigsawBoard>(levelData.GridId);
             await _helper.CreateGridAsync(levelData.GridId, _puzzleBoard, cToken);
             await _helper.CreateFullImageAsync($"{levelData.GridId}_full_image", _puzzleBoard, cToken);
@@ -78,7 +80,7 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(_board);
             JigsawBoardCalculator.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
-            await SetLevelStateAsync(cToken);
+            // await SetLevelStateAsync(cToken);
             UniEvents.Raise(new LevelStartEvent());
         }
 
@@ -125,7 +127,8 @@ namespace Client.Runtime
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             await _fullImageHandler.PlayLevelCompletedAnimationAsync(cToken);
-            await UniWidgets.PushAsync<LevelCompletedWidget>();
+            // await UniWidgets.PushAsync<LevelCompletedWidget>();
+            SignalBus.Publish(new OnLevelCompleteSignal() { levelType = _clearLevelType });
         }
 
         private void HandleOnLose() => UniTask.Void(HandleOnLoseAsync, default);

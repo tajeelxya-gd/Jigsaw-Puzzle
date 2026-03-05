@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 {
@@ -394,7 +394,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 .AppendCallback(() => ShowAchievementBase(previous.FillAmount))
                 .Append(_achievementFiller.DOFillAmount(targetFill, 1f))
                 .JoinCallback(PlayFillerBgEffect)
-                .Join(UpdateFillPercentageTween(targetFill, previous.FillAmount))
+                // .Join(UpdateFillPercentageTween(targetFill, previous.FillAmount))
                 // COMPLETION FX
                 .AppendCallback(() =>
                 {
@@ -457,11 +457,11 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void ShowAchievementBase(float previousFill)
         {
-            _achievementFillerTransform.gameObject.SetActive(true);
-            _achievementFiller_CG.alpha = 0;
-            _achievementFiller_CG.DOFade(1, 0.5f);
-            _achievementFillerTransform.DOAnchorPos(_animatedAchievementFiller_Position, 1f).SetEase(Ease.InOutSine);
-            _fillPercentage.text = Mathf.RoundToInt(previousFill * 100f) + "%";
+            // _achievementFillerTransform.gameObject.SetActive(true);
+            // _achievementFiller_CG.alpha = 0;
+            // _achievementFiller_CG.DOFade(1, 0.5f);
+            // _achievementFillerTransform.DOAnchorPos(_animatedAchievementFiller_Position, 1f).SetEase(Ease.InOutSine);
+            // _fillPercentage.text = Mathf.RoundToInt(previousFill * 100f) + "%";
             GameData _gameData = GlobalService.GameData;
             if (_gameData.Data.IsLeaderBoardUnlocked)
             {

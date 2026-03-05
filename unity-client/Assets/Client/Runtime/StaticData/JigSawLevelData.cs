@@ -23,15 +23,15 @@ namespace Client.Runtime
         public int Difficulty => _difficulty;
         public string[] CellActionIds => _cellActionIds;
         public int MaxDuration => _maxDuration;
-        public DifficultyType DifficultyType => Enum.TryParse(_difficultyType, out DifficultyType difficultyType) ? difficultyType : DifficultyType.Easy;
+        public LevelType DifficultyType => Enum.TryParse(_difficultyType, out LevelType difficultyType) ? difficultyType : LevelType.Easy;
 
-        public static DifficultyType GetCurrentDifficultyType()
+        public static LevelType GetCurrentDifficultyType()
         {
             var str = PlayerPrefs.GetString("JigsawLevelData_CurrentDifficultyType", "");
-            return Enum.TryParse(str, out DifficultyType difficultyType) ? difficultyType : DifficultyType.Easy;
+            return Enum.TryParse(str, out LevelType difficultyType) ? difficultyType : LevelType.Easy;
         }
 
-        public static void SetCurrentDifficultyType(DifficultyType difficultyType)
+        public static void SetCurrentDifficultyType(LevelType difficultyType)
         {
             PlayerPrefs.SetString("JigsawLevelData_CurrentDifficultyType", difficultyType.ToString());
         }

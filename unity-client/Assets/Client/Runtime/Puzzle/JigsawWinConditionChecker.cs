@@ -113,7 +113,7 @@ namespace Client.Runtime
             {
                 StopTimer();
                 OnWin.Broadcast();
-                HandleWinMissionSignals(true);
+                HandleWinMissionSignals();
                 return;
             }
 
@@ -124,7 +124,6 @@ namespace Client.Runtime
                     _isLoseBroadcasted = true;
                     StopTimer();
                     OnLose.Broadcast();
-                    HandleWinMissionSignals(false);
                 }
                 return;
             }
@@ -140,49 +139,34 @@ namespace Client.Runtime
             });
         }
 
-        private void HandleWinMissionSignals(bool isCurrentWin)
+        private void HandleWinMissionSignals()
         {
-            if (GlobalService.GameData.Data.PreviousWin && isCurrentWin)
+            SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
             {
-                SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
-                {
-                    MissionType = MissionType.WinStreak,
-                    Amount = 1
-                });
-            }
+                MissionType = MissionType.WinLevel,
+                Amount = 1
+            });
 
-            if (isCurrentWin)
+            var difficultyType = _puzzleService.GetCurrentLevelData().DifficultyType;
+            switch (difficultyType)
             {
-                SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
-                {
-                    MissionType = MissionType.WinLevel,
-                    Amount = 1
-                });
-
-                var difficultyType = _puzzleService.GetCurrentLevelData().DifficultyType;
-                switch (difficultyType)
-                {
-                    case DifficultyType.Hard:
-                        SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
-                        {
-                            MissionType = MissionType.WinHardLevel,
-                            Amount = 1
-                        });
-                        break;
-                    case DifficultyType.SuperHard:
-                        SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
-                        {
-                            MissionType = MissionType.WinSuperHardLevel,
-                            Amount = 1
-                        });
-                        break;
-                    default:
-                        break;
-                }
+                case LevelType.Hard:
+                    SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
+                    {
+                        MissionType = MissionType.WinHardLevel,
+                        Amount = 1
+                    });
+                    break;
+                case LevelType.SuperHard:
+                    SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
+                    {
+                        MissionType = MissionType.WinSuperHardLevel,
+                        Amount = 1
+                    });
+                    break;
+                default:
+                    break;
             }
-
-            GlobalService.GameData.Data.PreviousWin = isCurrentWin;
-            GlobalService.GameData.Save();
         }
     }
 }
