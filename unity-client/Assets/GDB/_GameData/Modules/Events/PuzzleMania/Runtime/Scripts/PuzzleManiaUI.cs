@@ -9,11 +9,14 @@ public class PuzzleManiaUI : MonoBehaviour
     [SerializeField] private GameObject _puzzleManiaPanel;
     [SerializeField] private CanvasGroup _rootCanvasGroup;
     [SerializeField] private RectTransform[] allContents;
- 
-    public void SetupUI(UIData[] data)
+
+    public void SetupUI(UIData[] data, int currentMilestoneIndex)
     {
         for (int i = 0; i < _holders.Length; i++)
-            _holders[i].SetupHolder(data[i]._number, data[i]._RewardProgress._rewardIcon,data[i]._RewardProgress.rewardChestAmount);
+        {
+            _holders[i].SetupHolder(data[i]._number, data[i]._RewardProgress._rewardIcon, data[i]._RewardProgress.rewardChestAmount);
+            _holders[i].SetLocked(i > currentMilestoneIndex);
+        }
     }
 
     private Sequence _openSequence;
@@ -38,7 +41,7 @@ public class PuzzleManiaUI : MonoBehaviour
     public void OpenPuzzleManiaPanel()
     {
         Reset();
-        _openSequence =  DOTween.Sequence();
+        _openSequence = DOTween.Sequence();
         _puzzleManiaPanel.gameObject.SetActive(true);
         _openSequence.Join(_rootCanvasGroup.DOFade(1, 0.2f).From(0));
         foreach (var content in allContents)
@@ -48,11 +51,11 @@ public class PuzzleManiaUI : MonoBehaviour
             _openSequence.Join(
                 content.DOScale(1f, 0.3f).From(2).SetEase(Ease.OutBack)
             );
-            _openSequence.AppendInterval(0.05f); 
+            _openSequence.AppendInterval(0.05f);
         }
         AudioController.PlaySFX(AudioType.ButtonClick);
-        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop);});
-        
+        DOVirtual.DelayedCall(0.15f, () => { AudioController.PlaySFX(AudioType.PanelPop); });
+
     }
 
     public void ClosePuzzleManiaPanel()
@@ -61,25 +64,25 @@ public class PuzzleManiaUI : MonoBehaviour
         _closeSequence.Join(_rootCanvasGroup.DOFade(0, 0.3f).From(1))
             .Join(_rootCanvasGroup.transform.DOScale(1.2f, 0.3f).From(1).OnComplete(() =>
             {
-               
+
             }))
-            .AppendCallback(()=>_puzzleManiaPanel.gameObject.SetActive(false));
+            .AppendCallback(() => _puzzleManiaPanel.gameObject.SetActive(false));
         AudioController.PlaySFX(AudioType.PanelClose);
-        DOVirtual.DelayedCall(0.35f, ()=>
+        DOVirtual.DelayedCall(0.35f, () =>
         {
             PopCommandExecutionResponder.RemoveCommand<OnBoardingMenuCommand>();
         });
-        DOVirtual.DelayedCall(0.35f + Time.deltaTime, ()=>
+        DOVirtual.DelayedCall(0.35f + Time.deltaTime, () =>
         {
             PopCommandExecutionResponder.RemoveCommand<PuzzleRushShowCommand>();
         });
-     
+
     }
     public void SetGrandPrize(int prize)
     {
         _grandPrize.text = prize.ToString();
     }
-    
+
     public void ResetUI()
     {
         foreach (var holder in _holders)

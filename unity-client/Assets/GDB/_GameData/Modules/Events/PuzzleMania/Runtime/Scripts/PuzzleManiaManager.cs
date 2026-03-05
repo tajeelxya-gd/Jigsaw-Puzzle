@@ -57,7 +57,7 @@ public class PuzzleManiaManager : MonoBehaviour
 
     private void Start()
     {
-        _puzzleManiaUI.SetupUI(_milestones);
+        _puzzleManiaUI.SetupUI(_milestones, _currentMilestoneIndex);
         if (_currentMilestoneIndex < _holder.Length)
         {
             _holder[_currentMilestoneIndex].SetHolderImage(_green);
@@ -320,7 +320,7 @@ public class PuzzleManiaManager : MonoBehaviour
         _saveData._totalBlocksUsed = 0;
         _saveDatabase.Save(_saveData);
 
-        _puzzleManiaUI.SetupUI(_milestones);
+        _puzzleManiaUI.SetupUI(_milestones, 0);
         if (_holder.Length > 0)
             _holder[_currentMilestoneIndex].SetHolderImage(_green);
 

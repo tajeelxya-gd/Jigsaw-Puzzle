@@ -48,6 +48,12 @@ public class HolderManager : MonoBehaviour
         _icon.gameObject.SetActive(false);
     }
 
+    public void SetLocked(bool locked)
+    {
+        _icon_FadeGroup.alpha = locked ? 0.4f : 1f;
+        _holderImage.sprite = locked ? _dimHolder : _originalSprite;
+    }
+
     public RectTransform GetTransform()
     {
         return (RectTransform)transform;
