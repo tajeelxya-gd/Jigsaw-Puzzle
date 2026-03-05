@@ -87,7 +87,7 @@ public class TimerAnim : MonoBehaviour
         // C. Trigger Visual Bump (using the stored original scale to determine punch magnitude)
         if (_bumpTarget != null)
         {
-            _mainSequence.Append(_bumpTarget.DOPunchScale(_originalScale * _bumpScaleAmount, _bumpDuration, 5, 0.5f));
+            _mainSequence.Join(_bumpTarget.DOPunchScale(_originalScale * _bumpScaleAmount, _bumpDuration, 5, 0.5f));
         }
 
         // D. Wait the pause duration
