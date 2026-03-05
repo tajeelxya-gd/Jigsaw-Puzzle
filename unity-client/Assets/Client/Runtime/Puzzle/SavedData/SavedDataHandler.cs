@@ -55,6 +55,7 @@ namespace Client.Runtime
             _savedData.CurrentLevel += 1;
             var difficultyType = _puzzleService.GetCurrentLevelData().DifficultyType;
             JigsawLevelData.SetCurrentDifficultyType(difficultyType);
+            GlobalService.GameData.Data.TrophiesWinInGame += UnityEngine.Random.Range(5, 15);
             Save();
         }
 

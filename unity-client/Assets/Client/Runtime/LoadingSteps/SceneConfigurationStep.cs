@@ -21,13 +21,9 @@ namespace Client.Runtime
         public override async UniTask InitialiseAsync(CancellationToken cToken = default)
         {
             await UniTask.Yield(PlayerLoopTiming.Update);
-            AdjustCamera();
-            UpdateViewPortsAsync(this.GetCancellationTokenOnDestroy()).Forget();
-        }
-
-        private void Update()
-        {
-            _boosters.position = Camera.main.ViewportToWorldPoint(_boostersViewPort);
+            // AdjustCamera();
+            // UpdateViewPortsAsync(this.GetCancellationTokenOnDestroy()).Forget();
+            SetTrayCollider();
         }
 
         private async UniTask UpdateViewPortsAsync(CancellationToken cToken = default)

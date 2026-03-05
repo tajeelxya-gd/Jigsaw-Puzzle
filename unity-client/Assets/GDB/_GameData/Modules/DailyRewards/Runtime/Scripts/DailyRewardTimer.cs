@@ -234,6 +234,8 @@ public class DailyRewardTimer : MonoBehaviour
 
         Debug.Log($"<color=cyan>Debug:</color> Last claim date moved back. " +
                   $"Current Day: {_currentDay}. Can claim: {_canClaimToday}");
+
+        _dailyRewardManager.ShowDailyRewardPanel();
     }
 }
 

@@ -105,7 +105,7 @@ public class DailyRewardManager : MonoBehaviour
         );
     }
 
-    void ShowDailyRewardPanel()
+    public void ShowDailyRewardPanel()
     {
         _dailyRewardPanel.SetActive(true);
         if (_rewardPanelScaling)

@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2114969101371362970}
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6cb7c12e3cc75b4a89bafae8ecf6e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.PuzzleTray
-  _rowCount: 1
+  _rowCount: 2
   _spacing: {x: 0.047, y: 0.047}
-  _padding: {x: 0.03, y: 0}
+  _padding: {x: 0, y: 0}
   _trayCollider: {fileID: 8619639753298581620}
   _bgTransform: {fileID: 2114969101371362970}
   _lerpSpeed: 20
@@ -76,7 +76,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.16, y: 0.05, z: 0.065}
+  m_Size: {x: 0.24, y: 0.05, z: 0.065}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2640388155200598392
 Rigidbody:
@@ -131,7 +131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902260606013415315, guid: d6d380ff2d73bd94ea5bb1fee7963145, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.65
+      value: 1.1542805
       objectReference: {fileID: 0}
     - target: {fileID: 902260606013415315, guid: d6d380ff2d73bd94ea5bb1fee7963145, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143,7 +143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902260606013415315, guid: d6d380ff2d73bd94ea5bb1fee7963145, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0015
+      value: -0.0016
       objectReference: {fileID: 0}
     - target: {fileID: 902260606013415315, guid: d6d380ff2d73bd94ea5bb1fee7963145, type: 3}
       propertyPath: m_LocalRotation.w
