@@ -14,6 +14,7 @@ namespace Client.Runtime
         [SerializeField] private int _difficulty;
         [SerializeField] private string[] _cellActionIds;
         [SerializeField] private int _maxDuration;
+        [SerializeField] private string _difficultyType;
 
         public string Id => _id;
         public string Name => _name;
@@ -22,5 +23,17 @@ namespace Client.Runtime
         public int Difficulty => _difficulty;
         public string[] CellActionIds => _cellActionIds;
         public int MaxDuration => _maxDuration;
+        public DifficultyType DifficultyType => Enum.TryParse(_difficultyType, out DifficultyType difficultyType) ? difficultyType : DifficultyType.Easy;
+
+        public static DifficultyType GetCurrentDifficultyType()
+        {
+            var str = PlayerPrefs.GetString("JigsawLevelData_CurrentDifficultyType", "");
+            return Enum.TryParse(str, out DifficultyType difficultyType) ? difficultyType : DifficultyType.Easy;
+        }
+
+        public static void SetCurrentDifficultyType(DifficultyType difficultyType)
+        {
+            PlayerPrefs.SetString("JigsawLevelData_CurrentDifficultyType", difficultyType.ToString());
+        }
     }
 }

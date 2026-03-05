@@ -53,6 +53,8 @@ namespace Client.Runtime
         private void HandleOnWin()
         {
             _savedData.CurrentLevel += 1;
+            var difficultyType = _puzzleService.GetCurrentLevelData().DifficultyType;
+            JigsawLevelData.SetCurrentDifficultyType(difficultyType);
             Save();
         }
 

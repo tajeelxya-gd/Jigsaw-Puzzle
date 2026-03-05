@@ -157,6 +157,27 @@ namespace Client.Runtime
                     MissionType = MissionType.WinLevel,
                     Amount = 1
                 });
+
+                var difficultyType = _puzzleService.GetCurrentLevelData().DifficultyType;
+                switch (difficultyType)
+                {
+                    case DifficultyType.Hard:
+                        SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
+                        {
+                            MissionType = MissionType.WinHardLevel,
+                            Amount = 1
+                        });
+                        break;
+                    case DifficultyType.SuperHard:
+                        SignalBus.Publish(new OnMissionObjectiveCompleteSignal()
+                        {
+                            MissionType = MissionType.WinSuperHardLevel,
+                            Amount = 1
+                        });
+                        break;
+                    default:
+                        break;
+                }
             }
 
             GlobalService.GameData.Data.PreviousWin = isCurrentWin;
