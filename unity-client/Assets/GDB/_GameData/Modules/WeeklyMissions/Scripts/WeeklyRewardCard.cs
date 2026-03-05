@@ -154,11 +154,6 @@ public class WeeklyRewardCard : MonoBehaviour
 
         int currentReward = getRewardSignal.RewardAmount;
 
-        SignalBus.Publish(new OnWeeklyProgressUpdatedSignal
-        {
-            Progress = currentReward
-        });
-
         if (_missionProgress.IsCompleted)
         {
             _missionProgress.CurrentAmount = 0;
@@ -169,6 +164,12 @@ public class WeeklyRewardCard : MonoBehaviour
         RefreshProgress();
         _popEffect.Move();
         _weeklyRewardManager.SaveMissionProgress(_missionProgress);
+
+        SignalBus.Publish(new OnWeeklyProgressUpdatedSignal
+        {
+            Progress = currentReward
+        });
+
         _animationEffect.gameObject.SetActive(true);
         SendAnalyticEvent();
     }

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
@@ -321,6 +321,19 @@ public class WeeklyRewardManager : MonoBehaviour
                 card._collectButton.interactable = timerDay >= day && missionProgress.IsCompleted;
             }
         }
+    }
+
+    public bool HasClaimableMissions(int day)
+    {
+        if (!_dailyMissionProgress.TryGetValue(day, out var missions)) return false;
+
+        foreach (var mission in missions)
+        {
+            if (mission.IsCompleted && !mission.IsClaimed)
+                return true;
+        }
+
+        return false;
     }
 }
 

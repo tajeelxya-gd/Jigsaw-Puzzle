@@ -8,6 +8,7 @@ public class WeeklyButtonManager : MonoBehaviour
     [SerializeField] private int _currentDay = 1;
     [SerializeField] private RectTransform _weeklGoalPanel;
     [SerializeField] private Button[] _dayButtons;
+    [SerializeField] private Image[] _dayAlerts; // active when claimable and day is unlcoked
     [SerializeField] private GameObject[] _days;
     [SerializeField] private Sprite _selectedButton;
     [SerializeField] private Sprite _originalButton;
@@ -16,9 +17,11 @@ public class WeeklyButtonManager : MonoBehaviour
     [SerializeField] private TMP_Text[] _dayTexts;
     [SerializeField] private bool _defaultUnlockAll = false;
     private Image[] _dayButtonsImg;
+    private WeeklyRewardManager _weeklyRewardManager;
 
     private void Start()
     {
+        _weeklyRewardManager = FindFirstObjectByType<WeeklyRewardManager>();
         int size = _dayButtons.Length;
         _dayButtonsImg = new Image[size];
         for (int i = 0; i < _dayButtons.Length; i++)
@@ -28,7 +31,29 @@ public class WeeklyButtonManager : MonoBehaviour
             _dayButtonsImg[i] = _dayButtons[i].gameObject.GetComponent<Image>();
         }
         SignalBus.Subscribe<OnDayChangedSignal>(SetCurrentDay);
+        SignalBus.Subscribe<OnPlayerDidActionSignal>(RefreshAlerts);
+        SignalBus.Subscribe<OnWeeklyProgressUpdatedSignal>(RefreshAlerts);
+
         SetCurrentDay(new OnDayChangedSignal(_currentDay));
+        RefreshAlerts();
+    }
+
+    private void RefreshAlerts(OnPlayerDidActionSignal signal) => RefreshAlerts();
+    private void RefreshAlerts(OnWeeklyProgressUpdatedSignal signal) => RefreshAlerts();
+
+    private void RefreshAlerts()
+    {
+        if (_weeklyRewardManager == null) return;
+
+        for (int i = 0; i < _dayAlerts.Length; i++)
+        {
+            int day = i + 1;
+            bool isUnlocked = day <= _currentDay;
+            bool hasClaimable = _weeklyRewardManager.HasClaimableMissions(day);
+
+            if (_dayAlerts[i] != null)
+                _dayAlerts[i].gameObject.SetActive(isUnlocked && hasClaimable);
+        }
     }
 
     public void UpdateCurrentMissions()
@@ -63,6 +88,8 @@ public class WeeklyButtonManager : MonoBehaviour
             var text = isLocked ? $"\n{i + 1}" : $"DAY\n{i + 1}";
             _dayTexts[i].SetText(text);
         }
+
+        RefreshAlerts();
     }
 
     public void OpenDay(int day)
@@ -82,10 +109,14 @@ public class WeeklyButtonManager : MonoBehaviour
                 _dayButtonsImg[i].sprite = isLocked ? _lockedButtonSprite : _originalButton;
             }
         }
+
+        RefreshAlerts();
     }
 
     private void OnDestroy()
     {
         SignalBus.Unsubscribe<OnDayChangedSignal>(SetCurrentDay);
+        SignalBus.Unsubscribe<OnPlayerDidActionSignal>(RefreshAlerts);
+        SignalBus.Unsubscribe<OnWeeklyProgressUpdatedSignal>(RefreshAlerts);
     }
 }
