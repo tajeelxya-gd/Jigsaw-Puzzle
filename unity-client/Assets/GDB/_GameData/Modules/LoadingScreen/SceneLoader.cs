@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private CanvasGroup rootCanvasGroup;
-    [SerializeField] private RectTransform fillBarRect; 
+    [SerializeField] private RectTransform fillBarRect;
     [SerializeField] private TextMeshProUGUI progressText;
 
     [Header("Settings")]
@@ -56,14 +56,14 @@ public class SceneLoader : MonoBehaviour
     {
         // We keep this at 1f to ensure the new scene starts running, 
         // but the logic below now works regardless of this value.
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
 
         if (signal.DoFakeLoad)
             StartFakeLoad(signal);
         else
             StartRealLoad(signal.SceneName);
 
-        if(!isGamePlay)
+        if (!isGamePlay)
             ChangeVisual(signal.levelType);
         AudioController.StopBG();
     }
@@ -71,7 +71,7 @@ public class SceneLoader : MonoBehaviour
     private void StartFakeLoad(OnSceneShiftSignal signal)
     {
         ResetUI(true);
-        
+
         // Added .SetUpdate(true) to ignore timeScale
         rootCanvasGroup.DOFade(1, fadeDuration).From(0).SetUpdate(true);
 
@@ -90,7 +90,7 @@ public class SceneLoader : MonoBehaviour
     private void ChangeVisual(LevelType levelType)
     {
         if (_loadingScreenUIData == null) return;
-        
+
         LoadingScreenUIData.UI uI = _loadingScreenUIData.GetData(levelType);
         _mainLoadingImg.sprite = uI.LoadingPanelSprite;
         _loadingTxtImg.sprite = uI.LoadingTxtSp;
@@ -116,19 +116,19 @@ public class SceneLoader : MonoBehaviour
         while (operation.progress < 0.9f || _visualProgress < 0.99f)
         {
             float target = Mathf.Clamp01(operation.progress / 0.9f);
-            
+
             // Changed to Time.unscaledDeltaTime so the bar moves while paused
             _visualProgress = Mathf.MoveTowards(_visualProgress, target, Time.unscaledDeltaTime / minLoadTime);
             UpdateUI(_visualProgress);
 
-            yield return null; 
+            yield return null;
         }
 
         UpdateUI(1f);
-        
+
         // Changed to WaitForSecondsRealtime so the coroutine doesn't hang while paused
         yield return new WaitForSecondsRealtime(0.2f);
-        
+
         operation.allowSceneActivation = true;
     }
 
