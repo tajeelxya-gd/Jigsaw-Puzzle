@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniTx.Runtime;
 using UniTx.Runtime.Content;
 using UniTx.Runtime.Entity;
@@ -18,6 +19,7 @@ namespace Client.Runtime
         [SerializeField] private Transform _puzzleBoard;
         [SerializeField] private Transform _puzzleBounds;
         [SerializeField] private Transform _frameMesh;
+        [SerializeField] private TMP_Text _timerText;
 
         private IContentService _contentService;
         private IEntityService _entityService;
@@ -133,7 +135,11 @@ namespace Client.Runtime
             await UniWidgets.PushAsync<RestartLevelWidget>();
         }
 
-        private void HandleOnTimerTick(float time) => OnTimerTick?.Invoke(time);
+        private void HandleOnTimerTick(float time)
+        {
+            _timerText.SetText($"{(int)time}");
+            OnTimerTick?.Invoke(time);
+        }
 
         private int GetCurrentIdx() => Math.Clamp(_savedData.CurrentLevel, 0, _levelsData.Length - 1);
 

@@ -30,7 +30,7 @@ namespace Client.Runtime
         private async UniTaskVoid HandleShowToastEventAsync(ToastEventData data, CancellationToken cToken = default)
         {
             await _vfxController.WaitForHighlightsAsync(cToken);
-            _toast.Show(data.Message);
+            // _toast.Show(data.Message);
         }
     }
 }
