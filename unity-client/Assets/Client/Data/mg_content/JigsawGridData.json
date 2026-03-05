@@ -5,7 +5,7 @@
     "_yConstraint": 3,
     "_trayScale": 0.47,
     "_traySpacing": {
-      "x": 0.052,
+      "x": 0.047,
       "y": 0.047
     },
     "_idleShadowOffset": {
@@ -25,8 +25,8 @@
     "_yConstraint": 4,
     "_trayScale": 0.7,
     "_traySpacing": {
-      "x": 0.05,
-      "y": 0.05
+      "x": 0.052,
+      "y": 0.047
     },
     "_idleShadowOffset": {
       "x": -0.00105,

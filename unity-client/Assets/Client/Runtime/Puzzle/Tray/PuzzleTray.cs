@@ -298,9 +298,16 @@ namespace Client.Runtime
         private Vector3 GetLocalMiddleLeftAnchor()
         {
             float gridHeight = (_rowCount - 1) * _spacing.y;
+            float halfPieceWidth = 0f;
+
+            JigsawPiece piece = _activePieces.Count > 0 ? _activePieces[0] : _hoverPiece;
+            if (piece != null)
+            {
+                halfPieceWidth = (piece.Size.x * piece.transform.localScale.x) / 2f;
+            }
 
             return new Vector3(
-                _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + _scrollX,
+                _trayCollider.center.x - (_trayCollider.size.x / 2f) + _padding.x + halfPieceWidth + _scrollX,
                 _trayCollider.center.y,
                 _trayCollider.center.z + (gridHeight / 2f)
             );
@@ -419,9 +426,16 @@ namespace Client.Runtime
                 return;
             }
 
+            float halfPieceWidth = 0f;
+            JigsawPiece piece = _activePieces.Count > 0 ? _activePieces[0] : _hoverPiece;
+            if (piece != null)
+            {
+                halfPieceWidth = (piece.Size.x * piece.transform.localScale.x) / 2f;
+            }
+
             int cols = Mathf.CeilToInt((float)totalCount / _rowCount);
 
-            float totalContentWidth = (cols - 1) * _spacing.x;
+            float totalContentWidth = (cols - 1) * _spacing.x + (2 * halfPieceWidth);
             float visibleWidth = _trayCollider.size.x - (_padding.x * 2);
             float maxScroll = Mathf.Max(0, totalContentWidth - visibleWidth);
 
