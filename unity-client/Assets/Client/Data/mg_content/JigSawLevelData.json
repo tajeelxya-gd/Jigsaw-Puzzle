@@ -80,7 +80,7 @@
       "cell_7_4x3_action_reward",
       "cell_8_4x3_action_puzzle_mania"
     ],
-    "_maxDuration": 180,
+    "_maxDuration": 10,
     "_difficultyType": "Easy"
   },
   {
