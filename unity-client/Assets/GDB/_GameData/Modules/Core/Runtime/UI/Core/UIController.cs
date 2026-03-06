@@ -1,5 +1,6 @@
 using System;
 using Client.Runtime;
+using UniTx.Runtime;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
@@ -16,7 +17,9 @@ public class UIController : MonoBehaviour
     {
         _winConditionChecker = winConditionChecker;
         _winConditionChecker.OnAdvance += OnAdvance;
-        _winScreen.Inject();
+        var resolver = UniStatics.Resolver;
+        _winScreen.Inject(resolver);
+        _loseScreen.Inject(resolver);
     }
 
     private void OnAdvance(float progress)

@@ -1,6 +1,7 @@
+using UniTx.Runtime.IoC;
 using UnityEngine;
 
-public abstract class ScreenBase : MonoBehaviour, IScreen
+public abstract class ScreenBase : MonoBehaviour, IScreen, IInjectable
 {
 
     public virtual void ShowScreen()
@@ -18,10 +19,7 @@ public abstract class ScreenBase : MonoBehaviour, IScreen
 
     }
 
-    public virtual void Inject()
-    {
-
-    }
+    public abstract void Inject(IResolver resolver);
 }
 
 public interface IScreen

@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Client.Runtime;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using UniTx.Runtime.Events;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +32,9 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         [TabGroup("FailScreen", "Roots")]
         [SerializeField]
         private CanvasGroup _upperBundleRoot;
+        [TabGroup("FailScreen", "Roots")]
+        [SerializeField]
+        private TMP_Text _levelNumber;
 
         // -----------------------------
         //  FAILED TAB
@@ -89,6 +96,14 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         [TabGroup("FailScreen", "LevelFailPanel")]
         [SerializeField]
         private Image[] _heartsSprites;
+
+        [TabGroup("FailScreen", "LevelFailPanel")]
+        [SerializeField]
+        private Image[] _heartsSpritesRoot;
+
+        [TabGroup("FailScreen", "LevelFailPanel")]
+        [SerializeField] private TMP_Text _resetHealthTimerTmp;
+
         [TabGroup("FailScreen", "LevelFailPanel")]
         [SerializeField]
         private Sprite _breakableHeart;
@@ -124,17 +139,28 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private Sequence _sequence;
         private LevelFailType _levelFailType;
         private Vector3 _initialTrophyPosition;
+        private IPuzzleService _puzzleService;
 
         private bool _hasFailPanelShown;
+
+        public override void Inject(IResolver resolver)
+        {
+            _puzzleService = resolver.Resolve<IPuzzleService>();
+            UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
+        }
+
+        private void OnDestory()
+        {
+            UniEvents.Unsubscribe<LevelStartEvent>(OnLevelLoaded);
+        }
 
         private void Start()
         {
             PlayHeartBeatEffect();
             //SignalBus.Subscribe<OnlevelFailSignal>(AssignLevelFailType);
             SignalBus.Subscribe<CloseFailPanelSignal>(CloseFailPanel);
-            SignalBus.Subscribe<OnLevelLoadedSignal>(OnLevelLoaded);
             SignalBus.Subscribe<SlotsFullSignal>(SlotChecker);
-
+            SignalBus.Subscribe<OnHealthUpdateSignal>(OnHealthUpdate);
             SignalBus.Subscribe<OnFailedSignal>(CallMainFailSignal);
             SignalBus.Subscribe<ChangeCannonSlotSignal>(ChangeCannonSprite);
             SignalBus.Subscribe<OnInAppBuySignal>((_) => OnIapPurchased());
@@ -146,7 +172,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             {
                 _instantiatedBundles.Add(bundle);
             }
-            RemoveHearts();
+            RemoveHearts(_heartsSprites);
+            RemoveHearts(_heartsSpritesRoot);
         }
 
 
@@ -159,14 +186,20 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _isInfinite = timeService_freeTimer.IsRunning();
         }
 
+        void OnHealthUpdate(OnHealthUpdateSignal signal)
+        {
+            timeService_resetHealthTimer.ExtendTimer(signal.TimeToAdd);
+        }
+
         // private void AssignLevelFailType(OnlevelFailSignal signal)
         // {
         //     Debug.LogError(signal.levelFailType);
         //     _levelFailType = signal.levelFailType;
         // }
-        void OnLevelLoaded(OnLevelLoadedSignal signal)
+        void OnLevelLoaded(LevelStartEvent signal)
         {
-            _currentPlayedLevel = signal.levelNo;
+            _currentPlayedLevel = signal.LevelIndex + 1;
+            _levelNumber.SetText($"LEVEL {_currentPlayedLevel}");
         }
 
         void OnIapPurchased()
@@ -183,6 +216,14 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             if (_isInfinite)
             {
                 _infiniteTimer.text = timeService_freeTimer.GetFormattedTimeMinutes();
+            }
+            if (timeService_resetHealthTimer.IsRunning())
+            {
+                _resetHealthTimerTmp.text = timeService_resetHealthTimer.GetFormattedTime();
+            }
+            else
+            {
+                _resetHealthTimerTmp.text = "25M";
             }
         }
 
@@ -252,7 +293,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 DOVirtual.DelayedCall(0.1f, ResetAll);
                 _levelFailPanel.transform.GetChild(0).DOScale(0.2f, 0.25f);
                 ContinueButton();
-                SignalBus.Publish(new OnSceneShiftSignal { DoFakeLoad = true, FakeLoadTime = 3 });
+                _puzzleService.RestartPuzzleAsync(this.GetCancellationTokenOnDestroy());
+                // SignalBus.Publish(new OnSceneShiftSignal { SceneName = "GamePlay", DoFakeLoad = true, FakeLoadTime = 3 });
                 GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
                  "Level " + _currentPlayedLevel,
                 "Fail",
@@ -266,7 +308,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             }
 
 
-            RemoveHearts();
+            RemoveHearts(_heartsSprites);
+            RemoveHearts(_heartsSpritesRoot);
             //Implement Continue Button
         }
 
@@ -348,40 +391,40 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         #endregion
 
         #region ANIMATIONS
-        private void PlayHeartAnimation()
+        private void PlayHeartAnimation(Image[] heartsSprites)
         {
-            ResetAllHearts();
+            ResetAllHearts(heartsSprites);
             _blinkTween?.Kill();
             int availableLives = GlobalService.GameData.Data.AvailableLives;
             int blinkIndex = availableLives - 1;
-            if (blinkIndex < 0 || blinkIndex >= _heartsSprites.Length) return;
-            _heartsSprites[blinkIndex].sprite = _breakableHeart;
-            _blinkTween = _heartsSprites[blinkIndex].transform
+            if (blinkIndex < 0 || blinkIndex >= heartsSprites.Length) return;
+            heartsSprites[blinkIndex].sprite = _breakableHeart;
+            _blinkTween = heartsSprites[blinkIndex].transform
                 .DOScale(0.8f, 0.5f)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine).SetUpdate(true);
         }
 
-        private void ResetAllHearts()
+        private void ResetAllHearts(Image[] heartsSprites)
         {
-            for (int i = 0; i < _heartsSprites.Length; i++)
+            for (int i = 0; i < heartsSprites.Length; i++)
             {
-                _heartsSprites[i].sprite = _heart;
+                heartsSprites[i].sprite = _heart;
             }
         }
 
-        private void RemoveHearts()
+        private void RemoveHearts(Image[] heartsSprites)
         {
             int availableLives = GlobalService.GameData.Data.AvailableLives;
-            for (int i = 0; i < _heartsSprites.Length; i++)
+            for (int i = 0; i < heartsSprites.Length; i++)
             {
                 if (i < availableLives)
                 {
-                    _heartsSprites[i].gameObject.SetActive(true);
+                    heartsSprites[i].gameObject.SetActive(true);
                 }
                 else
                 {
-                    _heartsSprites[i].gameObject.SetActive(false);
+                    heartsSprites[i].gameObject.SetActive(false);
                 }
             }
         }
@@ -559,8 +602,10 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         void OpenLevelFailedPanel()
         {
             _levelFailPanel.SetActive(true);
-            RemoveHearts();
-            PlayHeartAnimation();
+            RemoveHearts(_heartsSprites);
+            RemoveHearts(_heartsSpritesRoot);
+            PlayHeartAnimation(_heartsSprites);
+            PlayHeartAnimation(_heartsSpritesRoot);
             GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);
             GlobalService.GameData.Save();
             GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
@@ -656,19 +701,20 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private void CallMainFailSignal(OnFailedSignal signal)
         {
             _levelFailPanel.SetActive(true);
-            RemoveHearts();
-            PlayHeartAnimation();
+            RemoveHearts(_heartsSprites);
+            RemoveHearts(_heartsSpritesRoot);
+            PlayHeartAnimation(_heartsSprites);
+            PlayHeartAnimation(_heartsSpritesRoot);
         }
 
         private void OnDisable()
         {
-            SignalBus.Unsubscribe<OnLevelLoadedSignal>(OnLevelLoaded);
             SignalBus.Unsubscribe<CloseFailPanelSignal>(CloseFailPanel);
             SignalBus.Unsubscribe<SlotsFullSignal>(SlotChecker);
             SignalBus.Unsubscribe<OnFailedSignal>(CallMainFailSignal);
             SignalBus.Unsubscribe<ChangeCannonSlotSignal>(ChangeCannonSprite);
             SignalBus.Unsubscribe<OnInAppBuySignal>((_) => OnIapPurchased());
-
+            SignalBus.Unsubscribe<OnHealthUpdateSignal>(OnHealthUpdate);
             _sequence?.Kill();
         }
 

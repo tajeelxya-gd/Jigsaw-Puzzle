@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
+using UniTx.Runtime.IoC;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -156,6 +157,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         // -----------------------------
 
         private IJigsawResourceLoader _resourceLoader;
+
+        public override void Inject(IResolver resolver)
+        {
+            _resourceLoader = resolver.Resolve<IJigsawResourceLoader>();
+            UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
+        }
 
         private void Start()
         {
@@ -607,11 +614,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         //Fahad Code End
 
-        public override void Inject()
-        {
-            _resourceLoader = UniStatics.Resolver.Resolve<IJigsawResourceLoader>();
-            UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
-        }
+
 
         private void OnDestory()
         {

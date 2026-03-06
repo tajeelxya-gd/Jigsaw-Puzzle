@@ -61,7 +61,7 @@ public class AreYouSurePanel : MonoBehaviour
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
         _root.SetActive(false);
-        
+
         Time.timeScale = 1;
         SignalBus.Publish(new InputRestrictSignal { restrict = false });
     }
@@ -78,7 +78,7 @@ public class AreYouSurePanel : MonoBehaviour
                     ClosePanel();
                     Time.timeScale = 1;
                     SignalBus.Publish(new OnSceneShiftSignal
-                        { DoFakeLoad = true, FakeLoadTime = 2,OnFakeLoadCompleteEven = GoToHome});
+                    { DoFakeLoad = true, FakeLoadTime = 2, OnFakeLoadCompleteEven = GoToHome });
                 }
             ).SetUpdate(true);
         }
@@ -86,10 +86,10 @@ public class AreYouSurePanel : MonoBehaviour
         {
             ClosePanel();
             SignalBus.Publish(new OnSceneShiftSignal
-                { DoFakeLoad = true, FakeLoadTime = 2,OnFakeLoadCompleteEven = GoToHome});
+            { DoFakeLoad = true, FakeLoadTime = 2, OnFakeLoadCompleteEven = GoToHome });
         }
     }
-    
+
     private void GoToHome()
     {
         SceneManager.LoadScene(1);
