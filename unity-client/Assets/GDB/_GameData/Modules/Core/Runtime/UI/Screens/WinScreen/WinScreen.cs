@@ -364,7 +364,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             {
                 _gameData.Data.CurrentLevelEnemies = _gameData.Data.TempCollectedEnemies;
                 _gameData.Data.TempCollectedEnemies = 0;
-                _gameData.Data.CurrentLevelEnemies += UnityEngine.Random.Range(100, 300);
+                _gameData.Data.CurrentLevelEnemies += UnityEngine.Random.Range(100, 300); // (Pieces * 3.2 )+50
                 _currentEnemyCurrency = _gameData.Data.CurrentLevelEnemies;
             }
             _gameData.Data.Coins += GetTotalReward();
