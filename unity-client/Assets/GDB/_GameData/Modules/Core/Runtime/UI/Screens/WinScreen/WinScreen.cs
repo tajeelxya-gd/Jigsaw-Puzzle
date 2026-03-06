@@ -157,7 +157,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void Start()
         {
-            UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
             RegisterButtonListeners();
         }
 
@@ -606,6 +605,11 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         }
 
         //Fahad Code End
+
+        private void OnEnable()
+        {
+            UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
+        }
 
         private void OnDisable()
         {
