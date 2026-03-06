@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Runtime;
+using UniTx.Runtime.Audio;
 using UniTx.Runtime.Bootstrap;
 using UniTx.Runtime.IoC;
 
@@ -36,6 +37,9 @@ namespace Client.Runtime
                 UniStatics.LogInfo($"Initialising: concrete<{initialisable.GetType().Name}>", this);
                 await initialisable.InitialiseAsync(cToken);
             }
+
+            UniAudio.IsMusicOn = GlobalService.GameData.Data.MusicOn;
+            UniAudio.IsSoundOn = GlobalService.GameData.Data.SoundOn;
         }
     }
 }

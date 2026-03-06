@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using UniTx.Runtime.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -37,7 +38,7 @@ public class SettingsManager : MonoBehaviour
         timeService_resetHealthTimer =
             new RealTimeService(PlayerHealthTimerType.ResetHealthTimer.ToString(), OnTimerEndedResetHealth);
         _isInfiniteTimerActive = timeService_freeTimer.IsRunning();
-        UpdateAllUI();  
+        UpdateAllUI();
     }
     public void ToggleSound()
     {
@@ -81,6 +82,8 @@ public class SettingsManager : MonoBehaviour
 
     private void SaveAndUpdate()
     {
+        UniAudio.IsMusicOn = _gameData.Data.MusicOn;
+        UniAudio.IsSoundOn = _gameData.Data.SoundOn;
         _gameData.Save();
         UpdateAllUI();
     }
