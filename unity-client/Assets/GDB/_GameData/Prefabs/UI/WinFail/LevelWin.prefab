@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.019477634
+  m_Location: 0.92550707
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -10326,12 +10326,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2471333830900412166}
+  - {fileID: 3185148665791764878}
   m_Father: {fileID: 6074279053540740929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -206}
-  m_SizeDelta: {x: 671, y: 178}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -78.32428}
+  m_SizeDelta: {x: 0, y: 156.6486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4595332416979861169
 CanvasRenderer:
@@ -10496,19 +10497,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974664226257698771}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4766976504844580868}
   - {fileID: 7781156793828383356}
-  m_Father: {fileID: 6074279053540740929}
+  m_Father: {fileID: 7795891876781347407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 274}
-  m_SizeDelta: {x: -460, y: -1297}
+  m_AnchoredPosition: {x: 0, y: -597}
+  m_SizeDelta: {x: -460, y: 445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2367220906158040774
 GameObject:
@@ -31451,7 +31452,7 @@ MonoBehaviour:
   _completionFlash_glow: {fileID: 7372791022297461654}
   _victoryTransform: {fileID: 7795891876781347407}
   _defaultvictoryPosition: {x: 0, y: -700}
-  _animatedvictoryPosition: {x: 0, y: -180.5}
+  _animatedvictoryPosition: {x: 0, y: -78.32428}
   _currentLevelTxt: {fileID: 8753139620904914903}
   _streakModelViewController: {fileID: 6754012963066758238}
   _yourRewardObj: {fileID: 8823131592061910318}
@@ -31807,7 +31808,6 @@ RectTransform:
   m_Children:
   - {fileID: 7795891876781347407}
   - {fileID: 8983355409998536315}
-  - {fileID: 3185148665791764878}
   - {fileID: 2160705255862780250}
   - {fileID: 6433550547320134168}
   - {fileID: 8161198141656494833}
@@ -37272,7 +37272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.019477634
+  m_Location: 0.92550707
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -37966,7 +37966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.019477634
+  m_Location: 0.92550707
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -38072,7 +38072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2.2999268}
+  m_AnchoredPosition: {x: 0, y: -119.30005}
   m_SizeDelta: {x: 628, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5411306849547693762
