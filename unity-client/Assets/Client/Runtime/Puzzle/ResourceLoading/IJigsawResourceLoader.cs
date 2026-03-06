@@ -37,5 +37,7 @@ namespace Client.Runtime
         UniTask LoadOutlineGridAsync(string key, CancellationToken cToken = default);
 
         void UnLoadOutlineGrid();
+
+        Sprite GetLoadedImage();
     }
 }

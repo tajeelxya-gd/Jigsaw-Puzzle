@@ -5,6 +5,7 @@ using UniTx.Runtime.Database;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UniTx.Runtime.ResourceManagement;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -22,6 +23,7 @@ namespace Client.Runtime
         private AssetData _imageAssetData;
         private AssetData _gridAssetData;
         private Texture2D _image;
+        private Sprite _sprite;
         private Transform _grid;
         private Transform _fullImage;
 
@@ -50,6 +52,7 @@ namespace Client.Runtime
         {
             var imgAsset = _imageAssetData.GetAsset(key);
             _image = await UniResources.LoadAssetAsync<Texture2D>(imgAsset.RuntimeKey, cToken: cToken);
+            _sprite = await UniResources.LoadAssetAsync<Sprite>(imgAsset.RuntimeKey, cToken: cToken);
             var property = "_MainTex";
             _base.SetTexture(property, _image);
             _outlineTray.SetTexture(property, _image);
@@ -60,7 +63,9 @@ namespace Client.Runtime
         public void UnLoadImage()
         {
             UniResources.DisposeAsset(_image);
+            UniResources.DisposeAsset(_sprite);
             _image = null;
+            _sprite = null;
         }
 
         public async UniTask CreateGridAsync(string key, Transform parent, CancellationToken cToken = default)
@@ -100,5 +105,7 @@ namespace Client.Runtime
         {
             UniResources.DisposeAsset(OutlineGrid);
         }
+
+        public Sprite GetLoadedImage() => _sprite;
     }
 }

@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
+using System.Threading;
 using Client.Runtime;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UnityEngine;
 using UnityEngine.Events;
@@ -71,6 +74,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         [SerializeField] private GameObject _trophy;
         [TabGroup("WinScreen", "Victory")]
         [SerializeField] private Transform[] _trophyWaypoints;
+        [SerializeField] private Image _levelCompleteImage;
 
 
         // -----------------------------
@@ -205,16 +209,16 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 return;
             }
 
-            foreach (var onBoardingLevel in onBoardingLevels)
-            {
-                if ((int)onBoardingLevel == upcomingLevel)
-                    if (!OnBoardingConfig.HasOnBoardingActivatedBefore(onBoardingLevel))
-                    {
-                        GoToMainMenu();
-                        return;
-                    }
+            // foreach (var onBoardingLevel in onBoardingLevels)
+            // {
+            //     if ((int)onBoardingLevel == upcomingLevel)
+            //         if (!OnBoardingConfig.HasOnBoardingActivatedBefore(onBoardingLevel))
+            //         {
+            //             GoToMainMenu();
+            //             return;
+            //         }
 
-            }
+            // }
 
             PoolManager.ReturnAllItems();
             HideScreen();
@@ -265,6 +269,13 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         void OnLevelLoaded(LevelStartEvent signal)
         {
             _currentPlayedLevel = signal.LevelIndex + 1;
+            SetLevelCompleteImage();
+        }
+
+        private void SetLevelCompleteImage()
+        {
+            var resourceLoader = UniStatics.Resolver.Resolve<IJigsawResourceLoader>();
+            _levelCompleteImage.sprite = resourceLoader.GetLoadedImage();
         }
 
         public override void HideScreen()
