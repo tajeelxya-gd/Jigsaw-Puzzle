@@ -17,6 +17,11 @@ public abstract class ScreenBase : MonoBehaviour, IScreen
     {
 
     }
+
+    public virtual void Inject()
+    {
+
+    }
 }
 
 public interface IScreen

@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
     {
         _winConditionChecker = winConditionChecker;
         _winConditionChecker.OnAdvance += OnAdvance;
+        _winScreen.Inject();
     }
 
     private void OnAdvance(float progress)

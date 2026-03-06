@@ -155,6 +155,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         //  UNITY EVENTS
         // -----------------------------
 
+        private IJigsawResourceLoader _resourceLoader;
+
         private void Start()
         {
             RegisterButtonListeners();
@@ -273,8 +275,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void SetLevelCompleteImage()
         {
-            var resourceLoader = UniStatics.Resolver.Resolve<IJigsawResourceLoader>();
-            _levelCompleteImage.sprite = resourceLoader.GetLoadedImage();
+            _levelCompleteImage.sprite = _resourceLoader.GetLoadedImage();
         }
 
         public override void HideScreen()
@@ -606,16 +607,21 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         //Fahad Code End
 
-        private void OnEnable()
+        public override void Inject()
         {
+            _resourceLoader = UniStatics.Resolver.Resolve<IJigsawResourceLoader>();
             UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
+        }
+
+        private void OnDestory()
+        {
+            UniEvents.Unsubscribe<LevelStartEvent>(OnLevelLoaded);
         }
 
         private void OnDisable()
         {
             _sequence?.Kill();
             _trophySeq?.Kill();
-            UniEvents.Unsubscribe<LevelStartEvent>(OnLevelLoaded);
         }
     }
 }
