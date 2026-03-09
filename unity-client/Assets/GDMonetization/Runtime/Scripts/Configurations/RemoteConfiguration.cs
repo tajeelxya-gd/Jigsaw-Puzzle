@@ -15,7 +15,7 @@ namespace Monetization.Runtime.Configurations
         public bool DisableMaxOn2GBDevices = true;
         public int NextInterstitialDelay = 180;
         public int WallHealth = 2000;
-        public int CoinMultiplier = 1;
+        public int CoinMultiplier = 2;
         public int OfferPanelShowAfterLevels = 3;
         public bool ShowAdd = true;
         public int ShowAdAfter = 30;

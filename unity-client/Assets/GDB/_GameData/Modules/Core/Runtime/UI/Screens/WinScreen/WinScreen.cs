@@ -4,6 +4,7 @@ using System.Threading;
 using Client.Runtime;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Monetization.Runtime.RemoteConfig;
 using Sirenix.OdinInspector;
 using TMPro;
 using UniTx.Runtime;
@@ -265,8 +266,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         }
         int GetTotalReward()
         {
-            return levelData.CoinRewardAmount;
-            // return levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier;//return your reward from here
+            return levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier;//return your reward from here
         }
 
         public void GrantRewardToPlayer()//Give Reward here
