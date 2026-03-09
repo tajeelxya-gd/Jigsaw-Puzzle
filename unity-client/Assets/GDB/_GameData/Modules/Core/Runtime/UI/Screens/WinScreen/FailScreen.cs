@@ -260,6 +260,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 HideScreen();
                 PoolManager.ReturnAllItems();
                 SignalBus.Publish(new ONGameResetSignal());
+                _puzzleService.RestartPuzzleAsync(this.GetCancellationTokenOnDestroy());
             });
         }
 
