@@ -40,7 +40,7 @@ public class LevelStateMainMenue : MonoBehaviour
     {
         GameData gameData = GlobalService.GameData;
         int currentLevel = gameData.Data.LevelIndex;
-        _lvlNo_txt.text = $"{currentLevel + 1}";
+        _lvlNo_txt.text = $"LEVEL {currentLevel + 1}";
         _lvlDifficulty_txt.text = JigsawLevelData.GetCurrentDifficultyType().ToString();
         _gameSoundController = new GameSoundController(_leveldata);
         _gameSoundController.PlayBG();
