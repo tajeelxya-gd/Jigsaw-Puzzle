@@ -42,6 +42,8 @@ namespace Client.Runtime
 
         private void HandleMagnetButton()
         {
+            if (!_puzzleTray.CanDropPieces()) return;
+
             _puzzleTray.DropRandomPiecesAsync(_magnetPiecesCount, this.GetCancellationTokenOnDestroy());
             GlobalService.GameData.Data.Magnets -= 1;
             GlobalService.GameData.Save();
