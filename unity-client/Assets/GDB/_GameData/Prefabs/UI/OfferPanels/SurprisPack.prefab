@@ -2630,6 +2630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offerData: {fileID: 11400000, guid: fd68902755a7ca345aa7724e1f2ebbb1, type: 2}
+  inAppButton: {fileID: 3862060732138784862}
   isTimedService: 0
   _crossButton: {fileID: 8680876011214221930}
   openSfxEffect: {fileID: 8300000, guid: f194abd0ce442ae4ea3c248a1dfbbf56, type: 3}

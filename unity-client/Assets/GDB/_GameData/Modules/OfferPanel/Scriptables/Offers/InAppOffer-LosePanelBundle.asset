@@ -18,7 +18,7 @@ MonoBehaviour:
   _isRemoveAd: 0
   _allOffersRewards:
   - _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-    rewardType: 3
+    rewardType: 2
     rewardChestAmount: 1000
   - _rewardIcon: {fileID: 21300000, guid: fec395feb7b37cf40baa309c4db75cf0, type: 3}
     rewardType: 6
@@ -27,11 +27,11 @@ MonoBehaviour:
     rewardType: 5
     rewardChestAmount: 1
   - _rewardIcon: {fileID: 21300000, guid: 6c7719b78b8785745b799021d87d302f, type: 3}
-    rewardType: 1
+    rewardType: 0
     rewardChestAmount: 1
   - _rewardIcon: {fileID: 21300000, guid: e4a826ad4c15ca142a40c57c820289e0, type: 3}
     rewardType: 7
     rewardChestAmount: 1
   - _rewardIcon: {fileID: 21300000, guid: 23b54e0558d0f614da8f3f7670328387, type: 3}
-    rewardType: 2
+    rewardType: 1
     rewardChestAmount: 60

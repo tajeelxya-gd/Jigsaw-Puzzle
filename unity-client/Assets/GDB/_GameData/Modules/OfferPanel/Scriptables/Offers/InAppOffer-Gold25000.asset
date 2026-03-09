@@ -18,5 +18,5 @@ MonoBehaviour:
   _isRemoveAd: 0
   _allOffersRewards:
   - _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-    rewardType: 3
+    rewardType: 2
     rewardChestAmount: 25000

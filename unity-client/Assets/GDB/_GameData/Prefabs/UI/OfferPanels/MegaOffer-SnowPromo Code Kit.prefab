@@ -11114,6 +11114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offerData: {fileID: 11400000, guid: 6594fc7e719de6547999b569b42d8393, type: 2}
+  inAppButton: {fileID: 1924379487081624272}
   isTimedService: 1
   _crossButton: {fileID: 3296065332630773353}
   openSfxEffect: {fileID: 8300000, guid: 9fcb88d23529908488cad1ceab297e5a, type: 3}
