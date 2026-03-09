@@ -17,15 +17,15 @@ MonoBehaviour:
   _isConsumeable: 0
   _isRemoveAd: 1
   _allOffersRewards:
-  - _rewardIcon: {fileID: 21300000, guid: 3123e70dda3f218478f454331058489c, type: 3}
-    rewardType: 3
-    rewardChestAmount: 1000
-  - _rewardIcon: {fileID: 21300000, guid: fec395feb7b37cf40baa309c4db75cf0, type: 3}
-    rewardType: 6
-    rewardChestAmount: 2
-  - _rewardIcon: {fileID: 21300000, guid: 6c7719b78b8785745b799021d87d302f, type: 3}
-    rewardType: 1
-    rewardChestAmount: 2
-  - _rewardIcon: {fileID: 21300000, guid: 3c37316002461aa46b05900c05f8b5f1, type: 3}
+  - _rewardIcon: {fileID: 21300000, guid: ebc0e8c5a5e26914cb8c7e6b0423e2cb, type: 3}
     rewardType: 2
-    rewardChestAmount: 20
+    rewardChestAmount: 1000
+  - _rewardIcon: {fileID: 21300000, guid: 91c21a06ebfa49b4baeff967810f2923, type: 3}
+    rewardType: 1
+    rewardChestAmount: 30
+  - _rewardIcon: {fileID: 21300000, guid: 193ed28abe7f21a40abd9db8f92680ec, type: 3}
+    rewardType: 4
+    rewardChestAmount: 2
+  - _rewardIcon: {fileID: 21300000, guid: b033263e4978875469b7046bbb49ccec, type: 3}
+    rewardType: 3
+    rewardChestAmount: 2
