@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Monetization.Runtime.InAppPurchasing;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class Offer : MonoBehaviour
     protected CanvasGroup canvasGroup;
     private protected UnityAction<Offer> _onOfferBought;
     private protected UnityAction onOfferClosed;
-    // [SerializeField] private protected InAppButton inAppButton;
+    [SerializeField] private protected InAppButton inAppButton;
     [SerializeField] private bool isTimedService = false;
     public bool IsTimedOffer => isTimedService;
     public void Inject(UnityAction<Offer> onOfferBought, UnityAction onOfferClose)
@@ -22,8 +23,7 @@ public class Offer : MonoBehaviour
     }
     private void Start()
     {
-        // inAppButton?.RegisterBuyEvent(BuyOffer);
-
+        inAppButton?.RegisterBuyEvent(BuyOffer);
     }
 
     public virtual bool IsTimerRunning()
