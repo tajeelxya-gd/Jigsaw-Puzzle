@@ -18,4 +18,7 @@ MonoBehaviour:
   DisableMaxOn2GBDevices: 1
   NextInterstitialDelay: 10
   WallHealth: 2000
-  CoinMultiplier: 1
+  CoinMultiplier: 2
+  OfferPanelShowAfterLevels: 3
+  ShowAdd: 1
+  ShowAdAfter: 30
