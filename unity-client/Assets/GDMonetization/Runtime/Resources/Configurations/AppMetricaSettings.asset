@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab034a5bedbe3e4d9041d66c1055854, type: 3}
+  m_Name: AppMetricaSettings
+  m_EditorClassIdentifier: 
+  ApiKey: fd55affa-33e8-460d-92c5-f362e3d069d5
+  Logs: 0
+  CrashReporting: 1
+  NativeCrashReporting: 1
+  SessionsAutoTracking: 1
+  SessionTimeout: 10

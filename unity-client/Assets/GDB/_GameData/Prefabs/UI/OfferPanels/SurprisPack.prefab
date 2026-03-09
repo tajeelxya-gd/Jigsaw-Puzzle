@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 1190854238545738476}
   - component: {fileID: 5383431951601584055}
   - component: {fileID: 8838286072254456497}
+  - component: {fileID: 3862060732138784862}
   m_Layer: 5
   m_Name: ClaimButton
   m_TagString: Untagged
@@ -994,6 +995,21 @@ MonoBehaviour:
   optionalScrambleMode: 0
   optionalShakeRandomnessMode: 0
   optionalString: 
+--- !u!114 &3862060732138784862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891369072218476201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4994fcbfb8c35459e3fc86979fe190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productSO: {fileID: 11400000, guid: dd0c242568f3f8746a800519d226628a, type: 2}
+  _button: {fileID: 3009329994824702011}
+  _text: {fileID: 6405181660835709865}
 --- !u!1 &2295909438674686729
 GameObject:
   m_ObjectHideFlags: 0

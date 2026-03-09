@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f56771d1d019445b1448a1b1013c45, type: 3}
+  m_Name: AdUnitsSettings
+  m_EditorClassIdentifier: 
+  ShowAppopenOnLoad: 0
+  TestAds: 0
+  BannerSettings:
+    bannerSize: 1
+    BannerPosition: 2
+    MrecPosition: 0
+  Applovin:
+    AppKey: 2_MaDsrBI1f52f2l5II_DXOWLwtVO8yCLbFC6Qr0DIxcgpd8yNIZKc_JS9_9pspgHebQ5VilGlic88GvTKi0iw
+    AdUnitsInfo:
+    - AdType: 0
+      AdUnitId: 4d3856a6e9b78456
+    - AdType: 1
+      AdUnitId: 5e1ea638b38d4031
+    - AdType: 2
+      AdUnitId: 
+    - AdType: 3
+      AdUnitId: 
+    - AdType: 4
+      AdUnitId: 
+  Admob:
+    AppKey: ca-app-pub-9917171224118880~3027644972
+    AdUnitsInfo:
+    - AdType: 0
+      AdUnitId: ca-app-pub-9917171224118880/1108118710
+    - AdType: 1
+      AdUnitId: ca-app-pub-9917171224118880/2459193984
+    - AdType: 2
+      AdUnitId: 
+    - AdType: 3
+      AdUnitId: 
+    - AdType: 4
+      AdUnitId: 
