@@ -379,26 +379,26 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             }
             else
             {
-                GlobalService.GameData.Data.Coins -= _playOnAmount;
-                GlobalService.GameData.Save();
-                SignalBus.Publish(new AddCoinsSignal { Amount = -_playOnAmount, IsAdd = false });
-                HideScreen();
-                ResetAll();
-                _puzzleService.RestartPuzzleAsync(true, this.GetCancellationTokenOnDestroy());
+                //     GlobalService.GameData.Data.Coins -= _playOnAmount;
+                //     GlobalService.GameData.Save();
+                //     SignalBus.Publish(new AddCoinsSignal { Amount = -_playOnAmount, IsAdd = false });
+                //     HideScreen();
+                //     ResetAll();
+                //     _puzzleService.RestartPuzzleAsync(true, this.GetCancellationTokenOnDestroy());
 
-                GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
-               "Level " + _currentPlayedLevel,
-              "Fail",
-              "Screen1",
-              "Revive");
-                // SignalBus.Publish(new OnCoinBundleCalledSignal
-                // {
-                //     OnClose = () =>
-                //     {
-                //         ResetAll();
-                //         ShowScreen();
-                //     }
-                // });
+                //     GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
+                //    "Level " + _currentPlayedLevel,
+                //   "Fail",
+                //   "Screen1",
+                //   "Revive");
+                SignalBus.Publish(new OnCoinBundleCalledSignal
+                {
+                    OnClose = () =>
+                    {
+                        ResetAll();
+                        ShowScreen(_levelFailType);
+                    }
+                });
             }
         }
         #endregion
@@ -500,7 +500,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         [Button("Show Panel")]
         public override void ShowScreen<T>(T data)
         {
-            SetPlayOnButtonState();
             if (data is LevelFailType levelFailTypeType)
                 _levelFailType = levelFailTypeType;
             LoadAndUpdateHealthTimerData();
@@ -512,7 +511,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 _plaYOnCounter = 0;
                 return;
             }
-            if (_hasFailPanelShown) return;
+            // if (_hasFailPanelShown) return;
             Debug.LogError("Screen Shown");
             base.ShowScreen();
             ResetAll();
@@ -521,11 +520,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _hasFailPanelShown = true;
             AudioController.PlaySFX(AudioType.Loss);
             HapticController.Vibrate(HapticType.LevelFail);
-        }
-
-        private void SetPlayOnButtonState()
-        {
-            _playOn.interactable = GlobalService.GameData.Data.Coins >= _playOnAmount;
         }
 
         private void PlayFailSequence()
