@@ -244,13 +244,13 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             PunchHideButtons();
             _doubleRewardButton.enabled = false;
             _continueButton.enabled = false;
-            SignalBus.Publish(new AddCoinsSignal { Amount = GetTotalReward() });
+            SignalBus.Publish(new AddCoinsSignal { Amount = GetTotalReward(true) });
             PoolManager.ReturnAllItems();
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal { MissionType = MissionType.Get2XCoins, Amount = 1 });
             DOVirtual.DelayedCall(Time.deltaTime, () =>
             {
                 SignalBus.Publish(new OnMissionObjectiveCompleteSignal
-                { MissionType = MissionType.EarnCoins, Amount = GetTotalReward() });
+                { MissionType = MissionType.EarnCoins, Amount = GetTotalReward(true) });
             });
             AudioController.PlaySFX(AudioType.ButtonClick);
             HapticController.Vibrate(HapticType.Btn);
@@ -264,9 +264,10 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _buttonsRoot.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).SetDelay(0.1f);
 
         }
-        int GetTotalReward()
+        int GetTotalReward(bool isDoubleReward)
         {
-            return levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier;//return your reward from here
+            var multiplier = isDoubleReward ? 2 : 1;
+            return levelData.CoinRewardAmount * multiplier;//return your reward from here
         }
 
         public void GrantRewardToPlayer()//Give Reward here
@@ -367,7 +368,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 _gameData.Data.CurrentLevelEnemies += UnityEngine.Random.Range(100, 300); // (Pieces * 3.2 )+50
                 _currentEnemyCurrency = _gameData.Data.CurrentLevelEnemies;
             }
-            _gameData.Data.Coins += GetTotalReward();
+            _gameData.Data.Coins += GetTotalReward(false);
 
             int currentPlayedLevel = _gameData.Data.LevelIndex;
             if (!_gameData.Data.IsLeaderBoardUnlocked)
