@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class PuzzleManiaPuzzle : MonoBehaviour
 {
-    [Header("All Puzzles")] [SerializeField]
+    [Header("All Puzzles")]
+    [SerializeField]
     private FullPuzzleData[] _puzzles;
+    [SerializeField] private Color _lockColor;
 
     private DataBaseService<PuzzleCompleteSave> _puzzleSaveData;
     public PuzzleCompleteSave _puzzleData;
@@ -106,12 +108,13 @@ public class PuzzleManiaPuzzle : MonoBehaviour
                 _puzzles[x]._piecesUnlocked = _puzzleData._piecesUnlocked[x];
                 //Debug.LogError("cOMING HERE IN ASSIGNING SPRITES");
             }
-            
+
             if (x < _puzzleData._piecesAnimated.Length)
             {
                 _puzzles[x]._hasAnimated = _puzzleData._piecesAnimated[x]._piecesAnimated;
             }
         }
+        UpdateLockVisuals();
 
         SignalBus.Subscribe<PuzzleRewardGiven>(OnPanelOpen);
         SignalBus.Subscribe<OpenPuzzleManiaSignal>(ShouldPlayAnimation);
@@ -148,7 +151,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
     {
         _shouldPlayAnimation = signal._playAnimation;
     }
-[SerializeField] private PuzzleHandler _puzzleHandler;
+    [SerializeField] private PuzzleHandler _puzzleHandler;
     private void OnPanelOpen(PuzzleRewardGiven signal)
     {
         if (!_shouldPlayAnimation) return;
@@ -177,7 +180,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
             if (i >= puzzle._hasAnimated.Length || puzzle._hasAnimated[i])
             {
                 puzzle._puzzlePieces[i].sprite = puzzle._unlockedPuzzle[i];
-               // Debug.LogError("COMING HERE IN HAS ANIMATED IF CONDITION");
+                // Debug.LogError("COMING HERE IN HAS ANIMATED IF CONDITION");
                 continue;
             }
 
@@ -254,9 +257,12 @@ public class PuzzleManiaPuzzle : MonoBehaviour
                 }
             }
         }
+        UpdateLockVisuals();
     }
     public void UpdateUnlockedSprites()
     {
+        UpdateLockVisuals();
+
         foreach (var puzzle in _puzzles)
         {
             if (puzzle == null || puzzle._puzzlePieces == null) continue;
@@ -315,6 +321,7 @@ public class PuzzleManiaPuzzle : MonoBehaviour
                 puzzle._hasAnimated[i] = true;
             }
         }
+        UpdateLockVisuals();
     }
 
     public FullPuzzleData GetPuzzle(int puzzleIndex)
@@ -384,6 +391,34 @@ public class PuzzleManiaPuzzle : MonoBehaviour
         {
             _puzzleData._piecesUnlocked[i] = 0;
         }
+
+        UpdateLockVisuals();
+    }
+
+    private void UpdateLockVisuals()
+    {
+        if (_puzzles == null) return;
+        for (int i = 0; i < _puzzles.Length; i++)
+        {
+            var puzzle = _puzzles[i];
+            if (puzzle == null) continue;
+
+            bool isUnlocked = (i == 0) || (_puzzleData != null && _puzzleData._puzzlesCompleted != null && i < _puzzleData._puzzlesCompleted.Length && _puzzleData._puzzlesCompleted[i - 1]);
+
+            if (puzzle._lock != null)
+                puzzle._lock.gameObject.SetActive(!isUnlocked);
+
+            Color targetColor = isUnlocked ? Color.white : _lockColor;
+
+            if (puzzle._puzzlePieces != null)
+            {
+                foreach (var piece in puzzle._puzzlePieces)
+                {
+                    if (piece != null)
+                        piece.color = targetColor;
+                }
+            }
+        }
     }
 
     private void OnDestroy()
@@ -403,6 +438,7 @@ public class FullPuzzleData
     [HideInInspector] public Sprite[] _originalPuzzle;
     [HideInInspector] public bool[] _hasAnimated;
     [HideInInspector] public int _piecesUnlocked;
+    [SerializeField] public Image _lock;
 }
 
 public class PuzzleCompleteSave
@@ -418,6 +454,6 @@ public class PuzzlePieceAnimationData
     public bool[] _piecesAnimated;
 }
 
-public class PuzzleRewardGiven:ISignal
+public class PuzzleRewardGiven : ISignal
 {
 }
