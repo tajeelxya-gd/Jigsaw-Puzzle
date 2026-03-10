@@ -1,4 +1,7 @@
-public class DebugForceMoveToNextDaySignal : ISignal
+namespace Client.Runtime
 {
-    // Empty
+    public class DebugForceMoveToNextDaySignal : ISignal
+    {
+        // Empty
+    }
 }

@@ -1,16 +1,27 @@
 using System.ComponentModel;
+using Client.Runtime;
 
 public partial class SROptions
 {
     [Category("Currencies")]
-    public void AddCoin()
+    public void Add100Coins()
     {
-        SignalBus.Publish(new AddCoinsSignal { Amount = 1 });
+        GlobalService.GameData.Data.Coins += 100;
+        GlobalService.GameData.Save();
     }
 
-    public void AddLeaderboardTrophy()
+    [Category("Boosters")]
+    public void Add5Magnets()
     {
-        SignalBus.Publish(new DebugAddLeaderboardTrophySignal());
+        GlobalService.GameData.Data.Magnets += 5;
+        GlobalService.GameData.Save();
+    }
+
+    [Category("Boosters")]
+    public void Add5Eyes()
+    {
+        GlobalService.GameData.Data.Eye += 5;
+        GlobalService.GameData.Save();
     }
 
     [Category("DailyRewards")]
