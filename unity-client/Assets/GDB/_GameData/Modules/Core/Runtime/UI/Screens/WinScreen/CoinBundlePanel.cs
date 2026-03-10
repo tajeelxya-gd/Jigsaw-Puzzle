@@ -18,8 +18,18 @@ public class CoinBundlePanel : MonoBehaviour
     {
         _closeButton.onClick.AddListener(ClosePanel);
         _crossBtn.onClick.AddListener(ClosePanel);
+    }
+
+    private void OnEnable()
+    {
         SignalBus.Subscribe<OnCoinBundleCalledSignal>(OpenPanel);
         SignalBus.Subscribe<OnInAppBuySignal>(CloseAfterInAppPurchase);
+    }
+
+    private void OnDisable()
+    {
+        SignalBus.Unsubscribe<OnCoinBundleCalledSignal>(OpenPanel);
+        SignalBus.Unsubscribe<OnInAppBuySignal>(CloseAfterInAppPurchase);
     }
 
     private Action OnClose;
@@ -51,8 +61,8 @@ public class CoinBundlePanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        SignalBus.Unsubscribe<OnCoinBundleCalledSignal>(OpenPanel);
-        SignalBus.Unsubscribe<OnInAppBuySignal>(CloseAfterInAppPurchase);
+        _closeButton.onClick.RemoveListener(ClosePanel);
+        _crossBtn.onClick.RemoveListener(ClosePanel);
     }
     
     private void CloseAfterInAppPurchase(OnInAppBuySignal signal)

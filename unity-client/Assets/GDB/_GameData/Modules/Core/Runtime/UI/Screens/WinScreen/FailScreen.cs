@@ -154,16 +154,19 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             UniEvents.Unsubscribe<LevelStartEvent>(OnLevelLoaded);
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            PlayHeartBeatEffect();
-            //SignalBus.Subscribe<OnlevelFailSignal>(AssignLevelFailType);
             SignalBus.Subscribe<CloseFailPanelSignal>(CloseFailPanel);
             SignalBus.Subscribe<SlotsFullSignal>(SlotChecker);
             SignalBus.Subscribe<OnHealthUpdateSignal>(OnHealthUpdate);
             SignalBus.Subscribe<OnFailedSignal>(CallMainFailSignal);
             SignalBus.Subscribe<ChangeCannonSlotSignal>(ChangeCannonSprite);
-            SignalBus.Subscribe<OnInAppBuySignal>((_) => OnIapPurchased());
+            SignalBus.Subscribe<OnInAppBuySignal>(OnInAppBuySignalReceived);
+        }
+
+        private void Start()
+        {
+            PlayHeartBeatEffect();
 
             RegisterButtonListeners();
             LoadAndUpdateHealthTimerData();
@@ -200,6 +203,11 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         {
             _currentPlayedLevel = signal.LevelIndex + 1;
             _levelNumber.SetText($"LEVEL {_currentPlayedLevel}");
+        }
+
+        private void OnInAppBuySignalReceived(OnInAppBuySignal signal)
+        {
+            OnIapPurchased();
         }
 
         void OnIapPurchased()
@@ -337,7 +345,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 .SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
         }
 
-        private int _plaYOnCounter = 1;
+        private int _plaYOnCounter = 0;
         void OnClick_PlayOnForCoins()
         {
             AudioController.PlaySFX(AudioType.ButtonClick);
@@ -732,7 +740,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             SignalBus.Unsubscribe<SlotsFullSignal>(SlotChecker);
             SignalBus.Unsubscribe<OnFailedSignal>(CallMainFailSignal);
             SignalBus.Unsubscribe<ChangeCannonSlotSignal>(ChangeCannonSprite);
-            SignalBus.Unsubscribe<OnInAppBuySignal>((_) => OnIapPurchased());
+            SignalBus.Unsubscribe<OnInAppBuySignal>(OnInAppBuySignalReceived);
             SignalBus.Unsubscribe<OnHealthUpdateSignal>(OnHealthUpdate);
             _sequence?.Kill();
         }

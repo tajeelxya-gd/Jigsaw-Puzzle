@@ -12,7 +12,12 @@ public class OffersInApp : Offer
   protected override void Awake()
   {
     base.Awake();
-    SignalBus.Subscribe<OnInAppBuySignal>((_)=>UpdateState());
+    SignalBus.Subscribe<OnInAppBuySignal>(OnInInAppBuy);
+  }
+
+  private void OnInInAppBuy(OnInAppBuySignal signal)
+  {
+    UpdateState();
   }
 
   protected override void OnEnable()
@@ -23,6 +28,7 @@ public class OffersInApp : Offer
 
   void UpdateState()
   {
+    if (this == null) return;
     if (autoDisableState) { gameObject.SetActive(HasOffer());}
     
     if(hasAlternateState)
@@ -43,6 +49,6 @@ public class OffersInApp : Offer
 
   private void OnDisable()
   {
-    SignalBus.Unsubscribe<OnInAppBuySignal>((_)=>UpdateState());
+    SignalBus.Unsubscribe<OnInAppBuySignal>(OnInInAppBuy);
   }
 }

@@ -25,8 +25,13 @@ public class CelebrationEffect : MonoBehaviour
 
     private void Awake()
     {
-        SignalBus.Subscribe<OnCelebrationAchievementSignal>((_) => { PlayEffect();});
+        SignalBus.Subscribe<OnCelebrationAchievementSignal>(OnCelebrationAchievementReceived);
         _baseMoveDistance = Screen.height * (screenDistancePer/100);
+    }
+
+    private void OnCelebrationAchievementReceived(OnCelebrationAchievementSignal signal)
+    {
+        PlayEffect();
     }
 
     [Button("Play Effect")]
@@ -92,10 +97,9 @@ public class CelebrationEffect : MonoBehaviour
 
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        SignalBus.Unsubscribe<OnCelebrationAchievementSignal>((_) => { PlayEffect();});
-
+        SignalBus.Unsubscribe<OnCelebrationAchievementSignal>(OnCelebrationAchievementReceived);
     }
 }
 

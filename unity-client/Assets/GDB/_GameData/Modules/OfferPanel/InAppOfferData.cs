@@ -44,7 +44,7 @@ public class InAppOfferData : ScriptableObject
             DOVirtual.DelayedCall(0f, () =>
             {
                 ProcessReward(capturedReward, bulkPopService, gameData, screenCentre);
-            });
+            }).SetUpdate(true);
         }
 
         CompletePurchase();

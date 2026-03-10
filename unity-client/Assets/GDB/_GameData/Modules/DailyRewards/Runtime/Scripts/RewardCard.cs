@@ -34,8 +34,13 @@ public class RewardCard : MonoBehaviour
 
     private void Awake()
     {
-        SignalBus.Subscribe<OnDailyRewardClaim>((_) => OnClaimRewardButtonClicked());
-        SignalBus.Subscribe<OnShowDailyRewardPopUpEffect>(OnShowRewadPopBulk);
+        SignalBus.Subscribe<OnDailyRewardClaim>(OnDailyRewardClaimReceived);
+        SignalBus.Subscribe<OnShowDailyRewardPopUpEffect>(OnShowRewardPopBulk);
+    }
+
+    private void OnDailyRewardClaimReceived(OnDailyRewardClaim signal)
+    {
+        OnClaimRewardButtonClicked();
     }
 
     private void OnValidate()
@@ -43,7 +48,7 @@ public class RewardCard : MonoBehaviour
         _rewardCollected = PlayerPrefs.GetInt(RewardCollectedKey + _day, 0) == 1;
     }
 
-    public void OnShowRewadPopBulk(OnShowDailyRewardPopUpEffect signal)
+    public void OnShowRewardPopBulk(OnShowDailyRewardPopUpEffect signal)
     {
         if (_day != _currentDay) return;
         DOVirtual.DelayedCall(1.25f, () => { OnClaimReward(_rewardData); });
@@ -281,8 +286,7 @@ public class RewardCard : MonoBehaviour
 
     private void OnDestroy()
     {
-        SignalBus.Unsubscribe<OnDailyRewardClaim>((_) => OnClaimRewardButtonClicked());
-        SignalBus.Unsubscribe<OnShowDailyRewardPopUpEffect>(OnShowRewadPopBulk);
-
+        SignalBus.Unsubscribe<OnDailyRewardClaim>(OnDailyRewardClaimReceived);
+        SignalBus.Unsubscribe<OnShowDailyRewardPopUpEffect>(OnShowRewardPopBulk);
     }
 }

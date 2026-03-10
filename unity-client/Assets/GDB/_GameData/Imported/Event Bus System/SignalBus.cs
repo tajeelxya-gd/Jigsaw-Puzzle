@@ -46,11 +46,20 @@ public static class SignalBus
     public static void Publish<TSignal>(TSignal signal) where TSignal : ISignal
     {
         var type = typeof(TSignal);
-        if (listeners.ContainsKey(type))
+        if (listeners.TryGetValue(type, out var listenerList))
         {
-            foreach (var listener in listeners[type])
+            // Iterate over a copy of the list to avoid collection modified exceptions
+            var listenersCopy = new List<Delegate>(listenerList);
+            foreach (var listener in listenersCopy)
             {
-                ((Action<TSignal>)listener)?.Invoke(signal);
+                try
+                {
+                    ((Action<TSignal>)listener)?.Invoke(signal);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
             }
         }
     }
