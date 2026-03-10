@@ -699,6 +699,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _instantiatedBundles = new List<GameObject>(_bundles);
             _slots.sprite = _normalSlot;
             _root_CG.gameObject.SetActive(false);
+            
+            // Reset scales for animated panels
+            _tryAgainRoot.transform.localScale = Vector3.one;
+            _infinitePanel.transform.GetChild(0).localScale = Vector3.one;
+            _levelFailPanel.transform.GetChild(0).localScale = Vector3.one;
+
             _tryAgainRoot.gameObject.SetActive(false);
             _defeatContentTransform.gameObject.SetActive(false);
             _cannonPanel.SetActive(false);

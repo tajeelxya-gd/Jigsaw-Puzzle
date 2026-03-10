@@ -28,11 +28,15 @@ public class NoMoreLives : MonoBehaviour
         timeService_resetHealthTimer =
             new RealTimeService(PlayerHealthTimerType.ResetHealthTimer.ToString(), OnTimerEndedResetHealth);
         _isInfiniteTimerActive = timeService_freeTimer.IsRunning();
+        RegisterButtonCallbacks();
+        _refillText.text = _heartsRefillCost.ToString();
+    }
+
+    private void OnEnable()
+    {
         SignalBus.Subscribe<OnNoMoreLivesSignal>(OpenPanel);
         SignalBus.Subscribe<OnHealthUpdateSignal>(OnHealthUpdate);
         SignalBus.Subscribe<OnInAppBuySignal>(OnInAppPurchase);
-        RegisterButtonCallbacks();
-        _refillText.text = _heartsRefillCost.ToString();
     }
 
     void OnHealthUpdate(OnHealthUpdateSignal signal)
@@ -63,19 +67,30 @@ public class NoMoreLives : MonoBehaviour
     [Button]
     private void OpenPanel(OnNoMoreLivesSignal signal)
     {
+        if (this == null) return;
         if (_isInfiniteTimerActive) return;
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
+
         _root.SetActive(true);
+        // Reset scale and animate in
+        var bg = _root.transform.GetChild(0);
+        bg.DOKill();
+        bg.localScale = Vector3.one * 0.4f;
+        bg.DOScale(1f, 0.25f).SetEase(Ease.OutBack).SetUpdate(true);
+
         SignalBus.Publish(new InputRestrictSignal { restrict = true });
     }
 
     [Button]
     private void ClosePanel()
     {
+        if (this == null) return;
         AudioController.PlaySFX(AudioType.ButtonClick);
         HapticController.Vibrate(HapticType.Btn);
-        _root.transform.GetChild(0).DOScale(0.4f, 0.25f).SetEase(Ease.InQuad).OnComplete(() => _root.SetActive(false)).SetUpdate(true);
+        var bg = _root.transform.GetChild(0);
+        bg.DOKill();
+        bg.DOScale(0.4f, 0.25f).SetEase(Ease.InQuad).OnComplete(() => _root.SetActive(false)).SetUpdate(true);
         SignalBus.Publish(new InputRestrictSignal { restrict = false });
     }
 
