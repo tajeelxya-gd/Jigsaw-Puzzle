@@ -34,6 +34,9 @@ public class AreYouSurePanel : MonoBehaviour
     }
     void Update()
     {
+        timeService_freeTimer?.Update();
+        timeService_resetHealthTimer?.Update();
+
         if (timeService_resetHealthTimer.IsRunning())
         {
             _timer.text = timeService_resetHealthTimer.GetFormattedTime();

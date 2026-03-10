@@ -135,13 +135,13 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private List<GameObject> _instantiatedBundles = new List<GameObject>();
         ITimeService timeService_freeTimer;
         ITimeService timeService_resetHealthTimer;
-        private Tween _blinkTween;
         private Sequence _sequence;
         private LevelFailType _levelFailType;
         private Vector3 _initialTrophyPosition;
         private IPuzzleService _puzzleService;
 
         private bool _hasFailPanelShown;
+        private bool _lifeSubtracted;
 
         public override void Inject(IResolver resolver)
         {
@@ -213,6 +213,8 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private void Update()
         {
             timeService_freeTimer.Update();
+            timeService_resetHealthTimer.Update();
+
             if (_isInfinite)
             {
                 _infiniteTimer.text = timeService_freeTimer.GetFormattedTimeMinutes();
@@ -404,34 +406,30 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         #region ANIMATIONS
         private void PlayHeartAnimation(Image[] heartsSprites)
         {
-            ResetAllHearts(heartsSprites);
-            _blinkTween?.Kill();
             int availableLives = GlobalService.GameData.Data.AvailableLives;
             int blinkIndex = availableLives - 1;
             if (blinkIndex < 0 || blinkIndex >= heartsSprites.Length) return;
-            heartsSprites[blinkIndex].sprite = _breakableHeart;
-            _blinkTween = heartsSprites[blinkIndex].transform
-                .DOScale(0.8f, 0.5f)
+
+            Image heart = heartsSprites[blinkIndex];
+            heart.DOKill();
+            heart.DOFade(0.2f, 0.4f)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine).SetUpdate(true);
         }
 
-        private void ResetAllHearts(Image[] heartsSprites)
-        {
-            for (int i = 0; i < heartsSprites.Length; i++)
-            {
-                heartsSprites[i].sprite = _heart;
-            }
-        }
+
 
         private void RemoveHearts(Image[] heartsSprites)
         {
             int availableLives = GlobalService.GameData.Data.AvailableLives;
             for (int i = 0; i < heartsSprites.Length; i++)
             {
+                heartsSprites[i].DOKill();
                 if (i < availableLives)
                 {
                     heartsSprites[i].gameObject.SetActive(true);
+                    heartsSprites[i].color = Color.white;
+                    heartsSprites[i].sprite = _heart;
                 }
                 else
                 {
@@ -623,8 +621,14 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             RemoveHearts(_heartsSpritesRoot);
             PlayHeartAnimation(_heartsSprites);
             PlayHeartAnimation(_heartsSpritesRoot);
-            GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);
-            GlobalService.GameData.Save();
+
+            if (!_lifeSubtracted && !_isInfinite)
+            {
+                GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);
+                GlobalService.GameData.Save();
+                _lifeSubtracted = true;
+            }
+
             GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
                     "Level " + _currentPlayedLevel,
                       "Fail",
@@ -645,11 +649,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void ShowTryAgainPanel()
         {
-            //RemoveHeartAnimation();
             _tryAgainRoot.gameObject.SetActive(true);
             _tryAgainRoot.transform.localScale = Vector3.zero;
             _tryAgainRoot.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
-            //HeartBlinking();
+
+            RemoveHearts(_heartsSpritesRoot);
+            PlayHeartAnimation(_heartsSpritesRoot);
         }
 
         private void CloseFailPanel(CloseFailPanelSignal signal)
@@ -664,10 +669,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         {
             AudioController.PlaySFX(AudioType.ButtonClick);
             HapticController.Vibrate(HapticType.Btn);
-            if (!_isInfinite)
+
+            if (!_lifeSubtracted && !_isInfinite)
             {
                 GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);
                 GlobalService.GameData.Save();
+                _lifeSubtracted = true;
             }
 
             SignalBus.Publish(new OnSceneShiftSignal { DoFakeLoad = true, FakeLoadTime = 2, OnFakeLoadCompleteEven = LoadMainMenu });
@@ -699,6 +706,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _levelFailPanel.SetActive(false);
             _hasFailPanelShown = false;
             _hasCannonSlotFilled = false;
+            _lifeSubtracted = false;
         }
 
         private void ResumeGame()
@@ -737,9 +745,10 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void OnApplicationQuit()
         {
-            if (_isInfinite) return;
+            if (_isInfinite || _lifeSubtracted) return;
             GlobalService.GameData.Data.AvailableLives = Math.Max(0, GlobalService.GameData.Data.AvailableLives - 1);
             GlobalService.GameData.Save();
+            _lifeSubtracted = true;
         }
 
         private void SendLevelFailAnalytics()
