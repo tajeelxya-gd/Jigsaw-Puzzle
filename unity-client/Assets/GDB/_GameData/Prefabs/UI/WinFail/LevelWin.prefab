@@ -31451,8 +31451,8 @@ MonoBehaviour:
   _completionFlash: {fileID: 5507631983815054187}
   _completionFlash_glow: {fileID: 7372791022297461654}
   _victoryTransform: {fileID: 7795891876781347407}
-  _defaultvictoryPosition: {x: 0, y: -700}
-  _animatedvictoryPosition: {x: 0, y: -78.32428}
+  _defaultvictoryPosition: {x: 0, y: 881.6757}
+  _animatedvictoryPosition: {x: 0, y: 881.6757}
   _currentLevelTxt: {fileID: 8753139620904914903}
   _streakModelViewController: {fileID: 6754012963066758238}
   _yourRewardObj: {fileID: 8823131592061910318}
