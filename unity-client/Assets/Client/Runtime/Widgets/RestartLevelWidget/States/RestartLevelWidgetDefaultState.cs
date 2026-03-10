@@ -24,7 +24,7 @@ namespace Client.Runtime
         private async UniTaskVoid HandleRestartLevelAsync(CancellationToken cToken)
         {
             await UniWidgets.PushAsync<LoadingWidget>(PushLayer.Overlay, cToken);
-            await Context.PuzzleService.RestartPuzzleAsync(cToken);
+            await Context.PuzzleService.RestartPuzzleAsync(true, cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
         }

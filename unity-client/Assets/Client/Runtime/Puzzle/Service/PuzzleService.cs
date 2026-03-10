@@ -32,6 +32,7 @@ namespace Client.Runtime
         private JigsawBoard _board;
         private JigsawLevelData[] _levelsData;
         private LevelType _clearLevelType;
+        private string _levelId;
 
         public event Action<float> OnTimerTick;
 
@@ -66,12 +67,12 @@ namespace Client.Runtime
             _winConditionChecker.OnLose -= HandleOnLose;
             _winConditionChecker.OnTimerTick -= HandleOnTimerTick;
         }
-
-        public async UniTask LoadPuzzleAsync(CancellationToken cToken = default)
+        public async UniTask LoadPuzzleAsync(bool reloadState, CancellationToken cToken = default)
         {
             var levelData = GetCurrentLevelData();
             _clearLevelType = levelData.DifficultyType;
             _board = _entityService.Get<JigsawBoard>(levelData.GridId);
+            _levelId = levelData.Id;
             await _helper.CreateGridAsync(levelData.GridId, _puzzleBoard, cToken);
             await _helper.CreateFullImageAsync($"{levelData.GridId}_full_image", _puzzleBoard, cToken);
             await _helper.LoadOutlineGridAsync($"{levelData.GridId}_mat_outline", cToken);
@@ -80,7 +81,10 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(_board);
             JigsawBoardCalculator.SetBoard(_board);
             _puzzleTray.ShufflePieces(_board.Pieces);
-            // await SetLevelStateAsync(cToken);
+            if (reloadState)
+            {
+                await SetLevelStateAsync(cToken);
+            }
             UniEvents.Raise(new LevelStartEvent(GetCurrentIdx()));
             InputHandler.SetActive(true);
         }
@@ -96,13 +100,13 @@ namespace Client.Runtime
             _winConditionChecker.SetBoard(null);
             JigsawBoardCalculator.SetBoard(null);
             _puzzleTray.Reset();
-            UniEvents.Raise(new LevelResetEvent());
+            UniEvents.Raise(new LevelResetEvent(_levelId));
         }
 
-        public UniTask RestartPuzzleAsync(CancellationToken cToken = default)
+        public UniTask RestartPuzzleAsync(bool reloadState, CancellationToken cToken = default)
         {
             UnLoadPuzzle();
-            return LoadPuzzleAsync(cToken);
+            return LoadPuzzleAsync(reloadState, cToken);
         }
 
         public JigsawBoard GetCurrentBoard() => _board;
@@ -139,13 +143,11 @@ namespace Client.Runtime
             InputHandler.SetActive(false);
             SignalBus.Publish(new OnlevelFailSignal() { levelFailType = LevelFailType.none });
         }
-
         private void HandleOnTimerTick(float time)
         {
             _timerText.SetText($"{(int)time}");
             OnTimerTick?.Invoke(time);
         }
-
         private int GetCurrentIdx() => Math.Clamp(_savedData.CurrentLevel, 0, _levelsData.Length - 1);
 
         private async UniTask SetLevelStateAsync(CancellationToken cToken = default)

@@ -24,7 +24,7 @@ namespace Client.Runtime
 
         private async UniTaskVoid HandlePlayKickedAsync(CancellationToken cToken)
         {
-            await Context.PuzzleService.LoadPuzzleAsync(cToken);
+            await Context.PuzzleService.LoadPuzzleAsync(false, cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
         }
 

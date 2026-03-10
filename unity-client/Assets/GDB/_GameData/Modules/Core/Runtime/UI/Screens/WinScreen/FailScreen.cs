@@ -260,7 +260,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 HideScreen();
                 PoolManager.ReturnAllItems();
                 SignalBus.Publish(new ONGameResetSignal());
-                _puzzleService.RestartPuzzleAsync(this.GetCancellationTokenOnDestroy());
+                _puzzleService.RestartPuzzleAsync(false, this.GetCancellationTokenOnDestroy());
             });
         }
 
@@ -294,7 +294,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 DOVirtual.DelayedCall(0.1f, ResetAll);
                 _levelFailPanel.transform.GetChild(0).DOScale(0.2f, 0.25f);
                 ContinueButton();
-                _puzzleService.RestartPuzzleAsync(this.GetCancellationTokenOnDestroy());
                 // SignalBus.Publish(new OnSceneShiftSignal { SceneName = "GamePlay", DoFakeLoad = true, FakeLoadTime = 3 });
                 GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
                  "Level " + _currentPlayedLevel,
@@ -378,15 +377,26 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             }
             else
             {
+                GlobalService.GameData.Data.Coins -= _playOnAmount;
+                GlobalService.GameData.Save();
+                SignalBus.Publish(new AddCoinsSignal { Amount = -_playOnAmount, IsAdd = false });
                 HideScreen();
-                SignalBus.Publish(new OnCoinBundleCalledSignal
-                {
-                    OnClose = () =>
-                    {
-                        ResetAll();
-                        ShowScreen();
-                    }
-                });
+                ResetAll();
+                _puzzleService.RestartPuzzleAsync(true, this.GetCancellationTokenOnDestroy());
+
+                GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
+               "Level " + _currentPlayedLevel,
+              "Fail",
+              "Screen1",
+              "Revive");
+                // SignalBus.Publish(new OnCoinBundleCalledSignal
+                // {
+                //     OnClose = () =>
+                //     {
+                //         ResetAll();
+                //         ShowScreen();
+                //     }
+                // });
             }
         }
         #endregion
@@ -492,6 +502,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         [Button("Show Panel")]
         public override void ShowScreen<T>(T data)
         {
+            SetPlayOnButtonState();
             if (data is LevelFailType levelFailTypeType)
                 _levelFailType = levelFailTypeType;
             LoadAndUpdateHealthTimerData();
@@ -512,6 +523,11 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _hasFailPanelShown = true;
             AudioController.PlaySFX(AudioType.Loss);
             HapticController.Vibrate(HapticType.LevelFail);
+        }
+
+        private void SetPlayOnButtonState()
+        {
+            _playOn.interactable = GlobalService.GameData.Data.Coins >= _playOnAmount;
         }
 
         private void PlayFailSequence()

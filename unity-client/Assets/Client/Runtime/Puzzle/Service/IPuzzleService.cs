@@ -10,9 +10,9 @@ namespace Client.Runtime
 
         Transform FrameMesh { get; }
 
-        UniTask RestartPuzzleAsync(CancellationToken cToken = default);
+        UniTask RestartPuzzleAsync(bool reloadState, CancellationToken cToken = default);
 
-        UniTask LoadPuzzleAsync(CancellationToken cToken = default);
+        UniTask LoadPuzzleAsync(bool reloadState, CancellationToken cToken = default);
 
         void UnLoadPuzzle();
 

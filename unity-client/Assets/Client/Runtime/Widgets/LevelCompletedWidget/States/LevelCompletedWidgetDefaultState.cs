@@ -32,7 +32,7 @@ namespace Client.Runtime
         {
             await UniWidgets.PushAsync<LoadingWidget>(PushLayer.Overlay, cToken);
             Context.PuzzleService.UnLoadPuzzle();
-            await Context.PuzzleService.LoadPuzzleAsync(cToken);
+            await Context.PuzzleService.LoadPuzzleAsync(false, cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
             await UniWidgets.PopWidgetsStackAsync(cToken);
         }

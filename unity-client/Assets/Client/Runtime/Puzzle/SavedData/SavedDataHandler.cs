@@ -42,11 +42,12 @@ namespace Client.Runtime
             _checker.OnWin -= HandleOnWin;
             UniEvents.Unsubscribe<LevelStartEvent>(HandleOnLevelStart);
             UniEvents.Unsubscribe<LevelResetEvent>(HandleOnLevelReset);
+            UniEvents.Unsubscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
 
         private void OnApplicationQuit()
         {
-            // SaveCurrentLevelState();
+            SaveCurrentLevelState();
             _serialisationService.SaveImmediate();
         }
 
@@ -60,15 +61,20 @@ namespace Client.Runtime
 
         private void HandleOnLevelReset(LevelResetEvent @event)
         {
+            if (!_levelId.Equals(@event.LevelId))
+            {
+                _savedData.CurrentLevelState = null;
+                Save();
+            }
             _levelId = null;
-            _savedData.CurrentLevelState = null;
-            Save();
+            UniEvents.Unsubscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
 
         private void HandleOnLevelStart(LevelStartEvent @event)
         {
             var levelData = _puzzleService.GetCurrentLevelData();
             _levelId = levelData.Id;
+            UniEvents.Subscribe<GroupPlacedEvent>(HandleGroupPlaced);
         }
 
         private void Save()
@@ -77,6 +83,10 @@ namespace Client.Runtime
             _serialisationService.Save(_savedData);
         }
 
+        private void HandleGroupPlaced(GroupPlacedEvent @event)
+        {
+            SaveCurrentLevelState();
+        }
         private void SaveCurrentLevelState()
         {
             var board = _puzzleService.GetCurrentBoard();

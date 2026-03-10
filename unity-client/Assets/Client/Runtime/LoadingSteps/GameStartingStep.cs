@@ -24,9 +24,8 @@ namespace Client.Runtime
 
             var levelData = GetLevelData();
             _uiController.Initialize(levelData);
-            return _puzzleService.LoadPuzzleAsync(cToken);
+            return _puzzleService.LoadPuzzleAsync(false, cToken);
         }
-
         private LevelData GetLevelData()
         {
             var json = Resources.Load<TextAsset>($"Levels/Level {1}");

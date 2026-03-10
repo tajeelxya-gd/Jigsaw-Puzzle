@@ -4,6 +4,11 @@ namespace Client.Runtime
 {
     public readonly struct LevelResetEvent : IEvent
     {
-        // Empty yet.
+        public readonly string LevelId;
+
+        public LevelResetEvent(string levelId)
+        {
+            LevelId = levelId;
+        }
     }
 }
