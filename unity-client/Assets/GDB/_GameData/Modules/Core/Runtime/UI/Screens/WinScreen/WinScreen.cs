@@ -372,7 +372,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
             int currentPlayedLevel = _gameData.Data.LevelIndex;
             if (!_gameData.Data.IsLeaderBoardUnlocked)
-                if ((currentPlayedLevel + 1) >= (int)OnBoardingConfig.OnBoardingType.LeaderBoard)
+                if ((currentPlayedLevel) >= (int)OnBoardingConfig.OnBoardingType.LeaderBoard)
                 {
                     _gameData.Data.IsLeaderBoardUnlocked = true;
                     Debug.LogError("LeaderBoard Unlocked!!");
@@ -485,10 +485,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             // _achievementFillerTransform.DOAnchorPos(_animatedAchievementFiller_Position, 1f).SetEase(Ease.InOutSine);
             // _fillPercentage.text = Mathf.RoundToInt(previousFill * 100f) + "%";
             GameData _gameData = GlobalService.GameData;
-            if (_gameData.Data.IsLeaderBoardUnlocked)
+            var leaderboardUnlocked = _gameData.Data.IsLeaderBoardUnlocked;
+            _streakModelViewController.gameObject.SetActive(leaderboardUnlocked);
+
+            if (leaderboardUnlocked)
             {
                 _gameData.Data.CurrentWinStreakLevel = Mathf.Clamp(_gameData.Data.CurrentWinStreakLevel, 0, 4);
-                _streakModelViewController.gameObject.SetActive(true);
                 _streakModelViewController.UpdateStreaks();
                 _gameData.Data.TrophiesWinInGame = 3 * _streakModelViewController.GetCurrentStreakRewardMultiplier();
                 _totalTrophyCount.text = _gameData.Data.TrophiesWinInGame.ToString();
