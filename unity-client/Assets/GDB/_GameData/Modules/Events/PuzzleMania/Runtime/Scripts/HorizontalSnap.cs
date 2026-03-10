@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,15 +16,7 @@ public class HorizontalSnap : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     void Start()
     {
-        contentRect = scrollRect.content;
-        imageCount = contentRect.childCount;
-        positions = new float[imageCount];
-
-        float step = 1f / (imageCount - 1);
-        for (int i = 0; i < imageCount; i++)
-        {
-            positions[i] = step * i;
-        }
+        InitializePositions();
     }
 
     void Update()
@@ -101,7 +92,46 @@ public class HorizontalSnap : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private void OnEnable()
     {
-        activeImageIndex = 0;
+        InitializePositions();
+
+        var saveData = new DataBaseService<PuzzleManiaSaveData>().Load_Get();
+        if (saveData != null)
+        {
+            activeImageIndex = Mathf.Clamp(saveData._puzzleIndex, 0, imageCount - 1);
+        }
+        else
+        {
+            activeImageIndex = 0;
+        }
+
+        if (positions != null && activeImageIndex >= 0 && activeImageIndex < positions.Length)
+        {
+            scrollRect.horizontalNormalizedPosition = positions[activeImageIndex];
+        }
+
         SetActivePlaceHolders();
+    }
+
+    private void InitializePositions()
+    {
+        if (contentRect == null) contentRect = scrollRect.content;
+        imageCount = contentRect.childCount;
+
+        if (positions == null || positions.Length != imageCount)
+        {
+            positions = new float[imageCount];
+            if (imageCount > 1)
+            {
+                float step = 1f / (imageCount - 1);
+                for (int i = 0; i < imageCount; i++)
+                {
+                    positions[i] = step * i;
+                }
+            }
+            else if (imageCount == 1)
+            {
+                positions[0] = 0;
+            }
+        }
     }
 }
