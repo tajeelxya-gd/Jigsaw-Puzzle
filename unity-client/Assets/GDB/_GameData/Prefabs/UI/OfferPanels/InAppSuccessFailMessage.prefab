@@ -623,7 +623,7 @@ MonoBehaviour:
   m_text: Something's wrong with your purchase!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c3d88dc3c909aa43b7521b5235b1f99, type: 2}
-  m_sharedMaterial: {fileID: 929504418124363012, guid: 1c3d88dc3c909aa43b7521b5235b1f99, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1822a74a0a5cd7b4092a55ba30b28860, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -647,8 +647,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
-  m_fontSizeBase: 44
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5802,7 +5802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.966744
+  m_Location: 0.6683905
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -16101,7 +16101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.6564186
+  m_Location: 0
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -21224,7 +21224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.966744
+  m_Location: 0.6683905
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -21551,7 +21551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.966744
+  m_Location: 0.6683905
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -22043,7 +22043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.966744
+  m_Location: 0.6683905
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -27876,7 +27876,7 @@ MonoBehaviour:
   m_text: Your purchase was successful!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c3d88dc3c909aa43b7521b5235b1f99, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: d13c56221ff9a0e4a8d356f96932db4b, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1822a74a0a5cd7b4092a55ba30b28860, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -27900,10 +27900,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.1
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 51.1
   m_fontStyle: 0
