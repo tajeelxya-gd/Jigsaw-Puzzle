@@ -9,7 +9,6 @@ using UniTx.Runtime.Content;
 using UniTx.Runtime.Entity;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
-using UniTx.Runtime.Widgets;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -122,6 +121,13 @@ namespace Client.Runtime
             var currentIdx = GetCurrentIdx();
             var nextIdx = (currentIdx + 1) >= _levelsData.Length ? _levelsData.Length - 1 : currentIdx;
             return _levelsData[nextIdx];
+        }
+
+        public int GetBrushesCount()
+        {
+            var levelData = _contentService.GetData<JigsawLevelData>(_levelId);
+            var gridData = _contentService.GetData<JigsawGridData>(levelData.GridId);
+            return gridData.BrushesCount;
         }
 
         private void HandleOnWin() => UniTask.Void(HandleOnWinAsync, default);

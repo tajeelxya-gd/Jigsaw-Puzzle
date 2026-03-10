@@ -24,5 +24,7 @@ namespace Client.Runtime
 
         float RemainingTime { get; }
         event System.Action<float> OnTimerTick;
+
+        int GetBrushesCount();
     }
 }

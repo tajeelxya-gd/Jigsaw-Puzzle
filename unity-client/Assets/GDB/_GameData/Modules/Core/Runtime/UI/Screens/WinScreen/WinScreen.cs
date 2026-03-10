@@ -158,10 +158,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         // -----------------------------
 
         private IJigsawResourceLoader _resourceLoader;
+        private IPuzzleService _puzzleService;
 
         public override void Inject(IResolver resolver)
         {
             _resourceLoader = resolver.Resolve<IJigsawResourceLoader>();
+            _puzzleService = resolver.Resolve<IPuzzleService>();
             UniEvents.Subscribe<LevelStartEvent>(OnLevelLoaded);
         }
 
@@ -365,7 +367,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             {
                 _gameData.Data.CurrentLevelEnemies = _gameData.Data.TempCollectedEnemies;
                 _gameData.Data.TempCollectedEnemies = 0;
-                _gameData.Data.CurrentLevelEnemies += UnityEngine.Random.Range(100, 300); // (Pieces * 3.2 )+50
+                _gameData.Data.CurrentLevelEnemies += _puzzleService.GetBrushesCount();
                 _currentEnemyCurrency = _gameData.Data.CurrentLevelEnemies;
             }
             _gameData.Data.Coins += GetTotalReward(false);
@@ -588,16 +590,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             LevelData temp = ScriptableObject.CreateInstance<LevelData>();
             JsonUtility.FromJsonOverwrite(json.text, temp);
             levelData = temp;
-        }
-
-        private int GetEnemyCount()
-        {
-            int enemyCount = 0;
-            foreach (var enemy in levelData.enemyData)
-            {
-                enemyCount += enemy.enemyColumns.Length;
-            }
-            return enemyCount;
         }
 
         private void SendLevelWinAnalytics()

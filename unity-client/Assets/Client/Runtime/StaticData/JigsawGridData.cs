@@ -15,6 +15,7 @@ namespace Client.Runtime
         [SerializeField] private Vector2 _traySpacing;
         [SerializeField] private Vector3 _idleShadowOffset;
         [SerializeField] private Vector3 _hoverShadowOffset;
+        [SerializeField] private int _brushesCount;
 
         public string Id => _id;
         public string Name => _name;
@@ -24,6 +25,7 @@ namespace Client.Runtime
         public Vector2 TraySpacing => _traySpacing;
         public Vector3 IdleShadowOffset => _idleShadowOffset;
         public Vector3 HoverShadowOffset => _hoverShadowOffset;
+        public int BrushesCount => _brushesCount;
 
         public IEntity CreateEntity() => new JigsawBoard(Id);
     }
