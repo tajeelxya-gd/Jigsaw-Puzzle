@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GoldBundle-1
   m_EditorClassIdentifier: 
   _goldReward:
-    _rewardIcon: {fileID: 21300000, guid: 8fd5d010fc7387142a57dd22dcc5c67e, type: 3}
-    rewardType: 3
-    rewardChestAmount: 50
+    _rewardIcon: {fileID: 21300000, guid: df1d4d7b567c9cb42bf494f7cae6ee30, type: 3}
+    rewardType: 2
+    rewardChestAmount: 200
