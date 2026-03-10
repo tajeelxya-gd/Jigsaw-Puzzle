@@ -4,6 +4,7 @@ using UniTx.Runtime.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -82,8 +83,15 @@ public class SettingsManager : MonoBehaviour
 
     private void SaveAndUpdate()
     {
-        UniAudio.IsMusicOn = _gameData.Data.MusicOn;
-        UniAudio.IsSoundOn = _gameData.Data.SoundOn;
+        try
+        {
+            UniAudio.IsMusicOn = _gameData.Data.MusicOn;
+            UniAudio.IsSoundOn = _gameData.Data.SoundOn;
+        }
+        catch (Exception e)
+        {
+            // ignore
+        }
         _gameData.Save();
         UpdateAllUI();
     }
