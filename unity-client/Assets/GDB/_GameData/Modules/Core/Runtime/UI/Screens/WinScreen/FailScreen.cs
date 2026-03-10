@@ -385,20 +385,24 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 "Screen1",
                 "Revive");
             }
+            else if (_totalUserCoins >= _playOnAmount)
+            {
+                GlobalService.GameData.Data.Coins -= _playOnAmount;
+                GlobalService.GameData.Save();
+                SignalBus.Publish(new AddCoinsSignal { Amount = -_playOnAmount, IsAdd = false });
+                HideScreen();
+                ResetAll();
+                _puzzleService.RestartPuzzleAsync(true, this.GetCancellationTokenOnDestroy());
+
+                GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
+               "Level " + _currentPlayedLevel,
+              "Fail",
+              "Screen1",
+              "Revive");
+            }
             else
             {
-                //     GlobalService.GameData.Data.Coins -= _playOnAmount;
-                //     GlobalService.GameData.Save();
-                //     SignalBus.Publish(new AddCoinsSignal { Amount = -_playOnAmount, IsAdd = false });
-                //     HideScreen();
-                //     ResetAll();
-                //     _puzzleService.RestartPuzzleAsync(true, this.GetCancellationTokenOnDestroy());
 
-                //     GameAnalytics.PublishAnalytic(AnalyticEventType.GameData, "Progression",
-                //    "Level " + _currentPlayedLevel,
-                //   "Fail",
-                //   "Screen1",
-                //   "Revive");
                 SignalBus.Publish(new OnCoinBundleCalledSignal
                 {
                     OnClose = () =>
@@ -699,7 +703,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _instantiatedBundles = new List<GameObject>(_bundles);
             _slots.sprite = _normalSlot;
             _root_CG.gameObject.SetActive(false);
-            
+
             // Reset scales for animated panels
             _tryAgainRoot.transform.localScale = Vector3.one;
             _infinitePanel.transform.GetChild(0).localScale = Vector3.one;
