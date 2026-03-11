@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Threading;
 using Client.Runtime;
+using Coffee.UIExtensions;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Monetization.Runtime.RemoteConfig;
@@ -127,7 +128,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         //  FX & BUTTONS TAB
         // -----------------------------
         [TabGroup("WinScreen", "FX & Buttons")]
-        [SerializeField] private ParticleSystem _particleSystem_Win;
+        [SerializeField] private UIParticle _particleSystem_Win;
 
         [TabGroup("WinScreen", "FX & Buttons")]
         [SerializeField] private Button _continueButton, _doubleRewardButton; //_homeButton;
@@ -340,6 +341,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _streakModelViewController.gameObject.SetActive(false);
             _yourRewardObj.gameObject.SetActive(false);
             _unlockImg.gameObject.SetActive(false);
+            _trophy.SetActive(false);
         }
         private Sequence _sequence;
 
@@ -381,6 +383,22 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 }
             _yourRewardObj.SetActive(!_gameData.Data.IsLeaderBoardUnlocked);
             _trophyRewardObject.gameObject.SetActive(_gameData.Data.IsLeaderBoardUnlocked);
+
+            if (_gameData.Data.IsLeaderBoardUnlocked)
+            {
+                _trophy.SetActive(true);
+                if (_trophyWaypoints != null && _trophyWaypoints.Length > 0)
+                {
+                    _initialTrophyPosition = _trophyWaypoints[0].position;
+                    _trophy.transform.position = _initialTrophyPosition;
+                }
+
+                _gameData.Data.CurrentWinStreakLevel = Mathf.Clamp(_gameData.Data.CurrentWinStreakLevel, 0, 4);
+                _streakModelViewController.UpdateStreaks();
+                _gameData.Data.TrophiesWinInGame = 3 * _streakModelViewController.GetCurrentStreakRewardMultiplier();
+                _gameData.Data.CurrentWinStreakLevel++;
+            }
+
             _gameData.Data.BackFromWin = true;
             _gameData.Save();
 
@@ -439,6 +457,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             HapticController.Vibrate(HapticType.Win);
         }
 
+        [Button]
         void PlayWinVfx()
         {
             _particleSystem_Win.gameObject.SetActive(true);
@@ -468,15 +487,18 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             // _totalRewardText.text = (levelData.CoinRewardAmount * RemoteConfigManager.Configuration.CoinMultiplier).ToString();
             _totalEnemyCurrencyRewardTxt.text = _currentEnemyCurrency.ToString();
 
+            if (GlobalService.GameData.Data.IsLeaderBoardUnlocked)
+            {
+                _totalTrophyCount.text = GlobalService.GameData.Data.TrophiesWinInGame.ToString();
+                _streakModelViewController.gameObject.SetActive(true);
+                TrophyAnimation();
+            }
+
             _enemyCurrencyRewardObject.gameObject.SetActive(GlobalService.GameData.Data.IsPuzzleManiaUnlocked);
             _economyRootTransform.gameObject.SetActive(true);
             _economyRootTransform_CG.alpha = 0;
             _economyRootTransform.DOScale(1f, 0.3f).From(3f);
             _economyRootTransform_CG.DOFade(1, 0.3f);
-
-            if (GlobalService.GameData.Data.IsLeaderBoardUnlocked)
-                TrophyAnimation();
-
         }
 
         private void ShowAchievementBase(float previousFill)
@@ -486,19 +508,6 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             // _achievementFiller_CG.DOFade(1, 0.5f);
             // _achievementFillerTransform.DOAnchorPos(_animatedAchievementFiller_Position, 1f).SetEase(Ease.InOutSine);
             // _fillPercentage.text = Mathf.RoundToInt(previousFill * 100f) + "%";
-            GameData _gameData = GlobalService.GameData;
-            var leaderboardUnlocked = _gameData.Data.IsLeaderBoardUnlocked;
-            _streakModelViewController.gameObject.SetActive(leaderboardUnlocked);
-
-            if (leaderboardUnlocked)
-            {
-                _gameData.Data.CurrentWinStreakLevel = Mathf.Clamp(_gameData.Data.CurrentWinStreakLevel, 0, 4);
-                _streakModelViewController.UpdateStreaks();
-                _gameData.Data.TrophiesWinInGame = 3 * _streakModelViewController.GetCurrentStreakRewardMultiplier();
-                _totalTrophyCount.text = _gameData.Data.TrophiesWinInGame.ToString();
-                _gameData.Data.CurrentWinStreakLevel++;
-                _gameData.Save();
-            }
         }
 
         private Tween UpdateFillPercentageTween(float target, float previous)
