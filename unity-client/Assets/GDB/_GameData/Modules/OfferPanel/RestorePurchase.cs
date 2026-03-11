@@ -1,4 +1,5 @@
 using System;
+using Monetization.Runtime.InAppPurchasing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class RestorePurchase : MonoBehaviour
 
     void OnRestorePurchase()
     {
-        //    GDInAppPurchaseManager.RestorePurchases(); 
+        MonetizationPreferences.AdsRemoved.Set(false);
+        SignalBus.Publish(new BannerAdStatusChangedSignal { IsAdsRemoved = false });
+        GDInAppPurchaseManager.RestorePurchases();
     }
 }
