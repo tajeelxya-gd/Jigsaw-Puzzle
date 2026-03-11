@@ -745,8 +745,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -28.329346}
-  m_SizeDelta: {x: 0, y: -391.7516}
+  m_AnchoredPosition: {x: 0, y: -112.1}
+  m_SizeDelta: {x: 0, y: -224.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1295303937528528413
 CanvasRenderer:
@@ -4748,6 +4748,7 @@ GameObject:
   - component: {fileID: 1081349277795642512}
   - component: {fileID: 6128890645256989716}
   - component: {fileID: 6019348308802250088}
+  - component: {fileID: 5355407211541885381}
   m_Layer: 5
   m_Name: PuzzleMania
   m_TagString: Untagged
@@ -4839,6 +4840,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb58bdc7ca833348b26d52136b7bb75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5355407211541885381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908625639106720016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8581223d5c1575642aa4d5e5674867a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5970349003599572886
@@ -7935,7 +7948,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 15.684, y: 25.705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7283327591982365545
 CanvasRenderer:

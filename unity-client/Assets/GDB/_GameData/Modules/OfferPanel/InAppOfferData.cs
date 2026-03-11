@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Monetization.Runtime.Ads;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -104,7 +105,8 @@ public class InAppOfferData : ScriptableObject
 
     void BuyRemoveAd()
     {
-        // MonetizationPreferences.AdsRemoved.Set(true);
+        MonetizationPreferences.AdsRemoved.Set(true);
+        SignalBus.Publish(new BannerAdStatusChangedSignal { IsAdsRemoved = true });
         // AdsManager.HideBanner();
         // AdsManager.HideMRec();
     }
