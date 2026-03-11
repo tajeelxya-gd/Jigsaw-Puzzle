@@ -140,6 +140,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         private Vector3 _initialTrophyPosition;
         private IPuzzleService _puzzleService;
 
+        [SerializeField] private RectTransform _brokenHeartRoot;
+        [SerializeField] private RectTransform _remainingHeartRoot;
+        [SerializeField] private RectTransform _timeLabelRoot;
+        [SerializeField] private RectTransform _timerAnimRoot;
+        [SerializeField] private RectTransform _buttonsRoot;
+
         private bool _hasFailPanelShown;
         private bool _lifeSubtracted;
 
@@ -540,7 +546,10 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             GlobalService.GameData.Save();
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal
             { MissionType = MissionType.WinStreak, Amount = -100 });
+
             _sequence = DOTween.Sequence();
+            _sequence.SetUpdate(true);
+
             _sequence
                 // ROOT FADE IN
                 .AppendInterval(0.25f)
@@ -548,12 +557,36 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 .Append(_root_CG.DOFade(1, 0.3f))
                 .AppendCallback(() => _upperBundleRoot.gameObject.SetActive(true))
                 .Append(_upperBundleRoot.DOFade(1, 0.3f))
+
+                // HEADER / DEFEAT TITLE
                 .AppendCallback(PlayDefeatAnimation)
                 .AppendInterval(0.5f)
-                .AppendInterval(1.5f)
-                .SetUpdate(true)
-                ;
-            ShowTryAgainPanel();
+
+                // 1. BROKEN HEART
+                .AppendCallback(() => ShowSequenceElement(_brokenHeartRoot))
+                .AppendInterval(0.2f)
+
+                // 2. REMAINING HEART
+                .AppendCallback(() =>
+                {
+                    ShowSequenceElement(_remainingHeartRoot);
+                    RemoveHearts(_heartsSpritesRoot);
+                    PlayHeartAnimation(_heartsSpritesRoot);
+                })
+                .AppendInterval(0.2f)
+
+                // 3. TIME LABEL
+                .AppendCallback(() => ShowSequenceElement(_timeLabelRoot))
+                .AppendInterval(0.2f)
+
+                // 4. TIMER ANIM
+                .AppendCallback(() => ShowSequenceElement(_timerAnimRoot))
+                .AppendInterval(0.2f)
+
+                // 5. BUTTONS (last with delay)
+                .AppendInterval(0.6f)
+                .AppendCallback(() => ShowSequenceElement(_buttonsRoot));
+
             Debug.LogError(_levelFailType);
             if (_levelFailType == LevelFailType.OutOFSpace)
             {
@@ -599,6 +632,14 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             //InstantiateBundle(_upperBundleRoot.gameObject);
             GlobalService.GameData.Data.BackFromWin = false;
             GlobalService.GameData.Save();
+        }
+
+        private void ShowSequenceElement(RectTransform element)
+        {
+            if (element == null) return;
+            element.gameObject.SetActive(true);
+            element.localScale = Vector3.zero;
+            element.DOScale(1f, 0.4f).SetEase(Ease.OutBack).SetUpdate(true);
         }
 
         private void PlayOnButtonCheck()
@@ -655,12 +696,13 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
         private void ShowTryAgainPanel()
         {
-            _tryAgainRoot.gameObject.SetActive(true);
-            _tryAgainRoot.transform.localScale = Vector3.zero;
-            _tryAgainRoot.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
+            // This is now handled in the PlayFailSequence via _remainingHeartRoot
+            // _tryAgainRoot.gameObject.SetActive(true);
+            // _tryAgainRoot.transform.localScale = Vector3.zero;
+            // _tryAgainRoot.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
 
-            RemoveHearts(_heartsSpritesRoot);
-            PlayHeartAnimation(_heartsSpritesRoot);
+            // RemoveHearts(_heartsSpritesRoot);
+            // PlayHeartAnimation(_heartsSpritesRoot);
         }
 
         private void CloseFailPanel(CloseFailPanelSignal signal)
@@ -711,6 +753,12 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
             _tryAgainRoot.gameObject.SetActive(false);
             _defeatContentTransform.gameObject.SetActive(false);
+            _brokenHeartRoot.gameObject.SetActive(false);
+            _remainingHeartRoot.gameObject.SetActive(false);
+            _timeLabelRoot.gameObject.SetActive(false);
+            _timerAnimRoot.gameObject.SetActive(false);
+            _buttonsRoot.gameObject.SetActive(false);
+
             _cannonPanel.SetActive(false);
             _wallBreakPanel.SetActive(false);
             _infinitePanel.SetActive(false);
