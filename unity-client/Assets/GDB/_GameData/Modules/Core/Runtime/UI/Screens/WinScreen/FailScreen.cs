@@ -409,6 +409,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             else
             {
 
+                HideScreen();
                 SignalBus.Publish(new OnCoinBundleCalledSignal
                 {
                     OnClose = () =>
@@ -564,7 +565,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
                 // 1. BROKEN HEART
                 .AppendCallback(() => ShowSequenceElement(_brokenHeartRoot))
-                .AppendInterval(0.2f)
+                .AppendInterval(0.05f)
 
                 // 2. REMAINING HEART
                 .AppendCallback(() =>
@@ -573,18 +574,18 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                     RemoveHearts(_heartsSpritesRoot);
                     PlayHeartAnimation(_heartsSpritesRoot);
                 })
-                .AppendInterval(0.2f)
+                .AppendInterval(0.05f)
 
                 // 3. TIME LABEL
                 .AppendCallback(() => ShowSequenceElement(_timeLabelRoot))
-                .AppendInterval(0.2f)
+                .AppendInterval(0.05f)
 
                 // 4. TIMER ANIM
                 .AppendCallback(() => ShowSequenceElement(_timerAnimRoot))
-                .AppendInterval(0.2f)
+                .AppendInterval(0.05f)
 
-                // 5. BUTTONS (last with delay)
-                .AppendInterval(0.6f)
+                // 5. BUTTONS (delayed for emphasis)
+                .AppendInterval(0.8f)
                 .AppendCallback(() => ShowSequenceElement(_buttonsRoot));
 
             Debug.LogError(_levelFailType);
@@ -638,8 +639,22 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         {
             if (element == null) return;
             element.gameObject.SetActive(true);
-            element.localScale = Vector3.zero;
-            element.DOScale(1f, 0.4f).SetEase(Ease.OutBack).SetUpdate(true);
+            element.localScale = Vector3.one;
+
+            // Move from bottom effect
+            float offset = 100f;
+            Vector2 targetPos = element.anchoredPosition;
+            element.anchoredPosition = new Vector2(targetPos.x, targetPos.y - offset);
+
+            element.DOAnchorPos(targetPos, 0.4f).SetEase(Ease.OutBack).SetUpdate(true);
+
+            // Subtle fade in
+            CanvasGroup cg = element.GetComponent<CanvasGroup>();
+            if (cg != null)
+            {
+                cg.alpha = 0;
+                cg.DOFade(1f, 0.3f).SetUpdate(true);
+            }
         }
 
         private void PlayOnButtonCheck()
