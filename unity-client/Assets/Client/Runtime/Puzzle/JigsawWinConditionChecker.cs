@@ -99,12 +99,19 @@ namespace Client.Runtime
         public void Initialise()
         {
             UniEvents.Subscribe<GroupPlacedEvent>(OnPiecePlaced);
+            SignalBus.Subscribe<OnlevelFailSignal>(OnLevelFailed);
         }
 
         public void Reset()
         {
             StopTimer();
             UniEvents.Unsubscribe<GroupPlacedEvent>(OnPiecePlaced);
+            SignalBus.Unsubscribe<OnlevelFailSignal>(OnLevelFailed);
+        }
+
+        private void OnLevelFailed(OnlevelFailSignal signal)
+        {
+            StopTimer();
         }
 
         private void OnPiecePlaced(GroupPlacedEvent @event)
