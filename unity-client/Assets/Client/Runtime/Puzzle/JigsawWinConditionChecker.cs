@@ -39,12 +39,12 @@ namespace Client.Runtime
 
         public void SetBoard(JigsawBoard board)
         {
+            StopTimer();
+
             _board = board;
             _isTimeOut = false;
             _isLoseBroadcasted = false;
             RemainingTime = 0;
-
-            StopTimer();
 
             if (_board == null) return;
 
@@ -72,8 +72,13 @@ namespace Client.Runtime
                 {
                     OnTimerTick?.Invoke(RemainingTime);
                     await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
+
+                    if (token.IsCancellationRequested) return;
+
                     RemainingTime -= 1;
                 }
+
+                if (token.IsCancellationRequested) return;
 
                 RemainingTime = 0;
                 OnTimerTick?.Invoke(RemainingTime);
