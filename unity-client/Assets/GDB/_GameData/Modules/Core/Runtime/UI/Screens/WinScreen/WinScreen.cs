@@ -389,14 +389,19 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 _trophy.SetActive(true);
                 if (_trophyWaypoints != null && _trophyWaypoints.Length > 0)
                 {
-                    _initialTrophyPosition = _trophyWaypoints[0].position;
+                    // If we don't have an initial position, capture it or offset it from first waypoint
+                    if (_initialTrophyPosition == Vector3.zero)
+                        _initialTrophyPosition = _trophyWaypoints[0].position + Vector3.up * 100f; // Start above for animation
+
                     _trophy.transform.position = _initialTrophyPosition;
                 }
 
                 _gameData.Data.CurrentWinStreakLevel = Mathf.Clamp(_gameData.Data.CurrentWinStreakLevel, 0, 4);
+                // Increment streak
+                _gameData.Data.CurrentWinStreakLevel++;
+                // Update UI based on incremented streak (will select streak-1)
                 _streakModelViewController.UpdateStreaks();
                 _gameData.Data.TrophiesWinInGame = 3 * _streakModelViewController.GetCurrentStreakRewardMultiplier();
-                _gameData.Data.CurrentWinStreakLevel++;
             }
 
             _gameData.Data.BackFromWin = true;
@@ -576,7 +581,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
             for (int i = 1; i <= winStreak; i++)
             {
-                int index = i;
+                int index = i - 1;
 
                 _trophySeq.Append(
                     _trophy.transform.DOJump(

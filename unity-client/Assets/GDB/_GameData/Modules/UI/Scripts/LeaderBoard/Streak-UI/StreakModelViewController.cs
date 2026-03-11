@@ -22,15 +22,16 @@ public class StreakModelViewController : MonoBehaviour
 
     public void UpdateStreaks()
     {
-        if(_gameData == null)
+        if (_gameData == null)
             _gameData = GlobalService.GameData;
 
-        _gameData.Data.CurrentWinStreakLevel = Mathf.Clamp( _gameData.Data.CurrentWinStreakLevel,0, _streakModelView.Length - 1);
+        _gameData.Data.CurrentWinStreakLevel = Mathf.Clamp(_gameData.Data.CurrentWinStreakLevel, 0, _streakModelView.Length - 1);
         _gameData.Save();
         for (int i = 0; i < _streakModelView.Length; i++)
         {
-            _streakModelView[i].OnSelected(i == _gameData.Data.CurrentWinStreakLevel);
-            if (i == _gameData.Data.CurrentWinStreakLevel)
+            bool isCurrentAchieved = (i == _gameData.Data.CurrentWinStreakLevel - 1);
+            _streakModelView[i].OnSelected(isCurrentAchieved);
+            if (isCurrentAchieved)
                 _currentStreakModelView = _streakModelView[i];
         }
     }
