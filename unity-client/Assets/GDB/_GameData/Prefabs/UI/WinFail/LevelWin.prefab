@@ -16738,6 +16738,7 @@ MonoBehaviour:
   _continueButton: {fileID: 7006616088194928072}
   _doubleRewardButton: {fileID: 5077620948261736916}
   _buttonsContainer: {fileID: 0}
+  _endAlpha: 249
   _currentPlayedLevel: 0
   onBoardingLevels: 14000000180000004f00000064000000
 --- !u!1 &5799678906174561127

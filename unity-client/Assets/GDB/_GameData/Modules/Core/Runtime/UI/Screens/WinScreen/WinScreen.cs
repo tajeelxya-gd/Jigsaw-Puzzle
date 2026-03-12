@@ -137,6 +137,11 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
         [TabGroup("WinScreen", "FX & Buttons")]
         [SerializeField]
         private RectTransform _buttonsContainer;
+
+        [TabGroup("WinScreen", "FX & Buttons")]
+        [SerializeField] private float _endAlpha;
+
+
         // -----------------------------
         //  PROGRESSION TAB
         // -----------------------------
@@ -419,17 +424,20 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             _achievementFiller_Bg.sprite = current.RewardSprite;
 
             float targetFill = current.FillAmount;
+            var rootImg = _root_CG.GetComponent<Image>();
 
             _sequence = DOTween.Sequence();
-
             _sequence
                 // ROOT FADE IN
+                .AppendCallback(() => rootImg.SetAlpha(0))
                 .AppendCallback(() => _root_CG.gameObject.SetActive(true))
-                .Append(_root_CG.DOFade(1, 0.3f))
+                .AppendInterval(0.2f)
                 .AppendCallback(PlayWinVfx)
 
                 // VICTORY FX
-                .AppendInterval(0.2f)
+                .AppendInterval(2f)
+                .AppendCallback(() => rootImg.SetAlpha(_endAlpha / 255f))
+                .Append(_root_CG.DOFade(1, 0.3f))
                 .AppendCallback(() => PlayVictoryAnimation())
 
                 // ECONOMY FX
