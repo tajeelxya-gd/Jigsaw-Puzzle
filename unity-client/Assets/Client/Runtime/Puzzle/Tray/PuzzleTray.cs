@@ -32,6 +32,7 @@ namespace Client.Runtime
         private Camera _cam;
         private IPuzzleService _puzzleService;
         private IPuzzleTraySorter _sorter;
+        private IWinConditionChecker _winConditionChecker;
         private JigsawPiece _hitPiece;
         private JigsawPiece _hoverPiece;
         private float _scrollX = 0f;
@@ -59,10 +60,12 @@ namespace Client.Runtime
         {
             _puzzleService = resolver.Resolve<IPuzzleService>();
             _sorter = resolver.Resolve<IPuzzleTraySorter>();
+            _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
         }
 
         public void Initialise()
         {
+            _winConditionChecker.OnLose += HandleOnLose;
         }
 
         public void Reset()
@@ -75,6 +78,15 @@ namespace Client.Runtime
             _hoverPiece = null;
             _startMousePos = _lastMousePos = Vector3.zero;
             _isDragging = _isScrolling = false;
+            _winConditionChecker.OnLose -= HandleOnLose;
+        }
+
+        private void HandleOnLose()
+        {
+            if (_hoverPiece != null)
+            {
+                _hoverPiece.LockPiece();
+            }
         }
 
         public void ShufflePieces(IEnumerable<JigsawPiece> pieces)
