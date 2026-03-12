@@ -4,7 +4,7 @@ using UnityEngine;
 public static class OnBoardingConfig
 {
     private const string KEY = "OnBoardingConfig";
-    public enum OnBoardingType { PuzzleMania = 0, TheGreatRace = 2, WeeklyRewards = 1, LeaderBoard = 3 }
+    public enum OnBoardingType { PuzzleMania = 24, TheGreatRace = 2, WeeklyRewards = 1, LeaderBoard = 3 }
 
     public static void SetOnBoardingDone(OnBoardingType onBoardingType)
     {
