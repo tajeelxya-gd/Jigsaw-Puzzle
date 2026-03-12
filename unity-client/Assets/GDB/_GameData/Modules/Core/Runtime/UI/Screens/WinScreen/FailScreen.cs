@@ -548,6 +548,15 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
             SignalBus.Publish(new OnMissionObjectiveCompleteSignal
             { MissionType = MissionType.WinStreak, Amount = -100 });
 
+            if (_isInfinite)
+            {
+                _upperBundleRoot.gameObject.SetActive(false);
+                //InstantiateBundle(_tryAgainPanel.gameObject);
+                _crossButton.onClick.RemoveAllListeners();
+                OnClick_InfiniteButton();
+                return;
+            }
+
             _sequence = DOTween.Sequence();
             _sequence.SetUpdate(true);
 
