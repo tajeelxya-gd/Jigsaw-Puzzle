@@ -1,16 +1,32 @@
 using UniTx.Runtime;
-using UniTx.Runtime.Content;
-using UniTx.Runtime.Entity;
+using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
-using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class CellActionProcessor : ICellActionProcessor, IInjectable
+    public sealed class CellActionProcessor : ICellActionProcessor, IInjectable, IInitialisable, IResettable
     {
         private IRewardProcessor _rewardProcessor;
 
+        public bool CanProcess { get; private set; }
+
         public void Inject(IResolver resolver) => _rewardProcessor = resolver.Resolve<IRewardProcessor>();
+
+        public void Initialise()
+        {
+            UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
+            UniEvents.Subscribe<LevelResetEvent>(HandleLevelReset);
+        }
+
+        public void Reset()
+        {
+            UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
+            UniEvents.Unsubscribe<LevelResetEvent>(HandleLevelReset);
+        }
+
+        private void HandleLevelStart(LevelStartEvent @event) => CanProcess = true;
+
+        private void HandleLevelReset(LevelResetEvent @event) => CanProcess = false;
 
         public string GetImageKey(ICellActionData data)
         {
@@ -29,7 +45,7 @@ namespace Client.Runtime
 
         public void Process(ICellActionData data)
         {
-            if (data == null) return;
+            if (!CanProcess || data == null) return;
 
             switch (data)
             {

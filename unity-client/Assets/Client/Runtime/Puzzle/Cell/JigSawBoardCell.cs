@@ -52,7 +52,7 @@ namespace Client.Runtime
                     if (ActionData != null)
                     {
                         _cellActionProcessor.Process(ActionData);
-                        piece.InvokeAction();
+                        piece.InvokeAction(_cellActionProcessor.CanProcess);
                     }
                     _once = false;
                 }

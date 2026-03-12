@@ -147,9 +147,12 @@ namespace Client.Runtime
             _puzzleTray.SetHoverPiece(null);
         }
 
-        public void InvokeAction()
+        public void InvokeAction(bool triggerAnim)
         {
-            UniEvents.Raise(new CurrencyCollectHudEffectEvent(_imageKey, _cellActionSprite.transform.position));
+            if (triggerAnim)
+            {
+                UniEvents.Raise(new CurrencyCollectHudEffectEvent(_imageKey, _cellActionSprite.transform.position));
+            }
             _cellActionSprite.gameObject.SetActive(false);
         }
 
