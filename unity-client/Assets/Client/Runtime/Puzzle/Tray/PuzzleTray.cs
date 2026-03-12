@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class PuzzleTray : MonoBehaviour, IPuzzleTray, IResettable, IInjectable
+    public sealed class PuzzleTray : MonoBehaviour, IPuzzleTray, IResettable, IInjectable, IInitialisable
     {
         [Header("Grid Settings")]
         [SerializeField] private int _rowCount = 2;
@@ -61,6 +61,10 @@ namespace Client.Runtime
             _sorter = resolver.Resolve<IPuzzleTraySorter>();
         }
 
+        public void Initialise()
+        {
+        }
+
         public void Reset()
         {
             _activePieces.Clear();
@@ -78,7 +82,8 @@ namespace Client.Runtime
             SetSpacing();
             if (pieces == null) return;
 
-            var shuffledList = pieces.OrderBy(x => Guid.NewGuid()).ToList();
+            var difficulty = _puzzleService.GetCurrentLevelData().Difficulty;
+            var shuffledList = _sorter.Sort(pieces, difficulty);
             _activePieces.Clear();
             _activePieces.AddRange(shuffledList);
 
