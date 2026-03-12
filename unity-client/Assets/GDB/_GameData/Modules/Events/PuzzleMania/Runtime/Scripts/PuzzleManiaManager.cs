@@ -133,7 +133,7 @@ public class PuzzleManiaManager : MonoBehaviour
 
     void UpdateUI()
     {
-        _puzzleManiaRoot.gameObject.SetActive(_gameData.Data.LevelIndex >= (int)_onBoardingType);
+        // _puzzleManiaRoot.gameObject.SetActive(_gameData.Data.LevelIndex >= (int)_onBoardingType);
     }
 
     void LookForOnBoardingPanel()
