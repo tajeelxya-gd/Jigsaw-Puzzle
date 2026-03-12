@@ -55,7 +55,7 @@ namespace Client.Runtime
         public async UniTask PlayLevelCompletedAnimationAsync(CancellationToken cToken = default)
         {
             await FadeAsync(true, cToken);
-            await UniTask.Delay(TimeSpan.FromSeconds(_levelCompletedDuration), cancellationToken: cToken);
+            // await UniTask.Delay(TimeSpan.FromSeconds(_levelCompletedDuration), cancellationToken: cToken);
         }
 
         private void Awake() => _cam = Camera.main;
