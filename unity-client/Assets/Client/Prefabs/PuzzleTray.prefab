@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.PuzzleTray
   _rowCount: 2
   _spacing: {x: 0.047, y: 0.047}
-  _padding: {x: 0, y: 0}
+  _padding: {x: 0.01, y: 0}
   _trayCollider: {fileID: 8619639753298581620}
   _bgTransform: {fileID: 0}
   _lerpSpeed: 20
@@ -151,7 +151,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.24, y: 0.05, z: 0.1}
+  m_Size: {x: 0.26901177, y: 0.05, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2640388155200598392
 Rigidbody:
