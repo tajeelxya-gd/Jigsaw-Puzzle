@@ -43,7 +43,7 @@ public class Wall : MonoBehaviour, IDamageable
         {
             _isWallFall = true;
             Debug.LogError("WALL BREAK");
-            SignalBus.Publish(new OnlevelFailSignal { levelFailType = LevelFailType.WallBreak });
+            // SignalBus.Publish(new OnlevelFailSignal { levelFailType = LevelFailType.WallBreak });
         }
     }
 

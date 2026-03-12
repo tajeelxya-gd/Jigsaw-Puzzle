@@ -340,7 +340,7 @@ public class SpaceController : MonoBehaviour, ITickable
         if (AnyShooterCanShoot()) return;
         _isFailed = true;
         Debug.LogError("OUT OF SPACE");
-        SignalBus.Publish(new OnlevelFailSignal { levelFailType = LevelFailType.OutOFSpace });
+        // SignalBus.Publish(new OnlevelFailSignal { levelFailType = LevelFailType.OutOFSpace });
     }
 
     public bool SpacesAreFull()
