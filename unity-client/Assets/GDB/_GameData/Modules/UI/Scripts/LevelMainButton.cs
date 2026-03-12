@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelMainButton : MonoBehaviour
 {
@@ -31,4 +29,22 @@ public class LevelMainButton : MonoBehaviour
         SignalBus.Publish(new OnSceneShiftSignal { SceneName = "GamePlay", DoFakeLoad = false, levelType = _leveldata.levelType });
     }
     void OnInfiniteHealth() { }
+
+    private void AddInfiniteLivesTime(OnHealthUpdateSignal signal)
+    {
+        if (!timeService_freeTimer.IsRunning())
+            timeService_freeTimer.StartTimer(signal.TimeToAdd * 60);
+        else
+            timeService_freeTimer.ExtendTimer(signal.TimeToAdd);
+    }
+
+    private void Start()
+    {
+        SignalBus.Subscribe<OnHealthUpdateSignal>(AddInfiniteLivesTime);
+    }
+
+    private void OnDestroy()
+    {
+        SignalBus.Unsubscribe<OnHealthUpdateSignal>(AddInfiniteLivesTime);
+    }
 }
