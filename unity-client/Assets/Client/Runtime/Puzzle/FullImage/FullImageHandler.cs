@@ -14,12 +14,14 @@ namespace Client.Runtime
         [SerializeField] private float _levelCompletedDuration = 1;
         [SerializeField] private float _fadeDuration = 0.5f;
 
-        private CancellationTokenSource _fadeCts;
-
         private IJigsawResourceLoader _loader;
         private IWinConditionChecker _checker;
         private Camera _cam;
         private Renderer _renderer;
+        private float _maxDuration = 3f;
+
+        private CancellationTokenSource _fadeCts;
+        private CancellationTokenSource _autoHideCts;
 
         public void Inject(IResolver resolver)
         {
@@ -42,13 +44,42 @@ namespace Client.Runtime
             _fadeCts?.Cancel();
             _fadeCts?.Dispose();
             _fadeCts = null;
+
+            _autoHideCts?.Cancel();
+            _autoHideCts?.Dispose();
+            _autoHideCts = null;
         }
 
-        public void ToggleFullImage() => Fade(!gameObject.activeSelf);
+        public void ToggleFullImage()
+        {
+            if (gameObject.activeSelf) HideFullImage();
+            else ShowFullImage();
+        }
 
-        public void ShowFullImage() => Fade(true);
+        public void ShowFullImage()
+        {
+            Fade(true);
 
-        public void HideFullImage() => Fade(false);
+            _autoHideCts?.Cancel();
+            _autoHideCts = new CancellationTokenSource();
+            AutoHideAsync(_autoHideCts.Token).Forget();
+        }
+
+        public void HideFullImage()
+        {
+            _autoHideCts?.Cancel(); // Cancel auto-hide timer when explicitly hiding
+            Fade(false);
+        }
+
+        private async UniTask AutoHideAsync(CancellationToken cToken)
+        {
+            try
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(_maxDuration), cancellationToken: cToken);
+                Fade(false);
+            }
+            catch (OperationCanceledException) { }
+        }
 
         public bool IsActive() => gameObject.activeSelf;
 
@@ -90,6 +121,9 @@ namespace Client.Runtime
         {
             _fadeCts?.Cancel();
             _fadeCts = new CancellationTokenSource();
+
+            if (!active) _autoHideCts?.Cancel();
+
             FadeAsync(active, _fadeCts.Token, instant).Forget();
         }
 
