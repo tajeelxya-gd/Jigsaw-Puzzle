@@ -685,7 +685,7 @@
       "cell_21_7x5_action_reward",
       "cell_24_7x5_action_puzzle_mania"
     ],
-    "_maxDuration": 5,
+    "_maxDuration": 180,
     "_difficultyType": "Hard",
     "_retryDuration": 60
   },
