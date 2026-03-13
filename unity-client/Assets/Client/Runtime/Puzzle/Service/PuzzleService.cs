@@ -77,8 +77,9 @@ namespace Client.Runtime
             await _helper.LoadOutlineGridAsync($"{levelData.GridId}_mat_outline", cToken);
             await _helper.LoadImageAsync(levelData.ImageKey);
             await _board.LoadPuzzleAsync(_puzzleBoard, _puzzleBounds, levelData.CellActionIds, cToken);
-            _winConditionChecker.SetBoard(_board);
             JigsawBoardCalculator.SetBoard(_board);
+            _winConditionChecker.SetBoard(_board, reloadState);
+
             _puzzleTray.ShufflePieces(_board.Pieces);
             if (reloadState)
             {
@@ -96,7 +97,7 @@ namespace Client.Runtime
             _helper.DestroyFullImage();
             _helper.UnLoadOutlineGrid();
             _board = null;
-            _winConditionChecker.SetBoard(null);
+            _winConditionChecker.SetBoard(null, false);
             JigsawBoardCalculator.SetBoard(null);
             _puzzleTray.Reset();
             UniEvents.Raise(new LevelResetEvent(_levelId));
@@ -135,8 +136,6 @@ namespace Client.Runtime
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
             InputHandler.SetActive(false);
-            // await _vfxController.WaitForHighlightsAsync(cToken);
-            // await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             _fullImageHandler.PlayLevelCompletedAnimationAsync(cToken).Forget();
             SignalBus.Publish(new OnLevelCompleteSignal() { levelType = _clearLevelType });

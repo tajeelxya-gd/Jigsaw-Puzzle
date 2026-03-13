@@ -15,6 +15,7 @@ namespace Client.Runtime
         [SerializeField] private string[] _cellActionIds;
         [SerializeField] private int _maxDuration;
         [SerializeField] private string _difficultyType;
+        [SerializeField] private int _retryDuration;
 
         public string Id => _id;
         public string Name => _name;
@@ -23,6 +24,7 @@ namespace Client.Runtime
         public int Difficulty => _difficulty;
         public string[] CellActionIds => _cellActionIds;
         public int MaxDuration => _maxDuration;
+        public int RetryDuration => _retryDuration;
         public LevelType DifficultyType => Enum.TryParse(_difficultyType, out LevelType difficultyType) ? difficultyType : LevelType.Easy;
 
         public static LevelType GetCurrentDifficultyType()

@@ -6,6 +6,7 @@ using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.Extensions;
 using UniTx.Runtime.IoC;
+using UnityEngine.SceneManagement;
 
 namespace Client.Runtime
 {
@@ -37,7 +38,7 @@ namespace Client.Runtime
             return placed == _board.Cells.Count;
         }
 
-        public void SetBoard(JigsawBoard board)
+        public void SetBoard(JigsawBoard board, bool reloadState)
         {
             StopTimer();
 
@@ -48,7 +49,9 @@ namespace Client.Runtime
 
             if (_board == null) return;
 
-            var maxDuration = _puzzleService.GetCurrentLevelData().MaxDuration;
+            var levelData = _puzzleService.GetCurrentLevelData();
+
+            var maxDuration = reloadState ? levelData.RetryDuration : levelData.MaxDuration;
             if (maxDuration > 0)
             {
                 RemainingTime = maxDuration;
@@ -100,6 +103,7 @@ namespace Client.Runtime
         {
             UniEvents.Subscribe<GroupPlacedEvent>(OnPiecePlaced);
             SignalBus.Subscribe<OnlevelFailSignal>(OnLevelFailed);
+            SceneManager.sceneLoaded += OnSceneShift;
         }
 
         public void Reset()
@@ -107,6 +111,13 @@ namespace Client.Runtime
             StopTimer();
             UniEvents.Unsubscribe<GroupPlacedEvent>(OnPiecePlaced);
             SignalBus.Unsubscribe<OnlevelFailSignal>(OnLevelFailed);
+            SceneManager.sceneLoaded -= OnSceneShift;
+        }
+
+        private void OnSceneShift(Scene scene, LoadSceneMode mode)
+        {
+            SceneManager.sceneLoaded -= OnSceneShift;
+            StopTimer();
         }
 
         private void OnLevelFailed(OnlevelFailSignal signal)

@@ -18,10 +18,10 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 38c26e800e59ea74c8378b1ade284f29, type: 3}
   - ClipName: 9
     Volume: 1
-    audio: {fileID: 8300000, guid: 62d42b675303fdb48b8cee18f951bd48, type: 3}
+    audio: {fileID: 8300000, guid: e0342e84d2ada9b4288ebdf6bcf655d8, type: 3}
   - ClipName: 10
     Volume: 1
-    audio: {fileID: 8300000, guid: c16da717c501ce64e90ec7442a260d6f, type: 3}
+    audio: {fileID: 8300000, guid: 8f72d735a29853844b59ea59a33a7976, type: 3}
   - ClipName: 15
     Volume: 0.3
     audio: {fileID: 8300000, guid: 4a1f5ed9ad562f840a45d55f5749127c, type: 3}

@@ -13,6 +13,6 @@ namespace Client.Runtime
 
         bool CheckWin();
         bool CheckLose();
-        void SetBoard(JigsawBoard board);
+        void SetBoard(JigsawBoard board, bool reloadState);
     }
 }
