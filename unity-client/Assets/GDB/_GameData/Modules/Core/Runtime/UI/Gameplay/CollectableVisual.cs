@@ -7,6 +7,7 @@ public class CollectableVisual : MonoBehaviour
 
     public virtual void Initialize()
     {
+        gameObject.SetActive(GlobalService.GameData.Data.IsPuzzleManiaUnlocked);
         var amount = 0;
         UpdateText(amount);
     }
