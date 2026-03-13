@@ -14,6 +14,7 @@ namespace Client.Runtime
         [SerializeField] private int _magnetPiecesCount;
         [SerializeField] private Button _eyeButton;
         [SerializeField] private Button _magnetButton;
+        [SerializeField] private Toggle _arrowToggle;
         [SerializeField] private TMP_Text _eyeCount;
         [SerializeField] private TMP_Text _magnetCount;
 
@@ -34,6 +35,7 @@ namespace Client.Runtime
             _eyeButton.onClick.AddListener(HandleEyeButton);
             _magnetButton.onClick.AddListener(HandleMagnetButton);
             _winConditionChecker.OnWin += HandleOnWin;
+            _arrowToggle.onValueChanged.AddListener(HandleArrowToggle);
         }
 
         public void Reset()
@@ -42,6 +44,13 @@ namespace Client.Runtime
             _eyeButton.onClick.RemoveListener(HandleEyeButton);
             _magnetButton.onClick.RemoveListener(HandleMagnetButton);
             _winConditionChecker.OnWin -= HandleOnWin;
+            _arrowToggle.onValueChanged.RemoveListener(HandleArrowToggle);
+        }
+
+        private void HandleArrowToggle(bool toggleOn)
+        {
+
+
         }
 
         private void HandleOnWin() => gameObject.SetActive(false);
