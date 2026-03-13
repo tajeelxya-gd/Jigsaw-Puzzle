@@ -103,10 +103,10 @@ MonoBehaviour:
   BgsSoundData:
   - ClipName: 0
     Volume: 0.4
-    audio: {fileID: 8300000, guid: 509fc57c79dece44fb32def8a78db14d, type: 3}
+    audio: {fileID: 8300000, guid: ed786536697f97844a8255749b4264d7, type: 3}
   - ClipName: 1
     Volume: 0.4
-    audio: {fileID: 8300000, guid: d2536025b9b6b27419f8769d517c1c1a, type: 3}
+    audio: {fileID: 8300000, guid: ed786536697f97844a8255749b4264d7, type: 3}
   - ClipName: 2
     Volume: 0.4
-    audio: {fileID: 8300000, guid: 9da270170091c44409ec92e4390486ca, type: 3}
+    audio: {fileID: 8300000, guid: ed786536697f97844a8255749b4264d7, type: 3}
