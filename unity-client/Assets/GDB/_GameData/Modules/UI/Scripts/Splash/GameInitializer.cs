@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,17 +7,12 @@ using Monetization.Runtime.Consent;
 
 public class GameInitializer : MonoBehaviour
 {
-    [SerializeField] RectTransform fillBarRect; // Change to RectTransform
+    [SerializeField] RectTransform fillBarRect;
     [SerializeField] TMP_Text versionTxt;
-    [SerializeField] private ShaderVariantCollection _shaderVariantCollection;
     [SerializeField] private float minSplashTime = 5;
-    [SerializeField] private int minLvlsRequireForGamePlay = 19;
 
-    private float maxBarWidth;
     private const string ManuSceneName = "MainMenu";
-
     private string sceneToLoad = "MainMenu";
-    GameData gameData;
 
     private void OnEnable()
     {
@@ -33,18 +27,12 @@ public class GameInitializer : MonoBehaviour
 
     void Awake()
     {
-        maxBarWidth = fillBarRect.sizeDelta.x;
-
-        fillBarRect.sizeDelta = new Vector2(0, fillBarRect.sizeDelta.y);
-
-#if !UNITY_EDITOR
-        //Debug.unityLogger.logEnabled = false;
-#endif
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.anchoredPosition = new Vector2(-fillWidth, fillBarRect.anchoredPosition.y);
     }
 
     private void Load()
     {
-        gameData = GlobalService.GameData;
         sceneToLoad = ManuSceneName;
         LoadGamePlay();
     }
@@ -57,11 +45,7 @@ public class GameInitializer : MonoBehaviour
 
     IEnumerator LoadMenu(string sceneName)
     {
-        // AsyncOperation MenuScene = SceneManager.LoadSceneAsync(sceneName);
-        // MenuScene.allowSceneActivation = false;
-
-        fillBarRect.DOSizeDelta(new Vector2(maxBarWidth, fillBarRect.sizeDelta.y), minSplashTime)
-            .SetEase(Ease.Linear);
+        fillBarRect.DOAnchorPosX(0, minSplashTime).SetEase(Ease.Linear);
 
         float timer = 0;
         while (timer < 7f)
@@ -71,9 +55,5 @@ public class GameInitializer : MonoBehaviour
         }
 
         SceneManager.LoadSceneAsync(sceneName);
-        // Screen.SetResolution((int)(Screen.currentResolution.width * 0.8f), (int)(Screen.currentResolution.height * 0.8f), true);
-
-        // yield return new WaitForSeconds(1f);
-        // MenuScene.allowSceneActivation = true;
     }
 }
