@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,10 @@ public class WeeklyRewardProgressBar : MonoBehaviour
         _progressData = _progressDatabase.Load_Get();
         _currentProgress = _progressData.CurrentProgress;
         //Debug.LogError(_currentProgress);
-        _progressFillImage.fillAmount = _currentProgress / _maxProgress;
+        var progress = _currentProgress / _maxProgress;
+        var fillBarRect = _progressFillImage.rectTransform;
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.DOAnchorPosX((progress - 1) * fillWidth, 0.5f).SetEase(Ease.OutCubic);
     }
 
     private void OnEnable()
@@ -32,7 +36,10 @@ public class WeeklyRewardProgressBar : MonoBehaviour
     public void SetProgress(OnWeeklyProgressUpdatedSignal signal)
     {
         _currentProgress = Mathf.Clamp(signal.Progress, 0, _maxProgress);
-        _progressFillImage.fillAmount = _currentProgress / _maxProgress;
+        var progress = _currentProgress / _maxProgress;
+        var fillBarRect = _progressFillImage.rectTransform;
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.DOAnchorPosX((progress - 1) * fillWidth, 0.5f).SetEase(Ease.OutCubic);
 
         _progressData.CurrentProgress = _currentProgress;
         _progressDatabase.Save(_progressData);

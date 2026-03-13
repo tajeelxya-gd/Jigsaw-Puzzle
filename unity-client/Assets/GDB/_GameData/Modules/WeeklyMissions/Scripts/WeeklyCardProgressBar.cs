@@ -9,6 +9,8 @@ public class WeeklyCardProgressBar : MonoBehaviour
 
     public void FillBar(float progress)
     {
-        _filledBar.DOFillAmount(progress, _timer).SetEase(Ease.OutCubic);
+        var fillBarRect = _filledBar.rectTransform;
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.DOAnchorPosX((progress - 1) * fillWidth, _timer).SetEase(Ease.OutCubic);
     }
 }
