@@ -16,6 +16,7 @@ public class SceneLoader : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float minLoadTime = 2.0f;
+    [SerializeField] private float piecesAnimationSpeed = 5f;
 
     [Header("Visual")]
     [SerializeField] private LoadingScreenUIData _loadingScreenUIData;
@@ -145,6 +146,40 @@ public class SceneLoader : MonoBehaviour
     }
 
     private void OnDisable() => SignalBus.Unsubscribe<OnSceneShiftSignal>(OnShiftScene);
+
+    private void Update()
+    {
+        AnimatePieces();
+    }
+
+    private void AnimatePieces()
+    {
+        if (_pieces == null || _pieces.Length == 0) return;
+
+        float phase = (Time.unscaledTime * piecesAnimationSpeed) % _pieces.Length;
+
+        for (int i = 0; i < _pieces.Length; i++)
+        {
+            float dist = phase - i;
+
+            // Wrap distance to [-2, 2] for 4 pieces
+            float halfLen = _pieces.Length / 2f;
+            while (dist > halfLen) dist -= _pieces.Length;
+            while (dist < -halfLen) dist += _pieces.Length;
+
+            // alpha = 1.5 - abs(dist)
+            // This ensures:
+            // dist 0     -> alpha 1.0 (clamped from 1.5)
+            // dist 1/-1  -> alpha 0.5
+            // dist 2/-2  -> alpha 0.0 (clamped from -0.5)
+            // This keeps at most 3 pieces visible at any time.
+            float alpha = Mathf.Clamp01(1.5f - Mathf.Abs(dist));
+
+            Color c = _pieces[i].color;
+            c.a = alpha;
+            _pieces[i].color = c;
+        }
+    }
 }
 public class OnSceneShiftSignal : ISignal
 {

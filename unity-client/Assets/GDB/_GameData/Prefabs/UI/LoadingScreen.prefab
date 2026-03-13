@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 774680503, guid: 884f6ed77e471f64a82d48d52f0e92a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91f6e704a079a3b48bb5dbc813f537ca, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.65
+  m_PixelsPerUnitMultiplier: 2.5
 --- !u!114 &2511733320748388845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,10 +552,11 @@ MonoBehaviour:
   _pieces:
   - {fileID: 3172418052566212310}
   - {fileID: 639099754248865554}
-  - {fileID: 3058191895234531238}
   - {fileID: 521440874770205950}
+  - {fileID: 3058191895234531238}
   fadeDuration: 0.5
   minLoadTime: 3
+  piecesAnimationSpeed: 2.75
   _loadingScreenUIData: {fileID: 11400000, guid: cb4512ba311ea384ba4b365a1b7ae299, type: 2}
   _mainLoadingImg: {fileID: 4259957750675841028}
   _loadingTxtImg: {fileID: 8560672774524687780}
