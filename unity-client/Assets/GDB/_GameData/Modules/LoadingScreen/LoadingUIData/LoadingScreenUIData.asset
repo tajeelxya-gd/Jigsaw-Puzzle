@@ -17,14 +17,14 @@ MonoBehaviour:
     LoadingPanelSprite: {fileID: 21300000, guid: 19529b27f071b69439ef713c3c57930e, type: 3}
     LoadingTxtSp: {fileID: 21300000, guid: bfa6578c6e4d83544a54c35ef2e606b0, type: 3}
     EmptBarSp: {fileID: 21300000, guid: 96f21700cb315fe4abb2ddf200ed7780, type: 3}
-    RaceSp: {fileID: 21300000, guid: d6e5f1df4c3a8364eac9e2b84500b007, type: 3}
+    RaceSp: {fileID: 21300000, guid: ce2169b4fe601124c8d6bd2653cfe338, type: 3}
   - levelType: 1
     LoadingPanelSprite: {fileID: 21300000, guid: 19529b27f071b69439ef713c3c57930e, type: 3}
     LoadingTxtSp: {fileID: 21300000, guid: 65bc7cbd3c22c5b4e8fedfb3269546b4, type: 3}
     EmptBarSp: {fileID: 21300000, guid: 96f21700cb315fe4abb2ddf200ed7780, type: 3}
-    RaceSp: {fileID: 21300000, guid: b8beb75210ca75e48a86b88ddffa5d43, type: 3}
+    RaceSp: {fileID: 21300000, guid: ce2169b4fe601124c8d6bd2653cfe338, type: 3}
   - levelType: 2
     LoadingPanelSprite: {fileID: 21300000, guid: 19529b27f071b69439ef713c3c57930e, type: 3}
     LoadingTxtSp: {fileID: 21300000, guid: 19529b27f071b69439ef713c3c57930e, type: 3}
     EmptBarSp: {fileID: 21300000, guid: 96f21700cb315fe4abb2ddf200ed7780, type: 3}
-    RaceSp: {fileID: 21300000, guid: 33576680d5f020748bef9a290115bdef, type: 3}
+    RaceSp: {fileID: 21300000, guid: ce2169b4fe601124c8d6bd2653cfe338, type: 3}
