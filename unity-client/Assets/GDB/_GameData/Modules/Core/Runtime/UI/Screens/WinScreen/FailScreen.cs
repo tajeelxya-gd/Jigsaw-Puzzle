@@ -570,7 +570,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
 
                 // HEADER / DEFEAT TITLE
                 .AppendCallback(PlayDefeatAnimation)
-                .AppendInterval(0.5f)
+                // .AppendInterval(0.15f)
 
                 // 1. BROKEN HEART
                 .AppendCallback(() => ShowSequenceElement(_brokenHeartRoot))
@@ -594,7 +594,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 .AppendInterval(0.05f)
 
                 // 5. BUTTONS (delayed for emphasis)
-                .AppendInterval(0.8f)
+                .AppendInterval(0.1f)
                 .AppendCallback(() => ShowSequenceElement(_buttonsRoot));
 
             Debug.LogError(_levelFailType);
