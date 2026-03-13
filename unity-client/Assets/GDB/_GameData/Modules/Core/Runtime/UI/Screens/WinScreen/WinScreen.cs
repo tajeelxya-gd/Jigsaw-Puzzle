@@ -435,7 +435,7 @@ namespace _GameData.Modules.Core.Runtime.UI.Screens.WinScreen
                 .AppendCallback(PlayWinVfx)
 
                 // VICTORY FX
-                .AppendInterval(2f)
+                .AppendInterval(1.25f)
                 .AppendCallback(() => rootImg.SetAlpha(_endAlpha / 255f))
                 .Append(_root_CG.DOFade(1, 0.3f))
                 .AppendCallback(() => PlayVictoryAnimation())

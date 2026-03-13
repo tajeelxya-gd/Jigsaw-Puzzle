@@ -135,8 +135,8 @@ namespace Client.Runtime
         private async UniTaskVoid HandleOnWinAsync(CancellationToken cToken = default)
         {
             InputHandler.SetActive(false);
-            await _vfxController.WaitForHighlightsAsync(cToken);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
+            // await _vfxController.WaitForHighlightsAsync(cToken);
+            // await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cToken);
             await _vfxController.AnimateBoardCompletionAsync(cToken);
             _fullImageHandler.PlayLevelCompletedAnimationAsync(cToken).Forget();
             SignalBus.Publish(new OnLevelCompleteSignal() { levelType = _clearLevelType });

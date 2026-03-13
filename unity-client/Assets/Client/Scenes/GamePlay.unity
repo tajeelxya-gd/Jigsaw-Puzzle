@@ -277,6 +277,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &16248130 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6049633499471534675, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+  m_PrefabInstance: {fileID: 1588303118419370975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &16248131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7125124289792923527, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+  m_PrefabInstance: {fileID: 1588303118419370975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &82546560
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4947d070cf41eb87bc6a9968c32a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Location: 0.9270513
+  m_Location: 0.41096315
   m_Width: 0.304
   m_Softness: 1
   m_Brightness: 0.491
@@ -1241,29 +1257,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 225
       objectReference: {fileID: 0}
-    - target: {fileID: 4259957750675841028, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259957750675841028, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 19529b27f071b69439ef713c3c57930e, type: 3}
-    - target: {fileID: 4259957750675841028, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
-      propertyPath: m_Color.b
+    - target: {fileID: 4854823112166837366, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
+      propertyPath: isGamePlay
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259957750675841028, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259957750675841028, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4871262446081885450, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
-      propertyPath: m_Alpha
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4992283738352794687, guid: 74c31e351aa96fe45bf996fd74ade7e7, type: 3}
       propertyPath: m_Pivot.x
@@ -4729,9 +4725,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608989427184455533, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+      propertyPath: _bgImage
+      value: 
+      objectReference: {fileID: 16248131}
+    - target: {fileID: 3608989427184455533, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+      propertyPath: _bgTransform
+      value: 
+      objectReference: {fileID: 16248130}
     - target: {fileID: 4189858505960107931, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
       propertyPath: m_Name
       value: PuzzleTray
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125124289792923527, guid: 3ec6903368841954c976b6c7bf156c57, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

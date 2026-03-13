@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private CanvasGroup rootCanvasGroup;
     [SerializeField] private RectTransform fillBarRect;
     [SerializeField] private TextMeshProUGUI progressText;
+    [SerializeField] private Image[] _pieces;
 
     [Header("Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
@@ -26,7 +27,8 @@ public class SceneLoader : MonoBehaviour
 
     void Awake()
     {
-        _maxBarWidth = fillBarRect.sizeDelta.x;
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.anchoredPosition = new Vector2(-fillWidth, fillBarRect.anchoredPosition.y);
     }
 
     void Start()
@@ -38,7 +40,8 @@ public class SceneLoader : MonoBehaviour
     private void ResetUI(bool active)
     {
         _visualProgress = 0;
-        fillBarRect.sizeDelta = new Vector2(0, fillBarRect.sizeDelta.y);
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.anchoredPosition = new Vector2(-fillWidth, fillBarRect.anchoredPosition.y);
         progressText.text = "0%";
 
         if (!active)
@@ -135,8 +138,8 @@ public class SceneLoader : MonoBehaviour
     private void UpdateUI(float val)
     {
         _visualProgress = val;
-        float currentWidth = val * _maxBarWidth;
-        fillBarRect.sizeDelta = new Vector2(currentWidth, fillBarRect.sizeDelta.y);
+        float fillWidth = fillBarRect.rect.width;
+        fillBarRect.anchoredPosition = new Vector2((val - 1) * fillWidth, fillBarRect.anchoredPosition.y);
 
         progressText.text = $"{(val * 100):0}%";
     }

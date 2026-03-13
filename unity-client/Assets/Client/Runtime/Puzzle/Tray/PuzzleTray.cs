@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UniTx.Runtime;
 using UniTx.Runtime.Events;
 using UniTx.Runtime.IoC;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Client.Runtime
 {
@@ -27,6 +29,7 @@ namespace Client.Runtime
         [SerializeField] private float _visibilityBuffer = 0f;
         [SerializeField] private float _dragThreshold = 10f;
         [SerializeField] private float _decelerationRate = 0.95f;
+        [SerializeField] private Image _bgImage;
 
         private readonly List<JigsawPiece> _activePieces = new();
         private Camera _cam;
@@ -66,6 +69,7 @@ namespace Client.Runtime
         public void Initialise()
         {
             _winConditionChecker.OnLose += HandleOnLose;
+            _winConditionChecker.OnWin += HandleOnWin;
         }
 
         public void Reset()
@@ -79,6 +83,12 @@ namespace Client.Runtime
             _startMousePos = _lastMousePos = Vector3.zero;
             _isDragging = _isScrolling = false;
             _winConditionChecker.OnLose -= HandleOnLose;
+            _winConditionChecker.OnWin -= HandleOnWin;
+        }
+
+        private void HandleOnWin()
+        {
+            _bgImage.DOFade(0, 0.5f).SetEase(Ease.InQuad);
         }
 
         private void HandleOnLose()

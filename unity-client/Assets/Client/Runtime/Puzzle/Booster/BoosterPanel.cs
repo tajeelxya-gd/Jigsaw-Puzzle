@@ -19,11 +19,13 @@ namespace Client.Runtime
 
         private IFullImageHandler _fullImageHandler;
         private IPuzzleTray _puzzleTray;
+        private IWinConditionChecker _winConditionChecker;
 
         public void Inject(IResolver resolver)
         {
             _fullImageHandler = resolver.Resolve<IFullImageHandler>();
             _puzzleTray = resolver.Resolve<IPuzzleTray>();
+            _winConditionChecker = resolver.Resolve<IWinConditionChecker>();
         }
 
         public void Initialise()
@@ -31,6 +33,7 @@ namespace Client.Runtime
             UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
             _eyeButton.onClick.AddListener(HandleEyeButton);
             _magnetButton.onClick.AddListener(HandleMagnetButton);
+            _winConditionChecker.OnWin += HandleOnWin;
         }
 
         public void Reset()
@@ -38,7 +41,14 @@ namespace Client.Runtime
             UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
             _eyeButton.onClick.RemoveListener(HandleEyeButton);
             _magnetButton.onClick.RemoveListener(HandleMagnetButton);
+            _winConditionChecker.OnWin -= HandleOnWin;
         }
+
+        private void HandleOnWin()
+        {
+            gameObject.SetActive(false);
+        }
+
 
         private void HandleMagnetButton()
         {
