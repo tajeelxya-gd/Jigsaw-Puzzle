@@ -44,10 +44,7 @@ namespace Client.Runtime
             _winConditionChecker.OnWin -= HandleOnWin;
         }
 
-        private void HandleOnWin()
-        {
-            gameObject.SetActive(false);
-        }
+        private void HandleOnWin() => gameObject.SetActive(false);
 
 
         private void HandleMagnetButton()
@@ -76,6 +73,7 @@ namespace Client.Runtime
 
         private void HandleLevelStart(LevelStartEvent @event)
         {
+            gameObject.SetActive(true);
             UpdateEyeButtonState();
             UpdateMagnetButtonState();
         }

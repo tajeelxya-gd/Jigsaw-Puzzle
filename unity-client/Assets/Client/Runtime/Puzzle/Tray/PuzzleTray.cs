@@ -70,6 +70,7 @@ namespace Client.Runtime
         {
             _winConditionChecker.OnLose += HandleOnLose;
             _winConditionChecker.OnWin += HandleOnWin;
+            UniEvents.Subscribe<LevelStartEvent>(HandleLevelStart);
         }
 
         public void Reset()
@@ -84,12 +85,12 @@ namespace Client.Runtime
             _isDragging = _isScrolling = false;
             _winConditionChecker.OnLose -= HandleOnLose;
             _winConditionChecker.OnWin -= HandleOnWin;
+            UniEvents.Unsubscribe<LevelStartEvent>(HandleLevelStart);
         }
 
-        private void HandleOnWin()
-        {
-            _bgImage.DOFade(0, 0.5f).SetEase(Ease.InQuad);
-        }
+        private void HandleLevelStart(LevelStartEvent @event) => _bgImage.DOFade(1, 0);
+
+        private void HandleOnWin() => _bgImage.DOFade(0, 0.5f).SetEase(Ease.InQuad);
 
         private void HandleOnLose()
         {
