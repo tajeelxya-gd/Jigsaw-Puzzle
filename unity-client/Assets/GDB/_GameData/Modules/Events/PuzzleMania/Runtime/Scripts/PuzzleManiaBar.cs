@@ -23,9 +23,10 @@ public class PuzzleManiaBar : MonoBehaviour
 
         for (int i = 0; i < _fillBar.Length; i++)
         {
-            var img = _fillBar[i];
-            img.DOKill();
-            img.DOFillAmount(progress, _fillDuration).SetEase(Ease.OutCubic);
+            var fillBarRect = _fillBar[i].rectTransform;
+            fillBarRect.DOKill();
+            float fillWidth = fillBarRect.rect.width;
+            fillBarRect.DOAnchorPosX((progress - 1) * fillWidth, _fillDuration).SetEase(Ease.OutCubic);
         }
     }
 
